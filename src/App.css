@@ -131,11 +131,28 @@ body{
   box-shadow: 0 1px 5px 0 rgb(170 170 170);
 }
 
+.lenght{
+  margin: 50px 100px;
+  background-color: #fff;
+  padding:30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  height: 800px;
+}
+
 .bcI{
   width: 15px;
   float: left;
   padding-bottom: 20px;
 }
+
+.bcA{
+  width: 20px;
+  float: left;
+  padding-bottom: 20px;
+  margin-left: 80px;
+}
+
 .centerH{
   font-size: 28px;
   font-weight: 600;
@@ -145,6 +162,17 @@ body{
 .centerHp{
   font-size: 12px;
 }
+
+.textHp{
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.textH{
+  font-size: 8px;
+}
+
 .container-textAs {
   height: 200px; /* Example height of the parent container */
   position: relative; /* Ensure percentage height is relative to the parent */
@@ -157,6 +185,15 @@ body{
     font-size: 12px;
     height: 100%;
 }
+
+.textBs{
+  background-color: #F9F9F9;
+    border: none;
+    width: 100%;
+    font-size: 12px;
+    height: 605PX !important;
+}
+
 .bro{
   padding-bottom: 20px; 
   padding-top: 20px; 
@@ -165,10 +202,12 @@ body{
 .question{
   font-size: 13px;
 }
+
 .suggest{
   font-size: 12px;
   padding-top: 20px;
 }
+
 .curveNext{
   float: right;
     background-color: #E8C400 !important;
@@ -179,4 +218,112 @@ body{
     border-radius: 20px !important;
     font-size: 17px!important;
     margin-right: 100px!important;
+}
+
+.space{
+  padding-bottom: 20px; 
+  padding-top: 20px; 
+  width: 10%;
+  height: 120px;
+}
+
+/*Iframe space top*/
+.spaceA{
+  padding-bottom: 20px; 
+  padding-top: 20px; 
+  width: 10%;
+  height: 70px;
+}
+
+/*Iframe space bottom*/
+.spaceB{
+  padding-bottom: 20px; 
+  padding-top: 20px; 
+  width: 10%;
+  height: 10px;
+}
+
+.break{
+  padding-bottom: 20px; 
+  padding-top: 20px; 
+  width: 10%;
+  height: 50px;
+}
+
+/* Bottom button */
+.edit{
+  float: right;
+    background-color: white !important;
+    border: 0px !important;
+    color: #E8C400 !important;
+    font-weight: 500 !important;
+    padding: 5px 15px !important;
+    font-size: 12px!important;
+    margin-right: 0px!important;
+    margin-top: 10px;
+}
+
+/* Bottom button */
+.save{
+  float: right;
+    background-color: white !important;
+    border: 0px !important;
+    color:  #E8C400 !important;
+    font-weight: 500 !important;
+    padding: 5px 0px !important;
+    font-size: 12px!important;
+    margin-right: 0px!important;
+    margin-top: 10px;
+}
+
+/* Top button */
+.buttonS{
+  float: right;
+    background-color: white!important;
+    border: 0px !important;
+    color: black !important;
+    font-weight: 500 !important;
+    padding: 5px 15px !important;
+    font-size: 12px!important;
+    margin-right: 10px!important;
+    margin-top: 10px;
+    border-style: solid !important;
+    border-width: medium !important;
+    border-color:#E8C400 !important;
+}
+
+/* Top button */
+.buttonE{
+  float: right;
+   background-color: white!important;
+    border: 0px !important;
+    color:  black !important;
+    font-weight: 500 !important;
+    padding: 5px 15px !important;
+    font-size: 12px!important;
+    margin-right: 0px!important;
+    margin-top: 10px;
+    border-style: solid !important;
+    border-width: medium !important;
+    border-color:#E8C400 !important;
+}
+
+/* Top button hover */
+.buttonE:hover{
+  background-color: #f0e296 !important;
+}
+
+/*center Div */
+.align{
+  position: absolute;
+  margin-top: 80px;
+  padding: 0px;
+  top:0px;
+  left: 200px;
+}
+
+iframe{
+  height: 300px;
+  width: 100%;
+  border-radius: 10px !important;
 }
