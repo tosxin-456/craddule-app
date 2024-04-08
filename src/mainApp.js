@@ -11,6 +11,25 @@ import ExecutiveSummarys from './executiveSummarys';
 import SectionIntro from './sectionIntro';
 import ProblemStatement from './problemstatement';
 import VideoDemo from './video';
+import FinancialP from './financialP';
+import CashFlow from './Sectiondcf';
+import Sectiondcf from './Sectiondcf';
+import SectiondcfTwo from './SectiondcfTwo';
+import Sectiondcf3 from './SectionDiscount';
+import Solution from './Solution';
+import RiskMitigation from './mitigation';
+import Financials from './Financials';
+import Implementation from './implementation';
+import Conclusion from './conclusion';
+import PageGovernance from './govPage';
+import PageCost from './costPage';
+import PageBenefit from './pageBenefit';
+
+
+
+
+
+
 
 function App() {
 
@@ -33,7 +52,21 @@ function App() {
     {/*<IntroductionTwo />*/}
     {/*<ExecutiveSummarys />*/}
     {/*<ProblemStatement/>*/}
-    <VideoDemo />
+    {/*<VideoDemo />*/}
+    {/*<FinancialP />*/}
+    {/*Sectiondcf />*/}
+    {/*<SectiondcfTwo />*/}
+    {/*<Sectiondcf3 />*/}
+    {/*<Solution />*/}
+    {/*<RiskMitigation />*/}
+    <Financials />
+    {/*<Implementation />*/}
+    {/*<Conclusion />*/}
+    {/*<PageGovernance/>*/}
+    {/*<PageCost />*/}
+    {/*<PageBenefit />*/}
+  
+  
 
 
     

@@ -131,6 +131,7 @@ body{
   box-shadow: 0 1px 5px 0 rgb(170 170 170);
 }
 
+/* Center div height*/
 .lenght{
   margin: 50px 100px;
   background-color: #fff;
@@ -140,18 +141,21 @@ body{
   height: 800px;
 }
 
+/* Image Styling */
 .bcI{
-  width: 15px;
+  width: 20px;
   float: left;
   padding-bottom: 20px;
 }
 
+/* Image Styling */
 .bcA{
   width: 20px;
   float: left;
   padding-bottom: 20px;
   margin-left: 80px;
 }
+
 
 .centerH{
   font-size: 28px;
@@ -194,11 +198,47 @@ body{
     height: 605PX !important;
 }
 
+.tittle{
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+/* graph subttitle*/
+.titledcf{
+  position: absolute;
+  font-size: 14px;
+  margin: 0px;
+  left: 187px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+/* Image */
 .bro{
   padding-bottom: 20px; 
   padding-top: 20px; 
   width: 30%;
 }
+
+/* dcf Image */
+.dcfbro{
+  padding-bottom: 20px; 
+  padding-top: 20px; 
+  width: 350px;
+  height: 350px;
+}
+
+/* dcf graph*/
+.graph{
+  padding-bottom: 20px;  
+  width: 350px;
+  height: 350px;
+  border-radius: 5px;
+  width: 700px;
+}
+
 .question{
   font-size: 13px;
 }
@@ -208,6 +248,7 @@ body{
   padding-top: 20px;
 }
 
+/* Next Button*/
 .curveNext{
   float: right;
     background-color: #E8C400 !important;
@@ -220,6 +261,21 @@ body{
     margin-right: 100px!important;
 }
 
+/* Bedin and continue buttons */
+.curvedcf{
+   position: relative;
+    background-color: #E8C400 !important;
+    border: 0px !important;
+    color: #000 !important;
+    font-weight: bold !important;
+    padding: 5px 30px !important;
+    border-radius: 20px !important;
+    font-size: 17px!important;
+    width: 20% !important;
+    left: 19em;
+}
+
+/* Div space */
 .space{
   padding-bottom: 20px; 
   padding-top: 20px; 
@@ -241,6 +297,22 @@ body{
   padding-top: 20px; 
   width: 10%;
   height: 10px;
+}
+
+/* Div space dcf */
+.dcfspace{
+  padding-bottom: 20px; 
+  padding-top: 20px; 
+  width: 10%;
+  height: 50px;
+}
+
+/* top and bottom div space dcf */
+.dcfspacebottom{
+  padding-bottom: 20px; 
+  padding-top: 20px; 
+  width: 10%;
+  height: 20px;
 }
 
 .break{
@@ -327,3 +399,31 @@ iframe{
   width: 100%;
   border-radius: 10px !important;
 }
+
+/* quote box */
+.box{
+  font-weight: 200px;
+  font-size: 20px;
+  height: 130px;
+  width: 35em;
+  border-radius: 10px !important;
+  text-wrap:wrap;
+  background-color: #999252;
+  font-weight: bold;
+  padding: 0px 10px 0px 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+/* quote text */
+.quote{
+    padding-top: 15px;
+    margin: 0px;
+}
+
+/* quote author */
+.author{
+  padding-top: 15px;
+  margin: 0px;
+}
+
