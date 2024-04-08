@@ -10,7 +10,7 @@ function Fanancials ()  {
     <div className='col-md-10 align'>
         <div className='centerC'>
             <img src={bci} className='bcI'></img>
-            <div className='text-center'>
+            <div className='div-box'>
                 <p className='centerH'>ROI and Financials</p>
                 <p className='centerHp'>Make sure you answer all questions</p>
                 {/*<img src={bob} className='bro'></img>*/}
