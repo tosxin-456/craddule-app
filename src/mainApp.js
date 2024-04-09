@@ -24,6 +24,21 @@ import Conclusion from './conclusion';
 import PageGovernance from './govPage';
 import PageCost from './costPage';
 import PageBenefit from './pageBenefit';
+import PageSuccess from './pageSuccess';
+import PageBusiness from './pageBusiness';
+import PageSummary from './pageSummary';
+import PageIntro from './pageIntro';
+import PageCustomer from './pageCustomer';
+import PageSummarys from './pageSummarys';
+import PageProject from './pageProject';
+import CustomerSegment from './customerSegment';
+import PageMarketing from './marketing';
+
+
+
+
+
+
 
 
 
@@ -59,12 +74,23 @@ function App() {
     {/*<Sectiondcf3 />*/}
     {/*<Solution />*/}
     {/*<RiskMitigation />*/}
-    <Financials />
+    {/*<Financials />*/}
     {/*<Implementation />*/}
     {/*<Conclusion />*/}
     {/*<PageGovernance/>*/}
     {/*<PageCost />*/}
-    {/*<PageBenefit />*/}
+    {/*<PageBenefit />
+    <PageSuccess />
+    <PageBusiness />
+    <PageSummary />
+    <PageIntro />
+    <PageCustomer />
+    <PageSummarys />
+    <PageProject />
+    <CustomerSegment />*/}
+    <PageMarketing />
+
+
   
   
 
