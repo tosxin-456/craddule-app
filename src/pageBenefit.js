@@ -1,12 +1,19 @@
 import React from 'react';
 import bci from './images/bc.png'; 
-import benefit from './images/benefit.png'; 
+import benefit from './images/benefit.png';
+import Header from './component/header';
+import Menu from './component/menu';
 
 
 
 
 function PageBenefit ()  {
     return (
+        <>
+
+        <Header />
+        <Menu />
+        
         <div className='col-md-10 align'>
         <div className='centerC'>
             <img src={bci} className='bcI'></img>
@@ -28,6 +35,7 @@ function PageBenefit ()  {
            
           
   </div>
+  </>
     );
 }
 

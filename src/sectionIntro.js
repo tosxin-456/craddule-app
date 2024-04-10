@@ -1,8 +1,16 @@
 import React from 'react';
 import bci from './images/bc.png';
+import Header from './component/header';
+import Menu from './component/menu';
+
 
 function SectionIntro ()  {
     return (
+        <>
+
+        <Header />
+        <Menu />
+        
         <div className='col-md-10 align'>
             <img src={bci} className='bcA'></img>
         <div className='lenght'>
@@ -25,6 +33,7 @@ function SectionIntro ()  {
 
         <button className="btn btn-primary curveNext">Next</button>
   </div>
+  </>
     );
 }
 

@@ -1,12 +1,19 @@
 import React from 'react';
 import bci from './images/bc.png'; 
 import executive from './images/executive.png'; 
+import Header from './component/header';
+import Menu from './component/menu';
 
 
 
 
 function PageSummary ()  {
     return (
+        <>
+
+        <Header />
+        <Menu />
+        
         <div className='col-md-10 align'>
              <img src={bci} className='bcA'></img>
         <div className='centerC'>
@@ -28,6 +35,7 @@ function PageSummary ()  {
            
           
   </div>
+  </>
     );
 }
 

@@ -1,12 +1,18 @@
 import React from 'react';
 import bci from './images/bc.png'; 
 import dcf1 from './images/dcf1.png'; 
-
+import Header from './component/header';
+import Menu from './component/menu';
 
 
 
 function SectiondcfTwo ()  {
     return (
+        <>
+
+        <Header />
+        <Menu />
+        
         <div className='col-md-10 align'>
              <img src={bci} className='bcA'></img>
         <div className='centerC'>
@@ -20,6 +26,7 @@ function SectiondcfTwo ()  {
             <div class = "dcfspacebottom"></div>
         </div> 
   </div>
+  </>
     );
 }
 

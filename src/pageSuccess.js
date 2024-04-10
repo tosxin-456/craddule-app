@@ -1,12 +1,19 @@
 import React from 'react';
 import bci from './images/bc.png'; 
-import success from './images/success.png'; 
+import success from './images/success.png';
+import Header from './component/header';
+import Menu from './component/menu';
 
 
 
 
 function PageSuccess ()  {
     return (
+        <>
+
+        <Header />
+        <Menu />
+        
         <div className='col-md-10 align'>
              <img src={bci} className='bcA'></img>
         <div className='centerC'>
@@ -28,6 +35,7 @@ function PageSuccess ()  {
            
           
   </div>
+  </>
     );
 }
 

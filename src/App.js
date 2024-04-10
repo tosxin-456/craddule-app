@@ -16,6 +16,8 @@ import IntroductionTwo from './introduction1';
 import ExecutiveSummarys from './executiveSummarys';
 import SectionIntro from './sectionIntro';
 import ProblemStatement from './problemstatement';
+import Conclusion from './conclusion';
+import PageCost from './costPage';
 import VideoDemo from './video';
 import MainApp from './mainApp';
 
@@ -32,6 +34,8 @@ function App() {
         <Route path="/sectionIntro" element= {<SectionIntro />} />
         <Route path="/problemstatement" element= {<ProblemStatement />} />
         <Route path="/video" element= {<VideoDemo />} />
+        <Route path="/conclusion" element={<Conclusion />} />
+        <Route path="costPage" element={<PageCost />} />
         <Route path="/" element={<MainApp />} />
       </Routes>
     </Router>

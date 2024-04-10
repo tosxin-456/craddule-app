@@ -1,12 +1,18 @@
 import React from 'react';
 import bci from './images/bc.png'; 
 import solution from './images/solution.png'; 
-
+import Header from './component/header';
+import Menu from './component/menu';
 
 
 
 function Solution ()  {
     return (
+        <>
+
+        <Header />
+        <Menu />
+        
         <div className='col-md-10 align'>
         <div className='centerC'>
             <img src={bci} className='bcI'></img>
@@ -28,6 +34,7 @@ function Solution ()  {
            
           
   </div>
+  </>
     );
 }
 

@@ -1,8 +1,13 @@
 import React from 'react';
 import bci from './images/bc.png';
+import Header from './component/header';
+import Menu from './component/menu';
 
 function ExecutiveSummary ()  {
     return (
+        <>
+        <Header />
+        <Menu />
         <div className='col-md-10 align'>
         <div className='centerC'>
         <img src={bci} className='bcI'></img>
@@ -25,6 +30,7 @@ function ExecutiveSummary ()  {
 
         <button className="btn btn-primary curveNext">Next</button>
   </div>
+  </>
     );
 }
 

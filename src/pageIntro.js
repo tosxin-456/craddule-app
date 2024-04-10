@@ -1,12 +1,19 @@
 import React from 'react';
 import bci from './images/bc.png'; 
 import intro from './images/intro.png'; 
+import Header from './component/header';
+import Menu from './component/menu';
 
 
 
 
 function PageIntro ()  {
     return (
+        <>
+
+        <Header />
+        <Menu />
+        
         <div className='col-md-10 align'>
              <img src={bci} className='bcA'></img>
         <div className='centerC'>
@@ -28,6 +35,7 @@ function PageIntro ()  {
            
           
   </div>
+  </>
     );
 }
 

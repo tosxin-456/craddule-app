@@ -131,6 +131,14 @@ body{
   box-shadow: 0 1px 5px 0 rgb(170 170 170);
 }
 
+.centerB{
+  margin: 90px 100px 50px 100px;
+  background-color: #fff;
+  padding:30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+}
+
 /* Center div height*/
 .lenght{
   margin: 50px 100px;
@@ -150,12 +158,10 @@ body{
 
 /* Image Styling */
 .bcA{
-  width: 20px;
-  float: left;
+  width: 0px;
   padding-bottom: 20px;
   margin-left: 80px;
 }
-
 
 .centerH{
   font-size: 28px;
@@ -394,17 +400,37 @@ body{
   left: 200px;
 }
 
+.alignA{
+  position: absolute;
+  margin-top: 100px;
+  padding: 0px;
+  top:0px;
+  left: 200px;
+}
+
 iframe{
   height: 300px;
   width: 100%;
   border-radius: 10px !important;
 }
 
+/*text center for ROI Financials*/
 .div-box{
   margin-left: 50px;
   margin-right: 50px;
   text-align: center;
 }
+
+/* For top title*/
+.div-boxA{
+  position: absolute;
+  margin-left: 50px;
+  margin-right: 50px;
+  text-align: center;
+  Left: 30em;
+  margin-bottom: 90px;
+}
+
 
 /* quote box */
 .box{
@@ -432,4 +458,3 @@ iframe{
   padding-top: 15px;
   margin: 0px;
 }
-

@@ -1,12 +1,19 @@
 import React from 'react';
 import bci from './images/bc.png'; 
 import graph from './images/graph.png'; 
+import Header from './component/header';
+import Menu from './component/menu';
 
 
 
 
 function Sectiondcf3 ()  {
     return (
+        <>
+
+        <Header />
+        <Menu />
+        
         <div className='col-md-10 align'>
              <img src={bci} className='bcA'></img>
         <div className='centerC'>
@@ -21,6 +28,7 @@ function Sectiondcf3 ()  {
         </div> 
         <button className="btn btn-primary curveNext">Next</button>
   </div>
+  </>
     );
 }
 

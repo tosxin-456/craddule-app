@@ -33,6 +33,8 @@ import PageSummarys from './pageSummarys';
 import PageProject from './pageProject';
 import CustomerSegment from './customerSegment';
 import PageMarketing from './marketing';
+import SectionPrototype from './sectionPrototype';
+import PageFrontView from './pageFrontView';
 
 
 
@@ -58,28 +60,28 @@ function App() {
   return (
 
    <div>
-    <Header />
-    <Menu />       
-    {/*<MarketAnalysis/>*/}
-    {/*<Introduction />*/}
-    {/*<SectionIntro />*/}
-    {/*<ExecutiveSummary />*/}
-    {/*<IntroductionTwo />*/}
-    {/*<ExecutiveSummarys />*/}
-    {/*<ProblemStatement/>*/}
-    {/*<VideoDemo />*/}
-    {/*<FinancialP />*/}
-    {/*Sectiondcf />*/}
-    {/*<SectiondcfTwo />*/}
-    {/*<Sectiondcf3 />*/}
-    {/*<Solution />*/}
-    {/*<RiskMitigation />*/}
-    {/*<Financials />*/}
-    {/*<Implementation />*/}
-    {/*<Conclusion />*/}
-    {/*<PageGovernance/>*/}
-    {/*<PageCost />*/}
-    {/*<PageBenefit />
+    {/*<Header />
+    <Menu />     
+    <MarketAnalysis/>
+    <Introduction />
+    <SectionIntro />
+    <ExecutiveSummary />
+    <IntroductionTwo />
+    <ExecutiveSummarys />
+    <ProblemStatement/>
+    <VideoDemo />
+    <FinancialP />
+    <Sectiondcf />
+    <SectiondcfTwo />
+    <Sectiondcf3 />
+    <Solution />
+    <RiskMitigation />
+    <Financials />
+    <Implementation /> 
+    <Conclusion />
+    {/*<PageGovernance/>
+    <PageCost />
+    <PageBenefit />
     <PageSuccess />
     <PageBusiness />
     <PageSummary />
@@ -87,8 +89,10 @@ function App() {
     <PageCustomer />
     <PageSummarys />
     <PageProject />
-    <CustomerSegment />*/}
+    <CustomerSegment />
     <PageMarketing />
+    <SectionPrototype/>*/}
+    <PageFrontView />
 
 
   

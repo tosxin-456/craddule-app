@@ -1,12 +1,17 @@
 import React from 'react';
 import bci from './images/bc.png'; 
-import cost from './images/cost.png'; 
-
+import cost from './images/cost.png';
+import Header from './component/header';
+import Menu from './component/menu';
 
 
 
 function PageCost ()  {
     return (
+        <>
+
+        <Header />
+        <Menu />
         <div className='col-md-10 align'>
         <div className='centerC'>
             <img src={bci} className='bcI'></img>
@@ -28,6 +33,7 @@ function PageCost ()  {
            
           
   </div>
+  </>
     );
 }
 

@@ -1,12 +1,18 @@
 import React from 'react';
 import bci from './images/bc.png'; 
-import segment from './images/segment.png'; 
+import segment from './images/segment.png';
+import Header from './component/header';
+import Menu from './component/menu';
 
 
 
 
 function CustomerSegment ()  {
     return (
+        <>
+        
+        <Header />
+        <Menu />
         <div className='col-md-10 align'>
              <img src={bci} className='bcA'></img>
         <div className='centerC'>
@@ -28,6 +34,7 @@ function CustomerSegment ()  {
            
           
   </div>
+  </>
     );
 }
 

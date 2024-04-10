@@ -1,12 +1,18 @@
 import React from 'react';
 import bci from './images/bc.png'; 
-import bob from './images/bob.png'; 
+import bob from './images/bob.png';
+import Header from './component/header';
+import Menu from './component/menu';
 
 
 
 
 function Fanancials ()  {
     return (
+        <>
+
+        <Header />
+        <Menu />
     <div className='col-md-10 align'>
         <div className='centerC'>
             <img src={bci} className='bcI'></img>
@@ -32,6 +38,7 @@ function Fanancials ()  {
            
           
   </div>
+  </>
     );
 }
 
