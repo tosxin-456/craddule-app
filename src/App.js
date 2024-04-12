@@ -78,7 +78,11 @@ function App() {
         <Route path="/Financials" element= {<Financials />} />
         <Route path="/conclusion" element={<Conclusion />} />
         <Route path="costPage" element={<PageCost />} />
-        <Route path="/" element={<MainApp />} />
+        <Route path="/home" element= {<LandingPage />} />
+        {/* <Route path="/login" element= {<Login />} /> */}
+        <Route path="/loading" element= {<LoadingPage />} />
+        <Route path="/" element={<Login />} />
+        // <Route path="/" element={<MainApp />} />
       </Routes>
     </Router>
   );
