@@ -71,9 +71,9 @@ function App() {
     <ExecutiveSummarys />
    <ProblemStatement/>
     <VideoDemo />
-    <FinancialP />
-    <Sectiondcf />
-    <SectiondcfTwo />
+    <FinancialP />*/}
+  <Sectiondcf />
+    {/*<SectiondcfTwo />
     <Sectiondcf3 />
     <Solution />
     <RiskMitigation />
@@ -94,8 +94,8 @@ function App() {
     <PageMarketing />
     <SectionPrototype/>
     <PageFrontView />
-    <PagePositioning />*/}
-    <SectionExecute />
+    <PagePositioning />
+    <SectionExecute />*/}
 
 
   
