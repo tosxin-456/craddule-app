@@ -14,7 +14,6 @@ import p1 from './images/p1.jpeg';
 import p2 from './images/p2.jpeg';
 import p3 from './images/p3.jpeg';
 import bolt from './images/bolt.png';
-import bloob from './images/bloob2.png';
 import Modal from './component/modal';
 
 
