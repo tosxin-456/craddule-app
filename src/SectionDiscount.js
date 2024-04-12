@@ -3,11 +3,16 @@ import bci from './images/bc.png';
 import graph from './images/graph.png'; 
 import Header from './component/header';
 import Menu from './component/menu';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 
 function Sectiondcf3 ()  {
+    const navigate = useNavigate()
+
+    const onClickHandler = () => navigate(`/SectiondcfTwo`)
     return (
         <>
 
@@ -26,7 +31,7 @@ function Sectiondcf3 ()  {
             </div>
             <div class = "dcfspacebottom"></div>
         </div> 
-        <button className="btn btn-primary curveNext">Next</button>
+        <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
   </div>
   </>
     );

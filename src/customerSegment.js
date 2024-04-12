@@ -3,11 +3,16 @@ import bci from './images/bc.png';
 import segment from './images/segment.png';
 import Header from './component/header';
 import Menu from './component/menu';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 
 function CustomerSegment ()  {
+    const navigate = useNavigate()
+
+    const onClickHandler = () => navigate(`/pageCustomer`)
     return (
         <>
         
@@ -30,7 +35,7 @@ function CustomerSegment ()  {
             <p className='suggest'>Your answer shouldn't be about money, It should be about solving a problem</p>
         </div> 
   
-        <button className="btn btn-primary curveNext">Next</button>
+        <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
            
           
   </div>

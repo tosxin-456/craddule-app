@@ -3,10 +3,15 @@ import bci from './images/bc.png';
 import dcf1 from './images/dcf1.png'; 
 import Header from './component/header';
 import Menu from './component/menu';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 function SectiondcfTwo ()  {
+    const navigate = useNavigate()
+
+    const onClickHandler = () => navigate(`/pageSummarys`)
     return (
         <>
 
@@ -22,7 +27,7 @@ function SectiondcfTwo ()  {
                 <img src={dcf1} className='dcfbro'></img> 
             </div>
             <div class = "dcfspacebottom"></div>
-            <button className="btn btn-primary curvedcf">Continue</button>
+            <button className="btn btn-primary curvedcf" onClick={onClickHandler}>Continue</button>
             <div class = "dcfspacebottom"></div>
         </div> 
   </div>

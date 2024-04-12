@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 function Conclusion ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pageSummarys`)
+    const onClickHandler = () => navigate(`/Sectiondcf`)
 
     return (
         <>

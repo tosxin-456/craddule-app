@@ -28,6 +28,17 @@ import Implementation from './implementation';
 import SectionExecute from './sectionSummary';
 import PageGovernance from './govPage';
 import PageIntro from './pageIntro';
+import PageBusiness from './pageBusiness';
+import CashFlow from './Sectiondcf';
+import SectiondcfTwo from './SectiondcfTwo';
+import Sectiondcf3 from './SectionDiscount';
+import SectionPrototype from './sectionPrototype';
+import PageCustomer from './pageCustomer';
+import CustomerSegment from './customerSegment';
+import PageMarketing from './marketing';
+import PagePositioning from './pagePositioning';
+import PageProject from './pageProject';
+import PageSuccess from './pageSuccess';
 import MainApp from './mainApp';
 
 
@@ -46,6 +57,17 @@ function App() {
         <Route path="/Solution" element= {<Solution />} />
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
+        <Route path="/Sectiondcf" element= {<CashFlow />} />
+        <Route path="/pageProject" element= {<PageProject/>} />
+        <Route path="/pageSuccess" element= {<PageSuccess />} />
+        <Route path="/SectiondcfTwo" element= {<SectiondcfTwo />} />
+        <Route path="/SectionDiscount" element= {<Sectiondcf3 />} />
+        <Route path="/sectionPrototype" element= {<SectionPrototype />} />
+        <Route path="/pageCustomer" element= {<PageCustomer />} />
+        <Route path="/marketing" element= {<PageMarketing />} />
+        <Route path="/pagePositioning" element= {<PagePositioning />} />
+        <Route path="/customerSegment" element= {<CustomerSegment />} />
+        <Route path="/pageBuisness" element= {<PageBusiness/>} />
         <Route path="/pageIntro" element= {<PageIntro />} />
         <Route path="/pageSummarys" element= {<PageSummarys />} />
         <Route path="/sectionSummary" element= {<SectionExecute />} />

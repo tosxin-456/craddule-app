@@ -11,7 +11,6 @@ import ExecutiveSummarys from './executiveSummarys';
 import SectionIntro from './sectionIntro';
 import ProblemStatement from './problemstatement';
 import VideoDemo from './video';
-import FinancialP from './financialP';
 import CashFlow from './Sectiondcf';
 import Sectiondcf from './Sectiondcf';
 import SectiondcfTwo from './SectiondcfTwo';
