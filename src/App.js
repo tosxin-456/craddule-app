@@ -21,11 +21,13 @@ import Solution from './Solution';
 import Conclusion from './conclusion';
 import PageCost from './costPage';
 import VideoDemo from './video';
+import PageSummarys from './pageSummarys';
 import Financials from './Financials';
 import RiskMitigation from './mitigation';
 import Implementation from './implementation';
 import SectionExecute from './sectionSummary';
 import PageGovernance from './govPage';
+import PageIntro from './pageIntro';
 import MainApp from './mainApp';
 
 
@@ -44,6 +46,8 @@ function App() {
         <Route path="/Solution" element= {<Solution />} />
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
+        <Route path="/pageIntro" element= {<PageIntro />} />
+        <Route path="/pageSummarys" element= {<PageSummarys />} />
         <Route path="/sectionSummary" element= {<SectionExecute />} />
         <Route path="/govPage" element= {<PageGovernance />} />
         <Route path="/sectionSummary" element= {<VideoDemo />} />
