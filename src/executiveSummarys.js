@@ -2,9 +2,14 @@ import React from 'react';
 import bci from './images/bc.png';
 import Header from './component/header';
 import Menu from './component/menu';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function ExecutiveSummarys ()  {
+    const navigate = useNavigate()
+
+     const onClickHandler = () => navigate(`/introduction1`)
     return (
 
         <>
@@ -30,7 +35,7 @@ function ExecutiveSummarys ()  {
            
         </div> 
 
-        <button className="btn btn-primary curveNext">Next</button>
+        <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
   </div>
   </>
     );

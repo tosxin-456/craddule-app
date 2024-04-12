@@ -35,6 +35,7 @@ import CustomerSegment from './customerSegment';
 import PageMarketing from './marketing';
 import SectionPrototype from './sectionPrototype';
 import PageFrontView from './pageFrontView';
+import PagePositioning from './pagePositioning';
 
 
 
@@ -64,11 +65,11 @@ function App() {
     <Menu />     
     <MarketAnalysis/>
     <Introduction />
-    <SectionIntro />
+  <SectionIntro />
     <ExecutiveSummary />
-    <IntroductionTwo />
+  <IntroductionTwo />*/}
     <ExecutiveSummarys />
-    <ProblemStatement/>
+    {/*<ProblemStatement/>
     <VideoDemo />
     <FinancialP />
     <Sectiondcf />
@@ -83,16 +84,17 @@ function App() {
     <PageCost />
     <PageBenefit />
     <PageSuccess />
-    <PageBusiness />
+  <PageBusiness />
     <PageSummary />
     <PageIntro />
-    <PageCustomer />
+  <PageCustomer />
     <PageSummarys />
     <PageProject />
     <CustomerSegment />
     <PageMarketing />
-    <SectionPrototype/>*/}
+    <SectionPrototype/>
     <PageFrontView />
+    <PagePositioning />*/}
 
 
   

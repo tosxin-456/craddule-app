@@ -158,7 +158,8 @@ body{
 
 /* Image Styling */
 .bcA{
-  width: 0px;
+  width: 20px;
+  float: left;
   padding-bottom: 20px;
   margin-left: 80px;
 }
@@ -457,4 +458,87 @@ iframe{
 .author{
   padding-top: 15px;
   margin: 0px;
+}
+
+/*PagePositioning*/
+.textBrand{
+  font-weight: bold;
+}
+
+.container-textAt {
+  height: 50px; /* Example height of the parent container */
+  position: relative; /* Ensure percentage height is relative to the parent */
+}
+
+.buttonF{
+  position: relative;
+  background-color: white!important;
+  border: 0px !important;
+  color:  #E8C400 !important;
+  font-weight: 500 !important;
+  padding: 5px 15px !important;
+  font-size: 12px!important;
+  margin-right: 0px!important;
+  margin-top: 10px;
+  border-color:#E8C400 !important;
+  left: 100px;
+  bottom: 70px;
+}
+
+.buttonG{
+ position: relative;
+ background-color: white!important;
+ border: 0px !important;
+ color:  #E8C400 !important;
+ font-weight: 500 !important;
+ padding: 5px 15px !important;
+ font-size: 12px!important;
+ margin-right: 0px!important;
+ margin-top: 10px;
+ left: 100px;
+ bottom: 50px;
+}
+
+
+.buttonH{
+position: relative;
+background-color: white!important;
+ border: 0px !important;
+ color:  #E8C400 !important;
+ font-weight: 500 !important;
+ padding: 5px 15px !important;
+ font-size: 12px!important;
+ margin-right: 0px!important;
+ margin-top: 10px;
+ left: 100px;
+ bottom: 50px;
+}
+
+.createBrand{
+  width: 100px;
+  height: 40px;
+  background-color: #e8eaf5;
+  text-align: center;
+}
+
+.createBrandA{
+  padding-top: 10px;
+}
+
+.textAA{
+  height: 70px; /* Example height of the parent container */
+  position: relative; /* Ensure percentage height is relative to the parent */
+}
+
+.brandlogoA{
+  width: 100px;
+  height: 100px;
+  background-color: #e8eaf5;
+  text-align: center;
+}
+
+.brandlogo{
+  width: 50px;
+  padding-top: 20px;
+  margin-left: 0px;
 }

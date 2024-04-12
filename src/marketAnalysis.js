@@ -3,10 +3,15 @@ import bci from './images/bc.png';
 import bob from './images/bob.png'; 
 import Header from './component/header';
 import Menu from './component/menu';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 function MarketAnalysis ()  {
+    const navigate = useNavigate()
+
+    const onClickHandler = () => navigate(`/Solution`)
     return (
         <>
 
@@ -30,7 +35,7 @@ function MarketAnalysis ()  {
             <p className='suggest'>Your answer shouldn't be about money, It should be about solving a problem</p>
         </div> 
   
-        <button className="btn btn-primary curveNext">Next</button>
+        <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
            
           
   </div>

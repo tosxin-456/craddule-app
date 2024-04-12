@@ -16,10 +16,13 @@ import IntroductionTwo from './introduction1';
 import ExecutiveSummarys from './executiveSummarys';
 import SectionIntro from './sectionIntro';
 import ProblemStatement from './problemstatement';
+import PageBenefit from './pageBenefit';
+import Solution from './Solution';
 import Conclusion from './conclusion';
 import PageCost from './costPage';
 import VideoDemo from './video';
 import MainApp from './mainApp';
+
 
 
 function App() {
@@ -33,6 +36,8 @@ function App() {
         <Route path="/executiveSummarys" element= {<ExecutiveSummarys />} />
         <Route path="/sectionIntro" element= {<SectionIntro />} />
         <Route path="/problemstatement" element= {<ProblemStatement />} />
+        <Route path="/Solution" element= {<Solution />} />
+        <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/conclusion" element={<Conclusion />} />
         <Route path="costPage" element={<PageCost />} />
