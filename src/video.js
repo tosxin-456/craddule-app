@@ -23,7 +23,9 @@ function Video ()  {
             <img src={bci} className='bcI'></img>
 
             <div className='text-center'>
-            <div class = "spaceA"></div>
+            <p className='centerH'>Problem Statement</p>
+                <p className='centerHp'>Make sure you answer all questions</p>
+            <div class = "spaceB"></div>
             <iframe src="https://www.youtube.com/embed/NBd6yJBzyis?si=QTR7Qu_dLDkhRFmR" title="Iframe Example"></iframe>
             <div class = "spaceB"></div>
             </div>
