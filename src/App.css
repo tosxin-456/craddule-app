@@ -124,7 +124,7 @@ body{
 
 /* center */
 .centerC{
-  margin: 50px 100px;
+  margin: 20px 10px;
   background-color: #fff;
   padding:30px 40px;
   border-radius: 10px;
@@ -258,14 +258,15 @@ body{
 /* Next Button*/
 .curveNext{
   float: right;
-    background-color: #E8C400 !important;
+    background-color: #facc04 !important;
     border: 0px !important;
     color: #000 !important;
     font-weight: 500 !important;
     padding: 5px 30px !important;
     border-radius: 20px !important;
     font-size: 17px!important;
-    margin-right: 100px!important;
+    margin-right: 10px!important;
+    margin-bottom: 60px;
 }
 
 /* Bedin and continue buttons */
