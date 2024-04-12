@@ -36,6 +36,7 @@ import PageMarketing from './marketing';
 import SectionPrototype from './sectionPrototype';
 import PageFrontView from './pageFrontView';
 import PagePositioning from './pagePositioning';
+import SectionExecute from './sectionSummary';
 
 
 
@@ -67,9 +68,9 @@ function App() {
     <Introduction />
   <SectionIntro />
     <ExecutiveSummary />
-  <IntroductionTwo />*/}
+  <IntroductionTwo />
     <ExecutiveSummarys />
-    {/*<ProblemStatement/>
+   <ProblemStatement/>
     <VideoDemo />
     <FinancialP />
     <Sectiondcf />
@@ -95,6 +96,7 @@ function App() {
     <SectionPrototype/>
     <PageFrontView />
     <PagePositioning />*/}
+    <SectionExecute />
 
 
   

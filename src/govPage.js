@@ -1,12 +1,22 @@
 import React from 'react';
 import bci from './images/bc.png'; 
-import govern from './images/govern.png'; 
+import govern from './images/govern.png';
+import Header from './component/header';
+import Menu from './component/menu';
+import { useNavigate } from 'react-router-dom'; 
 
 
 
 
 function PageGovernance ()  {
+    const navigate = useNavigate()
+
+    const onClickHandler = () => navigate(`/conclusion`)
     return (
+        <>
+
+        <Header />
+        <Menu />
         <div className='col-md-10 align'>
         <div className='centerC'>
             <img src={bci} className='bcI'></img>
@@ -24,10 +34,11 @@ function PageGovernance ()  {
             <p className='suggest'>Your answer shouldn't be about money, It should be about solving a problem</p>
         </div> 
   
-        <button className="btn btn-primary curveNext">Next</button>
+        <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
            
           
   </div>
+  </>
     );
 }
 

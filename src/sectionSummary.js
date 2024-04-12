@@ -1,6 +1,6 @@
 import React from 'react';
 import bci from './images/bc.png'; 
-import implan from './images/implan.png'; 
+import bob from './images/bob.png'; 
 import Header from './component/header';
 import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
@@ -8,10 +8,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function Implementation ()  {
+function SectionExecute ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/govPage`)
+    const onClickHandler = () => navigate(`/executiveSummarys`)
     return (
         <>
 
@@ -20,12 +20,10 @@ function Implementation ()  {
         
         <div className='col-md-10 align'>
         <div className='centerC'>
-            <img src={bci} className='bcI'></img>
-
             <div className='text-center'>
-                <p className='centerH'>Implementation Plan</p>
-                <p className='centerHp'>Make sure you answer all questions</p>
-                <img src={implan} className='bro'></img>
+                <p className='textHp'>Executive Summary</p>
+                <p className='textH'>Make sure you answer all questions</p>
+                <img src={bob} className='bro'></img>
                
             </div>
             <p className='question'>Why do you want to start a Company?</p>
@@ -43,4 +41,4 @@ function Implementation ()  {
     );
 }
 
-export default Implementation
+export default SectionExecute
