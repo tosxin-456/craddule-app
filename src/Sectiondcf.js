@@ -26,10 +26,11 @@ function Sectiondcf ()  {
                 <p className='tittle'>Welcome to Discounted Cash Flow (DCF) </p>
                 <div class = "dcfspace"></div>
                 <img src={dcf} className='dcfbro'></img> 
+                <div class = "dcfspace"></div>
+                <button className="btn btn-primary curvedcf" onClick={onClickHandler}>Begin</button>
             </div>
-            <div class = "dcfspacebottom"></div>
-            <button className="btn btn-primary curvedcf" onClick={onClickHandler}>Begin</button>
-            <div class = "dcfspacebottom"></div>
+            {/*<div class = "dcfspacebottom"></div>
+            <div class = "dcfspacebottom"></div>*/}
         </div> 
   </div>
   </>
