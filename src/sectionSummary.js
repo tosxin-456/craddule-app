@@ -1,6 +1,5 @@
 import React from 'react';
-import bci from './images/bc.png'; 
-import bob from './images/bob.png'; 
+import amico from './images/amico.png'; 
 import Header from './component/header';
 import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +22,7 @@ function SectionExecute ()  {
             <div className='text-center'>
                 <p className='textHp'>Executive Summary</p>
                 <p className='textH'>Make sure you answer all questions</p>
-                <img src={bob} className='bro'></img>
+                <img src={amico} className='bro'></img>
                
             </div>
             <p className='question'>Why do you want to start a Company?</p>
