@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 function PageSummarys ()  {  const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pageSummarys`)
+    const onClickHandler = () => navigate(`/pageIntro`)
     return (
         <>
 

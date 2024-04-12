@@ -26,7 +26,7 @@ function Fanancials ()  {
                 <p className='centerHp'>Make sure you answer all questions</p>
                 {/*<img src={bob} className='bro'></img>*/}
                 <div class = "spaceB"></div>
-               <div className='box'>
+               <div className='container-box'>
                   <p className='quote'>"The most difficult thing is the decision to act, the rest is merely tenancity."</p>
                   <p className='author'>- Amelia Earhart</p> 
                 </div>
