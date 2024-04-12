@@ -41,6 +41,9 @@ import PageProject from './pageProject';
 import PageSuccess from './pageSuccess';
 import MainApp from './mainApp';
 
+import LandingPage from './landing';
+import Login from './login';
+import LoadingPage from './laodingPage';
 
 
 function App() {
