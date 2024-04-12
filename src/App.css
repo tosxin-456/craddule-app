@@ -538,3 +538,551 @@ background-color: white!important;
   padding-top: 20px;
   margin-left: 0px;
 }
+
+
+/* new menu */
+/* .newMHold{
+  
+} */
+
+.newMHold1{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 1px 17px 0 rgb(227 232 246);
+}
+
+.newMUl{
+  font-weight: 500;
+  font-size: 15px;
+  margin-bottom: 10px;
+  list-style: none;
+  cursor: pointer;
+  padding-left: 0rem;
+}
+
+
+.subMenu{
+  list-style: none;
+  overflow: hidden; 
+  font-size: 12px;
+  max-height: 0; /* Initially hide the submenu */
+  transition: max-height 0.5s ease-out;
+  
+}
+
+.dropdown-trigger:hover .subMenu2 {
+  max-height: 500px; /* Set max-height to show submenu */
+}
+
+
+.subMenu2{
+  list-style: none;
+  overflow: hidden; 
+  /* padding-left: 50px; */
+  max-height: 0; /* Initially hide the submenu */
+  transition: max-height 0.5s ease-out;
+}
+.subMenuOpen {
+  font-size: 14px;
+  /* padding-left: 50px; */
+  list-style: none;
+  transition: max-height 0.5s ease-in; 
+  max-height: 500px; /* Set max-height to show submenu */
+  background-color: #ececec;
+  margin-bottom:20px ;
+}
+
+.dropdown-trigger2{
+  margin-right: 20px;
+  margin-left: 20px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+}
+.dropdown-trigger2:hover{
+  background-color: #ececec;
+  border-radius: 20px
+}
+
+.dropdown-trigger2.active{
+  background-color: #ececec;
+  border-radius: 20px
+}
+.innr{
+  width: 80%;
+  font-size: 13px;
+  padding: 2px 10px;
+  /* border-bottom: 1px solid #b9b9b9; */
+  margin-bottom:20px ;
+  
+  padding-top: 10px;
+}
+/* .innr:hover{
+  background-color: #E8C400;
+  transition: 0.5s ease-in; 
+  color: #E8C400;
+} */
+.iconS{
+  font-size: 24px;
+  color: #393939;
+  margin-right: 10px;
+}
+.container-fluid{
+ 
+  padding-right: 50px !important;
+    padding-left: 50px !important;
+}
+/* end new menu */
+
+/* new header */
+.headerH{
+  padding-top: 30px;
+}
+.pName{
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 0rem;
+}
+
+.pSlogan{
+  font-size: 12px;
+  font-weight: 200;
+  margin-bottom: 0rem;
+}
+
+.proH {
+  margin-top: 20px;
+  width: 50px;
+  height: 50px;
+  overflow: hidden; 
+  border-radius: 50%; /* Make container circular */
+  border: 1px solid #ccc; /* Optional border */
+}
+
+.circular-image {
+  width: 100%; /* Ensure image fills container */
+  height: 100%; /* Ensure image fills container */
+  object-fit: cover; /* Preserve aspect ratio and cover entire container */
+}
+
+.weName1{
+  padding-top: 5px;
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 0rem;
+}
+.weName{
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 0rem;
+}
+
+
+.proTop {
+  display:inline-block;
+  margin-left: 20px;
+  padding: 2px;
+  width: 40px;
+  height: 40px;
+  overflow: hidden; 
+  border-radius: 30%; /* Make container circular */
+  border: 3px solid #dddddd; /* Optional border */
+}
+
+.circular-image-top {
+  width: 100%; /* Ensure image fills container */
+  height: 100%; /* Ensure image fills container */
+  object-fit: cover; /* Preserve aspect ratio and cover entire container */
+}
+
+.fll{
+  float: right;
+}
+
+.iconS2{
+  font-size: 25px;
+  color: #393939;
+}
+.mr{
+  margin-right: 20px;
+}
+
+.we1{
+  padding-top: 60px;
+  margin-left: 100px;
+    margin-bottom: 0rem;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.we2{
+  margin-bottom: 0rem;
+  font-size: 14px;
+  margin-left: 100px;
+}
+/* dashboard */
+
+.centerD{
+  margin-top: 20px;
+  background-color: #7a9cff;
+  padding:30px 20px;
+  border-radius: 10px;
+}
+
+.centerD2{
+  margin-top: 20px;
+  background-color: #e7bb00;
+  padding:30px 20px;
+  border-radius: 10px;
+}
+.pna{
+  color: #fff;
+  font-weight: 600;
+}
+.pna2{
+  color: #ececec;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.proTeam {
+  display:inline-block;
+  margin-left: 5px;
+  width: 25px;
+  height: 25px;
+  overflow: hidden; 
+  border-radius: 30%; /* Make container circular */
+  border: 3px solid #ececec; /* Optional border */
+}
+.ra{
+  margin-top: 30px;
+    font-weight: 700;
+}
+
+.actH{
+  background-color: #fff;
+  padding:5px 10px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 17px 0 rgb(227 232 246);
+  margin-bottom: 20px;
+}
+
+.proTeamI {
+  display:inline-block;
+  margin-left: 5px;
+  width: 40px;
+  height: 40px;
+  overflow: hidden; 
+  border-radius: 30%; /* Make container circular */
+}
+
+.rp1{
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.rp2{
+  font-size: 10px;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.calH{
+  background-color: #dfdfdf;
+  padding:10px 10px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.calH2{
+  background-color: #ffeea4;
+  padding:10px 10px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+.dat{
+  text-align: center;
+  font-size: 50px;
+  font-weight: 600;
+}
+
+.dat2{
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.datImage{
+  width: 40%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.progTeam{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  padding: 20px 20px;
+  border-radius: 20px;
+  box-shadow: 0px 1px 17px 0 rgb(227 232 246);
+}
+.teamP{
+  margin-bottom: 0rem;
+}
+
+.teamP2{
+  margin-bottom: 0rem;
+  font-size: 10px;
+}
+.spacer{
+  margin-top: 20px;
+}
+.progressB{
+  background-color: 'lightblue'
+}
+.bloob{
+  width: 90%;
+}
+.createP{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    cursor: pointer;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #1b45bf;
+    border-radius: 25px;
+}
+
+.crea1{
+  font-size: 18px;
+  font-weight: 800;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 0rem;
+}
+
+/* login */
+
+.wholeP{
+  border-radius: 25px;
+  width: 100%;
+  background-color: #fff;
+  margin-top:50px;
+  margin-bottom:50px;
+}
+
+.halfWhH{
+  width: 50%;
+  border-radius: 25px;
+ padding: 70px 90px;
+}
+.halfWh{
+  padding: 150px 30px;
+  margin: 50px 70px;
+  border-radius: 25px;
+  background-color: #1b45bf;
+  height: 68vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("./images/bg2.jpg");
+}
+
+.halfWhH2{
+  width: 50%;
+  border-radius: 25px;
+}
+
+.blurry{
+  background-color: rgba(255, 255, 255, 0.3); /* Transparent white background */
+  border-radius: 25px; /* Border radius */
+  padding: 10px 20px; /* Add padding for content */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  width: fit-content; /* Adjust width as needed */
+  margin: 20px auto; /* Center div horizontally */
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 1px 0px 4px 0px rgb(76 106 190);
+  font-size: 20px;
+}
+.loginH{
+  padding: 40px 90px;
+}
+.lgT{
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 9px;
+}
+
+.lgT2{
+  font-size: 14px;
+  color: #b8b8b8;
+}
+
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.lab {
+  margin-bottom: 5px;
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.custom-input {
+  padding: 10px;
+  border: 1px solid #bdbdbd; /* Default border */
+  border-radius: 25px;
+  transition: border-radius 0.3s ease; /* Smooth transition */
+  margin-bottom: 10px;
+}
+
+.custom-input:focus {
+  outline: none;
+  border: 1px solid #1b45bf;
+  border-radius: 25px; /* Change border radius when focused */
+}
+
+/* .password-input-container {
+  
+} */
+
+.password-toggle {
+  cursor: pointer;
+}
+
+
+.loginBtn{
+    background-color: #1b45bf !important;
+    border: 0px !important;
+    color: #fff !important;
+    font-weight: 500 !important;
+    padding: 10px 30px !important;
+    border-radius: 20px !important;
+    font-size: 17px!important;
+    margin-top: 30px;
+    width: 100%;
+    transition: 0.5s ease-in; 
+}
+
+.loginBtn:hover{
+  font-size: 19px!important;
+  transition: 0.5s ease-in; 
+}
+.loginBtn2{
+  background-color: #fff !important;
+  border: 0px !important;
+  color: #1b45bf !important;
+  font-weight: 500 !important;
+  padding: 10px 30px !important;
+  border-radius: 20px !important;
+  font-size: 17px!important;
+  margin-top: 20px;
+  border: 1px solid #1b45bf !important;
+  width: 100%;
+}
+
+.loginBtn2:hover{
+  font-size: 19px!important;
+  transition: 0.5s ease-in; 
+  border: 3px solid #1b45bf !important;
+}
+
+.loadP{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.loadPt{
+  padding-top: 20px;
+  font-size: 15px;
+  font-weight: 200;
+}
+
+.modalOv{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(0 0 0 / 84%);
+  z-index: 1000;
+}
+
+.modalSt{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 30px 20px;
+  width: 40%;
+  z-index: 1000;
+  border-radius: 15px;
+}
+
+.closeM{
+  cursor: pointer;
+  float: inline-end;
+}
+.input-containerC {
+  position: relative;
+  margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+.creT {
+  text-align: center;
+  font-size: 14px; /* Adjust font size as needed */
+}
+
+.bottom-border-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #ccc; /* Bottom border */
+  outline: none;
+  font-size: 14px;
+}
+
+/* Optional: Add focus styles */
+.bottom-border-input:focus {
+  border-bottom-color: #1b45bf; /* Adjust color as needed */
+}
+
+/* .iconSB{
+    border-radius: 40%;
+    font-size: 24px;
+    color: #ffffff;
+    border: 1px solid #1b45bf;
+    padding: 5px 8px;
+    background: #1b45bf;
+    cursor: pointer;
+    float: left;
+} */
+
+
+.iconSB{
+    font-size: 24px;
+    color: #1b45bf;
+    cursor: pointer;
+    float: right;
+} 
+.iconh{
+  margin-bottom: 25px;
+}
+
