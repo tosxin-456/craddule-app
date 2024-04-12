@@ -10,11 +10,11 @@ import Menu from './component/menu';
 function PagePositioning ()  {
     return (
         <>
-
-        <Header />
-        <Menu />
-        
-        <div className='col-md-10 align'>
+ <div className='container-fluid'>
+    <Header />
+    <div className='row'>
+    <Menu /> 
+        <div className='col-md-9'>
 
 <img src={bci} className='bcA'></img>
      
@@ -91,6 +91,8 @@ function PagePositioning ()  {
 <button className="btn btn-primary curveNext">Next</button>
    
   
+</div>
+</div>
 </div>
   </>
     );

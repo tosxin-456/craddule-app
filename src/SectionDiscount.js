@@ -15,11 +15,12 @@ function Sectiondcf3 ()  {
     const onClickHandler = () => navigate(`/SectiondcfTwo`)
     return (
         <>
-
-        <Header />
-        <Menu />
+ <div className='container-fluid'>
+    <Header />
+    <div className='row'>
+    <Menu /> 
         
-        <div className='col-md-10 align'>
+        <div className='col-md-9'>
              <img src={bci} className='bcA'></img>
         <div className='centerC'>
             <div className='text-center'>
@@ -32,6 +33,8 @@ function Sectiondcf3 ()  {
             <div class = "dcfspacebottom"></div>
         </div> 
         <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
+  </div>
+  </div>
   </div>
   </>
     );

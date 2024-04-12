@@ -8,10 +8,12 @@ function SectionPrototype ()  {
     return (
         <>
 
-        <Header />
-        <Menu />
+<div className='container-fluid'>
+    <Header />
+    <div className='row'>
+    <Menu /> 
         
-        <div className='col-md-10 alignA'>
+        <div className='col-md-9'>
             <img src={bci} className='bcA'></img>
                <div className='div-boxA'>
                 <p className='centerH'>Prototype</p>
@@ -26,6 +28,8 @@ function SectionPrototype ()  {
         </div> 
 
         <button className="btn btn-primary curveNext">Next</button>
+  </div>
+  </div>
   </div>
   </>
     );

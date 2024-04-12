@@ -11,9 +11,11 @@ function PageFrontView ()  {
     return (
         <>
 
-        <Header />
-        <Menu />
-    <div className='col-md-10 align'>
+<div className='container-fluid'>
+    <Header />
+    <div className='row'>
+    <Menu /> 
+    <div className='col-md-9'>
             <img src={bci} className='bcA'></img>
            <div className='div-boxA'>
                 <p className='centerH'>Frontview 3D Design</p>
@@ -27,6 +29,8 @@ function PageFrontView ()  {
   
         <button className="btn btn-primary curveNext">Next</button>        
           
+    </div>
+    </div>
     </div>
        </>
     );

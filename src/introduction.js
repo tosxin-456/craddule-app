@@ -12,11 +12,12 @@ function Introduction ()  {
     const onClickHandler = () => navigate(`/sectionIntro`)
     return (
         <>
+ <div className='container-fluid'>
+    <Header />
+    <div className='row'>
+    <Menu /> 
 
-        <Header />
-        <Menu />
-
-        <div className='col-md-10 align'>
+        <div className='col-md-9'>
         <div className='centerC'>
         <img src={bci} className='bcI'></img>
 
@@ -36,6 +37,8 @@ function Introduction ()  {
         </div> 
 
         <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
+  </div>
+  </div>
   </div>
         </>
     );

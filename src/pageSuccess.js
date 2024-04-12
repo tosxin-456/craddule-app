@@ -14,11 +14,12 @@ function PageSuccess ()  {
     const onClickHandler = () => navigate(`/marketing`)
     return (
         <>
-
-        <Header />
-        <Menu />
+ <div className='container-fluid'>
+    <Header />
+    <div className='row'>
+    <Menu /> 
         
-        <div className='col-md-10 align'>
+        <div className='col-md-9'>
              <img src={bci} className='bcA'></img>
         <div className='centerC'>
 
@@ -38,6 +39,8 @@ function PageSuccess ()  {
         <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
            
           
+  </div>
+  </div>
   </div>
   </>
     );

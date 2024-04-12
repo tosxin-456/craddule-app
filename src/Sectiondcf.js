@@ -15,11 +15,12 @@ function Sectiondcf ()  {
     const onClickHandler = () => navigate(`/SectionDiscount`)
     return (
         <>
-
-        <Header />
-        <Menu />
+  <div className='container-fluid'>
+    <Header />
+    <div className='row'>
+    <Menu /> 
         
-        <div className='col-md-10 align'>
+        <div className='col-md-9'>
              <img src={bci} className='bcA'></img>
         <div className='centerC'>
             <div className='text-center'>
@@ -32,6 +33,8 @@ function Sectiondcf ()  {
             {/*<div class = "dcfspacebottom"></div>
             <div class = "dcfspacebottom"></div>*/}
         </div> 
+  </div>
+  </div>
   </div>
   </>
     );

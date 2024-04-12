@@ -15,9 +15,11 @@ function PageCost ()  {
     return (
         <>
 
-        <Header />
-        <Menu />
-        <div className='col-md-10 align'>
+<div className='container-fluid'>
+    <Header />
+    <div className='row'>
+    <Menu /> 
+        <div className='col-md-9'>
         <div className='centerC'>
             <img src={bci} className='bcI'></img>
 
@@ -37,6 +39,8 @@ function PageCost ()  {
         <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
            
           
+  </div>
+  </div>
   </div>
   </>
     );

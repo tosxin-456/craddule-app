@@ -14,10 +14,12 @@ function SectionExecute ()  {
     return (
         <>
 
-        <Header />
-        <Menu />
+<div className='container-fluid'>
+    <Header />
+    <div className='row'>
+    <Menu /> 
         
-        <div className='col-md-10 align'>
+        <div className='col-md-9'>
         <div className='centerC'>
             <div className='text-center'>
                 <p className='textHp'>Executive Summary</p>
@@ -35,6 +37,8 @@ function SectionExecute ()  {
         <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
            
           
+  </div>
+  </div>
   </div>
   </>
     );
