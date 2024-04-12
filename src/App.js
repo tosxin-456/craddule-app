@@ -43,7 +43,7 @@ function App() {
         <Route path="/Solution" element= {<Solution />} />
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
-        <Route path="/sectionSummary" element= {<SectionExecute />} />
+        <Route path="/sectionSummary" element= {<VideoDemo />} />
         <Route path="/implementation" element= {<Implementation />} />
         <Route path="/mitigation" element= {<RiskMitigation />} />
         <Route path="/Financials" element= {<Financials />} />
