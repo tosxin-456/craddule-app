@@ -438,7 +438,7 @@ iframe{
   font-size: 20px;
   border-radius: 10px !important;
   text-wrap:wrap;
-  background-color: #999252;
+  background-color: #999252 !important;
   font-weight: bold;
   padding: 0px 10px 0px 10px;
   margin-left: 50px;
