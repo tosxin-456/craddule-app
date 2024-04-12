@@ -39,7 +39,7 @@
 
 
 body{
-  background-color: rgb(225, 225, 225) !important;
+  background-color: #ecf1ff !important;
 }
 
 .topN{
@@ -128,7 +128,7 @@ body{
   background-color: #fff;
   padding:30px 40px;
   border-radius: 10px;
-  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  box-shadow: 0px 1px 17px 0 rgb(227 232 246);
 }
 
 .centerB{
