@@ -19,7 +19,7 @@ useEffect(() =>{
   setLoading(true)
   setTimeout(() =>{
     setLoading(false)
-    navigate(`/marketAnalysis`)
+    navigate(`/executiveSummarys`)
   }, 8000)
 })
 
