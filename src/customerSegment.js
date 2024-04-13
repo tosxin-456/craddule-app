@@ -24,7 +24,7 @@ function CustomerSegment ()  {
         <div className='centerC'>
 
             <div className='text-center'>
-                <p className='centerH'>Costmer Segment</p>
+                <p className='centerH'>Customer Segment</p>
                 <p className='centerHp'>Make sure you answer all questions</p>
                 <img src={segment} className='bro'></img>
                
