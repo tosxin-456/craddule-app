@@ -593,7 +593,7 @@ background-color: white!important;
   list-style: none;
   transition: max-height 0.5s ease-in; 
   max-height: 500px; /* Set max-height to show submenu */
-  background-color: #ececec;
+  background-color: #7a9cff;
   margin-bottom:20px ;
 }
 
@@ -602,6 +602,26 @@ background-color: white!important;
   margin-left: 20px;
   padding-left: 15px;
   padding-bottom: 5px;
+}
+
+.dropdown-trigger2-open{
+  margin-right: 20px;
+  margin-left: 20px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+  background-color: #7a9cff;
+  color: #fff !important;
+  border-radius: 20px;
+}
+
+.dropdown-trigger2-open:hover{
+  margin-right: 20px;
+  margin-left: 20px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+  background-color: #7a9cff;
+  color: #fff!important;
+  border-radius: 20px;
 }
 .dropdown-trigger2:hover{
   background-color: #ececec;
@@ -626,9 +646,15 @@ background-color: white!important;
   transition: 0.5s ease-in; 
   color: #E8C400;
 } */
-.iconS{
+iconS{
   font-size: 24px;
   color: #393939;
+  margin-right: 10px;
+}
+
+.iconS-open{
+  font-size: 24px;
+  color: #fff;
   margin-right: 10px;
 }
 .container-fluid{
