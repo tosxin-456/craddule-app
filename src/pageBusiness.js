@@ -25,7 +25,7 @@ function PageBusiness ()  {
         <div className='centerC'>
 
             <div className='text-center'>
-                <p className='centerH'>Buisness Problem Statment/ Opportunity Analysis</p>
+                <p className='centerH'>Buisness Problem Statement/ Opportunity Analysis</p>
                 <p className='centerHp'>Make sure you answer all questions</p>
                 <img src={business} className='bro'></img>
                
