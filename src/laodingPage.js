@@ -19,7 +19,7 @@ useEffect(() =>{
   setLoading(true)
   setTimeout(() =>{
     setLoading(false)
-    navigate(`/executiveSummarys`)
+    navigate(`/introduction1`)
   }, 8000)
 })
 
