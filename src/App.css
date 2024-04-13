@@ -637,16 +637,24 @@ background-color: white!important;
   width: 80%;
   font-size: 13px;
   padding: 2px 10px;
-  /* border-bottom: 1px solid #b9b9b9; */
-  margin-bottom:20px ;
-  
+  margin-bottom: 7px;
   padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 20px;
 }
-/* .innr:hover{
-  background-color: #E8C400;
-  transition: 0.5s ease-in; 
-  color: #E8C400;
-} */
+
+.innr:hover{
+  background-color: #88a5fb;
+  transition: 0.2s ease-in; 
+  color: #fff;
+  border-radius: 20px;
+} 
+.innr.active{
+  background-color: #88a5fb;
+  transition: 0.2s ease-in; 
+  color: #fff;
+  border-radius: 20px;
+} 
 .iconS{
   font-size: 24px;
   color: #393939;
