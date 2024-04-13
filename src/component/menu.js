@@ -64,7 +64,7 @@ function Menu () {
             <span className={isSubmenuOpen ? 'iconS-open' : 'iconS'}><CiMemoPad /></span> Ideation
           </span>
             <ul className={isSubmenuOpen ? 'subMenuOpen' : 'subMenu'}>
-              <li className='innr'>Business Case Builder</li>
+              <li className='innr active'>Business Case Builder</li>
 
               <li className='innr'>Custom Financial Projection</li>
               <li className='innr'>Discounted Cash Flow (DCF)</li>
