@@ -56,12 +56,12 @@ function Menu () {
   
     <div className='newMHold1'>
       <ul className='newMUl'>
-          <li className="dropdown-trigger2 active"> 
+          <li  className={isSubmenuOpen ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
           <span
             onClick={toggleSubmenu}
-            className="dropdown-trigger"
+            className="dropdown-trigger" 
           >
-            <span className='iconS'><CiMemoPad /></span> Ideation
+            <span className={isSubmenuOpen ? 'iconS-open' : 'iconS'}><CiMemoPad /></span> Ideation
           </span>
             <ul className={isSubmenuOpen ? 'subMenuOpen' : 'subMenu'}>
               <li className='innr'>Business Case Builder</li>
@@ -76,12 +76,12 @@ function Menu () {
             </ul>
           </li>
 
-          <li className="dropdown-trigger2"> 
+          <li  className={isSubmenuOpen1 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
             <span
               onClick={toggleSubmenu1}
               className="dropdown-trigger"
             >
-              <span className='iconS'>< CiPaperplane /></span> Product Definition
+              <span className={isSubmenuOpen1 ? 'iconS-open' : 'iconS'}>< CiPaperplane /></span> Product Definition
             </span>
             <ul className={isSubmenuOpen1 ? 'subMenuOpen' : 'subMenu'}>
                 <li className='innr'>Business Analysis Pack</li>
@@ -96,12 +96,12 @@ function Menu () {
               </ul>
           </li>
 
-          <li className="dropdown-trigger2"> 
+          <li className={isSubmenuOpen2 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
             <span
                 onClick={toggleSubmenu2}
                 className="dropdown-trigger"
               >
-              <span className='iconS'><CiPen /></span> Prototyping
+              <span className={isSubmenuOpen2 ? 'iconS-open' : 'iconS'}><CiPen /></span> Prototyping
             </span>
             <ul className={isSubmenuOpen2 ? 'subMenuOpen' : 'subMenu'}>
               <li className='innr'>Wireframe</li>
@@ -111,12 +111,12 @@ function Menu () {
             </ul>
           </li>
 
-          <li className="dropdown-trigger2"> 
+          <li className={isSubmenuOpen3 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
             <span
                 onClick={toggleSubmenu3}
                 className="dropdown-trigger"
               >
-              <span className='iconS'><CiEdit /></span>Initial Design
+              <span className={isSubmenuOpen3 ? 'iconS-open' : 'iconS'}><CiEdit /></span>Initial Design
             </span>
             <ul className={isSubmenuOpen3 ? 'subMenuOpen' : 'subMenu'}>
               <li className='innr'>Wireframe</li>
@@ -126,12 +126,12 @@ function Menu () {
             </ul>
           </li>
 
-          <li className="dropdown-trigger2"> 
+          <li className={isSubmenuOpen4 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
             <span
                 onClick={toggleSubmenu4}
                 className="dropdown-trigger"
               >
-              <span className='iconS'><CiLaptop /></span>Validating and Testing
+              <span className={isSubmenuOpen4 ? 'iconS-open' : 'iconS'}><CiLaptop /></span>Validating and Testing
             </span>
             <ul className={isSubmenuOpen4 ? 'subMenuOpen' : 'subMenu'}>
               <li className='innr'>Detail Marketing/ RTM Tracking</li>
@@ -141,12 +141,12 @@ function Menu () {
             </ul>
           </li>
 
-          <li className="dropdown-trigger2">
+          <li className={isSubmenuOpen5 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}>
               <span
                 onClick={toggleSubmenu5}
                 className="dropdown-trigger"
               >
-                <span className='iconS'><CiBank /></span>Commercialization
+                <span className={isSubmenuOpen5 ? 'iconS-open' : 'iconS'}><CiBank /></span>Commercialization
              </span>
             <ul className={isSubmenuOpen5 ? 'subMenuOpen' : 'subMenu'}>
               <li className='innr'>MVP to Full Scale</li>
