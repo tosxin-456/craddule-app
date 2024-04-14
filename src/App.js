@@ -39,6 +39,10 @@ import PageMarketing from './marketing';
 import PagePositioning from './pagePositioning';
 import PageProject from './pageProject';
 import PageSuccess from './pageSuccess';
+import UploadLogo from './uploadLogo';
+import PageKpi from './pageKPI';
+import PageInvite from './sectionInvite';
+import PageTeam from './pageTeam';
 import MainApp from './mainApp';
 
 import LandingPage from './landing';
@@ -60,9 +64,13 @@ function App() {
         <Route path="/Solution" element= {<Solution />} />
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
+        <Route path="/uploadLogo" element= {<UploadLogo />} />
         <Route path="/Sectiondcf" element= {<CashFlow />} />
+        <Route path="/sectionInvite" element= {<PageInvite />} />
+        <Route path="/pageTeam" element= {<PageTeam />} />
         <Route path="/pageProject" element= {<PageProject/>} />
         <Route path="/pageSuccess" element= {<PageSuccess />} />
+        <Route path="/pageKpi" element= {<PageKpi />} />
         <Route path="/SectiondcfTwo" element= {<SectiondcfTwo />} />
         <Route path="/SectionDiscount" element= {<Sectiondcf3 />} />
         <Route path="/sectionPrototype" element= {<SectionPrototype />} />

@@ -36,6 +36,10 @@ import SectionPrototype from './sectionPrototype';
 import PageFrontView from './pageFrontView';
 import PagePositioning from './pagePositioning';
 import SectionExecute from './sectionSummary';
+import UploadLogo from './uploadLogo';
+import PageInvite from './sectionInvite';
+import PageTeam from './pageTeam';
+import PageKpi from './pageKPI';
 
 
 
@@ -71,7 +75,7 @@ function App() {
     <ExecutiveSummarys />
    <ProblemStatement/>
     <VideoDemo />
-    <FinancialP />*/}
+    <FinancialP />
   <Sectiondcf />
     {/*<SectiondcfTwo />
     <Sectiondcf3 />
@@ -95,7 +99,11 @@ function App() {
     <SectionPrototype/>
     <PageFrontView />
     <PagePositioning />
-    <SectionExecute />*/}
+    <SectionExecute />
+    <UploadLogo />
+    <PageInvite />
+    <PageTeam />*/}
+    <PageKpi />
 
 
   

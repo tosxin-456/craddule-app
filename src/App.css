@@ -1122,3 +1122,300 @@ background-color: white!important;
   margin-bottom: 25px;
 }
 
+.uploadBox{
+  position: absolute;
+  width: 500px;
+  left: 500px !important;
+  top: 250px;
+}
+
+hr{
+  border-top: 2px solid black !important;
+  opacity: .1 !important;
+}
+
+.uploadLogo{
+  background-color: #d8d7d7d1 !important; 
+  text-align: center;
+  border-style: dotted !important;
+  border-width: 2px !important;
+  margin-top: 15PX;
+  margin-right: 25px;
+  margin-left: 25px;
+  border-radius: 3px !important;
+}
+
+.logoIcon{
+  width: opx;
+  margin-top: 25PX;
+}
+
+.txt{
+  font-weight:bold !important;
+  margin-top: 20px;
+}
+
+.txt1{
+  margin-bottom: 0px !important;
+  font-size: 16px;
+}
+
+.txt2{
+ font-weight: bold !important;
+ margin-left: 25px !important;
+}
+
+.curveLogo{
+  background-color: #E8C400 !important;
+  border: 0px !important;
+  color: #000 !important;
+  font-weight: bold !important;
+  padding: 5px 12px  !important;
+  border-radius: 10px !important;
+  font-size: 17px!important;
+  left: 19em;
+  margin-bottom: 20px !important;
+  margin: 20px !important;
+}
+
+.closeIcon{
+  text-align: right;
+  font-size: 25px;
+  margin-right: 25px;
+  margin-bottom: 0px !important;
+  color: solid black !important;
+  opacity: .6 !important;
+}
+
+.inviteBox{
+  position: absolute;
+  width: 800px;
+  left: 400px !important;
+  top: 170px;
+  background-color: white;
+  border-radius: 5px; 
+  height: 300px;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+}
+
+.curveInvite{
+  position: relative;
+  background-color: #E8C400 !important;
+  border: 0px !important;
+  color: #000 !important;
+  font-weight: bold !important;
+  padding: 5px 50px  !important;
+  border-radius: 10px !important;
+  font-size: 17px!important;
+  left: 19em;
+  margin-bottom: 20px !important;
+  top: 50px;
+}
+
+.enterE{
+  width: 400px !important; 
+  border-radius: 5px;
+  margin-left: 50px !important;
+  height: 40px !important;
+
+}
+
+.input{
+  position: absolute;
+  left: 250px;
+  top: 40px;
+  border-radius: 15px;
+  width: 400px;
+  height: 35px;
+}
+
+.txtA{
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 0px !important;
+  margin-left: 10PX;
+}
+
+.txtB{
+  margin-bottom: 0px !important;
+  margin-left: 10PX;
+}
+
+.closeB{
+  float: right;
+  margin-right: 25px;
+  margin-top: 10px !important;
+  margin-bottom: 0px !important;
+  color: solid black !important;
+}
+
+.email{
+  margin-left: 50px !important;
+  margin-bottom: 0px !important;
+}
+
+.buttonSelect{
+  position: absolute;
+  right: 150px;
+  background-color: #E8C400 !important;
+  border-color: white !important; 
+  color: #000 !important;
+  border-radius: 0px !important;
+  }
+
+  .team{
+    margin-left: 20px !important;
+    margin-right: 90px !important;
+    margin-bottom: 20px !important;
+    width: 150px;
+    padding: 10px 15px !important;
+    font-weight: bold !important;
+    border-radius: 10px !important;
+    background-color: white !important;
+    border-color: white !important; 
+    color: #000 !important;
+    box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+  }
+
+  .team1{
+    margin-left: 20px !important;
+    margin-right: 90px !important;
+    margin-bottom: 20px !important;
+    padding: 10px 15px !important;
+    font-weight: bold !important;
+    border-radius: 10px !important;
+    background-color: white !important;
+    border-color: white !important; 
+    color: #000 !important;
+    box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+  }
+
+  .teamF{
+    margin-left: 50px !important;
+    margin-right: 90px !important;
+    margin-bottom: 20px !important;
+    width: 200px;
+    padding: 10px 15px !important;
+    font-weight: bold !important;
+    border-radius: 10px !important;
+    background-color: white !important;
+    border-color: white !important; 
+    color: #000 !important;
+    box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+  }
+
+  .teamS{
+    margin-left: 60px !important;
+    margin-right: 90px !important;
+    margin-bottom: 20px !important;
+    padding: 10px 15px !important;
+    font-weight: bold !important;
+    border-radius: 10px !important;
+    background-color: black !important;
+    border-color: white !important; 
+    color: white !important;
+    box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+  }
+
+
+  .teamL{
+    margin-left: 20px !important;
+    margin-right: 0px !important;
+    margin-bottom: 20px !important;
+    width: 150px;
+    padding: 10px 15px !important;
+    font-weight: bold !important;
+    border-radius: 10px !important;
+    background-color: white !important;
+    border-color: white !important; 
+    color: #000 !important;
+    box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+  }
+
+  .teamk{
+    margin-left: 20px !important;
+    margin-right: 0px !important;
+    margin-bottom: 20px !important;
+    padding: 10px 15px !important;
+    font-weight: bold !important;
+    border-radius: 10px !important;
+    background-color: white !important;
+    border-color: white !important; 
+    color: #000 !important;
+    box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+  }
+
+  .txtS{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  .centerKpi{
+    margin: 30px 100px 50px 100px;
+    border-radius: 10px;
+    width: 880px;
+  }
+
+  .div-kpi{
+    text-align: center;
+    font-size: 30px;
+    color: #5b5414;
+    font-weight:bold !important;
+  }
+
+  .box1 {
+    display: flex;
+    text-wrap: nowrap;
+    margin-top: 40px;
+    background-color: #f0e296 !important;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px 0 rgb(170 170 170);
+
+  }
+
+  .flex-container > div{
+    text-align: center;
+    margin-right: 30px;
+    padding: 10px;
+    font-size: 14px !important;
+  }
+
+  .list{
+    margin-right:120px !important;
+    margin-left: 10px !important;
+  }
+
+  .list1{
+    margin-right:50px !important;
+    margin-left: 10px !important;
+  }
+
+  .box2 {
+    display: flex;
+    text-wrap: nowrap;
+    margin-top: 2px;
+    background-color: white !important;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  }
+
+  .box3 {
+    display: flex;
+    text-wrap: nowrap;
+    margin-top: 2px;
+    height: 40px;
+    background-color: white !important;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  }
+
+  .kPi{
+    font-size: 50px;
+  }
+
+  .txtc{
+    font-size: 10px !important;
+    margin: 0px !important;
+  }
