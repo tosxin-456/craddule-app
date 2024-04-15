@@ -3,11 +3,16 @@ import bci from './images/bc.png';
 import success from './images/success.png'; 
 import Header from './component/header';
 import Menu from './component/menu';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 
 function PagePositioning ()  {
+    const navigate = useNavigate()
+
+     const onClickHandler = () => navigate(`/sectionPrototype`)
     return (
         <>
  <div className='container-fluid'>
@@ -88,7 +93,7 @@ function PagePositioning ()  {
     <div className = "break"></div>
 
 </div> 
-<button className="btn btn-primary curveNext">Next</button>
+<button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
    
   
 </div>
