@@ -1264,10 +1264,10 @@ hr{
   }
 
   .team{
-    margin-left: 20px !important;
-    margin-right: 90px !important;
+    margin-left: 0px !important;
+    margin-right: 70px !important;
     margin-bottom: 20px !important;
-    width: 150px;
+    width: 250px;
     padding: 10px 15px !important;
     font-weight: bold !important;
     border-radius: 10px !important;
@@ -1278,34 +1278,7 @@ hr{
   }
 
   .team1{
-    margin-left: 20px !important;
-    margin-right: 90px !important;
-    margin-bottom: 20px !important;
-    padding: 10px 15px !important;
-    font-weight: bold !important;
-    border-radius: 10px !important;
-    background-color: white !important;
-    border-color: white !important; 
-    color: #000 !important;
-    box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
-  }
-
-  .teamF{
-    margin-left: 50px !important;
-    margin-right: 90px !important;
-    margin-bottom: 20px !important;
-    width: 200px;
-    padding: 10px 15px !important;
-    font-weight: bold !important;
-    border-radius: 10px !important;
-    background-color: white !important;
-    border-color: white !important; 
-    color: #000 !important;
-    box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
-  }
-
-  .teamS{
-    margin-left: 60px !important;
+    margin-left: 30px !important;
     margin-right: 90px !important;
     margin-bottom: 20px !important;
     padding: 10px 15px !important;
@@ -1317,12 +1290,43 @@ hr{
     box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
   }
 
+  .teamF{
+    margin-left: 50px !important;
+    margin-right: 40px !important;
+    margin-bottom: 20px !important;
+    width: 200px;
+    padding: 10px 15px !important;
+    font-weight: bold !important;
+    border-radius: 10px !important;
+    background-color: white !important;
+    border-color: white !important; 
+    color: #000 !important;
+    box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+  }
+
+  .teamF:hover{
+    background-color: #f0e296 !important;
+  }
+
+  .teamS{
+    margin-left: 70px !important;
+    margin-right: 80px !important;
+    margin-bottom: 20px !important;
+    padding: 10px 20px !important;
+    font-weight: bold !important;
+    border-radius: 10px !important;
+    background-color: black !important;
+    border-color: white !important; 
+    color: white !important;
+    box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+  }
+
 
   .teamL{
-    margin-left: 20px !important;
+    margin-left: 0px !important;
     margin-right: 0px !important;
     margin-bottom: 20px !important;
-    width: 150px;
+    width: 250px;
     padding: 10px 15px !important;
     font-weight: bold !important;
     border-radius: 10px !important;
@@ -1339,9 +1343,9 @@ hr{
     padding: 10px 15px !important;
     font-weight: bold !important;
     border-radius: 10px !important;
-    background-color: white !important;
+    background-color: black !important;
     border-color: white !important; 
-    color: #000 !important;
+    color: white !important;
     box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
   }
 
@@ -1359,10 +1363,14 @@ hr{
   }
 
   .div-kpi{
+    position: relative;
     text-align: center;
     font-size: 30px;
     color: #5b5414;
     font-weight:bold !important;
+    width: 20px;
+    left: 500px;
+    margin-bottom: 50px;
   }
 
   .box1 {
@@ -1372,12 +1380,12 @@ hr{
     background-color: #f0e296 !important;
     border-radius: 5px;
     box-shadow: 0 1px 5px 0 rgb(170 170 170);
-
   }
+  
 
   .flex-container > div{
     text-align: center;
-    margin-right: 30px;
+    margin-right: 50px;
     padding: 10px;
     font-size: 14px !important;
   }
@@ -1418,4 +1426,86 @@ hr{
   .txtc{
     font-size: 10px !important;
     margin: 0px !important;
+  }
+
+  .editT{
+    margin-right: 0px !important;
+  }
+
+  .No{
+    margin-right: 55px !important;
+    margin-left: 30px !important;
+  }
+
+  .amt{
+    margin-left: 10px !important;
+  }
+
+  .anchor{
+    text-decoration: none !important;
+    color: #433e10 !important;
+  }
+
+  .anchor1{
+    text-decoration: none !important;
+    color: red !important;
+  }
+
+
+  .boxG {
+    display: flex;
+    text-wrap: nowrap; 
+    background-color: #f0e296 !important;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  }
+
+  .boxH {
+    display: flex;
+    text-wrap: nowrap;
+    margin-top: 2px;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  }
+
+  .boxI {
+    display: flex;
+    text-wrap: nowrap;
+    margin-top: 2px;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  }
+
+  .curveSend{
+      background-color: #facc04 !important;
+      border: 0px !important;
+      color: #000 !important;
+      font-weight: 500 !important;
+      padding: 5px 30px !important;
+      border-radius: 20px !important;
+      font-size: 17px!important;
+      margin-right: 10px!important;
+      margin-top: 50px;
+      width: 100px;
+  }
+
+  .listT{
+    margin-right:250px !important;
+    margin-left: 10px !important;
+  }
+
+  .listT1{
+    margin-right:245px !important;
+    margin-left: 10px !important;
+  }
+
+
+  .listU{
+    margin-right: 200px !important;
+    margin-left: 10px !important;
+  }
+
+  .lst{
+    margin-right: 240px !important;
+    margin-left: 0px !important;
   }

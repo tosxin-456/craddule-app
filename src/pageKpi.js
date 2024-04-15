@@ -18,7 +18,6 @@ function PageKpi ()  {
             <Header />
             <div className='row'>
             <Menu /> 
-                
                 <div className='col-md-9'>
                     <img src={bci} className='bcA'></img>
                        <div className='div-kpi'>KPI</div>
@@ -27,7 +26,7 @@ function PageKpi ()  {
                 <button className="btn btn-primary team" type="button">Track KPI</button>
                 <button className="btn btn-primary dropdown-toggle teamL" type="button" data-toggle="dropdown">Select Project</button>
                 <br></br>
-                <button className="btn btn-primary  teamS" type="button">Select Project <br></br><p className='txtc'>Add a KPI manually</p></button>
+                <button className="btn btn-primary  teamS" type="button">Add a KPI<br></br><p className='txtc'>Add a KPI manually</p></button>
                 <button className="btn btn-primary  team1" type="button">Search for a KPI <br></br><p className='txtc'>Browse and add KPI's from the library</p></button>
                 <button className="btn btn-primary  teamk" type="button">Add a KPI Template<p className='txtc'>Browse and add KPI's from the library</p></button>
                 <br></br>
@@ -43,41 +42,20 @@ function PageKpi ()  {
                     <div className='list1'>Sales Revenue</div>
                     <div>#2,400,000</div>
                     <div>Daily</div>
-                    <div>Up</div>
-                    <div>#1.200,00</div>
+                    <div className='No'>Up</div>
+                    <div className='amt'>#1.200,00</div>
                     <div>No</div>
-                    <div>Edit</div>
-                    <div>Delete</div>
+                    <div className='editT'><a href='' className='anchor'>Edit</a></div>
+                    <div className='delete'><a href='' className='anchor1'>Delete</a></div>
                 </div>
                 <div class="flex-container box3">
                     <div className='list1'></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
                 </div>
                 <div class="flex-container box3">
                     <div className='list1'></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
                 </div>
                 <div class="flex-container box3">
                     <div className='list1'></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
                 </div>
                 </div> 
         

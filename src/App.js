@@ -42,6 +42,7 @@ import PageSuccess from './pageSuccess';
 import UploadLogo from './uploadLogo';
 import PageKpi from './pageKPI';
 import PageInvite from './sectionInvite';
+import TeamManagement from './teamManagement';
 import PageTeam from './pageTeam';
 import MainApp from './mainApp';
 
@@ -64,6 +65,7 @@ function App() {
         <Route path="/Solution" element= {<Solution />} />
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
+        <Route path="/teamManagement" element= {<TeamManagement />} />
         <Route path="/uploadLogo" element= {<UploadLogo />} />
         <Route path="/Sectiondcf" element= {<CashFlow />} />
         <Route path="/sectionInvite" element= {<PageInvite />} />

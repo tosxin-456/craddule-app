@@ -40,6 +40,7 @@ import UploadLogo from './uploadLogo';
 import PageInvite from './sectionInvite';
 import PageTeam from './pageTeam';
 import PageKpi from './pageKPI';
+import TeamManagement from './teamManagement';
 
 
 
@@ -102,8 +103,9 @@ function App() {
     <SectionExecute />
     <UploadLogo />
     <PageInvite />
-    <PageTeam />*/}
-    <PageKpi />
+    <PageTeam />
+    <PageKpi />*/}
+    <TeamManagement />
 
 
   
