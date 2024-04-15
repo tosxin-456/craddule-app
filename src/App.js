@@ -72,7 +72,7 @@ function App() {
         <Route path="/pageTeam" element= {<PageTeam />} />
         <Route path="/pageProject" element= {<PageProject/>} />
         <Route path="/pageSuccess" element= {<PageSuccess />} />
-        <Route path="/pageKpi" element= {<PageKpi />} />
+        <Route path="/pageKPI" element= {<PageKpi />} />
         <Route path="/SectiondcfTwo" element= {<SectiondcfTwo />} />
         <Route path="/SectionDiscount" element= {<Sectiondcf3 />} />
         <Route path="/sectionPrototype" element= {<SectionPrototype />} />
