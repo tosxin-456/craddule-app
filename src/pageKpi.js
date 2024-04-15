@@ -59,7 +59,7 @@ function PageKpi ()  {
                 </div>
                 </div> 
         
-                <button className="btn btn-primary curveNext">Next</button>
+                <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
           </div>
           </div>
           </div>
