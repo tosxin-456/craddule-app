@@ -161,17 +161,22 @@ body{
   width: 20px;
   float: left;
   padding-bottom: 20px;
-  margin-left: 80px;
+  margin-bottom: 20PX;
+  position: relative;
+  bottom: 10px;
+  margin-left: 10px;
 }
 
 .centerH{
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 30px;
+  font-weight: bold;
   margin-bottom: 0;
+  text-align: center !important;
 }
 
 .centerHp{
   font-size: 12px;
+  text-align: center !important;
 }
 
 .textHp{
@@ -537,8 +542,8 @@ background-color: white!important;
 
 .brandlogo{
   width: 50px;
-  padding-top: 20px;
   margin-left: 0px;
+  margin-top: 30px;
 }
 
 
@@ -1481,11 +1486,12 @@ hr{
       border: 0px !important;
       color: #000 !important;
       font-weight: 500 !important;
+      text-wrap: nowrap;
       padding: 5px 30px !important;
       border-radius: 20px !important;
       font-size: 17px!important;
       margin-right: 10px!important;
-      margin-top: 50px;
+      margin-top: 60px;
       width: 100px;
   }
 
@@ -1498,7 +1504,21 @@ hr{
     margin-right:245px !important;
     margin-left: 10px !important;
   }
+  
+  .listT2{
+    margin-right:230px !important;
+    margin-left: 10px !important;
+  }
 
+  .listT3{
+    margin-right:265px !important;
+    margin-left: 10px !important;
+  }
+
+  .listT4{
+    margin-right:245px !important;
+    margin-left: 10px !important;
+  }
 
   .listU{
     margin-right: 200px !important;
@@ -1511,5 +1531,175 @@ hr{
   }
 
   .lstS{
-    margin-right: 270px !important;
+    margin-right: 240px !important;
   }
+
+  .lisS{
+    margin-right: 240px !important;
+  }
+
+  .input2{
+    width: 100% !important;
+    border-radius: 5px;
+    height: 40px;
+    border-width: 1px;
+    box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+  }
+
+  .centerH1{
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-top: 50px;
+    margin-left: 20px;
+  }
+  
+  .centerHp1{
+    font-size: 12px;
+    margin-bottom: 2rem !important;
+    margin-left: 20px;
+  }
+
+  .boxR {
+    display: flex;
+    text-wrap: nowrap; 
+    justify-content: center;
+    border-radius: 5px;
+  }
+
+  .design{
+    box-shadow: 0 1px 5px 0 rgb(170 170 170);
+    box-sizing: border-box;    
+  }
+
+  .boxY{
+   margin-top: 10px;
+   width: 100%;
+  }
+
+  .boxU{
+  margin-top: 20px;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  }
+
+  .centerH1a{
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 250px;
+  }
+  
+  .centerHp1a{
+    font-size: 12px;
+    margin-bottom: 2rem !important;
+    margin-left: 20px;
+    width: 250px;
+  }
+
+  .curveN{
+      float: right;
+      position: relative;
+      background-color: #facc04 !important;
+      border: 0px !important;
+      color: #000 !important;
+      font-weight: 500 !important;
+      padding: 5px 30px !important;
+      border-radius: 20px !important;
+      font-size: 17px!important;
+      margin-right: 10px!important;
+      bottom: 70PX;
+  }
+
+  .curveI{
+    float: right;
+    position: relative;
+    background-color: white !important;
+    border: 0px !important;
+    color: #5b5414 !important;
+    font-weight: 500 !important;
+    padding: 5px 30px !important;
+    border-radius: 20px !important;
+    font-size: 17px!important;
+    margin-right: 10px!important;
+    bottom: 70PX;
+}
+
+  .curveX{
+    background-color: #facc04 !important;
+    border: 0px !important;
+    color: #000 !important;
+    font-weight: 500 !important;
+    padding: 5px 30px !important;
+    border-radius: 20px !important;
+    font-size: 17px!important;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    margin-right: 10px!important;
+    top: 65PX;
+}
+
+.curvej{
+  background-color: #facc04 !important;
+  border: 0px !important;
+  color: #000 !important;
+  font-weight: 500 !important;
+  padding: 5px 30px !important;
+  border-radius: 20px !important;
+  font-size: 17px!important;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  margin-right: 10px!important;
+  top: 65PX;
+  float: right;
+}
+
+.checkbox{
+  color: #000 !important;
+  margin-top: 10px !important;
+}
+
+.BoxPhase1{
+  padding-left: 100px;
+  padding-right: 100px;
+  margin-bottom: 20px;
+}
+
+.BoxPhase{
+  box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+  margin: 0px !important;
+  padding: 10px !important;
+}
+
+.heading{
+  font-weight: bold !important;
+  padding: 0px !important;
+}
+
+.subHeading{
+  margin: 0px !important;
+}
+
+.curveP{
+  float: right;
+  position: relative;
+  background-color: #facc04 !important;
+  border: 0px !important;
+  color: #000 !important;
+  font-weight: 500 !important;
+  padding: 5px 10px !important;
+  font-size: 17px!important;
+  border-radius: 0px !important;
+  margin-top: 15PX;
+  margin-right: 10px!important;
+  bottom: 70PX;
+}
+
+.centerH1v{
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}

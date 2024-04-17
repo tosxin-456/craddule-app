@@ -8,10 +8,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function TeamManagement ()  {
+function SectionManagement ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pageBenefit`)
+    const onClickHandler = () => navigate(`/pageShare`)
     return (
         
         <>
@@ -22,17 +22,16 @@ function TeamManagement ()  {
     <Menu /> 
         
         <div className='col-md-9'>
+        <img src={bci} className='bcA'></img>
         <div className='centerC'>
-            <img src={bci} className='bcI'></img>
-
-            <div className='text-center'>
-                <p className='centerH'>Getting your Team</p>
-                <p className='centerHp'>Make sure you answer all questions</p>               
-            </div>
-            <p className='centerH1'>Team Management</p>
-            <p className='centerHp1'>View, manage your memebers and send invites</p>
+            
+            <div><p className='centerH1a'>Team Management</p>
+            <p className='centerHp1a'>View, manage your memebers and send invites</p>
+            <button className="btn btn-primary curveN">Save changes</button>
+            <button className="btn btn-primary curveI">Discard changes</button></div>
             <input type="text" className='input2' placeholder="Search.."></input>
-            <p type='button' className='curveSend'>Invite</p>
+            <button className="btn btn-primary curveX">Chat and message</button>
+            <button className="btn btn-primary curvej">Send Invite</button>
                     <div class="flex-container boxG">
                     <div className='listT'>Name</div>
                     <div className='listU'>Team Members Permission</div>
@@ -57,7 +56,9 @@ function TeamManagement ()  {
                     <div className='listT4'>Titilope Seun</div>
                     <div type="button" data-toggle="dropdown" className='dropdown-toggle lstS'>Change Permission</div>
                     <div type="button" data-toggle="dropdown" className='dropdown-toggle txtp4'>Choose</div>
-                </div> 
+                </div>
+                <input type="checkbox" id="checkbox" name="checkbox"></input>
+                <label for="checkbox" className='checkbox'>NDA - Standard Non Disclosure Agreements (if neccessary for a project)</label>               
         </div> 
   
         <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
@@ -70,4 +71,4 @@ function TeamManagement ()  {
     );
 }
 
-export default TeamManagement
+export default SectionManagement

@@ -1,6 +1,7 @@
 import React from 'react';
 import bci from './images/bc.png'; 
 import success from './images/success.png'; 
+import cloud from './images/cloud.png';
 import Header from './component/header';
 import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
@@ -40,7 +41,7 @@ function PagePositioning ()  {
     <div>
     <p className="question textBrand">Brand Logo</p>
     <div>
-        <div className='brandlogoA'><img src={success} className='brandlogo'></img></div>
+        <div className='brandlogoA'><img src={cloud} className='brandlogo'></img></div>
        <button className="btn btn-primary buttonF">Upload you Brand Logo</button></div>
     </div>
 

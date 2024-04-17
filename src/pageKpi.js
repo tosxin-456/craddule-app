@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function PageKpi ()  {
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/introduction1`)
+     const onClickHandler = () => navigate(`/claimDomain`)
     return (
 
         <>

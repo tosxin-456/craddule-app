@@ -40,7 +40,17 @@ import UploadLogo from './uploadLogo';
 import PageInvite from './sectionInvite';
 import PageTeam from './pageTeam';
 import PageKpi from './pageKPI';
+import Summary from './summary';
+import PitchDeck from './pitchDeck';
+import PageShare from './pageShare';
+import SectionManagement from './sectionManagement';
+import PlanDesign from './planDesign';
+import Engagement from './engagement';
+import SectionScale from './sectionScale';
+import SectionExe from './sectionExecute';
 import TeamManagement from './teamManagement';
+import ClaimDomain from './claimDomain';
+import PageTrack from './pageTrack';
 
 
 
@@ -104,8 +114,18 @@ function App() {
     <UploadLogo />
     <PageInvite />
     <PageTeam />
-    <PageKpi />*/}
+    <PageKpi />
     <TeamManagement />
+    <ClaimDomain />
+    <PageTrack />
+    <Summary />
+    <SectionScale />
+    <SectionExe />}
+    <PitchDeck />
+    <PlanDesign />
+    <Engagement />
+    <SectionManagement />*/}
+    <PageShare />
 
 
   

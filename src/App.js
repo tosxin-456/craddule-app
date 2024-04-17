@@ -42,7 +42,17 @@ import PageSuccess from './pageSuccess';
 import UploadLogo from './uploadLogo';
 import PageKpi from './pageKPI';
 import PageInvite from './sectionInvite';
+import PageTrack from './pageTrack';
+import Summary from './summary';
+import PlanDesign from './planDesign';
+import PitchDeck from './pitchDeck';
+import Engagement from './engagement';
+import SectionScale from './sectionScale';
+import SectionExe from './sectionExecute';
+import PageShare from './pageShare';
+import SectionManagement from './sectionManagement';
 import TeamManagement from './teamManagement';
+import ClaimDomain from './claimDomain';
 import PageTeam from './pageTeam';
 import MainApp from './mainApp';
 
@@ -63,8 +73,10 @@ function App() {
         <Route path="/sectionIntro" element= {<SectionIntro />} />
         <Route path="/problemstatement" element= {<ProblemStatement />} />
         <Route path="/Solution" element= {<Solution />} />
+        <Route path="/pageShare" element= {<PageShare />} />
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
+        <Route path="/sectionManagement" element= {<SectionManagement />} />
         <Route path="/teamManagement" element= {<TeamManagement />} />
         <Route path="/uploadLogo" element= {<UploadLogo />} />
         <Route path="/Sectiondcf" element= {<CashFlow />} />
@@ -73,6 +85,15 @@ function App() {
         <Route path="/pageProject" element= {<PageProject/>} />
         <Route path="/pageSuccess" element= {<PageSuccess />} />
         <Route path="/pageKPI" element= {<PageKpi />} />
+        <Route path="/engagement" element= {<Engagement />} />
+        <Route path="/summary" element= {<Summary />} />
+
+        <Route path="/planDesign" element= {<PlanDesign />} />
+        <Route path="/pageTrack" element= {<PageTrack />} />
+        <Route path="/pitchDeck" element= {<PitchDeck />} />
+        <Route path="/sectionScale" element= {<SectionScale />} />
+        <Route path="/claimDomain" element= {<ClaimDomain />} />
+        <Route path="/sectionExecute" element= {<SectionExe />} />
         <Route path="/SectiondcfTwo" element= {<SectiondcfTwo />} />
         <Route path="/SectionDiscount" element= {<Sectiondcf3 />} />
         <Route path="/sectionPrototype" element= {<SectionPrototype />} />
