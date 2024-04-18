@@ -40,7 +40,7 @@ import PagePositioning from './pagePositioning';
 import PageProject from './pageProject';
 import PageSuccess from './pageSuccess';
 import UploadLogo from './uploadLogo';
-import PageKpi from './pageKPI';
+
 import PageInvite from './sectionInvite';
 import PageTrack from './pageTrack';
 import Summary from './summary';
@@ -50,12 +50,14 @@ import Engagement from './engagement';
 import SectionScale from './sectionScale';
 import SectionExe from './sectionExecute';
 import PageShare from './pageShare';
+import SendFile from './sendFile';
 import SectionManagement from './sectionManagement';
 import TeamManagement from './teamManagement';
+import ShareFile from './shareFile';
 import ClaimDomain from './claimDomain';
 import PageTeam from './pageTeam';
 import MainApp from './mainApp';
-
+import KPIPage from './kpiPage';
 import LandingPage from './landing';
 import Login from './login';
 import LoadingPage from './laodingPage';
@@ -76,6 +78,7 @@ function App() {
         <Route path="/pageShare" element= {<PageShare />} />
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
+        <Route path="/sendFile" element= {<SendFile />} />
         <Route path="/sectionManagement" element= {<SectionManagement />} />
         <Route path="/teamManagement" element= {<TeamManagement />} />
         <Route path="/uploadLogo" element= {<UploadLogo />} />
@@ -84,10 +87,10 @@ function App() {
         <Route path="/pageTeam" element= {<PageTeam />} />
         <Route path="/pageProject" element= {<PageProject/>} />
         <Route path="/pageSuccess" element= {<PageSuccess />} />
-        <Route path="/pageKPI" element= {<PageKpi />} />
+        <Route path="/kpiPage" element= {<KPIPage />} />
         <Route path="/engagement" element= {<Engagement />} />
         <Route path="/summary" element= {<Summary />} />
-
+        <Route path="/shareFile" element= {<ShareFile />} />
         <Route path="/planDesign" element= {<PlanDesign />} />
         <Route path="/pageTrack" element= {<PageTrack />} />
         <Route path="/pitchDeck" element= {<PitchDeck />} />

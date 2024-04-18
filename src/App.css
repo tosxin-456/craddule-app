@@ -1703,3 +1703,115 @@ hr{
   margin-bottom: 20px;
   margin-top: 50px;
 }
+
+.shareBox{
+  background-color: #d8d7d7d1 !important;
+  border-style: dotted !important;
+  border-width: 2px !important;
+  margin-top: 15PX;
+  margin-right: 25px;
+  margin-left: 25px;
+  height: 200px;
+  border-radius: 3px !important;
+}
+
+.shareBox1{
+  text-align: center;
+  margin-top: 15PX;
+  margin-right: 25px;
+  margin-left: 25px;
+  border-radius: 3px !important;
+}
+
+.share{
+  font-weight: bold;
+  margin-top: 20px !important;
+  margin-bottom: 0px !important;
+  margin-left: 25px !important;
+}
+
+.share1{
+  font-size: 10px;
+  margin-bottom: 0px !important;
+  margin-left: 25px !important;
+}
+
+
+.anchor2{
+  text-decoration: none !important;
+  color: #facc04 !important;
+}
+
+.shareA{
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.sendBox{
+  background-color: #fafafad1 !important;
+  border-style: dotted !important;
+  border-width: 2px !important;
+  margin-top: 15PX;
+  margin-right: 25px;
+  margin-left: 25px;
+  height: 430px;
+  border-radius: 3px !important;
+}
+
+.uploadSendBox{
+  position: relative;
+  width: 700px;
+  left: 500px !important;
+  top: 110px;
+  height: 550px !important;
+  border-radius: 6px !important;
+  background-color: white !important;
+}
+
+.uploadBoxh{
+  position: absolute;
+  width: 500px;
+  left: 550px !important;
+  top: 200px;
+  background-color: white !important;
+  height: 320px;
+}
+
+.input3{
+  width: 90% !important;
+  border-radius: 5px;
+  height: 40px;
+  border-width: 1px;
+  margin: 30px;
+  box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+}
+
+.container-textAl {
+  height: 150px; /* Example height of the parent container */
+  position: relative; /* Ensure percentage height is relative to the parent */
+}
+
+.textAb{
+  background-color: #F9F9F9;
+    border: none;
+    width: 70%;
+    font-size: 12px;
+    height: 100%;
+}
+
+.curveSb{
+  background-color: #E8C400 !important;
+  border: 0px !important;
+  color: #000 !important;
+  font-weight: bold !important;
+  padding: 5px 30px !important;
+  border-radius: 20px !important;
+  font-size: 17px!important;
+  margin-top: 20px;
+  left: 19em;
+}
+
+.copy{
+  margin-left: 50px;
+}
