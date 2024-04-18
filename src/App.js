@@ -40,7 +40,6 @@ import PagePositioning from './pagePositioning';
 import PageProject from './pageProject';
 import PageSuccess from './pageSuccess';
 import UploadLogo from './uploadLogo';
-import PageKpi from './pageKPI';
 import PageInvite from './sectionInvite';
 import PageTrack from './pageTrack';
 import Summary from './summary';
