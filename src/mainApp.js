@@ -40,9 +40,16 @@ import UploadLogo from './uploadLogo';
 import PageInvite from './sectionInvite';
 import PageTeam from './pageTeam';
 import KPIPage from './kpiPage';
+import WireFrame from './wireFrame';
+import Prototype from './prototype';
 import Summary from './summary';
+import Presentation from './presentation';
+import SearchKpi from './searchKpi';
 import PitchDeck from './pitchDeck';
+import PageAddKpi from './pageAddKpi';
 import PageShare from './pageShare';
+import Model from './model';
+import AllFiles from './allFiles';
 import SectionManagement from './sectionManagement';
 import PlanDesign from './planDesign';
 import Engagement from './engagement';
@@ -110,7 +117,6 @@ function App() {
     <CustomerSegment />
     <PageMarketing />
     <SectionPrototype/>
-    <PageFrontView />
     <PagePositioning />
     <SectionExecute />
     <UploadLogo />
@@ -128,8 +134,17 @@ function App() {
     <SectionManagement />
     <PageShare />
     <ShareFile />
-    <SendFile />*/}
+    <SendFile />
     <KPIPage />
+    <PageFrontView />
+    <Presentation />
+    <Prototype />
+    <WireFrame />
+    <Model />
+    <PageAddKpi />
+    <SearchKpi />*/}
+    <AllFiles />
+
 
 
   

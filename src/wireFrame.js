@@ -3,7 +3,7 @@ import bci from './images/bc.png';
 import solution from './images/solution.png'; 
 import Rect from './images/Rect.png'
 import Header from './component/header';
-import plan from './images/plan.png';
+import proto from './images/proto.png';
 import Menu from './component/menu';
 import cloud from './images/cloud.png'
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function PlanDesign ()  {
+function WireFrame ()  {
     const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/pageBenefit`)
@@ -26,17 +26,11 @@ function PlanDesign ()  {
         
         <div className='col-md-9'>
         <img src={bci} className='bcA'></img>
-                <p className='centerH'>3D Plan Design</p>
+                <p className='centerH'>prototype</p>
                 <p className='centerHp'>Here you get the wireframe of your product</p>
         <div className='lenght'>
             <div className='text-center'>
-            <div class="flex-container boxR">
-                    <div type='button' className='hd'>Front View</div>
-                    <div type='button'className='hdd'>Plan</div>
-                    <div type='button'className='hd'>3rd Angle Presentation</div>
-                    <div type='button'className='hd'>3D Model</div>
-                </div> 
-                <div className='container-boxk'>
+                <div className='container-boxkk'>
                <div type="button" className='clod'><img src={cloud} className='imgC'></img>Upload</div> 
 
                 <div className='imgbox'>
@@ -53,8 +47,13 @@ function PlanDesign ()  {
                   <img src={Rect} className='imgA' ></img>
                   </div>
                 </div> 
-                <div class="container-boxy">
-                  <img src={plan} className='imgB'></img>                  
+                <div class="container-boxj">
+                  <img src={proto} className='imgh'></img>    
+                  <img src={proto} className='imgh'></img>   
+                  <img src={proto} className='imgh'></img> 
+                  <img src={proto} className='imgh'></img> 
+                  <img src={proto} className='imgh'></img> 
+                  <img src={proto} className='imgh'></img>              
                 </div>         
             </div>
            
@@ -70,4 +69,4 @@ function PlanDesign ()  {
     );
 }
 
-export default PlanDesign
+export default WireFrame

@@ -43,10 +43,17 @@ import UploadLogo from './uploadLogo';
 import PageInvite from './sectionInvite';
 import PageTrack from './pageTrack';
 import Summary from './summary';
+import SearchKpi from './searchKpi';
+import Prototype from './prototype';
+import PageFrontView from './pageFrontView';
 import PlanDesign from './planDesign';
 import PitchDeck from './pitchDeck';
 import Engagement from './engagement';
+import AllFiles from './allFiles';
+import WireFrame from './wireFrame';
 import SectionScale from './sectionScale';
+import Presentation from './presentation';
+import Model from './model';
 import SectionExe from './sectionExecute';
 import PageShare from './pageShare';
 import SendFile from './sendFile';
@@ -60,6 +67,13 @@ import KPIPage from './kpiPage';
 import LandingPage from './landing';
 import Login from './login';
 import LoadingPage from './laodingPage';
+import PageAddKpi from './pageAddKpi';
+
+
+
+
+
+
 
 
 function App() {
@@ -77,7 +91,13 @@ function App() {
         <Route path="/pageShare" element= {<PageShare />} />
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
+        <Route path="/model" element= {<Model />} />
+        <Route path="/allFiles" element= {<AllFiles />} />
+        <Route path="/searchKpi" element= {<SearchKpi />} />
+        <Route path="/pageAddKpi" element= {<PageAddKpi />} />
+        <Route path="/prototype" element= {<Prototype />} />
         <Route path="/sendFile" element= {<SendFile />} />
+        <Route path="/wireFrame" element= {<WireFrame />} />
         <Route path="/sectionManagement" element= {<SectionManagement />} />
         <Route path="/teamManagement" element= {<TeamManagement />} />
         <Route path="/uploadLogo" element= {<UploadLogo />} />
@@ -89,6 +109,8 @@ function App() {
         <Route path="/kpiPage" element= {<KPIPage />} />
         <Route path="/engagement" element= {<Engagement />} />
         <Route path="/summary" element= {<Summary />} />
+        <Route path="/presentation" element= {<Presentation />} />
+        <Route path="/pageFrontView" element= {<PageFrontView />} />
         <Route path="/shareFile" element= {<ShareFile />} />
         <Route path="/planDesign" element= {<PlanDesign />} />
         <Route path="/pageTrack" element= {<PageTrack />} />
