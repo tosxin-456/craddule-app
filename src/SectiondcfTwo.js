@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 function SectiondcfTwo ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pageSummarys`)
+    const onClickHandler = () => navigate(``)
     return (
         <>
  <div className='container-fluid'>

@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 function PagePositioning ()  {
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/sectionPrototype`)
+     const onClickHandler = () => navigate(``)
     return (
         <>
  <div className='container-fluid'>

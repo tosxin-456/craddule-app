@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 function PageCustomer ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pageProject`)
+    const onClickHandler = () => navigate(``)
     return (
         <>
  <div className='container-fluid'>

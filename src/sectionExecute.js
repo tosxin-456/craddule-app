@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 function SectionExe ()  {  const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pitchDeck`)
+    const onClickHandler = () => navigate(``)
     return (
         <>
  <div className='container-fluid'>

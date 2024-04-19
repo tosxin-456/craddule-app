@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 function SectionScale ()  {  const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/sectionExecute`)
+    const onClickHandler = () => navigate(``)
     return (
         <>
  <div className='container-fluid'>

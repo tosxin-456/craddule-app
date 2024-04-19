@@ -17,6 +17,14 @@ function Menu () {
   const onClickHandler9 = () => navigate(`/wireFrame`);
   const onClickHandler10 = () => navigate(`/pageSummary`);
   const onClickHandler11 = () => navigate(`/summary`);
+  const onClickHandler12 = () => navigate(`/pageProject`);
+  const onClickHandler13 = () => navigate(`/kpiPage`);
+  const onClickHandler14 = () => navigate(`/pagePositioning`);
+  const onClickHandler15 = () => navigate(`/teamManagement`);
+  const onClickHandler16 = () => navigate(`/pitchDeck`);
+  const onClickHandler17 = () => navigate(`/allFiles`);
+  const onClickHandler18 = () => navigate(`/Sectiondcf`);
+  const onClickHandler19 = () => navigate(`/sectionScale`);
 
   const [isClosed, setIsClosed] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -82,11 +90,11 @@ function Menu () {
               <li className='innr active' onClick={onClickHandler}>Business Case Builder</li>
 
               <li className='innr'>Custom Financial Projection</li>
-              <li className='innr'>Discounted Cash Flow (DCF)</li>
+              <li className='innr'onClick={onClickHandler18}>Discounted Cash Flow (DCF)</li>
               <li className='innr'>Comparative Analysis</li>
               <li className='innr'>Project Timeline Builder</li>
               <li className='innr'>Go/ No-Go gate</li>
-              <li className='innr'>Summary (PDF)</li>
+              <li className='innr'onClick={onClickHandler11}>Summary (PDF)</li>
               {/* Add more submenu items as needed */}
             </ul>
           </li>
@@ -101,10 +109,10 @@ function Menu () {
             <ul className={isSubmenuOpen1 ? 'subMenuOpen' : 'subMenu'}>
                 <li className='innr' onClick={onClickHandler8}>Business Analysis Pack</li>
                 <li className='innr' onClick={onClickHandler10}>Value Proposition Pack (VPP)</li>
-                <li className='innr'>Success Matrix</li>
-                <li className='innr'>KPI</li>
-                <li className='innr'>Detailed Marketing Strategies</li>
-                <li className='innr'>Getting Your Team</li>
+                <li className='innr' onClick={onClickHandler12}>Success Matrix</li>
+                <li className='innr' onClick={onClickHandler13}>KPI</li>
+                <li className='innr'onClick={onClickHandler14}>Detailed Marketing Strategies</li>
+                <li className='innr' onClick={onClickHandler15}>Getting Your Team</li>
                 <li className='innr'>Go/ No-Go gate</li>
                 <li className='innr'onClick={onClickHandler11}>Summary (PDF)</li>
                 {/* Add more submenu items as needed */}
@@ -135,10 +143,11 @@ function Menu () {
             </span>
             <ul className={isSubmenuOpen3 ? 'subMenuOpen' : 'subMenu'}>
               <li className='innr'onClick={onClickHandler5}>Claim Domain</li>
-              <li className='innr'>Team</li>
+              <li className='innr'
+              >Team</li>
               <li className='innr' onClick={onClickHandler4}>Stakeholder Engagement</li>
               <li className='innr'>Go/ No-Go gate</li>
-              <li className='innr'>Summary (PDF)</li>
+              <li className='innr'onClick={onClickHandler11}>Summary (PDF)</li>
                 {/* Add more submenu items as needed */}
             </ul>
           </li>
@@ -153,7 +162,7 @@ function Menu () {
             <ul className={isSubmenuOpen4 ? 'subMenuOpen' : 'subMenu'}>
               <li className='innr' onClick={onClickHandler6}>Detail Marketing/ RTM Tracking</li>
               <li className='innr'>Go/ No-Go gate</li>
-              <li className='innr'>Summary (PDF)</li>
+              <li className='innr'onClick={onClickHandler11}>Summary (PDF)</li>
                 {/* Add more submenu items as needed */}
             </ul>
           </li>
@@ -166,14 +175,14 @@ function Menu () {
                 <span className={isSubmenuOpen5 ? 'iconS-open' : 'iconS'}><CiBank /></span>Commercialization
              </span>
             <ul className={isSubmenuOpen5 ? 'subMenuOpen' : 'subMenu'}>
-              <li className='innr'onClick={onClickHandler7}>MVP to Full Scale</li>
-              <li className='innr'>Execute RTM</li>
+              <li className='innr'onClick={onClickHandler19}>MVP to Full Scale</li>
+              <li className='innr'onClick={onClickHandler7}>Execute RTM</li>
                 {/* Add more submenu items as needed */}
             </ul>
           </li>
-           <li className="dropdown-trigger2"> <span className='iconS'><CiVideoOn /></span>Pitch Deck</li>
+           <li className="dropdown-trigger2" onClick={onClickHandler16}> <span className='iconS'><CiVideoOn /></span>Pitch Deck</li>
             <li className="dropdown-trigger2"> <span className='iconS'><CiExport /></span>Share</li>
-            <li className="dropdown-trigger2"> <span className='iconS'><CiDatabase /></span>Craddule Hub</li>
+            <li className="dropdown-trigger2" onClick={onClickHandler17}> <span className='iconS'><CiDatabase /></span>Craddule Hub</li>
           {/* Add more items as needed */}
       </ul>
     </div>

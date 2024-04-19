@@ -11,7 +11,7 @@ function PitchDeck ()  {
 
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/engagement`)
+    const onClickHandler = () => navigate(``)
     return (
         <>
  <div className='container-fluid'>
@@ -30,11 +30,11 @@ function PitchDeck ()  {
             <iframe src="https://www.youtube.com/embed/NBd6yJBzyis?si=QTR7Qu_dLDkhRFmR" title="Iframe Example"></iframe>
             <div class = "spaceB"></div>
             </div>
-            <p className='question'>Why do you want to start a Company?</p>
+            {/*<p className='question'>Why do you want to start a Company?</p>
             <div className='container-textAs'>
                 <textarea className='textAs'></textarea>
             </div>
-            <p className='suggest'>Your answer shouldn't be about money, It should be about solving a problem</p>
+    <p className='suggest'>Your answer shouldn't be about money, It should be about solving a problem</p>*/}
         </div> 
 
         <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
