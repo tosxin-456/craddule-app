@@ -30,9 +30,9 @@ function AllFiles ()  {
             <div className='text-center'>
             <p className='centerH'>All Files</p>
             <div class="flex-container boxRA">
-                    <div type='button' className='hd'>Recent</div>
-                    <div type='button'className='hd'>Started</div>
-                    <div type='button'className='hd'>Shared</div>
+                    <div type='button' className='hdds'>Recent</div>
+                    <div type='button'className='hds'>Started</div>
+                    <div type='button'className='hds'>Shared</div>
                 </div> 
                 <div className='container-boxkA'>
                 <p className='file'>Name +</p> 

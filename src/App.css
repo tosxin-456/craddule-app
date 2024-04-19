@@ -2147,7 +2147,7 @@ font-weight: 0px;
   width: 200px;
   padding: 50px;
   box-shadow: 0 1px 5px 0 rgb(208, 208, 208) !important;
-
+  border-radius: 10px !important;
 }
 
 .imageBoxZ{
@@ -2178,4 +2178,15 @@ font-weight: 0px;
   font-size: 10px;
   margin:0px;
   font-weight: bold;
+}
+
+.hdds:hover{
+  color: #88750a !important;
+  text-decoration: underline;
+  font-weight: bold !important;
+}
+
+.hds{
+  font-size: 40px;
+  font-weight: 500px !important;
 }
