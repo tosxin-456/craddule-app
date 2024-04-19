@@ -41,6 +41,7 @@ import PagePositioning from './pagePositioning';
 import PageProject from './pageProject';
 import PageSuccess from './pageSuccess';
 import UploadLogo from './uploadLogo';
+import GraphPage from './graphPage';
 import PageInvite from './sectionInvite';
 import PageTrack from './pageTrack';
 import Summary from './summary';
@@ -99,6 +100,7 @@ function App() {
         <Route path="/pageAddKpi" element= {<PageAddKpi />} />
         <Route path="/prototype" element= {<Prototype />} />
         <Route path="/sendFile" element= {<SendFile />} />
+        <Route path="/graphPage" element= {<GraphPage />} />
         <Route path="/wireFrame" element= {<WireFrame />} />
         <Route path="/sectionManagement" element= {<SectionManagement />} />
         <Route path="/teamManagement" element= {<TeamManagement />} />

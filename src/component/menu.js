@@ -14,7 +14,7 @@ function Menu () {
   const onClickHandler6 = () => navigate(`/pageTrack`);
   const onClickHandler7 = () => navigate(`/sectionExecute`);
   const onClickHandler8 = () => navigate(`/ExecutiveSummary`);
-  const onClickHandler9 = () => navigate(`/wireFrame`);
+  const onClickHandler9 = () => navigate(`/sectionPrototype`);
   const onClickHandler10 = () => navigate(`/pageSummary`);
   const onClickHandler11 = () => navigate(`/summary`);
   const onClickHandler12 = () => navigate(`/pageProject`);

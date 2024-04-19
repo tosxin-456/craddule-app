@@ -42,6 +42,7 @@ import PageTeam from './pageTeam';
 import KPIPage from './kpiPage';
 import WireFrame from './wireFrame';
 import Prototype from './prototype';
+import GraphPage from './graphPage';
 import Summary from './summary';
 import Presentation from './presentation';
 import SearchKpi from './searchKpi';
@@ -142,8 +143,9 @@ function App() {
     <WireFrame />
     <Model />
     <PageAddKpi />
-    <SearchKpi />*/}
-    <AllFiles />
+    <SearchKpi />
+    <AllFiles />*/}
+    <GraphPage />
 
 
 

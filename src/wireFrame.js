@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 function WireFrame ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(``)
+    const onClickHandler = () => navigate(`/pageFrontView`)
     return (
         
         <>

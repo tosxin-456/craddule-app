@@ -1885,11 +1885,32 @@ hr{
   width: 70px;
   height: 70px;
   margin: 2px;
+  border-radius:5px !important ;
+  transition: transform 0.3s ease;
+}
+
+.imgA:hover{
+  border: 1px !important;
+  border-style: solid !important;
+  border-color: #E8C400 !important;
+  border-width: 3px !important;
+  border-radius: 5px;
+  transform: scale(1.1) !important;
 }
 
 .imgbox{
   margin-top: 20px;
   padding-bottom: 5px;
+}
+
+.imgBox.enlarge{
+  width:400px ;
+  height: 400px;
+}
+
+
+.imgBox.enlarge.imgA{
+ transform: scale(3) !important;
 }
 
 .imgB{
@@ -1920,12 +1941,7 @@ hr{
   font-weight: bold;
 }
 
-.hdd{
-  background-color:  #fafafad1 ;
-  font-weight: bold;
-}
-
-.hdd:hover{
+.hd:hover{
   background-color: #f7e78d !important;
 }
 
@@ -2189,4 +2205,9 @@ font-weight: 0px;
 .hds{
   font-size: 40px;
   font-weight: 500px !important;
+}
+
+
+.apexcharts-toolbar{
+  display: none !important;
 }

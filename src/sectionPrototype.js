@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function SectionPrototype ()  {
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(``)
+     const onClickHandler = () => navigate(`/wireFrame`)
     return (
         <>
 
