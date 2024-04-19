@@ -59,9 +59,9 @@ function WireFrame ()  {
                   <img src={present} className='imgh'></img>    
                   <img src={plan} className='imgh'></img>   
                   <img src={proto} className='imgh'></img> 
-                  <img src={Rectan} className='imgh'></img> 
-                  <img src={Rect} className='imgh'></img> 
-                  <img src={imgC} className='imgh'></img>              
+                  <img src={present} className='imgh'></img> 
+                  <img src={plan} className='imgh'></img> 
+                  <img src={proto} className='imgh'></img>              
                 </div>         
             </div>
            
