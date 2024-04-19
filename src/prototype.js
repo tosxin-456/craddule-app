@@ -47,8 +47,8 @@ function Prototype ()  {
                   <img src={Rect} className='imgA' ></img>
                   </div>
                 </div> 
-                <div class="container-boxy">
-                  <img src={proto} className='imgB'></img>                  
+                <div class="container-boxyy">
+                  <img src={proto} className='imgB1'></img>                  
                 </div>         
             </div>
            

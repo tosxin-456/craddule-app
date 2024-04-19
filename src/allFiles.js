@@ -1,9 +1,9 @@
 import React from 'react';
 import bci from './images/bc.png'; 
-import solution from './images/solution.png'; 
+import excel from './images/excel.png'; 
 import Rect from './images/Rect.png'
 import Header from './component/header';
-import present from './images/present.png';
+import pdf from './images/pdf.png';
 import Menu from './component/menu';
 import cloud from './images/cloud.png'
 import { useNavigate } from 'react-router-dom';
@@ -35,23 +35,23 @@ function AllFiles ()  {
                     <div type='button'className='hd'>Shared</div>
                 </div> 
                 <div className='container-boxkA'>
-                <p className='file'>Make sure you answer all questions</p> 
+                <p className='file'>Name +</p> 
 
                 <div className='container-image'>
-                  <div className='flex-container imageBoxZ'><img src={Rect} className='imgX' ></img>
-                  <p className='textH'>Make sure you answer all questions</p></div> 
-                  <div className='flex-container imageBoxZ'><img src={Rect} className='imgX' ></img>
-                  <p className='textH'>Make sure you answer all questions</p></div> 
-                  <div className='flex-container imageBoxZ'><img src={Rect} className='imgX' ></img>
-                  <p className='textH'>Make sure you answer all questions</p></div> 
+                  <div className='flex-container1 imageBoxZ'><img src={pdf} className='imgX' ></img>
+                  <div className='textH'><img src= {pdf} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Value proposition pack</p>Team A folder: 4 items</div></div></div> 
+                  <div className='flex-container1 imageBoxZ'><img src={excel} className='imgX' ></img>
+                  <div className='textH'><img src= {excel} className='smImg'></img ><div className='fileTxt'><p className='toptxt'>Business Analysis</p>File page: 10</div></div></div> 
+                  <div className='flex-container1 imageBoxZ'><img src={excel} className='imgX' ></img>
+                  <div className='textH'><img src= {excel} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Wireframe</p>File page: 10</div></div></div> 
                   </div>
                   <div className='container-image'>
-                  <div className='flex-container imageBoxZ'><img src={Rect} className='imgX' ></img>
-                  <p className='textH'>Make sure you answer all questions</p></div> 
-                  <div className='flex-container imageBoxZ'><img src={Rect} className='imgX' ></img>
-                  <p className='textH'>Make sure you answer all questions</p></div> 
-                  <div className='flex-container imageBoxZ'><img src={Rect} className='imgX' ></img>
-                  <p className='textH'>Make sure you answer all questions</p></div> 
+                  <div className='flex-container1 imageBoxZ'><img src={pdf} className='imgX' ></img>
+                  <div className='textH'><img src= {pdf} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Ideation</p>File page: 4</div></div></div> 
+                  <div className='flex-container1 imageBoxZ'><img src={pdf} className='imgX' ></img>
+                  <div className='textH'><img src= {pdf} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Financials</p>File page: 10</div></div></div> 
+                  <div className='flex-container1 imageBoxZ'><img src={excel} className='imgX' ></img>
+                  <div className='textH'><img src= {excel} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Financials</p>Team folder: 24 items</div></div></div> 
                   </div>
                 </div>          
             </div>

@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 function Model ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pageBenefit`)
+    const onClickHandler = () => navigate(``)
     return (
         
         <>
@@ -53,7 +53,7 @@ function Model ()  {
                   <img src={Rect} className='imgA' ></img>
                   </div>
                 </div> 
-                <div class="container-boxy">
+                <div class="container-boxyy">
                   <img src={model} className='imgB'></img>                  
                 </div>         
             </div>

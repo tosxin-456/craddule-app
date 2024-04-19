@@ -1865,6 +1865,22 @@ hr{
   box-shadow: 0 1px 5px 0 rgb(170 170 170);
 }
 
+.container-boxyy{
+  position: relative !important;
+  font-size: 20px;
+  border-radius: 10px !important;
+  text-wrap:wrap;
+  background-color: white !important;
+  font-weight: bold;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 20px;
+  color:#fff;
+  left: 150px !important;
+  width: 400px;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+}
+
 .imgA{
   width: 70px;
   height: 70px;
@@ -1878,6 +1894,10 @@ hr{
 
 .imgB{
   height:400px !important;
+}
+
+.imgB1{
+  height:500px !important;
 }
 
 .imgC{
@@ -2086,7 +2106,7 @@ font-weight: 0px;
   display: flex;
   flex-wrap: wrap;
   align-content: center !important;
-  width: 390px;
+  width: 700px;
 }
 
 .container-boxkA{
@@ -2113,7 +2133,49 @@ font-weight: 0px;
 
 .file{
   color:#000;
-  font-size: 14px;
+  font-size: 16px;
   text-align: left;
-  margin-bottom: 20px;
+  margin: 0px 0px 0px 10px;
+  font-weight: bold;
+}
+
+.textH{
+  color: #000;
+}
+
+.imgX{
+  width: 200px;
+  padding: 50px;
+  box-shadow: 0 1px 5px 0 rgb(208, 208, 208) !important;
+
+}
+
+.imageBoxZ{
+  padding: 10px;
+  text-align:start !important;
+}
+
+.flex-container1 > div{
+  margin-right: 50px;
+  padding: 10px;
+  font-size: 14px !important;
+}
+
+.smImg{
+  width: 30px;
+}
+
+.fileTxt{
+  line-height: 15px;
+  position: relative;
+  left: 30px;
+  bottom: 30px;
+  font-size: 8px;
+  margin-left: 2px;
+}
+
+.toptxt{
+  font-size: 10px;
+  margin:0px;
+  font-weight: bold;
 }
