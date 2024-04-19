@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 function PageFrontView ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pageBenefit`)
+    const onClickHandler = () => navigate(`/planDesign`)
     return (
         
         <>

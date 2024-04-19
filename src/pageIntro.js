@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 function PageIntro ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pageBuisness`)
+    const onClickHandler = () => navigate(`/pageBusiness`)
     return (
         <>
  <div className='container-fluid'>

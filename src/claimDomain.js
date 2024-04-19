@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 function ClaimDomain ()  {  const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pageTrack`)
+    const onClickHandler = () => navigate(``)
     return (
         <>
  <div className='container-fluid'>

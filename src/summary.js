@@ -9,7 +9,7 @@ function Summary ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/sectionScale`)
+     const onClickHandler = () => navigate(``)
     return (
         <>
 

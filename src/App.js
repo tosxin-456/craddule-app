@@ -22,6 +22,7 @@ import Conclusion from './conclusion';
 import PageCost from './costPage';
 import VideoDemo from './video';
 import PageSummarys from './pageSummarys';
+import PageSummary from './pageSummary';
 import Financials from './Financials';
 import RiskMitigation from './mitigation';
 import Implementation from './implementation';
@@ -92,6 +93,7 @@ function App() {
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/pageSummary" element= {<PageSummary />} />
         <Route path="/allFiles" element= {<AllFiles />} />
         <Route path="/searchKpi" element= {<SearchKpi />} />
         <Route path="/pageAddKpi" element= {<PageAddKpi />} />
@@ -125,7 +127,7 @@ function App() {
         <Route path="/marketing" element= {<PageMarketing />} />
         <Route path="/pagePositioning" element= {<PagePositioning />} />
         <Route path="/customerSegment" element= {<CustomerSegment />} />
-        <Route path="/pageBuisness" element= {<PageBusiness/>} />
+        <Route path="/pageBusiness" element= {<PageBusiness/>} />
         <Route path="/pageIntro" element= {<PageIntro />} />
         <Route path="/pageSummarys" element= {<PageSummarys />} />
         <Route path="/sectionSummary" element= {<SectionExecute />} />

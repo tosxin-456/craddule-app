@@ -9,7 +9,7 @@ function Engagement ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/sectionManagement`)
+     const onClickHandler = () => navigate(``)
     return (
         <>
 

@@ -1,8 +1,23 @@
 import React, {useEffect,useState,useRef} from 'react';
 import { CiApple,CiMemoPad ,CiPaperplane,CiPen,CiEdit,CiLaptop,CiBank,CiVideoOn,CiExport,CiDatabase,CiSettings,CiMicrochip,CiUser} from 'react-icons/ci';
-
+import { useNavigate } from 'react-router-dom';
 
 function Menu () {
+  const navigate = useNavigate()
+
+  const onClickHandler = () => navigate(`/introduction1`);
+  const onClickHandler1 = () => navigate(`/pageFrontView`);
+  const onClickHandler2 = () => navigate(`/prototype`);
+  const onClickHandler3 = () => navigate(`/sectionManagement`);
+  const onClickHandler4 = () => navigate(`/engagement`);
+  const onClickHandler5 = () => navigate(`/claimDomain`);
+  const onClickHandler6 = () => navigate(`/pageTrack`);
+  const onClickHandler7 = () => navigate(`/sectionExecute`);
+  const onClickHandler8 = () => navigate(`/ExecutiveSummary`);
+  const onClickHandler9 = () => navigate(`/wireFrame`);
+  const onClickHandler10 = () => navigate(`/pageSummary`);
+  const onClickHandler11 = () => navigate(`/summary`);
+
   const [isClosed, setIsClosed] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   const openNav = () => {
@@ -64,7 +79,7 @@ function Menu () {
             <span className={isSubmenuOpen ? 'iconS-open' : 'iconS'}><CiMemoPad /></span> Ideation
           </span>
             <ul className={isSubmenuOpen ? 'subMenuOpen' : 'subMenu'}>
-              <li className='innr active'>Business Case Builder</li>
+              <li className='innr active' onClick={onClickHandler}>Business Case Builder</li>
 
               <li className='innr'>Custom Financial Projection</li>
               <li className='innr'>Discounted Cash Flow (DCF)</li>
@@ -84,14 +99,14 @@ function Menu () {
               <span className={isSubmenuOpen1 ? 'iconS-open' : 'iconS'}>< CiPaperplane /></span> Product Definition
             </span>
             <ul className={isSubmenuOpen1 ? 'subMenuOpen' : 'subMenu'}>
-                <li className='innr'>Business Analysis Pack</li>
-                <li className='innr'>Value Proposition Pack (VPP)</li>
+                <li className='innr' onClick={onClickHandler8}>Business Analysis Pack</li>
+                <li className='innr' onClick={onClickHandler10}>Value Proposition Pack (VPP)</li>
                 <li className='innr'>Success Matrix</li>
                 <li className='innr'>KPI</li>
                 <li className='innr'>Detailed Marketing Strategies</li>
                 <li className='innr'>Getting Your Team</li>
                 <li className='innr'>Go/ No-Go gate</li>
-                <li className='innr'>Summary (PDF)</li>
+                <li className='innr'onClick={onClickHandler11}>Summary (PDF)</li>
                 {/* Add more submenu items as needed */}
               </ul>
           </li>
@@ -104,9 +119,9 @@ function Menu () {
               <span className={isSubmenuOpen2 ? 'iconS-open' : 'iconS'}><CiPen /></span> Prototyping
             </span>
             <ul className={isSubmenuOpen2 ? 'subMenuOpen' : 'subMenu'}>
-              <li className='innr'>Wireframe</li>
-              <li className='innr'>3D Design</li>
-              <li className='innr'>Prototype</li>
+              <li className='innr' onClick={onClickHandler9}>Wireframe</li>
+              <li className='innr'onClick={onClickHandler1}>3D Design</li>
+              <li className='innr'onClick={onClickHandler2}>Prototype</li>
                 {/* Add more submenu items as needed */}
             </ul>
           </li>
@@ -119,9 +134,11 @@ function Menu () {
               <span className={isSubmenuOpen3 ? 'iconS-open' : 'iconS'}><CiEdit /></span>Initial Design
             </span>
             <ul className={isSubmenuOpen3 ? 'subMenuOpen' : 'subMenu'}>
-              <li className='innr'>Wireframe</li>
-              <li className='innr'>3D Design</li>
-              <li className='innr'>Prototype</li>
+              <li className='innr'onClick={onClickHandler5}>Claim Domain</li>
+              <li className='innr'>Team</li>
+              <li className='innr' onClick={onClickHandler4}>Stakeholder Engagement</li>
+              <li className='innr'>Go/ No-Go gate</li>
+              <li className='innr'>Summary (PDF)</li>
                 {/* Add more submenu items as needed */}
             </ul>
           </li>
@@ -134,7 +151,7 @@ function Menu () {
               <span className={isSubmenuOpen4 ? 'iconS-open' : 'iconS'}><CiLaptop /></span>Validating and Testing
             </span>
             <ul className={isSubmenuOpen4 ? 'subMenuOpen' : 'subMenu'}>
-              <li className='innr'>Detail Marketing/ RTM Tracking</li>
+              <li className='innr' onClick={onClickHandler6}>Detail Marketing/ RTM Tracking</li>
               <li className='innr'>Go/ No-Go gate</li>
               <li className='innr'>Summary (PDF)</li>
                 {/* Add more submenu items as needed */}
@@ -149,7 +166,7 @@ function Menu () {
                 <span className={isSubmenuOpen5 ? 'iconS-open' : 'iconS'}><CiBank /></span>Commercialization
              </span>
             <ul className={isSubmenuOpen5 ? 'subMenuOpen' : 'subMenu'}>
-              <li className='innr'>MVP to Full Scale</li>
+              <li className='innr'onClick={onClickHandler7}>MVP to Full Scale</li>
               <li className='innr'>Execute RTM</li>
                 {/* Add more submenu items as needed */}
             </ul>
@@ -164,7 +181,7 @@ function Menu () {
     <div className='newMHold1'>
     <ul className='newMUl'>
         
-        <li className="dropdown-trigger2"> <span className='iconS'><CiMicrochip /></span> Team Management</li>
+        <li className="dropdown-trigger2" onClick={onClickHandler3}> <span className='iconS'><CiMicrochip /></span> Team Management</li>
         <li className="dropdown-trigger2"> <span className='iconS'><CiUser /></span> Profile</li>
         <li className="dropdown-trigger2"> <span className='iconS'><CiSettings /></span>Setting</li>
        

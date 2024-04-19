@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 function TeamManagement ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pageBenefit`)
+    const onClickHandler = () => navigate(``)
     return (
         
         <>

@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 function PageTrack ()  {  const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/summary`)
+    const onClickHandler = () => navigate(``)
     return (
         <>
  <div className='container-fluid'>

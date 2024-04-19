@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 function WireFrame ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pageBenefit`)
+    const onClickHandler = () => navigate(``)
     return (
         
         <>
@@ -26,7 +26,7 @@ function WireFrame ()  {
         
         <div className='col-md-9'>
         <img src={bci} className='bcA'></img>
-                <p className='centerH'>prototype</p>
+                <p className='centerH'>WireFrame</p>
                 <p className='centerHp'>Here you get the wireframe of your product</p>
         <div className='lenght'>
             <div className='text-center'>
