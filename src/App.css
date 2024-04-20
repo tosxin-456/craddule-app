@@ -2204,3 +2204,146 @@ font-weight: 0px;
 .apexcharts-toolbar{
   display: none !important;
 }
+
+/* go css */
+
+.gogo{
+  
+  padding: 15px 15px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  border-radius: 20px;
+  background-color: #1b45bf;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  margin-right: 4px;
+  margin-bottom: 10px;
+
+}
+
+.goP{
+  color: #fff;
+  font-weight: 800;
+  margin-bottom: 0.3rem;
+}
+
+.goP2{
+  color: #fff;
+  font-size: 14px;
+}
+
+.goH{
+  padding: 10px 20px;
+  width: 100%;
+  height:100%;
+  top:0;
+  right:-100% ;
+  position: absolute;
+  background-color: #1f3d4738;
+  backdrop-filter:blur(5px);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: start;
+  transition: 1s;
+}
+
+.gogo:hover .goH{
+  right:0;
+}
+
+.goTitle{
+  font-size: 12px;
+  color: #fff;
+  font-weight: 800;
+  float: left;
+}
+
+.goSub{
+  font-size: 12px;
+  color: #fff;
+  padding-top: 4PX;
+
+}
+.goBtnP{
+  color:#000 !important;
+  background-color: #fff !important;
+  padding: 5px 5px !important;
+  border-radius: 20px !important;
+  text-transform: capitalize !important;
+  border:none !important;
+  outline: none !important;
+  font-weight: 500!important;
+  cursor: pointer !important;
+  font-size: 9px!important;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.goBtnPD{
+  color: #fff !important;
+  background-color: #FACC05 !important;
+  padding: 5px 5px !important;
+  border-radius: 20px !important;
+  text-transform: capitalize !important;
+  border:none !important;
+  outline: none !important;
+  font-weight: 500!important;
+  cursor: pointer !important;
+  font-size: 9px!important;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+
+.gogoG{
+  
+  padding: 15px 15px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  border-radius: 20px;
+  background-color: #b9b9b9;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 10px;
+
+}
+
+.gogoG:hover .goH{
+  right:0;
+}
+
+.gogoY{
+  
+  padding: 15px 15px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  border-radius: 20px;
+  background-color: #e6b800;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 10px;
+}
+
+.gogoY:hover .goH{
+  right:0;
+}
+
+.pa{
+  padding-bottom: 40px;
+}
+
+.rowU{
+  flex-wrap:inherit !important;
+  margin-right: 0rem !important;
+}

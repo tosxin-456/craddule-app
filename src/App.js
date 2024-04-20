@@ -70,6 +70,7 @@ import LandingPage from './landing';
 import Login from './login';
 import LoadingPage from './laodingPage';
 import PageAddKpi from './pageAddKpi';
+import GoPage from './goPage';
 
 
 
@@ -141,6 +142,7 @@ function App() {
         <Route path="/conclusion" element={<Conclusion />} />
         <Route path="costPage" element={<PageCost />} />
         <Route path="/home" element= {<LandingPage />} />
+        <Route path="/go" element= {<GoPage />} />
         {/* <Route path="/login" element= {<Login />} /> */}
         <Route path="/loading" element= {<LoadingPage />} />
         <Route path="/" element={<Login />} />

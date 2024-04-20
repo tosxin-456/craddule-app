@@ -25,6 +25,7 @@ function Menu () {
   const onClickHandler17 = () => navigate(`/allFiles`);
   const onClickHandler18 = () => navigate(`/Sectiondcf`);
   const onClickHandler19 = () => navigate(`/sectionScale`);
+  const onClickHandler20 = () => navigate(`/go`);
 
   const [isClosed, setIsClosed] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -93,7 +94,7 @@ function Menu () {
               <li className='innr'onClick={onClickHandler18}>Discounted Cash Flow (DCF)</li>
               <li className='innr'>Comparative Analysis</li>
               <li className='innr'>Project Timeline Builder</li>
-              <li className='innr'>Go/ No-Go gate</li>
+              <li className='innr' onClick={onClickHandler20}>Go/ No-Go gate</li>
               <li className='innr'onClick={onClickHandler11}>Summary (PDF)</li>
               {/* Add more submenu items as needed */}
             </ul>
