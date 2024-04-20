@@ -66,8 +66,8 @@ import ClaimDomain from './claimDomain';
 import PageTeam from './pageTeam';
 import MainApp from './mainApp';
 import KPIPage from './kpiPage';
-import LandingPage from './landing';
 import Login from './login';
+import LandingPage from './landing';
 import LoadingPage from './laodingPage';
 import PageAddKpi from './pageAddKpi';
 import GoPage from './goPage';
@@ -103,6 +103,7 @@ function App() {
         <Route path="/sendFile" element= {<SendFile />} />
         <Route path="/graphPage" element= {<GraphPage />} />
         <Route path="/wireFrame" element= {<WireFrame />} />
+        <Route path="/login" element= {<Login />} />
         <Route path="/sectionManagement" element= {<SectionManagement />} />
         <Route path="/teamManagement" element= {<TeamManagement />} />
         <Route path="/uploadLogo" element= {<UploadLogo />} />

@@ -51,6 +51,7 @@ import PageAddKpi from './pageAddKpi';
 import PageShare from './pageShare';
 import Model from './model';
 import AllFiles from './allFiles';
+import Login from './login';
 import SectionManagement from './sectionManagement';
 import PlanDesign from './planDesign';
 import Engagement from './engagement';
@@ -144,8 +145,9 @@ function App() {
     <Model />
     <PageAddKpi />
     <SearchKpi />
-    <AllFiles />*/}
-    <GraphPage />
+    <AllFiles />
+    <GraphPage />*/}
+    <Login />
 
 
 
