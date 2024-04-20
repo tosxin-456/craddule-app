@@ -26,6 +26,7 @@ function Menu () {
   const onClickHandler18 = () => navigate(`/Sectiondcf`);
   const onClickHandler19 = () => navigate(`/sectionScale`);
   const onClickHandler20 = () => navigate(`/go`);
+  const onClickHandler21 = () => navigate(`/pageShare`);
 
   const [isClosed, setIsClosed] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -182,7 +183,7 @@ function Menu () {
             </ul>
           </li>
            <li className="dropdown-trigger2" onClick={onClickHandler16}> <span className='iconS'><CiVideoOn /></span>Pitch Deck</li>
-            <li className="dropdown-trigger2"> <span className='iconS'><CiExport /></span>Share</li>
+            <li className="dropdown-trigger2" onClick={onClickHandler21}> <span className='iconS'><CiExport /></span>Share</li>
             <li className="dropdown-trigger2" onClick={onClickHandler17}> <span className='iconS'><CiDatabase /></span>Craddule Hub</li>
           {/* Add more items as needed */}
       </ul>
