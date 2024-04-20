@@ -17,13 +17,11 @@ import cloud from './images/cloud.png'
 import { useNavigate } from 'react-router-dom';
 
 
-
-
 function PageFrontView ()  {
     const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/planDesign`)
-
+   
     return (
         
         <>
@@ -49,7 +47,8 @@ function PageFrontView ()  {
                <div type="button" className='clod'><img src={cloud} className='imgC'></img>Upload</div> 
 
                 <div className='imgbox'>
-                  <img src={Rectan} className='imgA' ></img>
+                  <a target="_blank" href= {Rectan}>
+                  <img src={Rectan} className='imgA' width="600" height={600}></img></a>
                   <img src={imgA} className='imgA' ></img>
                   <img src={imgB} className='imgA' ></img>
                   <img src={imgC} className='imgA' ></img>

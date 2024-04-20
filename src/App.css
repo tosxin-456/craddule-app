@@ -1,7 +1,6 @@
 .App {
   text-align: center;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -1828,9 +1827,7 @@ hr{
   margin-right: 50px;
   margin-top: 20px;
   color:#fff;
-  left: 70px !important;
   width: 500px;
-  box-shadow: 0 1px 5px 0 rgb(170 170 170);
 }
 
 .container-boxkk{
@@ -1844,9 +1841,7 @@ hr{
   margin-left: 50px;
   margin-right: 50px;
   color:#fff;
-  left: 90px !important;
   width: 500px;
-  box-shadow: 0 1px 5px 0 rgb(170 170 170);
 }
 
 .container-boxy{
@@ -1860,9 +1855,8 @@ hr{
   margin-right: 50px;
   margin-top: 20px;
   color:#fff;
-  left: 120px !important;
+  left: 50px !important;
   width: 400px;
-  box-shadow: 0 1px 5px 0 rgb(170 170 170);
 }
 
 .container-boxyy{
@@ -1895,7 +1889,7 @@ hr{
   border-color: #E8C400 !important;
   border-width: 3px !important;
   border-radius: 5px;
-  transform: scale(1.1) !important;
+  transform: scale(1.5) !important;
 }
 
 .imgbox{
@@ -1952,8 +1946,8 @@ hr{
   text-wrap:wrap;
   background-color: white !important;
   font-weight: bold;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
   margin-top: 20px;
   color:#fff;
 }
@@ -1961,8 +1955,7 @@ hr{
 .imgh{
   margin: 5px;
   padding: 10px;
-  height: 250px;
-  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  height: 200px;
   border-radius: 5px !important;
  }
 
