@@ -1659,6 +1659,7 @@ hr{
 .checkbox{
   color: #000 !important;
   margin-top: 10px !important;
+  padding-left: 20px;
 }
 
 .BoxPhase1{
