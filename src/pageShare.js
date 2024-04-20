@@ -58,7 +58,7 @@ function PageShare ()  {
             </div>
         </div> 
   
-        <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
+        
            
           
   </div>
