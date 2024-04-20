@@ -134,6 +134,8 @@ body{
   margin: 20px 10px;
   padding:30px 40px;
   height: 600px;
+  position: relative;
+  left: 5em;
 }
 
 .centerB{
@@ -2190,7 +2192,7 @@ font-weight: 0px;
   color:#000;
   font-size: 16px;
   text-align: left;
-  margin: 0px 0px 0px 20px;
+  margin: 0px 0px 0px 2cqmax;
   font-weight: bold;
 }
 
