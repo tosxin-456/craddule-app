@@ -1,17 +1,21 @@
-{/*import React from 'react';
-import bci from './images/bc.png'; 
-import solution from './images/solution.png'; 
-import Header from './component/header';
-import Menu from './component/menu';
+import React, { useState } from 'react';
+import ReactDOM from "react-dom";
+import ViewSharedModal from './viewSharedModal';
+import { useNavigate } from 'react-router-dom';
 
 
+export default function ShareModal ({open, onClose})  {
+  const [isOpen, setIsOpen]= useState(false);
+  const navigate = useNavigate()
 
+  const onClickHandler = () => navigate(`/shareFile`)
+ if(!open) return null
 
-function SendFile ()  {
-    return (
+ return ReactDOM.createPortal (
+  <>
         <div className='modalOv' >
            <div className='modalSt'>
-                <p onClick={onClose} className='closeIcon'>X</p>
+                <p type='button' onClick={onClose} className='closeIcon'>X</p>
               <p className='txt2'>Send/ Share File</p>
               <hr></hr>
               <div className='sendBox'>
@@ -23,12 +27,17 @@ function SendFile ()  {
                 <div className='container-textAl'>
                 <textarea className='textAb'></textarea>
             </div>                
-            <button className="btn btn-primary curveSb">Share File</button>
+            <button className="btn btn-primary curveSb" onClick={()=>setIsOpen(true)}>Share File</button>
            </div>
+           <ViewSharedModal open={isOpen} onClose={() => setIsOpen(false)}>
+
+          </ViewSharedModal>
            </div>
            </div>          
         </div>
+        </>,
+         document.getElementById('portal')
+
      );
 }
 
-export default SendFile */}

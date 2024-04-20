@@ -1,17 +1,21 @@
-{/*import React from 'react';
-import bci from './images/bc.png'; 
-import solution from './images/solution.png'; 
-import Header from './component/header';
-import Menu from './component/menu';
+import React, { useState } from 'react';
+import ReactDOM from "react-dom";
+import { useNavigate } from 'react-router-dom';
 
 
 
 
-function ShareFile ()  {
+
+export default function ViewSharedModal ({open, onClose})  {
+    const [isOpen, setIsOpen]= useState(false);
+    const navigate = useNavigate()
+
+    const onClickHandler = () => navigate(`/shareFile`)
+    if(!open) return null
     return (
-        <div className='col-md-5' >
-           <div className='uploadBoxh'>
-                <p className='closeIcon'>X</p>
+        <div className='modalOv' >
+           <div className='modalStt'>
+                <p type='button' className='closeIcon' onClick={onClose}>X</p>
               <p className='txt2'>View Shared File</p>
               <hr></hr>
               <div className='shareBox'>
@@ -26,4 +30,3 @@ function ShareFile ()  {
      );
 }
 
-export default ShareFile*/}

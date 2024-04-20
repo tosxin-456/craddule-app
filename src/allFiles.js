@@ -35,15 +35,15 @@ function AllFiles ()  {
                     <div type='button'className='hds'>Shared</div>
                 </div> 
                 <div className=''>
-                <p className='file'>Name +</p> 
+                <p className='file'>Name</p> 
 
                 <div className='container-image'>
                   <div className='flex-container1 imageBoxZ'><img src={pdf} className='imgX' ></img>
                   <div className='textH'><img src= {pdf} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Value proposition pack</p>Team A folder: 4 items</div></div></div> 
                   <div className='flex-container1 imageBoxZ'><img src={excel} className='imgX' ></img>
                   <div className='textH'><img src= {excel} className='smImg'></img ><div className='fileTxt'><p className='toptxt'>Business Analysis</p>File page: 10</div></div></div> 
-                  <div className='flex-container1 imageBoxZ'><img src={excel} className='imgX' ></img>
-                  <div className='textH'><img src= {excel} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Wireframe</p>File page: 10</div></div></div> 
+                  <div className='flex-container1 imageBoxZ'><img src={pdf} className='imgX' ></img>
+                  <div className='textH'><img src= {pdf} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Wireframe</p>File page: 10</div></div></div> 
                   </div>
                   <div className='container-image'>
                   <div className='flex-container1 imageBoxZ'><img src={pdf} className='imgX' ></img>
