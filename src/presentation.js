@@ -61,7 +61,7 @@ function Presentation ()  {
                   <img src={imgE} className='imgA' ></img>
                   </div>
                 </div> 
-                <div class="container-boxy">
+                <div>
                   <img src={present} className='imgB'></img>                  
                 </div>         
             </div>

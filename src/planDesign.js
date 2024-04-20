@@ -62,7 +62,7 @@ function PlanDesign ()  {
                   <img src={present} className='imgA' ></img>
                   </div>
                 </div> 
-                <div class="container-boxy">
+                <div>
                   <img src={plan} className='imgB'></img>                  
                 </div>         
             </div>

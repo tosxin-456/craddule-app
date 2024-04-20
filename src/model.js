@@ -63,7 +63,7 @@ function Model ()  {
                   <img src={imgE} className='imgA' ></img>
                   </div>
                 </div> 
-                <div class="container-boxy">
+                <div>
                   <img src={model} className='imgB'></img>                  
                 </div>         
             </div>
