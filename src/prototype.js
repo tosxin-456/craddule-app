@@ -28,7 +28,7 @@ function Prototype ()  {
         <img src={bci} className='bcA'></img>
                 <p className='centerH'>Prototype</p>
                 <p className='centerHp'>Here you get the wireframe of your product</p>
-        <div className='lenght'>
+        <div className='centerC'>
             <div className='text-center'>
                 <div className='container-boxkk'>
                <div type="button" className='clod'><img src={cloud} className='imgC'></img>Upload</div> 
