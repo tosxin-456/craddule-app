@@ -90,11 +90,11 @@ function Menu () {
             <ul className={isSubmenuOpen ? 'subMenuOpen' : 'subMenu'}>
               <li className='innr active' onClick={onClickHandler}>Business Case Builder</li>
 
-              <li className='innr'>Custom Financial Projection</li>
+              <li className='innr pending'>Custom Financial Projection <p className='penP'>Ongoing</p></li>
               <li className='innr'onClick={onClickHandler18}>Discounted Cash Flow (DCF)</li>
               <li className='innr'>Comparative Analysis</li>
               <li className='innr'>Project Timeline Builder</li>
-              <li className='innr' onClick={onClickHandler20}>Go/ No-Go gate</li>
+              <li className='innr done' onClick={onClickHandler20}>Go/ No-Go gate <p className='penD'>Done</p></li>
               <li className='innr'onClick={onClickHandler11}>Summary (PDF)</li>
               {/* Add more submenu items as needed */}
             </ul>
