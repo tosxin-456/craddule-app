@@ -26,7 +26,7 @@ function GoPage ()  {
             <div className='centerC'>
 
             <div className='text-center'>
-                <p className='centerH pa wow fadeInLeft'>Go No Go Gate</p>
+                <p className='centerH pa wow fadeInLeft'>Go/ No-Go Gate</p>
                
             </div>
 
