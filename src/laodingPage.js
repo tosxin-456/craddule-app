@@ -36,7 +36,7 @@ useEffect(() =>{
           aria-label="Loading Spinner"
           data-testid="loader"
         />
-    <p className='loadPt'>Setting up Your Craddle</p>
+    <p className='loadPt'>Setting up Your Craddule</p>
     </div> 
   ):(
     <div></div>
