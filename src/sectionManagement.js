@@ -61,7 +61,7 @@ function SectionManagement ()  {
                 <label for="checkbox" className='checkbox'>NDA - Standard Non Disclosure Agreements (if neccessary for a project)</label>               
         </div> 
   
-        <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
+        
            
           
   </div>
