@@ -51,7 +51,7 @@ function PageShare ()  {
                 <button className="btn btn-primary curveP">Share</button>
             </div>
             <div className='BoxPhase'>
-                <p className='heading'>Validation and texting</p>
+                <p className='heading'>Validation and Testing</p>
                 <p className='subHeading'>12pages</p>
                 <button className="btn btn-primary curveP">Share</button>
             </div>
