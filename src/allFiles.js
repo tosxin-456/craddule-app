@@ -34,7 +34,7 @@ function AllFiles ()  {
                     <div type='button'className='hds'>Started</div>
                     <div type='button'className='hds'>Shared</div>
                 </div> 
-                <div className=''>
+                <div className='centerCc'>
                 <p className='file'>Name</p> 
 
                 <div className='container-image'>

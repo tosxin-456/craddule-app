@@ -130,6 +130,12 @@ body{
   box-shadow: 0px 1px 17px 0 rgb(227 232 246);
 }
 
+.centerCc{
+  margin: 20px 10px;
+  padding:30px 40px;
+  height: 600px;
+}
+
 .centerB{
   margin: 90px 100px 50px 100px;
   background-color: #fff;
@@ -2150,12 +2156,11 @@ font-weight: 0px;
 
 
 .container-image{
-  display: flex;
+  display:flex;
   flex-wrap: wrap;
   align-content: center !important;
-  width: 700px;
-  position: relative;
-  left: 10%;
+  padding: 15px;
+  height: 300px;
 }
 
 .container-boxkA{
@@ -2185,7 +2190,7 @@ font-weight: 0px;
   color:#000;
   font-size: 16px;
   text-align: left;
-  margin: 0px 0px 0px 95px;
+  margin: 0px 0px 0px 20px;
   font-weight: bold;
 }
 
