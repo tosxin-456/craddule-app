@@ -35,7 +35,7 @@ function PageFrontView ()  {
         <img src={bci} className='bcA'></img>
                 <p className='centerH'>Frontview 3D Design</p>
                 <p className='centerHp'>Here you get the wireframe of your product</p>
-        <div className='lenght'>
+        <div className='centerC'>
             <div className='text-center'>
             <div class="flex-container boxR">
                     <div type='button' className='hd'>Front View</div>
