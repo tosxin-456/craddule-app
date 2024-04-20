@@ -659,6 +659,34 @@ background-color: white!important;
   color: #fff;
   border-radius: 20px;
 } 
+
+.innr.active{
+  background-color: #88a5fb;
+  transition: 0.2s ease-in; 
+  color: #fff;
+  border-radius: 20px;
+} 
+
+.pending{
+  border-bottom: 3px solid #facc04 !important;
+  border-radius: 0px !important;
+}
+.penP{
+  margin-bottom: 0.5rem;
+    font-size: 10px;
+    float: right;
+    color: #dac78b;
+}
+.done{
+  border-bottom: 3px solid #31fa04 !important;
+  border-radius: 0px !important;
+}
+.penD{
+  margin-bottom: 0.5rem;
+    font-size: 10px;
+    float: right;
+    color: #31fa04;
+}
 .iconS{
   font-size: 24px;
   color: #393939;
