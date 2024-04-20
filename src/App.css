@@ -2149,6 +2149,7 @@ font-weight: 0px;
   padding: 50px;
   box-shadow: 0 1px 5px 0 rgb(208, 208, 208) !important;
   border-radius: 10px !important;
+  cursor:pointer;
 }
 
 .imageBoxZ{
