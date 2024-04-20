@@ -1538,11 +1538,12 @@ hr{
   }
 
   .input2{
-    width: 100% !important;
-    border-radius: 5px;
-    height: 40px;
+   border-radius: 20px;
     border-width: 1px;
-    box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+    /* box-shadow: 0 1px 5px 0 #f0dfa4; */
+    height: 40px;
+    width: 100%!important;
+    padding: 20px;
   }
 
   .centerH1{
