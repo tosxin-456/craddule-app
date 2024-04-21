@@ -22,7 +22,7 @@ export default function ShareModal ({open, onClose})  {
                 <p className='share'>Share this file</p>
                 <p className= 'share1'>Anyone with the link <a href='' className='anchor2'>can view</a></p>
                 <input type="text" className='input3' placeholder="Search.."></input>
-                <p className='copy'><a href='' className='anchor2'>copy me</a></p>
+                <p className='copy'><a href='' className='anchor2'>copy link</a></p>
                <div className='text-center'>
                 <div className='container-textAl'>
                 <textarea className='textAb'></textarea>

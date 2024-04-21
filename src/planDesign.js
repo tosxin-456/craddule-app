@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import bci from './images/bc.png'; 
 import solution from './images/solution.png'; 
 import Rect from './images/Rect.png'
@@ -15,6 +15,7 @@ import imgD from './images/imgD.jpeg'
 import imgE from './images/imgE.jpeg'
 import Menu from './component/menu';
 import cloud from './images/cloud.png'
+import UploadLogoModal from './component/brandLogoModal';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -24,6 +25,7 @@ function PlanDesign ()  {
     const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/presentation`)
+    const [isOpen, setIsOpen]= useState(false);
     return (
         
         <>
@@ -46,7 +48,7 @@ function PlanDesign ()  {
                     <div type='button'className='hd'>3D Model</div>
                 </div> 
                 <div className='container-boxk'>
-               <div type="button" className='clod'><img src={cloud} className='imgC'></img>Upload</div> 
+               <div type="button" className='clod' onClick={()=>setIsOpen(true)}><img src={cloud} className='imgC' onClick={()=>setIsOpen(true)}></img>Upload</div> 
 
                 <div className='imgbox'>
                   <img src={plan} className='imgA' ></img>
@@ -66,7 +68,9 @@ function PlanDesign ()  {
                   <img src={plan} className='imgB'></img>                  
                 </div>         
             </div>
-           
+            <UploadLogoModal open={isOpen} onClose={() => setIsOpen(false)}>
+
+          </UploadLogoModal>
         </div> 
   
         <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>

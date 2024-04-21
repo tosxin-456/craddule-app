@@ -21,6 +21,7 @@ import Solution from './Solution';
 import Conclusion from './conclusion';
 import PageCost from './costPage';
 import VideoDemo from './video';
+import SignUp from './signUp';
 import PageSummarys from './pageSummarys';
 import PageSummary from './pageSummary';
 import Financials from './Financials';
@@ -59,6 +60,7 @@ import Model from './model';
 import SectionExe from './sectionExecute';
 import PageShare from './pageShare';
 import SendFile from './sendFile';
+import GeneralSetting from './generalSetting';
 import SectionManagement from './sectionManagement';
 import TeamManagement from './teamManagement';
 import ShareFile from './shareFile';
@@ -95,6 +97,7 @@ function App() {
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/generalSetting" element= {<GeneralSetting />} />
         <Route path="/pageSummary" element= {<PageSummary />} />
         <Route path="/allFiles" element= {<AllFiles />} />
         <Route path="/searchKpi" element= {<SearchKpi />} />
@@ -104,6 +107,7 @@ function App() {
         <Route path="/graphPage" element= {<GraphPage />} />
         <Route path="/wireFrame" element= {<WireFrame />} />
         <Route path="/login" element= {<Login />} />
+        <Route path="/signUp" element= {<SignUp />} />
         <Route path="/sectionManagement" element= {<SectionManagement />} />
         <Route path="/teamManagement" element= {<TeamManagement />} />
         <Route path="/uploadLogo" element= {<UploadLogo />} />

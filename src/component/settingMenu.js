@@ -1,0 +1,110 @@
+import React, {useEffect,useState,useRef} from 'react';
+import { CiApple,CiMemoPad ,CiPaperplane,CiPen,CiEdit,CiLaptop,CiBank,CiVideoOn,CiExport,CiDatabase,CiSettings,CiMicrochip,CiUser} from 'react-icons/ci';
+import { useNavigate } from 'react-router-dom';
+
+function SettingMenu () {
+  const navigate = useNavigate()
+
+  const onClickHandler = () => navigate(`/generalSetting`);
+
+  const [isClosed, setIsClosed] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const openNav = () => {
+    console.log("here");
+    setIsOpen(true);
+  }
+  
+  const closeNav = () => {
+    setIsOpen(false);
+  }
+
+
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  const [isSubmenuOpen1, setIsSubmenuOpen1] = useState(false);
+  const [isSubmenuOpen2, setIsSubmenuOpen2] = useState(false);
+  const [isSubmenuOpen3, setIsSubmenuOpen3] = useState(false);
+  const [isSubmenuOpen4, setIsSubmenuOpen4] = useState(false);
+  const [isSubmenuOpen5, setIsSubmenuOpen5] = useState(false);
+
+  // Function to toggle the visibility of the submenu
+  const toggleSubmenu = () => {
+    setIsSubmenuOpen(!isSubmenuOpen);
+  };
+
+  const toggleSubmenu1 = () => {
+    setIsSubmenuOpen1(!isSubmenuOpen1);
+  };
+
+  const toggleSubmenu2 = () => {
+    setIsSubmenuOpen2(!isSubmenuOpen2);
+  };
+
+  const toggleSubmenu3 = () => {
+    setIsSubmenuOpen3(!isSubmenuOpen3);
+  };
+
+  const toggleSubmenu4 = () => {
+    setIsSubmenuOpen4(!isSubmenuOpen4);
+  };
+
+  const toggleSubmenu5 = () => {
+    setIsSubmenuOpen5(!isSubmenuOpen5);
+  };
+
+
+  return(
+  
+  <div className='col-md-3'>
+  <div className='newMHold'>
+
+  
+    <div className='newMHold2'>
+       
+      <ul className='newMUl'>
+      {/*<h3>Setting</h3>*/}
+          <li  className={isSubmenuOpen ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
+          <span>
+            <span className={isSubmenuOpen ? 'iconS-open' : 'iconS'} onClick={onClickHandler}><CiMemoPad /></span> General
+          </span>
+          </li>
+
+          <li  className={isSubmenuOpen1 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
+            <span>
+              <span className={isSubmenuOpen1 ? 'iconS-open' : 'iconS'}>< CiPaperplane /></span> Billing
+            </span>
+          </li>
+
+          <li className={isSubmenuOpen2 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
+            <span>
+              <span className={isSubmenuOpen2 ? 'iconS-open' : 'iconS'}><CiPen /></span> Notification
+            </span>
+          </li>
+
+          <li className={isSubmenuOpen3 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
+            <span>
+              <span className={isSubmenuOpen3 ? 'iconS-open' : 'iconS'}><CiEdit /></span>Chat Support
+            </span>
+          </li>
+
+      </ul>
+    </div>
+
+    <div className='newMHold1'>
+    <ul className='newMUl'>
+        
+        <li className="dropdown-trigger2"> <span className='iconS'><CiMicrochip /></span> Log Out</li>
+        <li className="dropdown-trigger2"> <span className='iconS'><CiUser /></span>Deactivate</li>       
+        {/* Add more items as needed */}
+    </ul>
+
+
+    
+
+</div>
+</div>
+</div>
+  )
+}
+
+
+export default SettingMenu;

@@ -27,6 +27,8 @@ function Menu () {
   const onClickHandler19 = () => navigate(`/sectionScale`);
   const onClickHandler20 = () => navigate(`/go`);
   const onClickHandler21 = () => navigate(`/pageShare`);
+  const onClickHandler22 = () => navigate(`/generalSetting`);
+
 
   const [isClosed, setIsClosed] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -194,7 +196,7 @@ function Menu () {
         
         <li className="dropdown-trigger2" onClick={onClickHandler3}> <span className='iconS'><CiMicrochip /></span> Team Management</li>
         <li className="dropdown-trigger2"> <span className='iconS'><CiUser /></span> Profile</li>
-        <li className="dropdown-trigger2"> <span className='iconS'><CiSettings /></span>Setting</li>
+        <li className="dropdown-trigger2" onClick={onClickHandler22}> <span className='iconS'><CiSettings /></span>Setting</li>
        
         {/* Add more items as needed */}
     </ul>

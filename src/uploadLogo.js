@@ -1,4 +1,4 @@
-import React from 'react';
+{/*import React from 'react';
 import bci from './images/bc.png'; 
 import solution from './images/solution.png'; 
 import Header from './component/header';
@@ -26,4 +26,4 @@ function UploadLogo ()  {
      );
 }
 
-export default UploadLogo
+export default UploadLogo*/}

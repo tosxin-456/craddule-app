@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import bci from './images/bc.png'; 
 import Rect from './images/Rect.png'
 import present from './images/present.png';
@@ -14,6 +14,7 @@ import wire6 from './images/wire6.jpeg'
 import wire7 from './images/wire7.jpeg'
 import wire8 from './images/wire8.jpeg'
 import Header from './component/header';
+import UploadLogoModal from './component/brandLogoModal'
 import Menu from './component/menu';
 import cloud from './images/cloud.png'
 import { useNavigate } from 'react-router-dom';
@@ -25,6 +26,8 @@ function WireFrame ()  {
     const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/pageFrontView`)
+    const [isOpen, setIsOpen]= useState(false);
+
     return (
         
         <>
@@ -41,7 +44,7 @@ function WireFrame ()  {
         <div className='lenght'>
             <div className='text-center'>
                 <div className='container-boxkk'>
-               <div type="button" className='clod'><img src={cloud} className='imgC'></img>Upload</div> 
+               <div type="button" className='clod'onClick={()=>setIsOpen(true)}><img src={cloud} className='imgC' onClick={()=>setIsOpen(true)}></img>Upload</div> 
 
                 <div className='imgbox'>
                   <img src={proto} className='imgA' ></img>
@@ -66,7 +69,9 @@ function WireFrame ()  {
                   <img src={proto} className='imgh'></img>              
                 </div>         
             </div>
-           
+            <UploadLogoModal open={isOpen} onClose={() => setIsOpen(false)}>
+
+</UploadLogoModal>
         </div> 
   
         <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>

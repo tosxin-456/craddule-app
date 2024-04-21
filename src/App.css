@@ -130,6 +130,16 @@ body{
   box-shadow: 0px 1px 17px 0 rgb(227 232 246);
 }
 
+.centerS{
+  margin: 20px 10px;
+  background-color: #fff;
+  padding:30px 40px;
+  border-radius: 20px;
+  height: 600px;
+  margin-top: 50px;
+  box-shadow: 0px 1px 17px 0 rgb(227 232 246);
+}
+
 .centerCc{
   margin: 20px 10px;
   padding:30px 40px;
@@ -181,6 +191,11 @@ body{
   text-align: center !important;
 }
 
+.centerHh{
+  margin-bottom: 0;
+  text-align: center !important;
+}
+
 .centerHp{
   font-size: 12px;
   text-align: center !important;
@@ -190,6 +205,10 @@ body{
   font-size: 30px;
   font-weight: 600;
   margin-bottom: 0;
+}
+
+.textH{
+  font-size: 8px;
 }
 
 .textH{
@@ -567,6 +586,17 @@ background-color: white!important;
   padding-bottom: 30px;
   border-radius: 20px;
   box-shadow: 0px 1px 17px 0 rgb(227 232 246);
+}
+
+.newMHold2{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 1px 17px 0 rgb(227 232 246);
+  height: 500px;
 }
 
 .newMUl{
@@ -1890,7 +1920,7 @@ hr{
   color:#fff;
 }
 
-{/*.container-boxy{
+/*.container-boxy{
   position: relative !important;
   font-size: 20px;
   border-radius: 10px !important;
@@ -1903,7 +1933,8 @@ hr{
   color:#fff;
   left: 50px !important;
   width: 400px;
-}*/}
+}
+*/
 
 
 .container-boxyy{
@@ -2395,4 +2426,33 @@ font-weight: 0px;
 .rowU{
   flex-wrap:inherit !important;
   margin-right: 0rem !important;
+}
+
+.curveNn{
+  float: right;
+  background-color: #facc04 !important;
+  border: 0px !important;
+  color: #444 !important;
+  font-weight: 500 !important;
+  padding: 7px 15px !important;
+  border-radius: 10px !important;
+  font-size: 14px!important;
+  margin-right: 10px!important;
+  bottom: 70PX;
+}
+
+.curveIi{
+  float: right;
+  border: 0px !important;
+  color: #5b5414 !important;
+  font-weight: 500 !important;
+  padding: 5px 30px !important;
+  border-radius: 10px !important;
+  font-size: 17px!important;
+  margin-right: 10px!important;
+  bottom: 70PX;
+}
+
+.curveIi:hover{
+  color: #facc04 !important;
 }
