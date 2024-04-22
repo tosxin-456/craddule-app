@@ -31,8 +31,8 @@ function Profile ()  {
             <p className='profileTitle'>Profile picture or company logo</p>
 
             <div className='profilePic'>
-                <img src= {p1} className='imgPic'></img>
-                <p className='imgTittle'>Change</p>
+                <img src= {p1} className='imgPic' type='button'></img>
+                <p className='imgTittle' type='button'>Edit</p>
             </div>
 
             <div className='filled1'>
@@ -51,15 +51,29 @@ function Profile ()  {
             </div>
 
             <div class='filled3'>
-    <p class='pageTitle'>Assign super admin/delegated</p>
-    <div class='dropdown'>
+             <p class='pageTitle'>Assign super admin/delegated</p>
+
+            <div className="dropdown">
+                <div className="select">
+                    <span classname="selected">Select from team member</span>
+                    <div class="caret"></div>
+                </div>
+                <ul className='menu'>
+                    <li>John Deo</li>
+                    <li>Mary John</li>
+                </ul>
+            </div>
+            </div>
+
+         
+       {/*<div class='dropdown'>
         <select class='dropdown-select'>
             <option value='' class="opP">Select from team member</option>
         </select>
         <div class='dropdown-arrow'></div>
     </div>
 </div>
-            {/*<div className='filled2'>
+            <div className='filled2'>
                 <p className='pageTittle'>Assign super admin/ delegated</p>
                 <div className='member'><p className='textdiv'>Select from team member</p></div>
     </div>

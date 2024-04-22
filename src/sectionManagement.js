@@ -33,8 +33,10 @@ function SectionManagement ()  {
             <button className="btn btn-primary curveN">Save changes</button>
             <button className="btn btn-primary curveI">Discard changes</button></div>
             <input type="text" className='input2' placeholder="Search.."></input>
-            <button className="btn btn-primary curveX">Chat and message</button>
-            <button className="btn btn-primary curvej" onClick={()=>setIsOpen(true)}>Send Invite</button>
+            {/*<button className="btn btn-primary curveX">Chat and message</button>*/}
+            <div><button className="btn btn-primary curvej" onClick={()=>setIsOpen(true)}>Send Invite</button>
+</div>
+              <div className='container-team'>
                     <div class="flex-container boxG">
                     <div className='listT'>Name</div>
                     <div className='listU'>Team Members Permission</div>
@@ -60,9 +62,11 @@ function SectionManagement ()  {
                     <div type="button" data-toggle="dropdown" className='dropdown-toggle lstS'>Change Permission</div>
                     <div type="button" data-toggle="dropdown" className='dropdown-toggle txtp4'>Choose</div>
                 </div>
-                <input type="checkbox" id="checkbox" name="checkbox"></input>
-                <label for="checkbox" className='checkbox'>NDA - Standard Non Disclosure Agreements (if neccessary for a project)</label>               
+                <div><input type="checkbox" id="checkbox" name="checkbox"></input>
+                <label for="checkbox" className='checkbox' type='button'>NDA - Standard Non Disclosure Agreements (if neccessary for a project)</label></div>
+                               
         </div> 
+        </div>
         <CollaboratorModal open={isOpen} onClose={() => setIsOpen(false)}>
 
     </CollaboratorModal>   

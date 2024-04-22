@@ -1726,9 +1726,9 @@ hr{
   padding: 7px 15px !important;
   border-radius: 20px !important;
   font-size: 14px!important;
-  margin-top: 50px;
+  margin-top: 15px;
   margin-bottom: 10px;
-  margin-right: 10px!important;
+  margin-right: 3px!important;
   top: 65PX;
   float: right;
 }
@@ -1736,7 +1736,7 @@ hr{
 .checkbox{
   color: #000 !important;
   margin-top: 10px !important;
-  padding-left: 20px;
+  padding-left: 5px;
 }
 
 .BoxPhase1{
@@ -2465,7 +2465,7 @@ font-weight: 0px;
 
 .curveHome{
   float: right;
-    background-color: #facc04 !important;
+    background-color: #473b02 !important;
     position: relative;
     border: 0px !important;
     color: #000 !important;
@@ -2588,7 +2588,7 @@ font-weight: bold;
 
 .opP{
   padding: 10px 20px;
-  background-color: #444;
+  background-color: #444 !important;
   font-size: 14px;
 
 }
@@ -2637,12 +2637,25 @@ font-weight: bold;
 .smallBox1{
   width: 30px;
   height: 20px;
+  margin-right: 70px;
+  background-color: rgb(247, 170, 29);
+}
+
+.smallBox2{
+  width: 30px;
+  height: 20px;
+  margin-right: 70px;
   background-color: rgb(117, 83, 19);
 }
 
 .graphTxt{
   display: inline-block;
   margin-left:40px;
+}
+
+.container-centerGraph{
+  display: flex;
+  justify-content: center;
 }
 
 .centerGraph{
@@ -2656,7 +2669,7 @@ font-weight: bold;
   padding:30px 40px;
   border-radius: 20px;
   box-shadow: 0px 1px 17px 0 rgb(227 232 246);
-  height: 500px;
+  height: 80%;
 }
 
 /* Next Button*/
@@ -2665,13 +2678,140 @@ font-weight: bold;
     background-color: #facc04 !important;
     border: none !important;
     color: #000 !important;
-    padding: 1px 5px !important;
+    padding: 1px 20px !important;
     border-radius: 5px !important;
-    font-size: 15px!important;
+    font-size: 12px!important;
+    font-weight: bold;
     margin-right: 10px!important;
 }
 
 .graphtxtt{
   margin-top: 10px;
   margin-bottom: 5px !important;
+}
+
+.emailInvite{
+  display: flex;
+}
+
+.topText{
+  font-weight: bold;
+}
+
+.boxGraph {
+  display: flex;
+  text-wrap: nowrap; 
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.centerGraph{
+  margin-bottom: 40px;
+  text-align: center !important;
+}
+
+.hg{
+  background-color:  #dfdfdf ;
+  font-weight: bold;
+}
+
+.flex-container-graph > div{
+  text-align: center;
+  margin-right: 20px;
+  padding: 10px;
+  font-size: 12px !important;
+}
+
+.hg:hover{
+  background-color: #f7e78d !important;
+}
+
+.container-team{
+  display: grid;
+  width: max-content;
+  margin-top: 60px;
+}
+
+.dropdown{
+  min-width: 15em;
+  position: relative;
+  margin: 2em;
+}
+
+.dropdown *{
+  box-sizing: border-box !important;
+}
+
+.select{
+  background: #f7e78d;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px red solid;
+  border-radius: 0.5em;
+  padding: 1em;
+  cursor: pointer;
+  transition: background 0.3s; 
+}
+
+.select-clicked{
+  border: 2px red solid;
+  box-shadow: 0 0 0.8em red;
+}
+
+.select:hover{
+  background: #282c34;
+}
+
+.caret{
+  width:0;
+  height: 0px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #f72727;
+  transition: 0.3s;
+}
+
+.caret-rotate{
+  transform: rotate(190deg);
+}
+
+.menu{
+  list-style: none;
+  padding: 0.2em 0.5em;
+  background-color: #31fa04;
+  border: 1px red solid;
+  box-shadow: 0 0 0.8em red;
+  border-radius: 0.5em;
+  color: orange;
+  position: absolute;
+  top: 3em;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%);
+  opacity: 0;
+  display: none;
+  transition: 0.2s;
+  z-index: 1;
+}
+
+.menu l1 {
+  padding: 0.7em 0.5em;
+  margin: 0.3em 0;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+.menu li:hover{
+  background-color: black;
+}
+
+.active{
+  background: black;
+}
+
+.menu-open{
+  display:block;
+  opacity:1;
 }

@@ -4,24 +4,26 @@ import Header from './component/header';
 import Menu from './component/menu';
 import { BiBorderAll } from "react-icons/bi";
 import { BsBorderWidth } from "react-icons/bs";
-import { useNavigate } from 'react-router-dom';
 
-
-class GraphPage extends Component {
-  
+class   NetGraph extends Component {
   constructor(props) {
     super(props);
-    const  colors = ['#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03',];
+    const  colors = ['#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03'];
     this.state = {
       series: [{
-        data: [21, 22, 10, 28, 16, 21, 13, 30]
-      }],
+        data: [21, 22, 10, 28, 16, 21, 13, 30,21, 22, 10, 28, 16, 21]
+      },
+      {
+        data: [21, 22, 10, 28, 16, 21, 13, 30,21, 22, 10, 28, 16, 21]
+      }
+    ],
      
      
       options: {
         chart: {
           height: 350,
           type: 'bar',
+          stacked:true,
           events: {
             click: function(chart, w, e) {
               // console.log(chart, w, e)
@@ -31,7 +33,7 @@ class GraphPage extends Component {
         colors: colors,
         plotOptions: {
           bar: {
-            columnWidth: '45%',
+            columnWidth: '90%',
             distributed: true,
           }
         },
@@ -43,14 +45,20 @@ class GraphPage extends Component {
         },
         xaxis: {
           categories: [
-            ['John', 'Doe'],
-            ['Joe', 'Smith'],
-            ['Jake', 'Williams'],
-            'Amber',
-            ['Peter', 'Brown'],
-            ['Mary', 'Evans'],
-            ['David', 'Wilson'],
-            ['Lily', 'Roberts'], 
+            ['Nov'],
+            ['Dec'],
+            ['Jan'],
+            ['Feb'],
+            ['Mar'],
+            ['Apr'],
+            ['May'],
+            ['Jun'],
+            ['Jul'],
+            ['Aug'],
+            ['Sep'],
+            ['Oct'],
+            ['Nov'],
+            ['Dec']
           ],
           labels: {
             style: {
@@ -64,9 +72,7 @@ class GraphPage extends Component {
     
     };
   }
-  
   render() {
-    
     return (
       <div className="container-fluid">
          <Header />
@@ -84,13 +90,16 @@ class GraphPage extends Component {
                     <div type='button'className='hg'>Company Growth Rate</div>
                 </div>
             <div className='centerG'>
-              <p className="topText">Inflation Rate</p>
+              <p className="topText">Net Profit (or Loss) per year</p>
              <div className="graph1">
-              <div className="centerGraph">
+              <div className="container-centerGraph">
               <div className="smallBox1"> 
               <p className='graphTxt'>Customer</p>
               </div>
-              </div>
+              <div className="smallBox2"> 
+              <p className='graphTxt'>Customer</p>
+              </div>             
+    </div>
                 <Chart
                 options={this.state.options}
                 series={this.state.series}
@@ -98,7 +107,7 @@ class GraphPage extends Component {
                 width="500"
                 />
             </div>
-            <p className="graphtxtt">Customer Influx</p>
+            <p className="graphtxtt">Projected Profit and Loss</p>
             <button className="btn btn-primary curveGraph dropdown-toggle" data-toggle="dropdown">See more</button>
 
             </div>
@@ -112,6 +121,4 @@ class GraphPage extends Component {
   }
 }
 
-
-
-export default GraphPage;
+export default NetGraph;

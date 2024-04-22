@@ -29,6 +29,7 @@ function Menu () {
   const onClickHandler21 = () => navigate(`/pageShare`);
   const onClickHandler22 = () => navigate(`/generalSetting`);
   const onClickHandler23 = () => navigate(`/profile`);
+  const onClickHandler24 = () => navigate(`/graphPage`);
 
 
   const [isClosed, setIsClosed] = useState(false);
@@ -94,7 +95,7 @@ function Menu () {
             <ul className={isSubmenuOpen ? 'subMenuOpen' : 'subMenu'}>
               <li className='innr active' onClick={onClickHandler}>Business Case Builder</li>
 
-              <li className='innr pending'>Custom Financial Projection <p className='penP'>Ongoing</p></li>
+              <li className='innr pending' onClick={onClickHandler24}>Custom Financial Projection <p className='penP'>Ongoing</p></li>
               <li className='innr'onClick={onClickHandler18}>Discounted Cash Flow (DCF)</li>
               <li className='innr'>Comparative Analysis</li>
               <li className='innr'>Project Timeline Builder</li>

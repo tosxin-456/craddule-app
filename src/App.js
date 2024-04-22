@@ -55,9 +55,12 @@ import Engagement from './engagement';
 import AllFiles from './allFiles';
 import HomeStarter from './homeStarter';
 import WireFrame from './wireFrame';
+import IncomeGraph from './incomeGraph';
 import SectionScale from './sectionScale';
 import Presentation from './presentation';
 import Model from './model';
+import GrowthRateGraph from './growthRateGraph';
+import NetGraph from './netGraph';
 import SectionExe from './sectionExecute';
 import PageShare from './pageShare';
 import SendFile from './sendFile';
@@ -99,7 +102,10 @@ function App() {
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/growthRateGraph" element= {<GrowthRateGraph />} />
+        <Route path="/netGraph" element= {<NetGraph/>} />
         <Route path="/profile" element= {<Profile />} />
+        <Route path="/incomeGraph" element= {<IncomeGraph />} />
         <Route path="/homeStarter" element= {<HomeStarter />} />
         <Route path="/generalSetting" element= {<GeneralSetting />} />
         <Route path="/pageSummary" element= {<PageSummary />} />

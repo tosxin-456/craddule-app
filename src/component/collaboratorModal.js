@@ -24,8 +24,8 @@ export default function CollaboratorModal ({open, onClose})  {
               <p className='txtB'>Manage, assign and send invites</p>
               <input type="text" className='input' placeholder="Search.."></input>
               <hr></hr>
+              <p className='txtS'>Add Collaborator</p>
               <div className='emailInvite'>
-                <p className='txtS'>Add Collaborator</p>
                 <button className="btn btn-primary dropdown-toggle team" type="button" data-toggle="dropdown">Select Project</button>
                 <button className="btn btn-primary dropdown-toggle team" type="button" data-toggle="dropdown">Select Project</button>
                 <button className="btn btn-primary dropdown-toggle team" type="button" data-toggle="dropdown">Select Project</button>
