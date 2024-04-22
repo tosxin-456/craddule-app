@@ -20,7 +20,7 @@ function GeneralSetting ()  {
     <SettingMenu /> 
         
         <div className='col-md-9'>
-        <h1 className='centerHh'>Prototype</h1>
+        <h1 className='centerHh'>Setting</h1>
         <button className="btn btn-primary curveNn">Save changes</button>
         <button className="btn curveIi">Discard changes</button>
         {/*<div className='gene'>General Setting</div>*/}

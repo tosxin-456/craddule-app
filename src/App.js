@@ -53,6 +53,7 @@ import PlanDesign from './planDesign';
 import PitchDeck from './pitchDeck';
 import Engagement from './engagement';
 import AllFiles from './allFiles';
+import HomeStarter from './homeStarter';
 import WireFrame from './wireFrame';
 import SectionScale from './sectionScale';
 import Presentation from './presentation';
@@ -67,6 +68,7 @@ import ShareFile from './shareFile';
 import ClaimDomain from './claimDomain';
 import PageTeam from './pageTeam';
 import MainApp from './mainApp';
+import Profile from './profile';
 import KPIPage from './kpiPage';
 import Login from './login';
 import LandingPage from './landing';
@@ -97,6 +99,8 @@ function App() {
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/profile" element= {<Profile />} />
+        <Route path="/homeStarter" element= {<HomeStarter />} />
         <Route path="/generalSetting" element= {<GeneralSetting />} />
         <Route path="/pageSummary" element= {<PageSummary />} />
         <Route path="/allFiles" element= {<AllFiles />} />

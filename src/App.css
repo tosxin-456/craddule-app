@@ -2456,3 +2456,222 @@ font-weight: 0px;
 .curveIi:hover{
   color: #facc04 !important;
 }
+
+.footer{
+  display: flex;
+  background-color: #facc04;
+  height: 100px;
+}
+
+.curveHome{
+  float: right;
+    background-color: #facc04 !important;
+    position: relative;
+    border: 0px !important;
+    color: #000 !important;
+    font-weight: 500 !important;
+    padding: 5px 30px !important;
+    border-radius: 20px !important;
+    font-size: 17px!important;
+    margin-right: 50px !important;
+    margin-bottom: 0px;
+}
+
+.demo{
+  height: 500px;
+}
+
+.text1{
+font-size: 14px !important;
+font-weight: bold;
+ padding-top: 40px !important;
+ margin-right: 2px !important;
+ margin-left: 500px !important;
+}
+
+.text2{
+  font-size: 14px !important;
+ font-weight: bold;
+  padding-top: 40px !important;
+ }
+
+ .profilePic{
+  border-radius: 10px;
+  padding: 4px 7px;
+  box-shadow: 0px 0px 2px 0 rgb(170 170 170);
+  width: 15%;
+  margin-left: 20px;
+ }
+
+ .imgPic{
+  width: 70px;
+  height: 65px;
+  border-radius: 50px;
+ }
+
+ .imgTittle{
+  display: inline-block;
+    margin-left: 20px;
+    font-size: 14px;
+    color: #5b5414;
+ }
+
+ .profileTitle{
+  margin-left: 20px;
+  margin-bottom: 5px;
+ }
+
+ .filled1{
+  margin-top: 30px;
+  margin-left: 20px;
+ }
+
+ .filled2{
+  margin-top: 20px;
+  margin-left: 20px;
+ }
+
+ .pageTittle{
+  margin-bottom: 5px;
+ }
+
+ .profileInput{
+    background-color: rgb(247, 244, 244);
+    width: 50%;
+    border: none;
+    outline: none;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+ }
+
+ .member{
+  background-color: wheat;
+  width: 15%;
+  height: 30px;
+ }
+
+ .filled3 {
+  margin-top: 20px;
+  margin-left: 20px;
+  position: relative;
+  width: 200px; /* Adjust as needed */
+}
+
+/* Style for dropdown select */
+.dropdown-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Style for dropdown arrow */
+.dropdown-arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #555;
+  pointer-events: none;
+}
+
+.opP{
+  padding: 10px 20px;
+  background-color: #444;
+  font-size: 14px;
+
+}
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Style for selected option */
+.selected-option {
+  display: block;
+  padding: 10px;
+  color: #000; /* Change text color */
+}
+
+/* Style for options */
+.options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.options li {
+  padding: 10px;
+  background-color: #333; /* Change background color */
+  color: #fff; /* Change text color */
+  cursor: pointer;
+}
+
+.options li:hover {
+  background-color: #555; /* Change background color on hover */
+}
+
+.graph1{
+  box-shadow: 0px 0px 2px 0 rgb(170 170 170);
+  border-radius: 10px;
+  padding: 10px;
+  width:max-content;
+}
+
+.smallBox1{
+  width: 30px;
+  height: 20px;
+  background-color: rgb(117, 83, 19);
+}
+
+.graphTxt{
+  display: inline-block;
+  margin-left:40px;
+}
+
+.centerGraph{
+  display: flex;
+  justify-content: center;
+}
+
+.centerG{
+  margin: 20px 10px;
+  background-color: #fff;
+  padding:30px 40px;
+  border-radius: 20px;
+  box-shadow: 0px 1px 17px 0 rgb(227 232 246);
+  height: 500px;
+}
+
+/* Next Button*/
+.curveGraph{
+  float: left;
+    background-color: #facc04 !important;
+    border: none !important;
+    color: #000 !important;
+    padding: 1px 5px !important;
+    border-radius: 5px !important;
+    font-size: 15px!important;
+    margin-right: 10px!important;
+}
+
+.graphtxtt{
+  margin-top: 10px;
+  margin-bottom: 5px !important;
+}

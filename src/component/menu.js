@@ -28,6 +28,7 @@ function Menu () {
   const onClickHandler20 = () => navigate(`/go`);
   const onClickHandler21 = () => navigate(`/pageShare`);
   const onClickHandler22 = () => navigate(`/generalSetting`);
+  const onClickHandler23 = () => navigate(`/profile`);
 
 
   const [isClosed, setIsClosed] = useState(false);
@@ -195,7 +196,7 @@ function Menu () {
     <ul className='newMUl'>
         
         <li className="dropdown-trigger2" onClick={onClickHandler3}> <span className='iconS'><CiMicrochip /></span> Team Management</li>
-        <li className="dropdown-trigger2"> <span className='iconS'><CiUser /></span> Profile</li>
+        <li className="dropdown-trigger2"  onClick={onClickHandler23}> <span className='iconS'><CiUser /></span> Profile</li>
         <li className="dropdown-trigger2" onClick={onClickHandler22}> <span className='iconS'><CiSettings /></span>Setting</li>
        
         {/* Add more items as needed */}

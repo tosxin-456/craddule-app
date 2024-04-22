@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import bci from './images/bc.png'; 
 import solution from './images/solution.png'; 
 import Header from './component/header';
 import Menu from './component/menu';
+import CollaboratorModal from './component/collaboratorModal'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -10,6 +11,8 @@ import { useNavigate } from 'react-router-dom';
 
 function SectionManagement ()  {
     const navigate = useNavigate()
+    const [isOpen, setIsOpen]= useState(false);
+
 
     const onClickHandler = () => navigate(`/pageShare`)
     return (
@@ -31,7 +34,7 @@ function SectionManagement ()  {
             <button className="btn btn-primary curveI">Discard changes</button></div>
             <input type="text" className='input2' placeholder="Search.."></input>
             <button className="btn btn-primary curveX">Chat and message</button>
-            <button className="btn btn-primary curvej">Send Invite</button>
+            <button className="btn btn-primary curvej" onClick={()=>setIsOpen(true)}>Send Invite</button>
                     <div class="flex-container boxG">
                     <div className='listT'>Name</div>
                     <div className='listU'>Team Members Permission</div>
@@ -60,9 +63,9 @@ function SectionManagement ()  {
                 <input type="checkbox" id="checkbox" name="checkbox"></input>
                 <label for="checkbox" className='checkbox'>NDA - Standard Non Disclosure Agreements (if neccessary for a project)</label>               
         </div> 
-  
-        
-           
+        <CollaboratorModal open={isOpen} onClose={() => setIsOpen(false)}>
+
+    </CollaboratorModal>   
           
   </div>
   </div>

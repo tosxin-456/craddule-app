@@ -1,14 +1,21 @@
-{/*import React from 'react';
-import bci from './images/bc.png'; 
-import closeB from './images/closeB.png'
-import Header from './component/header';
-import Menu from './component/menu';
+import React, { useState } from 'react';
+import ReactDOM from "react-dom";
+import closeB from './closeB.png';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
-function PageTeam ()  {
-    return (
+
+
+export default function CollaboratorModal ({open, onClose})  {
+    const [isOpen, setIsOpen]= useState(false);
+    const navigate = useNavigate()
+  
+    const onClickHandler = () => navigate(`/shareFile`)
+   if(!open) return null
+    return ReactDOM.createPortal (
+        <>
         <div className='col-md-5' >
            <div className='inviteBox'>
                <img src={closeB} className='closeB'></img>
@@ -28,7 +35,9 @@ function PageTeam ()  {
            </div>
            </div>          
         </div>
+        </>,
+                 document.getElementById('portal')
+
      );
 }
 
-export default PageTeam*/}

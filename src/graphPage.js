@@ -38,19 +38,24 @@ class GraphPage extends Component {
         <Menu />    
 
         <div className='col-md-9'>
-            <div className='centerC'>
-             
+            <div className='centerG'>
+             <div className="graph1">
+              <div className="centerGraph">
+              <div className="smallBox1"> 
+              <p className='graphTxt'>Customer</p>
+              </div>
+              </div>
                 <Chart
                 options={this.state.options}
                 series={this.state.series}
                 type="bar"
                 width="500"
                 />
-            
             </div>
+            <p className="graphtxtt">Customer Influx</p>
+            <button className="btn btn-primary curveGraph dropdown-toggle" data-toggle="dropdown">See more</button>
 
-            <button className="btn btn-primary curveNext">Next</button>
-
+            </div>
 
         </div>
 
