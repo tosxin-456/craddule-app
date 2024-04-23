@@ -6,6 +6,7 @@ function SettingMenu () {
   const navigate = useNavigate()
 
   const onClickHandler = () => navigate(`/generalSetting`);
+  const onClickHandler1 = () => navigate(`/login`);
 
   const [isClosed, setIsClosed] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -64,25 +65,25 @@ function SettingMenu () {
       {/*<h3>Setting</h3>*/}
           <li  className={isSubmenuOpen ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
           <span>
-            <span className={isSubmenuOpen ? 'iconS-open' : 'iconS'} onClick={onClickHandler}><CiMemoPad /></span> General
+            <span className={isSubmenuOpen ? 'iconS-open' : 'iconS'} onClick={onClickHandler}><CiMemoPad /></span>Forgot Password
           </span>
           </li>
 
           <li  className={isSubmenuOpen1 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
             <span>
-              <span className={isSubmenuOpen1 ? 'iconS-open' : 'iconS'}>< CiPaperplane /></span> Billing
+              <span className={isSubmenuOpen1 ? 'iconS-open' : 'iconS'}>< CiPaperplane /></span> Subscription and Billing
             </span>
           </li>
 
           <li className={isSubmenuOpen2 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
             <span>
-              <span className={isSubmenuOpen2 ? 'iconS-open' : 'iconS'}><CiPen /></span> Notification
+              <span className={isSubmenuOpen2 ? 'iconS-open' : 'iconS'}><CiPen /></span> Terms and Agreement
             </span>
           </li>
 
           <li className={isSubmenuOpen3 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
             <span>
-              <span className={isSubmenuOpen3 ? 'iconS-open' : 'iconS'}><CiEdit /></span>Chat Support
+              <span className={isSubmenuOpen3 ? 'iconS-open' : 'iconS'}><CiEdit /></span> Privacy policy
             </span>
           </li>
 
@@ -92,7 +93,7 @@ function SettingMenu () {
     <div className='newMHold1'>
     <ul className='newMUl'>
         
-        <li className="dropdown-trigger2"> <span className='iconS'><CiMicrochip /></span> Log Out</li>
+        <li className="dropdown-trigger2" onClick={onClickHandler1}> <span className='iconS'><CiMicrochip /></span> Log Out</li>
         <li className="dropdown-trigger2"> <span className='iconS'><CiUser /></span>Deactivate</li>       
         {/* Add more items as needed */}
     </ul>

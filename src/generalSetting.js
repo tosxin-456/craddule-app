@@ -34,6 +34,7 @@ function GeneralSetting ()  {
         
         <div className='col-md-9'>
         <h1 className='centerHh'>Setting</h1>
+        <p className='centerHh'>View and manage settings</p>
         <button className="btn btn-primary curveNn">Save changes</button>
         <button className="btn curveIi">Discard changes</button>
         {/*<div className='gene'>General Setting</div>*/}
@@ -107,7 +108,7 @@ function GeneralSetting ()  {
         </div> 
   
   
-        <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
+      {/*  <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>*/}
            
           
   </div>

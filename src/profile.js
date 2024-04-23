@@ -36,7 +36,7 @@ const Profile = () =>  {
     <div className='row'>
         
         <div className='col-md-12'>
-        <div className='centerC'>
+        <div className='centerP'>
             
             <div><p className='centerH1a'>Profile</p>
             <p className='centerHp1a'>View, manage your memebers and send invites</p>
@@ -65,9 +65,14 @@ const Profile = () =>  {
                 <input className='profileInput'  placeholder='Email'></input>
             </div>
 
-            <div className='filled2'>
-             <p class='pageTitle1'>Assign super admin/delegated</p>
+            <div className='filledd'>
+            <div className="dropdown">
+             <p class='pageTitle1'>Assign super admin/delegated</p> </div>
+             <div className="dropdown">
+             <p class='pageTitle1'>Delegate authority period</p>
+              </div>
               </div>  
+           
 
             <div className='filled3'>    
             <div className="dropdown">
@@ -79,6 +84,19 @@ const Profile = () =>  {
                     <li type='button' onClick={() => handleOptionSelect("Option 1")}>Ade Yemaja</li>
                     <hr className='listMar'></hr>
                     <li type='button' onClick={() => handleOptionSelect("Option 1")}>Jide Arowolo</li>
+                </ul>
+            </div>
+
+            
+            <div className="dropdown">
+                <div className={`select ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
+                    <span classname="selected">Choose period</span>
+                    <div class="caret"></div>
+                </div>
+                <ul className={`menu ${isDropdownOpen ? 'menu-open' : ''}`}>
+                    <li type='button' onClick={() => handleOptionSelect("Option 1")}>One Week</li>
+                    <hr className='listMar'></hr>
+                    <li type='button' onClick={() => handleOptionSelect("Option 1")}>Two Weeks</li>
                 </ul>
             </div>
             </div>
@@ -108,9 +126,22 @@ const Profile = () =>  {
         <div class='dropdown-arrow'></div>
     </div>
 </div>*/}
-            <div className='filled2'>
-                <p className='pageTittle'>Age</p>
-                <input className='profileInput'></input>
+            <div className='filledd'>
+            <div className="dropdown">
+                <p className='pageTittle1'>Age</p>
+                <input className='profileInput'></input></div>
+                <div className="dropdown">
+                <div className={`select ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
+                    <span classname="selected">Select from team member</span>
+                    <div class="caret"></div>
+                </div>
+                <ul className={`menu ${isDropdownOpen ? 'menu-open' : ''}`}>
+                    <li type='button' onClick={() => handleOptionSelect("Option 1")}>Ade Yemaja</li>
+                    <hr className='listMar'></hr>
+                    <li type='button' onClick={() => handleOptionSelect("Option 1")}>Jide Arowolo</li>
+                </ul>
+            </div>
+                
             </div>
             
       </div>    
