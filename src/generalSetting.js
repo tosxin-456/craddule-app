@@ -4,12 +4,15 @@ import bob from './images/bob.png';
 import Header from './component/header';
 import SettingMenu from './component/settingMenu';
 import { useNavigate } from 'react-router-dom';
+import DeleteModal from './component/deleteModal';
 
 
 
 
 
 function GeneralSetting ()  {
+  const [isOpen, setIsOpen]= useState(false);
+
     const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/Solution`)
@@ -40,48 +43,48 @@ function GeneralSetting ()  {
             <p>Create a new password</p>
     </div>*/}
          <div>
-            <p className='lgT'>Change Password</p>
+            <h1 className='lgT1'>Change Password</h1>
             <p className='lgT2'>Create new password</p>
 
             <div className="inputs-container">
-            <label htmlFor="password" className='lab'>Current Password</label>
+            <label htmlFor="password" className='lab1'>Current Password</label>
                 
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="custom-input"
+                  className="custom-input1"
                   placeholder='*************'
                 />
 
-                <label htmlFor="password" className='lab'>New Password</label>
+                <label htmlFor="password" className='lab1'>New Password</label>
                 
                   <input
                     type={showPassword ? 'text' : 'password'}
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="custom-input"
+                    className="custom-input1"
                     placeholder='Input New Password'
                   />
 
-                    <span className="password-toggle" onClick={handleTogglePassword}>
+                    <span className="password-toggle1" onClick={handleTogglePassword}>
                     {showPassword ? 'Hide' : 'Show'}
                   </span>
                   
-                  <label htmlFor="password" className='lab'>Confirm New Password</label>
+                  <label htmlFor="password" className='lab1'>Confirm New Password</label>
                 
                   <input
                     type={showPassword ? 'text' : 'password'}
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="custom-input"
+                    className="custom-input1"
                     placeholder='Confirm New Passowrd'
                   />
                 
-                <span className="password-toggle" onClick={handleTogglePassword}>
+                <span className="password-toggle1" onClick={handleTogglePassword}>
                     {showPassword ? 'Hide' : 'Show'}
                   </span>
               </div>
@@ -93,8 +96,11 @@ function GeneralSetting ()  {
             <p>Create a new password</p>
     </div>*/}
          <div>
-            <p className='lgT'>Change Password</p>
+            <h1 className='lgT1'>Change Password</h1>
             <p className='lgT2'>Create new password</p>
+
+            <button className="btn btn-primary deleteButton" onClick={()=>setIsOpen(true)}>Delete Account</button>
+
 
             
     </div>
@@ -105,6 +111,9 @@ function GeneralSetting ()  {
            
           
   </div>
+  <DeleteModal open={isOpen} onClose={() => setIsOpen(false)}>
+
+            </DeleteModal>
   </div>
   </div>
   </>

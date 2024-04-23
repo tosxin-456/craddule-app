@@ -22,6 +22,7 @@ import Conclusion from './conclusion';
 import PageCost from './costPage';
 import VideoDemo from './video';
 import SignUp from './signUp';
+import DeleteModal from './component/deleteModal';
 import PageSummarys from './pageSummarys';
 import PageSummary from './pageSummary';
 import Financials from './Financials';
@@ -102,6 +103,7 @@ function App() {
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/deleteModal" element= {<DeleteModal />} />
         <Route path="/growthRateGraph" element= {<GrowthRateGraph />} />
         <Route path="/netGraph" element= {<NetGraph/>} />
         <Route path="/profile" element= {<Profile />} />

@@ -1029,6 +1029,11 @@ background-color: white!important;
   margin-bottom: 9px;
 }
 
+.lgT1{
+  font-size: 20px;
+  margin-bottom: 9px;
+}
+
 .lgT2{
   font-size: 14px;
   color: #b8b8b8;
@@ -1046,10 +1051,29 @@ background-color: white!important;
   font-weight: 700;
 }
 
+.lab1 {
+  margin-bottom: 5px;
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #b8b8b8;
+}
+
 .custom-input {
   padding: 10px;
   border: 1px solid #bdbdbd; /* Default border */
   border-radius: 25px;
+  transition: border-radius 0.3s ease; /* Smooth transition */
+  margin-bottom: 10px;
+}
+
+.custom-input1 {
+  padding: 10px;
+  font-size: 12px;
+  outline: none;
+  width: 50%;
+  border: 1px solid #bdbdbd; /* Default border */
+  border-radius: 10px;
   transition: border-radius 0.3s ease; /* Smooth transition */
   margin-bottom: 10px;
 }
@@ -1068,6 +1092,10 @@ background-color: white!important;
   cursor: pointer;
 }
 
+.password-toggle1 {
+  cursor: pointer;
+  color: #b8b8b8;
+}
 
 .loginBtn{
     background-color: #1b45bf !important;
@@ -2450,6 +2478,31 @@ font-weight: 0px;
   bottom: 70PX;
 }
 
+.deleteButton{
+  background-color: white !important;
+  border: 2px solid red !important;
+  color: red !important;
+  font-weight: 500 !important;
+  padding: 7px 15px !important;
+  border-radius: 5px !important;
+  font-size: 14px!important;
+  margin-right: 10px!important;
+  bottom: 70PX;
+}
+
+.deleteNoButton{
+  background-color: white !important;
+  border: 2px solid green !important;
+  color: green !important;
+  font-weight: 500 !important;
+  padding: 7px 15px !important;
+  border-radius: 5px !important;
+  font-size: 14px!important;
+  margin-right: 10px!important;
+  bottom: 70PX;
+  width: 15%;
+}
+
 .curveIi{
   float: right;
   border: 0px !important;
@@ -2917,4 +2970,25 @@ font-weight: bold;
 .menu-open1{
   display:block;
   opacity:1;
+}
+
+.deleteOption{
+  margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.aboutDelete{
+  text-align: center;
+  margin-top: 30px;
+}
+
+.inviteTi{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 40px !important;
+}
+
+.subInvite{
+  font-size: 20px;
 }
