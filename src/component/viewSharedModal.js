@@ -14,7 +14,7 @@ export default function ViewSharedModal ({open, onClose})  {
     if(!open) return null
     return (
         <div className='modalOv' >
-           <div className='modalStt'>
+           <div className='modalSt1'>
                 <p type='button' className='closeIcon' onClick={onClose}>X</p>
               <p className='txt2'>View Shared File</p>
               <hr></hr>

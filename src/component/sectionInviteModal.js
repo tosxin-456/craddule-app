@@ -1,17 +1,20 @@
-{/*import React from 'react';
-import bci from './images/bc.png'; 
-import closeB from './images/closeB.png'
-import Header from './component/header';
-import Menu from './component/menu';
+import React, { useState } from 'react';
+import closeB from './closeB.png'
+import { useNavigate } from 'react-router-dom';
 
 
 
 
-function PageInvite ()  {
+export default function SectionInviteModal ({open, onClose})  {
+    const [isOpen, setIsOpen]= useState(false);
+    const navigate = useNavigate()
+
+    const onClickHandler = () => navigate(``)
+    if(!open) return null
     return (
-        <div className='col-md-5' >
-           <div className='inviteBox'>
-               <img src={closeB} className='closeB'></img>
+        <div className='modalOv' >
+           <div className='modalSt'>
+               <img src={closeB} className='closeB' onClick={onClose}></img>
                <br></br>
               <p className='txtA'>Invite</p>
               <p className='txtB'>Manage, assign and send invites</p>
@@ -29,4 +32,3 @@ function PageInvite ()  {
      );
 }
 
-export default PageInvite*/}

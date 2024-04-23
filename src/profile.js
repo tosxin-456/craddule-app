@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import p1 from './images/p1.jpeg'; 
 import solution from './images/solution.png'; 
 import Header from './component/header';
@@ -8,7 +8,22 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function Profile ()  {
+const Profile = () =>  {
+
+     // State variables to manage dropdown behavior
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('');
+
+  // Function to toggle dropdown visibility
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  // Function to handle option selection
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option);
+    setIsDropdownOpen(false);
+  };
     const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/pageShare`)
@@ -50,17 +65,20 @@ function Profile ()  {
                 <input className='profileInput'  placeholder='Email'></input>
             </div>
 
-            <div class='filled3'>
-             <p class='pageTitle'>Assign super admin/delegated</p>
+            <div className='filled2'>
+             <p class='pageTitle1'>Assign super admin/delegated</p>
+              </div>  
 
+            <div className='filled3'>    
             <div className="dropdown">
-                <div className="select">
+                <div className={`select ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
                     <span classname="selected">Select from team member</span>
                     <div class="caret"></div>
                 </div>
-                <ul className='menu'>
-                    <li>John Deo</li>
-                    <li>Mary John</li>
+                <ul className={`menu ${isDropdownOpen ? 'menu-open' : ''}`}>
+                    <li type='button' onClick={() => handleOptionSelect("Option 1")}>Ade Yemaja</li>
+                    <hr className='listMar'></hr>
+                    <li type='button' onClick={() => handleOptionSelect("Option 1")}>Jide Arowolo</li>
                 </ul>
             </div>
             </div>

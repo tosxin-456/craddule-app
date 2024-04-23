@@ -32,9 +32,9 @@ function SectionManagement ()  {
             <p className='centerHp1a'>View, manage your memebers and send invites</p>
             <button className="btn btn-primary curveN">Save changes</button>
             <button className="btn btn-primary curveI">Discard changes</button></div>
-            <input type="text" className='input2' placeholder="Search.."></input>
+            <div className='bottonInput'><input type="text" className='input2' placeholder="Search.."></input>
             {/*<button className="btn btn-primary curveX">Chat and message</button>*/}
-            <div><button className="btn btn-primary curvej" onClick={()=>setIsOpen(true)}>Send Invite</button>
+            <button className="btn btn-primary curvej" onClick={()=>setIsOpen(true)}>Send Invite</button>
 </div>
               <div className='container-team'>
                     <div class="flex-container boxG">
