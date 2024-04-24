@@ -66,6 +66,7 @@ import IncomeGraph from './incomeGraph';
 import SectionScale from './sectionScale';
 import Presentation from './presentation';
 import Model from './model';
+import Comparative from './comparative';
 import YearOnYear from './yearOnYear';
 import FinancialProject from './financialP';
 import GrowthRateGraph from './growthRateGraph';
@@ -77,6 +78,7 @@ import GeneralSetting from './generalSetting';
 import SectionManagement from './sectionManagement';
 import TeamManagement from './teamManagement';
 import ShareFile from './shareFile';
+import MonthOnMonth from './monthOnmonth';
 import ClaimDomain from './claimDomain';
 import PageTeam from './pageTeam';
 import MainApp from './mainApp';
@@ -114,6 +116,8 @@ function App() {
         <Route path="/viewDocument" element= {<ViewDocument />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/comparative" element= {<Comparative />} />
+        <Route path="/monthOnmonth" element= {<MonthOnMonth/>} />
         <Route path="/yearOnyear" element= {<YearOnYear />} />
         <Route path="/settingMenu" element= {<SettingMenu />} />
         <Route path="/financialP" element= {<FinancialProject />} />

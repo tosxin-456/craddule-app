@@ -30,6 +30,7 @@ function Menu () {
   const onClickHandler22 = () => navigate(`/generalSetting`);
   const onClickHandler23 = () => navigate(`/profile`);
   const onClickHandler24 = () => navigate(`/financialP`);
+  const onClickHandler25 = () => navigate(`/comparative`);
 
 
   const [isClosed, setIsClosed] = useState(false);
@@ -97,7 +98,7 @@ function Menu () {
 
               <li className='innr pending' onClick={onClickHandler24}>Custom Financial Projection <p className='penP'>Ongoing</p></li>
               <li className='innr'onClick={onClickHandler18}>Discounted Cash Flow (DCF)</li>
-              <li className='innr'>Comparative Analysis</li>
+              <li className='innr'onClick={onClickHandler25}>Comparative Analysis</li>
               <li className='innr'>Project Timeline Builder</li>
               <li className='innr done' onClick={onClickHandler20}>Go/ No-Go gate <p className='penD'>Done</p></li>
               <li className='innr'onClick={onClickHandler11}>Summary (PDF)</li>
@@ -198,7 +199,7 @@ function Menu () {
         
         <li className="dropdown-trigger2" onClick={onClickHandler3}> <span className='iconS'><CiMicrochip /></span> Team Management</li>
         <li className="dropdown-trigger2"  onClick={onClickHandler23}> <span className='iconS'><CiUser /></span> Profile</li>
-        <li className="dropdown-trigger2" onClick={onClickHandler22}> <span className='iconS'><CiSettings /></span>Setting</li>
+        <li className="dropdown-trigger2" onClick={onClickHandler22}> <span className='iconS'><CiSettings /></span>Settings</li>
        
         {/* Add more items as needed */}
     </ul>

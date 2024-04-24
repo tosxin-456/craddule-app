@@ -9,7 +9,8 @@ function FinancialProject ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(``)
+     const onClickHandler = () => navigate(`/yearOnYear`)
+     const onClickHandler1 = () => navigate(`/monthOnmonth`)
     return (
 
             <>
@@ -26,8 +27,8 @@ function FinancialProject ()  {
             <div className='centerM'>
             <div className='container divMonth'>
                 <div className='month'>
-                <div className='monthOn' type='button'>Month on Month</div>
-                <div className='monthOn' type='button' >Year on Year</div>
+                <div className='monthOn' type='button' onClick={onClickHandler1}>Month on Month</div>
+                <div className='monthOn' type='button' onClick={onClickHandler}>Year on Year</div>
                 </div>
                 </div>
             </div> 

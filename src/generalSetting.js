@@ -43,11 +43,11 @@ function GeneralSetting ()  {
             <p>Create a new password</p>
     </div>*/}
          <div>
-            <h1 className='lgT1'>Forget Password</h1>
+            <h1 className='lgT1'>Change Passowrd</h1>
             <p className='lgT2'>Create new password</p>
 
             <div className="inputs-container">
-           {/*  <label htmlFor="password" className='lab1'>Current Password</label>
+            <label htmlFor="password" className='lab1'>Current Password</label>
                 
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -56,7 +56,7 @@ function GeneralSetting ()  {
                   onChange={(e) => setPassword(e.target.value)}
                   className="custom-input1"
                   placeholder='*************'
-                />*/}
+                />
 
                 <label htmlFor="password" className='lab1'>New Password</label>
                 

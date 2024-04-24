@@ -9,7 +9,8 @@ function YearOnYear ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(``)
+     const onClickHandler = () => navigate(`/graphPage`)
+     const onClickHandler1 = () => navigate(`/financialP`)
     return (
 
             <>
@@ -20,11 +21,11 @@ function YearOnYear ()  {
         <Menu /> 
             
             <div className='col-md-9'>
-                <img src={bci} className='bcA'></img>
+                <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
                     <p className='centerH'>Year on Year</p>
             <div className='centerM'>
              
-             <div className='inputYear'><input className='yearInput' placeholder='Input the title of the graph'></input></div>
+             <div className='inputYear'><input className='yearInput' placeholder='Input title of graph'></input></div>
 
             <div className='container divMonth1'>
                 <div className='month1'>
