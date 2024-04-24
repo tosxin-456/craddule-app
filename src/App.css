@@ -258,6 +258,14 @@ body{
   text-align: center !important;
 }
 
+.centerHhPr{
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center !important;
+}
+
+
 .centerHp{
   font-size: 12px;
   text-align: center !important;
@@ -3566,4 +3574,10 @@ font-weight: bold;
   height: 50px;
   border:none;
   border-radius: 5px;
+}
+
+.paragraph{
+  padding: 0px 50px 0px 50px;
+  text-wrap: wrap;
+  text-align: justify;
 }

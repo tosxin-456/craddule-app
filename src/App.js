@@ -54,10 +54,12 @@ import PageInvite from './sectionInvite';
 import PageTrack from './pageTrack';
 import Summary from './summary';
 import SearchKpi from './searchKpi';
+import PageSub from './pageSub';
 import Prototype from './prototype';
 import PageFrontView from './pageFrontView';
 import PlanDesign from './planDesign';
 import PitchDeck from './pitchDeck';
+import Privacy from './privacy';
 import Engagement from './engagement';
 import AllFiles from './allFiles';
 import HomeStarter from './homeStarter';
@@ -66,6 +68,7 @@ import IncomeGraph from './incomeGraph';
 import SectionScale from './sectionScale';
 import Presentation from './presentation';
 import Model from './model';
+import TermAgreement from './termAgreement';
 import Comparative from './comparative';
 import YearOnYear from './yearOnYear';
 import FinancialProject from './financialP';
@@ -116,6 +119,9 @@ function App() {
         <Route path="/viewDocument" element= {<ViewDocument />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/pageSub" element= {<PageSub />} />
+        <Route path="/termAgreement" element= {<TermAgreement />} />
+        <Route path="/privacy" element= {<Privacy />} />
         <Route path="/comparative" element= {<Comparative />} />
         <Route path="/monthOnmonth" element= {<MonthOnMonth/>} />
         <Route path="/yearOnyear" element= {<YearOnYear />} />

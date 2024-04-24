@@ -93,12 +93,12 @@ function PageSub ()  {
               </div>
     </div>
         </div> 
-        {/*<div className='centerC'>
+       <div className='centerC'>
           {/*<div>
             <p>Change Password</p>
             <p>Create a new password</p>
     </div>*/}
-         {/*<div>
+      <div>
             <h1 className='lgT1'>Change Password</h1>
             <p className='lgT2'>Create new password</p>
 
@@ -107,7 +107,7 @@ function PageSub ()  {
 
             
     </div>
-        </div> */}
+        </div> 
   
   
       {/*  <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>*/}

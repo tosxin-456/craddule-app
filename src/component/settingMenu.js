@@ -8,6 +8,10 @@ function SettingMenu () {
 
   const onClickHandler = () => navigate(`/generalSetting`);
   const onClickHandler1 = () => navigate(`/login`);
+  const onClickHandler2 = () => navigate(`/privacy`);
+  const onClickHandler3 = () => navigate(`/termAgreement`);
+  const onClickHandler4 = () => navigate(`/deleteModal`);
+
 
   const [isClosed, setIsClosed] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -76,13 +80,13 @@ function SettingMenu () {
             </span>
           </li>
 
-          <li className={isSubmenuOpen2 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
+          <li className={isSubmenuOpen2 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'} onClick={onClickHandler3}> 
             <span>
-              <span className={isSubmenuOpen2 ? 'iconS-open' : 'iconS'}><CiPen /></span> Terms and Agreement
+              <span className={isSubmenuOpen2 ? 'iconS-open' : 'iconS'} ><CiPen /></span> Terms and Agreement
             </span>
           </li>
 
-          <li className={isSubmenuOpen3 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
+          <li className={isSubmenuOpen3 ? 'dropdown-trigger2-open' : 'dropdown-trigger2'} onClick={onClickHandler2}> 
             <span>
               <span className={isSubmenuOpen3 ? 'iconS-open' : 'iconS'}><CiEdit /></span> Privacy policy
             </span>
@@ -96,7 +100,7 @@ function SettingMenu () {
         
         <li className="dropdown-trigger2" onClick={onClickHandler1}> <span className='iconS'><CiMicrochip /></span> Log Out</li>
         <li className="dropdown-trigger2"> <span className='iconS'><CiUser /></span>Deactivate</li>       
-        <li className="dropdown-trigger2" > <span className='iconS'><CiUser /></span>Delete Account</li>   
+        <li className="dropdown-trigger2" onClick={onClickHandler4}> <span className='iconS'><CiUser /></span>Delete Account</li>   
         {/* Add more items as needed */}
     </ul>
 </div>
