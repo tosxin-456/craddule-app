@@ -23,6 +23,7 @@ import PageCost from './costPage';
 import VideoDemo from './video';
 import SignUp from './signUp';
 import Welcome from './welcome';
+import PageLogin from './pageLogin';
 import DeleteModal from './component/deleteModal';
 import PageSummarys from './pageSummarys';
 import PageSummary from './pageSummary';
@@ -71,12 +72,17 @@ import Model from './model';
 import TermAgreement from './termAgreement';
 import Comparative from './comparative';
 import YearOnYear from './yearOnYear';
+import InflationAnalysis from './inflationAnalysis';
 import FinancialProject from './financialP';
 import GrowthRateGraph from './growthRateGraph';
 import NetGraph from './netGraph';
 import SectionExe from './sectionExecute';
 import PageShare from './pageShare';
+import CustomerInflux from './cutomerInflux';
 import SendFile from './sendFile';
+import Expenses from './expenses';
+import CustomerGrowth from './customerGrowth';
+import OperatingIncome from './operatingIncome';
 import GeneralSetting from './generalSetting';
 import SectionManagement from './sectionManagement';
 import TeamManagement from './teamManagement';
@@ -93,7 +99,7 @@ import LandingPage from './landing';
 import LoadingPage from './laodingPage';
 import PageAddKpi from './pageAddKpi';
 import GoPage from './goPage';
-
+import ProfitPage from './profitPage';
 
 
 
@@ -119,7 +125,13 @@ function App() {
         <Route path="/viewDocument" element= {<ViewDocument />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/customerGrowth" element= {<CustomerGrowth />} />
+        <Route path="/cutomerinflux" element= {<CustomerInflux />} />
+        <Route path="/profitPage" element= {<ProfitPage />} />
+        <Route path="/expenses" element= {<Expenses />} />
+        <Route path="/inflationAnalysis" element= {<InflationAnalysis />} />
         <Route path="/pageSub" element= {<PageSub />} />
+        <Route path="/pageLogin" element= {<PageLogin />} />
         <Route path="/termAgreement" element= {<TermAgreement />} />
         <Route path="/privacy" element= {<Privacy />} />
         <Route path="/comparative" element= {<Comparative />} />
@@ -130,6 +142,7 @@ function App() {
         <Route path="/chatTool" element= {<ChatTools />} />
         <Route path="/giveFeedbackModal" element= {<GiveFeedbackModal />} />
         <Route path="/welcome" element= {<Welcome />} />
+        <Route path="/operatingIncome" element= {<OperatingIncome />} />
         <Route path="/password" element= {<Password />} />
         <Route path="/deleteModal" element= {<DeleteModal />} />
         <Route path="/growthRateGraph" element= {<GrowthRateGraph />} />

@@ -11,7 +11,7 @@ export default function ViewSharedModal ({open, onClose})  {
     const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/welcome`)
-    const onClickHandler1 = () => navigate(`/login`)
+    const onClickHandler1 = () => navigate(`/pageLogin`)
     if(!open) return null
     return (
         <div className='modalOv' >
