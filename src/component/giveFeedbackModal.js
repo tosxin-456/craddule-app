@@ -1,26 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
+export default function GiveFeedbackModal ({open, onClose})  {
+   const [isOpen, setIsOpen]= useState(false);
+   const navigate = useNavigate()
 
-function GiveFeedbackModal ()  {
-    return (
-        <div className='col-md-5' >
-           <div className='uploadBoxh'>
-                <p className='closeIcon'>X</p>
-              <p className='txt2'>View Shared File</p>
-              <hr></hr>
-              <div className='shareBox'>
-                <p className='share'>View Shared File</p>
-                <p className= 'share1'>Anyone with the link <a href='' className='anchor2'>can view</a></p>
-                <div className='shareBox1'>
-                <p className='shareA'>Already have an account on craddule</p>
-                <p className= 'share1'><a href='' className='anchor2'>Not on craddule</a></p></div>
-           </div>
-           </div>          
-        </div>
+   const onClickHandler = () => navigate(`/viewDocument`)
+   if(!open) return null
+   return (
+      <>
+      
+      <div className='modalOv'>
+              <div className='modalSt'>
+              <div className='text-center give'>
+              <p className='centerGive'>Give Feedback</p>
+              <p className='centerHgive'>Your is valuable in helping us understand your needs and tailor our services accordingly</p>
+              </div>
+          {/*<p className= "buttonE">Save</p>
+          <p className= "buttonS">Edit</p>*/}
+          <div className='container-textBs'>
+              <textarea className='textBk'></textarea>
+              <div className='giveButton'> 
+              <p className='TitleGive' type='button' onClick={onClose}>Share Feedback</p>
+              </div>
+             
+          </div>
+          
+         
+         
+      </div> 
+</div>
+</>
      );
 }
-
-export default GiveFeedbackModal

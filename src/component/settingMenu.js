@@ -65,7 +65,7 @@ function SettingMenu () {
       {/*<h3>Setting</h3>*/}
           <li  className={isSubmenuOpen ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
           <span>
-            <span className={isSubmenuOpen ? 'iconS-open' : 'iconS'} onClick={onClickHandler}><CiMemoPad /></span>Forgot Password
+            <span className={isSubmenuOpen ? 'iconS-open' : 'iconS'} onClick={onClickHandler}><CiMemoPad /></span> Forgot Password
           </span>
           </li>
 

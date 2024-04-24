@@ -210,6 +210,14 @@ body{
   text-align: center !important;
 }
 
+.centerGive{
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 0;
+  color: #dac78b;
+  text-align: center !important;
+}
+
 .centerHh{
   margin-bottom: 0;
   text-align: center !important;
@@ -218,6 +226,13 @@ body{
 .centerHp{
   font-size: 12px;
   text-align: center !important;
+}
+
+.centerHgive{
+  font-size: 12px;
+  text-align: center !important;
+  text-wrap: wrap;
+  padding: 0px 100px 0px 100px;
 }
 
 .textHp{
@@ -1897,7 +1912,7 @@ hr{
 
 .anchor2{
   text-decoration: none !important;
-  color: #facc04 !important;
+  color: #c19000 !important;
 }
 
 .shareA{
@@ -3140,6 +3155,16 @@ font-weight: bold;
   box-shadow: 0 1px 5px 0 rgb(170 170 170);
   height: 500px;
 }
+
+.lenghtGive{
+  margin: 50px 100px;
+  background-color: #fff;
+  padding:0px 50px 0px 50px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  height: 500px;
+}
+
 .textBv{
   background-color: #F9F9F9;
     border: none;
@@ -3151,4 +3176,36 @@ font-weight: bold;
 .TitleB{
   font-size: 14px;
   text-align: center;
+}
+
+.textBk{
+  background-color: #F9F9F9;
+    border: none;
+    width: 100%;
+    font-size: 12px;
+    height: 300px !important;
+    border-radius: 10px;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+
+.give{
+  justify-content: center;
+  padding: 0px 0px 15px 0px;
+}
+
+.TitleGive{
+  display: inline-block;
+  font-size: 18px;
+  text-align: center;
+  padding: 0px 20px 0px 20px;
+  background-color: #e6b800;
+  border-radius: 5px;
+  margin: 0px !important;
+}
+
+.giveButton{
+  display: flex;
+  justify-content: center;
 }

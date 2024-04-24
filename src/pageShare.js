@@ -30,29 +30,59 @@ function PageShare ()  {
             <div className='BoxPhase1'>
             <p className='centerH1v'>Phase</p>
             <div className='BoxPhase'>
-                <p className='heading'> Ideation</p>
-                <p className='subHeading'>12pages</p>
+                <div className='boxView'><p className='heading'>Ideation</p>
+                <p className='subHeading'>12pages</p></div>
+                
+                <div className='boxView'>
                 <button className="btn btn-primary curveP" onClick={()=>setIsOpen(true)}>Share</button>
+                </div>
+                
             </div>
             <div className='BoxPhase'>
-                <p className='heading'>Product Definition</p>
-                <p className='subHeading'>12pages</p>
+                <div className='boxView'><p className='heading'>Product Definition</p>
+                <p className='subHeading'>12pages</p></div>
+                
+                <div className='boxView'>
                 <button className="btn btn-primary curveP" onClick={()=>setIsOpen(true)}>Share</button>
+                </div>
+                
             </div>
             <div className='BoxPhase'>
-                <p className='heading'>Prototype</p>
-                <p className='subHeading'>12pages</p>
+                <div className='boxView'><p className='heading'>Prototypiing</p>
+                <p className='subHeading'>12pages</p></div>
+                
+                <div className='boxView'>
                 <button className="btn btn-primary curveP" onClick={()=>setIsOpen(true)}>Share</button>
+                </div>
+                
             </div>
             <div className='BoxPhase'>
-                <p className='heading'>Initial Design</p>
-                <p className='subHeading'>12pages</p>
+                <div className='boxView'><p className='heading'>Initial Design</p>
+                <p className='subHeading'>12pages</p></div>
+                
+                <div className='boxView'>
                 <button className="btn btn-primary curveP" onClick={()=>setIsOpen(true)}>Share</button>
+                </div>
+                
             </div>
             <div className='BoxPhase'>
-                <p className='heading'>Validation and Testing</p>
-                <p className='subHeading'>12pages</p>
+                <div className='boxView'><p className='heading'>Validating and Testing</p>
+                <p className='subHeading'>12pages</p></div>
+                
+                <div className='boxView'>
                 <button className="btn btn-primary curveP" onClick={()=>setIsOpen(true)}>Share</button>
+                </div>
+                
+            </div>
+            
+            <div className='BoxPhase'>
+                <div className='boxView'><p className='heading'>Commercialization</p>
+                <p className='subHeading'>12pages</p></div>
+                
+                <div className='boxView'>
+                <button className="btn btn-primary curveP" onClick={()=>setIsOpen(true)}>Share</button>
+                </div>
+                
             </div>
             <ShareModal open={isOpen} onClose={() => setIsOpen(false)}>
 

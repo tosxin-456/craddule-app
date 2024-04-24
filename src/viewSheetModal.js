@@ -8,7 +8,7 @@ function ViewSheetModal ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(``)
+     const onClickHandler = () => navigate(`/viewDocument`)
     return (
         <>
                 <div className='container-fluid'>
@@ -20,7 +20,7 @@ function ViewSheetModal ()  {
                 <h1 className='centerHh'>View Document</h1>
                 <p className='centerHp'>Here you can view shared document</p>
                 </div>
-                <img src={bci} className='bcA1'></img>
+                <img src={bci} className='bcA1'type='button' onClick={onClickHandler}></img>
                 <div className='lenghtV'>
             {/*<p className= "buttonE">Save</p>
             <p className= "buttonS">Edit</p>*/}

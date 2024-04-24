@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import bci from './images/bc.png'; 
-import solution from './images/solution.png'; 
+import React, { useState } from 'react'; 
 import Header from './component/header';
-import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
+import GiveFeedbackModal from './component/giveFeedbackModal';
 
 
 
 
-function ViewDocument ()  {
+function ViewDocument ({open, onClose})  {
+    const [isOpen, setIsOpen]= useState(false);
     const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/viewSheetModal`)
@@ -29,17 +28,17 @@ function ViewDocument ()  {
                 <p className='subHeading'>12pages</p></div>
                 
                 <div className='boxView'>
-                    <p className='textView' type='button'>Give Feedback</p>
+                    <p className='textView' type='button'onClick={()=>setIsOpen(true)}>Give Feedback</p>
                 <button className="btn btn-primary curveP" onClick={onClickHandler}>View</button>
                 </div>
                 
             </div>
             <div className='BoxPhase'>
-                <div className='boxView'><p className='heading'onClick={onClickHandler}>Product Definition</p>
+                <div className='boxView'><p className='heading'>Product Definition</p>
                 <p className='subHeading'>12pages</p></div>
                 
                 <div className='boxView'>
-                    <p className='textView' type='button'>Give Feedback</p>
+                    <p className='textView' type='button'onClick={()=>setIsOpen(true)}>Give Feedback</p>
                 <button className="btn btn-primary curveP" onClick={onClickHandler}>View</button>
                 </div>
                 
@@ -49,7 +48,7 @@ function ViewDocument ()  {
                 <p className='subHeading'>12pages</p></div>
                 
                 <div className='boxView'>
-                    <p className='textView' type='button'>Give Feedback</p>
+                    <p className='textView' type='button'onClick={()=>setIsOpen(true)}>Give Feedback</p>
                 <button className="btn btn-primary curveP" onClick={onClickHandler}>View</button>
                 </div>
                 
@@ -59,7 +58,7 @@ function ViewDocument ()  {
                 <p className='subHeading'>12pages</p></div>
                 
                 <div className='boxView'>
-                    <p className='textView' type='button'>Give Feedback</p>
+                    <p className='textView' type='button'onClick={()=>setIsOpen(true)}>Give Feedback</p>
                 <button className="btn btn-primary curveP" onClick={onClickHandler}>View</button>
                 </div>
                 
@@ -69,7 +68,7 @@ function ViewDocument ()  {
                 <p className='subHeading'>12pages</p></div>
                 
                 <div className='boxView'>
-                    <p className='textView' type='button'>Give Feedback</p>
+                    <p className='textView' type='button'onClick={()=>setIsOpen(true)}>Give Feedback</p>
                 <button className="btn btn-primary curveP" onClick={onClickHandler}>View</button>
                 </div>
                 
@@ -79,11 +78,15 @@ function ViewDocument ()  {
                 <p className='subHeading'>12pages</p></div>
                 
                 <div className='boxView'>
-                    <p className='textView' type='button'>Give Feedback</p>
+                    <p className='textView' type='button'onClick={()=>setIsOpen(true)}>Give Feedback</p>
                 <button className="btn btn-primary curveP" onClick={onClickHandler}>View</button>
                 </div>
                 
             </div>
+            <GiveFeedbackModal open={isOpen} onClose={() => setIsOpen(false)}>
+
+      </GiveFeedbackModal>
+
             </div>
         </div> 
   
