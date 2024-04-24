@@ -192,6 +192,17 @@ body{
   margin-left: 10px;
 }
 
+.bcA1{
+  width: 20px;
+  float: left;
+  padding-bottom: 20px;
+  margin-bottom: 20PX;
+  position: relative;
+  bottom: 10px;
+  left: 10em;
+  margin-left: 10px;
+}
+
 .centerH{
   font-size: 30px;
   font-weight: bold;
@@ -1031,6 +1042,11 @@ background-color: white!important;
 .loginH{
   padding: 40px 90px;
 }
+
+.loginHp{
+  padding: 90px 90px;
+}
+
 .lgT{
   font-size: 20px;
   font-weight: 900;
@@ -1789,8 +1805,10 @@ hr{
 }
 
 .BoxPhase1{
-  padding-left: 100px;
-  padding-right: 100px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  padding: 0px 50px 0px 50px;
   margin-bottom: 20px;
 }
 
@@ -1811,7 +1829,6 @@ hr{
 
 .curveP{
   float: right;
-  position: relative;
   background-color: #facc04 !important;
   border: 0px !important;
   color: #444 !important;
@@ -1819,10 +1836,9 @@ hr{
   padding: 5px 10px !important;
   font-size: 14px!important;
   border-radius: 0px !important;
-  margin-top: 25PX;
-  margin-right: 10px!important;
-  bottom: 70PX;
-  border-radius:20px !important
+  margin-left: 10px;
+  bottom: 70px;
+  border-radius: 10px !important
 }
 
 .centerH1v{
@@ -3089,4 +3105,36 @@ font-weight: bold;
 .menu-open2{
   display:block;
   opacity:1;
+}
+
+
+.boxView{
+  padding: 5px 10px;
+}
+
+.textView{
+  display: inline-block;
+  font-size: 14px;
+  margin: 7px 0px 0px 0px;
+}
+
+.lenghtV{
+  margin: 50px 100px;
+  background-color: #fff;
+  padding:0px 90px 0px 90px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  height: 500px;
+}
+.textBv{
+  background-color: #F9F9F9;
+    border: none;
+    width: 100%;
+    font-size: 12px;
+    height: 400px !important;
+}
+
+.TitleB{
+  font-size: 14px;
+  text-align: center;
 }
