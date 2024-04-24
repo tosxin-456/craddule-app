@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function GeneralSetting ()  {
+function PageSub ()  {
   const [isOpen, setIsOpen]= useState(false);
 
     const navigate = useNavigate()
@@ -121,4 +121,4 @@ function GeneralSetting ()  {
     );
 }
 
-export default GeneralSetting
+export default PageSub

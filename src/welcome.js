@@ -20,7 +20,7 @@ function Welcome() {
       setShowPassword(!showPassword);
     };
     const navigate = useNavigate()
-    const onClickHandler = () => navigate(`/viewDocument`)
+    const onClickHandler = () => navigate(`/password`)
     const onClickHandler1 = () => navigate(`/signUp`)
     const onClickHandler2 = () => navigate(`/login`)
   return (
@@ -34,21 +34,19 @@ function Welcome() {
             <p className='lgT2'>Make your product cool</p>
 
             <div className="inputs-container">
-            <p className='lab1'>Input our details</p>
-                <label htmlFor="password" className='lab'>Password</label>
+            <p className='lab1'>Input your details</p>
+                <label htmlFor="email" className='lab'>Email</label>
             
                   <input
-                    type={showPassword ? 'text' : 'password'}
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="custom-input"
                   />
-                   <span className="password-toggle" onClick={handleTogglePassword}>
-                    {showPassword ? 'Hide' : 'Show'}
-                  </span>
+      
                   
-                  <label htmlFor="email" className='lab'>Full Name</label>
+                  <label htmlFor="text" className='lab'>Full Name</label>
                 <input
                   type="text"
                   id="text"

@@ -41,6 +41,7 @@ function Password() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="custom-input"
+                    placeholder='Enter Auto-Generated password here'
                   />
                    <span className="password-toggle" onClick={handleTogglePassword}>
                     {showPassword ? 'Hide' : 'Show'}

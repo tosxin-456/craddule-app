@@ -11,10 +11,11 @@ export default function ViewSharedModal ({open, onClose})  {
     const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/welcome`)
+    const onClickHandler1 = () => navigate(`/login`)
     if(!open) return null
     return (
         <div className='modalOv' >
-           <div className='modalSt1'>
+           <div className='modalStt'>
                 <p type='button' className='closeIcon' onClick={onClose}>X</p>
               <p className='txt2'>View Shared File</p>
               <hr></hr>
@@ -22,7 +23,7 @@ export default function ViewSharedModal ({open, onClose})  {
                 <p className='share'>View Shared File</p>
                 <p className= 'share1'>Anyone with the link <a href='' className='anchor2'>can view</a></p>
                 <div className='shareBox1'>
-                <p className='shareA'>Already have an account on craddule</p>
+                <p className='shareA' type='button' onClick={onClickHandler1}>Already have an account on craddule</p>
                 <p className= 'share1'><a href='' className='anchor2' onClick={onClickHandler}>Not on craddule</a></p></div>
            </div>
            </div>          

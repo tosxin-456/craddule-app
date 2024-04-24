@@ -4,12 +4,13 @@ import bob from './images/bob.png';
 import Header from './component/header';
 import SettingMenu from './component/settingMenu';
 import { useNavigate } from 'react-router-dom';
+import DeleteModal from './component/deleteModal';
 
 
 
 
 
-function GeneralSetting ()  {
+function Privacy ()  {
   const [isOpen, setIsOpen]= useState(false);
 
     const navigate = useNavigate()
@@ -32,9 +33,9 @@ function GeneralSetting ()  {
     <SettingMenu /> 
         
         <div className='col-md-9'>
-        <h1 className='centerHh'>Settings</h1>
+        <h1 className='centerHh'>Setting</h1>
         <p className='centerHh'>View and manage settings</p>
-       {/*} <button className="btn btn-primary curveNn">Save changes</button>
+        <button className="btn btn-primary curveNn">Save changes</button>
         <button className="btn curveIi">Discard changes</button>
         {/*<div className='gene'>General Setting</div>*/}
         <div className='centerS'>
@@ -43,11 +44,11 @@ function GeneralSetting ()  {
             <p>Create a new password</p>
     </div>*/}
          <div>
-            <h1 className='lgT1'>Forget Password</h1>
+            <h1 className='lgT1'>Change Password</h1>
             <p className='lgT2'>Create new password</p>
 
             <div className="inputs-container">
-           {/*  <label htmlFor="password" className='lab1'>Current Password</label>
+            <label htmlFor="password" className='lab1'>Current Password</label>
                 
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -56,7 +57,7 @@ function GeneralSetting ()  {
                   onChange={(e) => setPassword(e.target.value)}
                   className="custom-input1"
                   placeholder='*************'
-                />*/}
+                />
 
                 <label htmlFor="password" className='lab1'>New Password</label>
                 
@@ -87,38 +88,37 @@ function GeneralSetting ()  {
                 <span className="password-toggle1" onClick={handleTogglePassword}>
                     {showPassword ? 'Hide' : 'Show'}
                   </span>
-                    <div className='changeButton'><button className="btn btn-primary deleteButton">Save Change</button>
-                    </div>
-                  
               </div>
     </div>
         </div> 
-        {/*<div className='centerC'>
+        <div className='centerC'>
           {/*<div>
             <p>Change Password</p>
             <p>Create a new password</p>
     </div>*/}
-         {/*<div>
+         <div>
             <h1 className='lgT1'>Change Password</h1>
             <p className='lgT2'>Create new password</p>
 
-  <button className="btn btn-primary deleteButton" onClick={()=>setIsOpen(true)}>Delete Account</button>
+            <button className="btn btn-primary deleteButton" onClick={()=>setIsOpen(true)}>Delete Account</button>
 
 
             
     </div>
-        </div> */}
+        </div> 
   
   
       {/*  <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>*/}
            
           
   </div>
- 
+  <DeleteModal open={isOpen} onClose={() => setIsOpen(false)}>
+
+            </DeleteModal>
   </div>
   </div>
   </>
     );
 }
 
-export default GeneralSetting
+export default Privacy

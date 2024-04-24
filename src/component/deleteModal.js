@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import closeB from './closeB.png'
+import ReactDOM from "react-dom";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -11,7 +12,8 @@ export default function DeleteModal ({open, onClose})  {
     const navigate = useNavigate()
     const onClickHandler = () => navigate(`/login`)
     if(!open) return null
-    return (
+    return ReactDOM.createPortal (
+      <>
         <div className='modalOv' >
            <div className='modalSt'>
               <div className='aboutDelete'>
@@ -23,6 +25,9 @@ export default function DeleteModal ({open, onClose})  {
                 </div>
                
            </div>
-           </div>          
+           </div> 
+
+          </>,   
+            document.getElementById('portal')      
      );
 }

@@ -1,0 +1,59 @@
+import React from 'react';
+import bci from './images/bc.png';
+import Header from './component/header';
+import Menu from './component/menu';
+import { useNavigate } from 'react-router-dom';
+
+
+function YearOnYear ()  {
+    
+    const navigate = useNavigate()
+
+     const onClickHandler = () => navigate(``)
+    return (
+
+            <>
+    
+    <div className='container-fluid'>
+        <Header />
+        <div className='row'>
+        <Menu /> 
+            
+            <div className='col-md-9'>
+                <img src={bci} className='bcA'></img>
+                    <p className='centerH'>Year on Year</p>
+            <div className='centerM'>
+             
+             <div className='inputYear'><input className='yearInput' placeholder='Input the title of the graph'></input></div>
+
+            <div className='container divMonth1'>
+                <div className='month1'>
+                    <div className='flexy'>
+                <div className='monthOn1' type='button'></div>
+                <p className='monthOn1T'>Year 1</p>
+                </div>            
+                </div>
+                <div className='flexy'>
+                <div className='monthOn1' type='button'></div>
+                <p className='monthOn1T'>Year 2</p>
+                </div>
+                <div className='flexy'>
+                <div className='monthOn1' type='button'></div>
+                <p className='monthOn1T'>Year 3</p>
+                </div>
+                <div className='flexy'>
+                <div className='monthOn1' type='button'></div>
+                <p className='monthOn1T'>Year 4</p>
+                </div>
+                </div>
+            </div> 
+            <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
+      </div>
+      
+      </div>
+      </div>
+      </>
+        );
+}
+
+export default YearOnYear

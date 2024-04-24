@@ -34,6 +34,7 @@ import PageGovernance from './govPage';
 import PageIntro from './pageIntro';
 import PageBusiness from './pageBusiness';
 import CashFlow from './Sectiondcf';
+import SettingMenu from './component/settingMenu';
 import GiveFeedbackModal from './component/giveFeedbackModal';
 import SectiondcfTwo from './SectiondcfTwo';
 import Sectiondcf3 from './SectionDiscount';
@@ -65,6 +66,8 @@ import IncomeGraph from './incomeGraph';
 import SectionScale from './sectionScale';
 import Presentation from './presentation';
 import Model from './model';
+import YearOnYear from './yearOnYear';
+import FinancialProject from './financialP';
 import GrowthRateGraph from './growthRateGraph';
 import NetGraph from './netGraph';
 import SectionExe from './sectionExecute';
@@ -78,6 +81,7 @@ import ClaimDomain from './claimDomain';
 import PageTeam from './pageTeam';
 import MainApp from './mainApp';
 import Profile from './profile';
+import ChatTools from './chatTool';
 import KPIPage from './kpiPage';
 import Login from './login';
 import LandingPage from './landing';
@@ -110,6 +114,10 @@ function App() {
         <Route path="/viewDocument" element= {<ViewDocument />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/yearOnyear" element= {<YearOnYear />} />
+        <Route path="/settingMenu" element= {<SettingMenu />} />
+        <Route path="/financialP" element= {<FinancialProject />} />
+        <Route path="/chatTool" element= {<ChatTools />} />
         <Route path="/giveFeedbackModal" element= {<GiveFeedbackModal />} />
         <Route path="/welcome" element= {<Welcome />} />
         <Route path="/password" element= {<Password />} />

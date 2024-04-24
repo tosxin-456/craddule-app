@@ -2,6 +2,7 @@ import React, {useEffect,useState,useRef} from 'react';
 import { CiApple,CiMemoPad ,CiPaperplane,CiPen,CiEdit,CiLaptop,CiBank,CiVideoOn,CiExport,CiDatabase,CiSettings,CiMicrochip,CiUser} from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
 
+
 function SettingMenu () {
   const navigate = useNavigate()
 
@@ -95,13 +96,11 @@ function SettingMenu () {
         
         <li className="dropdown-trigger2" onClick={onClickHandler1}> <span className='iconS'><CiMicrochip /></span> Log Out</li>
         <li className="dropdown-trigger2"> <span className='iconS'><CiUser /></span>Deactivate</li>       
+        <li className="dropdown-trigger2" > <span className='iconS'><CiUser /></span>Delete Account</li>   
         {/* Add more items as needed */}
     </ul>
-
-
-    
-
 </div>
+
 </div>
 </div>
   )
