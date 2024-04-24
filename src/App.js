@@ -44,6 +44,9 @@ import PageProject from './pageProject';
 import PageSuccess from './pageSuccess';
 import UploadLogo from './uploadLogo';
 import GraphPage from './graphPage';
+import ViewSheetModal from './component/viewSheetModal';
+import ViewDocument from './viewDocument';
+import Password from './password';
 import PageInvite from './sectionInvite';
 import PageTrack from './pageTrack';
 import Summary from './summary';
@@ -97,12 +100,15 @@ function App() {
         <Route path="/ExecutiveSummary" element= {<ExecutiveSummary />} />
         <Route path="/executiveSummarys" element= {<ExecutiveSummarys />} />
         <Route path="/sectionIntro" element= {<SectionIntro />} />
+        <Route path="/viewSheetModal" element= {<ViewSheetModal />} />
         <Route path="/problemstatement" element= {<ProblemStatement />} />
         <Route path="/Solution" element= {<Solution />} />
         <Route path="/pageShare" element= {<PageShare />} />
         <Route path="/pageBenefit" element= {<PageBenefit />} />
+        <Route path="/viewDocument" element= {<ViewDocument />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/password" element= {<Password />} />
         <Route path="/deleteModal" element= {<DeleteModal />} />
         <Route path="/growthRateGraph" element= {<GrowthRateGraph />} />
         <Route path="/netGraph" element= {<NetGraph/>} />
