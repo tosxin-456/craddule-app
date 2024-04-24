@@ -22,6 +22,7 @@ import Conclusion from './conclusion';
 import PageCost from './costPage';
 import VideoDemo from './video';
 import SignUp from './signUp';
+import Welcome from './welcome';
 import DeleteModal from './component/deleteModal';
 import PageSummarys from './pageSummarys';
 import PageSummary from './pageSummary';
@@ -33,6 +34,7 @@ import PageGovernance from './govPage';
 import PageIntro from './pageIntro';
 import PageBusiness from './pageBusiness';
 import CashFlow from './Sectiondcf';
+import GiveFeedbackModal from './component/giveFeedbackModal';
 import SectiondcfTwo from './SectiondcfTwo';
 import Sectiondcf3 from './SectionDiscount';
 import SectionPrototype from './sectionPrototype';
@@ -44,7 +46,7 @@ import PageProject from './pageProject';
 import PageSuccess from './pageSuccess';
 import UploadLogo from './uploadLogo';
 import GraphPage from './graphPage';
-import ViewSheetModal from './component/viewSheetModal';
+import ViewSheetModal from './viewSheetModal';
 import ViewDocument from './viewDocument';
 import Password from './password';
 import PageInvite from './sectionInvite';
@@ -108,6 +110,8 @@ function App() {
         <Route path="/viewDocument" element= {<ViewDocument />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/giveFeedbackModal" element= {<GiveFeedbackModal />} />
+        <Route path="/welcome" element= {<Welcome />} />
         <Route path="/password" element= {<Password />} />
         <Route path="/deleteModal" element= {<DeleteModal />} />
         <Route path="/growthRateGraph" element= {<GrowthRateGraph />} />

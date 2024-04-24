@@ -20,8 +20,8 @@ function Password() {
       setShowPassword(!showPassword);
     };
     const navigate = useNavigate()
-    const onClickHandler = () => navigate(`/signUp`)
-    const onClickHandler1 = () => navigate(``)
+    const onClickHandler = () => navigate(`/viewDocument`)
+    const onClickHandler1 = () => navigate(`/signUp`)
   return (
 
 <div className='container'>
@@ -48,8 +48,8 @@ function Password() {
                   
               </div>
 
-              <button className='btn loginBtn' onClick={onClickHandler1}>Proceed</button>
-              <p className='lab'>Already on Craddule? <a href=''onClick={onClickHandler}>Sign Up</a> now!</p>
+              <button className='btn loginBtn' onClick={onClickHandler}>Proceed</button>
+              <p className='lab'>Already on Craddule? <a href=''onClick={onClickHandler1}>Sign Up</a> now!</p>
           </div>
           
         </div>

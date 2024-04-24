@@ -1134,6 +1134,20 @@ background-color: white!important;
     transition: 0.5s ease-in; 
 }
 
+
+.loginBtn1{
+  background-color: #1b45bf !important;
+  border: 0px !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+  padding: 10px 30px !important;
+  border-radius: 20px !important;
+  font-size: 17px!important;
+  margin-top: 15px;
+  width: 100%;
+  transition: 0.5s ease-in; 
+}
+
 .loginBtn:hover{
   font-size: 19px!important;
   transition: 0.5s ease-in; 

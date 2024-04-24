@@ -21,6 +21,7 @@ function SignUp() {
     };
     const navigate = useNavigate()
     const onClickHandler = () => navigate(`/login`)
+    const onClickHandler1= () => navigate(`/password`)
   return (
 
 <div className='container'>
@@ -88,7 +89,7 @@ function SignUp() {
                   </span>
               </div>
 
-              <button className='btn loginBtn' onClick={onClickHandler}>Proceed</button>
+              <button className='btn loginBtn' onClick={onClickHandler1}>Proceed</button>
               <p className='lab'>Already on Craddule? <a href=''onClick={onClickHandler}>Login</a> now!</p>
           </div>
           
