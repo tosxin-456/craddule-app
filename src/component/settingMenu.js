@@ -68,9 +68,9 @@ function SettingMenu () {
        
       <ul className='newMUl'>
       {/*<h3>Setting</h3>*/}
-          <li  className={isSubmenuOpen ? 'dropdown-trigger2-open' : 'dropdown-trigger2'}> 
+          <li  className={isSubmenuOpen ? 'dropdown-trigger2-open' : 'dropdown-trigger2'} onClick={onClickHandler}> 
           <span>
-            <span className={isSubmenuOpen ? 'iconS-open' : 'iconS'} onClick={onClickHandler}><CiMemoPad /></span> Change Passowrd
+            <span className={isSubmenuOpen ? 'iconS-open' : 'iconS'}><CiMemoPad /></span> Change Passowrd
           </span>
           </li>
 
