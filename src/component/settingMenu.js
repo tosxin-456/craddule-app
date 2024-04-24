@@ -1,6 +1,7 @@
 import React, {useEffect,useState,useRef} from 'react';
 import { CiApple,CiMemoPad ,CiPaperplane,CiPen,CiEdit,CiLaptop,CiBank,CiVideoOn,CiExport,CiDatabase,CiSettings,CiMicrochip,CiUser} from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
+import DeleteModal from './deleteModal';
 
 
 function SettingMenu () {
@@ -10,11 +11,11 @@ function SettingMenu () {
   const onClickHandler1 = () => navigate(`/login`);
   const onClickHandler2 = () => navigate(`/privacy`);
   const onClickHandler3 = () => navigate(`/termAgreement`);
-  const onClickHandler4 = () => navigate(`/deleteModal`);
+ {/*} const onClickHandler4 = () => navigate(`/deleteModal`);*/}
 
 
   const [isClosed, setIsClosed] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen]= useState(false);
   const openNav = () => {
     console.log("here");
     setIsOpen(true);
@@ -100,11 +101,13 @@ function SettingMenu () {
         
         <li className="dropdown-trigger2" onClick={onClickHandler1}> <span className='iconS'><CiMicrochip /></span> Log Out</li>
         <li className="dropdown-trigger2"> <span className='iconS'><CiUser /></span>Deactivate</li>       
-        <li className="dropdown-trigger2" onClick={onClickHandler4}> <span className='iconS'><CiUser /></span>Delete Account</li>   
+        <li className="dropdown-trigger2" onClick={()=>setIsOpen(true)}> <span className='iconS'><CiUser /></span>Delete Account</li>   
         {/* Add more items as needed */}
     </ul>
 </div>
+<DeleteModal open={isOpen} onClose={() => setIsOpen(false)}>
 
+    </DeleteModal>
 </div>
 </div>
   )
