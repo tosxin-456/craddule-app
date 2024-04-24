@@ -1805,14 +1805,14 @@ hr{
 }
 
 .BoxPhase1{
-  display: flex;
-  justify-content: space-between;
   margin-top: 50px;
   padding: 0px 50px 0px 50px;
   margin-bottom: 20px;
 }
 
 .BoxPhase{
+  display: flex;
+  justify-content: space-between;
   box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
   margin: 0px !important;
   padding: 10px !important;
