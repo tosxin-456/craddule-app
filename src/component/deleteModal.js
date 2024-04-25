@@ -18,9 +18,9 @@ export default function DeleteModal ({open, onClose})  {
            <div className='modalSt'>
               <div className='aboutDelete'>
                 <p className='inviteTi'>Delete Account</p>
-              <p className='subInvite'>Are you sure you want to Delete your Account?</p></div>
+              <p className='subInvite'>Are you sure you want to permanently Delete your Account?</p></div>
                 <div className='deleteOption'>
-                <button className="btn btn-primary deleteButton" onClick={onClickHandler}>Delete Account</button>
+                <button className="btn btn-primary deleteButton1" onClick={onClickHandler}>Delete Account</button>
                 <button className="btn btn-primary deleteNoButton" onClick={onClose}>No</button>
                 </div>
                

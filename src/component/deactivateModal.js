@@ -18,9 +18,9 @@ export default function DeactivateModal ({open, onClose})  {
            <div className='modalSt'>
               <div className='aboutDelete'>
                 <p className='inviteTi'>Deactive Account</p>
-              <p className='subInvite'>Are you sure you want to Deactive your Account?</p></div>
+              <p className='subInvite'>Are you sure you want to temporarily Deactive your Account?</p></div>
                 <div className='deleteOption'>
-                <button className="btn btn-primary deleteButton" onClick={onClickHandler}>Delete Account</button>
+                <button className="btn btn-primary deleteButtonDe" onClick={onClickHandler}>Deactivate Account</button>
                 <button className="btn btn-primary deleteNoButton" onClick={onClose}>No</button>
                 </div>
                

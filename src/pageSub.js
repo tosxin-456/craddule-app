@@ -14,7 +14,7 @@ function PageSub ()  {
 
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/Solution`)
+    const onClickHandler = () => navigate(`/planSub`)
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -47,7 +47,7 @@ function PageSub ()  {
             <p className='topDivSub1'>Current plan ends on Wednesday, Jun 21, 2024.</p>
           </div>
             <div className='cancelSubButt'>
-            <button className="btn btn-primary cancelSubc">Upgrade Plan</button>
+            <button className="btn btn-primary cancelSubc" onClick={onClickHandler}>Upgrade Plan</button>
             </div>
             <div className='bottomCanDiv'>
             <p className='bottomCan' type='button'>Cancel Subscription</p>

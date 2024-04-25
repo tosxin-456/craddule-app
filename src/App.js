@@ -96,6 +96,7 @@ import SectionManagement from './sectionManagement';
 import TeamManagement from './teamManagement';
 import ShareFile from './shareFile';
 import MonthOnMonth from './monthOnmonth';
+import PlanSub from './planSub';
 import CustomerGrowthYoY from './customerGrowthYoY';
 import ClaimDomain from './claimDomain';
 import PageTeam from './pageTeam';
@@ -137,6 +138,7 @@ function App() {
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/viewDocument" element= {<ViewDocument />} />
         <Route path="/video" element= {<VideoDemo />} />
+        <Route path="/planSub" element= {<PlanSub />} />
         <Route path="/customerGrowthYoY" element= {<CustomerGrowthYoY />} />
         <Route path="/profitYoYpage" element= {<ProfitYoYpage/>} />
         <Route path="/operatingIncomeYoY" element= {<OperatingIncomeYoY />} />
