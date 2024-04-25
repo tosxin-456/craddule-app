@@ -34,75 +34,57 @@ function PageSub ()  {
         <div className='col-md-9'>
         <h1 className='centerHh'>Settings</h1>
         <p className='centerHh'>View and manage settings</p>
-       {/*} <button className="btn btn-primary curveNn">Save changes</button>
-        <button className="btn curveIi">Discard changes</button>
-        {/*<div className='gene'>General Setting</div>*/}
+  
         <div className='centerS'>
-          {/*<div>
-            <p>Change Password</p>
-            <p>Create a new password</p>
-    </div>*/}
-         <div>
-            <h1 className='lgT1'>Forget Password</h1>
-            <p className='lgT2'>Create new password</p>
+          <div className='topDiv'>
+            <p className='topDivT'>Current Plan</p>
+            <p className='topDivSub'>See information regarding your current plan</p>
+          </div>
 
-            <div className="inputs-container">
-           {/*  <label htmlFor="password" className='lab1'>Current Password</label>
-                
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="custom-input1"
-                  placeholder='*************'
-                />*/}
+          <div className='subCont'>
+          <div className='topDiv1'>
+            <p className='topDivT'>Craddule Basic</p>
+            <p className='topDivSub1'>Current plan ends on Wednesday, Jun 21, 2024.</p>
+          </div>
+            <div className='cancelSubButt'>
+            <button className="btn btn-primary cancelSubc">Upgrade Plan</button>
+            </div>
+            <div className='bottomCanDiv'>
+            <p className='bottomCan' type='button'>Cancel Subscription</p>
+          </div>
 
-                <label htmlFor="password" className='lab1'>New Password</label>
-                
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="custom-input1"
-                    placeholder='Input New Password'
-                  />
+          </div>
 
-                    <span className="password-toggle1" onClick={handleTogglePassword}>
-                    {showPassword ? 'Hide' : 'Show'}
-                  </span>
-                  
-                  <label htmlFor="password" className='lab1'>Confirm New Password</label>
-                
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="custom-input1"
-                    placeholder='Confirm New Passowrd'
-                  />
-                
-                <span className="password-toggle1" onClick={handleTogglePassword}>
-                    {showPassword ? 'Hide' : 'Show'}
-                  </span>
-                    <div className='changeButton'><button className="btn btn-primary deleteButton">Save Change</button>
-                    </div>
-                  
-              </div>
-    </div>
         </div> 
-       <div className='centerC'>
-          {/*<div>
-            <p>Change Password</p>
-            <p>Create a new password</p>
-    </div>*/}
-      <div>
-            <h1 className='lgT1'>Change Password</h1>
-            <p className='lgT2'>Create new password</p>
 
-  <button className="btn btn-primary deleteButton" onClick={()=>setIsOpen(true)}>Delete Account</button>
+
+
+
+       <div className='centerC'>
+      <div>
+           <div className='bigHeading'>
+            <p className='bigHeadingTxt'>Billing History</p>
+           </div>
+           <div className='billHeading'>
+            <div className='billList'>
+              <p className='theList'>Invoice</p>
+              <p className='theList'>Amount</p>
+              <p className='theList'>Date</p>
+              <p className='theList'>Status</p>
+            </div>
+            <div className='billList1'>
+              <p className='theList'>INV-363362</p>
+              <p className='theList'>N10,000</p>
+              <p className='theList'>Apr 12, 2024</p>
+              <div className='thelistDiv1' type='button'><p className='theListP'>Paid</p></div>
+            </div>
+            <div className='billList2'>
+              <p className='theList'>INV-121464</p>
+              <p className='theList'>N10,000</p>
+              <p className='theList'>Apr 12, 2024</p>
+              <p className='theListC' type='button'>cancelled</p>
+            </div>
+           </div>
 
 
             

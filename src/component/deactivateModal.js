@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export default function DeleteModal ({open, onClose})  {
+export default function DeactivateModal ({open, onClose})  {
     const [isOpen, setIsOpen]= useState(false);
     const navigate = useNavigate()
     const onClickHandler = () => navigate(`/login`)
@@ -17,8 +17,8 @@ export default function DeleteModal ({open, onClose})  {
         <div className='modalOv' >
            <div className='modalSt'>
               <div className='aboutDelete'>
-                <p className='inviteTi'>Delete Account</p>
-              <p className='subInvite'>Are you sure you want to Delete your Account?</p></div>
+                <p className='inviteTi'>Deactive Account</p>
+              <p className='subInvite'>Are you sure you want to Deactive your Account?</p></div>
                 <div className='deleteOption'>
                 <button className="btn btn-primary deleteButton" onClick={onClickHandler}>Delete Account</button>
                 <button className="btn btn-primary deleteNoButton" onClick={onClose}>No</button>

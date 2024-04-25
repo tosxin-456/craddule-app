@@ -5,7 +5,7 @@ import p3 from './../images/p3.jpeg';
 import p4 from './../images/p4.jpeg';
 import p5 from './../images/p5.jpeg';
 import p6 from './../images/p6.jpeg';
-import { CiBellOn ,CiUser} from 'react-icons/ci';
+import { CiBellOn ,CiUser, CiChat2} from 'react-icons/ci';
 
 const Header = () => {
     return(
@@ -41,8 +41,8 @@ const Header = () => {
 
             <div className='col-md-3'>
                 <div className='fll'>
-                    <span className='iconS2 mr'><CiUser /></span>
-                    <span className='iconS2'><CiBellOn /></span>
+                    <span className='iconS2 mr'><CiBellOn /></span>
+                    <span className='iconS2'><CiChat2 /></span>
                 </div>
             </div>
         </div>

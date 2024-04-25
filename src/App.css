@@ -3584,3 +3584,114 @@ font-weight: bold;
 .flexy{
   text-align: center;
 }
+
+.billList{
+    display: flex;
+    justify-content: space-between;
+    background-color: gainsboro;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    padding: 10px 45px 10px 20px;
+}
+
+.billList1{
+  display: flex;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  justify-content: space-between;
+  border-radius: 5px;
+  margin-bottom: 3px;
+  padding: 10px 45px 10px 20px;
+}
+
+.billList2{
+  display: flex;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  justify-content: space-between;
+  border-radius: 5px;
+  margin-bottom: 3px;
+  padding: 10px 20px 10px 20px;
+}
+
+.billHeading{
+  display: grid;
+}
+
+.theList{
+  margin: 0px;
+  font-size: 12px;
+}
+
+.theListP{
+  margin: 0px;
+  font-size: 12px;
+  color: green;
+}
+
+.theListC{
+  margin: 0px;
+  font-size: 12px;
+  color: red;
+}
+
+.bigHeading{
+  margin-bottom: 5px;
+}
+
+.bigHeadingTxt{
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.subCont{
+  width: 50%;
+  background-color: rgb(245, 229, 216);
+  border-radius: 3px;
+}
+
+.topDiv{
+  margin-bottom: 20px;
+}
+
+.topDiv1{
+  margin-bottom: 20px;
+  padding: 10px 0px 0px 20px
+}
+
+.topDivT{
+  margin: 0px !important;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.topDivSub{
+  margin: 0px !important;
+  color: #b8b8b8;
+}
+
+.topDivSub1{
+  margin: 0px !important;
+  color: #b3b0b0;
+  font-size: 12px;
+}
+
+.cancelSubButt{
+  display: flex;
+  justify-content: end;
+  margin-right: 20px;
+}
+.cancelSubc{
+   border-radius: 500px !important;
+   padding: 10px;
+   border: none !important;
+   background-color: #000 !important;
+}
+
+.bottomCanDiv{
+  padding-bottom: 10px;
+  margin-left: 20px;
+}
+
+.bottomCan{
+  color: red;
+  font-size: 12px;
+}
