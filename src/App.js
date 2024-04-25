@@ -22,6 +22,7 @@ import Conclusion from './conclusion';
 import PageCost from './costPage';
 import VideoDemo from './video';
 import SignUp from './signUp';
+import CustomerGrowthMoM from './customerGrowthMoM';
 import Welcome from './welcome';
 import PageLogin from './pageLogin';
 import DeleteModal from './component/deleteModal';
@@ -56,6 +57,7 @@ import PageTrack from './pageTrack';
 import Summary from './summary';
 import SearchKpi from './searchKpi';
 import PageSub from './pageSub';
+import ProfitPageMOM from './profitPageMoM';
 import Prototype from './prototype';
 import PageFrontView from './pageFrontView';
 import PlanDesign from './planDesign';
@@ -69,18 +71,24 @@ import IncomeGraph from './incomeGraph';
 import SectionScale from './sectionScale';
 import Presentation from './presentation';
 import Model from './model';
+import CustomerInfluxMoM from './customerInfluxMoM';
+import ExpensesMonthOnMonth from './expensesMoM';
+import InflationMonthOnMonth from './inflationMoM';
 import TermAgreement from './termAgreement';
 import Comparative from './comparative';
+import OperatingIncomeMoM from './operatingIncomeMoM';
 import YearOnYear from './yearOnYear';
 import InflationAnalysis from './inflationAnalysis';
 import FinancialProject from './financialP';
 import GrowthRateGraph from './growthRateGraph';
 import NetGraph from './netGraph';
+import ExpensesYoY from './exepensesYoY';
 import SectionExe from './sectionExecute';
 import PageShare from './pageShare';
 import CustomerInflux from './cutomerInflux';
 import SendFile from './sendFile';
 import Expenses from './expenses';
+import InflationYoY from './inflationYoY';
 import CustomerGrowth from './customerGrowth';
 import OperatingIncome from './operatingIncome';
 import GeneralSetting from './generalSetting';
@@ -88,9 +96,13 @@ import SectionManagement from './sectionManagement';
 import TeamManagement from './teamManagement';
 import ShareFile from './shareFile';
 import MonthOnMonth from './monthOnmonth';
+import CustomerGrowthYoY from './customerGrowthYoY';
 import ClaimDomain from './claimDomain';
 import PageTeam from './pageTeam';
+import CustomerYoYInflux from './customerYoYinflux';
+import ProfitYoYpage from './profitYoYpages';
 import MainApp from './mainApp';
+import OperatingIncomeYoY from './operatingIncomeYoY';
 import Profile from './profile';
 import ChatTools from './chatTool';
 import KPIPage from './kpiPage';
@@ -120,11 +132,23 @@ function App() {
         <Route path="/viewSheetModal" element= {<ViewSheetModal />} />
         <Route path="/problemstatement" element= {<ProblemStatement />} />
         <Route path="/Solution" element= {<Solution />} />
+        <Route path="/customerGrowthMoM" element= {<CustomerGrowthMoM />} />
         <Route path="/pageShare" element= {<PageShare />} />
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/viewDocument" element= {<ViewDocument />} />
         <Route path="/video" element= {<VideoDemo />} />
+        <Route path="/customerGrowthYoY" element= {<CustomerGrowthYoY />} />
+        <Route path="/profitYoYpage" element= {<ProfitYoYpage/>} />
+        <Route path="/operatingIncomeYoY" element= {<OperatingIncomeYoY />} />
+        <Route path="/customerYoYinflux" element= {<CustomerYoYInflux />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/expensesYoY" element= {<ExpensesYoY />} />
+        <Route path="/inflationYoY" element= {<InflationYoY />} />
+        <Route path="/customerInfluxMoM" element= {<CustomerInfluxMoM />} />
+        <Route path="/profitPageMoM" element= {<ProfitPageMOM />} />
+        <Route path="/operatingIncomeMoM" element= {<OperatingIncomeMoM />} />
+        <Route path="/expensesMoM" element= {<ExpensesMonthOnMonth />} />
+        <Route path="/inflationMoM" element= {<InflationMonthOnMonth />} />
         <Route path="/customerGrowth" element= {<CustomerGrowth />} />
         <Route path="/cutomerinflux" element= {<CustomerInflux />} />
         <Route path="/profitPage" element= {<ProfitPage />} />

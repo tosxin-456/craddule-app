@@ -5,11 +5,11 @@ import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
 
 
-function MonthOnMonth ()  {
+function CustomerGrowthMoM ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/inflationMoM`)
+     const onClickHandler = () => navigate(`/graphPage`)
      const onClickHandler1 = () => navigate(`/financialP`)
     return (
 
@@ -22,7 +22,7 @@ function MonthOnMonth ()  {
             
             <div className='col-md-9'>
                 <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
-                    <p className='centerH'>Month On Month</p>
+                    <p className='centerH'>Customer Growth Rate</p>
             <div className='container-fluid centerM1'>
              
              <div className='inputYear'><input className='yearInput' placeholder='Input title of graph'></input></div>
@@ -107,4 +107,5 @@ function MonthOnMonth ()  {
         );
 }
 
-export default MonthOnMonth
+
+export default CustomerGrowthMoM

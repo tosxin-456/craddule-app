@@ -26,8 +26,10 @@ function Comparative ()  {
                     <p className='centerHp'>Make sure you answer all question</p>
             <div className='container-fluid centerM3'>
             <div className='container divMonth2'>
-                <div className='containTitle'>Company</div>
                 <div className='month1'>
+                <div className='flexy'>
+                <div className='containTitle'>Company</div>
+                </div> 
                     <div className='flexy'>
                 <div className='monthOn2R' type='button'></div>
                 </div>            
@@ -56,8 +58,10 @@ function Comparative ()  {
                 </div>
 
                 <div className='container divMonth2'>
-                <div className='containTitle'>Variables</div>
                 <div className='month1'>
+                <div className='flexy'>
+                <div className='containTitle'>Variables</div>
+                </div> 
                     <div className='flexy'>
                 <div className='monthOn2T' type='button'></div>
                 </div>            

@@ -3,13 +3,14 @@ import bci from './images/bc.png';
 import Header from './component/header';
 import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
+import OperatingIncome from './operatingIncome';
 
 
-function YearOnYear ()  {
+function OperatingIncomeYoY ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/inflationYoY`)
+     const onClickHandler = () => navigate(`/profitYoYpage`)
      const onClickHandler1 = () => navigate(`/financialP`)
     return (
 
@@ -22,7 +23,7 @@ function YearOnYear ()  {
             
             <div className='col-md-9'>
                 <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
-                    <p className='centerH'>Year on Year</p>
+                    <p className='centerH'>operating Income</p>
             <div className='centerM'>
              
              <div className='inputYear'><input className='yearInput' placeholder='Input title of graph'></input></div>
@@ -57,4 +58,4 @@ function YearOnYear ()  {
         );
 }
 
-export default YearOnYear
+export default OperatingIncomeYoY
