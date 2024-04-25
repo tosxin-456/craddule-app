@@ -9,8 +9,7 @@ function Comparative ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(``)
-     const onClickHandler1 = () => navigate(``)
+     const onClickHandler = () => navigate(`/foreCast`)
     return (
 
             <>
@@ -21,9 +20,9 @@ function Comparative ()  {
         <Menu /> 
             
             <div className='col-md-9'>
-                <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
                     <p className='centerH'>Comparative Analaysis</p>
                     <p className='centerHp'>Make sure you answer all question</p>
+                    <img src={bci} className='bcA' type='button'></img>
             <div className='container-fluid centerM3'>
             <div className='container divMonth2'>
                 <div className='month1'>

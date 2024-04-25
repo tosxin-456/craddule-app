@@ -55,6 +55,7 @@ import Password from './password';
 import PageInvite from './sectionInvite';
 import PageTrack from './pageTrack';
 import Summary from './summary';
+import ForeCast from './foreCast';
 import SearchKpi from './searchKpi';
 import PageSub from './pageSub';
 import ProfitPageMOM from './profitPageMoM';
@@ -144,6 +145,7 @@ function App() {
         <Route path="/operatingIncomeYoY" element= {<OperatingIncomeYoY />} />
         <Route path="/customerYoYinflux" element= {<CustomerYoYInflux />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/foreCast" element= {<ForeCast />} />
         <Route path="/expensesYoY" element= {<ExpensesYoY />} />
         <Route path="/inflationYoY" element= {<InflationYoY />} />
         <Route path="/customerInfluxMoM" element= {<CustomerInfluxMoM />} />

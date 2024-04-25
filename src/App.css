@@ -2863,11 +2863,17 @@ font-weight: bold;
 .graphTxt{
   display: inline-block;
   margin-left:40px;
+  text-wrap: nowrap;
 }
 
 .container-centerGraph{
   display: flex;
   justify-content: center;
+}
+
+.container-centerGraph1{
+  display: flex;
+  justify-content: space-around;
 }
 
 .centerGraph{
@@ -3722,6 +3728,7 @@ font-weight: bold;
 
 .divPlan{
   display: flex;
+  justify-content: center;
   margin-top: 50px;
 }
 
@@ -3779,7 +3786,7 @@ font-weight: bold;
 }
 
 .state{
-  margin-top: 5px;
+  margin: 5px 5px 12px 0px;
   font-size: 11px;
    color:#858585;
 }

@@ -22,7 +22,7 @@ function Privacy ()  {
     <SettingMenu /> 
         
         <div className='col-md-9'>
-        <h1 className='centerHh'>Setting</h1>
+        <h1 className='centerHh'>Settings</h1>
         <p className='centerHh'>View and manage settings</p>
         {/*<div className='gene'>General Setting</div>*/}
         <div className='centerS'>

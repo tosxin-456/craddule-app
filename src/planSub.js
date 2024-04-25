@@ -42,7 +42,7 @@ function PlanSub ()  {
           </div>
 
           <div className='divPlan'>
-          <div className='divPlan1'>
+         {/* <div className='divPlan1'>
             <div className='planTittle'>
                 <p className='planHead'>Basic</p>
                 <p className='planHead'>N10,000<span className='planSmall'>/month</span></p>
@@ -60,11 +60,11 @@ function PlanSub ()  {
             <div className='planButton'>
             <button className="btn btn-primary thePlanButton">Current Plan</button>
             </div>
-          </div>
+    </div>*/}
 
           <div className='divPlan2'>
             <div className='planTittle'>
-                <p className='planHead'>Basic</p>
+                <p className='planHead'>Pro</p>
                 <p className='planHead'>N10,000<span className='planSmall'>/month</span></p>
                 <p className='state'>Ideal for small teams, offering essential tools and feature</p>
             </div>
@@ -82,7 +82,7 @@ function PlanSub ()  {
             </div>
           </div>
 
-          <div className='divPlan3'>
+          {/*<div className='divPlan3'>
             <div className='planTittle'>
                 <p className='planHead'>Basic</p>
                 <p className='planHead'>N10,000<span className='planSmall'>/month</span></p>
@@ -101,7 +101,7 @@ function PlanSub ()  {
             <div className='planButton'>
             <button className="btn btn-primary thePlanButton2">Upgrade to Platinum</button>
             </div>
-          </div>
+</div>*/}
 
           
           </div>
