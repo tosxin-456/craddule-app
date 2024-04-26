@@ -679,10 +679,11 @@ background-color: white!important;
 /*chat tool*/
 .newMHold3{
   position: static;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 20px;
   background-color: #f6f8fc;
   padding-top: 5px;
+  padding-bottom: 5px;
   width:100%;
   box-shadow: 0px 1px 17px 0 rgb(227 232 246);
   height: 600px;
@@ -1264,6 +1265,16 @@ background-color: white!important;
   right: 0;
   bottom: 0;
   background-color: rgb(0 0 0 / 84%);
+  z-index: 1000;
+}
+
+.modalOv1{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f6f8fc42;;
   z-index: 1000;
 }
 
@@ -3300,8 +3311,7 @@ font-weight: bold;
 .container-fluid1{
     display: flex;
     justify-content: flex-end;
-    margin-top: 100px;
-    padding-right: 15px;
+    padding-top: 50px;
     padding-left: 0px;
 }
 
@@ -3851,29 +3861,43 @@ font-weight: bold;
   border-radius: 200px;
 }
 
+.chatImgSm{
+  width: 19px;
+  height: 17px;
+  border-radius: 250px;
+}
+
 .chatImg1{
   width: 125px;
   height: 90px;
+  border-radius: 5px;
 }
 
 .chatImg3{
   width: 30px;
   height: 27px;
   border-radius: 200px;
-  margin-top: 25px;
+  margin-top: 15px;
 }
 
 .chatImg4{
   width: 30px;
   height: 27px;
   border-radius: 200px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
-.iconS3{
-  font-size: 10px;
+.iconSs3{
+  width: 17px;
+  color: #393939;
+  margin: 6px;
+}
+
+.iconSs3{
+  font-size: 15px;
   color: #393939;
   margin: 3px;
+  padding-left: 5px;
 }
 
 .chatIcon1{
@@ -3900,12 +3924,19 @@ font-weight: bold;
 
 .iconTxtP{
   display: inline-block;
+  margin-left: 5px;
+  font-size: 9px;
+
 }
 
+.topIcon1{
+  margin-left: 10px;
+}
 
 .chatText1{
   margin: 0px;
   text-align: center;
+  font-size: 11px;
 }
 
 .chatTextT1{
@@ -3926,12 +3957,91 @@ font-weight: bold;
 .chatConT{
   text-align: end;
   margin-right: 10px;
+  font-size: small;
 }
 
 .chatConT1{
   margin-left: 10px;
+  font-size: small;
 }
 
 .chatGrid1{
   padding: 3px 5px 3px 5px;
+}
+
+.chatBottom{
+  display: flex;
+  justify-content: space-between;
+}
+
+.chatTime{
+  margin: 5px;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.chatTime1{
+  margin: 2px 5px 50px 5px;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.chatInput{
+  width: 280px;
+  padding: 5px;
+  border-radius: 20px;
+  outline: none;
+  border: 1px solid #b8b8b8;
+  background-color: #fafcff;
+}
+
+.theChat{
+  margin-bottom: 5px;
+}
+
+.theChat1{
+  margin: 0px;
+}
+
+.textBox{
+  text-align: center;
+  width: 150px;
+  background-color: #b8b8b8;
+  padding: 5px;
+  border-radius: 20px;
+}
+
+.inputIcon{
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+}
+
+.chatsButton{
+ margin-right: 30px;
+ width: 20px;
+}
+
+.theChatButton{
+  border-radius: 10px !important;
+  background-color: #e6b800 !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.sm{
+  margin-right: 10px;
+}
+
+.sm1{
+  margin-left: 10px;
+}
+
+.uiTeam{
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.iconS3{
+  font-size: 20px;
 }
