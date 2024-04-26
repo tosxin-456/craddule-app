@@ -678,13 +678,12 @@ background-color: white!important;
 
 /*chat tool*/
 .newMHold3{
+  position: static;
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: #fff;
-  padding-top: 20px;
+  background-color: #f6f8fc;
+  padding-top: 5px;
   width:100%;
-  padding-bottom: 30px;
-  border-radius: 10px;
   box-shadow: 0px 1px 17px 0 rgb(227 232 246);
   height: 600px;
 }
@@ -3344,6 +3343,7 @@ font-weight: bold;
   height: 40px;
   border: 2px solid rgb(170 170 170);
   border-radius: 5px;
+  outline: none;
 }
 
 .monthOn2{
@@ -3828,3 +3828,94 @@ font-weight: bold;
   border-radius: 50px !important;
 }
 
+
+.chatImg{
+  width: 30px;
+  height: 27px;
+  border-radius: 200px;
+}
+
+.chatImg1{
+  width: 125px;
+  height: 90px;
+}
+
+.chatImg3{
+  width: 30px;
+  height: 27px;
+  border-radius: 200px;
+  margin-top: 25px;
+}
+
+.chatImg4{
+  width: 30px;
+  height: 27px;
+  border-radius: 200px;
+  margin-top: 30px;
+}
+
+.iconS3{
+  font-size: 10px;
+  color: #393939;
+  margin: 3px;
+}
+
+.chatIcon1{
+  display: flex;
+  justify-content: end;
+}
+
+.chatGrid{
+  display: grid;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  background-color: #fafcff;
+  padding: 3px 5px 3px 5px;
+}
+
+.imgChatDiv{
+  display: flex;
+  justify-content: end;
+}
+
+.iconTxt{
+  display: flex;
+}
+
+.iconTxtP{
+  display: inline-block;
+}
+
+
+.chatText1{
+  margin: 0px;
+  text-align: center;
+}
+
+.chatTextT1{
+  margin: 30px;
+}
+
+.chatCon{
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+}
+
+.chatCon1{
+  display: flex;
+  margin-top: 10px;
+}
+
+.chatConT{
+  text-align: end;
+  margin-right: 10px;
+}
+
+.chatConT1{
+  margin-left: 10px;
+}
+
+.chatGrid1{
+  padding: 3px 5px 3px 5px;
+}

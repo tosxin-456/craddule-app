@@ -31,16 +31,16 @@ function ProfitPageMOM ()  {
                 <div className='month1'>
                  
                     <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                    <input className='monthOn1'></input>
                 <p className='monthOn1T'>January</p>
                 </div>            
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>Febuary</p>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>March</p>
                 </div>
                 </div>
@@ -48,16 +48,16 @@ function ProfitPageMOM ()  {
                 <div className='container divMonth1'>
                 <div className='month1'>
                     <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                    <input className='monthOn1'></input>
                 <p className='monthOn1T'>April</p>
                 </div>            
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>May</p>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>June</p>
                 </div>
                 </div>
@@ -65,16 +65,16 @@ function ProfitPageMOM ()  {
                 <div className='container divMonth1'>
                 <div className='month1'>
                     <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                    <input className='monthOn1'></input>
                 <p className='monthOn1T'>July</p>
                 </div>            
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>August</p>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>September</p>
                 </div>
                 </div>
@@ -82,16 +82,16 @@ function ProfitPageMOM ()  {
                 <div className='container divMonth1'>
                 <div className='month1'>
                     <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                    <input className='monthOn1'></input>
                 <p className='monthOn1T'>October</p>
                 </div>            
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>November</p>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>December</p>
                 </div>
                 </div>
