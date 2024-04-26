@@ -112,7 +112,7 @@ export default function ChatToolModal ({open, onClose}) {
     </div>
 
     <div className='container-flex chatGrid1'>
-      <div className='chatBottom'>
+      <div className='chatsBottom'>
         <div className='inputIcon'>
         <span className='iconS3 sm' type='button'><CiShare1 /></span>
         <span className='iconS3 sm' type='button'><CiFaceSmile/></span>

@@ -3975,9 +3975,8 @@ font-weight: bold;
 .chatGrid1{
   padding: 3px 5px 3px 5px;
 }
-<<<<<<< HEAD
 
-.chatBottom{
+.chatsBottom{
   display: flex;
   justify-content: space-between;
 }
@@ -4053,7 +4052,8 @@ font-weight: bold;
 .iconS3{
   font-size: 20px;
 }
-=======
+
+
 .createPG{
   margin: 0;
   padding: 0;
