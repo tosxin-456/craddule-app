@@ -21,7 +21,7 @@ function IntroductionTwo ()  {
     const userId = decodedToken.userId;
 
     const projectId = localStorage.getItem('nProject');
-
+    const [loading, setLoading] = useState(false);
     console.log(userId);
 
     const [formData, setFormData] = useState({
@@ -68,7 +68,7 @@ function IntroductionTwo ()  {
       };
 
       const createAnswer = async (data) => {
-       
+        setLoading(true);
         
         try {
          data.userId = userId;  
@@ -77,7 +77,7 @@ function IntroductionTwo ()  {
 
           console.log(data);
           
-          const response = await fetch('http://localhost:3001/api/answer', {
+          const response = await fetch(API_BASE_URL+'/api/answer', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -90,17 +90,21 @@ function IntroductionTwo ()  {
             // If submission is successful, fetch another question
             const responseData = await response.json();
             console.log(responseData);
+
             fetchUnansweredQuestion();
+            setLoading(false);
             setFormData({
                      answer: '',
                   });
           } else {
             const result = await response.json();
+            setLoading(false);
             toast.error(result['error']);
             console.error('Error:', result['error']);
           }
         } catch (error) {
             //toast.error(result['error']);  
+            setLoading(false);
             console.error('An error occurred:', error);
         }
       };
@@ -133,8 +137,13 @@ function IntroductionTwo ()  {
                 <textarea className='textAs' id="answer"  value={formData.answer} onChange={handleChange}></textarea>
             </div>
             <p className='suggest'>Your answer shouldn't be about money, It should be about solving a problem</p>
-
-            <button className="btn btn-primary curveNext"  type="submit">Next</button>
+            <button type="submit" className='btn btn-primary curveNext' disabled={loading}>
+              
+                { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+                { !loading && <span>Next</span>}
+              
+              </button>
+           
             </div>
             
             </form>
