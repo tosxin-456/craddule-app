@@ -20,7 +20,7 @@ function Comparative ()  {
         <Menu /> 
             
             <div className='col-md-9'>
-                    <p className='centerH'>Comparative Analaysis</p>
+                    <p className='centerH'>Company Variables</p>
                     <p className='centerHp'>Make sure you answer all question</p>
                     <img src={bci} className='bcA' type='button'></img>
             <div className='container-fluid centerM3'>
@@ -30,29 +30,29 @@ function Comparative ()  {
                 <div className='containTitle'>Company</div>
                 </div> 
                     <div className='flexy'>
-                <div className='monthOn2R' type='button'></div>
+                <input className='monthOn2R'></input>
                 </div>            
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2W' type='button'></div>
+                <input className='monthOn2W'></input>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2S' type='button'></div>
+                <input className='monthOn2S'></input>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2F' type='button'></div>
+                <input className='monthOn2F'></input>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2K' type='button'></div>
+                <input className='monthOn2K'></input>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2V' type='button'></div>
+                <input className='monthOn2V'></input>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2O' type='button'></div>
+                <input className='monthOn2O'></input>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2H' type='button'></div>
+                <input className='monthOn2H'></input>
                 </div>
                 </div>
 
@@ -62,29 +62,29 @@ function Comparative ()  {
                 <div className='containTitle'>Variables</div>
                 </div> 
                     <div className='flexy'>
-                <div className='monthOn2T' type='button'></div>
+                <input className='monthOn2T'></input>
                 </div>            
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2Z' type='button'></div>
+                <input className='monthOn2Z'></input>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2Q' type='button'></div>
+                <input className='monthOn2Q'></input>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2D' type='button'></div>
+                <input className='monthOn2D'></input>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2B' type='button'></div>
+                <input className='monthOn2B'></input>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2I' type='button'></div>
+                <input className='monthOn2I'></input>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2M' type='button'></div>
+                <input className='monthOn2M'></input>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn2N' type='button'></div>
+                <input className='monthOn2N'></input>
                 </div>
                 </div>
                 
