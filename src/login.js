@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { Toaster, toast } from 'sonner'
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from './config/apiConfig';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
 function Login() {
 
@@ -9,6 +13,7 @@ function Login() {
     //     const wow = new WOW.WOW();
     //     wow.init();
     //   }, []);
+
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,7 +24,81 @@ function Login() {
       setShowPassword(!showPassword);
     };
     const navigate = useNavigate()
-    const onClickHandler = () => navigate(`/home`)
+    const onClickHandler = () => navigate(`/signUp`);
+
+    
+  
+
+
+  
+
+
+    //Login
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        username: '',
+        password: '',
+      });
+    
+      const handleChange = (e) => {
+        setFormData({
+          ...formData,
+          [e.target.id]: e.target.value,
+        });
+      };
+    
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        login(formData);
+    
+       
+      };
+    
+      const login = async (data) => {
+        setLoading(true);
+        try {
+
+          
+        console.log(data);
+        console.log(JSON.stringify(data));
+          const response = await fetch(API_BASE_URL+'/api/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+
+         // const data = response.json();
+    
+          if (response.status === 200) {
+            console.log(response.status);
+            console.log(response);
+
+            const responseData = await response.json(); // Parse JSON response
+      
+     
+      const { token } = responseData; // Access token directly from response
+      setLoading(false);
+      // Save access token to local storage
+      localStorage.setItem('access_token', token);
+      console.log('Access Token:', token);
+      localStorage.setItem('access_token', token);
+            console.log('Logged successfully');
+          } else {
+            const result = await response.json();
+            setLoading(false);
+            toast.error(result['error']);
+              console.error('Error:', result['error']);
+            //console.error('Failed to create User');
+          }
+        } catch (error) {
+          setLoading(false);
+          console.error('An error occurred:', error);
+        }
+      };
+
   return (
 
 <div className='container'>
@@ -29,14 +108,14 @@ function Login() {
           <div className='loginH'>
             <p className='lgT'>Login</p>
             <p className='lgT2'>Fill in neccessary details to proceed</p>
-
+            <form onSubmit={handleSubmit}> 
             <div className="inputs-container">
-                <label htmlFor="email" className='lab'>Email</label>
+                <label htmlFor="email" className='lab'>Email or Phone Number</label>
                 <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  id="username"
+                  value={formData.username}
+                  onChange={handleChange}
                   className="custom-input"
                 />
 
@@ -45,8 +124,8 @@ function Login() {
                   <input
                     type={showPassword ? 'text' : 'password'}
                     id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={formData.cpassword}
+                    onChange={handleChange}
                     className="custom-input"
                   />
                   
@@ -56,7 +135,13 @@ function Login() {
                   </span>
               </div>
 
-              <button className='btn loginBtn' onClick={onClickHandler}>Login</button>
+              <button type="submit" className='btn loginBtn' disabled={loading}>
+              
+                { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+                { !loading && <span>Login</span>}
+                
+              </button>
+              </form>
               <button className='btn loginBtn2' onClick={onClickHandler}>Sign Up</button>
           </div>
           
@@ -75,7 +160,7 @@ function Login() {
     
       
    </div>
-
+   <Toaster  position="top-right" />
 </div>
   );
 }
