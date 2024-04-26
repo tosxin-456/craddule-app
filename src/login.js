@@ -75,7 +75,6 @@ function Login() {
           if (response.status === 200) {
             console.log(response.status);
             console.log(response);
-
             const responseData = await response.json(); // Parse JSON response
       
      
@@ -86,6 +85,7 @@ function Login() {
       console.log('Access Token:', token);
       localStorage.setItem('access_token', token);
             console.log('Logged successfully');
+              navigate(`/introduction1`)
           } else {
             const result = await response.json();
             setLoading(false);
