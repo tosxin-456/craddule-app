@@ -303,6 +303,9 @@ body{
     width: 100%;
     font-size: 12px;
     height: 100%;
+      outline: none;
+    padding: 10px;
+
 }
 
 .textBs{
@@ -311,6 +314,9 @@ body{
     width: 100%;
     font-size: 12px;
     height: 605PX !important;
+      outline: none;
+    padding: 10px;
+
 }
 
 .tittle{
