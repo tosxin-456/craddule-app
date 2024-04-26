@@ -37,7 +37,7 @@ function TermAgreement ()  {
         <p className='centerHh'>View and manage settings</p>
         {/*<div className='gene'>General Setting</div>*/}
         <div className='centerS'>
-        <p className='centerHhPr'>Term and Agreement</p>
+        <p className='centerHhPr'>Terms and Agreement</p>
         <div>
           <p className='paragraph'>
           At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti

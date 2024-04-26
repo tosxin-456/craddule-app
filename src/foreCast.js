@@ -86,7 +86,7 @@ class ForeCast extends Component {
                     <p className='centerHp'>Make sure you answer all question</p>
                     <img src={bci} className='bcA' type='button'></img>
             <div className='centerS'>
-              <p className="topText">Fancial Forcasy by Year</p>
+              <p className="topText">Fancial Forcast by Year</p>
              <div className="graph1">
               <div className="container-centerGraph1">
               <div className="smallBox1"> 

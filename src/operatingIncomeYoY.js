@@ -23,7 +23,7 @@ function OperatingIncomeYoY ()  {
             
             <div className='col-md-9'>
                 <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
-                    <p className='centerH'>operating Income</p>
+                    <p className='centerH'>Operating Income</p>
             <div className='centerM'>
              
              <div className='inputYear'><input className='yearInput' placeholder='Input title of graph'></input></div>
@@ -31,20 +31,20 @@ function OperatingIncomeYoY ()  {
             <div className='container divMonth1'>
                 <div className='month1'>
                     <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                    <input className='monthOn1'></input>
                 <p className='monthOn1T'>Year 1</p>
                 </div>            
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>Year 2</p>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>Year 3</p>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>Year 4</p>
                 </div>
                 </div>

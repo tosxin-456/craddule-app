@@ -43,7 +43,7 @@ function PageSub ()  {
 
           <div className='subCont'>
           <div className='topDiv1'>
-            <p className='topDivT'>Craddule Basic</p>
+            <p className='topDivT'>Craddule Pro</p>
             <p className='topDivSub1'>Current plan ends on Wednesday, Jun 21, 2024.</p>
           </div>
             <div className='cancelSubButt'>

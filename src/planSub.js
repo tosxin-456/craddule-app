@@ -37,7 +37,7 @@ function PlanSub ()  {
         <img src={bci} className='bcA' onClick={onClickHandler}></img>
         <div className='centerS'>
           <div className='topDiv'>
-            <p className='topDivT'>Current Plan</p>
+            <p className='topDivT'>Upgrade Plan</p>
             <p className='topDivSub'>See information regarding your current plan</p>
           </div>
 
@@ -64,7 +64,7 @@ function PlanSub ()  {
 
           <div className='divPlan2'>
             <div className='planTittle'>
-                <p className='planHead'>Pro</p>
+                <p className='planHead'>Premium</p>
                 <p className='planHead'>N10,000<span className='planSmall'>/month</span></p>
                 <p className='state'>Ideal for small teams, offering essential tools and feature</p>
             </div>

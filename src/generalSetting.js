@@ -87,7 +87,7 @@ function GeneralSetting ()  {
                 <span className="password-toggle1" onClick={handleTogglePassword}>
                     {showPassword ? 'Hide' : 'Show'}
                   </span>
-                    <div className='changeButton'><button className="btn btn-primary deleteButton">Save Change</button>
+                    <div className='changeButton'><button className="btn btn-primary deleteButton">Save</button>
                     </div>
                   
               </div>

@@ -31,20 +31,20 @@ function ProfitYoYpage ()  {
             <div className='container divMonth1'>
                 <div className='month1'>
                     <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                    <input className='monthOn1'></input>
                 <p className='monthOn1T'>Year 1</p>
                 </div>            
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>Year 2</p>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>Year 3</p>
                 </div>
                 <div className='flexy'>
-                <div className='monthOn1' type='button'></div>
+                <input className='monthOn1'></input>
                 <p className='monthOn1T'>Year 4</p>
                 </div>
                 </div>
