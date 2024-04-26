@@ -1,21 +1,117 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import bci from './images/bc.png'; 
 import bro from './images/bro.png'; 
 import Header from './component/header';
 import Menu from './component/menu';
+import SideMenu from './component/sideMenu';
+import API_BASE_URL from './config/apiConfig';
 import { useNavigate } from 'react-router-dom';
-
+import { Toaster, toast } from 'sonner';
+import { jwtDecode } from "jwt-decode";
 
 function IntroductionTwo ()  {
 
     const navigate = useNavigate()
-
+    
     const onClickHandler = () => navigate(`/introduction`)
+
+    const [question, setQuestion] = useState(null);
+    const access_token = localStorage.getItem('access_token');
+    const decodedToken = jwtDecode(access_token);
+    const userId = decodedToken.userId;
+
+    const projectId = localStorage.getItem('nProject');
+
+    console.log(userId);
+
+    const [formData, setFormData] = useState({
+        answer: '',
+        });
+
+        const handleChange = (e) => {
+            setFormData({
+              ...formData,
+              [e.target.id]: e.target.value,
+            });
+          };
+
+    const fetchUnansweredQuestion = async () => {
+        try {
+          const response = await fetch(API_BASE_URL+`/api/new/question/${userId}/${projectId}/BusinessCaseBuilder/Introduction`);
+          if (response.status === 200) {
+            const data = await response.json();
+            if (!data.data) {
+            //   setNoMoreQuestions(true);
+                navigate(`/sectionIntro`);
+            } else {
+              setQuestion(data.data);
+            }
+            // setQuestion(data.data); // Set the fetched question to state
+          } else {
+            const errorMessage = `Error fetching question: ${response.statusText}`;
+            console.error(errorMessage);
+            throw new Error(errorMessage);
+          }
+        } catch (error) {
+          console.error('An error occurred:', error.message);
+        }
+      };
+    
+    useEffect(() => {
+       
+        fetchUnansweredQuestion(); // Call the function to fetch the unanswered question
+      }, [userId]);
+      
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        createAnswer(formData);
+      };
+
+      const createAnswer = async (data) => {
+       
+        
+        try {
+         data.userId = userId;  
+         data.questionId = question._id; 
+         data.projectId = projectId; 
+
+          console.log(data);
+          
+          const response = await fetch('http://localhost:3001/api/answer', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${access_token}`,
+            },
+            body: JSON.stringify({data}),
+          });
+    
+          if (response.status === 200) {
+            // If submission is successful, fetch another question
+            const responseData = await response.json();
+            console.log(responseData);
+            fetchUnansweredQuestion();
+            setFormData({
+                     answer: '',
+                  });
+          } else {
+            const result = await response.json();
+            toast.error(result['error']);
+            console.error('Error:', result['error']);
+          }
+        } catch (error) {
+            //toast.error(result['error']);  
+            console.error('An error occurred:', error);
+        }
+      };
+      //submit answer
+     
     return (
         <>
 
 <div className='container-fluid'>
     <Header />
+    {/* <SideMenu />  */}
     <div className='row'>
     <Menu /> 
         <div className='col-md-9'>
@@ -28,16 +124,29 @@ function IntroductionTwo ()  {
                 <img src={bro} className='bro'></img>
                
             </div>
-            <p className='question'>Why do you want to start a Company?</p>
+            {question ? (
+             <form onSubmit={handleSubmit}>
+            <div>
+           
+            <p className='question'>{question.question}</p>
             <div className='container-textAs'>
-                <textarea className='textAs'></textarea>
+                <textarea className='textAs' id="answer"  value={formData.answer} onChange={handleChange}></textarea>
             </div>
             <p className='suggest'>Your answer shouldn't be about money, It should be about solving a problem</p>
+
+            <button className="btn btn-primary curveNext"  type="submit">Next</button>
+            </div>
+            
+            </form>
+             ) : (
+                <p></p>
+              )}
         </div> 
 
-        <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
+       
   </div>
   </div>
+  <Toaster  position="top-right" />
   </div>
   </>
     );
