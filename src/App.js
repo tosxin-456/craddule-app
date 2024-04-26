@@ -114,7 +114,8 @@ import LoadingPage from './laodingPage';
 import PageAddKpi from './pageAddKpi';
 import GoPage from './goPage';
 import ProfitPage from './profitPage';
-
+import CreateProject from './createProject';
+import CreateQuestion from './createQuestion';
 
 
 
@@ -231,6 +232,8 @@ function App() {
         <Route path="/go" element= {<GoPage />} />
         {/* <Route path="/login" element= {<Login />} /> */}
         <Route path="/loading" element= {<LoadingPage />} />
+        <Route path="/createProject" element= {<CreateProject />} />
+        <Route path="/createQuestion" element= {<CreateQuestion />} />  
         <Route path="/" element={<Login />} />
         // <Route path="/" element={<MainApp />} />
       </Routes>
