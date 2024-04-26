@@ -20,7 +20,7 @@ export default function ChatToolModal ({open, onClose}) {
     return ReactDOM.createPortal(
     <>
   <div className='container-fluid1 chat modalOv1'>
-  <div className='col-md-4'>
+  <div className='col-lg-4'>
   <div className='newMHold'>
   <div className='newMHold3'>
     <div className='chatIcon1'>
