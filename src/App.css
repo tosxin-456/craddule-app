@@ -3376,8 +3376,9 @@ font-weight: bold;
 }
 
 .monthOn1T{
-  text-align: center;
+  text-align: start;
   color: #b8b8b8;
+  
 }
 
 .divMonth{   
