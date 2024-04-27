@@ -26,7 +26,6 @@ function CustomerYoYInflux ()  {
                     <p className='centerH'>Customer Influx</p>
             <div className='centerM'>
              
-             <div className='inputYear'><input className='yearInput' placeholder='Input title of graph'></input></div>
 
             <div className='container divMonth1'>
                 <div className='month1'>

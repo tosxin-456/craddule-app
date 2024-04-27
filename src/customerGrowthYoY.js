@@ -26,7 +26,7 @@ function CustomerGrowthYoY ()  {
                     <p className='centerH'>Customer Growth Rate</p>
             <div className='centerM'>
              
-             <div className='inputYear'><input className='yearInput' placeholder='Input title of graph'></input></div>
+            {/* <div className='inputYear'><input className='yearInput' placeholder='Input title of graph'></input></div>*/}
 
             <div className='container divMonth1'>
                 <div className='month1'>

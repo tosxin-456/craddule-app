@@ -25,7 +25,6 @@ function ExpensesMonthOnMonth ()  {
                     <p className='centerH'>Expenses</p>
             <div className='container-fluid centerM1'>
              
-             <div className='inputYear'><input className='yearInput' placeholder='Input title of graph'></input></div>
                 <div className='year'>Year 1</div>
             <div className='container divMonth1'>
                 <div className='month1'>

@@ -26,7 +26,6 @@ function ProfitYoYpage ()  {
                     <p className='centerH'>Net Profit</p>
             <div className='centerM'>
              
-             <div className='inputYear'><input className='yearInput' placeholder='Input title of graph'></input></div>
 
             <div className='container divMonth1'>
                 <div className='month1'>
