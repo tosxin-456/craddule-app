@@ -30,22 +30,22 @@ function GoPage ()  {
                
             </div>
 
-                <div className='row rowU'>
-                    <div className='col-md-3 gogo wow fadeInUp'>
+                <div className='columns rowU'>
+                    {/* <div className='columnG gogo wow fadeInUp'>
                         <p className='goP'>Phase 1</p>
-                        <p className='goP2'>Business Analysis Pack</p>
+                        <p className='goP2'>Business Case Builder</p>
 
                         <div className='goH'>
-                            <h1 className='goTitle'>Acommpished</h1>
+                            <h1 className='goTitle'> Select Action</h1>
                             <h1 className='goSub'>This Phase as been accomplished, you can still go back to see what was done</h1>
                             <span className='goBtnP'>Revisit</span>
                         </div>
-                    </div>
+                    </div> */}
 
 
-                    <div className='col-md-3 gogoY wow fadeInDown'>
-                        <p className='goP'>Phase 2</p>
-                        <p className='goP2'>Value Proposition</p>
+                    <div className='columnG gogo wow fadeInUp'>
+                        <p className='goP'>Phase 1</p>
+                        <p className='goP2'>Business Case Builder</p>
 
                         <div className='goH'>
                             <h1 className='goTitle'> Select Action</h1>
@@ -56,9 +56,9 @@ function GoPage ()  {
                     </div>
 
 
-                    <div className='col-md-3 gogoG wow fadeInUp'>
-                        <p className='goP'>Phase 3</p>
-                        <p className='goP2'>Detailed Marketing Strategies</p>
+                    <div className='columnG gogoG wow fadeInUp'>
+                        <p className='goP'>Phase 2</p>
+                        <p className='goP2'>Custom Financial Projection</p>
 
                         <div className='goH'>
                             <h1 className='goTitle'>No Action</h1>
@@ -67,9 +67,20 @@ function GoPage ()  {
                         </div>
                     </div>
 
-                    <div className='col-md-3 gogoG wow fadeInDown'>
+                    <div className='columnG gogoG wow fadeInDown'>
+                        <p className='goP'>Phase 3</p>
+                        <p className='goP2'>Discounted Cash Flow</p>
+
+                        <div className='goH'>
+                            <h1 className='goTitle'>No Action</h1>
+                            <h1 className='goSub'>Can only Movge forward when you have passed previous stages</h1>
+                            
+                        </div>
+                    </div>
+
+                    <div className='columnG gogoG wow fadeInDown'>
                         <p className='goP'>Phase 4</p>
-                        <p className='goP2'>Getting your Team</p>
+                        <p className='goP2'>Comparable Companies</p>
 
                         <div className='goH'>
                             <h1 className='goTitle'>No Action</h1>
