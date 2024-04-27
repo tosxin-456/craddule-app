@@ -362,8 +362,8 @@ body{
 }
 
 .question{
-  font-size: 16px;
-    font-weight: 700;
+  font-size: 16px !important;
+    font-weight: 700 !important;
 }
 
 .suggest{
