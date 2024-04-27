@@ -4155,17 +4155,19 @@ font-weight: bold;
 
 .column{
   flex: 1;
-  margin:5px;
+  margin-bottom: 20px;
+  /* margin:5px; */
   background:#fff;
   transition:0.3s;
   border-radius:20px;
-  box-shadow: rgb(227, 232, 246) 0px 1px 17px 0px;
+  box-shadow: rgb(227, 232, 246) 0px 1px;
   cursor: pointer;
   transition:0.5s
 }
 
 .column:hover{
-  box-shadow: rgb(227, 232, 246) 3px 5px 10px 12px;
+  box-shadow: rgb(227, 232, 246) 0px 1px;
+  /* box-shadow: rgb(227, 232, 246) 1px 5px 1px 12px; */
 }
 .column:first-child{
   /* margin-left:5px; */
