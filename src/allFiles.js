@@ -34,26 +34,50 @@ function AllFiles ()  {
                     <div type='button'className='hds'>Started</div>
                     <div type='button'className='hds'>Shared</div>
                 </div> 
-                <div className='centerCc'>
-                <p className='file'>Name</p> 
+                
+        
+        <div className='wrapper2'>
+            <div className='columns'>
+               <div className='column'>
+                    <img src={pdf} className='imgX' ></img>
+               </div> 
 
-                <div className='container-image'>
-                  <div className='flex-container1 imageBoxZ'><img src={pdf} className='imgX' ></img>
-                  <div className='textH'><img src= {pdf} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Value proposition pack</p>Team A folder: 4 items</div></div></div> 
-                  <div className='flex-container1 imageBoxZ'><img src={excel} className='imgX' ></img>
-                  <div className='textH'><img src= {excel} className='smImg'></img ><div className='fileTxt'><p className='toptxt'>Business Analysis</p>File page: 10</div></div></div> 
-                  <div className='flex-container1 imageBoxZ'><img src={pdf} className='imgX' ></img>
-                  <div className='textH'><img src= {pdf} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Wireframe</p>File page: 10</div></div></div> 
-                  </div>
-                  <div className='container-image'>
-                  <div className='flex-container1 imageBoxZ'><img src={pdf} className='imgX' ></img>
-                  <div className='textH'><img src= {pdf} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Ideation</p>File page: 4</div></div></div> 
-                  <div className='flex-container1 imageBoxZ'><img src={pdf} className='imgX' ></img>
-                  <div className='textH'><img src= {pdf} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Financials</p>File page: 10</div></div></div> 
-                  <div className='flex-container1 imageBoxZ'><img src={excel} className='imgX' ></img>
-                  <div className='textH'><img src= {excel} className='smImg'></img><div className='fileTxt'><p className='toptxt'>Financials</p>Team folder: 24 items</div></div></div> 
-                  </div>
-                </div>          
+               <div className='column'>
+                    <img src={excel} className='imgX' ></img>
+               </div> 
+
+               <div className='column'>
+                    <img src={pdf} className='imgX' ></img>
+               </div> 
+
+               <div className='column'>
+                    <img src={pdf} className='imgX' ></img>
+               </div> 
+
+               <div className='column'>
+                    <img src={excel} className='imgX' ></img>
+               </div> 
+
+               <div className='column'>
+                    <img src={pdf} className='imgX' ></img>
+               </div> 
+
+               <div className='column'>
+                    <img src={excel} className='imgX' ></img>
+               </div> 
+
+               <div className='column'>
+                    <img src={pdf} className='imgX' ></img>
+               </div> 
+
+               <div className='column'>
+                    <img src={pdf} className='imgX' ></img>
+               </div> 
+             
+
+            </div>
+        </div>
+            
             </div>
            
         </div> 
