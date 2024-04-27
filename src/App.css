@@ -4179,3 +4179,22 @@ font-weight: bold;
   /* margin-left:0; */
 }
 /*size it end*/
+/* go */
+
+.columnG{
+  flex: 1;
+  margin-bottom: 20px;
+  /* margin:5px; */
+  transition:0.3s;
+  border-radius:20px;
+  cursor: pointer;
+  transition:0.5s
+}
+
+.column:first-child{
+  /* margin-left:5px; */
+}
+
+.column:last-child{
+  /* margin-left:0; */
+}
