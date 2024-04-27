@@ -113,7 +113,7 @@ function Menu () {
             >
               <span className={isSubmenuOpen1 ? 'iconS-open' : 'iconS'}>< CiPaperplane /></span> Product Definition
             </span>
-           <ul className={isSubmenuOpen ? 'subMenuOpen' : 'subMenu'}>
+          <ul className={isSubmenuOpen ? 'subMenuOpen' : 'subMenu'}>
               <li className='innr active pending' onClick={onClickHandler}><p className='penP'>Ongoing</p> Business Case Builder</li>
 
               <li className='innr' onClick={onClickHandler24}>Custom Financial Projection</li>
