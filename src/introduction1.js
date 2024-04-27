@@ -122,12 +122,12 @@ function IntroductionTwo ()  {
     <Menu /> 
         <div className='col-md-9'>
         <div className='centerC'>
-            // <img src={bci} className='bcI'></img>
+            <img src={bci} className='bcI'></img>
 
             <div className='text-center'>
                 <p className='textHp'>Introduction</p>
                 <p className='textH'>Make sure you answer all questions</p>
-                <img src={bro} className='bro'></img>
+               
                
             </div>
             {question ? (
