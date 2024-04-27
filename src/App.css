@@ -3358,9 +3358,10 @@ font-weight: bold;
   padding: 10px;
   width: 100px;
   height: 40px;
-  border: 2px solid rgb(170 170 170);
+  border: 1px solid #dddddd
   border-radius: 5px;
   outline: none;
+  
 }
 
 .monthOn2{
@@ -3370,7 +3371,7 @@ font-weight: bold;
   padding: 10px;
   width: 200px;
   height: 50px;
-  border: 2px solid rgb(170 170 170);
+  border: 1px solid #dddddd
   border-radius: 5px;
 }
 
