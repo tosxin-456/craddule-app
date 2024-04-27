@@ -118,7 +118,10 @@ import CreateProject from './createProject';
 import CreateQuestion from './createQuestion';
 
 
-
+.monthOn1T{
+  color: #b8b8b8;
+  text-align: start;
+}
 
 
 
