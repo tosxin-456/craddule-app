@@ -94,13 +94,13 @@ function Menu () {
             <span className={isSubmenuOpen ? 'iconS-open' : 'iconS'}><CiMemoPad /></span> Ideation
           </span>
             <ul className={isSubmenuOpen ? 'subMenuOpen' : 'subMenu'}>
-              <li className='innr active' onClick={onClickHandler}>Business Case Builder</li>
+              <li className='innr active pending' onClick={onClickHandler}><p className='penP'>Ongoing</p> Business Case Builder</li>
 
-              <li className='innr pending' onClick={onClickHandler24}>Custom Financial Projection <p className='penP'>Ongoing</p></li>
+              <li className='innr' onClick={onClickHandler24}>Custom Financial Projection</li>
               <li className='innr'onClick={onClickHandler18}>Discounted Cash Flow (DCF)</li>
               <li className='innr'onClick={onClickHandler25}>Comparative Analysis</li>
               <li className='innr'>Project Timeline Builder</li>
-              <li className='innr done' onClick={onClickHandler20}>Go/ No-Go gate <p className='penD'>Done</p></li>
+              <li className='innr' onClick={onClickHandler20}>Go/ No-Go gate <p className='penD'>Done</p></li>
               <li className='innr'onClick={onClickHandler11}>Summary (PDF)</li>
               {/* Add more submenu items as needed */}
             </ul>
