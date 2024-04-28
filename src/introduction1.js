@@ -127,7 +127,7 @@ function IntroductionTwo ()  {
             <div className='text-center'>
                 <p className='textHp'>Introduction</p>
                 <p className='textH'>Make sure you answer all questions</p>
-                <img src={bro} className='bro'></img>
+               
                
             </div>
             {question ? (

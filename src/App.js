@@ -118,10 +118,6 @@ import CreateProject from './createProject';
 import CreateQuestion from './createQuestion';
 
 
-
-
-
-
 function App() {
   return (
     <Router>

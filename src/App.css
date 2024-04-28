@@ -362,7 +362,8 @@ body{
 }
 
 .question{
-  font-size: 13px;
+  font-size: 16px !important;
+    font-weight: 700 !important;
 }
 
 .suggest{
@@ -3376,9 +3377,10 @@ font-weight: bold;
   padding: 10px;
   width: 100px;
   height: 40px;
-  border: 2px solid rgb(170 170 170);
+  border: 1px solid #dddddd;
   border-radius: 5px;
   outline: none;
+  
 }
 
 .monthOn2{
@@ -3388,13 +3390,14 @@ font-weight: bold;
   padding: 10px;
   width: 200px;
   height: 50px;
-  border: 2px solid rgb(170 170 170);
+  border: 1px solid #dddddd;
   border-radius: 5px;
 }
 
 .monthOn1T{
-  text-align: center;
+  text-align: start;
   color: #b8b8b8;
+  
 }
 
 .divMonth{   
@@ -4199,6 +4202,7 @@ font-weight: bold;
   /* margin-left:0; */
 }
 /*size it end*/
+<<<<<<< HEAD
 
 .bcP{
   width: 20px;
@@ -4216,4 +4220,24 @@ font-weight: bold;
 .emailInvite1{
   display: flex;
   justify-content: space-around;
+=======
+/* go */
+
+.columnG{
+  flex: 1;
+  margin-bottom: 20px;
+  /* margin:5px; */
+  transition:0.3s;
+  border-radius:20px;
+  cursor: pointer;
+  transition:0.5s
+}
+
+.column:first-child{
+  /* margin-left:5px; */
+}
+
+.column:last-child{
+  /* margin-left:0; */
+>>>>>>> f00fbfeb2f8f2c68b803558fa500b5a092c5ce12
 }
