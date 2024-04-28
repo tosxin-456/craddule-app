@@ -15,7 +15,7 @@ function IntroductionTwo ()  {
 
     const navigate = useNavigate()
     
-    const onClickHandler = () => navigate(`/introduction`)
+    const onClickHandler = () => navigate(``)
 
     const [question, setQuestion] = useState(null);
     const access_token = localStorage.getItem('access_token');
@@ -122,7 +122,7 @@ function IntroductionTwo ()  {
     <Menu /> 
         <div className='col-md-9'>
         <div className='centerC'>
-            <img src={bci} className='bcI'></img>
+           {/* <img src={bci} className='bcI' type='button' onClick={onClickHandler}></img>*/}
 
             <div className='text-center'>
                 <p className='textHp'>Introduction</p>

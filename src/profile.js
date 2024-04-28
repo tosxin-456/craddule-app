@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import p1 from './images/p1.jpeg'; 
+import bci from './images/bc.png'; 
 import solution from './images/solution.png'; 
 import Header from './component/header';
 import Menu from './component/menu';
@@ -24,9 +25,44 @@ const Profile = () =>  {
     setSelectedOption(option);
     setIsDropdownOpen(false);
   };
-    const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/pageShare`)
+  
+//Second Dropdown
+  // State variables to manage dropdown behavior
+       const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
+       const [selectedOption1, setSelectedOption1] = useState('');
+
+  // Function to toggle dropdown visibility
+  const toggleDropdown1 = () => {
+    setIsDropdownOpen1(!isDropdownOpen1);
+  };
+
+   // Function to handle option selection
+   const handleOptionSelect1 = (option) => {
+    setSelectedOption1(option);
+    setIsDropdownOpen1(false);
+  };
+
+
+//Third Dropdown
+  // State variables to manage dropdown behavior
+  const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
+  const [selectedOption2, setSelectedOption2] = useState('');
+
+// Function to toggle dropdown visibility
+const toggleDropdown2 = () => {
+setIsDropdownOpen2(!isDropdownOpen2);
+};
+
+// Function to handle option selection
+const handleOptionSelect2 = (option) => {
+setSelectedOption2(option);
+setIsDropdownOpen2(false);
+};
+
+const navigate = useNavigate()
+
+    const onClickHandler = () => navigate(`/introduction1`)
     return (
         
         <>
@@ -37,7 +73,8 @@ const Profile = () =>  {
         
         <div className='col-md-12'>
         <div className='centerP'>
-            
+        <img src={bci} className='bcP' type='button'onClick={onClickHandler}></img>
+
             <div><p className='centerH1a'>Profile</p>
             <p className='centerHp1a'>View, manage your memebers and send invites</p>
             <button className="btn btn-primary curveN">Save changes</button>
@@ -77,26 +114,26 @@ const Profile = () =>  {
             <div className='filled3'>    
             <div className="dropdown">
                 <div className={`select ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
-                    <span classname="selected">Select from team member</span>
+                    <span classname="selected">{selectedOption|| "Select from team member"}</span>
                     <div class="caret"></div>
                 </div>
                 <ul className={`menu ${isDropdownOpen ? 'menu-open' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect("Option 1")}>Ade Yemaja</li>
+                    <li type='button' onClick={() => handleOptionSelect("Ade Yemaja")}>Ade Yemaja</li>
                     <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect("Option 1")}>Jide Arowolo</li>
+                    <li type='button' onClick={() => handleOptionSelect("Jide Arowolo")}>Jide Arowolo</li>
                 </ul>
             </div>
 
             
             <div className="dropdown">
-                <div className={`select ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
-                    <span classname="selected">Choose period</span>
+                <div className={`select ${isDropdownOpen1 ? 'select-clicked' : ''}`} onClick={toggleDropdown1}>
+                    <span classname="selected" >{selectedOption1|| "Choose period"}</span>
                     <div class="caret"></div>
                 </div>
-                <ul className={`menu ${isDropdownOpen ? 'menu-open' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect("Option 1")}>One Week</li>
+                <ul className={`menu ${isDropdownOpen1? 'menu-open' : ''}`}>
+                    <li type='button' onClick={() => handleOptionSelect1("One Week")}>One Week</li>
                     <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect("Option 1")}>Two Weeks</li>
+                    <li type='button' onClick={() => handleOptionSelect1("Two Weeks")}>Two Weeks</li>
                 </ul>
             </div>
             </div>
@@ -125,23 +162,62 @@ const Profile = () =>  {
         </div>
         <div class='dropdown-arrow'></div>
     </div>
-</div>*/}
+</div>
             <div className='filledd'>
             <div className="dropdown">
                 <p className='pageTittle1'>Age</p>
                 <input className='profileInput'></input></div>
                 <div className="dropdown">
-                <div className={`select ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
-                    <span classname="selected">Select from team member</span>
+                <div className={`select ${isDropdownOpen2 ? 'select-clicked' : ''}`} onClick={toggleDropdown2}>
+                    <span classname="selected">{selectedOption1|| "Gender"}</span>
                     <div class="caret"></div>
                 </div>
-                <ul className={`menu ${isDropdownOpen ? 'menu-open' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect("Option 1")}>Ade Yemaja</li>
+                <ul className={`menu ${isDropdownOpen2 ? 'menu-open' : ''}`}>
+                    <li type='button' onClick={() => handleOptionSelect2("Ade Yemaja")}>Ade Yemaja</li>
                     <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect("Option 1")}>Jide Arowolo</li>
+                    <li type='button' onClick={() => handleOptionSelect2("Jide Arowolo")}>Jide Arowolo</li>
                 </ul>
             </div>
                 
+            </div>*/}
+
+<div className='filledd'>
+            <div className="dropdown">
+             <p class='pageTitle1'>Age</p> </div>
+             <div className="dropdown">
+             <p class='pageTitle1'>Gender</p>
+              </div>
+              </div>  
+           
+
+            <div className='filled3'>    
+            <div className="dropdown">
+            <input className='profileInput1'></input></div>
+
+
+                {/*<div className={`select ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
+                    <span classname="selected">{selectedOption|| "Select from team member"}</span>
+                    <div class="caret"></div>
+                </div>
+                <ul className={`menu ${isDropdownOpen ? 'menu-open' : ''}`}>
+                    <li type='button' onClick={() => handleOptionSelect("Ade Yemaja")}>Ade Yemaja</li>
+                    <hr className='listMar'></hr>
+                    <li type='button' onClick={() => handleOptionSelect("Jide Arowolo")}>Jide Arowolo</li>
+                </ul>
+        </div>*/}
+
+            
+            <div className="dropdown">
+                <div className={`select ${isDropdownOpen2 ? 'select-clicked' : ''}`} onClick={toggleDropdown2}>
+                    <span classname="selected" >{selectedOption2|| "Select Gender"}</span>
+                    <div class="caret"></div>
+                </div>
+                <ul className={`menu ${isDropdownOpen2? 'menu-open' : ''}`}>
+                    <li type='button' onClick={() => handleOptionSelect2("Male")}>Male</li>
+                    <hr className='listMar'></hr>
+                    <li type='button' onClick={() => handleOptionSelect2("Female")}>Female</li>
+                </ul>
+            </div>
             </div>
             
       </div>    

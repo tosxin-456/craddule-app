@@ -14,7 +14,7 @@ function GeneralSetting ()  {
 
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/Solution`)
+    const onClickHandler = () => navigate(`/introduction1`)
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -34,6 +34,7 @@ function GeneralSetting ()  {
         <div className='col-md-9'>
         <h1 className='centerHh'>Settings</h1>
         <p className='centerHh'>View and manage settings</p>
+        <img src={bci} className='bcA' type='button' onClick={onClickHandler}></img>
        {/*} <button className="btn btn-primary curveNn">Save changes</button>
         <button className="btn curveIi">Discard changes</button>
         {/*<div className='gene'>General Setting</div>*/}

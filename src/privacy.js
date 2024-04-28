@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from './component/header';
+import bci from './images/bc.png'; 
 import SettingMenu from './component/settingMenu';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +13,7 @@ function Privacy ()  {
 
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(``)
+    const onClickHandler = () => navigate(`/generalSetting`)
 
     return (
         <>
@@ -24,6 +25,7 @@ function Privacy ()  {
         <div className='col-md-9'>
         <h1 className='centerHh'>Settings</h1>
         <p className='centerHh'>View and manage settings</p>
+        <img src={bci} className='bcA' type='button' onClick={onClickHandler}></img>
         {/*<div className='gene'>General Setting</div>*/}
         <div className='centerS'>
         <p className='centerHhPr'>Privacy Policy</p>

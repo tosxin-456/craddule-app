@@ -14,7 +14,7 @@ function PageSub ()  {
 
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/planSub`)
+    const onClickHandler = () => navigate(`/generalSetting`)
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -34,7 +34,7 @@ function PageSub ()  {
         <div className='col-md-9'>
         <h1 className='centerHh'>Settings</h1>
         <p className='centerHh'>View and manage settings</p>
-  
+        <img src={bci} className='bcA' type='button' onClick={onClickHandler}></img>
         <div className='centerS'>
           <div className='topDiv'>
             <p className='topDivT'>Current Plan</p>

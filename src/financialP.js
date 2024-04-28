@@ -21,9 +21,9 @@ function FinancialProject ()  {
         <Menu /> 
             
             <div className='col-md-9'>
-                <img src={bci} className='bcA'></img>
                     <p className='centerH'>Financial Projection</p>
                     <p className='centerHp'>Make sure you answer all question</p>
+                    <img src={bci} className='bcA'></img>
             <div className='centerM'>
             <div className='container divMonth'>
                 <div className='month'>

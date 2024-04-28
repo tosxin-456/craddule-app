@@ -111,18 +111,16 @@ export default function ChatToolModal ({open, onClose}) {
       <p className='chatText1'>11:30</p>
     </div>
 
-    <div className='container-flex chatGrid1'>
+    <div className='chatGrid1'>
       <div className='chatsBottom'>
-        <div className='inputIcon'>
+        {/*<div className='inputIcon'>      </div>*/}
         <span className='iconS3 sm' type='button'><CiShare1 /></span>
         <span className='iconS3 sm' type='button'><CiFaceSmile/></span>
-        </div>
-        <div>
+  
         <input placeholder='Write your message' className='chatInput'></input>
-        </div>
-        <div className='chatsButton'>
-        <button className='btn btn-primary theChatButton'>Send</button>
-        </div>
+       {/* <div className='chatsButton'>        </div>*/}
+        <p className='theChatButton' type='button'>Send</p>
+
       </div>
     </div>
   </div>
