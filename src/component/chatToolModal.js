@@ -13,6 +13,23 @@ import close from './closeB.png';
 
 
 export default function ChatToolModal ({open, onClose}) {
+
+  //first dropdown
+    // State variables to manage dropdown behavior
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState('');
+  
+    // Function to toggle dropdown visibility
+    const toggleDropdown = () => {
+      setIsDropdownOpen(!isDropdownOpen);
+    };
+  
+    // Function to handle option selection
+    const handleOptionSelect = (option) => {
+      setSelectedOption(option);
+      setIsDropdownOpen(false);
+    };
+
     const [isOpen, setIsOpen]= useState(false);
     const navigate = useNavigate()
     const onClickHandler = () => navigate(`/login`)
@@ -51,8 +68,22 @@ export default function ChatToolModal ({open, onClose}) {
       <div>
         <div className='iconTxt'>
           <div>
-            <span className='' type='button'><CiCircleRemove /></span>
-            <p className='iconTxtP'>4 Members</p>
+            {/*<span className='' type='button'><CiCircleRemove /></span>*/}
+            <div className="dropdown3">
+                <div className={`select4 ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
+                    <span classname="selected">{selectedOption || <CiCircleRemove />}</span>
+                    <div class=""></div>
+                    <p className='iconTxtP'>4 Members</p>
+                </div>
+                <ul className={`menu4 ${isDropdownOpen ? 'menu-open4' : ''}`}>
+                    <li type='button'>Angela Onoja</li>
+                    <hr className='listMar'></hr>
+                    <li type='button'>John Doe</li>
+                    <hr className='listMar'></hr>
+                    <li type='button'>Mark Joel </li>
+                </ul>
+            </div>
+           
           </div>
           <div className='topIcon1'>
             <span className='' type='button'><CiFolderOn /></span>

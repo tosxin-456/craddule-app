@@ -1642,12 +1642,12 @@ hr{
   }
   
 
-  .flex-container > div{
+  /*.flex-container > div{
     text-align: center;
     margin-right: 50px;
     padding: 10px;
     font-size: 14px !important;
-  }
+  }*/
 
   .list{
     margin-right:120px !important;
@@ -1711,17 +1711,30 @@ hr{
   }
 
 
-  .boxG {
+  /*.boxG {
     display: flex;
-    text-wrap: nowrap; 
+    justify-content: space-around;
     background-color: #f0e296 !important;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px 0 rgb(170 170 170);
+  }*/
+
+  .boxH1 {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2px;
+    background-color: #f0e296 !important;
+    padding: 10px;
+    font-size: 14px !important;
     border-radius: 5px;
     box-shadow: 0 1px 5px 0 rgb(170 170 170);
   }
 
   .boxH {
     display: flex;
-    text-wrap: nowrap;
+    padding: 10px;
+    font-size: 14px !important;
+    justify-content: space-between;
     margin-top: 2px;
     border-radius: 5px;
     box-shadow: 0 1px 5px 0 rgb(170 170 170);
@@ -1729,6 +1742,7 @@ hr{
 
   .boxI {
     display: flex;
+    justify-content: space-between;
     text-wrap: nowrap;
     margin-top: 2px;
     border-radius: 5px;
@@ -1749,47 +1763,92 @@ hr{
       width: 100px;
   }
 
-  .listT{
+
+  .boxH1> div{
+    margin-left: 35px;
+    margin-right: 70px;
+  }
+
+  .boxH> div{
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+ /* .listT{
     margin-right:200px !important;
     margin-left: 10px !important;
   }
 
   .listT1{
-    margin-right:185px !important;
+    /*margin-right:185px !important;
     margin-left: 10px !important;
   }
   
   .listT2{
-    margin-right:172px !important;
+   /* margin-right:172px !important;
     margin-left: 10px !important;
   }
 
   .listT3{
-    margin-right:205px !important;
+   /* margin-right:205px !important;
     margin-left: 10px !important;
   }
 
   .listT4{
-    margin-right:183px !important;
+   /* margin-right:183px !important;
     margin-left: 10px !important;
   }
 
   .listU{
     margin-right: 70px !important;
     margin-left: 10px !important;
-  }
+  }*/
+
+ .listT{
+  margin-left: 20px !important;
+  margin-right: 10px  ;
+ }
 
   .lst{
-    margin-right: 90px !important;
-    margin-left: 0px !important;
+    margin-right: 100px !important;
   }
 
-  .lstS{
+  
+  .txtp1{
+    margin-right: 50px !important;
+  }
+
+
+.lstS{
+    margin-right: 110px !important;
+  }
+
+  .txtp2{
     margin-right: 90px !important;
   }
 
+  
+  
   .lisS{
-    margin-right: 90px !important;
+    margin-right: 80px !important;
+  }
+
+  .txtp3{
+    margin-right: 50px !important;
+  }
+
+
+  .lstS1{
+    margin-right: 95px !important;
+  }
+
+  .txtp4{
+    margin-right: 50px !important;
+  }
+
+
+  .remvo{
+    margin-right: 30px !important;
   }
 
   .input2{
@@ -3952,7 +4011,7 @@ font-weight: bold;
 
 .iconTxtP{
   display: inline-block;
-  margin-left: 5px;
+  margin: 4px 5px 0px 2px;
   font-size: 9px;
 
 }
@@ -4248,3 +4307,197 @@ margin-left:5px;
   /*.column:last-child{
  margin-left:0; 
 }*/
+
+
+/*Team dropdown
+.dropdown2{
+  min-width: 15em;
+  position: relative;
+  margin: 0.55em;
+}
+
+.dropdown *{
+  box-sizing: border-box !important;
+}
+
+.select{
+  background: rgb(247, 244, 244);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px rgb(247, 244, 244)solid;
+  border-radius: 0.5em;
+  padding: .5em;
+  cursor: pointer;
+  transition: background 0.3s; 
+}
+
+.select-clicked{
+  border: 2px rgb(247, 244, 244) solid;
+  box-shadow: 0 0 0.8em rgb(247, 244, 244);
+}
+
+/*.select:hover{
+  background: #282c34;
+}
+.caret{
+  width:0;
+  height: 0px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid rgb(94, 90, 90);
+  transition: 0.3s;
+}
+
+.caret-rotate{
+  transform: rotate(190deg);
+}
+
+.menu{
+  list-style: none;
+  padding: 0.2em 0.5em;
+  background-color: rgb(247, 244, 244);
+  border: 1px rgb(247, 244, 244);
+  box-shadow: 0 0 0.8em rgb(247, 244, 244);
+  border-radius: 0.5em;
+  position: absolute;
+  top: 3em;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%);
+  opacity: 0;
+  display: none;
+  transition: 0.2s;
+  z-index: 1;
+}
+
+.menu l1 {
+  padding: 0.7em 0.5em;
+  margin: 0.3em 0;
+  border-radius: 0.5em;
+  cursor: pointer;
+}*/
+
+.dropdown3{
+  min-width: 7em;
+  position: relative;
+}
+
+/*.dropdown3:hover{
+  color:#c19000;
+}*/
+
+.dropdown *{
+  box-sizing: border-box !important;
+}
+
+.select3{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s; 
+}
+
+.select-clicked2{
+  border: none;
+}
+
+.select:hover{
+  background: #282c34;
+}
+.caret3{
+  width:0;
+  height: 0px;
+  margin-left: 15px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid rgb(94, 90, 90);
+  transition: 0.3s;
+}
+
+.caret-rotate{
+  transform: rotate(190deg);
+}
+
+.menu3{
+  list-style: none;
+  padding: 0.2em 0.5em;
+  background-color: rgb(247, 244, 244);
+  border: 1px rgb(247, 244, 244);
+  box-shadow: 0 0 0.8em rgb(247, 244, 244);
+  border-radius: 0.5em;
+  position: absolute;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%);
+  opacity: 0;
+  display: none;
+  transition: 0.2s;
+  z-index: 1;
+}
+
+.menu-open3{
+  display:block;
+  opacity:1;
+}
+
+.menu3 l1 {
+  padding: 0.7em 0.5em;
+  margin: 0.3em 0;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+/*.menu li:hover{
+  background-color: black;
+}*/
+
+.lili{
+  color: green !important;
+}
+
+.lili1{
+  color: red !important;
+}
+
+.select4{
+  display: flex;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s; 
+}
+
+/* For chat tools*/
+.menu4{
+  list-style: none;
+  padding: 0.2em 0.5em;
+  background-color: #fafcff;
+  border: 1px rgb(247, 244, 244);
+  box-shadow: 0 0 0.8em rgb(247, 244, 244);
+  border-radius: 0.5em;
+  position: absolute;
+  left: 50%;
+  margin-top: 2px;
+  margin-left: 10px;
+  text-wrap: nowrap;
+  transform: translate(-50%);
+  opacity: 0;
+  display: none;
+  transition: 0.2s;
+  z-index: 1;
+}
+
+.menu3 l1 {
+  padding: 0.7em 0.5em;
+  margin: 0.3em 0;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+.menu-open4{
+  display:block;
+  opacity:1;
+}
