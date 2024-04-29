@@ -4194,15 +4194,20 @@ font-weight: bold;
   box-shadow: rgb(227, 232, 246) 0px 1px;
   /* box-shadow: rgb(227, 232, 246) 1px 5px 1px 12px; */
 }
-.column:first-child{
-  /* margin-left:5px; */
-}
 
-.column:last-child{
-  /* margin-left:0; */
-}
+  /*.column:first-child{
+ margin-left:5px; 
+}*/
+
+  /* .column:last-child{
+margin-left:0;
+} */
+
+
 /*size it end*/
-<<<<<<< HEAD
+
+
+HEAD
 
 .bcP{
   width: 20px;
@@ -4220,6 +4225,9 @@ font-weight: bold;
 .emailInvite1{
   display: flex;
   justify-content: space-around;
+}
+
+
 /* go */
 
 .columnG{
@@ -4232,11 +4240,11 @@ font-weight: bold;
   transition:0.5s
 }
 
-.column:first-child{
-  /* margin-left:5px; */
-}
+  /* .column:first-child{
+margin-left:5px; 
+  }*/
 
-.column:last-child{
-  /* margin-left:0; */
->>>>>>> f00fbfeb2f8f2c68b803558fa500b5a092c5ce12
-}
+
+  /*.column:last-child{
+ margin-left:0; 
+}*/
