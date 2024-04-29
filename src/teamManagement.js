@@ -171,12 +171,12 @@ function TeamManagement ()  {
             <input type="text" className='input2' placeholder="Search.."></input>
             <p type='button' className='curveSend' onClick={()=>setIsOpen(true)}>Invite</p>
             <div className='container-secTeam'>
-                    <div class="flex-container boxH1">
+                    <div class="boxH1">
                     <div className='listT'>Name</div>
                     <div className='listU'>Team Members Permission</div>
                     <div className='remvo'>Revoke team member access</div>
                 </div>
-                <div class="flex-container boxH">
+                <div class="boxH">
                     <div className='listT1'>Adunni Arike</div>
                    { /*<div type="button" data-toggle="dropdown" className='dropdown-toggle lst'>Change permission</div>*/}
                     <div className="dropdown3 lst">
@@ -208,7 +208,7 @@ function TeamManagement ()  {
             </div> 
 
 
-                <div class="flex-container boxH">
+                <div class="boxH">
                     <div className='listT2'>Jeddiah Joshua</div>
                     {/*<div type="button" data-toggle="dropdown" className='dropdown-toggle lstS'>Change permission</div>*/}
                     <div className="dropdown3 lstS">
@@ -241,7 +241,7 @@ function TeamManagement ()  {
 
 
 
-                <div class="flex-container boxH">
+                <div class="boxH">
                     <div className='listT3'>Mark Joel</div>
                   {/*  <div type="button" data-toggle="dropdown" className='dropdown-toggle lisS'>Change permission</div>*/}
                     <div className="dropdown3 lisS">
@@ -274,7 +274,7 @@ function TeamManagement ()  {
 
 
 
-                <div class="flex-container boxH">
+                <div class="boxH">
                     <div className='listT4'>Titilope Seun</div>
                    {/* <div type="button" data-toggle="dropdown" className='dropdown-toggle lstS1'>Change Permission</div>*/}
                     <div className="dropdown3 lstS1">

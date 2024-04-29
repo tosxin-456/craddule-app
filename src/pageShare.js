@@ -21,7 +21,7 @@ function PageShare ()  {
     <Menu /> 
         
         <div className='col-md-9'>
-        <img src={bci} className='bcA'></img>
+       {/* <img src={bci} className='bcA'></img>*/}
         <div className='centerC'>
             <div className='text-center'>
                 <p className='centerH'>Share</p>

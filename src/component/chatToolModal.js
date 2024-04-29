@@ -30,6 +30,22 @@ export default function ChatToolModal ({open, onClose}) {
       setIsDropdownOpen(false);
     };
 
+//second dropdown
+    // State variables to manage dropdown behavior
+    const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
+    const [selectedOption1, setSelectedOption1] = useState('');
+  
+    // Function to toggle dropdown visibility
+    const toggleDropdown1 = () => {
+      setIsDropdownOpen1(!isDropdownOpen1);
+    };
+  
+    // Function to handle option selection
+    const handleOptionSelect1 = (option) => {
+      setSelectedOption1(option);
+      setIsDropdownOpen1(false);
+    };
+
     const [isOpen, setIsOpen]= useState(false);
     const navigate = useNavigate()
     const onClickHandler = () => navigate(`/login`)
@@ -144,8 +160,21 @@ export default function ChatToolModal ({open, onClose}) {
 
     <div className='chatGrid1'>
       <div className='chatsBottom'>
-        {/*<div className='inputIcon'>      </div>*/}
-        <span className='iconS3 sm' type='button'><CiShare1 /></span>
+        {/*<div className='inputIcon'>      </div>
+        <span className='iconS3 sm' type='button'><CiShare1 /></span>*/}
+        <div className="dropdown4 iconS3 sm">
+                <div className={`select4 ${isDropdownOpen1 ? 'select-clicked' : ''}`} onClick={toggleDropdown1}>
+                    <span classname="selected">{selectedOption1 || <CiShare1 />}</span>
+                    <div class=""></div>
+                </div>
+                <ul className={`menu5 ${isDropdownOpen1 ? 'menu-open5' : ''}`}>
+                    <li type='button'><CiMobile1 /> Photo & Videos</li>
+                    <hr className='listMar'></hr>
+                    <li type='button'><CiCamera /> Camera</li>
+                    <hr className='listMar'></hr>
+                    <li type='button'><CiShare1 /> Document </li>
+                </ul>
+            </div>
         <span className='iconS3 sm' type='button'><CiFaceSmile/></span>
   
         <input placeholder='Write your message' className='chatInput'></input>

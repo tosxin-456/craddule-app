@@ -60,6 +60,22 @@ setSelectedOption2(option);
 setIsDropdownOpen2(false);
 };
 
+
+//fourth Dropdown
+  // State variables to manage dropdown behavior
+  const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
+  const [selectedOption3, setSelectedOption3] = useState('');
+
+// Function to toggle dropdown visibility
+const toggleDropdown3 = () => {
+setIsDropdownOpen3(!isDropdownOpen3);
+};
+
+// Function to handle option selection
+const handleOptionSelect3 = (option) => {
+setSelectedOption3(option);
+setIsDropdownOpen3(false);
+};
 const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/introduction1`)
@@ -73,7 +89,7 @@ const navigate = useNavigate()
         
         <div className='col-md-12'>
         <div className='centerP'>
-        <img src={bci} className='bcP' type='button'onClick={onClickHandler}></img>
+        <img src={bci} className='bcP1' type='button'onClick={onClickHandler}></img>
 
             <div><p className='centerH1a'>Profile</p>
             <p className='centerHp1a'>View, manage your memebers and send invites</p>
@@ -84,7 +100,18 @@ const navigate = useNavigate()
 
             <div className='profilePic'>
                 <img src= {p1} className='imgPic' type='button'></img>
-                <p className='imgTittle' type='button'>Edit</p>
+                {/*<p className='imgTittle' type='button'>Edit</p>*/}
+                <div className="dropdown4 imgTittle">
+                <div className={`select4 ${isDropdownOpen3 ? 'select-clicked' : ''}`} onClick={toggleDropdown3}>
+                    <span classname="selected">{selectedOption3 || "Edit"}</span>
+                    <div class=""></div>
+                </div>
+                <ul className={`menu6 ${isDropdownOpen3 ? 'menu-open6' : ''}`}>
+                    <li type='button' className='imgItem'>Upload a photo</li>
+                    <hr className='listMar1'></hr>
+                    <li type='button' className='imgItem'>Remove photo</li>
+                </ul>
+            </div>
             </div>
 
             <div className='filled1'>
@@ -111,7 +138,7 @@ const navigate = useNavigate()
               </div>  
            
 
-            <div className='filled3'>    
+            <div className='filled3a'>    
             <div className="dropdown">
                 <div className={`select ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
                     <span classname="selected">{selectedOption|| "Select from team member"}</span>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'; 
+import bci from './images/bc.png';
 import Header from './component/header';
 import { useNavigate } from 'react-router-dom';
 import GiveFeedbackModal from './component/giveFeedbackModal';
@@ -11,6 +12,7 @@ function ViewDocument ({open, onClose})  {
     const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/viewSheetModal`)
+    const onClickHandler1 = () => navigate(`/pageShare`)
     return (        
         <>
          <div className='container-fluid'>
@@ -18,9 +20,11 @@ function ViewDocument ({open, onClose})  {
         
         <div className='container col-sm-7'>
         <div className='centerC'>
+            
             <div className='text-center'>
+            <img src={bci} className='bcI' onClick={onClickHandler1}></img>  
                 <p className='centerH'>View Document</p>
-                <p className='centerHp'>Here you can view shared document</p>               
+                <p className='centerHp'>Here you can view shared document</p>             
             </div>
             <div className='BoxPhase1'>
             <div className='BoxPhase'>
