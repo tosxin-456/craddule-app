@@ -5,7 +5,7 @@ import solution from './images/solution.png';
 import Header from './component/header';
 import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
-
+import UploadLogoModal from './component/brandLogoModal';
 
 
 
@@ -77,6 +77,7 @@ setSelectedOption3(option);
 setIsDropdownOpen3(false);
 };
 const navigate = useNavigate()
+const [isOpen, setIsOpen]= useState(false);
 
     const onClickHandler = () => navigate(`/introduction1`)
     return (
@@ -107,7 +108,7 @@ const navigate = useNavigate()
                     <div class=""></div>
                 </div>
                 <ul className={`menu6 ${isDropdownOpen3 ? 'menu-open6' : ''}`}>
-                    <li type='button' className='imgItem'>Upload a photo</li>
+                    <li type='button' className='imgItem' onClick={()=>setIsOpen(true)}>Upload a photo</li>
                     <hr className='listMar1'></hr>
                     <li type='button' className='imgItem'>Remove photo</li>
                 </ul>
@@ -246,7 +247,9 @@ const navigate = useNavigate()
                 </ul>
             </div>
             </div>
-            
+            <UploadLogoModal open={isOpen} onClose={() => setIsOpen(false)}>
+
+          </UploadLogoModal>
       </div>    
   </div>
   </div>
