@@ -8,6 +8,7 @@ import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
 import ImageModal from './component/imageModal';
 import { Toaster, toast } from 'sonner'
+import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
@@ -145,7 +146,9 @@ return () => {
 };
 }, []);
 
-
+const access_token = localStorage.getItem('access_token');
+const decodedToken = jwtDecode(access_token);
+const userId = decodedToken.userId;
 
 //Register
 
@@ -157,7 +160,7 @@ const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
-    CompanyName: '',
+    phoneNumber: '',
   });
 
   const handleChange = (e) => {
@@ -171,18 +174,22 @@ const [formData, setFormData] = useState({
     e.preventDefault();
 
     
-    createUser(formData);
+    updateUser(formData);
 
    
   };
 
-  const createUser = async (data) => {
+  const updateUser = async (data) => {
     setLoading(true);
+    console.log("at change")
     try {
-      const response = await fetch(API_BASE_URL+'/api/user', {
+
+
+      const response = await fetch(API_BASE_URL+'/api/user/'+userId, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${access_token}`,
         },
         body: JSON.stringify(data),
       });
@@ -194,16 +201,10 @@ const [formData, setFormData] = useState({
         console.log(response);
 
         const responseData = await response.json(); // Parse JSON response
+        console.log(responseData)
   
-  // Access the access_token from the response data
-  const { access_token } = responseData.data;
-
-  // Do something with the access_token
-  console.log('Access Token:', access_token);
-  localStorage.setItem('access_token', access_token);
   setLoading(false);      
-  navigate(``);      
-        console.log('User created successfully');
+
       } else {
         const result = await response.json();
         setLoading(false);
@@ -233,18 +234,26 @@ const [isOpen, setIsOpen]= useState(false);
         <div className='col-md-12'>
         <div className='centerP'>
         <img src={bci} className='bcP1' type='button'onClick={onClickHandler}></img>
-
+        <form onSubmit={handleSubmit}>
             <div><p className='centerH1a'>Profile</p>
             <p className='centerHp1a'>View, manage your memebers and send invites</p>
-            <button className="btn btn-primary curveN">Save changes</button>
+
+
+
+            <button className="btn btn-primary curveN"  disabled={loading}>
+              { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+                { !loading && <span>Save changes</span>}
+                
+              </button>
+
             <button className="btn btn-primary curveI">Discard changes</button></div>
 
             <p className='profileTitle'>Profile picture or company logo</p>
 
             <div className='profilePic'>
                 <img src= {p1} className='imgPic' type='button'></img>
-                {/*<p className='imgTittle' type='button'>Edit</p>*/}
-                <div ref={dropdownRef3} className="dropdown4 imgTittle">
+              <p className='imgTittle' type='button'>Edit</p>
+                 {/* <div ref={dropdownRef3} className="dropdown4 imgTittle">
                 <div className={`select4 ${isDropdownOpen3 ? 'select-clicked' : ''}`} onClick={toggleDropdown3}>
                     <span classname="selected">{selectedOption3 || "Edit"}</span>
                     <div class=""></div>
@@ -254,23 +263,59 @@ const [isOpen, setIsOpen]= useState(false);
                     <hr className='listMar1'></hr>
                     <li type='button' className='imgItem'>Remove photo</li>
                 </ul>
+            </div>*/}
             </div>
-            </div>
+
 
             <div className='filled1'>
-                <p className='pageTittle'>Full Name</p>
-                <input className='profileInput' placeholder='Enter first and last name'></input>
+            <label htmlFor="firstName" className='pageTittle'>First Name</label>
+                <input 
+                type="text"
+                id="firstName" 
+                value= {formData.firstName}
+                onChange={handleChange}
+                className='profileInput' 
+                placeholder='First Name'
+                />
+                
+            </div>
+            <div className='filled2'>
+                <label htmlFor="lastName" className='pageTittle'>Last Name</label>
+                <input 
+                type="text"
+                id="lastName" 
+                value= {formData.lastName}
+                onChange={handleChange}
+                className='profileInput' 
+                placeholder='Last Name'
+                />
             </div>
 
             <div className='filled2'>
-                <p className='pageTittle'>Company Name</p>
-                <input className='profileInput' placeholder='Company Name'></input>
+                <label htmlFor="email" className='pageTittle'>Email</label>
+                <input 
+                type="email"
+                id="email"
+                value={formData.email}
+                onChange={handleChange}
+                className='profileInput' 
+                placeholder='Email'
+                />
             </div>
 
             <div className='filled2'>
-                <p className='pageTittle'>Email</p>
-                <input className='profileInput'  placeholder='Email'></input>
+                <label htmlFor="phone" className='pageTittle'>Phone Number</label>
+                <input 
+                 type="tel"
+                 id="phoneNumber" 
+                 value= {formData.phoneNumber}
+                 onChange={handleChange}
+                className='profileInput'  
+                placeholder='Phone Number'
+                />
             </div>
+         </form>
+
 
             <div className='filledd'>
             <div className="dropdown">
@@ -389,11 +434,15 @@ const [isOpen, setIsOpen]= useState(false);
                 </ul>
             </div>
             </div>
+            
             <ImageModal open={isOpen} onClose={() => setIsOpen(false)}>
 
           </ImageModal>
-      </div>    
+      </div>  
+        
   </div>
+  <Toaster  position="top-right" />
+
   </div>
   </div>
   </>
