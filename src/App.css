@@ -1321,6 +1321,18 @@ background-color: white!important;
   border-radius: 15px;
 }
 
+.modalSt2{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 10px 20px;
+  width: 40%;
+  z-index: 1000;
+  border-radius: 15px;
+}
+
 .closeM{
   cursor: pointer;
   float: inline-end;
@@ -1378,6 +1390,18 @@ background-color: white!important;
   top: 250px;
 }
 
+.okNice{
+  background-color: #e6b800;
+  border-radius: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  width: 40%;
+  z-index: 1000;
+}
+
 hr{
   border-top: 2px solid black !important;
   opacity: .1 !important;
@@ -1394,6 +1418,15 @@ hr{
   border-radius: 3px !important;
 }
 
+.uploadImage{
+  background-color: #d8d7d7d1 !important; 
+  text-align: center;
+  border-style: dotted !important;
+  border-width: 2px !important;
+  margin: 5px;
+  border-radius: 3px !important;
+}
+
 .logoIcon{
   width: opx;
   margin-top: 25PX;
@@ -1405,14 +1438,24 @@ hr{
 }
 
 .txt1{
-  margin-bottom: 0px !important;
-  font-size: 16px;
+  margin-bottom: 15px !important;
+  font-size: 10px;
+}
+
+.txtC{
+  font-weight:bold !important;
+  margin-top: 10px;
 }
 
 .txt2{
  font-weight: bold !important;
  margin-left: 25px !important;
 }
+
+.txt2a{
+  font-weight: bold !important;
+  margin-left: 0px !important;
+ }
 
 .curveLogo{
   background-color: #E8C400 !important;
@@ -1427,9 +1470,22 @@ hr{
   margin: 20px !important;
 }
 
+.curveImage{
+  background-color: #f7eaa3 !important;
+  border: 0px !important;
+  color: #000 !important;
+  font-weight:500 !important;
+  padding: 3px 10px  !important;
+  border-radius: 10px !important;
+  font-size: 17px!important;
+  left: 19em;
+  margin: 5px !important;
+}
+
 .closeIcon{
   text-align: right;
-  font-size: 25px;
+  font-size: 15px;
+  font-weight: 700;
   margin-right: 25px;
   margin-bottom: 0px !important;
   color: solid black !important;
@@ -1856,8 +1912,8 @@ hr{
     border-width: 1px;
     /* box-shadow: 0 1px 5px 0 #f0dfa4; */
     height: 40px;
-    width: 100%!important;
     padding: 20px;
+    width: 100%;
     display: block;
     outline: none;
 
@@ -1969,6 +2025,7 @@ hr{
   margin-bottom: 10px;
   margin-right: 3px!important;
   top: 65PX;
+  right: 65px;
   float: right;
 }
 
@@ -2453,7 +2510,7 @@ font-weight: 0px;
 .boxRA {
   display: flex;
   text-wrap: nowrap; 
-  justify-content: center;
+  justify-content: space-evenly;
   border-radius: 5px;
   margin: 20px;
 }
@@ -3056,8 +3113,7 @@ font-weight: bold;
 
 .container-team{
   display: grid;
-  width: 100%;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 
 .dropdown{
@@ -3156,8 +3212,8 @@ font-weight: bold;
 }
 
 .bottonInput{
-  display: block;
-  width: 100%;
+  display: inline-block;
+  width: 90%;
 }
 
 .dropdown1{
@@ -4297,6 +4353,12 @@ HEAD
   margin-top: 20px;
 }
 
+.shareImageDiv{
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
 
 .emailInvite1{
   display: flex;
@@ -4421,9 +4483,10 @@ margin-left:5px;
   border: none;
 }
 
-.select:hover{
+/*.select:hover{
   background: #282c34;
-}
+}*/
+
 .caret3{
   width:0;
   height: 0px;
@@ -4597,4 +4660,35 @@ margin-left:5px;
 
 .listMar1{
   margin: 2px !important;
+}
+
+.okDiv{
+  display: block;
+  text-align: center;
+  margin: 20px;
+  padding: 70px;
+}
+
+.niceWork{
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0px;
+}
+
+.niceWork1{
+  font-weight: bold;
+  text-wrap: wrap;
+  margin: 10px 0px 0px 0px;
+}
+
+.niceImg{
+  font-size: 50px;
+  color: green;
+}
+
+.calendar-dropdown {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  z-index: 2;
 }

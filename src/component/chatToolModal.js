@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {CiCamera, CiShare1, CiFaceSmile, CiUndo, CiMobile1, CiPaperplane, CiCircleRemove, CiFolderOn} from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
 import ReactDOM from "react-dom";
@@ -18,6 +18,8 @@ export default function ChatToolModal ({open, onClose}) {
     // State variables to manage dropdown behavior
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
+    const dropdownRef = useRef(null);
+
   
     // Function to toggle dropdown visibility
     const toggleDropdown = () => {
@@ -34,6 +36,8 @@ export default function ChatToolModal ({open, onClose}) {
     // State variables to manage dropdown behavior
     const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
     const [selectedOption1, setSelectedOption1] = useState('');
+    const dropdownRef1 = useRef(null);
+
   
     // Function to toggle dropdown visibility
     const toggleDropdown1 = () => {
@@ -45,6 +49,36 @@ export default function ChatToolModal ({open, onClose}) {
       setSelectedOption1(option);
       setIsDropdownOpen1(false);
     };
+
+
+// Close dropdown when clicking outside of it 1
+useEffect(() => {
+  const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+          setIsDropdownOpen(false);
+      }
+  };
+
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, []);
+
+// Close dropdown when clicking outside of it 2
+useEffect(() => {
+  const handleClickOutside = (event) => {
+      if (dropdownRef1.current && !dropdownRef1.current.contains(event.target)) {
+          setIsDropdownOpen1(false);
+      }
+  };
+
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, []);
+
 
     const [isOpen, setIsOpen]= useState(false);
     const navigate = useNavigate()
@@ -85,7 +119,7 @@ export default function ChatToolModal ({open, onClose}) {
         <div className='iconTxt'>
           <div>
             {/*<span className='' type='button'><CiCircleRemove /></span>*/}
-            <div className="dropdown3">
+            <div ref={dropdownRef} className="dropdown3">
                 <div className={`select4 ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
                     <span classname="selected">{selectedOption || <CiCircleRemove />}</span>
                     <div class=""></div>
@@ -162,7 +196,7 @@ export default function ChatToolModal ({open, onClose}) {
       <div className='chatsBottom'>
         {/*<div className='inputIcon'>      </div>
         <span className='iconS3 sm' type='button'><CiShare1 /></span>*/}
-        <div className="dropdown4 iconS3 sm">
+        <div ref={dropdownRef1} className="dropdown4 iconS3 sm">
                 <div className={`select4 ${isDropdownOpen1 ? 'select-clicked' : ''}`} onClick={toggleDropdown1}>
                     <span classname="selected">{selectedOption1 || <CiShare1 />}</span>
                     <div class=""></div>

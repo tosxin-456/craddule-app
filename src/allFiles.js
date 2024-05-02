@@ -31,8 +31,8 @@ function AllFiles ()  {
             <p className='centerH'>All Files</p>
             <div class="flex-container boxRA">
                     <div type='button' className='hdds'>Recent</div>
-                    <div type='button'className='hds'>Started</div>
-                    <div type='button'className='hds'>Shared</div>
+                    <div type='button'className='hdds'>Started</div>
+                    <div type='button'className='hdds'>Shared</div>
                 </div> 
                 
         

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from "react-dom";
 import closeB from './closeB.png';
 import SectionInviteModal from './sectionInviteModal';
+import DatePicker from 'react-datepicker';
 import { useNavigate } from 'react-router-dom';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 
@@ -13,6 +15,9 @@ export default function CollaboratorModal ({open, onClose})  {
        // State variables to manage dropdown behavior
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
+  const dropdownRef = useRef(null);
+
 
   // Function to toggle dropdown visibility
   const toggleDropdown = () => {
@@ -26,12 +31,20 @@ export default function CollaboratorModal ({open, onClose})  {
     
   };
 
+     // Function to handle date selection
+     const handleDateSelect = (date) => {
+      setSelectedDate(date);
+      setIsDropdownOpen(false);
+  };
+
 
   //Second Dropdown
 
         // State variables to manage dropdown behavior
         const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
         const [selectedOption1, setSelectedOption1] = useState('');
+        const dropdownRef1 = useRef(null);
+
       
         // Function to toggle dropdown visibility
         const toggleDropdown1 = () => {
@@ -51,6 +64,8 @@ export default function CollaboratorModal ({open, onClose})  {
         // State variables to manage dropdown behavior
         const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
         const [selectedOption2, setSelectedOption2] = useState('');
+        const dropdownRef2 = useRef(null);
+
       
         // Function to toggle dropdown visibility
         const toggleDropdown2 = () => {
@@ -69,6 +84,9 @@ export default function CollaboratorModal ({open, onClose})  {
         // State variables to manage dropdown behavior
         const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
         const [selectedOption3, setSelectedOption3] = useState('');
+        const [selectedDate3, setSelectedDate3] = useState(null);
+        const dropdownRef3 = useRef(null);
+
       
         // Function to toggle dropdown visibility
         const toggleDropdown3 = () => {
@@ -81,6 +99,71 @@ export default function CollaboratorModal ({open, onClose})  {
           setIsDropdownOpen3(false);
           
         };
+
+             // Function to handle date selection
+     const handleDateSelect3 = (date) => {
+      setSelectedDate3(date);
+      setIsDropdownOpen3(false);
+  };
+
+
+
+
+         // Close dropdown when clicking outside of it 1
+ useEffect(() => {
+  const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+          setIsDropdownOpen(false);
+      }
+  };
+
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, []);
+
+// Close dropdown when clicking outside of it 2
+useEffect(() => {
+  const handleClickOutside = (event) => {
+      if (dropdownRef1.current && !dropdownRef1.current.contains(event.target)) {
+          setIsDropdownOpen1(false);
+      }
+  };
+
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, []);
+
+// Close dropdown when clicking outside of it 3
+useEffect(() => {
+const handleClickOutside = (event) => {
+    if (dropdownRef2.current && !dropdownRef2.current.contains(event.target)) {
+        setIsDropdownOpen2(false);
+    }
+};
+
+document.addEventListener('mousedown', handleClickOutside);
+return () => {
+    document.removeEventListener('mousedown', handleClickOutside);
+};
+}, []);
+
+// Close dropdown when clicking outside of it 4
+useEffect(() => {
+const handleClickOutside = (event) => {
+  if (dropdownRef3.current && !dropdownRef3.current.contains(event.target)) {
+      setIsDropdownOpen3(false);
+  }
+};
+
+document.addEventListener('mousedown', handleClickOutside);
+return () => {
+  document.removeEventListener('mousedown', handleClickOutside);
+};
+}, []);
 
 
     const [isOpen, setIsOpen]= useState(false);
@@ -100,7 +183,7 @@ export default function CollaboratorModal ({open, onClose})  {
               <hr></hr>
               <p className='txtS'>Add Collaborator</p>
               <div className='emailInvite'>
-                <div className="dropdown1">
+                <div ref={dropdownRef} className="dropdown1">
                  <div className={`select1 ${isDropdownOpen ? 'select-clicked1' : ''}`} onClick={toggleDropdown}>
                   <span classname="selected">{selectedOption|| "Name"}</span>
                     <div class="caret1"></div>
@@ -113,7 +196,7 @@ export default function CollaboratorModal ({open, onClose})  {
                     <li type='button' onClick={() => handleOptionSelect("David Arowolo")}>David Arowolo</li>
                 </ul>                                 
                 </div>
-                <div className="dropdown1">
+                <div ref={dropdownRef1} className="dropdown1">
                  <div className={`select1 ${isDropdownOpen1 ? 'select-clicked1' : ''}`} onClick={toggleDropdown1}>
                   <span classname="selected">{selectedOption1|| "Select Task"}</span>
                     <div class="caret1"></div>
@@ -126,31 +209,35 @@ export default function CollaboratorModal ({open, onClose})  {
                     <li type='button' onClick={() => handleOptionSelect1("Development")}>Development</li>
                 </ul>                                 
                 </div>
-                <div className="dropdown1">
+                <div ref={dropdownRef2} className="dropdown1">
                  <div className={`select1 ${isDropdownOpen2 ? 'select-clicked2' : ''}`} onClick={toggleDropdown2}>
-                  <span classname="selected">{selectedOption2|| "Start Date"}</span>
+                  <span classname="selected">{selectedDate ? selectedDate.toLocaleDateString() : "Start Date"}</span>
                     <div class="caret1"></div>
                  </div>
-                 <ul className={`menu1 ${isDropdownOpen2 ? 'menu-open1' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect2("Ade Yemaja")}>Ade Yemaja</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect2("Jide Arowolo")}>Jide Arowolo</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect2("Jide Arowolo")}>Jide Arowolo</li>
-                </ul>                                 
+                 {isDropdownOpen2 && (
+                <div className="calendar-dropdown">
+                    <DatePicker
+                        selected={selectedDate}
+                        onChange={handleDateSelect}
+                        inline
+                    />
                 </div>
-                <div className="dropdown1">
+            )}                                
+                </div>
+                <div ref={dropdownRef3} className="dropdown1">
                  <div className={`select1 ${isDropdownOpen3 ? 'select-clicked1' : ''}`} onClick={toggleDropdown3}>
-                  <span classname="selected">{selectedOption3|| "End Date"}</span>
+                  <span classname="selected">{selectedDate3 ? selectedDate3.toLocaleDateString() : "End Date"}</span>
                     <div class="caret1"></div>
                  </div>
-                 <ul className={`menu1 ${isDropdownOpen3 ? 'menu-open1' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect3("Ade Yemaja")}>Ade Yemaja</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect3("Jide Arowolo")}>Jide Arowolo</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect3("David Arowolo")}>David Arowolo</li>
-                </ul>                                 
+                 {isDropdownOpen3 && (
+                <div className="calendar-dropdown">
+                    <DatePicker
+                        selected={selectedDate3}
+                        onChange={handleDateSelect3}
+                        inline
+                    />
+                </div>
+            )}                                
                 </div>
                 {/*<button className="btn btn-primary dropdown-toggle team" type="button" data-toggle="dropdown">Name</button>
                 <button className="btn btn-primary dropdown-toggle team" type="button" data-toggle="dropdown">Select Task</button>

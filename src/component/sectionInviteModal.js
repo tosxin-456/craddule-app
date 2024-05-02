@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import closeB from './closeB.png'
 import ReactDOM from "react-dom";
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,8 @@ export default function SectionInviteModal ({open, onClose})  {
       // State variables to manage dropdown behavior
       const [isDropdownOpen, setIsDropdownOpen] = useState(false);
       const [selectedOption, setSelectedOption] = useState('');
+      const dropdownRef = useRef(null);
+
     
       // Function to toggle dropdown visibility
       const toggleDropdown = () => {
@@ -23,6 +25,24 @@ export default function SectionInviteModal ({open, onClose})  {
         setIsDropdownOpen(false);
         
       };
+
+
+
+           // Close dropdown when clicking outside of it 1
+ useEffect(() => {
+  const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+          setIsDropdownOpen(false);
+      }
+  };
+
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, []);
+
+
 
     const [isOpen, setIsOpen]= useState(false);
     const navigate = useNavigate()
@@ -50,7 +70,7 @@ export default function SectionInviteModal ({open, onClose})  {
 
 
               
-                <div className="dropdown2">
+                <div ref={dropdownRef} className="dropdown2">
                  <div className={`select2 ${isDropdownOpen ? 'select-clicked2' : ''}`} onClick={toggleDropdown}>
                   <span classname="selected">{selectedOption|| "Select project"}</span>
                     <div class="caret2"></div>

@@ -34,7 +34,7 @@ function PlanSub ()  {
         <div className='col-md-9'>
         <h1 className='centerHh'>Settings</h1>
         <p className='centerHh'>View and manage settings</p>
-        <img src={bci} className='bcA' onClick={onClickHandler}></img>
+        <img src={bci} className='bcA' onClick={onClickHandler} type='button'></img>
         <div className='centerS'>
           <div className='topDiv'>
             <p className='topDivT'>Upgrade Plan</p>

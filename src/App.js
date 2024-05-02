@@ -18,6 +18,7 @@ import SectionIntro from './sectionIntro';
 import ProblemStatement from './problemstatement';
 import PageBenefit from './pageBenefit';
 import Solution from './Solution';
+import NiceWorkModal from './component/niceWorkModal';
 import Conclusion from './conclusion';
 import PageCost from './costPage';
 import VideoDemo from './video';
@@ -72,6 +73,7 @@ import IncomeGraph from './incomeGraph';
 import SectionScale from './sectionScale';
 import Presentation from './presentation';
 import Model from './model';
+import NiceWork from './niceWork';
 import CustomerInfluxMoM from './customerInfluxMoM';
 import ExpensesMonthOnMonth from './expensesMoM';
 import InflationMonthOnMonth from './inflationMoM';
@@ -131,6 +133,7 @@ function App() {
         <Route path="/viewSheetModal" element= {<ViewSheetModal />} />
         <Route path="/problemstatement" element= {<ProblemStatement />} />
         <Route path="/Solution" element= {<Solution />} />
+        <Route path="/niceWorkModal" element= {<NiceWorkModal />} />
         <Route path="/customerGrowthMoM" element= {<CustomerGrowthMoM />} />
         <Route path="/pageShare" element= {<PageShare />} />
         <Route path="/pageBenefit" element= {<PageBenefit />} />
@@ -185,6 +188,7 @@ function App() {
         <Route path="/graphPage" element= {<GraphPage />} />
         <Route path="/wireFrame" element= {<WireFrame />} />
         <Route path="/login" element= {<Login />} />
+        <Route path="/niceWork" element= {<NiceWork />} />
         <Route path="/signUp" element= {<SignUp />} />
         <Route path="/sectionManagement" element= {<SectionManagement />} />
         <Route path="/teamManagement" element= {<TeamManagement />} />

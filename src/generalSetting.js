@@ -6,11 +6,9 @@ import API_BASE_URL from './config/apiConfig';
 import { Toaster, toast } from 'sonner'
 import SettingMenu from './component/settingMenu';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
-
-
+import { jwtDecode } from "jwt-decode";
 
 
 
@@ -22,8 +20,6 @@ function GeneralSetting ()  {
 
     const onClickHandler = () => navigate(`/introduction1`)
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showPassword1, setShowPassword1] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
@@ -48,9 +44,9 @@ function GeneralSetting ()  {
 
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
-        password: '',
-        npassword: '',
-        cpassword: '',
+        confirmNewPassword: '',
+        newPassword: '',
+        currentPassword: '',
       });
     
       const handleChange = (e) => {
@@ -64,10 +60,12 @@ function GeneralSetting ()  {
         e.preventDefault();
         
          // Check if new password matches confirmation password
-         if (formData.npassword !== formData.cpassword) {
+         if (formData.newPassword !== formData.confirmNewPassword) {
           console.error('New password and confirmation password do not match');
           return;
       }
+      console.log(formData);
+      console.log("check before")
         changePassword(formData);
     
        
@@ -75,15 +73,17 @@ function GeneralSetting ()  {
     
       const changePassword = async (data) => {
         setLoading(true);
+        console.log("at change");
         try {
 
           
         console.log(data);
         console.log(JSON.stringify(data));
-          const response = await fetch(API_BASE_URL+'/api/change-password' +userId, {
+          const response = await fetch(API_BASE_URL+'/api/user/change-password/'+userId, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${access_token}`,
             },
             body: JSON.stringify(data),
           });
@@ -96,14 +96,11 @@ function GeneralSetting ()  {
             const responseData = await response.json(); // Parse JSON response
       
      
-      const { token } = responseData; // Access token directly from response
+      //const { token } = responseData; // Access token directly from response
       setLoading(false);
       // Save access token to local storage
-      localStorage.setItem('access_token', token);
-      console.log('Access Token:', token);
-      localStorage.setItem('access_token', token);
-            console.log('Password Changed');
-              navigate(``)
+    
+         
           } else {
             const result = await response.json();
             setLoading(false);
@@ -146,8 +143,8 @@ function GeneralSetting ()  {
                 
                 <input
                   type={showPassword2 ? 'text' : 'password'}
-                  id="password"
-                  value={formData.password}
+                  id="currentPassword"
+                  value={formData.currentPassword}
                   onChange={handleChange}
                   className="custom-input1"
                   placeholder='*************'
@@ -158,12 +155,12 @@ function GeneralSetting ()  {
                   </span>
                   
 
-                <label htmlFor="npassword" className='lab1'>New Password</label>
+                <label htmlFor="newPassword" className='lab1'>New Password</label>
                 
                   <input
                     type={showPassword ? 'text' : 'password'}
-                    id="npassword"
-                    value={formData.npassword}
+                    id="newPassword"
+                    value={formData.newPassword}
                     onChange={handleChange}
                     className="custom-input1"
                     placeholder='Input New Password'
@@ -177,8 +174,8 @@ function GeneralSetting ()  {
                 
                   <input
                     type={showPassword1 ? 'text' : 'password'}
-                    id="cpassword"
-                    value={formData.cpassword}
+                    id="confirmNewPassword"
+                    value={formData.confirmNewPassword}
                     onChange={handleChange}
                     className="custom-input1"
                     placeholder='Confirm New Passowrd'
@@ -218,10 +215,8 @@ function GeneralSetting ()  {
            
           
   </div>
- 
-  </div>
   <Toaster  position="top-right" />
-
+  </div>
   </div>
   </>
     );
