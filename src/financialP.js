@@ -11,6 +11,7 @@ function FinancialProject ()  {
 
      const onClickHandler = () => navigate(`/yearOnYear`)
      const onClickHandler1 = () => navigate(`/monthOnmonth`)
+     const onClickHandler2 = () => navigate(`/multipleGraph`)
     return (
 
             <>
@@ -23,7 +24,7 @@ function FinancialProject ()  {
             <div className='col-md-9'>
                     <p className='centerH'>Financial Projection</p>
                     <p className='centerHp'>Make sure you answer all question</p>
-                    <img src={bci} className='bcA'></img>
+                    <img src={bci} className='bcA' type='button' onClick={onClickHandler2}></img>
             <div className='centerM'>
             <div className='container divMonth'>
                 <div className='month'>

@@ -29,7 +29,7 @@ function Menu () {
   const onClickHandler21 = () => navigate(`/pageShare`);
   const onClickHandler22 = () => navigate(`/generalSetting`);
   const onClickHandler23 = () => navigate(`/profile`);
-  const onClickHandler24 = () => navigate(`/financialP`);
+  const onClickHandler24 = () => navigate(`/multipleGraph`);
   const onClickHandler25 = () => navigate(`/comparative`);
 
 

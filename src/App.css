@@ -2884,6 +2884,7 @@ font-weight: bold;
  }
 
  .pageTittle{
+  display: block;
   margin-bottom: 5px;
  }
 
@@ -4691,4 +4692,21 @@ margin-left:5px;
   top: calc(100% + 2px);
   left: 0;
   z-index: 2;
+}
+
+.graphName{
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+
+.columnGraph{
+  flex: 1;
+  margin-bottom: 20px;
+  /* margin:5px; */
+  background:#fff;
+  transition:0.3s;
+  cursor: pointer;
+  transition:0.5s
 }

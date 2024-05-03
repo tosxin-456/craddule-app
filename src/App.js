@@ -17,12 +17,14 @@ import ExecutiveSummarys from './executiveSummarys';
 import SectionIntro from './sectionIntro';
 import ProblemStatement from './problemstatement';
 import PageBenefit from './pageBenefit';
+import InflationRateGraph from './inflationRateGraph';
 import Solution from './Solution';
 import NiceWorkModal from './component/niceWorkModal';
 import Conclusion from './conclusion';
 import PageCost from './costPage';
 import VideoDemo from './video';
 import SignUp from './signUp';
+import MultipleGraph from './multipleGraph';
 import CustomerGrowthMoM from './customerGrowthMoM';
 import Welcome from './welcome';
 import PageLogin from './pageLogin';
@@ -111,6 +113,7 @@ import Profile from './profile';
 import ChatTools from './chatTool';
 import KPIPage from './kpiPage';
 import Login from './login';
+import ExpensesGraph from './ExpensesGraph';
 import LandingPage from './landing';
 import LoadingPage from './laodingPage';
 import PageAddKpi from './pageAddKpi';
@@ -133,6 +136,7 @@ function App() {
         <Route path="/viewSheetModal" element= {<ViewSheetModal />} />
         <Route path="/problemstatement" element= {<ProblemStatement />} />
         <Route path="/Solution" element= {<Solution />} />
+        <Route path="/inflationRateGraph" element= {<InflationRateGraph />} />
         <Route path="/niceWorkModal" element= {<NiceWorkModal />} />
         <Route path="/customerGrowthMoM" element= {<CustomerGrowthMoM />} />
         <Route path="/pageShare" element= {<PageShare />} />
@@ -140,6 +144,8 @@ function App() {
         <Route path="/viewDocument" element= {<ViewDocument />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/planSub" element= {<PlanSub />} />
+        <Route path="/ExpensesGraph" element= {<ExpensesGraph />} />
+        <Route path="/multipleGraph" element= {<MultipleGraph />} />
         <Route path="/customerGrowthYoY" element= {<CustomerGrowthYoY />} />
         <Route path="/profitYoYpage" element= {<ProfitYoYpage/>} />
         <Route path="/operatingIncomeYoY" element= {<OperatingIncomeYoY />} />
