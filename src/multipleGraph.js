@@ -23,7 +23,7 @@ function MultipleGraph ()  {
     const onClickHandler1 = () => navigate(`/financialPincome`)
     const onClickHandler2 = () => navigate(`/financialPexpense`)
     const onClickHandler3 = () => navigate(`/financialPnet`)
-    const onClickHandler4 = () => navigate(`/financialPinflux`)
+    const onClickHandler4 = () => navigate(`/fincialPinflux`)
     const onClickHandler5 = () => navigate(`/financialPcomp`)
     return (
         
