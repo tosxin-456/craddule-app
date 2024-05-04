@@ -81,14 +81,14 @@ class   NetGraph extends Component {
 
         <div className='col-md-9'>
         <h1 className='centerGraph'>Graph</h1>
-        <div class="flex-container-graph boxGraph">
+       {/*} <div class="flex-container-graph boxGraph">
                     <div type='button' className='hg'>Inflation Rate</div>
                     <div type='button'className='hg'>Operating Income</div>
                     <div type='button'className='hg'>Expenses</div>
                     <div type='button'className='hg'>Net Profit</div>
                     <div type='button'className='hg'>Customer Influx</div>
                     <div type='button'className='hg'>Company Growth Rate</div>
-                </div>
+    </div>*/}
             <div className='centerG'>
               <p className="topText">Net Profit (or Loss) per year</p>
              <div className="graph1">

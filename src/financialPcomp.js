@@ -5,13 +5,13 @@ import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
 
 
-function FinancialProject ()  {
+function FinancialPcomp ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(``)
-     const onClickHandler1 = () => navigate(``)
-     const onClickHandler2 = () => navigate(``)
+     const onClickHandler = () => navigate(`/customerGrowthYoY`)
+     const onClickHandler1 = () => navigate(`/customerGrowthMoM`)
+     const onClickHandler2 = () => navigate(`/multipleGraph`)
     return (
 
             <>
@@ -40,4 +40,4 @@ function FinancialProject ()  {
         );
 }
 
-export default FinancialProject
+export default FinancialPcomp

@@ -10,8 +10,8 @@ function CustomerYoYInflux ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/customerGrowthYoY`)
-     const onClickHandler1 = () => navigate(`/financialP`)
+     const onClickHandler = () => navigate(`/graphPage`)
+     const onClickHandler1 = () => navigate(`/financialPinflux`)
     return (
 
             <>

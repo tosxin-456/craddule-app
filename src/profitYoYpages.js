@@ -10,8 +10,8 @@ function ProfitYoYpage ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/customerYoYinflux`)
-     const onClickHandler1 = () => navigate(`/financialP`)
+     const onClickHandler = () => navigate(`/netGraph`)
+     const onClickHandler1 = () => navigate(`/financialPnet`)
     return (
 
             <>

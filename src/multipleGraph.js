@@ -19,7 +19,12 @@ import { useNavigate } from 'react-router-dom';
 function MultipleGraph ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/financialP`)
+    const onClickHandler = () => navigate(`/financialPintegrate`)
+    const onClickHandler1 = () => navigate(`/financialPincome`)
+    const onClickHandler2 = () => navigate(`/financialPexpense`)
+    const onClickHandler3 = () => navigate(`/financialPnet`)
+    const onClickHandler4 = () => navigate(`/financialPinflux`)
+    const onClickHandler5 = () => navigate(`/financialPcomp`)
     return (
         
         <>
@@ -45,27 +50,27 @@ function MultipleGraph ()  {
                </div> 
 
                <div className='columnGraph'>
-                    <img src={graph5} className='imgX'onClick={onClickHandler}></img>
+                    <img src={graph5} className='imgX'onClick={onClickHandler1}></img>
                     <p className='graphName'>Operating Income</p>
                </div> 
 
                <div className='columnGraph'>
-                    <img src={graph3} className='imgX'onClick={onClickHandler}></img>
+                    <img src={graph3} className='imgX'onClick={onClickHandler2}></img>
                     <p className='graphName'>Expensses</p>
                </div> 
 
                <div className='columnGraph'>
-                    <img src={graph2} className='imgX'onClick={onClickHandler}></img>
+                    <img src={graph2} className='imgX'onClick={onClickHandler3}></img>
                     <p className='graphName'>Net Profit</p>
                </div> 
 
                <div className='columnGraph'>
-                    <img src={graph4} className='imgX'onClick={onClickHandler}></img>
+                    <img src={graph4} className='imgX'onClick={onClickHandler4}></img>
                     <p className='graphName'>Customer Influx</p>
                </div> 
 
                <div className='columnGraph'>
-                    <img src={graph1} className='imgX'onClick={onClickHandler}></img>
+                    <img src={graph1} className='imgX'onClick={onClickHandler5}></img>
                     <p className='graphName'>Company Growth Rate</p>
                </div> 
              

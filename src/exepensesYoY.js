@@ -9,8 +9,8 @@ function ExpensesYoY ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/operatingIncomeYoY`)
-     const onClickHandler1 = () => navigate(`/financialP`)
+     const onClickHandler = () => navigate(`/ExpensesGraph`)
+     const onClickHandler1 = () => navigate(`/financialPexpenses`)
     return (
 
             <>
