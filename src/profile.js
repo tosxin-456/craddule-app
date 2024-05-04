@@ -251,9 +251,9 @@ const [isOpen, setIsOpen]= useState(false);
             <p className='profileTitle'>Profile picture or company logo</p>
 
             <div className='profilePic'>
-                <img src= {p1} className='imgPic' type='button'></img>
-              <p className='imgTittle' type='button'>Edit</p>
-                 {/* <div ref={dropdownRef3} className="dropdown4 imgTittle">
+               <img src= {p1} className='imgPic' type='button'></img>
+              {/* <p className='imgTittle' type='button'>Edit</p>*/}
+                 <div ref={dropdownRef3} className="dropdown4 imgTittle">
                 <div className={`select4 ${isDropdownOpen3 ? 'select-clicked' : ''}`} onClick={toggleDropdown3}>
                     <span classname="selected">{selectedOption3 || "Edit"}</span>
                     <div class=""></div>
@@ -263,7 +263,7 @@ const [isOpen, setIsOpen]= useState(false);
                     <hr className='listMar1'></hr>
                     <li type='button' className='imgItem'>Remove photo</li>
                 </ul>
-            </div>*/}
+            </div>
             </div>
 
 
