@@ -37,35 +37,35 @@ function MultipleGraph ()  {
 
                 
         
-        <div className='wrapper2'>
+        <div className='wrapper3'>
             <div className='columns'>
                <div className='columnGraph'>
-                    <img src={graph6} className='imgX' ></img>
+                    <img src={graph6} className='imgX'onClick={onClickHandler}></img>
                     <p className='graphName'>Inflation Rate</p>
                </div> 
 
                <div className='columnGraph'>
-                    <img src={graph5} className='imgX' ></img>
+                    <img src={graph5} className='imgX'onClick={onClickHandler}></img>
                     <p className='graphName'>Operating Income</p>
                </div> 
 
                <div className='columnGraph'>
-                    <img src={graph3} className='imgX' ></img>
+                    <img src={graph3} className='imgX'onClick={onClickHandler}></img>
                     <p className='graphName'>Expensses</p>
                </div> 
 
                <div className='columnGraph'>
-                    <img src={graph2} className='imgX' ></img>
+                    <img src={graph2} className='imgX'onClick={onClickHandler}></img>
                     <p className='graphName'>Net Profit</p>
                </div> 
 
                <div className='columnGraph'>
-                    <img src={graph4} className='imgX' ></img>
+                    <img src={graph4} className='imgX'onClick={onClickHandler}></img>
                     <p className='graphName'>Customer Influx</p>
                </div> 
 
                <div className='columnGraph'>
-                    <img src={graph1} className='imgX' ></img>
+                    <img src={graph1} className='imgX'onClick={onClickHandler}></img>
                     <p className='graphName'>Company Growth Rate</p>
                </div> 
              
@@ -76,7 +76,7 @@ function MultipleGraph ()  {
             </div>
            
         </div> 
-        <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
+        {/*<button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>*/}
    
   </div>
   </div>
