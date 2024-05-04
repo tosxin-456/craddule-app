@@ -21,8 +21,9 @@ function OperatingIncomeMoM ()  {
         <Menu /> 
             
             <div className='col-md-9'>
-                <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
                     <p className='centerH'>Operating Income</p>
+                    <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
+
             <div className='container-fluid centerM1'>
              
                 <div className='year'>Year 1</div>

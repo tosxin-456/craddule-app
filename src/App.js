@@ -154,7 +154,7 @@ function App() {
         <Route path="/financialPnet" element= {<FinancialPnet />} />
         <Route path="/financialPincome" element= {<FinancialPincome />} />
         <Route path="/financialPexpense" element= {<FinancialPexpense />} />
-        <Route path="/financialPinflux" element= {<FinancialPinflux />} />
+        <Route path="/fincialPinflux" element= {<FinancialPinflux />} />
         <Route path="/financialPcomp" element= {<FinancialPcomp />} />
         <Route path="/financialPintegrate" element= {<FinancialPintegrate/>} />
         <Route path="/ExpensesGraph" element= {<ExpensesGraph />} />
@@ -182,6 +182,7 @@ function App() {
         <Route path="/pageLogin" element= {<PageLogin />} />
         <Route path="/termAgreement" element= {<TermAgreement />} />
         <Route path="/privacy" element= {<Privacy />} />
+        <Route path="/exepensesYoY" element= {<ExpensesYoY/>} />
         <Route path="/comparative" element= {<Comparative />} />
         <Route path="/monthOnmonth" element= {<MonthOnMonth/>} />
         <Route path="/yearOnyear" element= {<YearOnYear />} />

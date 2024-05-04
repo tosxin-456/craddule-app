@@ -22,8 +22,10 @@ function OperatingIncomeYoY ()  {
         <Menu /> 
             
             <div className='col-md-9'>
-                <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
+                
                     <p className='centerH'>Operating Income</p>
+                    <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
+
             <div className='centerM'>
              
 

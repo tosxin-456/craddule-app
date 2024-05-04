@@ -10,7 +10,7 @@ function ExpensesYoY ()  {
     const navigate = useNavigate()
 
      const onClickHandler = () => navigate(`/ExpensesGraph`)
-     const onClickHandler1 = () => navigate(`/financialPexpenses`)
+     const onClickHandler1 = () => navigate(`/financialPexpense`)
     return (
 
             <>
@@ -21,8 +21,9 @@ function ExpensesYoY ()  {
         <Menu /> 
             
             <div className='col-md-9'>
-                <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
                     <p className='centerH'>Expenses</p>
+                    <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
+
             <div className='centerM'>
              
 

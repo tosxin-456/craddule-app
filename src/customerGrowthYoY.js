@@ -22,8 +22,9 @@ function CustomerGrowthYoY ()  {
         <Menu /> 
             
             <div className='col-md-9'>
-                <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
                     <p className='centerH'>Company Growth Rate</p>
+                    <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
+
             <div className='centerM'>
              
             {/* <div className='inputYear'><input className='yearInput' placeholder='Input title of graph'></input></div>*/}
