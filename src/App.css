@@ -4746,3 +4746,17 @@ margin-left:5px;
   color: red;
   font-size: 10px;
 }
+
+/*new modal*/
+.mdN{
+  padding: 0px !important;
+  width: 70%  !important;
+  background: transparent !important;
+}
+.nn{
+  color: #fff !important;
+}
+.closeMMM{
+  color: #fff;
+  cursor: pointer;
+}
