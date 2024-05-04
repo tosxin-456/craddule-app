@@ -94,7 +94,7 @@ function GeneralSetting ()  {
             console.log(response.status);
             console.log(response);
             const responseData = await response.json(); // Parse JSON response
-      
+            console.log(responseData);
      
       //const { token } = responseData; // Access token directly from response
       setLoading(false);

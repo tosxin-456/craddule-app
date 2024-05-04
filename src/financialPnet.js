@@ -9,7 +9,7 @@ function FinancialPnet ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/profitYoYpage`)
+     const onClickHandler = () => navigate(`/profitYoYpages`)
      const onClickHandler1 = () => navigate(`/profitPageMoM`)
      const onClickHandler2 = () => navigate(`/multipleGraph`)
     return (

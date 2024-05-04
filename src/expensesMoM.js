@@ -9,8 +9,8 @@ function ExpensesMonthOnMonth ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/operatingIncomeMoM`)
-     const onClickHandler1 = () => navigate(`/financialP`)
+     const onClickHandler = () => navigate(`/ExpensesGraph`)
+     const onClickHandler1 = () => navigate(`/financialPexpense`)
     return (
 
             <>

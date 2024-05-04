@@ -11,6 +11,7 @@ import {
 
 import MarketAnalysis from './marketAnalysis';
 import Introduction from './introduction';
+import UpdateImage from './updateImage';
 import ExecutiveSummary from './ExecutiveSummary';
 import IntroductionTwo from './introduction1';
 import ExecutiveSummarys from './executiveSummarys';
@@ -75,6 +76,12 @@ import IncomeGraph from './incomeGraph';
 import SectionScale from './sectionScale';
 import Presentation from './presentation';
 import Model from './model';
+import FinancialPcomp from './financialPcomp';
+import FinancialPexpense from './financialPexpense';
+import FinancialPincome from './financialPincome';
+import FinancialPinflux from './fincialPinflux';
+import FinancialPintegrate from './financialPintegrate';
+import FinancialPnet from './financialPnet';
 import NiceWork from './niceWork';
 import CustomerInfluxMoM from './customerInfluxMoM';
 import ExpensesMonthOnMonth from './expensesMoM';
@@ -144,6 +151,12 @@ function App() {
         <Route path="/viewDocument" element= {<ViewDocument />} />
         <Route path="/video" element= {<VideoDemo />} />
         <Route path="/planSub" element= {<PlanSub />} />
+        <Route path="/financialPnet" element= {<FinancialPnet />} />
+        <Route path="/financialPincome" element= {<FinancialPincome />} />
+        <Route path="/financialPexpense" element= {<FinancialPexpense />} />
+        <Route path="/financialPinflux" element= {<FinancialPinflux />} />
+        <Route path="/financialPcomp" element= {<FinancialPcomp />} />
+        <Route path="/financialPintegrate" element= {<FinancialPintegrate/>} />
         <Route path="/ExpensesGraph" element= {<ExpensesGraph />} />
         <Route path="/multipleGraph" element= {<MultipleGraph />} />
         <Route path="/customerGrowthYoY" element= {<CustomerGrowthYoY />} />
@@ -151,6 +164,7 @@ function App() {
         <Route path="/operatingIncomeYoY" element= {<OperatingIncomeYoY />} />
         <Route path="/customerYoYinflux" element= {<CustomerYoYInflux />} />
         <Route path="/model" element= {<Model />} />
+        <Route path="/updateImage" element= {<UpdateImage />} />
         <Route path="/foreCast" element= {<ForeCast />} />
         <Route path="/expensesYoY" element= {<ExpensesYoY />} />
         <Route path="/inflationYoY" element= {<InflationYoY />} />

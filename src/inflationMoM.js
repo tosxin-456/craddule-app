@@ -9,8 +9,8 @@ function InflationMonthOnMonth ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/expensesMoM`)
-     const onClickHandler1 = () => navigate(`/financialP`)
+     const onClickHandler = () => navigate(`/inflationRateGraph`)
+     const onClickHandler1 = () => navigate(`/financialPintegrate`)
     return (
 
             <>

@@ -9,8 +9,8 @@ function ProfitPageMOM ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/customerInfluxMoM`)
-     const onClickHandler1 = () => navigate(`/financialP`)
+     const onClickHandler = () => navigate(`/netGraph`)
+     const onClickHandler1 = () => navigate(`/financialPnet`)
     return (
 
             <>

@@ -9,8 +9,8 @@ function OperatingIncomeMoM ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/profitPageMoM`)
-     const onClickHandler1 = () => navigate(`/financialP`)
+     const onClickHandler = () => navigate(`/incomeGraph`)
+     const onClickHandler1 = () => navigate(`/financialPincome`)
     return (
 
             <>

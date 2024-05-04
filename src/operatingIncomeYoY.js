@@ -10,8 +10,8 @@ function OperatingIncomeYoY ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/profitYoYpage`)
-     const onClickHandler1 = () => navigate(`/financialP`)
+     const onClickHandler = () => navigate(`/incomeGraph`)
+     const onClickHandler1 = () => navigate(`/financialPincome`)
     return (
 
             <>

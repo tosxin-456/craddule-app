@@ -1427,9 +1427,24 @@ hr{
   border-radius: 3px !important;
 }
 
+.uploadImage1{
+  background-color: #d8d7d7d1 !important; 
+  text-align: center;
+  border-style: dotted !important;
+  border-width: 2px !important;
+  margin: 5px;
+  padding: 15px;
+  border-radius: 3px !important;
+}
+
 .logoIcon{
   width: opx;
   margin-top: 25PX;
+}
+
+.logoIcon1{
+  width: 35px;
+  margin: 15px 0px 35px 0px;
 }
 
 .txt{
@@ -1445,6 +1460,13 @@ hr{
 .txtC{
   font-weight:bold !important;
   margin-top: 10px;
+}
+
+.txtCa{
+  font-weight:bold !important;
+  margin: 10px 5px 10px 10px;
+  display: block;
+  justify-content: center;
 }
 
 .txt2{
@@ -4709,4 +4731,18 @@ margin-left:5px;
   transition:0.3s;
   cursor: pointer;
   transition:0.5s
+}
+
+
+/*Multiple Grapgs*/
+.wrapper3{
+  padding: 5px;
+  max-width: 1200px;
+  width:75%;
+  margin:20px auto;
+}
+
+.error-message{
+  color: red;
+  font-size: 10px;
 }

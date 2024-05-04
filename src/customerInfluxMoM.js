@@ -9,8 +9,8 @@ function CustomerInfluxMoM ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/customerGrowthMoM`)
-     const onClickHandler1 = () => navigate(`/financialP`)
+     const onClickHandler = () => navigate(`/graphPage`)
+     const onClickHandler1 = () => navigate(`/fincialPinflux`)
     return (
 
             <>

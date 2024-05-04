@@ -9,8 +9,8 @@ function CustomerGrowthMoM ()  {
     
     const navigate = useNavigate()
 
-     const onClickHandler = () => navigate(`/graphPage`)
-     const onClickHandler1 = () => navigate(`/financialP`)
+     const onClickHandler = () => navigate(`/growthRateGraph`)
+     const onClickHandler1 = () => navigate(`/financialPcomp`)
     return (
 
             <>
@@ -22,7 +22,7 @@ function CustomerGrowthMoM ()  {
             
             <div className='col-md-9'>
                 <img src={bci} className='bcA' type='button' onClick={onClickHandler1}></img>
-                    <p className='centerH'>Customer Growth Rate</p>
+                    <p className='centerH'>Company Growth Rate</p>
             <div className='container-fluid centerM1'>
              
                 <div className='year'>Year 1</div>
