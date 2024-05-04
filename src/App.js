@@ -128,7 +128,7 @@ import GoPage from './goPage';
 import ProfitPage from './profitPage';
 import CreateProject from './createProject';
 import CreateQuestion from './createQuestion';
-
+import InspVideo from './inspVideo';
 
 function App() {
   return (
@@ -255,6 +255,7 @@ function App() {
         <Route path="/loading" element= {<LoadingPage />} />
         <Route path="/createProject" element= {<CreateProject />} />
         <Route path="/createQuestion" element= {<CreateQuestion />} />  
+          <Route path="/inspVideo" element= {<InspVideo />} />  
         <Route path="/" element={<Login />} />
         // <Route path="/" element={<MainApp />} />
       </Routes>
