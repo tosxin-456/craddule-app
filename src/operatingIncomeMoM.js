@@ -151,59 +151,59 @@ function OperatingIncomeMoM ()  {
             <div className='wrapperChart'>
                 <div className='columnsChart'>
                     <div className='columnChart'>
-                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'JAN', e.target.value)}></input>
+                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'JAN', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>JAN</p>
                     </div>
                     <div className='columnChart'>
-                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'FEB', e.target.value)}></input>
+                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'FEB', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>FEB</p>
                     </div>
                     <div className='columnChart'>
-                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'MAR', e.target.value)}></input>
+                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'MAR', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>MAR</p>
                     </div>
                     <div className='columnChart'>
-                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'APR', e.target.value)}></input>
+                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'APR', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>APR</p>
                     </div>
 
                     <div className='columnChart'>
-                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'MAY', e.target.value)}></input>
+                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'MAY', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>MAY</p>
                     </div>
 
                     <div className='columnChart'>
-                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'JUN', e.target.value)}></input>
+                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'JUN', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>JUN</p>
                     </div>
 
                     <div className='columnChart'>
-                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'JULY', e.target.value)}></input>
+                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'JULY', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>JULY</p>
                     </div>
 
                     <div className='columnChart'>
-                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'AUG', e.target.value)}></input>
+                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'AUG', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>AUG</p>
                     </div>
 
                     <div className='columnChart'>
-                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'SEP', e.target.value)}></input>
+                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'SEP', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>SEP</p>
                     </div>
 
                     <div className='columnChart'>
-                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'OCT', e.target.value)}></input>
+                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'OCT', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>OCT</p>
                     </div>
 
                     <div className='columnChart'>
-                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'NOV', e.target.value)}></input>
+                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'NOV', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>NOV</p>
                     </div>
 
                     <div className='columnChart'>
-                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'DEC', e.target.value)}></input>
+                        <input className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'DEC', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>DEC</p>
                     </div>
                     {/* Add more inputs for the remaining months */}
