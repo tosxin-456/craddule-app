@@ -163,6 +163,35 @@ const [formData, setFormData] = useState({
     phoneNumber: '',
   });
 
+  useEffect(() => {
+    // Simulating fetching user details from an API
+    const fetchUserDetails = async () => {
+        try {
+          const response = await fetch(API_BASE_URL+'/api/user/'+userId, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${access_token}`,
+            },
+          });
+            if (response.status === 200) {
+                const data = await response.json();
+                console.log(data);
+                // Update user details state with fetched data
+                const { firstName, lastName, email, phoneNumber } = data;
+                setFormData({ firstName, lastName, email, phoneNumber });
+            } else {
+                const data = await response.json();
+                console.log(data);
+                console.error('Failed to fetch user details');
+            }
+        } catch (error) {
+            console.error('Error fetching user details:', error);
+        }
+    };
+
+    fetchUserDetails();
+}, []);
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -184,7 +213,7 @@ const [formData, setFormData] = useState({
     console.log("at change")
     try {
 
-
+      console.log(data);
       const response = await fetch(API_BASE_URL+'/api/user/'+userId, {
         method: 'PUT',
         headers: {
@@ -195,7 +224,7 @@ const [formData, setFormData] = useState({
       });
 
      // const data = response.json();
-
+      
       if (response.status === 200) {
         console.log(response.status);
         console.log(response);
@@ -246,8 +275,8 @@ const [isOpen, setIsOpen]= useState(false);
                 
               </button>
 
-            <button className="btn btn-primary curveI">Discard changes</button></div>
-
+            {/* <button className="btn btn-primary curveI">Discard changes</button></div> */}
+            </div>
             <p className='profileTitle'>Profile picture or company logo</p>
 
             <div className='profilePic'>
@@ -317,16 +346,16 @@ const [isOpen, setIsOpen]= useState(false);
          </form>
 
 
-            <div className='filledd'>
+            {/* <div className='filledd'>
             <div className="dropdown">
              <p class='pageTitle1'>Assign super admin/delegated</p> </div>
              <div className="dropdown">
              <p class='pageTitle1'>Delegate authority period</p>
               </div>
-              </div>  
+              </div>   */}
            
 
-            <div className='filled3a'>    
+            {/* <div className='filled3a'>    
             <div ref={dropdownRef} className="dropdown">
                 <div className={`select ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
                     <span classname="selected">{selectedOption|| "Select from team member"}</span>
@@ -351,7 +380,7 @@ const [isOpen, setIsOpen]= useState(false);
                     <li type='button' onClick={() => handleOptionSelect1("Two Weeks")}>Two Weeks</li>
                 </ul>
             </div>
-            </div>
+            </div> */}
 
          
        {/*<div class='dropdown'>
@@ -395,7 +424,7 @@ const [isOpen, setIsOpen]= useState(false);
             </div>
                 
             </div>*/}
-
+{/* 
 <div className='filledd'>
             <div className="dropdown">
              <p class='pageTitle1'>Age</p> </div>
@@ -410,16 +439,7 @@ const [isOpen, setIsOpen]= useState(false);
             <input className='profileInput1'></input></div>
 
 
-                {/*<div className={`select ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
-                    <span classname="selected">{selectedOption|| "Select from team member"}</span>
-                    <div class="caret"></div>
-                </div>
-                <ul className={`menu ${isDropdownOpen ? 'menu-open' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect("Ade Yemaja")}>Ade Yemaja</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect("Jide Arowolo")}>Jide Arowolo</li>
-                </ul>
-        </div>*/}
+               
 
             
             <div ref={dropdownRef2} className="dropdown">
@@ -433,7 +453,7 @@ const [isOpen, setIsOpen]= useState(false);
                     <li type='button' onClick={() => handleOptionSelect2("Female")}>Female</li>
                 </ul>
             </div>
-            </div>
+            </div> */}
             
             <ImageModal open={isOpen} onClose={() => setIsOpen(false)}>
 
