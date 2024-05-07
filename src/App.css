@@ -3520,15 +3520,15 @@ font-weight: bold;
 }
 
 .monthOn1{
-  margin: 10px;
-  font-weight: bold;
   font-size: 12px;
-  padding: 10px;
-  width: 100px;
-  height: 40px;
-  border: 1px solid #dddddd;
-  border-radius: 5px;
-  outline: none;
+    padding: 3px;
+    width: 90px;
+    height: 40px;
+    border: 1px solid #717171;
+    border-radius: 5px;
+    outline: none;
+    background-color: #444;
+    color: #fff;
   
 }
 
@@ -4759,4 +4759,98 @@ margin-left:5px;
 .closeMMM{
   color: #fff;
   cursor: pointer;
+}
+.modG{
+    display: flex;
+    justify-content: center;
+}
+#apexcharts5cmf0fh9{
+  width: auto;
+}
+/* chart input */
+.wrapperChart{
+  padding: 5px;
+  max-width: 1200px;
+  width:95%;
+  margin:20px auto;
+}
+.columnsChart{
+  display:flex;
+  flex-flow:row wrap;
+  justify-content:center;
+  margin:5px 0;
+}
+
+.columnChart{
+  flex: 1;
+  /* margin:5px; */
+  background:#fff;
+  transition:0.3s;
+  border-radius:5px;
+  cursor: pointer;
+  transition:0.5s
+}
+.grP{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+}
+.graphNameT{
+  text-decoration: none;
+  list-style: none;
+  display: inline-block;
+  background: #c1c1c1;
+  margin: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  /* Define styles for mobile devices */
+  .apexchart {
+      width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  /* Define styles for mobile devices */
+  .apexchart {
+      width: 90%;
+  }
+}
+
+.addy{
+  border: 1px solid #6a6a6a;
+  padding: 5px 9px;
+  border-radius: 80px;
+  color: #6a6a6a;
+}
+
+.subm{
+  border-radius: 10px;
+  border: 0px;
+  background-color: #9c8403;
+  padding: 5px 10px;
+  font-size: 15px;
+  float: right;
+  color: #fff;
+}
+
+.mmj{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #fff;
+}
+.gname{
+  color: #323232;
+    margin-bottom: 0rem;
+    font-weight: 700;
+}
+.mmr{
+  margin-left: 10px;
 }
