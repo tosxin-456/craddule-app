@@ -3543,10 +3543,12 @@ font-weight: bold;
   border-radius: 5px;
 }
 
-.monthOn1T{
-  text-align: start;
-  color: #b8b8b8;
-  
+.monthOn1T {
+    text-align: start;
+    color: #8e8e8e;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 0rem;
 }
 
 .divMonth{   
@@ -3576,12 +3578,14 @@ font-weight: bold;
   border-radius: 5px;
 }
 
-.year{
-  font-size: 25px;
-  font-weight: bold;
-  color: #b8b8b8;
-  margin: 20px;
-  display: inline-flex;
+.year {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    display: inline-flex;
+    color: #323232;
 }
 
 .centerM3{
