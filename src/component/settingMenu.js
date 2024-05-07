@@ -62,6 +62,11 @@ function SettingMenu () {
   };
 
 
+  const logout = () => {
+    localStorage.removeItem('access_token');
+    navigate(`/login`);
+}
+
   return(
   
   <div className='col-md-3'>
@@ -102,7 +107,7 @@ function SettingMenu () {
     <div className='newMHold1'>
     <ul className='newMUl'>
         
-        <li className="dropdown-trigger2" onClick={onClickHandler1}> <span className='iconS'><CiMicrochip /></span> Log Out</li>
+        <li className="dropdown-trigger2" onClick={logout}> <span className='iconS'><CiMicrochip /></span> Log Out</li>
         <li className="dropdown-trigger2" onClick={()=>setIsOpen1(true)}> <span className='iconS'><CiUser /></span>Deactivate</li>       
         <li className="dropdown-trigger2" onClick={()=>setIsOpen(true)}> <span className='iconS'><CiUser /></span>Delete Account</li>   
         {/* Add more items as needed */}
