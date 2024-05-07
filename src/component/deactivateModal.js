@@ -42,7 +42,7 @@ export default function DeactivateModal ({open, onClose})  {
           console.log(response);
           const responseData = await response.json(); // Parse JSON response
           console.log(responseData);
-          navigate('../login')
+          navigate('/login')
           //const { token } = responseData; // Access token directly from response
           setLoading(false);
           // Save access token to local storage
