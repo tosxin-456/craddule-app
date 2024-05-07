@@ -56,7 +56,7 @@ useEffect(() => {
 
                 // Set the first graph name's data as selectedGraphData initially
                 if (data.length > 0) {
-                    setSelectedGraphData(data[1]);
+                    setSelectedGraphData(data[0]);
                 }
             } catch (error) {
                 console.error('Error fetching graph data:', error);
