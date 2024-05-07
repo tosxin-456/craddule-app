@@ -19,12 +19,12 @@ import { useNavigate } from 'react-router-dom';
 function MultipleGraph ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/financialPintegrate`)
-    const onClickHandler1 = () => navigate(`/financialPincome`)
-    const onClickHandler2 = () => navigate(`/financialPexpense`)
-    const onClickHandler3 = () => navigate(`/financialPnet`)
-    const onClickHandler4 = () => navigate(`/fincialPinflux`)
-    const onClickHandler5 = () => navigate(`/financialPcomp`)
+    const onClickHandler = () => navigate(`/inflationMoM`)
+    const onClickHandler1 = () => navigate(`/operatingIncomeMoM`)
+    const onClickHandler2 = () => navigate(`/expensesMoM`)
+    const onClickHandler3 = () => navigate(`/profitPageMoM`)
+    const onClickHandler4 = () => navigate(`/customerInfluxMoM`)
+    const onClickHandler5 = () => navigate(`/customerGrowthMoM`)
     return (
         
         <>

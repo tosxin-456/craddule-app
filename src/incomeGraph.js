@@ -1,21 +1,86 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import Chart from "react-apexcharts";
+import ReactDOM from "react-dom";
+import ReactApexChart from 'react-apexcharts';
+import ApexCharts from 'apexcharts';
 import Header from './component/header';
 import Menu from './component/menu';
-import { BiBorderAll } from "react-icons/bi";
-import { BsBorderWidth } from "react-icons/bs";
+import API_BASE_URL from './config/apiConfig';
 
-class IncomeGraph extends Component {
-  constructor(props) {
-    super(props);
-    const  colors = ['#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03','#5f4e03',];
-    this.state = {
-      series: [{
-        data: [21, 22, 10, 28, 16, 21, 13, 30, 35, 65, 76, 90, 65, 43]
-      }],
-     
-     
-      options: {
+
+
+
+
+function IncomeGraph({projectId, graphType }) {
+
+  
+    
+
+      const [graphData, setGraphData] = useState([]);
+    const [selectedGraphData, setSelectedGraphData] = useState(null);
+    
+    const [deviceType, setDeviceType] = useState('desktop');
+
+// Function to update deviceType state based on window width
+const updateDeviceType = () => {
+    if (window.innerWidth < 768) {
+        setDeviceType('mobile');
+    } else if (window.innerWidth < 1024) {
+        setDeviceType('tablet');
+    } else {
+        setDeviceType('desktop');
+    }
+};
+// Effect to update isMobile state on window resize
+useEffect(() => {
+  updateDeviceType();
+  window.addEventListener('resize', updateDeviceType);
+  return () => window.removeEventListener('resize', updateDeviceType);
+}, []);
+
+
+    useEffect(() => {
+        const projectId = localStorage.getItem('nProject');
+    const graphType = "OperatingIncome";
+        const fetchData = async () => {
+            try {
+                // Fetch graph data based on projectId and graphType
+                const response = await fetch(API_BASE_URL + `/api/graph?projectId=${projectId}&graphType=${graphType}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch graph data');
+                }
+                
+                const data = await response.json();
+                console.log(data);
+                setGraphData(data);
+
+                // Set the first graph name's data as selectedGraphData initially
+                if (data.length > 0) {
+                    setSelectedGraphData(data[1]);
+                }
+            } catch (error) {
+                console.error('Error fetching graph data:', error);
+                // Handle error, e.g., show error message to user
+            }
+        };
+
+        fetchData();
+    }, [projectId, graphType]);
+
+    const handleGraphNameClick = (graphName) => {
+        const selectedGraph = graphData.find(entry => entry.graphName === graphName);
+        setSelectedGraphData(selectedGraph);
+    };
+
+    const transformGraphData = (graphData) => {
+      if (!graphData) return null;
+    
+      const series = graphData.years.map((yearData) => ({
+        name: `Year ${yearData.year}`,
+        data: yearData.months.map((monthData) => parseFloat(monthData.value))
+    }));
+    
+      const options = {
         chart: {
           height: 350,
           type: 'bar',
@@ -25,7 +90,7 @@ class IncomeGraph extends Component {
             }
           }
         },
-        colors: colors,
+       
         plotOptions: {
           bar: {
             columnWidth: '90%',
@@ -38,79 +103,67 @@ class IncomeGraph extends Component {
         legend: {
           show: false
         },
-        xaxis: {
-          categories: [
-            ['Nov'],
-            ['Dec'],
-            ['Jan'],
-            ['Feb'],
-            ['Mar'],
-            ['Apr'],
-            ['May'],
-            ['Jun'],
-            ['Jul'],
-            ['Aug'],
-            ['Sep'],
-            ['Oct'],
-            ['Nov'],
-            ['Dec']
-          ],
-          labels: {
-            style: {
-              colors: colors,
-              fontSize: '12px'
+       xaxis: {
+                categories: graphData.years[0].months.map((monthData) => monthData.month),
             }
-          }
-        }
-      },
+      };
     
-    
+      return { series, options };
     };
-  }
-  render() {
-    return (
-      <div className="container-fluid">
-         <Header />
-        <div className="row">
-        <Menu />    
+    
 
-        <div className='col-md-9'>
-        <h1 className='centerGraph'>Graph</h1>
-        {/*<div class="flex-container-graph boxGraph">
-                    <div type='button' className='hg'>Inflation Rate</div>
-                    <div type='button'className='hg'>Operating Income</div>
-                    <div type='button'className='hg'>Expenses</div>
-                    <div type='button'className='hg'>Net Profit</div>
-                    <div type='button'className='hg'>Customer Influx</div>
-                    <div type='button'className='hg'>Company Growth Rate</div>
-    </div>*/}
-            <div className='centerG'>
-              <p className="topText">Revenue by Month</p>
-             <div className="graph1">
-                {/*<div className="centerGraph">
-            <div className="smallBox1"> 
-              <p className='graphTxt'>Operatiing Income</p>
-    </div>
-              </div>*/}
-                <Chart
-                options={this.state.options}
-                series={this.state.series}
-                type="bar"
-                width="500"
+    const chartData = transformGraphData(selectedGraphData);
+
+      
+  
+
+  
+
+ 
+      return (
+
+        <div className="container-fluid">
+        <Header />
+       <div className="row">
+       <Menu />    
+
+       <div className='col-md-9'>
+       <div className='centerG'>
+        <div className="grP">
+       {graphData.map((entry, index) => (
+                    <li key={index} onClick={() => handleGraphNameClick(entry.graphName)} className="graphNameT">
+                        {entry.graphName}
+                    </li>
+                ))}
+        </div>
+        <div className="modG">
+          <div className="graph1">
+                <div>
+                  <div id="chart">
+                  {selectedGraphData && (
+                <ReactApexChart
+                    options={chartData.options}
+                    series={chartData.series}
+                    type="bar"
+                    height={deviceType === 'mobile' ? 250 : deviceType === 'tablet' ? 300 : 350}
+                    width={deviceType !== 'desktop' ? '100%' : 700}
                 />
-            </div>
-            <p className="graphtxtt">Operating Income</p>
-            <button className="btn btn-primary curveGraph dropdown-toggle" data-toggle="dropdown">See more</button>
+            )}
+                  </div>
+                  <div id="html-dist"></div>
+                </div>
 
-            </div>
-
+          </div>
         </div>
-
-          
+        <p className="graphtxtt">Operating Income</p>
         </div>
-      </div>
-    );
-  }
-}
+</div> 
+</div>
+</div>
+      );
+    }
 
-export default IncomeGraph;
+
+
+
+  export default IncomeGraph;
