@@ -86,15 +86,16 @@ function Login() {
               console.log(responseData.user);
             const userStatus = responseData.user.status;
             console.log(responseData.user.status);
+               navigate(`/introduction1`);
               
-            if(userStatus === 'deactivated'){
-              toast.error("This Account as been Deactivated");
-            }else{
-              localStorage.setItem('access_token', token);
-              console.log('Access Token:', token);
-              localStorage.setItem('access_token', token);
-              navigate(`/introduction1`);
-            }
+            // if(userStatus === 'deactivated'){
+            //   toast.error("This Account as been Deactivated");
+            // }else{
+            //   localStorage.setItem('access_token', token);
+            //   console.log('Access Token:', token);
+            //   localStorage.setItem('access_token', token);
+            //   navigate(`/introduction1`);
+            // }
            
              // navigate(`/introduction1`)
           } else {
