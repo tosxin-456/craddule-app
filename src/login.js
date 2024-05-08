@@ -83,7 +83,7 @@ function Login() {
       // Save access token to local storage
     
             console.log('Logged successfully');
-            const userStatus = responseData.user.status
+            const userStatus = responseData.user.status;
             console.log(responseData.user.status);
             if(userStatus === 'deactivated'){
               toast.error("This Account as been Deactivated");
