@@ -82,7 +82,7 @@ function Login() {
       setLoading(false);
       // Save access token to local storage
     
-            console.log('Logged successfully');
+            console.log('Logging successfully');
               console.log(responseData.user);
             // const userStatus = responseData.user.status;
             // console.log(responseData.user.status);
