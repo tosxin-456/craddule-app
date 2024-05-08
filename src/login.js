@@ -84,9 +84,9 @@ function Login() {
     
             console.log('Logged successfully');
               console.log(responseData.user);
-            const userStatus = responseData.user.status;
-            console.log(responseData.user.status);
-               navigate(`/introduction1`);
+            // const userStatus = responseData.user.status;
+            // console.log(responseData.user.status);
+               //navigate(`/introduction1`);
               
             // if(userStatus === 'deactivated'){
             //   toast.error("This Account as been Deactivated");
