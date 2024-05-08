@@ -83,6 +83,7 @@ function Login() {
       // Save access token to local storage
     
             console.log('Logged successfully');
+              console.log(responseData.user);
             const userStatus = responseData.user.status;
             console.log(responseData.user.status);
             if(userStatus === 'deactivated'){
