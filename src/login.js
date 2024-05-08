@@ -86,6 +86,7 @@ function Login() {
               console.log(responseData.user);
             const userStatus = responseData.user.status;
             console.log(responseData.user.status);
+              
             if(userStatus === 'deactivated'){
               toast.error("This Account as been Deactivated");
             }else{
