@@ -25,7 +25,7 @@ function SectionPrototype ()  {
         <div className='centerC'>
             <div className='text-center'>
             <div class = "spaceA"></div>
-            <iframe src="https://www.youtube.com/embed/NBd6yJBzyis?si=QTR7Qu_dLDkhRFmR" title="Iframe Example"></iframe>
+            <iframe className='protoIframe' src="https://www.youtube.com/embed/NBd6yJBzyis?si=QTR7Qu_dLDkhRFmR" title="Iframe Example"></iframe>
             <div class = "spaceA"></div>
             </div>
         </div> 

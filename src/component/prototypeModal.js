@@ -11,7 +11,7 @@ import { jwtDecode } from "jwt-decode";
 
 
 
-export default function UploadLogoModal ( {open, onClose})  {
+export default function PrototypeModal ( {open, onClose})  {
   const [isOpen, setIsOpen]= useState(false);
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -80,7 +80,7 @@ const projectId = localStorage.getItem('nProject');
     Object.keys(data).forEach(key => {
       formData.append(key, data[key]);
     }); 
-   formData.append("type", "Wireframe" );
+   formData.append("type", "Prototype" );
    formData.append("projectId", projectId );
     console.log("data");
     console.log(formData);
