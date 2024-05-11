@@ -2654,6 +2654,8 @@ font-weight: 0px;
 
 /* go css */
 
+/* go css */
+
 .gogo{
   
   padding: 15px 15px;
@@ -2661,6 +2663,23 @@ font-weight: 0px;
   padding-bottom: 70px;
   border-radius: 20px;
   background-color: #1b45bf;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  margin-right: 4px;
+  margin-bottom: 10px;
+
+}
+
+
+.gogo{
+  
+  padding: 15px 15px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  border-radius: 20px;
+  background-color: #e6b800;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -2747,7 +2766,7 @@ font-weight: 0px;
 
 
 
-.gogoG{
+.gogoN{
   
   padding: 15px 15px;
   padding-top: 70px;
@@ -2763,11 +2782,11 @@ font-weight: 0px;
 
 }
 
-.gogoG:hover .goH{
+.gogoN:hover .goH{
   right:0;
 }
 
-.gogoY{
+.gogoO{
   
   padding: 15px 15px;
   padding-top: 70px;
@@ -2782,7 +2801,46 @@ font-weight: 0px;
   margin-bottom: 10px;
 }
 
-.gogoY:hover .goH{
+.gogoO:hover .goH{
+  right:0;
+}
+
+.gogoA{
+  
+  padding: 15px 15px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  border-radius: 20px;
+  background-color: #1a8400;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 10px;
+}
+
+.gogoA:hover .goH{
+  right:0;
+}
+
+
+.gogoD{
+  
+  padding: 15px 15px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  border-radius: 20px;
+  background-color: #840000;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 10px;
+}
+
+.gogoD:hover .goH{
   right:0;
 }
 
@@ -4445,8 +4503,9 @@ HEAD
 /* go */
 
 .columnG{
-  flex: 1;
+  width: 33.33333%;
   margin-bottom: 20px;
+  flex: 0 0 auto;
   /* margin:5px; */
   transition:0.3s;
   border-radius:20px;
