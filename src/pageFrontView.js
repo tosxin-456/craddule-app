@@ -154,6 +154,8 @@ useEffect(() => {
           if (response.status === 200) {
             console.log(response.status);
             console.log(response);
+            window.location.reload();
+
             const responseData = await response.json(); 
             console.log(responseData);
             // Additional handling if needed
