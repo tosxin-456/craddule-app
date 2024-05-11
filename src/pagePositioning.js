@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import bci from './images/bc.png'; 
 import success from './images/success.png'; 
 import cloud from './images/cloud.png';
 import Header from './component/header';
+import { SketchPicker } from 'react-color'; // Importing SketchPicker from react-color
 import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,6 +15,31 @@ function PagePositioning ()  {
     const navigate = useNavigate()
 
      const onClickHandler = () => navigate(``)
+     const [color, setColor] = useState('#ffffff'); // Initial color
+  const [showPicker, setShowPicker] = useState(false);
+
+  const handleChange = (selectedColor) => {
+    setColor(selectedColor.hex);
+  };
+
+  const handleButtonClick = () => {
+    if (showPicker) {
+      // If color picker is visible, hide it
+      setShowPicker(false);
+      // Handle adding color here when the color picker is hidden
+      console.log('Selected color:', color);
+      // Update the input value with the selected color
+      const input = document.getElementById('colorInput');
+      if (input) {
+        input.value = color;
+      }
+    } else {
+      // If color picker is not visible, show it
+      setShowPicker(true);
+    }
+  };
+
+
     return (
         <>
  <div className='container-fluid'>
@@ -30,68 +56,109 @@ function PagePositioning ()  {
         <p className='centerH'>Positioning and Messaging</p>
         <p className='centerHp'>Here we create a brand</p>
     </div>
-    <div class = "break"></div>
+
+    <div className = "titleBrand">
     <p className='question textBrand'>Brand Name</p>
-    <div className='container-textAt'>
-        <textarea className='textAs'></textarea>
+    <div className=''>
+        <input className='longInput'
+        placeholder='Enter Brand Name'
+        />
+        </div>
+        </div>
+
+
+    <div className = "titleBrand3">
+    <p className="headBrand">Brand Logo</p>
+    <div className=''>
+        <div className='brandlogoA'>
+        <img src={cloud} className='brandlogo'></img>
+        </div>
+        <button className="btn btn-primary buttonF">Upload your Brand Logo</button>
+       </div>
     </div>
 
-    <div class = "break"></div>
-    
-    <div>
-    <p className="question textBrand">Brand Logo</p>
-    <div>
-        <div className='brandlogoA'><img src={cloud} className='brandlogo'></img></div>
-       <button className="btn btn-primary buttonF">Upload you Brand Logo</button></div>
+
+    <div className = "color-picker-container">
+    <p className='headBrand'>Brand Color</p>
+    <div className='divBrand'>
+        {/* <input className='colorInput'
+        placeholder='Add colors'
+        /> */}
+        <input
+          id="colorInput"
+          className='colorInput'
+          placeholder='Add colors'
+          readOnly // Make the input field read-only
+        />
+          <button
+          className="btn btn-primary forColor"
+          onClick={handleButtonClick} // Toggle color picker visibility or handle adding color
+        >
+          {showPicker ? 'Add Color' : 'Select Color'}
+        </button>
+      </div>
+      {showPicker && (
+        <div className="pickerStlyes"> 
+        <SketchPicker
+          color={color}
+          onChange={handleChange}
+          presetColors={[]}
+          disableAlpha
+        />
+        </div>
+      )}
+       </div>
+
+
+    <div className = "color-picker-container">
+    <p className='headBrand'>Writing Font/ Style</p>
+    <div className='divBrand'>
+        <input className='colorInput'
+        placeholder='Add fonts'
+        />
+        <button className="btn btn-primary forColor">Add Font</button></div>
     </div>
 
-    <div className = "break"></div>
 
-    <div>
-    <p className='question textBrand'>Brand Color</p>
-    <div>
-        <div className='createBrand'><p className='createBrandA'>Add colors</p></div>
-       <button className="btn btn-primary buttonG">Add Color</button></div>
-    </div>
+    <div className = "titleBrand2">
+    <p className='headBrand'>Sologan</p>
+    <div className=''>
+        <input className='longInput'
+        placeholder='Sologan'
+        />
+        </div>
+        </div>
 
-    <div className = "break"></div>
 
-    <div>
-    <p className='question textBrand'>Writing Font/ Style</p>
-    <div>
-      <div className= 'createBrand'><p className='createBrandA'>Add Font</p></div>
-        <button className="btn btn-primary buttonH">Add Font</button></div>
-    </div>
+        <div className = "titleBrand2">
+    <p className='headBrand'>Vision</p>
+    <div className=''>
+        <input className='longInput'
+        placeholder='Vision'
+        />
+        </div>
+        </div>
 
-    <div className = "break"></div>
 
-    <p className='question textBrand'>Slogan</p>
-    <div className='container-textAt textAA'>
-        <textarea className='textAs'></textarea>
-    </div>
+        <div className = "titleBrand2">
+    <p className='headBrand'>Mission</p>
+    <div className=''>
+        <input className='longInput'
+        placeholder='Mission'
+        />
+        </div>
+        </div>
 
-    <div className = "break"></div>
 
-    <p className='question textBrand'>Vission</p>
-    <div className='container-textAt textAA'>
-        <textarea className='textAs'></textarea>
-    </div>
+        <div className = "titleBrand2">
+    <p className='headBrand'>Philosophy</p>
+    <div className=''>
+        <input className='longInput'
+        placeholder='Philosophy'
+        />
+        </div>
+        </div>
 
-    <div className = "break"></div>
-
-    <p className='question textBrand'>Mission</p>
-    <div className='container-textAt textAA'>
-        <textarea className='textAs'></textarea>
-    </div>
-
-    <div className = "break"></div>
-
-    <p className='question textBrand'>Philosophy</p>
-    <div className='container-textAt textAA'>
-        <textarea className='textAs'></textarea>
-    </div>
-
-    <div className = "break"></div>
 
 </div> 
 <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
