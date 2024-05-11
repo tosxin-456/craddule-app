@@ -135,7 +135,7 @@ function GeneralSetting ()  {
             <p>Create a new password</p>
     </div>*/}
          <div>
-            <h1 className='lgT1'>Change Passowrd</h1>
+            <h1 className='lgT1'>Change Password</h1>
             <p className='lgT2'>Create new password</p>
             <form onSubmit={handleSubmit}> 
             <div className="inputs-container">
