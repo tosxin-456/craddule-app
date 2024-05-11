@@ -145,7 +145,7 @@ function PitchDeck ()  {
                <div className='columnP'>
                {imageDetails.map((imageDetails, index) => (
 
-                    <img src={`http://localhost:3001/document/${imageDetails.document}`} alt="Image 1"
+                    <img src={API_BASE_URL+`/images/${imageDetails.image}`} alt="Image 1"
                     className='imgX' ></img>
                   ))}
                </div> 

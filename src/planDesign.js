@@ -209,9 +209,9 @@ function PlanDesign ()  {
                 <div className="image-grid">
                 {imageDetails.map((imageDetails, index) => (
 
-                 <img src={`http://localhost:3001/images/${imageDetails.image}`}  alt="Image 1"
+                 <img src={API_BASE_URL+`/images/${imageDetails.image}`}  alt="Image 1"
           className="gallery-image imgA"
-          onClick={() => handleImageClick(`http://localhost:3001/images/${imageDetails.image}`, imageDetails._id, imageDetails.sequence, imageDetails.imageName)}></img>
+          onClick={() => handleImageClick(API_BASE_URL+`/images/${imageDetails.image}`, imageDetails._id, imageDetails.sequence, imageDetails.imageName)}></img>
         ))}
           </div>
                 </div> 

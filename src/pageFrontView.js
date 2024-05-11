@@ -205,38 +205,10 @@ useEffect(() => {
                <div className="gallery-container">
                 <div className="image-grid">
                 {imageDetails.map((imageDetails, index) => (
-                  <img src={`http://localhost:3001/images/${imageDetails.image}`}  alt="Image 1"
+                  <img src={API_BASE_URL+`/images/${imageDetails.image}`}  alt="Image 1"
           className="gallery-image imgA"
-          onClick={() => handleImageClick(`http://localhost:3001/images/${imageDetails.image}`, imageDetails._id, imageDetails.sequence, imageDetails.imageName)}></img>
+          onClick={() => handleImageClick(API_BASE_URL+`/images/${imageDetails.image}`, imageDetails._id, imageDetails.sequence, imageDetails.imageName)}></img>
         ))}
-                  {/* <img src={imgA} alt="Image 2"
-          className="gallery-image imgA"
-          onClick={() => handleImageClick(imgA)}></img>
-                  <img src={imgB} alt="Image 3"
-          className="gallery-image imgA"
-          onClick={() => handleImageClick(imgB)} ></img>
-                  <img src={imgC} alt="Image 4"
-          className="gallery-image imgA"
-          onClick={() => handleImageClick(imgC)} ></img>
-                  <img src={imgD} alt="Image 5"
-          className="gallery-image imgA"
-          onClick={() => handleImageClick(imgD)}></img>
-            
-                  <img src={imgE} alt="Image 6"
-          className="gallery-image imgA"
-          onClick={() => handleImageClick(imgE)}></img>
-                  <img src={model} alt="Image 7"
-          className="gallery-image imgA"
-          onClick={() => handleImageClick(model)} ></img>
-                  <img src={plan} alt="Image 8"
-          className="gallery-image imgA"
-          onClick={() => handleImageClick(plan)} ></img>
-                  <img src={proto} alt="Image 9"
-          className="gallery-image imgA"
-          onClick={() => handleImageClick(proto)}></img>
-                  <img src={present}alt="Image 10"
-          className="gallery-image imgA"
-          onClick={() => handleImageClick(present)} ></img> */}
                   </div>
                 </div> 
                 {displayedImage && (
