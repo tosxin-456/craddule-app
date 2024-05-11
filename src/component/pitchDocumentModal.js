@@ -93,6 +93,8 @@ export default function PitchDocumentModal ( {open, onClose})  {
        });
        console.log(response);
        // Handle successful upload
+         // Reload the page after successful upload
+      window.location.reload();
      } catch (error) {
        console.error('Error uploading image:', error);
        console.log(error.response);
@@ -142,8 +144,12 @@ export default function PitchDocumentModal ( {open, onClose})  {
                 <p className='txt'>Drag and drop your Image here</p>
                {/*} <p className='txt1'>Maximum 50MB file size</p>
                 <p className='txt1'>JPG, PNG, or GIF format</p>*/}
-                <button className="btn btn-primary curveLogo" type="submit" >Upload image</button>
-           </div>
+              <button type="submit" className="btn btn-primary curveLogo" disabled={loading}>
+              { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+              { !loading && <span>Upload File</span>}
+              
+            </button>
+            </div>
            </form>
 
            </div>  

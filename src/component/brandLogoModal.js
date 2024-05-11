@@ -94,6 +94,9 @@ const projectId = localStorage.getItem('nProject');
         }
       });
       console.log(response);
+      // Reload the page after successful upload
+      window.location.reload();
+      
       // Handle successful upload
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -142,9 +145,10 @@ const projectId = localStorage.getItem('nProject');
              
               <img src={cloud} className='logoIcon'></img>
                 <p className='txt'>Drag and drop your Image here</p>
-               {/* <p className='txt1'>Maximum 50MB file size</p>
-                <p className='txt1'>JPG, PNG, or GIF format</p>*/} 
-                <button className="btn btn-primary curveLogo" type="submit">Upload image</button>
+                <button type="submit" className="btn btn-primary curveLogo" disabled={loading}>
+              { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+              { !loading && <span>Upload Images</span>}
+            </button>
            </div>
            </form>
            </div>  
