@@ -122,7 +122,7 @@ function PitchDeck ()  {
                   <a className={`nav-link ${activeTab === 'tab2' ? 'active' : ''}`} onClick={() => handleTabClick('tab2')} href="#tab2">Pitch Deck Slides</a>
                 </li>
                 <li className="nav-item">
-                  <a className={`nav-link ${activeTab === 'tab3' ? 'active' : ''}`} onClick={() => handleTabClick('tab3')} href="#tab3">Ask</a>
+                  <a className={`nav-link ${activeTab === 'tab3' ? 'active' : ''}`} onClick={() => handleTabClick('tab3')} href="#tab3">Resources</a>
                 </li>
                 {/* Add more tabs as needed */}
               </ul>
