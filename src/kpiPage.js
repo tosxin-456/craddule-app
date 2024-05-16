@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 function KPIPage ()  {
     const navigate = useNavigate()
+    const onClickHandler = () => navigate(`/trackPage`)
 
-     const onClickHandler = () => navigate(``)
     return (
 
         <>
@@ -19,27 +19,31 @@ function KPIPage ()  {
             <div className='row'>
             <Menu /> 
                 <div className='col-md-9'>
-                    <img src={bci} className='bcA'></img>
-                       <div className='div-kpi'>KPI</div>
-                <div className='centerKpi'>
-                <button className="btn btn-primary teamF" type="button">Create KPI</button>
-                <button className="btn btn-primary team" type="button">Track KPI</button>
-                <button className="btn btn-primary dropdown-toggle teamL" type="button" data-toggle="dropdown">Select Project</button>
-                <br></br>
-                <button className="btn btn-primary  teamS" type="button">Add a KPI<br></br><p className='txtc'>Add a KPI manually</p></button>
-                <button className="btn btn-primary  team1" type="button">Search for a KPI <br></br><p className='txtc'>Browse and add KPI's from the library</p></button>
-                <button className="btn btn-primary  teamk" type="button">Add a KPI Template<p className='txtc'>Browse and add KPI's from the library</p></button>
-                <br></br>
-                <div class="flex-container box1">
-                    <div className='list'>Name</div>
+                    <img src={bci} className='bcA' onClick={onClickHandler}></img>
+                    <div className='div-kpi1'><p>KPI</p></div>
+                <div className='centerKpi1'>
+                <div  className='topButtonKpi'>
+                <button className="btn btn-primary tFeem" type="button">Create KPI</button>
+                <button className="btn btn-primary tFeem1" type="button">Track KPI</button>
+                <button className="btn btn-primary dropdown-toggle tFeem2" type="button" data-toggle="dropdown">Select Project</button>
+                </div>
+
+                <div  className='bottomButtonKpi'>
+                <button className="btn btn-primary  tFeems" type="button">Add a KPI<br></br><p className='txtc'>Add a KPI manually</p></button>
+                <button className="btn btn-primary  tFeems1" type="button">Search for a KPI <br></br><p className='txtc'>Browse and add KPI's from the library</p></button>
+                <button className="btn btn-primary  tFeems2" type="button">Add a KPI Template<p className='txtc'>Browse and add KPI's from the library</p></button>
+               </div>
+
+                <div class="boxA1">
+                    <div className=''>Name</div>
                     <div>Unit</div>
                     <div>Frequency</div>
                     <div>Direction</div>
                     <div>Target</div>
                     <div>Calculated?</div>
                 </div>
-                <div class="flex-container box2">
-                    <div className='list1'>Sales Revenue</div>
+                <div class="boxA2">
+                    <div className=''>Sales Revenue</div>
                     <div>#2,400,000</div>
                     <div>Daily</div>
                     <div className='No'>Up</div>
@@ -59,7 +63,7 @@ function KPIPage ()  {
                 </div>
                 </div> 
         
-                <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
+                <button className="btn btn-primary curveNext">Next</button>
           </div>
           </div>
           </div>

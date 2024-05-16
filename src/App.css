@@ -465,6 +465,7 @@ body{
   font-size: 16px;
   font-weight: bold;
   display: block;
+  margin-bottom: 5px;
 }
 
 /* Bottom button */
@@ -659,7 +660,7 @@ background-color: white!important;
 }
 
 .colorInput{
-  width: 100px;
+  width: 110px;
   height: 40px; 
   outline: none;
   padding: 5px;
@@ -3517,6 +3518,7 @@ font-weight: bold;
 
 
 .boxView{
+  flex: 1;
   padding: 5px 10px;
 }
 
@@ -5203,8 +5205,326 @@ justify-content: space-between;
   transition: background-color 0.3s ease;
 }
 
-.pickerStlyes{
+.pickerStyles{
  position: relative;
  left: 110px;
  height: auto;
+}
+
+.fontSelect{
+  margin-left: 5px;
+}
+
+
+.copyLink{
+  width: 70% !important;
+  border-radius: 5px;
+  height: 30px;
+  padding: 15px;
+  border-width: 1px;
+  margin: 30px 30px 5px 30px;
+  outline: none;
+  background-color: #F9F9F9;
+}
+
+.copyA{
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+
+.copyA1{
+  margin-left: 30px;
+  text-align: left !important;
+  margin-bottom: 5px;
+}
+
+.emailInput{
+  background-color: #F9F9F9;
+  border-radius: 5px;
+  width: 70% !important;
+  height: 30px;
+  padding: 15px;
+  outline: none; 
+  border-width: 1px; 
+  margin: 0px 30px 5px 30px;
+}
+
+.shareEmailDiv{
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+.container-Email {
+  height: max-content;
+}
+
+
+.sendBoxE{
+  background-color: #fafafad1 !important;
+  border-style: dotted !important;
+  border-width: 2px !important;
+  margin-top: 15PX;
+  margin-right: 25px;
+  margin-left: 25px;
+  height: 100%;
+  border-radius: 3px !important;
+}
+
+.btn.highlighted{
+  float: right;
+  background-color: #37bde2 !important;
+  border: 0px !important;
+  color: #000 !important;
+  font-weight: 500 !important;
+  padding: 5px 30px !important;
+  border-radius: 20px !important;
+  font-size: 17px!important;
+  margin-right: 10px!important;
+  margin-bottom: 60px;
+}
+
+.BoxPhase.selected {
+  background-color: #f0f0f0;
+}
+
+.topButtonKpi{
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 15px;
+}
+
+/* .centerKpi1{
+  margin: 30px 10px 50px 10px;
+  border-radius: 10px;
+  width: 880px;
+} */
+
+.bottomButtonKpi{
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.boxA1 {
+  display: flex;
+  justify-content: space-between;
+  text-wrap: nowrap;
+  margin-top: 40px;
+  padding-left: 20px;
+  padding-right: 170px;
+  background-color: #f0e296 !important;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+}
+
+.div-boxA1{
+  margin: 20px;
+}
+
+.boxA2 {
+  display: flex;
+  text-wrap: nowrap;
+  margin-top: 2px;
+  padding-left: 20px;
+  padding-right: 30px;
+  justify-content: space-between;
+  background-color: white !important;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+}
+
+.containerGraph{
+  display: flex;
+  margin-top: 10px;
+}
+
+.progressGraph{
+  background-color: white;
+  /* height: 200px; */
+  width: max-content;
+  margin-left: 10px;
+  padding: 5px;
+  box-shadow: 0 2px 10px 0 rgb(170 170 170);
+border-radius: 10px;
+flex-wrap: wrap;
+}
+
+.graphNam{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.health{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.healthP{
+  display: inline-block;
+  margin: 0px;
+  font-size: 16px;
+}
+
+.healthS{
+  display: inline-block;
+  margin: 0px;
+  font-size: 13px;
+  color: #b8b8b8
+}
+
+.healthGraph{
+  background-color: white;
+  margin: 10px;
+  width: 39%;
+  padding: 5px;
+  box-shadow: 0 2px 10px 0 rgb(170 170 170);
+border-radius: 10px;
+}
+
+.healthRule{
+  border: 1px solid rgb(170 170 170);
+  margin: 0px 20px 0px 20px;
+}
+
+.progressKpi{
+  background-color: white;
+  margin: 10px;
+  padding: 15px;
+  width: 90%;
+  box-shadow: 0 2px 10px 0 rgb(170 170 170);
+border-radius: 5px;
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+}
+
+.streak{
+  display: flex;
+  width: max-content;
+}
+
+.streakP{
+  margin: 0px;
+  font-size: 8px;
+  color: #908e8e
+}
+
+.bolt{
+  font-size: 25px;
+  margin-right: 10px;
+  margin-top: 10px;
+  color: #e6b800;
+}
+
+.progressBar{
+  border-radius: 10px;
+}
+
+.Ustreak{
+  margin: 0px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.Ustreak1{
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.centerKpi1{
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+progress{
+  width: 90%;
+}
+
+.boltBig{
+  font-size: 60px;
+  color:#e6b800;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.vivian{
+  margin-top: 35px;
+}
+
+.tFeem{
+  padding: 5px 15px !important;
+  font-weight: bold !important;
+  border-radius: 10px !important;
+  background-color: white !important;
+  color: #000 !important;
+  border: none !important;
+  box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+}
+
+.tFeem1{
+  color: #000 !important;
+  border: none !important;
+  padding: 5px 15px !important;
+  border-radius: 10px !important;
+  background-color: #E8C400 !important;
+}
+
+.tFeem2{
+  padding: 10px 15px !important;
+  font-weight: bold !important;
+  border-radius: 10px !important;
+  background-color: white !important;
+  border: none !important;
+  color: #000 !important;
+  box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+}
+
+.tFeems{
+  padding: 10px 20px !important;
+  font-weight: bold !important;
+  border-radius: 10px !important;
+  background-color: black !important;
+  border: none !important;
+  color: white !important;
+  box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+}
+
+.tFeems1{
+  padding: 10px 15px !important;
+  font-weight: bold !important;
+  border-radius: 10px !important;
+  background-color: black !important;
+  border-color: white !important; 
+  border: none !important;
+  box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+}
+
+
+.tFeems2{
+  padding: 10px 15px !important;
+  font-weight: bold !important;
+  border-radius: 10px !important;
+  background-color: black !important;
+  border: none !important;
+  color: white !important;
+  box-shadow: 0 1px 5px 0 rgb(240, 223, 164);
+}
+
+.trackHeader{
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.div-kpi1{
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  color: #5b5414;
+  font-weight:bold !important;
+  margin-bottom: 50px;
 }

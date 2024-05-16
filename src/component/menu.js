@@ -18,7 +18,7 @@ function Menu () {
   const onClickHandler10 = () => navigate(`/pageSummary`);
   const onClickHandler11 = () => navigate(`/summary`);
   const onClickHandler12 = () => navigate(`/pageProject`);
-  const onClickHandler13 = () => navigate(`/kpiPage`);
+  const onClickHandler13 = () => navigate(`/trackPage`);
   const onClickHandler14 = () => navigate(`/pagePositioning`);
   const onClickHandler15 = () => navigate(`/teamManagement`);
   const onClickHandler16 = () => navigate(`/pitchDeck`);

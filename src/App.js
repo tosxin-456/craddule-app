@@ -12,6 +12,8 @@ import {
 import MarketAnalysis from './marketAnalysis';
 import Introduction from './introduction';
 import UpdateImage from './updateImage';
+import FontPicker from './fontPicker';
+import TrackPage from './trackPage';
 import ExecutiveSummary from './ExecutiveSummary';
 import IntroductionTwo from './introduction1';
 import ExecutiveSummarys from './executiveSummarys';
@@ -119,6 +121,11 @@ import OperatingIncomeYoY from './operatingIncomeYoY';
 import Profile from './profile';
 import ChatTools from './chatTool';
 import KPIPage from './kpiPage';
+import WorkLoad from './workLoad';
+import Task from './task';
+import Progress from './progress';
+import Time from './time';
+import Cost from './cost';
 import Login from './login';
 import ExpensesGraph from './ExpensesGraph';
 import LandingPage from './landing';
@@ -140,6 +147,11 @@ function App() {
         <Route path="/ExecutiveSummary" element= {<ExecutiveSummary />} />
         <Route path="/executiveSummarys" element= {<ExecutiveSummarys />} />
         <Route path="/sectionIntro" element= {<SectionIntro />} />
+        <Route path="/trackPage" element= {<TrackPage />} />
+        <Route path="/progress" element= {<Progress />} />
+        <Route path="/workLoad" element= {<WorkLoad />} />
+        <Route path="/cost" element= {<Cost />} />
+        <Route path="/time" element= {<Time />} />
         <Route path="/viewSheetModal" element= {<ViewSheetModal />} />
         <Route path="/problemstatement" element= {<ProblemStatement />} />
         <Route path="/Solution" element= {<Solution />} />
@@ -150,6 +162,7 @@ function App() {
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/viewDocument" element= {<ViewDocument />} />
         <Route path="/video" element= {<VideoDemo />} />
+        <Route path="/fontPicker" element= {<FontPicker />} />
         <Route path="/planSub" element= {<PlanSub />} />
         <Route path="/financialPnet" element= {<FinancialPnet />} />
         <Route path="/financialPincome" element= {<FinancialPincome />} />
