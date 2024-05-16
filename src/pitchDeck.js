@@ -58,6 +58,7 @@ function PitchDeck ()  {
     const projectId = localStorage.getItem('nProject');
     const fetchImageDetails = async () => {
             try {
+                const deck = "PicthDeck";
                 const response = await fetch(`${API_BASE_URL}/api/pitchDeck/upload/${projectId}`, {
                     method: 'GET',
                     headers: {
@@ -145,7 +146,7 @@ function PitchDeck ()  {
                <div className='columnP'>
                {imageDetails.map((imageDetails, index) => (
 
-                    <img src={API_BASE_URL+`/document/${imageDetails.document}`} alt="Image 1"
+                    <img src={API_BASE_URL+`/document/${imageDetails.hubFile}`} 
                     className='imgX' ></img>
                   ))}
                </div> 
