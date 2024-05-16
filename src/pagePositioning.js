@@ -6,7 +6,6 @@ import Header from './component/header';
 import { SketchPicker } from 'react-color'; // Importing SketchPicker from react-color
 import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
-import FontPicker from './fontPicker';
 import SelectFont from './component/selectFonts';
 import LogoModal from './component/logoModal';
 import { Toaster, toast } from 'sonner'
