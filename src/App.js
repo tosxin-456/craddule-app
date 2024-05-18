@@ -138,7 +138,6 @@ import ProfitPage from './profitPage';
 import CreateProject from './createProject';
 import CreateQuestion from './createQuestion';
 import InspVideo from './inspVideo';
-// import CreateGo from './createGo';
 import Share from './share';
 import LoginTeam from './loginStart';
 import SignUpTeam from './signUpStart';
@@ -274,7 +273,6 @@ function App() {
         <Route path="/createProject" element= {<CreateProject />} />
         <Route path="/createQuestion" element= {<CreateQuestion />} />  
           <Route path="/inspVideo" element= {<InspVideo />} />  
-          // <Route path="/createGo" element= {<CreateGo />} />  
         <Route path="/" element={<Login />} />
           Route path="/AllFiles" element= {<AllFiles />} />
             <Route path="/types/:type" element={<SubtypesList />} />
