@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import closeB from './closeB.png'
 import ReactDOM from "react-dom";
+import API_BASE_URL from '../config/apiConfig';
+import API_BASE_WEB_URL from '../config/apiConfigW';
+import { Toaster, toast } from 'sonner'
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -12,6 +17,7 @@ export default function SectionInviteModal ({open, onClose})  {
       const [isDropdownOpen, setIsDropdownOpen] = useState(false);
       const [selectedOption, setSelectedOption] = useState('');
       const dropdownRef = useRef(null);
+      const [linkD, setLink] = useState('');
 
     
       // Function to toggle dropdown visibility
@@ -45,53 +51,142 @@ export default function SectionInviteModal ({open, onClose})  {
 
 
     const [isOpen, setIsOpen]= useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
     const onClickHandler = () => navigate(``)
+
+    const projectId = localStorage.getItem('nProject');
+    const token = localStorage.getItem('access_token'); 
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.userId;
+    
+  
+    const [formData, setFormData] = useState({
+      email: '',
+      projectId: projectId,
+      link: ''
+    });
+
+ const createTeam = async (data) => {
+  setLoading(true);
+  
+  try {
+
+    
+    const timestamp = new Date().getTime();
+    const randomString = Math.random().toString(36).substring(2, 8);
+    const uniqueCode = timestamp.toString() + randomString;
+    const link = "/login/start/"+uniqueCode;
+    
+    console.log(link);
+    const updatedFormData = {
+      ...formData,
+      link: link
+    };
+      const response = await fetch(API_BASE_URL + '/api/team', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedFormData),
+      });
+
+      if (response.status === 200) {
+        setLoading(false);
+        console.log(response);
+        setLink(API_BASE_WEB_URL+link);
+      } else {
+            const result = await response.json();
+            setLoading(false);
+            //toast.error(result['error']);
+              console.error('Error:', result['error']);
+      }
+  } catch (error) {
+    setLoading(false);
+    console.error('An error occurred:', error);
+  }
+};
+const handleSubmit = (e) => {
+  e.preventDefault();
+  
+  createTeam(formData);
+
+ 
+};
+
+
+const copyToClipboard = () => {
+  navigator.clipboard.writeText(linkD).then(() => {
+    alert('Link copied to clipboard!');
+  }).catch((error) => {
+    console.error('Failed to copy the link: ', error);
+  });
+};
+
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.id]: e.target.value,
+  });
+};
+
+const handleClose = () => {
+  setLink('');
+  onClose();
+};
     if(!open) return null
     return ReactDOM.createPortal (
       <>
         <div className='modalOv' >
            <div className='modalSt1'>
-               <img src={closeB} className='closeB' onClick={onClose} type='button'></img>
+               <img src={closeB} className='closeB' onClick={handleClose} type='button'></img>
 
                <div className='titleCenter'>
               <p className='txtA'>Invite</p>
               <p className='txtB'>Manage, assign and send invites</p></div>
-              <input type="text" className='input' placeholder="Search.."></input>
+             
               <hr></hr>
-              
+              {linkD && (
+                <p className='copyPp'>{linkD}
+                <button className='cop' onClick={copyToClipboard}>
+                   Copy
+                </button>
+                </p>
+                )}
+              <form onSubmit={handleSubmit}>
               <div className='emailInvite1'>
                 <div className='enterEmail'>
                 <p className='email'>Email</p>
-                <input type="text" className='enterE' placeholder="Email"></input>
+                <input 
+                  type="text" 
+                  className='enterE' 
+                  placeholder="Email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                ></input>
                 {/*<textarea className='enterE'></textarea>*/}
                 </div>
 
 
-              
-                <div ref={dropdownRef} className="dropdown2">
-                 <div className={`select2 ${isDropdownOpen ? 'select-clicked2' : ''}`} onClick={toggleDropdown}>
-                  <span classname="selected">{selectedOption|| "Select project"}</span>
-                    <div class="caret2"></div>
-                 </div>
-                 <ul className={`menu2 ${isDropdownOpen ? 'menu-open2' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect("Project A")}>Project A</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect("Project B")}>Project B</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect("Project C")}>Project C</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect("Project D")}>Project D</li>
-                </ul>                                 
-                
-                </div>
+               
+               
 
                 </div>
+
+                
+
                 {/*<button className="btn btn-primary dropdown-toggle buttonSelect" type="button" data-toggle="dropdown">Select Project</button>*/}
                 <div className='shareButtonDiv'>
-           <button className="btn btn-primary curveInviteA" onClick={()=>setIsOpen(true)}>Add</button>
+           <button className="btn btn-primary curveInviteA" type='submit'>
+           { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+                { !loading && <span>Add</span>}
+            </button>
+            
            </div>
+           </form>
          
            </div>          
         </div>
