@@ -5528,3 +5528,102 @@ progress{
   font-weight:bold !important;
   margin-bottom: 50px;
 }
+
+/* hub */
+.fol{
+  width: 100px;
+}
+.folP{
+  font-size: 12px;
+  padding-top: 4px;
+  text-decoration: none;
+  color: #000;
+}
+.typeH{
+  font-size: 14px;
+  float: left;
+}
+
+/* styles.css */
+
+.grid-container {
+  display: grid;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+.grid-item {
+  text-align: center;
+}
+
+/* Default to 1 column for extra-small screens */
+.grid-container {
+  grid-template-columns: 1fr;
+}
+
+/* 2 columns for small screens */
+@media (min-width: 600px) {
+  .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 3 columns for medium screens */
+@media (min-width: 768px) {
+  .grid-container {
+      grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 4 columns for large screens */
+@media (min-width: 992px) {
+  .grid-container {
+      grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.dd{
+  text-decoration: none;
+}
+
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+.filled {
+  background-color: gold;
+  border: none;
+}
+
+.borderC{
+  background-color: transparent;
+  border: 2px solid gold !important;
+}
+.shreB{
+  font-size: 14px !important;
+    padding: 7px 10px !important;
+    margin-bottom: 9px;
+}
+.cop{
+  border: 0;
+  font-size: 10px;
+  background-color: transparent;
+  color: #bfa102;
+}
+.copyP{
+  font-size: 10px;
+  margin-left: 25px;
+}
+.copyPp{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 10px;
+}
