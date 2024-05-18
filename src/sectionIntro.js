@@ -7,6 +7,14 @@ import API_BASE_URL from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import ReactQuill, { Quill } from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
+import ImageResize from 'quill-image-resize-vue';
+
+Quill.register("modules/imageResize", ImageResize);
+
+
 
 function SectionIntro ()  {
     
@@ -23,7 +31,7 @@ function SectionIntro ()  {
   const questionType ="BusinessCaseBuilder";
   const questionSubType ="Introduction";
   const token = localStorage.getItem('access_token');
-
+  const [value, setValue] = useState('');
   const [formData, setFormData] = useState({
     summary: '',
     });
@@ -111,7 +119,72 @@ function SectionIntro ()  {
     }
   };
   
+
+  const modules = {
+    toolbar: [
+      [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+      [{ size: [] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+      ['link', 'image'],
+      ['clean']
+    ],
+    imageResize: {
+      modules: ['Resize', 'DisplaySize', 'Toolbar'] // Configure the image resize module
+    }
+  };
+
+  const formats = [
+    'header', 'font', 'size',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image'
+  ];
+  const toolbarOptions = [
+    ['bold', 'italic', 'underline', 'strike'],
+    ['blockquote', 'code-block'],
+  ['link', 'image', 'formula'],
+  [{size: []}],
+
+  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
+  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+  [{ 'direction': 'rtl' }],                         // text direction
+
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean']         
+  ];
+
+  const module =  {
   
+      toolbar: toolbarOptions
+  };
+
+  const reactQuillRef = React.useRef(null);
+  const accessToolbar = () => {
+    // Check if ref is initialized
+    if (reactQuillRef.current) {
+      // Get the Quill editor instance
+      const quill = reactQuillRef.current.getEditor();
+      
+      // Access the toolbar
+      const toolbar = quill.getModule('toolbar').handlers.image;
+      toolbar.addHandler('image', console.log("image toolbar"));
+      //console.log(toolbar.handlers.image);
+
+    } else {
+      console.error('ReactQuill ref is not initialized');
+    }
+  };
+
+
 //   createOrUpdateSummary();
   
     return (
@@ -126,7 +199,7 @@ function SectionIntro ()  {
             <img src={bci} className='bcA'></img>
         <div className='lenght'>
                     <div className='text-center'>
-                <p className='centerH'>Introduction</p>
+                <p className='centerH' onClick={accessToolbar}>Introduction</p>
                 <p className='centerHp'>Make sure you answer all questions</p>
                 </div>
                 <form onSubmit={handleSubmit}>    
@@ -142,8 +215,10 @@ function SectionIntro ()  {
 
            
             <div className='container-textBs'>
+
+            <ReactQuill ref={reactQuillRef} theme="snow" value={combinedAnswer} onChange={setCombinedAnswer} modules={modules}/>
             
-                <textarea className='textBs' value={combinedAnswer} onChange={handleChange} id="summary"></textarea>
+                {/* <textarea className='textBs' value={combinedAnswer} onChange={handleChange} id="summary"></textarea> */}
             
             </div>
 
