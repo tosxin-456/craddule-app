@@ -72,6 +72,8 @@ import PitchDeck from './pitchDeck';
 import Privacy from './privacy';
 import Engagement from './engagement';
 import AllFiles from './allFiles';
+import SubtypesList from './allFilesType';
+import FilesList from './allFilesSubType';
 import HomeStarter from './homeStarter';
 import WireFrame from './wireFrame';
 import IncomeGraph from './incomeGraph';
@@ -136,6 +138,10 @@ import ProfitPage from './profitPage';
 import CreateProject from './createProject';
 import CreateQuestion from './createQuestion';
 import InspVideo from './inspVideo';
+import CreateGo from './createGo';
+import Share from './share';
+import LoginTeam from './loginStart';
+import SignUpTeam from './signUpStart';
 
 function App() {
   return (
@@ -214,7 +220,6 @@ function App() {
         <Route path="/homeStarter" element= {<HomeStarter />} />
         <Route path="/generalSetting" element= {<GeneralSetting />} />
         <Route path="/pageSummary" element= {<PageSummary />} />
-        <Route path="/allFiles" element= {<AllFiles />} />
         <Route path="/searchKpi" element= {<SearchKpi />} />
         <Route path="/pageAddKpi" element= {<PageAddKpi />} />
         <Route path="/prototype" element= {<Prototype />} />
@@ -269,7 +274,14 @@ function App() {
         <Route path="/createProject" element= {<CreateProject />} />
         <Route path="/createQuestion" element= {<CreateQuestion />} />  
           <Route path="/inspVideo" element= {<InspVideo />} />  
+          <Route path="/createGo" element= {<CreateGo />} />  
         <Route path="/" element={<Login />} />
+          Route path="/AllFiles" element= {<AllFiles />} />
+            <Route path="/types/:type" element={<SubtypesList />} />
+            <Route path="/subtypes/:type/:subtype" element={<FilesList />} />
+            <Route path="/share/start/:id/" element={<Share />} />
+            <Route path="/login/start/:id/" element={<LoginTeam />} />
+            <Route path="/signup/start/:id/" element={<SignUpTeam />} />
         // <Route path="/" element={<MainApp />} />
       </Routes>
     </Router>
