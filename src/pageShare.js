@@ -1,103 +1,84 @@
-import React, { useState } from 'react';
-import bci from './images/bc.png'; 
-import solution from './images/solution.png'; 
+import React, { useState, useEffect } from 'react';
 import Header from './component/header';
 import Menu from './component/menu';
-import { useNavigate } from 'react-router-dom';
 import ShareModal from './component/shareModal';
 
+const phaseNames = [
+  'Ideation',
+  'Product Definition',
+  'Prototyping',
+  'Initial Design',
+  'Validating and Testing',
+  'Commercialization'
+];
 
+function PageShare() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [circles, setCircles] = useState(new Array(6).fill(false));
 
+  // Clear localStorage on initial load
+  useEffect(() => {
+    localStorage.removeItem('filledCircles');
+  }, []);
 
-function PageShare ()  {
-    const [isOpen, setIsOpen]= useState(false);
-    return (
-        
-        <>
+  useEffect(() => {
+    const filledCircles = circles
+      .map((isFilled, index) => (isFilled ? phaseNames[index] : null))
+      .filter(phase => phase !== null);
+    localStorage.setItem('filledCircles', JSON.stringify(filledCircles));
+    console.log('Filled circles:', filledCircles); // Log the filled circles
+  }, [circles]);
 
-<div className='container-fluid'>
-    <Header />
-    <div className='row'>
-    <Menu /> 
-        
-        <div className='col-md-9'>
-       {/* <img src={bci} className='bcA'></img>*/}
-        <div className='centerC'>
-            <div className='text-center'>
+  const toggleStyle = (index) => {
+    setCircles(prevCircles => {
+      const newCircles = [...prevCircles];
+      newCircles[index] = !newCircles[index];
+      return newCircles;
+    });
+  };
+
+  return (
+    <>
+      <div className='container-fluid'>
+        <Header />
+        <div className='row'>
+          <Menu />
+
+          <div className='col-md-9'>
+            <div className='centerC'>
+              <div className='text-center'>
                 <p className='centerH'>Share</p>
-                <p className='centerHp'>Here you can share your work</p>               
-            </div>
-            <div className='BoxPhase1'>
-            <p className='centerH1v'>Phase</p>
-            <div className='BoxPhase'>
-                <div className='boxView'><p className='heading'>Ideation</p>
-                <p className='subHeading'>12pages</p></div>
-                
+                <p className='centerHp'>Here you can share your work</p>
+              </div>
+              <div className='BoxPhase1'>
+                <p className='centerH1v'>Phase</p>
+                {phaseNames.map((phase, index) => (
+                  <div className='BoxPhase' key={index}>
+                    <div className='boxView'><p className='heading'>{phase}</p></div>
+                    <div className='boxView'>
+                      <div 
+                        className={`circle ${circles[index] ? 'filled' : 'borderC'}`} 
+                        onClick={() => toggleStyle(index)}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
                 <div className='boxView'>
-                <button className="btn btn-primary curveP" onClick={()=>setIsOpen(true)}>Share</button>
+                  <button className="btn btn-primary curveP" onClick={() => setIsOpen(true)}>Share</button>
                 </div>
-                
+                <ShareModal 
+                    open={isOpen} 
+                    onClose={() => setIsOpen(false)} 
+                    circles={circles}
+                    phaseNames={phaseNames}
+                />
+              </div>
             </div>
-            <div className='BoxPhase'>
-                <div className='boxView'><p className='heading'>Product Definition</p>
-                <p className='subHeading'>12pages</p></div>
-                
-                <div className='boxView'>
-                <button className="btn btn-primary curveP" onClick={()=>setIsOpen(true)}>Share</button>
-                </div>
-                
-            </div>
-            <div className='BoxPhase'>
-                <div className='boxView'><p className='heading'>Prototypiing</p>
-                <p className='subHeading'>12pages</p></div>
-                
-                <div className='boxView'>
-                <button className="btn btn-primary curveP" onClick={()=>setIsOpen(true)}>Share</button>
-                </div>
-                
-            </div>
-            <div className='BoxPhase'>
-                <div className='boxView'><p className='heading'>Initial Design</p>
-                <p className='subHeading'>12pages</p></div>
-                
-                <div className='boxView'>
-                <button className="btn btn-primary curveP" onClick={()=>setIsOpen(true)}>Share</button>
-                </div>
-                
-            </div>
-            <div className='BoxPhase'>
-                <div className='boxView'><p className='heading'>Validating and Testing</p>
-                <p className='subHeading'>12pages</p></div>
-                
-                <div className='boxView'>
-                <button className="btn btn-primary curveP" onClick={()=>setIsOpen(true)}>Share</button>
-                </div>
-                
-            </div>
-            
-            <div className='BoxPhase'>
-                <div className='boxView'><p className='heading'>Commercialization</p>
-                <p className='subHeading'>12pages</p></div>
-                
-                <div className='boxView'>
-                <button className="btn btn-primary curveP" onClick={()=>setIsOpen(true)}>Share</button>
-                </div>
-                
-            </div>
-            <ShareModal open={isOpen} onClose={() => setIsOpen(false)}>
-
-            </ShareModal>
-            </div>
-        </div> 
-  
-        
-           
-          
-  </div>
-  </div>
-  </div>
-  </>
-    );
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default PageShare
+export default PageShare;

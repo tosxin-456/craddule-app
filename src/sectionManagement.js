@@ -3,9 +3,12 @@ import bci from './images/bc.png';
 import solution from './images/solution.png'; 
 import Header from './component/header';
 import Menu from './component/menu';
-import CollaboratorModal from './component/collaboratorModal'
+import SectionInviteModal from './component/sectionInviteModal';
 import { useNavigate } from 'react-router-dom';
-
+import API_BASE_URL from './config/apiConfig';
+import API_BASE_WEB_URL from './config/apiConfigW';
+import { Toaster, toast } from 'sonner'
+import { jwtDecode } from "jwt-decode";
 
 
 
@@ -147,6 +150,31 @@ function SectionManagement ()  {
       setSelectedOption7(option);
       setIsDropdownOpen7(false);
     };
+    const projectId = localStorage.getItem('nProject');
+    const [teamMembers, setTeamMembers] = useState([]);
+
+    useEffect(() => {
+      const fetchTeamMembers = async () => {
+        try {
+          const response = await fetch(`${API_BASE_URL}/api/team/${projectId}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          const result = await response.json();
+          if (result.status === 'success') {
+            setTeamMembers(result.data);
+          } else {
+            console.error('Failed to fetch team members:', result.message);
+          }
+        } catch (error) {
+          console.error('An error occurred while fetching team members:', error);
+        }
+      };
+  
+      fetchTeamMembers();
+    }, [projectId]);
 
 
     // Close dropdown when clicking outside of it 1
@@ -282,8 +310,7 @@ function SectionManagement ()  {
             
             <div><p className='centerH1a'>Team Management</p>
             <p className='centerHp1a'>View, manage your memebers and send invites</p>
-            <button className="btn btn-primary curveN">Save changes</button>
-            <button className="btn btn-primary curveI">Discard changes</button></div>
+          </div>
             <div className='bottonInput'><input type="text" className='input2' placeholder="Search.."></input>
             {/*<button className="btn btn-primary curveX">Chat and message</button>*/}
             <button className="btn btn-primary curvej" onClick={()=>setIsOpen(true)}>Send Invite</button>
@@ -430,9 +457,9 @@ function SectionManagement ()  {
                                
         </div> 
         </div>
-        <CollaboratorModal open={isOpen} onClose={() => setIsOpen(false)}>
+        <SectionInviteModal open={isOpen} onClose={() => setIsOpen(false)}>
 
-    </CollaboratorModal>   
+            </SectionInviteModal>   
           
   </div>
   </div>

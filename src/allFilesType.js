@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import API_BASE_URL from './config/apiConfig';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
 function AllFiles ()  {
@@ -23,11 +23,9 @@ function AllFiles ()  {
     const access_token = localStorage.getItem('access_token');
    const decodedToken = jwtDecode(access_token);
 
-   const [types, setTypes] = useState([]);
+   const { type } = useParams();
     const [subtypes, setSubtypes] = useState({});
-    const [files, setFiles] = useState({});
-    const [selectedType, setSelectedType] = useState(null);
-    const [selectedSubtype, setSelectedSubtype] = useState(null);
+    const [files, setFiles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -66,27 +64,27 @@ function AllFiles ()  {
 //      }
 //  };
 
- const handleSubtypeClick = (subtype) => {
-     setSelectedSubtype(subtype);
- };
+
 
 
 
  useEffect(() => {
-     const fetchTypes = async () => {
-         try {
-             const response = await axios.get(`${API_BASE_URL}/api/hub/types`);
-             setTypes(response.data);
-             setLoading(false);
-         } catch (error) {
-             console.error('Error fetching types:', error);
-             setError('Failed to fetch types');
-             setLoading(false);
-         }
-     };
+    const fetchTypeDetails = async () => {
+        try {
+            const response = await axios.get(`${API_BASE_URL}/api/hub/types/${type}`);
+            setSubtypes(response.data.subTypes);
+            setFiles(response.data.files);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching subtypes and files:', error);
+            setError('Failed to fetch subtypes and files');
+            setLoading(false);
+        }
+    };
 
-     fetchTypes();
- }, []);
+    fetchTypeDetails();
+}, [type]);
+
 
  if (loading) return <div>Loading...</div>;
  if (error) return <div>{error}</div>;
@@ -110,17 +108,35 @@ function AllFiles ()  {
                     <div type='button'className='hdds'>Started</div>
                     <div type='button'className='hdds'>Shared</div>
                 </div> 
-               
-          <div className='grid-container'>
-                {types.map((type) => (
-                    <div key={type} className='grid-item'>
-                        <Link to={`/types/${type}`} className='dd'>
-                        <img src={fol} className='fol' ></img>
-                          <p className='folP'>{type}</p>
-                        </Link>
-                    </div>
+
+        <div>
+            <h1 className='typeH'>{type}</h1>
+            
+            <div className='grid-container'>
+                {files.map((file, index) => (
+                    <div key={index} className='grid-item'>
+                        <img src={API_BASE_URL+`/images/${file.hubFile}`}  alt="Image 1"
+                            className="gallery-image imgA dd"></img>
+                       
+                       </div>
                 ))}
-           </div>
+                </div>
+                
+                <div className='grid-container'>
+                    {Object.entries(subtypes).map(([subtype, subFiles]) => (
+                        <div key={subtype} className='grid-item'>
+                        
+                            <Link to={`/subtypes/${type}/${subtype}`} className='dd'>
+                                <img src={fol} className='fol' ></img>
+                                <p className='folP'>{subtype}</p>
+                            </Link>
+                        
+                        </div>
+                    ))}
+                </div>
+            </div>
+                
+               
 
                 <div>
 

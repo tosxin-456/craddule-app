@@ -11,7 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import API_BASE_URL from './config/apiConfig';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 
 
 function AllFiles ()  {
@@ -30,6 +31,8 @@ function AllFiles ()  {
     const [selectedSubtype, setSelectedSubtype] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const { type, subtype } = useParams();
 
 //    const fetchTypes = async () => {
 //      try {
@@ -73,20 +76,21 @@ function AllFiles ()  {
 
 
  useEffect(() => {
-     const fetchTypes = async () => {
-         try {
-             const response = await axios.get(`${API_BASE_URL}/api/hub/types`);
-             setTypes(response.data);
-             setLoading(false);
-         } catch (error) {
-             console.error('Error fetching types:', error);
-             setError('Failed to fetch types');
-             setLoading(false);
-         }
-     };
+    const fetchSubtypeFiles = async () => {
+        try {
+            const response = await axios.get(`${API_BASE_URL}/api/hubs/types/${type}/${subtype}`);
+            setFiles(response.data);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching files:', error);
+            setError('Failed to fetch files');
+            setLoading(false);
+        }
+    };
 
-     fetchTypes();
- }, []);
+    fetchSubtypeFiles();
+}, [type, subtype]);
+
 
  if (loading) return <div>Loading...</div>;
  if (error) return <div>{error}</div>;
@@ -110,17 +114,15 @@ function AllFiles ()  {
                     <div type='button'className='hdds'>Started</div>
                     <div type='button'className='hdds'>Shared</div>
                 </div> 
-               
-          <div className='grid-container'>
-                {types.map((type) => (
-                    <div key={type} className='grid-item'>
-                        <Link to={`/types/${type}`} className='dd'>
-                        <img src={fol} className='fol' ></img>
-                          <p className='folP'>{type}</p>
-                        </Link>
+                
+                <div className='grid-container'>
+                {files.map((file, index) => (
+                   <div key={index} className='grid-item'>
+                    <img src={API_BASE_URL+`/images/${file.hubFile}`}  alt="Image 1"
+                            className="gallery-image imgA dd"></img>
                     </div>
                 ))}
-           </div>
+            </div>
 
                 <div>
 
