@@ -22,6 +22,7 @@ function PagePositioning ()  {
 
      const onClickHandler = () => navigate(``)
      const [loading, setLoading] = useState(false);
+     const [font, setFont] = useState(null);
 
   const [isOpen, setIsOpen]= useState(false);
   const [showPicker, setShowPicker] = useState(false);
@@ -34,6 +35,13 @@ function PagePositioning ()  {
   const handleAddFontClick = () => {
     setShowFontPicker(true);
   };
+
+  const handleChange = (e) => {
+    setFont({
+      [e.target.id]: e.target.value,
+    });
+
+  };  
 
   const handleFontSelect = (font) => {
     setSelectedFont(font);
@@ -49,6 +57,8 @@ function PagePositioning ()  {
     setSelectedColor(color.hex); // Update selected color
   };
 
+
+  
 
     return (
         <>
@@ -127,6 +137,7 @@ function PagePositioning ()  {
           placeholder="Add fonts"
           readOnly // Ensure that the input field is read-only to prevent manual editing
           value={selectedFont}
+          onChange={handleChange}
         />
         {showFontPicker && (
           <SelectFont fonts={fonts} onSelect={handleFontSelect} />

@@ -23,6 +23,14 @@ import API_BASE_URL from './config/apiConfig';
               chart: {
                 type: 'donut',
               },
+              dataLabels: {
+                enabled: true,
+                formatter: function (val, opts) {
+                  // You can customize the label here. For instance, add a custom suffix.
+                  return opts.w.config.series[opts.seriesIndex];
+                }
+                
+              },
               responsive: [{
                 breakpoint: 480,
                 options: {
@@ -32,9 +40,6 @@ import API_BASE_URL from './config/apiConfig';
                 }
               }]
             },
-            title: {
-                text: 'Task'
-              },
           
           };
         }
@@ -46,7 +51,7 @@ import API_BASE_URL from './config/apiConfig';
             <div className='progressGraph'>
                 <div className="graphNam">Task</div>
                   <div id="chart">
-                <ReactApexChart options={this.state.options} series={this.state.series} type="donut" height={120} width={300} />
+                <Chart options={this.state.options} series={this.state.series} type="donut" height={120} width={350} />
               </div>
               <div id="html-dist"></div>
                   </div>

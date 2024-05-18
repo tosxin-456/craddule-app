@@ -86,6 +86,8 @@ function PitchDeck ()  {
                 }
             } catch (error) {
                 console.error('Error fetching image details:', error);
+                console.log(error.response);
+
             }
         };
 
