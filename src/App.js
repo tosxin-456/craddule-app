@@ -274,7 +274,7 @@ function App() {
         <Route path="/createQuestion" element= {<CreateQuestion />} />  
           <Route path="/inspVideo" element= {<InspVideo />} />  
         <Route path="/" element={<Login />} />
-          Route path="/AllFiles" element= {<AllFiles />} />
+          <Route path="/AllFiles" element= {<AllFiles />} />
             <Route path="/types/:type" element={<SubtypesList />} />
             <Route path="/subtypes/:type/:subtype" element={<FilesList />} />
             <Route path="/share/start/:id/" element={<Share />} />
