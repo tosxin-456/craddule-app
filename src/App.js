@@ -138,7 +138,7 @@ import ProfitPage from './profitPage';
 import CreateProject from './createProject';
 import CreateQuestion from './createQuestion';
 import InspVideo from './inspVideo';
-import CreateGo from './createGo';
+// import CreateGo from './createGo';
 import Share from './share';
 import LoginTeam from './loginStart';
 import SignUpTeam from './signUpStart';
