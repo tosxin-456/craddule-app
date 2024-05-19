@@ -19,6 +19,13 @@ function SectionManagement ()  {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
     const dropdownRef = useRef(null);
+
+    const access_token = localStorage.getItem('access_token');
+    const decodedToken = jwtDecode(access_token);
+    const userId = decodedToken.userId;
+
+    const projectId = localStorage.getItem('nProject');
+    console.log(projectId);
   
     // Function to toggle dropdown visibility
     const toggleDropdown = () => {
@@ -150,31 +157,50 @@ function SectionManagement ()  {
       setSelectedOption7(option);
       setIsDropdownOpen7(false);
     };
-    const projectId = localStorage.getItem('nProject');
     const [teamMembers, setTeamMembers] = useState([]);
 
-    useEffect(() => {
-      const fetchTeamMembers = async () => {
-        try {
-          const response = await fetch(`${API_BASE_URL}/api/team/${projectId}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-          const result = await response.json();
-          if (result.status === 'success') {
-            setTeamMembers(result.data);
-          } else {
-            console.error('Failed to fetch team members:', result.message);
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  
+    const fetchTeamMembers = async () => {
+      try {
+        console.log(projectId);
+        const response = await fetch(`${API_BASE_URL}/api/team/${projectId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+             'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
           }
-        } catch (error) {
-          console.error('An error occurred while fetching team members:', error);
+        });
+        
+        console.log("here");
+        console.log("here");
+        if (response.status === 200) {
+          const data = await response.json();
+          console.log(data.data);
+          setTeamMembers(data.data);
+          console.log(teamMembers)
+          setLoading(false);
+        }else{
+          const result = await response.json();
+          console.error('Error:', result['error']);
         }
-      };
+       
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+        console.log(err);
+      }
+    };
+
+    useEffect(() => {
+     
+      console.log("work");
   
       fetchTeamMembers();
     }, [projectId]);
+
+   
 
 
     // Close dropdown when clicking outside of it 1
@@ -295,6 +321,29 @@ function SectionManagement ()  {
 
 
     const onClickHandler = () => navigate(`/pageShare`)
+
+
+    const handleRemove = async (memberId) => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/team/${memberId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${access_token}` 
+          }
+        });
+  
+        if (response.ok) {
+          // Remove the deleted member from the teamMembers state
+          setTeamMembers(prevMembers => prevMembers.filter(member => member._id !== memberId));
+        } else {
+          const result = await response.json();
+          console.error('Error:', result['error']);
+        }
+      } catch (error) {
+        console.error('Error removing team member:', error);
+      }
+    };
+
     return (
         
         <>
@@ -316,144 +365,33 @@ function SectionManagement ()  {
             <button className="btn btn-primary curvej" onClick={()=>setIsOpen(true)}>Send Invite</button>
 </div>
               <div className='container-team'>
-                    <div class="flex-container boxH1">
-                    <div className='listTa'>Name</div>
-                    <div className='listU'>Team Members Permission</div>
-                    <div className='remvo'>Revoke team member access</div>
-                </div>
-                <div class="flex-container boxH">
-                    <div className='listT1'>Adunni Arike</div>
-                   { /*<div type="button" data-toggle="dropdown" className='dropdown-toggle lst'>Change permission</div>*/}
-                    <div ref={dropdownRef} className="dropdown3 lst">
-                <div className={`select3 ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
-                    <span classname="selected">{selectedOption|| "Change Permission"}</span>
-                    <div class="caret3"></div>
-                </div>
-                <ul className={`menu3 ${isDropdownOpen ? 'menu-open3' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect("Allow")} className='lili'>Allow</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect("Rejected")} className='lili1'>Rejected</li>
-                </ul>
-            </div>
+                    
+               
+
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {teamMembers.map(member => (
+              <tr key={member._id}>
+                <td>{`${member.userDetails.firstName} ${member.userDetails.lastName}`}</td>
+                <td>{member.email || 'Not Set'}</td>
+                <td>
+                  <button className="btn btn-danger btn-sm" onClick={() => handleRemove(member._id)}>Remove</button>
+                </td>
+              </tr>
+            ))}
+            </tbody>
+        </table>
+             
 
 
-                   {/* <div type="button" data-toggle="dropdown" className='dropdown-toggle txtp1'>Choose</div>*/}
-          
-                <div ref={dropdownRef4} className="dropdown3 txtp1">
-                <div className={`select3 ${isDropdownOpen4 ? 'select-clicked' : ''}`} onClick={toggleDropdown4}>
-                    <span classname="selected">{selectedOption4|| "Choose"}</span>
-                    <div class="caret3"></div>
-                </div>
-                <ul className={`menu3 ${isDropdownOpen4 ? 'menu-open3' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect4("NO")} className='lili'>NO</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect4("YES")} className='lili1'>YES</li>
-                </ul>
-            </div>
-            </div> 
-
-
-                <div class="flex-container boxH">
-                    <div ref={dropdownRef1} className='listT2'>Jeddiah Joshua</div>
-                    {/*<div type="button" data-toggle="dropdown" className='dropdown-toggle lstS'>Change permission</div>*/}
-                    <div className="dropdown3 lstS">
-                <div className={`select3 ${isDropdownOpen1 ? 'select-clicked' : ''}`} onClick={toggleDropdown1}>
-                    <span classname="selected">{selectedOption1|| "Change Permission"}</span>
-                    <div class="caret3"></div>
-                </div>
-                <ul className={`menu3 ${isDropdownOpen1 ? 'menu-open3' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect1("Allow")} className='lili'>Allow</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect1("Rejected")} className='lili1'>Rejected</li>
-                </ul>
-            </div>
-
-
-                    {/*<div type="button" data-toggle="dropdown" className='dropdown-toggle txtp2'>Choose</div>*/}
-                    <div className="dropdown3 txtp1">
-                <div ref={dropdownRef5} className={`select3 ${isDropdownOpen5 ? 'select-clicked' : ''}`} onClick={toggleDropdown5}>
-                    <span classname="selected">{selectedOption5|| "Choose"}</span>
-                    <div class="caret3"></div>
-                </div>
-                <ul className={`menu3 ${isDropdownOpen5 ? 'menu-open3' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect5("NO")} className='lili'>NO</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect5("YES")} className='lili1'>YES</li>
-                </ul>
-            </div>
-
-                </div>  
-
-
-
-                <div class="flex-container boxH">
-                    <div className='listT3'>Mark Joel</div>
-                  {/*  <div type="button" data-toggle="dropdown" className='dropdown-toggle lisS'>Change permission</div>*/}
-                    <div ref={dropdownRef2} className="dropdown3 lisS">
-                <div className={`select3 ${isDropdownOpen2 ? 'select-clicked' : ''}`} onClick={toggleDropdown2}>
-                    <span classname="selected">{selectedOption2|| "Change Permission"}</span>
-                    <div class="caret3"></div>
-                </div>
-                <ul className={`menu3 ${isDropdownOpen2 ? 'menu-open3' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect2("Allow")} className='lili'>Allow</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect2("Rejected")} className='lili1'>Rejected</li>
-                </ul>
-            </div>
-
-
-                  {/*  <div type="button" data-toggle="dropdown" className='dropdown-toggle txtp3'>Choose</div>*/}
-                    <div ref={dropdownRef6} className="dropdown3 txtp3">
-                <div className={`select3 ${isDropdownOpen6 ? 'select-clicked' : ''}`} onClick={toggleDropdown6}>
-                    <span classname="selected">{selectedOption6 || "Choose"}</span>
-                    <div class="caret3"></div>
-                </div>
-                <ul className={`menu3 ${isDropdownOpen6 ? 'menu-open3' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect6("NO")} className='lili'>NO</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect6("YES")} className='lili1'>YES</li>
-                </ul>
-            </div>
-
-                </div> 
-
-
-
-                <div class="flex-container boxH">
-                    <div className='listT4'>Titilope Seun</div>
-                   {/* <div type="button" data-toggle="dropdown" className='dropdown-toggle lstS1'>Change Permission</div>*/}
-                    <div ref={dropdownRef3} className="dropdown3 lstS1">
-                <div className={`select3 ${isDropdownOpen3 ? 'select-clicked' : ''}`} onClick={toggleDropdown3}>
-                    <span classname="selected">{selectedOption3|| "Change Permission"}</span>
-                    <div class="caret3"></div>
-                </div>
-                <ul className={`menu3 ${isDropdownOpen3 ? 'menu-open3' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect3("Allow")} className='lili'>Allow</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect3("Rejected")} className='lili1'>Rejected</li>
-                </ul>
-            </div>
-
-
-                   {/* <div type="button" data-toggle="dropdown" className='dropdown-toggle txtp4'>Choose</div>*/}
-                    <div ref={dropdownRef7} className="dropdown3 txtp4">
-                <div className={`select3 ${isDropdownOpen7 ? 'select-clicked' : ''}`} onClick={toggleDropdown7}>
-                    <span classname="selected">{selectedOption7 || "Choose"}</span>
-                    <div class="caret3"></div>
-                </div>
-                <ul className={`menu3 ${isDropdownOpen7 ? 'menu-open3' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect7("NO")} className='lili'>NO</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect7("YES")} className='lili1'>YES</li>
-                </ul>
-            </div>
-
-                </div>
-
-
-
-                <div><input type="checkbox" id="checkbox" name="checkbox"></input>
-                <label for="checkbox" className='checkbox' type='button'>NDA - Standard Non Disclosure Agreements (if neccessary for a project)</label></div>
+               
                                
         </div> 
         </div>

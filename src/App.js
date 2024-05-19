@@ -141,6 +141,7 @@ import InspVideo from './inspVideo';
 import Share from './share';
 import LoginTeam from './loginStart';
 import SignUpTeam from './signUpStart';
+import AllQuestions from './questionList';
 
 function App() {
   return (
@@ -280,6 +281,7 @@ function App() {
             <Route path="/share/start/:id/" element={<Share />} />
             <Route path="/login/start/:id/" element={<LoginTeam />} />
             <Route path="/signup/start/:id/" element={<SignUpTeam />} />
+           <Route path="/question/:id" element= {<AllQuestions />} />
         // <Route path="/" element={<MainApp />} />
       </Routes>
     </Router>
