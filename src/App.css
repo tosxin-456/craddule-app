@@ -5341,13 +5341,14 @@ justify-content: space-between;
 .containerGraph{
   display: flex;
   margin-top: 10px;
+  justify-content: space-between;
 }
 
 .progressGraph{
   background-color: white;
   /* height: 200px; */
-  width: max-content;
-  margin-left: 10px;
+  /* width: 100%;
+  margin-left: 10px; */
   padding: 5px;
   box-shadow: 0 2px 10px 0 rgb(170 170 170);
 border-radius: 10px;

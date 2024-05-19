@@ -120,7 +120,7 @@ function KPIPage ()  {
                 <button className="btn btn-primary  tFeems2" type="button">Add a KPI Template<p className='txtc'>Browse and add KPI's from the library</p></button>
                </div>
 
-                <div class="boxA1">
+                {/* <div class="boxA1">
                     <div className=''>Name</div>
                     <div>Unit</div>
                     <div>Frequency</div>
@@ -146,7 +146,27 @@ function KPIPage ()  {
                 </div>
                 <div class="flex-container box3">
                     <div className='list1'></div>
-                </div>
+                </div>*/}
+
+<table>
+  <tr>
+    <th>Unit</th>
+    <th>Frequency</th>
+    <th>Direction</th>
+    <th>Target</th>
+    <th>Calculated</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td></td>
+  </tr>
+</table>
                 </div> 
         
                 <button className="btn btn-primary curveNext">Next</button>

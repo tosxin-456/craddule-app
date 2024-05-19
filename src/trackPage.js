@@ -210,7 +210,7 @@ function TrackPage ()  {
                         </div>
 
                 <div className='containerGraph'>
-               <div> <Progress/></div>
+               <Progress/>
                 <Task/>
                 
              </div>
