@@ -52,7 +52,7 @@ import API_BASE_URL from './config/apiConfig';
           return (
     
       
-            <div className='progressGraph'>
+            <div className='progressGraph1'>
                    <div className="graphNam">WorkLoad</div>
                   <div id="chart">
                 <ReactApexChart options={this.state.options} series={this.state.series} type="bar" height={120} width={460}/>

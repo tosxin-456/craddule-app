@@ -5355,6 +5355,17 @@ border-radius: 10px;
 flex-wrap: wrap;
 }
 
+.progressGraph1{
+  background-color: white;
+  /* height: 200px; */
+  /* width: 100%;*/
+  margin-left: 10px; 
+  padding: 5px;
+  box-shadow: 0 2px 10px 0 rgb(170 170 170);
+border-radius: 10px;
+flex-wrap: wrap;
+}
+
 .graphNam{
   text-align: center;
   margin-top: 10px;

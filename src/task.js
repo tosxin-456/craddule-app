@@ -48,7 +48,7 @@ import API_BASE_URL from './config/apiConfig';
         render() {
           return (
       
-            <div className='progressGraph'>
+            <div className='progressGraph1'>
                 <div className="graphNam">Task</div>
                   <div id="chart">
                 <Chart options={this.state.options} series={this.state.series} type="donut" height={120} width={400} />
