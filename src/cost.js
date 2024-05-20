@@ -49,7 +49,7 @@ import API_BASE_URL from './config/apiConfig';
                       options={this.state.options}
                       series={this.state.series}
                       type="bar"
-                      height={120} width={400}
+                      height={120} width={450}
                       />      
       
               </div>

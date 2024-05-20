@@ -55,7 +55,7 @@ import API_BASE_URL from './config/apiConfig';
             <div className='progressGraph1'>
                    <div className="graphNam">WorkLoad</div>
                   <div id="chart">
-                <ReactApexChart options={this.state.options} series={this.state.series} type="bar" height={120} width={460}/>
+                <ReactApexChart options={this.state.options} series={this.state.series} type="bar" height={120} width={520}/>
               </div>
               <div id="html-dist"></div>
                   

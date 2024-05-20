@@ -5342,6 +5342,7 @@ justify-content: space-between;
   display: flex;
   margin-top: 10px;
   /* justify-content: space-between; */
+  justify-content: center;
 }
 
 .progressGraph{
@@ -5394,7 +5395,7 @@ flex-wrap: wrap;
 
 .healthGraph{
   background-color: white;
-  margin: 10px;
+  margin-left: 10px;
   /* display: flex;
   justify-content: center; */
   width: 50%;

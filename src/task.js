@@ -51,7 +51,7 @@ import API_BASE_URL from './config/apiConfig';
             <div className='progressGraph1'>
                 <div className="graphNam">Task</div>
                   <div id="chart">
-                <Chart options={this.state.options} series={this.state.series} type="donut" height={120} width={400} />
+                <Chart options={this.state.options} series={this.state.series} type="donut" height={120} width={460} />
               </div>
               <div id="html-dist"></div>
                   </div>

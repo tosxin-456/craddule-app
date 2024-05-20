@@ -61,7 +61,7 @@ import API_BASE_URL from './config/apiConfig';
                 <div className='progressGraph'>
                   <div className="graphNam">Progress</div>
                 <Chart 
-                options={this.state.options} series={this.state.series} type="bar" height={120} width={460}/>
+                options={this.state.options} series={this.state.series} type="bar" height={120} width={520}/>
   </div>
 
           );
