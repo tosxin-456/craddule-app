@@ -148,22 +148,56 @@ function KPIPage ()  {
                     <div className='list1'></div>
                 </div>*/}
 
-<table>
-  <tr>
+<table className='kpiTable'> 
+  <tr className="boxA1">
+    <th>Name</th>
     <th>Unit</th>
     <th>Frequency</th>
     <th>Direction</th>
     <th>Target</th>
     <th>Calculated</th>
+    <th></th>
+    <th></th>
   </tr>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
+  <tr className='boxA2'>
+    <td>Sales Revenue</td>
+    <td>#2,400,000</td>
+    <td>Daily</td>
+    <td>Up</td>
+    <td>#1.200,00</td>
+    <td>No</td>
+    <td><a href='' className='anchor'>Edit</a></td>
+    <td><a href='' className='anchor1'>Delete</a></td>
   </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
+  <tr className='boxA3'>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  {/* <br className='brkKpi'></br> */}
+  <tr className='boxA3'>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr className='boxA3'>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
     <td></td>
   </tr>
 </table>

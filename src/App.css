@@ -5311,12 +5311,7 @@ justify-content: space-between;
 
 
 .boxA1 {
-  display: flex;
-  justify-content: space-between;
-  text-wrap: nowrap;
-  margin-top: 40px;
-  padding-left: 20px;
-  padding-right: 170px;
+  text-wrap: wrap;
   background-color: #f0e296 !important;
   border-radius: 5px;
   box-shadow: 0 1px 5px 0 rgb(170 170 170);
@@ -5327,16 +5322,21 @@ justify-content: space-between;
 }
 
 .boxA2 {
-  display: flex;
-  text-wrap: nowrap;
+  text-wrap: wrap;
   margin-top: 2px;
-  padding-left: 20px;
-  padding-right: 30px;
-  justify-content: space-between;
+  background-color: white !important;
+  border-radius: 5px !important;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+}
+
+.boxA3 {
+  text-wrap: nowrap;
+  height: 30px;
   background-color: white !important;
   border-radius: 5px;
   box-shadow: 0 1px 5px 0 rgb(170 170 170);
 }
+
 
 .containerGraph{
   display: flex;
@@ -5773,3 +5773,23 @@ progress{
   transition: background 0.3s;
 }
 
+
+.kpiTable {
+  caption-side: bottom;
+  border-collapse: collapse;
+  width: 100%;
+margin-top: 40px;
+}
+
+th{
+  padding: 6px;
+}
+
+td{
+  padding: 6px;
+}
+
+.brkKpi{
+  margin: 0px;
+  padding: 0px;
+}
