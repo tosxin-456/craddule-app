@@ -5341,7 +5341,7 @@ justify-content: space-between;
 .containerGraph{
   display: flex;
   margin-top: 10px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .progressGraph{
