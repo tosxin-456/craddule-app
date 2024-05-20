@@ -218,7 +218,7 @@ function TrackPage ()  {
              <div className='containerGraph'>
                 <Time/>
                 <div className='healthGraph'>
-                   <div className="graphNam">Health</div>
+                   {/* <div className="graphNam">Health</div>
                     <div className='health'>
                         <p className='healthP'>Time</p>
                         <p className='healthS'>14% ahead of schedule</p>
@@ -247,7 +247,40 @@ function TrackPage ()  {
                         <p className='healthP'>Cost</p>
                         <p className='healthS'>14% ahead of schedule</p>
                         <di></di>
-                    </div>
+                    </div> */}
+                    <div className="graphNam">Health</div>
+                    <table className='trackTable'> 
+
+  <tr className=''>
+    <td>Time</td>
+    <td>14% ahead of schedule</td>
+  </tr>
+  <hr className='healthRule'></hr>
+
+  <tr className=''>
+  <td>Task</td>
+    <td>12 tasks to be completed</td>
+  </tr>
+  <hr className='healthRule'></hr>
+
+  {/* <br className='brkKpi'></br> */}
+  <tr className=''>
+  <td>WorkLoad</td>
+  <td>0 task overdue</td>
+  </tr>
+  <hr className='healthRule'></hr>
+
+  <tr className=''>
+  <td>Progress</td>
+  <td>14% complete</td>
+  </tr>
+  <hr className='healthRule'></hr>
+
+  <tr className=''>
+  <td>Cost</td>
+  <td>42% under budget</td>
+  </tr>
+</table>
 
                   </div>
                 
