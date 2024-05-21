@@ -5910,6 +5910,7 @@ width: 100%;
   min-height: 300px;
   border: 1px solid #ccc;
   margin-top: 10px;
+  outline: none;
 }
 
 .image-popup {
@@ -5922,17 +5923,15 @@ width: 100%;
 }
 
 .toolbar button {
-  cursor: pointer;
-  display: inline-block;
-  float: left;
-  height: 24px;
-  width: 28px;
-  background: none;
-  border-width: initial;
-  border-style: none;
-  border-color: initial;
-  border-image: initial;
-  padding: 3px 5px;
+  box-shadow: none;
+    background: none;
+    background-color: transparent;
+    border: initial none;
+    border-color: initial;
+    cursor: pointer;
+    height: 24px;
+    padding: 3px 5px;
+    margin: 5px;
 }
 
 
