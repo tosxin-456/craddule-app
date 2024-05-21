@@ -15,8 +15,7 @@ import Tooltip from './component/tooltip';
 import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import API_BASE_WEB_URL from './config/apiConfigW';
-import { ResizableBox } from 'react-resizable';
-import 'react-resizable/css/styles.css';
+
 
 Quill.register("modules/imageResize", ImageResize);
 
