@@ -135,7 +135,7 @@ const ImagePopup = ({  onClose, onInsertFile}) => {
                          <div key={index} className='grid-item'>
                              <img src={API_BASE_URL+`/images/${file.hubFile}`}  alt="Image 1"
                                  className="gallery-image imgA dd" onClick={() => handleInsertClick(file)}></img>
-                                 <p className='crap'>Uploaded By: {file.user.firstName} {formatDateTime(file.timeSent)}</p>
+                                <p className='crap'>Uploaded at: {formatDateTime(file.timeSent)}</p>
                             
                             </div>
                      ))}
