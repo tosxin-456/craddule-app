@@ -142,7 +142,7 @@ import Share from './share';
 import LoginTeam from './loginStart';
 import SignUpTeam from './signUpStart';
 import AllQuestions from './questionList';
-
+import ShareReview from './shareReview';
 function App() {
   return (
     <Router>
@@ -282,6 +282,7 @@ function App() {
             <Route path="/login/start/:id/" element={<LoginTeam />} />
             <Route path="/signup/start/:id/" element={<SignUpTeam />} />
            <Route path="/question/:id" element= {<AllQuestions />} />
+          <Route path="/sharereview/:id" element= {<ShareReview />} />
         // <Route path="/" element={<MainApp />} />
       </Routes>
     </Router>
