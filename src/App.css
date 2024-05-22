@@ -4695,7 +4695,7 @@ margin-left:5px;
 .menu4{
   list-style: none;
   padding: 0.2em 0.5em;
-  background-color: #fafcff;
+  background-color: #f6f8fc;
   position: absolute;
   left: 50%;
   margin-top: 2px;
@@ -5998,4 +5998,121 @@ width: 100%;
 .modalX{
   border: none !important;
     padding: 0px !important;
+}
+
+
+.dropdown5{
+  min-width: 7em;
+    position: relative;
+    display: ruby;
+}
+
+
+
+.select0{
+  display: flex;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s; 
+}
+
+/* For chat tools*/
+.menu0{
+  list-style: none;
+  padding: 0.2em 0.5em;
+  background-color: #f6f8fc  ;
+  position: absolute;
+  /* left: 10%; */
+  /* right: 1px; */
+  margin-top: 2px;
+  margin-left: 10px;
+  margin-right: 20px;
+  text-wrap: nowrap;
+  /* width: 300px; */
+  transform: translate(-50%);
+  opacity: 0;
+  display: none;
+  transition: 0.2s;
+  z-index: 1;
+}
+
+/* .menu0 l1 {
+  padding: 0.7em 0.5em;
+  margin: 0.3em 0;
+  border-radius: 0.5em;
+  cursor: pointer;
+} */
+
+.menu-open0{
+  display:block;
+  opacity:1;
+}
+
+
+.bulb{
+  font-size: 14px;
+  color:orange;
+  margin-right: 5px;
+  margin-top: 2px;
+}
+
+.notify{
+  display: flex;
+  background-color: #b8b8b8;
+  padding: 5px;
+  border-radius: 5px;
+  width: 210px;text-align: justify;
+}
+
+.notiHead{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.notifyHead{
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0px;
+}
+
+.notBodi{
+    font-size: 12px;
+}
+
+.notTime{
+  font-size: 10px;
+}
+
+.divNotify{
+padding: 5px;  
+}
+
+.container-fluid1{
+  --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    /* width: 100%; */
+    padding-right: calc(var(--bs-gutter-x)* .5);
+    padding-left: calc(var(--bs-gutter-x)* .5);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.deleteButtonNotify {
+  background: none;
+  border: none;
+  color: orange;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0px;
+  margin-left: 5px;
+}
+
+.displayDeletebutton{
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.notifyTxt{
+  text-wrap: wrap;
 }
