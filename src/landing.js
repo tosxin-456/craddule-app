@@ -1,3 +1,4 @@
+import React, { useState,useEffect,useRef } from 'react';
 import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -5,10 +6,10 @@ import bci from './images/bc.png';
 import bro from './images/bro.png';
 import HeaderHome from './component/headerHome';
 import MenuHome from './component/menuHome';
-
-
-
-import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from './config/apiConfig';
+import API_BASE_WEB_URL from './config/apiConfigW';
+import { jwtDecode } from "jwt-decode";
 
 import p1 from './images/p1.jpeg';
 import p2 from './images/p2.jpeg';
@@ -19,15 +20,15 @@ import Modal from './component/modal';
 
 
 
+const access_token = localStorage.getItem('access_token');
+const decodedToken = jwtDecode(access_token);
+const userId = decodedToken.userId;
 
 
 
 function LandingPage() {
 
-    //useEffect(() => {
-    //     const wow = new WOW.WOW();
-    //     wow.init();
-    //   }, []);
+   
     
   const [inputValue, setInputValue] = useState('');
   const [show, setShow] = useState(false);
@@ -38,6 +39,103 @@ function LandingPage() {
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
+
+  const [teamMembers, setTeamMembers] = useState([]);
+const [projects, setProjects] = useState([]);
+const [share, setShare] = useState([]);
+
+const fetchTeamProjects= async () => {
+  try {
+    console.log(userId);
+    const response = await fetch(`${API_BASE_URL}/api/team/user/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+         'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
+      }
+    });
+    
+    console.log("here");
+    console.log("here");
+    if (response.status === 200) {
+      const data = await response.json();
+      console.log(data.data);
+      setTeamMembers(data.data);
+      console.log(teamMembers)
+    }else{
+      const result = await response.json();
+      console.error('Error:', result['error']);
+    }
+   
+  } catch (err) {
+   
+    console.log(err);
+  }
+};
+
+const fetchUserProjects= async () => {
+  try {
+    console.log(userId);
+    const response = await fetch(`${API_BASE_URL}/api/project/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+         'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
+      }
+    });
+    
+    console.log("here");
+    console.log("here");
+    if (response.status === 200) {
+      const data = await response.json();
+      console.log(data);
+      setProjects(data.data);
+      console.log(teamMembers)
+    }else{
+      const result = await response.json();
+      console.error('Error:', result['error']);
+    }
+   
+  } catch (err) {
+   
+    console.log(err);
+  }
+};
+
+const fetchSharedProjects= async () => {
+  try {
+    console.log(userId);
+    const response = await fetch(`${API_BASE_URL}/api/share/user/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+         'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
+      }
+    });
+    
+    console.log("here");
+    console.log("here");
+    if (response.status === 200) {
+      const data = await response.json();
+      console.log(data.data);
+      setShare(data.data);
+      console.log(teamMembers)
+    }else{
+      const result = await response.json();
+      console.error('Error:', result['error']);
+    }
+   
+  } catch (err) {
+   
+    console.log(err);
+  }
+};
+
+
+ useEffect(() => {
+  fetchTeamProjects();
+  fetchUserProjects();
+  fetchSharedProjects();
+        // const wow = new WOW.WOW();
+        // wow.init();
+      }, []);
   const [isOpen, setIsOpen]= useState(false);
     const [progress, setProgress] = useState(40);
     const [progressT, setProgressT] = useState(50);
@@ -62,9 +160,11 @@ function LandingPage() {
  
   <div className='col-md-6'>
     <div className='row'>
+    {teamMembers.map(member => (
       <div className='col-md-6'>
+      <a href={`/sharereview/${member.projectId}`} className='team-member-link'> {/* Anchor tag for navigation */}
         <div className='centerD'>
-            <p className='pna'>The Golden Shoe</p>
+            <p className='pna'>{member.projectDetails.project}</p>
             <progress value={progress} max="100"></progress>
             <p className='pna2'>Job is 40% done</p>
             <div class="proTeam">
@@ -75,9 +175,14 @@ function LandingPage() {
                       <img src={p2} alt="Circular Image" className="circular-image-top"/>
                   </div>
           </div> 
+          </a>
+        </div>
+      ))}
 
-          <div className='centerD2'>
-            <p className='pna'>The Golden Shoe</p>
+      {projects.map(member => (
+        <div className='col-md-6'>
+        <div className='centerD'>
+            <p className='pna'>{member.projectName}</p>
             <progress value={progress} max="100"></progress>
             <p className='pna2'>Job is 40% done</p>
             <div class="proTeam">
@@ -88,36 +193,9 @@ function LandingPage() {
                       <img src={p2} alt="Circular Image" className="circular-image-top"/>
                   </div>
           </div> 
-
-       </div>
-
-       <div className='col-md-6'>
-        <div className='centerD2'>
-            <p className='pna'>The Golden Shoe</p>
-            <progress value={progress} max="100"></progress>
-            <p className='pna2'>Job is 40% done</p>
-            <div class="proTeam">
-                      <img src={p3} alt="Circular Image" className="circular-image-top"/>
-                  </div>
-
-                  <div class="proTeam">
-                      <img src={p2} alt="Circular Image" className="circular-image-top"/>
-                  </div>
           </div> 
 
-          <div className='centerD'>
-            <p className='pna'>The Golden Shoe</p>
-            <progress value={progress} max="100"></progress>
-            <p className='pna2'>Job is 40% done</p>
-            <div class="proTeam">
-                      <img src={p3} alt="Circular Image" className="circular-image-top"/>
-                  </div>
-
-                  <div class="proTeam">
-                      <img src={p2} alt="Circular Image" className="circular-image-top"/>
-                  </div>
-          </div> 
-       </div>  
+        ))}
 
     </div>
 
