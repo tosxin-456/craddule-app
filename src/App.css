@@ -6021,7 +6021,7 @@ width: 100%;
 .menu0{
   list-style: none;
   padding: 0.2em 0.5em;
-  background-color: #f6f8fc  ;
+  /* background-color: #f6f8fc  ; */
   position: absolute;
   /* left: 10%; */
   /* right: 1px; */
@@ -6059,10 +6059,12 @@ width: 100%;
 
 .notify{
   display: flex;
-  background-color: #b8b8b8;
+  background-color: white;
   padding: 5px;
   border-radius: 5px;
   width: 210px;text-align: justify;
+  box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.2);
+  /* opacity: .1 !important; */
 }
 
 .notiHead{
