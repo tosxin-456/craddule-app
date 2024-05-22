@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from "react-dom";
+import axios from 'axios';
+import API_BASE_URL from './apiConfig';
+import { jwtDecode } from "jwt-decode";
+import { Toaster, toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -7,23 +12,44 @@ import ReactDOM from "react-dom";
 
 export default function AddKpiModal ({open, onClose})  {
     const [isOpen, setIsOpen]= useState(false);
+    const [kpiName, setKpiName] = useState('');
+    const [graphType, setGraphType] = useState('');
+    const [kpiDescription, setKpiDescription] = useState('');
+    const [category, setCategory] = useState('');
+    const [unit, setUnit] = useState('');
+    const [xAxisLabel, setXAxisLabel] = useState('');
+    const [yAxisLabel, setYAxisLabel] = useState('');
+    const [xAxisData, setXAxisData] = useState('');
+    const [yAxisData, setYAxisData] = useState('');
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState('');
 
 //first dropdown
     // State variables to manage dropdown behavior
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('');
+    // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    // const [selectedOption, setSelectedOption] = useState('');
+    // Function to handle changes in the input field
+  const handleInputChangeName = (event) => {
+    // Update the graphName state variable with the new value entered into the input field
+    setKpiName(event.target.value);
+  };
+
+  const handleInputKpiDescription = (event) => {
+    // Update the graphName state variable with the new value entered into the input field
+    setKpiDescription(event.target.value);
+  };
     const dropdownRef = useRef(null);
   
-    // Function to toggle dropdown visibility
-    const toggleDropdown = () => {
-      setIsDropdownOpen(!isDropdownOpen);
-    };
+    // // Function to toggle dropdown visibility
+    // const toggleDropdown = () => {
+    //   setIsDropdownOpen(!isDropdownOpen);
+    // };
   
-    // Function to handle option selection
-    const handleOptionSelect = (option) => {
-      setSelectedOption(option);
-      setIsDropdownOpen(false);
-    };
+    // // Function to handle option selection
+    // const handleOptionSelect = (option) => {
+    //   setSelectedOption(option);
+    //   setIsDropdownOpen(false);
+    // };
 
     //second dropdown
     // State variables to manage dropdown behavior
@@ -39,6 +65,7 @@ export default function AddKpiModal ({open, onClose})  {
     // Function to handle option selection
     const handleOptionSelect1 = (option) => {
       setSelectedOption1(option);
+      setUnit(option);
       setIsDropdownOpen1(false);
     };
 
@@ -56,6 +83,7 @@ export default function AddKpiModal ({open, onClose})  {
     // Function to handle option selection
     const handleOptionSelect2 = (option) => {
       setSelectedOption2(option);
+      setGraphType(option);
       setIsDropdownOpen2(false);
     };
 
@@ -102,6 +130,72 @@ export default function AddKpiModal ({open, onClose})  {
   };
 }, []);
 
+const token = localStorage.getItem('access_token'); 
+const decodedToken = jwtDecode(token);
+const userId = decodedToken.userId;
+const navigate = useNavigate();
+
+const handleInputChange = (setter) => (event) => {
+    setter(event.target.value);
+};
+
+const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+};
+
+const handleOptionSelect = (option) => {
+    setSelectedOption(option);
+    setCategory(option);
+    setIsDropdownOpen(false);
+};
+
+const sendDataToAPI = async (data) => {
+    console.log(data);
+    try {
+        data.userId = userId;
+        data.projectId = localStorage.getItem('nProject');
+        data.graphType = graphType;
+        data.kpiName = kpiName;
+        data.kpiDescription = kpiDescription;
+        data.category = category;
+        data.unit = unit;
+        console.log(data);
+        
+        const response = await axios.post(API_BASE_URL + '/api/kpi', data);
+        console.log('Graph saved successfully:', response.data);
+        navigate('/trackPage');
+    } catch (error) {
+        if (error.response) {
+            toast.error(error.response.data.error);
+            console.log(error.response.data);
+        }
+        console.error('Error sending data to API:', error);
+        console.log(error.response.data);
+    }
+};
+
+const handleSubmit = () => {
+    const xAxisArray = xAxisData.split(',').map(item => item.trim());
+    const yAxisArray = yAxisData.split(',').map(item => parseFloat(item.trim()));
+
+    if (xAxisArray.length !== yAxisArray.length) {
+        toast.error('X and Y axis data must have the same number of values');
+        return;
+    }
+
+    const dataToSend = {
+        xAxisLabel: xAxisLabel,
+        yAxisLabel: yAxisLabel,
+        data: xAxisArray.map((x, index) => ({
+            x: x,
+            y: yAxisArray[index]
+        })),
+    };
+    sendDataToAPI(dataToSend);
+};
+
+
+
     if(!open) return null
 
     return ReactDOM.createPortal (
@@ -113,10 +207,25 @@ export default function AddKpiModal ({open, onClose})  {
               <div className='whiteKpi'>
               <p className='details'>Details of the KPI</p>
              <div className='addKpiBox'>
-                <div className='kpiname'><p>KPI Name</p><input className='inpt' type="text" placeholder="Search.."></input></div> 
-                <div className='kpiname'><p>KPI Description</p><input className='inpt' type="text" placeholder="Search.."></input></div> 
-                
-                
+                <div className='kpiname'><p>KPI Name</p>
+                <input 
+                className='inpt' 
+                type="text" 
+                value={kpiName}
+                placeholder="Search.."
+                onChange={handleInputChangeName}
+                />
+                </div> 
+                <div className='kpiname'><p>KPI Description</p>
+                <input 
+                className='inpt' 
+                type="text" 
+                placeholder="Search.."
+                value={kpiDescription}
+                onChange={handleInputKpiDescription} 
+                />
+                </div> 
+
                 <div className='kpiname'><p>Category</p>
                 {/* <button className="btn-primary dropdown-toggle bttn1" type="button" data-toggle="dropdown">KPI Category</button> */}
                 <div ref={dropdownRef} className="dropdown3 bttn1">
@@ -164,23 +273,39 @@ export default function AddKpiModal ({open, onClose})  {
                     <div class="caret3"></div>
                 </div>
                 <ul className={`menu9 ${isDropdownOpen2 ? 'menu-open9' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect2("Allow")} className='kpiCat'>Bar Chart</li>
+                    <li type='button' onClick={() => handleOptionSelect2("Bar Chart")} className='kpiCat'>Bar Chart</li>
                     <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect2("Rejected")} className='kpiCat'>Pie Chart</li>
+                    <li type='button' onClick={() => handleOptionSelect2("Pie Chart")} className='kpiCat'>Pie Chart</li>
                     <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect2("Rejected")} className='kpiCat'>Histogram</li>
+                    <li type='button' onClick={() => handleOptionSelect2("Histogram")} className='kpiCat'>Histogram</li>
                     <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect2("Rejected")} className='kpiCat'>Radar Graph</li>
+                    <li type='button' onClick={() => handleOptionSelect2("Radar Graph")} className='kpiCat'>Radar Graph</li>
                 </ul>
             </div>
                 </div> 
-                <div className='kpiname'><p>Add Axis(x)</p><input className='inpt' type="text" placeholder="Search.."></input></div> 
-                <div className='kpiname'><p>Add Axis(y)</p><input className='inpt' type="text" placeholder="Search.."></input></div>  
+                <div className='kpiname'><p>Add Axis(x)</p>
+                <input 
+                className='inpt' 
+                type="text" 
+                placeholder="Search.."
+                value={xAxisData}
+                onChange={handleInputChange(setXAxisData)}
+                />
+                </div>
+                <div className='kpiname'><p>Add Axis(y)</p>
+                <input className='inpt' 
+                type="text" 
+                placeholder="Search.."
+                value={yAxisData}
+                onChange={handleInputChange(setYAxisData)}
+                />
+                </div>  
                 </div>         
              <button className="btn btn-primary kpib">Cancel</button>
-              <button className="btn btn-primary kpibA">Save</button>
+              <button className="btn btn-primary kpibA" onClick={handleSubmit}>Save</button>
               </div>          
            </div>
+           <Toaster  position="top-right" />
         </div>
         </>,
         document.getElementById('portal')

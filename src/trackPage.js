@@ -7,13 +7,15 @@ import Progress from './progress';
 import WorkLoad from './workLoad';
 import Task from './task';
 import Cost from './cost';
+import API_BASE_URL from './config/apiConfig';
+import ReactApexChart from 'react-apexcharts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom';
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons';
 
 
 
-function TrackPage ()  {
+function TrackPage ( {projectId, graphType, xAxisData, yAxisData })  {
     const navigate = useNavigate()
 
     const onClickHandler = (event) => {
@@ -30,6 +32,31 @@ function TrackPage ()  {
     const [selectedOption, setSelectedOption] = useState('');
     const [isNestedDropdownOpen, setIsNestedDropdownOpen] = useState(false);
     const [isNestedDropdownOpen1, setIsNestedDropdownOpen1] = useState(false);
+
+
+    const [graphData, setGraphData] = useState([]);
+    const [selectedGraphData, setSelectedGraphData] = useState(null);
+    
+    const [deviceType, setDeviceType] = useState('desktop');
+
+// Function to update deviceType state based on window width
+const updateDeviceType = () => {
+    if (window.innerWidth < 768) {
+        setDeviceType('mobile');
+    } else if (window.innerWidth < 1024) {
+        setDeviceType('tablet');
+    } else {
+        setDeviceType('desktop');
+    }
+};
+// Effect to update isMobile state on window resize
+useEffect(() => {
+  updateDeviceType();
+  window.addEventListener('resize', updateDeviceType);
+  return () => window.removeEventListener('resize', updateDeviceType);
+}, []);
+
+
     const dropdownRef = useRef(null);
   
     // Function to toggle dropdown visibility
@@ -70,6 +97,43 @@ function TrackPage ()  {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
+    useEffect(() => {
+        const projectId = localStorage.getItem('nProject');
+    const graphType = "Pie Chart";
+        const fetchData = async () => {
+            try {
+                // Fetch graph data based on projectId and graphType
+                const response = await fetch(API_BASE_URL + `/api/kpi?projectId=${projectId}&graphType=${graphType}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch graph data');
+                }
+                
+                const data = await response.json();
+                console.log(data);
+                setGraphData(data);
+
+                // Set the first graph name's data as selectedGraphData initially
+                if (data.length > 0) {
+                    setSelectedGraphData(data[0]);
+                }
+            } catch (error) {
+                console.error('Error fetching graph data:', error);
+                // Handle error, e.g., show error message to user
+            }
+        };
+
+        fetchData();
+    }, [projectId, graphType]);
+
+    const handleGraphTypeClick = (graphType) => {
+        const selectedGraph = graphData.find(entry => entry.graphType === graphType);
+        setSelectedGraphData(selectedGraph);
+    };
+
+
+   
+
 
     return (
 
@@ -210,7 +274,7 @@ function TrackPage ()  {
                         </div>
 
                 <div className='containerGraph'>
-               <Progress/>
+                <Progress/>
                 <Task/>
                 
              </div>
@@ -218,38 +282,8 @@ function TrackPage ()  {
              <div className='containerGraph'>
                 <Time/>
                 <div className='healthGraph'>
-                   {/* <div className="graphNam">Health</div>
-                    <div className='health'>
-                        <p className='healthP'>Time</p>
-                        <p className='healthS'>14% ahead of schedule</p>
-                        <di></di>
-                    </div>
-                    <hr className='healthRule'></hr>
-                    <div className='health'>
-                        <p className='healthP'>Task</p>
-                        <p className='healthS'>14% ahead of schedule</p>
-                        <di></di>
-                    </div>
-                    <hr className='healthRule'></hr>
-                    <div className='health'>
-                        <p className='healthP'>WorkLoad</p>
-                        <p className='healthS'>14% ahead of schedule</p>
-                        <di></di>
-                    </div>
-                    <hr className='healthRule'></hr>
-                    <div className='health'>
-                        <p className='healthP'>Progress</p>
-                        <p className='healthS'>14% ahead of schedule</p>
-                        <di></di>
-                    </div>
-                    <hr className='healthRule'></hr>
-                    <div className='health'>
-                        <p className='healthP'>Cost</p>
-                        <p className='healthS'>14% ahead of schedule</p>
-                        <di></di>
-                    </div> */}
-                    <div className="graphNam">Health</div>
-                    <table className='trackTable'> 
+                   <div className="graphNam">Health</div>
+                   <table className='trackTable'> 
 
   <tr className=''>
     <td>Time</td>
