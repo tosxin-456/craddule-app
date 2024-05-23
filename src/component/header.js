@@ -141,7 +141,7 @@ const handleNotifyClick1 = () => {
                 <div className={`menu0  container-fluid1 ${isDropdownOpen ? 'menu-open0' : ''}`}>
                   
                  <div className='divNotify'>
-                <p className='notiHead' >Notification</p>
+                {/* <p className='notiHead' >Notification</p> */}
                 
                 <div className='displayDeletebutton'>
                 <div className='notify' onClick={handleNotifyClick}>
