@@ -31,6 +31,7 @@ function Menu () {
   const onClickHandler23 = () => navigate(`/profile`);
   const onClickHandler24 = () => navigate(`/multipleGraph`);
   const onClickHandler25 = () => navigate(`/comparative`);
+  const onClickHandler26 = () => navigate(`/timelineBuilder`);
 
 
   const [isClosed, setIsClosed] = useState(false);
@@ -99,7 +100,7 @@ function Menu () {
               <li className='innr' onClick={onClickHandler24}>Custom Financial Projection</li>
               <li className='innr'onClick={onClickHandler18}>Discounted Cash Flow (DCF)</li>
               <li className='innr'onClick={onClickHandler25}>Comparative Analysis</li>
-              <li className='innr'>Project Timeline Builder</li>
+              <li className='innr'onClick={onClickHandler26}>Project Timeline Builder</li>
               <li className='innr' onClick={onClickHandler20}>Go/ No-Go gate</li>
               <li className='innr'onClick={onClickHandler11}>Summary (PDF)</li>
               {/* Add more submenu items as needed */}
