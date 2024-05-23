@@ -7,12 +7,15 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faRectangleList, faSquareFull } from '@fortawesome/free-solid-svg-icons';
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
+import CreateTaskModal from './component/createTaskModal';
+import AddUserModal from './component/addUserModal';
 
 
 
 
 function TimelineBuilder ()  {
     const [isOpen, setIsOpen]= useState(false);
+    const [isOpen1, setIsOpen1]= useState(false);
 
     const navigate = useNavigate()
 
@@ -37,7 +40,7 @@ function TimelineBuilder ()  {
             </div>
             <div className='timelineButton'>
             <p type='button' className='buttonTime' onClick={()=>setIsOpen(true)}>Creat Task</p>
-            <p type='button' className='buttonTime' onClick={()=>setIsOpen(true)}>Add User</p>
+            <p type='button' className='buttonTime' onClick={()=>setIsOpen1(true)}>Add User</p>
             </div>
 
                 <table className='tTable'>
@@ -61,7 +64,7 @@ function TimelineBuilder ()  {
             <tr className='timeRow'>
                 <td>Mike Idoma</td>
                 <td>loremipsum@yahoo.com</td>
-                <td>U1</td>
+                <td>UI</td>
                 <td><FontAwesomeIcon icon={faSquareFull} className='green'/></td>
                 <td>8/4/2024</td>
                 <td>17/4/2024</td>
@@ -69,7 +72,7 @@ function TimelineBuilder ()  {
             <tr className='timeRow'>
                 <td>Aisha Aliyu</td>
                 <td>loremipsum@yahoo.com</td>
-                <td>U1</td>
+                <td>UI</td>
                 <td><FontAwesomeIcon icon={faSquareFull} className='green'/></td>
                 <td>8/4/2024</td>
                 <td>17/4/2024</td>
@@ -97,6 +100,12 @@ function TimelineBuilder ()  {
         <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
            
   </div>
+  <CreateTaskModal open={isOpen} onClose={() => setIsOpen(false)}>
+
+          </CreateTaskModal>
+          <AddUserModal open={isOpen1} onClose={() => setIsOpen1(false)}>
+
+          </AddUserModal>
   </div>
   </div>
   </>

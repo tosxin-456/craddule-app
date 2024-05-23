@@ -239,10 +239,6 @@ return () => {
                 </div>
             )}                                
                 </div>
-                {/*<button className="btn btn-primary dropdown-toggle team" type="button" data-toggle="dropdown">Name</button>
-                <button className="btn btn-primary dropdown-toggle team" type="button" data-toggle="dropdown">Select Task</button>
-                <button className="btn btn-primary dropdown-toggle team" type="button" data-toggle="dropdown">Start Date</button>
-               <button className="btn btn-primary dropdown-toggle team" type="button" data-toggle="dropdown">End Date</button>*/}
            </div>
            <div className='shareButtonDiv'>
            <button className="btn btn-primary curveInviteA" onClick={()=>setIsOpen(true)}>Add</button>

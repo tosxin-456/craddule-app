@@ -1378,6 +1378,19 @@ background-color: white!important;
   border-radius: 15px;
 }
 
+.modalStTask{
+   position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 10px 20px;
+  width: 40%;
+  z-index: 1000;
+  border-radius: 15px;
+  height: 70%;
+}
+
 .closeM{
   cursor: pointer;
   float: inline-end;
@@ -6173,3 +6186,124 @@ color: red;
   margin-right: 10px!important;
   margin-top: 60px;
 }
+
+
+.dashHr{
+  border-top: 3px dashed black !important;
+}
+
+.taskList{
+  display: flex;
+  /* justify-content: end; */
+  font-size: 14px;
+  margin: 20px;
+  flex-direction: row;
+}
+
+.taskDate{
+  display: flex;
+  /* justify-content: end; */
+  font-size: 14px;
+  margin: 20px;
+  flex-direction: row;
+}
+
+.taskColor{
+  display: flex;
+  /* justify-content: end; */
+  font-size: 14px;
+  margin: 20px;
+  flex-direction: row;
+}
+
+.inpTask{
+  margin-left: 10px;
+  border-radius: 5px !important;
+  border-width: 1px;
+  width: 70%;
+  outline: none;
+  padding: 2px;
+}
+
+
+.inpColor{
+  margin-left: 10px;
+  border-radius: 5px !important;
+  border-width: 1px;
+  /* width: 70%; */
+  outline: none;
+  padding: 2px;
+}
+
+.creatTask{
+  font-size: 20px;
+  border-radius: 10px !important;
+  text-wrap: wrap;
+  /* font-weight: bold; */
+  padding: 0px 10px 0px 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 40px !important;
+  margin-bottom: 65px;
+}
+
+.taskHeader{
+  font-size: 14px;
+  font-weight: bold !important;
+  margin: 0px;
+}
+
+.timeTxt{
+  margin-top: 10px;
+}
+
+.menu1Tk{
+  list-style: none;
+  padding: 0.2em 0.5em;
+  background-color: rgb(247, 244, 244);
+  border: 1px rgb(247, 244, 244);
+  position: absolute;
+  /*top: 3em;*/
+  top: 0em;
+  left: 155%;
+  text-wrap: nowrap;
+  transform: translate(-50%);
+  opacity: 0;
+  display: none;
+  transition: 0.2s;
+  z-index: 1;
+}
+
+.menu1Tk l1 {
+  padding: 0.7em 0.5em;
+  margin: 0.3em 0;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+.menu-open1Tk{
+  display:block;
+  opacity:1;
+}
+
+
+.taskButtonDiv{
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+}
+
+.calendar-dropdownT {
+  position: absolute;
+  top: 0em;
+  left: 105%;
+  z-index: 2;
+}
+
+.pickerStylesT{
+  position: absolute;
+  left: 48%;
+  top: 37%;
+  height: auto;
+  z-index: 1;
+ }
