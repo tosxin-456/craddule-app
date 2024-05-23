@@ -11,6 +11,7 @@ import {
 
 import MarketAnalysis from './marketAnalysis';
 import Introduction from './introduction';
+import TimelineBuilder from './timelineBuilder';
 import UpdateImage from './updateImage';
 import FontPicker from './fontPicker';
 import TrackPage from './trackPage';
@@ -158,6 +159,7 @@ function App() {
         <Route path="/workLoad" element= {<WorkLoad />} />
         <Route path="/cost" element= {<Cost />} />
         <Route path="/time" element= {<Time />} />
+        <Route path="/timelineBuilder" element= {<TimelineBuilder />} />
         <Route path="/viewSheetModal" element= {<ViewSheetModal />} />
         <Route path="/problemstatement" element= {<ProblemStatement />} />
         <Route path="/Solution" element= {<Solution />} />

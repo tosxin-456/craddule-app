@@ -6118,3 +6118,58 @@ padding: 5px;
 .notifyTxt{
   text-wrap: wrap;
 }
+
+.timelineButton{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.timeTable {
+  margin-top: 2px;
+  background-color: #f0e296 !important;
+  padding: 10px;
+  font-size: 14px !important;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+}
+
+.tTable{
+  width: 100%;
+  text-align: center;
+}
+
+.timeRow {
+  padding: 10px;
+  font-size: 14px !important;
+  margin-top: 2px;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px 0 rgb(170 170 170);
+}
+
+.orange{
+color: orange;
+
+}
+
+.green{
+color: green;
+}
+
+.red{
+color: red;
+}
+
+
+.buttonTime{
+  background-color: #facc04 !important;
+  border: 0px !important;
+  color: #000 !important;
+  font-weight: 500 !important;
+  text-wrap: nowrap;
+  padding: 5px 30px !important;
+  border-radius: 20px !important;
+  font-size: 17px!important;
+  margin-right: 10px!important;
+  margin-top: 60px;
+}
