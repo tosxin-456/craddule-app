@@ -73,6 +73,7 @@ function Login() {
          // const data = response.json();
     
           if (response.status === 200) {
+            localStorage.clear();
             console.log(response.status);
             console.log(response);
             const responseData = await response.json(); // Parse JSON response
@@ -82,20 +83,16 @@ function Login() {
       setLoading(false);
       // Save access token to local storage
     
-            console.log('Logging successfully');
-              console.log(responseData.user);
-             
-            const userStatus = responseData.user.status;
+            console.log('Logged successfully');
+            const userStatus = responseData.user.status
             console.log(responseData.user.status);
-               //navigate(`/introduction1`);
-              
             if(userStatus === 'deactivated'){
               toast.error("This Account as been Deactivated");
             }else{
               localStorage.setItem('access_token', token);
               console.log('Access Token:', token);
               localStorage.setItem('access_token', token);
-              navigate(`/introduction1`);
+              navigate(`/home`);
             }
            
              // navigate(`/introduction1`)

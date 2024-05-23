@@ -28,7 +28,7 @@ const userId = decodedToken.userId;
 
 function LandingPage() {
 
-   
+   const navigate = useNavigate();
     
   const [inputValue, setInputValue] = useState('');
   const [show, setShow] = useState(false);
@@ -129,6 +129,11 @@ const fetchSharedProjects= async () => {
 };
 
 
+const handleProjectClick = (projectId) => {
+  localStorage.setItem('nProject', projectId);
+  navigate(`/introduction1`);
+};
+
  useEffect(() => {
   fetchTeamProjects();
   fetchUserProjects();
@@ -180,7 +185,8 @@ const fetchSharedProjects= async () => {
       ))}
 
       {projects.map(member => (
-        <div className='col-md-6'>
+       
+        <div className='col-md-6'  onClick={() => handleProjectClick(member._id)}>
         <div className='centerD'>
             <p className='pna'>{member.projectName}</p>
             <progress value={progress} max="100"></progress>
@@ -194,6 +200,7 @@ const fetchSharedProjects= async () => {
                   </div>
           </div> 
           </div> 
+         
 
         ))}
 
