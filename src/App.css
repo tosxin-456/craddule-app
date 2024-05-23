@@ -1388,7 +1388,7 @@ background-color: white!important;
   width: 40%;
   z-index: 1000;
   border-radius: 15px;
-  height: 70%;
+  /* height: 70%; */
 }
 
 .closeM{
@@ -6303,7 +6303,7 @@ color: red;
 .pickerStylesT{
   position: absolute;
   left: 48%;
-  top: 37%;
+  top: 42%;
   height: auto;
   z-index: 1;
  }
