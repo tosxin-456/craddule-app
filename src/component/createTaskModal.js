@@ -124,6 +124,63 @@ export default function CreateTaskModal ( {open, onClose})  {
   };
   
 
+  const [formData, setFormData] = useState({
+      task: '',
+      // color: selectedColor,
+      // startDate: selectedDate,
+      // endDate: selectedDate1,
+  
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    
+    createTask(formData);
+
+   
+  };
+
+ 
+  const createTask = async (data) => {
+    console.log(data);
+
+    setLoading(true);
+    try {
+      console.log(access_token + "access token")
+      console.log(access_token)
+
+      const response = await axios.post(API_BASE_URL+'/api/task',{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${access_token}`,
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.status === 200) {
+        console.log(response.status);
+        console.log(response);    
+        console.log('Task created successfully');
+      } else {
+        const result = await response.json();
+        setLoading(false);
+        toast.error(result['error']);
+          console.error('Error:', result['error']);        
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error('An error occurred:', error);
+      console.log(error.response.data);
+    }
+  };
+
   if(!open) return null
 
    return ReactDOM.createPortal (
@@ -135,9 +192,17 @@ export default function CreateTaskModal ( {open, onClose})  {
               <p>Here you can create and assign task</p>
               <hr className='dashHr'></hr>
               <div className='creatTask'>
+              {/* <form onSubmit={handleSubmit}> */}
                 <div className='taskList'>
-                    <p className='timeTxt'>Task</p>
-                    <input className='inpTask'></input>
+                    {/* <p className='timeTxt'>Task</p> */}
+                    <label htmlFor="test" className='timeTxt'>Task</label>
+                    <input 
+                    className='inpTask'
+                    type="test"
+                   id="task"
+                   value={formData.task}
+                  onChange={handleChange}
+                    />
                 </div>
                 <div className='taskColor'>
                     <p className='timeTxt'>Color</p>
@@ -199,12 +264,15 @@ export default function CreateTaskModal ( {open, onClose})  {
                         inline
                     />
                 </div>
-            )}                                
+            )}    
+                                        
                 </div>
+                
                 </div>
+                {/* </form> */}
               </div>
-          
-           <div className='taskButtonDiv'><button type="submit" className="btn btn-primary curveImage" disabled={loading}>{ loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+         
+           <div className='taskButtonDiv'><button type="submit" className="btn btn-primary curveImage" disabled={loading} onClick={handleSubmit}>{ loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
                 { !loading && <span>Proceed</span>}
                 
               </button>
