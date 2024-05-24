@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import API_BASE_URL from './config/apiConfig';
+import API_BASE_WEB_URL from './config/apiConfigW';
 import axios from 'axios';
 const phaseNames = [
   'Ideation',
@@ -31,7 +32,7 @@ function PageShare() {
     
     try {
       console.log(userId);
-      const response = await fetch(`${API_BASE_URL}/api/share/review/${userId}/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/share/review/${id}`, {
         headers: {
           'Content-Type': 'application/json',
            'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
@@ -77,15 +78,24 @@ function PageShare() {
               </div>
               <div className='BoxPhase1'>
                 <p className='centerH1v'>Phase</p>
-                {share.map((phase, index) => (
-                  <div className='BoxPhase' key={index}>
-                    <div className='boxView'><p className='heading'>{phase}</p></div>
-                    
-                  </div>
-                ))}
-                <div className='boxView'>
-                  <button className="btn btn-primary curveP" onClick={() => setIsOpen(true)}>Share</button>
-                </div>
+                {share && share.length > 0 && share.map((item, itemIndex) => (
+                      item.phases && item.phases.length > 0 && item.phases.map((phase, phaseIndex) => (
+                        <a 
+                          key={`${item._id}-${phaseIndex}`} 
+                          href={`${API_BASE_WEB_URL}/shareview/${id}/${phase}`} 
+                          style={{ textDecoration: 'none' }}
+                        >
+                          <div className='BoxPhase'>
+                            <div className='boxView'>
+                              <p className='heading'>{phase}</p>
+                            </div>
+                          </div>
+                        </a>
+                      ))
+                  ))}
+
+                
+              
                 
               </div>
             </div>
