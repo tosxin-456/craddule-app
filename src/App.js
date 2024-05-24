@@ -144,6 +144,10 @@ import LoginTeam from './loginStart';
 import SignUpTeam from './signUpStart';
 import AllQuestions from './questionList';
 import ShareReview from './shareReview';
+import ShareView from './sectionIntroShare';
+import ShareFeedback from './sectionFeedback';
+import Timeline from './timeline';
+import PageFeedback from './pageFeedback';
 function App() {
   return (
     <Router>
@@ -285,6 +289,10 @@ function App() {
             <Route path="/signup/start/:id/" element={<SignUpTeam />} />
            <Route path="/question/:id" element= {<AllQuestions />} />
           <Route path="/sharereview/:id" element= {<ShareReview />} />
+            <Route path="/shareview/:id/:phase" element= {<ShareView />} />
+            <Route path="/sharefeedback/:id/:phase" element= {<ShareFeedback />} />
+            <Route path="/feedback" element= {<PageFeedback />} />
+            <Route path="/timeline" element= {<Timeline />} />
         // <Route path="/" element={<MainApp />} />
       </Routes>
     </Router>
