@@ -16,19 +16,31 @@ import p2 from './images/p2.jpeg';
 import p3 from './images/p3.jpeg';
 import bolt from './images/bolt.png';
 import Modal from './component/modal';
+// import { validateToken } from './util/auth'; 
 
 
 
 
-const access_token = localStorage.getItem('access_token');
-const decodedToken = jwtDecode(access_token);
-const userId = decodedToken.userId;
 
 
 
 function LandingPage() {
 
    const navigate = useNavigate();
+
+   
+
+   useEffect(() => {
+
+    const token = localStorage.getItem('access_token');
+
+    if (!token) {
+      // Navigate to login page if token is not found
+      navigate('/login');
+      return;
+    }
+    
+  }, [navigate]);
     
   const [inputValue, setInputValue] = useState('');
   const [show, setShow] = useState(false);
@@ -43,6 +55,10 @@ function LandingPage() {
   const [teamMembers, setTeamMembers] = useState([]);
 const [projects, setProjects] = useState([]);
 const [share, setShare] = useState([]);
+
+const access_token = localStorage.getItem('access_token');
+const decodedToken = jwtDecode(access_token);
+const userId = decodedToken.userId;
 
 const fetchTeamProjects= async () => {
   try {

@@ -19,7 +19,7 @@ export default function CreateTaskModal ( {open, onClose})  {
   const [isOpen, setIsOpen]= useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [showPicker, setShowPicker] = useState(false);
-  const [selectedColor, setSelectedColor] = useState('#ffffff'); // Initial color value
+  const [selectedColor, setSelectedColor] = useState(''); // Initial color value
 
      // State variables to manage dropdown behavior
      const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -141,23 +141,31 @@ export default function CreateTaskModal ( {open, onClose})  {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const projectId = localStorage.getItem('nProject');
 
-    
-    createTask(formData);
+    const updatedFormData = {
+      color: selectedColor,
+      startDate: selectedDate,
+      endDate: selectedDate1,
+      projectId: projectId,
+      ...formData,
+    };
+    createTask(updatedFormData);
 
    
   };
 
  
   const createTask = async (data) => {
-    console.log(data);
-
     setLoading(true);
     try {
       console.log(access_token + "access token")
       console.log(access_token)
 
-      const response = await axios.post(API_BASE_URL+'/api/task',{
+      console.log(data);
+      console.log(JSON.stringify(data));
+      const response = await fetch(API_BASE_URL+'/api/task',{
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${access_token}`,
@@ -166,7 +174,10 @@ export default function CreateTaskModal ( {open, onClose})  {
       });
       if (response.status === 200) {
         console.log(response.status);
-        console.log(response);    
+        console.log(response);   
+        // window.location.reload();
+        navigate('');
+ 
         console.log('Task created successfully');
       } else {
         const result = await response.json();
@@ -186,19 +197,21 @@ export default function CreateTaskModal ( {open, onClose})  {
    return ReactDOM.createPortal (
       <>
         <div className='modalOv'>
+        <form onSubmit={handleSubmit}>
            <div className='modalStTask'>
                 <p className='closeIcon' type='button' onClick={onClose} >X</p>
               <p className='taskHeader'>Create Task</p>
               <p>Here you can create and assign task</p>
               <hr className='dashHr'></hr>
+        
               <div className='creatTask'>
-              {/* <form onSubmit={handleSubmit}> */}
+             
                 <div className='taskList'>
                     {/* <p className='timeTxt'>Task</p> */}
-                    <label htmlFor="test" className='timeTxt'>Task</label>
+                    <label htmlFor="task" className='timeTxt'>Task</label>
                     <input 
                     className='inpTask'
-                    type="test"
+                    type="text"
                    id="task"
                    value={formData.task}
                   onChange={handleChange}
@@ -242,7 +255,10 @@ export default function CreateTaskModal ( {open, onClose})  {
                 <div className="calendar-dropdownT">
                     <DatePicker
                         selected={selectedDate}
-                        onChange={handleDateSelect}
+                        onChange={(date) => {
+                          setSelectedDate(date);
+                          setIsDropdownOpen(false);
+                        }}
                         inline
                     />
                 </div>
@@ -254,13 +270,16 @@ export default function CreateTaskModal ( {open, onClose})  {
                     <div ref={dropdownRef1} className="dropdown1">
                  <div className={`select1 ${isDropdownOpen1 ? 'select-clicked1' : ''}`} onClick={toggleDropdown1}>
                   <span classname="selected">{selectedDate1 ? selectedDate1.toLocaleDateString() : "End Date"}</span>
-                    <div class="caret1"></div>
+                    <div className="caret1"></div>
                  </div>
                  {isDropdownOpen1 && (
                 <div className="calendar-dropdownT">
                     <DatePicker
                         selected={selectedDate1}
-                        onChange={handleDateSelect1}
+                        onChange={(date) => {
+                          setSelectedDate1(date);
+                          setIsDropdownOpen1(false);
+                        }}
                         inline
                     />
                 </div>
@@ -269,16 +288,17 @@ export default function CreateTaskModal ( {open, onClose})  {
                 </div>
                 
                 </div>
-                {/* </form> */}
+              
               </div>
          
-           <div className='taskButtonDiv'><button type="submit" className="btn btn-primary curveImage" disabled={loading} onClick={handleSubmit}>{ loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+           <div className='taskButtonDiv'><button type="submit" className="btn btn-primary curveImage" disabled={loading}>
+            { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
                 { !loading && <span>Proceed</span>}
                 
               </button>
                     </div>
            </div> 
-           
+           </form>
              <Toaster  position="top-right" />
         </div>
         </>,

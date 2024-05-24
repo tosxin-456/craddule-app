@@ -20,9 +20,13 @@ export default function AddUserModal ( {open, onClose})  {
   // State variables to manage dropdown behavior
      const [isDropdownOpen, setIsDropdownOpen] = useState(false);
      const [selectedOption, setSelectedOption] = useState('');
+     const [error, setError] = useState(null);
+     const [task, setTask] = useState([]);
+
+
      const dropdownRef = useRef(null);
      
-     
+    const projectId = localStorage.getItem('nProject');
 
   const [loading, setLoading] = useState(false);
   const access_token = localStorage.getItem('access_token');
@@ -93,6 +97,93 @@ export default function AddUserModal ( {open, onClose})  {
         document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    // Fetch all tasks for the dropdown on component mount
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get('/tasks');
+        setTask(response.data);
+      } catch (err) {
+        console.error(err);
+        setError('Error fetching tasks for the dropdown');
+      }
+    };
+
+    fetchTasks();
+  }, []);
+
+  
+
+  const getAllTaskById = async () => {
+    try {
+      console.log(projectId);
+      const response = await fetch(`${API_BASE_URL}/api/task/${projectId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+           'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
+        }
+      });
+      
+      console.log("here");
+      console.log("here");
+      if (response.status === 200) {
+        const data = await response.json();
+        console.log(data.data);
+        setTask(data.data);
+        console.log(task)
+        setLoading(false);
+      }else{
+        const result = await response.json();
+        console.error('Error:', result['error']);
+      }
+     
+    } catch (err) {
+      setError(err);
+      setLoading(false);
+      console.log(err);
+      console.log(err.response.data);
+    }
+  };
+
+  useEffect(() => {
+     
+    console.log("work");
+
+    getAllTaskById();
+  }, [projectId]);
+
+
+
+
+//   useEffect(() => {
+//     // Simulating fetching user details from an API
+//     const getAllTaskById = async () => {
+//         try {
+
+//           const response = await fetch(`${API_BASE_URL}/api/task/${projectId}/${task}`, {
+//             method: 'GET',
+//             headers: {
+//               'Content-Type': 'application/json',
+//               'Authorization': `Bearer ${access_token}`,
+//             },
+//           });
+//             if (response.status === 200) {
+//                 const data = await response.json();
+//                 console.log(data);
+//             } else {
+//                 const data = await response.json();
+//                 console.log(data);
+//                 console.error('Failed to fetch task');
+//             }
+//         } catch (error) {
+//             console.error('Error fetching task:', error);
+//         }
+//     };
+
+//     getAllTaskById();
+// }, []);
 
   if(!open) return null
 
