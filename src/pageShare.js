@@ -51,6 +51,9 @@ function PageShare() {
                 <p className='centerHp'>Here you can share your work</p>
               </div>
               <div className='BoxPhase1'>
+              <div className='boxView'>
+                  <a className="btn btn-primary curveP" href="feedback">Feedback</a>
+                </div>
                 <p className='centerH1v'>Phase</p>
                 {phaseNames.map((phase, index) => (
                   <div className='BoxPhase' key={index}>
