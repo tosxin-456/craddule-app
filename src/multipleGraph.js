@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
 function MultipleGraph ()  {
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate(`/inflationMoM`)
+    const onClickHandler = () => navigate(`/inflationRateGraph`)
     const onClickHandler1 = () => navigate(`/operatingIncomeMoM`)
     const onClickHandler2 = () => navigate(`/expensesMoM`)
     const onClickHandler3 = () => navigate(`/profitPageMoM`)

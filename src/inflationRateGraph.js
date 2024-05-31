@@ -7,7 +7,7 @@ import Header from './component/header';
 import Menu from './component/menu';
 import API_BASE_URL from './config/apiConfig';
 
-
+import { useNavigate,Link } from 'react-router-dom';
 
 
 
@@ -18,6 +18,7 @@ function InflationRateGraph({projectId, graphType }) {
 
       const [graphData, setGraphData] = useState([]);
     const [selectedGraphData, setSelectedGraphData] = useState(null);
+    const [selectedGraphId, setSelectedGraphId] = useState('');
     
     const [deviceType, setDeviceType] = useState('desktop');
 
@@ -52,11 +53,13 @@ useEffect(() => {
                 
                 const data = await response.json();
                 console.log(data);
+                console.log(data._id);
                 setGraphData(data);
 
                 // Set the first graph name's data as selectedGraphData initially
                 if (data.length > 0) {
                     setSelectedGraphData(data[0]);
+                    setSelectedGraphId(data[0]._id);
                 }
             } catch (error) {
                 console.error('Error fetching graph data:', error);
@@ -67,9 +70,10 @@ useEffect(() => {
         fetchData();
     }, [projectId, graphType]);
 
-    const handleGraphNameClick = (graphName) => {
+    const handleGraphNameClick = (graphName,id) => {
         const selectedGraph = graphData.find(entry => entry.graphName === graphName);
         setSelectedGraphData(selectedGraph);
+        setSelectedGraphId(id);
     };
 
       const transformGraphData = (graphData) => {
@@ -113,8 +117,8 @@ useEffect(() => {
     };
 
     const chartData = transformGraphData(selectedGraphData);
-
-      
+    const navigate = useNavigate()
+    const onClickHandler = () => navigate(`/inflationMoM`)
   
 
   
@@ -128,10 +132,14 @@ useEffect(() => {
        <Menu />    
 
        <div className='col-md-9'>
+        
        <div className='centerG'>
+        <div style={{paddingBottom: 30}}>
+             <a style={{textDecoration: "none"}} href="inflationMoM" className='subm' type="button">Create Data</a>
+       </div>
         <div className="grP">
        {graphData.map((entry, index) => (
-                    <li key={index} onClick={() => handleGraphNameClick(entry.graphName)} className="graphNameT">
+                    <li key={index} onClick={() => handleGraphNameClick(entry.graphName,entry._id)} className="graphNameT">
                         {entry.graphName}
                     </li>
                 ))}
@@ -155,7 +163,19 @@ useEffect(() => {
 
           </div>
         </div>
-        <p className="graphtxtt">Inflation Rate Graph</p>
+        <div className="row">
+            <div className="col-md-6">
+                <p className="graphtxtt">Inflation Rate Graph</p>
+            </div>
+
+            <div className="col-md-6">
+            <Link to={`/inflationMoME/${selectedGraphId}`} className='dd'>
+                <p  className="edd">Edit</p>
+            </Link>
+            </div>
+        </div>
+        
+       
         </div>
 </div> 
 </div>

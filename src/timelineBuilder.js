@@ -16,7 +16,7 @@ import AddUserModal from './component/addUserModal';
 function TimelineBuilder ()  {
     const [isOpen, setIsOpen]= useState(false);
     const [isOpen1, setIsOpen1]= useState(false);
-
+    const onClickHandler1 = () => navigate(`/timeline`);
     const navigate = useNavigate()
 
     const onClickHandler = () => navigate(``)

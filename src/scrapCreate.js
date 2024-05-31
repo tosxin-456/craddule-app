@@ -17,9 +17,10 @@ import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
 
+import { useParams } from 'react-router-dom';
 
 
-function SectionIntro ({ htmlContent })  {
+function ScrapCreate ({ htmlContent })  {
     
     const navigate = useNavigate()
 
@@ -33,7 +34,8 @@ function SectionIntro ({ htmlContent })  {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const projectId = localStorage.getItem('nProject');
-  const [combinedAnswer, setCombinedAnswer] = useState('');
+  const [scrap, setScrap] = useState('');
+  const [scrapName, setScrapName] = useState('');
 
   const access_token = localStorage.getItem('access_token');
     const decodedToken = jwtDecode(access_token);
@@ -47,82 +49,13 @@ function SectionIntro ({ htmlContent })  {
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionBoxPosition, setSuggestionBoxPosition] = useState({ top: 0, left: 0 });
   const [selectedWord, setSelectedWord] = useState(null); 
-
+  const { id } = useParams();
+  console.log("create id "+id)
   const [formData, setFormData] = useState({
-    summary: '',
+    scrap: '',
     });
-    
-    useEffect(() => {
-       
-      fetchAnswerCut(); // Call the function to fetch the unanswered question
-    }, [questionType, questionSubType, projectId]);
-  
-    useEffect(() => {
-      const fetchTypes = async () => {
-          try {
-              const response = await axios.get(`${API_BASE_URL}/api/hub/types`);
-              setImages(response.data);
-              setLoading(false);
-          } catch (error) {
-              console.error('Error fetching types:', error);
-              setError('Failed to fetch types');
-              setLoading(false);
-          }
-      };
- 
-      fetchTypes();
-  }, []);
 
-  useEffect(() => {
-    const fetchAnswers = async () => {
-      try {
-        const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${questionType}/${questionSubType}`, {
-            headers: {
-              'Content-Type': 'application/json', 
-              'Authorization': `Bearer ${token}` // Include the token in the request headers
-            }
-          });
-        
-      if(summaryResponse.ok) {
-        // If summary exists, fetch the summary data
-        const dataS = await summaryResponse.json();
-        console.log(dataS);
-        console.log(dataS.data.summary);
-        setCombinedAnswer(dataS.data.summary);
-     } else {
-        const response = await fetch(API_BASE_URL + `/api/new/question/BusinessCaseBuilder/Introduction/${projectId}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch answers');
-        }
-        const data = await response.json();
-        console.log(data);
-        setAnswers(data.data);
-        setLoading(false);
-    }
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    };
 
-    fetchAnswers();
-  }, [questionType, questionSubType, projectId]);
-
-  useEffect(() => {
-    // Combine all answers into one string
-    const combined = answers.map(answer => answer.answer).join('\n \n');
-    setCombinedAnswer(combined);
-  }, [answers]);
-
-  // const handleEditorChange = () => {
-  //   // Get the current content of the editor
-  //   const content = editorRef.current.innerHTML;
-
-  //   const event = { target: { id: 'editor', value: content } };
-  // // Call the handleChange function with the content
-  //   handleChange(event);
-   
-  // };
 
 
   const handleEditorChange = () => {
@@ -136,7 +69,7 @@ function SectionIntro ({ htmlContent })  {
    
 
     const newText = content || '';
-    setCombinedAnswer(content);
+    setScrap(content);
     console.log(content);
     console.log("checking error");
     console.log(newText);
@@ -149,45 +82,81 @@ function SectionIntro ({ htmlContent })  {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setCombinedAnswer(value);
+    setScrap(value);
 }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    createOrUpdateSummary();
+    createOrUpdateScrap();
     
   };
 
 
 
+  useEffect(() => {
+    const fetchScrap = async () => {
+      try {
+        const scrapResponse = await fetch(API_BASE_URL + `/api/scrap/${id}`, {
+            headers: {
+              'Content-Type': 'application/json', 
+              'Authorization': `Bearer ${token}` // Include the token in the request headers
+            }
+          });
+        
+      if(scrapResponse.status === 200) {
+        // If summary exists, fetch the summary data
+        const dataS = await scrapResponse.json();
+        console.log(dataS);
+        console.log("scrap "+dataS.data.scrap);
+        setScrap(dataS.data.scrap);
+        setScrapName(dataS.data.scrapName)
+     } else {
+        
+        const data = await scrapResponse.json();
+        console.log(data);
+        setLoading(false);
+    }
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
 
-  const createOrUpdateSummary = async (data) => {
+    fetchScrap();
+  }, [id]);
+
+
+  const createOrUpdateScrap = async (data) => {
     try {
         setLoading(true);
-        console.log(combinedAnswer);
-        const summary = combinedAnswer;
-      const response = await fetch(API_BASE_URL +'/api/summary', {
-        method: 'POST',
+        console.log(scrap);
+        const summary = scrap;
+      const response = await fetch(API_BASE_URL +'/api/scrap/scrap/'+id, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` 
         },
-        body: JSON.stringify({ projectId, questionType, questionSubType, summary }),
+        body: JSON.stringify({ scrap }),
       });
   
-      if (!response.ok) {
+      if (response.status === 200) {
+        setLoading(false);
+        toast.success("Saved");
+
+        ///throw new Error('Failed to create or update summary');
+      }else{
+        const data = await response.json();
         setLoading(false);
         toast.error("can't save");
-        ///throw new Error('Failed to create or update summary');
+        console.log(data.message); // Log success message
       }
 
-      const data = await response.json();
-      setLoading(false);
-      toast.success("Saved");
-      console.log(data.message); // Log success message
+      
   
      
     } catch (error) {
-      console.error('Error creating or updating summary:', error.message);
+      console.error('Error creating or updating scrapbook:', error.message);
       // Handle error
     }
   };
@@ -223,20 +192,7 @@ function SectionIntro ({ htmlContent })  {
   ['clean']         
   ];
 
-  const modules = {
-    toolbar: {
-      container: toolbarOptions,
-      // handlers: {
-      //   'image': () => {
-      //     setShowImagePopup(true);
-      //   }
-      // }
-    },
-    
-    imageResize: {
-      modules: ['Resize', 'DisplaySize', 'Toolbar'] // Configure the image resize module
-    }
-  };
+
   const module =  {
   
       toolbar: toolbarOptions
@@ -259,59 +215,13 @@ function SectionIntro ({ htmlContent })  {
     }
   };
 
-  const fetchAnswerCut = async () => {
-        
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/answer/${projectId}/${questionType}/${questionSubType}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
-        }
-      });
-  
-      if (response.status === 200) {
-        const data = await response.json();
-        console.log(data)
-        setAnswersV(data.data); // Adjust based on your API response structure
-       
-      }else{
-        const result = await response.json();
-        console.error('Error:', result['error']);
-      }
-  
-      
-    } catch (error) {
-      console.log(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
- 
-  const handleMouseEnter = (index) => {
-    setHoveredIndex(index);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-  };
 
   const editorRef = useRef(null);
 
-  const handleImageSelect = (imageUrl) => {
-    const quill = reactQuillRef.current.getEditor();
-    const range = quill.getSelection();
-    quill.insertEmbed(range.index, 'image', imageUrl);
-    setShowImagePopup(false);
-  };
 
   const formatText = (command, value = null) => {
     document.execCommand(command, false, value);
     editorRef.current.focus();
-  };
-
-  const createMarkup = (html) => {
-    return { __html: html };
   };
   const insertLink = () => {
     const url = prompt('Enter the link URL:');
@@ -320,21 +230,16 @@ function SectionIntro ({ htmlContent })  {
     }
   };
 
-  const insertImage = () => {
-    const imageUrl = prompt('Enter the image URL:');
-    if (imageUrl) {
-      formatText('insertImage', imageUrl);
-    }
-  };
-  const handleInput = () => {
-    setCombinedAnswer(editorRef.current.innerHTML);
-  };
+
   useEffect(() => {
     const editor = editorRef.current;
-    if (editor && editor.innerHTML !== combinedAnswer) {
-      editor.innerHTML = combinedAnswer;
+    if (editor && editor.innerHTML !== scrap) {
+      if(scrap){
+        editor.innerHTML = scrap;
+      }
+      
     }
-  }, [combinedAnswer]);
+  }, [scrap]);
 
   const loadDictionary = async () => {
     const affResponse = await fetch('/dictionaries/en.aff');
@@ -378,7 +283,7 @@ function SectionIntro ({ htmlContent })  {
     // const html = editor.innerHTML;
     // const newHtml = html.replace(new RegExp(`\\b${misspelledWords[0]}\\b`, 'g'), suggestion);
     // editor.innerHTML = newHtml;
-    // setCombinedAnswer(newHtml);
+    // setScrap(newHtml);
     // setSuggestions([]);
 
     if (!selectedWord) return; // Check if a word is selected
@@ -391,27 +296,13 @@ function SectionIntro ({ htmlContent })  {
     const newHtml = html.replace(new RegExp(`\\b${escapedWord}\\b`, 'g'), suggestion);
 
     editor.innerHTML = newHtml;
-    setCombinedAnswer(newHtml);
+    setScrap(newHtml);
     checkSpelling(newHtml);
     setSelectedWord(null); // Reset selected word
     
   };
 
-  const handleSuggestionClick = (suggestion) => {
-    if (!selectedWord) return; // Check if a word is selected
 
-    const editor = editorRef.current;
-    const html = editor.innerHTML;
-
-    // Create a regex to match only the selected word
-    const escapedWord = selectedWord.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-    const newHtml = html.replace(new RegExp(`\\b${escapedWord}\\b`, 'g'), suggestion);
-
-    editor.innerHTML = newHtml;
-    setCombinedAnswer(newHtml);
-    checkSpelling(newHtml);
-    setSelectedWord(null); // Reset selected word
-  };
 
   useEffect(() => {
     const editor = editorRef.current;
@@ -433,6 +324,7 @@ function SectionIntro ({ htmlContent })  {
     }
   };
 
+  
   const handleImagePopup = () => {
     setShowImagePopup(!showImagePopup);
   };
@@ -440,13 +332,13 @@ function SectionIntro ({ htmlContent })  {
   const [showHeadingDropdown, setShowHeadingDropdown] = useState(false);
 
   const toggleHeadingDropdown = () => setShowHeadingDropdown(!showHeadingDropdown);
-//   createOrUpdateSummary();
+//   createOrUpdateScrap();
   
 const handleInsertFile = (file) => {
   const newFile = API_BASE_URL+'/images/'+file;
   console.log(newFile);
-  setCombinedAnswer((prevContent) => `${prevContent}<div contenteditable="true" style="display:inline-block; width:30%;"><img src="${newFile}" style="width:100%;" /></div>`);
-  // setCombinedAnswer((prevContent) => `${prevContent}<img src="${newFile}" alt="Inserted File" />`);
+  setScrap((prevContent) => `${prevContent}<div contenteditable="true" style="display:inline-block; width:30%;"><img src="${newFile}" style="width:100%;" /></div>`);
+  // setScrap((prevContent) => `${prevContent}<img src="${newFile}" alt="Inserted File" />`);
 
 };
 
@@ -560,9 +452,10 @@ const handleInsertFile = (file) => {
             <img src={bci} className='bcA'></img>
         <div className='lenght'>
                     <div className='text-center'>
-                <p className='centerH' onClick={accessToolbar}>Introduction</p>
-                <p className='centerHp'>Make sure you answer all questions</p>
+                <p className='centerH' onClick={accessToolbar}>{scrapName}</p>
+                
                 </div>
+               
                 <form onSubmit={handleSubmit}>    
             <button className="btn btn-primary buttonE" type='submit'>
                 { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
@@ -572,31 +465,8 @@ const handleInsertFile = (file) => {
             {/*<p className= "buttonE">Save</p>
             <p className= "buttonS">Edit</p>*/}
             <div class = "break"></div>
-            {answersV.map((answerV, index) => (
-            <Link to={`/question/${answerV.questionId}`}>
-                <div key={answerV._id} className="qul">
-                <Tooltip content={answerV.answer}>
-                
-              
-                    <p
-                        className={`qulp ${hoveredIndex === index ? 'full' : ''}`}
-                        onMouseEnter={() => handleMouseEnter(index)}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {hoveredIndex === index ? answerV.question : answerV.question.slice(0, 10) + '...'}
-                    </p>
-                    </Tooltip>
-                    
-                </div>
-                 </Link>
-            ))}
            
             <div className='container-textBs'>
-
-            {/* <ReactQuill ref={reactQuillRef} theme="snow" value={combinedAnswer} onChange={setCombinedAnswer} modules={modules} formats={formats}/> */}
-            
-                {/* <textarea className='textBs' value={combinedAnswer} onChange={handleChange} id="summary"></textarea> */}
-
 
   <div class="toolbar">
   <button onClick={() => formatText('bold')} type='button'>
@@ -744,4 +614,4 @@ const handleInsertFile = (file) => {
     );
 }
 
-export default SectionIntro
+export default ScrapCreate

@@ -56,6 +56,7 @@ function PitchDeck ()  {
 
 
     const projectId = localStorage.getItem('nProject');
+    console.log ('projectId '+projectId)
     const fetchImageDetails = async () => {
             try {
                 const deck = "PicthDeck";
