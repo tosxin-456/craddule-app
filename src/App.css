@@ -3212,7 +3212,6 @@ font-weight: bold;
   padding:30px 40px;
   border-radius: 20px;
   box-shadow: 0px 1px 17px 0 rgb(227 232 246);
-  height: 80%;
 }
 
 /* Next Button*/
@@ -6324,3 +6323,35 @@ color: red;
  .divKpi{
   display: flex;
  }
+
+ .resizer-icon {
+  display: none;
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  cursor: nwse-resize;
+  width: 16px;
+  height: 16px;
+  background-color: #333;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+/* Styles for images with resizer */
+.editor img {
+  position: relative;
+  display: inline-block;
+}
+
+.edd{
+  text-decoration: none;
+  float: right;
+  padding-top: 10px;
+}
+
+
+.scarv{
+  border-bottom: 1px solid #b1b1b1;
+  color: #000;
+  padding: 10px 10px;
+}

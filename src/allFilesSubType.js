@@ -78,7 +78,7 @@ function AllFiles ()  {
  useEffect(() => {
     const fetchSubtypeFiles = async () => {
         try {
-            const response = await axios.get(`${API_BASE_URL}/api/hubs/types/${type}/${subtype}`);
+            const response = await axios.get(`${API_BASE_URL}/api/hub/types/${type}/${subtype}`);
             setFiles(response.data);
             setLoading(false);
         } catch (error) {

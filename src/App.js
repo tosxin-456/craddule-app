@@ -148,6 +148,10 @@ import ShareView from './sectionIntroShare';
 import ShareFeedback from './sectionFeedback';
 import Timeline from './timeline';
 import PageFeedback from './pageFeedback';
+import InflationMoME from './inflationMoME';
+import ScrapCreate from './scrapCreate';
+import ScrapCreateName from './scrapCreateName';
+import ScrapView from './scrapView';
 function App() {
   return (
     <Router>
@@ -293,6 +297,10 @@ function App() {
             <Route path="/sharefeedback/:id/:phase" element= {<ShareFeedback />} />
             <Route path="/feedback" element= {<PageFeedback />} />
             <Route path="/timeline" element= {<Timeline />} />
+            <Route path="/inflationMoME/:id" element= {<InflationMoME />} />
+            <Route path="/createScrap/:id" element= {<ScrapCreate />} />
+            <Route path="/createScrapName/" element= {<ScrapCreateName />} />
+            <Route path="/scrapView/" element= {<ScrapView />} />
         // <Route path="/" element={<MainApp />} />
       </Routes>
     </Router>

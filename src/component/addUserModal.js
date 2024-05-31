@@ -98,6 +98,8 @@ export default function AddUserModal ( {open, onClose})  {
     };
   }, []);
 
+  const [teamMembers, setTeamMembers] = useState([]);
+
   useEffect(() => {
     // Fetch all tasks for the dropdown on component mount
     const fetchTasks = async () => {
@@ -147,11 +149,44 @@ export default function AddUserModal ( {open, onClose})  {
     }
   };
 
+
+  const fetchTeamMembers = async () => {
+    try {
+      console.log(projectId);
+      const response = await fetch(`${API_BASE_URL}/api/team/${projectId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+           'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
+        }
+      });
+      
+      console.log("here");
+      console.log("here");
+      if (response.status === 200) {
+        const data = await response.json();
+        console.log(data.data);
+        setTeamMembers(data.data);
+        console.log(teamMembers)
+        setLoading(false);
+      }else{
+        const result = await response.json();
+        console.error('Error:', result['error']);
+      }
+     
+    } catch (err) {
+      setError(err);
+      setLoading(false);
+      console.log(err);
+    }
+  };
+
+
   useEffect(() => {
      
     console.log("work");
 
     getAllTaskById();
+    fetchTeamMembers();
   }, [projectId]);
 
 
@@ -198,7 +233,7 @@ export default function AddUserModal ( {open, onClose})  {
               <div className='creatTask'>
                 <div className='taskList'>
                     <p className='timeTxt'>Task</p>
-                    {/* <input className='inpTask'></input> */}
+                   
                     <div ref={dropdownRef} className="dropdown1">
                  <div className={`select1 ${isDropdownOpen ? 'select-clicked1' : ''}`} onClick={toggleDropdown}>
                   <span classname="selected">{selectedOption|| "Name"}</span>

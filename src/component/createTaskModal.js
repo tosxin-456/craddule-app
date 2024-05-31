@@ -173,10 +173,11 @@ export default function CreateTaskModal ( {open, onClose})  {
         body: JSON.stringify(data),
       });
       if (response.status === 200) {
+        setLoading(false);
         console.log(response.status);
         console.log(response);   
         // window.location.reload();
-        navigate('');
+        toast.success('Task Added');
  
         console.log('Task created successfully');
       } else {
