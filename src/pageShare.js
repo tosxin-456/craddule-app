@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './component/header';
 import Menu from './component/menu';
 import ShareModal from './component/shareModal';
+import { useNavigate } from 'react-router-dom';
 
 const phaseNames = [
   'Ideation',
@@ -37,6 +38,10 @@ function PageShare() {
     });
   };
 
+  const navigate = useNavigate()
+
+  const onClickHandler21 = () => navigate(`/feedback`);
+
   return (
     <>
       <div className='container-fluid'>
@@ -51,7 +56,9 @@ function PageShare() {
                 <p className='centerHp'>Here you can share your work</p>
               </div>
               <div className='BoxPhase1'>
+              <button className="btn btn-primary curveP" onClick={onClickHandler21}>Feedback</button>
                 <p className='centerH1v'>Phase</p>
+               
                 {phaseNames.map((phase, index) => (
                   <div className='BoxPhase' key={index}>
                     <div className='boxView'><p className='heading'>{phase}</p></div>
