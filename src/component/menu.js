@@ -32,6 +32,7 @@ function Menu () {
   const onClickHandler24 = () => navigate(`/multipleGraph`);
   const onClickHandler25 = () => navigate(`/comparative`);
   const onClickHandler26 = () => navigate(`/timelineBuilder`);
+  const onClickHandler27 = () => navigate(`/scrapView`);
 
 
   const [isClosed, setIsClosed] = useState(false);
@@ -198,6 +199,7 @@ function Menu () {
     <div className='newMHold1'>
     <ul className='newMUl'>
         
+        <li className="dropdown-trigger2" onClick={onClickHandler27}> <span className='iconS'><CiMicrochip /></span> Scrapbook</li>
         <li className="dropdown-trigger2" onClick={onClickHandler3}> <span className='iconS'><CiMicrochip /></span> Team Management</li>
         <li className="dropdown-trigger2"  onClick={onClickHandler23}> <span className='iconS'><CiUser /></span> Profile</li>
         <li className="dropdown-trigger2" onClick={onClickHandler22}> <span className='iconS'><CiSettings /></span>Settings</li>
