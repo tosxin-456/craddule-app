@@ -88,7 +88,7 @@ function ScrapView ({ htmlContent })  {
   }, [projectId]);
 
 
-
+  const onClickHandler27 = () => navigate(`/createScrapName`);
 
 
     return (
@@ -105,6 +105,9 @@ function ScrapView ({ htmlContent })  {
                     <div className='text-center'>
                 <p className='centerHp'>Scrapbook</p>
                 </div>
+                {/* <link to={`/scrapCreateName`} > */}
+                  <span className='addy' onClick={onClickHandler27}>+</span>
+                {/* </link> */}
                 <hr style={{marginBottom:0}}></hr>
                 {scraps.map((scrap) => (
                    <Link to={`/createScrap/${scrap._id}`} className='dd'>
