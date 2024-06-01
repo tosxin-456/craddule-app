@@ -67,8 +67,9 @@ function PageFeedback() {
              
               {feedback.map((feedback) => (
               <div className='feedS'>
-                <p style={{color:"#a98600"}}>{feedback.phase} </p>
+                <p className='feedP'>{feedback.phase} </p>
                 <p>{feedback.feedback} </p>
+                <p className='feedP2'>{feedback.userId.firstName} </p>
                 </div>
               
               ))}
