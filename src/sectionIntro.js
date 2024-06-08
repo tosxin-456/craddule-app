@@ -342,7 +342,102 @@ function SectionIntro ({ htmlContent })  {
   
     const dicResponse = await fetch('/dictionaries/en.dic');
     const dic = await dicResponse.text();
+    console.log(dic);
     return nspell({ aff, dic });
+  };
+
+
+  const escapeRegExp = (string) => {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  };
+  
+  
+
+  const highlightMisspelledWords = () => {
+    //if (!editorRef.current) return;
+
+
+    const selection = window.getSelection();
+    const range = selection.getRangeAt(0);
+    const startContainer = range.startContainer;
+    const startOffset = range.startOffset;
+  
+    const startMarker = document.createElement("span");
+    startMarker.id = "start-marker";
+    range.insertNode(startMarker);
+    
+    console.log(misspelledWords);
+    if (misspelledWords.length === 0) {
+      console.log("no words")
+      //editorRef.current.innerHTML = combinedAnswer;
+      return;
+    }
+  
+    let innerHTML = combinedAnswer;
+    const words = innerHTML.split(/(\s+)/); // Split by spaces, keeping the spaces in the array
+  
+    //const words = innerHTML.split(/(\b|\s+)/);
+    const tempContainer = document.createElement('div');
+    tempContainer.innerHTML = combinedAnswer;
+    const textNodes = getTextNodes(tempContainer);
+  
+  textNodes.forEach(node => {
+    let nodeText = node.nodeValue;
+    misspelledWords.forEach(word => {
+      const escapedWord = escapeRegExp(word);
+      const regex = new RegExp(`\\b${escapedWord}\\b`, 'g');
+      nodeText = nodeText.replace(regex, `<span style="background-color: darkblue; color: white;">${word}</span>`);
+    });
+    const newNode = document.createElement('span');
+    newNode.innerHTML = nodeText;
+    node.replaceWith(...newNode.childNodes);
+  });
+
+
+  
+  console.log(tempContainer.innerHTML);
+  editorRef.current.innerHTML = tempContainer.innerHTML;
+  restoreCursorPosition();
+
+    // Highlight misspelled words
+    // for (let i = 0; i < words.length; i++) {
+    //   const word = words[i];
+    //   if (misspelledWords.includes(word.trim())) {
+    //     words[i] = `<span style="background-color: darkblue; color: white;">${word}</span>`;
+    //   }
+    // }
+
+    // console.log(words);
+    // setCombinedAnswer(words);
+    //editorRef.current.innerHTML = words.join('');
+  };
+
+  const getTextNodes = (node) => {
+    let textNodes = [];
+    if (node.nodeType === Node.TEXT_NODE) {
+      textNodes.push(node);
+    } else {
+      for (let child of node.childNodes) {
+        textNodes = textNodes.concat(getTextNodes(child));
+      }
+    }
+    return textNodes;
+  };
+
+  const restoreCursorPosition = () => {
+    const startMarker = document.getElementById("start-marker");
+    if (!startMarker) return;
+  
+    const range = document.createRange();
+    const selection = window.getSelection();
+  
+    range.setStartBefore(startMarker);
+    range.collapse(true);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  
+    // Clean up marker
+    startMarker.parentNode.removeChild(startMarker);
   };
   const checkSpelling = async (text) => {
     if (!text) return;
@@ -354,6 +449,8 @@ function SectionIntro ({ htmlContent })  {
     setMisspelledWords(misspelled);
     console.log("what was passed");
     console.log(misspelledWords);
+    highlightMisspelledWords();
+    
   };
 
   const showSuggestions = async (word, rect) => {
