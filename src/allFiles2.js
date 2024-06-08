@@ -12,12 +12,10 @@ import { jwtDecode } from "jwt-decode";
 import API_BASE_URL from './config/apiConfig';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import TopMenu from './component/topMenu';
-import SideMenu2 from './component/sideMenu2';
-import { useParams } from 'react-router-dom';
 
-function AllFiles() {
-  const navigate = useNavigate()
+
+function AllFiles ()  {
+    const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/pageBenefit`)
     const projectId = localStorage.getItem('nProject');
@@ -32,8 +30,6 @@ function AllFiles() {
     const [selectedSubtype, setSelectedSubtype] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
-    const { type, subtype } = useParams();
 
 //    const fetchTypes = async () => {
 //      try {
@@ -74,66 +70,77 @@ function AllFiles() {
      setSelectedSubtype(subtype);
  };
 
- const [showScrollableDiv, setShowScrollableDiv] = useState(false);
-    
- const handleToggle = () => {
-   setShowScrollableDiv(!showScrollableDiv);
- };
+
 
  useEffect(() => {
-    const fetchSubtypeFiles = async () => {
-        try {
-            const response = await axios.get(`${API_BASE_URL}/api/hub/types/${type}/${subtype}`);
-            setFiles(response.data);
-            setLoading(false);
-        } catch (error) {
-            console.error('Error fetching files:', error);
-            setError('Failed to fetch files');
-            setLoading(false);
-        }
-    };
+     const fetchTypes = async () => {
+         try {
+             const response = await axios.get(`${API_BASE_URL}/api/hub/types`);
+             setTypes(response.data);
+             setLoading(false);
+         } catch (error) {
+             console.error('Error fetching types:', error);
+             setError('Failed to fetch types');
+             setLoading(false);
+         }
+     };
 
-    fetchSubtypeFiles();
-}, [type, subtype]);
-      return (
+     fetchTypes();
+ }, []);
 
-       
-       <>
-      
-        <TopMenu />
-    <div className='container2'>
-         <SideMenu2 />    
-         <div className="main-content">
-         <div className='headermm'>
-            <p>AllFiles</p>
-          </div> 
+ if (loading) return <div>Loading...</div>;
+ if (error) return <div>{error}</div>;
+
+    return (
         
-         <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`} style={{paddingTop:0}}>
+        <>
 
-          <div className='surroundd'>
-
-          
+<div className='container-fluid'>
+    <Header />
+    <div className='row'>
+    <Menu /> 
+        
+        <div className='col-md-9'>
+        <img src={bci} className='bcA'></img>
+        <div className='centerC'>
+            <div className='text-center'>
+            <p className='centerH'>All Files</p>
+            <div class="flex-container boxRA">
+                    <div type='button' className='hdds'>Recent</div>
+                    <div type='button'className='hdds'>Started</div>
+                    <div type='button'className='hdds'>Shared</div>
+                </div> 
+               
           <div className='grid-container'>
-          {files.map((file, index) => (
-                   <div key={index} className='grid-item'>
-                    <img src={API_BASE_URL+`/images/${file.hubFile}`}  alt="Image 1"
-                            className="gallery-image imgA dd"></img>
+                {types.map((type) => (
+                    <div key={type} className='grid-item'>
+                        <Link to={`/types/${type}`} className='dd'>
+                        <img src={fol} className='fol' ></img>
+                          <p className='folP'>{type}</p>
+                        </Link>
                     </div>
                 ))}
-            </div>
-           
-      
-            </div>
-         </div>
+           </div>
+
+                <div>
+
+            
+        </div>
 
         
-    </div>
-</div> 
-</>
-      );
-    }
+            
+            </div>
+           
+        </div> 
+  
+       
+           
+          
+  </div>
+  </div>
+  </div>
+  </>
+    );
+}
 
-
-
-
-  export default AllFiles;
+export default AllFiles

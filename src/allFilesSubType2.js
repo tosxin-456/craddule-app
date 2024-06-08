@@ -11,13 +11,12 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import API_BASE_URL from './config/apiConfig';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import TopMenu from './component/topMenu';
-import SideMenu2 from './component/sideMenu2';
 import { useParams } from 'react-router-dom';
 
-function AllFiles() {
-  const navigate = useNavigate()
+
+
+function AllFiles ()  {
+    const navigate = useNavigate()
 
     const onClickHandler = () => navigate(`/pageBenefit`)
     const projectId = localStorage.getItem('nProject');
@@ -74,11 +73,7 @@ function AllFiles() {
      setSelectedSubtype(subtype);
  };
 
- const [showScrollableDiv, setShowScrollableDiv] = useState(false);
-    
- const handleToggle = () => {
-   setShowScrollableDiv(!showScrollableDiv);
- };
+
 
  useEffect(() => {
     const fetchSubtypeFiles = async () => {
@@ -95,45 +90,59 @@ function AllFiles() {
 
     fetchSubtypeFiles();
 }, [type, subtype]);
-      return (
 
-       
-       <>
-      
-        <TopMenu />
-    <div className='container2'>
-         <SideMenu2 />    
-         <div className="main-content">
-         <div className='headermm'>
-            <p>AllFiles</p>
-          </div> 
+
+ if (loading) return <div>Loading...</div>;
+ if (error) return <div>{error}</div>;
+
+    return (
         
-         <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`} style={{paddingTop:0}}>
+        <>
 
-          <div className='surroundd'>
-
-          
-          <div className='grid-container'>
-          {files.map((file, index) => (
+<div className='container-fluid'>
+    <Header />
+    <div className='row'>
+    <Menu /> 
+        
+        <div className='col-md-9'>
+        <img src={bci} className='bcA'></img>
+        <div className='centerC'>
+            <div className='text-center'>
+            <p className='centerH'>All Files</p>
+            <div class="flex-container boxRA">
+                    <div type='button' className='hdds'>Recent</div>
+                    <div type='button'className='hdds'>Started</div>
+                    <div type='button'className='hdds'>Shared</div>
+                </div> 
+                
+                <div className='grid-container'>
+                {files.map((file, index) => (
                    <div key={index} className='grid-item'>
                     <img src={API_BASE_URL+`/images/${file.hubFile}`}  alt="Image 1"
                             className="gallery-image imgA dd"></img>
                     </div>
                 ))}
             </div>
-           
-      
-            </div>
-         </div>
+
+                <div>
+
+            
+        </div>
 
         
-    </div>
-</div> 
-</>
-      );
-    }
+            
+            </div>
+           
+        </div> 
+  
+       
+           
+          
+  </div>
+  </div>
+  </div>
+  </>
+    );
+}
 
-
-
-
-  export default AllFiles;
+export default AllFiles

@@ -11,36 +11,23 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import API_BASE_URL from './config/apiConfig';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import TopMenu from './component/topMenu';
-import SideMenu2 from './component/sideMenu2';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-function AllFiles() {
 
-  const navigate = useNavigate()
-  const { type } = useParams();
-  const onClickHandler = () => navigate(`/pageBenefit`)
-  const projectId = localStorage.getItem('nProject');
-  const [imageDetails, setImageDetails] = useState([]);
-  const access_token = localStorage.getItem('access_token');
- const decodedToken = jwtDecode(access_token);
+function AllFiles ()  {
+    const navigate = useNavigate()
 
- const [types, setTypes] = useState([]);
- const [subtypes, setSubtypes] = useState({});
+    const onClickHandler = () => navigate(`/pageBenefit`)
+    const projectId = localStorage.getItem('nProject');
+    const [imageDetails, setImageDetails] = useState([]);
+    const access_token = localStorage.getItem('access_token');
+   const decodedToken = jwtDecode(access_token);
+
+   const { type } = useParams();
+    const [subtypes, setSubtypes] = useState({});
     const [files, setFiles] = useState([]);
-  const [selectedType, setSelectedType] = useState(null);
-  const [selectedSubtype, setSelectedSubtype] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-
-    
-    const [showScrollableDiv, setShowScrollableDiv] = useState(false);
-    
-    const handleToggle = () => {
-      setShowScrollableDiv(!showScrollableDiv);
-    };
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
 //    const fetchTypes = async () => {
 //      try {
@@ -56,7 +43,7 @@ function AllFiles() {
 
 //  useEffect(() => {
 //      // Simulating fetching user details from an API
-
+ 
 //      fetchTypes();
 //  }, []);
 
@@ -77,49 +64,53 @@ function AllFiles() {
 //      }
 //  };
 
-const handleSubtypeClick = (subtype) => {
-   setSelectedSubtype(subtype);
-};
 
 
 
-useEffect(() => {
-  const fetchTypeDetails = async () => {
-      try {
-          const response = await axios.get(`${API_BASE_URL}/api/hub/types/${type}`);
-          setSubtypes(response.data.subTypes);
-          setFiles(response.data.files);
-          setLoading(false);
-      } catch (error) {
-          console.error('Error fetching subtypes and files:', error);
-          setError('Failed to fetch subtypes and files');
-          setLoading(false);
-      }
-  };
 
-  fetchTypeDetails();
+ useEffect(() => {
+    const fetchTypeDetails = async () => {
+        try {
+            const response = await axios.get(`${API_BASE_URL}/api/hub/types/${type}`);
+            setSubtypes(response.data.subTypes);
+            setFiles(response.data.files);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching subtypes and files:', error);
+            setError('Failed to fetch subtypes and files');
+            setLoading(false);
+        }
+    };
+
+    fetchTypeDetails();
 }, [type]);
 
 
-      return (
+ if (loading) return <div>Loading...</div>;
+ if (error) return <div>{error}</div>;
 
-       
-       <>
-      
-        <TopMenu />
-    <div className='container2'>
-         <SideMenu2 />    
-         <div className="main-content">
-         <div className='headermm'>
-            <p>AllFiles</p>
-          </div> 
+    return (
         
-         <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`} style={{paddingTop:0}}>
+        <>
 
-          <div className='surroundd'>
+<div className='container-fluid'>
+    <Header />
+    <div className='row'>
+    <Menu /> 
+        
+        <div className='col-md-9'>
+        <img src={bci} className='bcA'></img>
+        <div className='centerC'>
+            <div className='text-center'>
+            <p className='centerH'>All Files</p>
+            <div class="flex-container boxRA">
+                    <div type='button' className='hdds'>Recent</div>
+                    <div type='button'className='hdds'>Started</div>
+                    <div type='button'className='hdds'>Shared</div>
+                </div> 
 
-          
-          <h1 className='typeH'>{type}</h1>
+        <div>
+            <h1 className='typeH'>{type}</h1>
             
             <div className='grid-container'>
                 {files.map((file, index) => (
@@ -143,20 +134,29 @@ useEffect(() => {
                         </div>
                     ))}
                 </div>
-            
-           
-      
             </div>
-         </div>
+                
+               
+
+                <div>
+
+            
+        </div>
 
         
-    </div>
-</div> 
-</>
-      );
-    }
+            
+            </div>
+           
+        </div> 
+  
+       
+           
+          
+  </div>
+  </div>
+  </div>
+  </>
+    );
+}
 
-
-
-
-  export default AllFiles;
+export default AllFiles

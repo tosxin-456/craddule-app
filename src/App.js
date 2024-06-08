@@ -10,15 +10,14 @@ import {
 } from "react-router-dom";
 
 import MarketAnalysis from './marketAnalysis';
-import Introduction from './introduction';
 import TimelineBuilder from './timelineBuilder';
 import UpdateImage from './updateImage';
 import FontPicker from './fontPicker';
 import TrackPage from './trackPage';
 import ExecutiveSummary from './ExecutiveSummary';
-import IntroductionTwo from './introduction1';
+import QuestionBus from './questionBus';
 import ExecutiveSummarys from './executiveSummarys';
-import SectionIntro from './sectionIntro';
+import  QuestionBusIntro from './quesBusIntro';
 import ProblemStatement from './problemstatement';
 import PageBenefit from './pageBenefit';
 import InflationRateGraph from './inflationRateGraph';
@@ -119,7 +118,6 @@ import ClaimDomain from './claimDomain';
 import PageTeam from './pageTeam';
 import CustomerYoYInflux from './customerYoYinflux';
 import ProfitYoYpage from './profitYoYpages';
-import MainApp from './mainApp';
 import OperatingIncomeYoY from './operatingIncomeYoY';
 import Profile from './profile';
 import ChatTools from './chatTool';
@@ -152,16 +150,22 @@ import InflationMoME from './inflationMoME';
 import ScrapCreate from './scrapCreate';
 import ScrapCreateName from './scrapCreateName';
 import ScrapView from './scrapView';
+import CreateKpi from './kpiCreate';
+import EditKpi from './kpiEdith';
+import ViewInflation from './inflationRateGraphView';
+import ViewImage from './viewImages';
+import ViewImageMenu from './viewImagesMenu';
+import Start from './start';
+import Upload from './upload';
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/introduction" element= {<Introduction />} />
+        <Route path="/questionBus" element= {<QuestionBus />} />
         <Route path="/marketAnalysis" element= {<MarketAnalysis />} />
-        <Route path="/Introduction1" element= {<IntroductionTwo />} />
         <Route path="/ExecutiveSummary" element= {<ExecutiveSummary />} />
         <Route path="/executiveSummarys" element= {<ExecutiveSummarys />} />
-        <Route path="/sectionIntro" element= {<SectionIntro />} />
+        <Route path="/questionBusIntro" element= {<QuestionBusIntro />} />
         <Route path="/trackPage" element= {<TrackPage />} />
         <Route path="/progress" element= {<Progress />} />
         <Route path="/workLoad" element= {<WorkLoad />} />
@@ -298,10 +302,16 @@ function App() {
             <Route path="/feedback" element= {<PageFeedback />} />
             <Route path="/timeline" element= {<Timeline />} />
             <Route path="/inflationMoME/:id" element= {<InflationMoME />} />
+            <Route path="/viewInflation/" element= {<ViewInflation />} />
             <Route path="/createScrap/:id" element= {<ScrapCreate />} />
             <Route path="/createScrapName/" element= {<ScrapCreateName />} />
             <Route path="/scrapView/" element= {<ScrapView />} />
-        // <Route path="/" element={<MainApp />} />
+            <Route path="/createKpi/" element= {<CreateKpi />} />
+            <Route path="/kpiEdit/:id" element= {<EditKpi />} />
+            <Route path="/viewImage/" element= {<ViewImage />} />
+            <Route path="/viewImageMenu/" element= {<ViewImageMenu />} />
+            <Route path="/start/" element= {<Start />} />
+            <Route path="/upload/" element= {<Upload />} />
       </Routes>
     </Router>
   );
