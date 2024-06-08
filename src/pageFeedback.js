@@ -71,7 +71,6 @@ function PageFeedback() {
                 <p>{feedback.feedback} </p>
                 <p className='feedP2'>{feedback.userId.firstName} </p>
                 </div>
-              
               ))}
               </div>
             </div>

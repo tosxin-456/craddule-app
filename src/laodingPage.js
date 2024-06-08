@@ -19,7 +19,7 @@ useEffect(() =>{
   setLoading(true)
   setTimeout(() =>{
     setLoading(false)
-    navigate(`/introduction1`)
+    navigate(`/questionBus`)
   }, 8000)
 })
 

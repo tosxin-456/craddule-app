@@ -147,7 +147,7 @@ const fetchSharedProjects= async () => {
 
 const handleProjectClick = (projectId) => {
   localStorage.setItem('nProject', projectId);
-  navigate(`/introduction1`);
+  navigate(`/start`);
 };
 
  useEffect(() => {
