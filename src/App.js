@@ -157,6 +157,8 @@ import ViewImage from './viewImages';
 import ViewImageMenu from './viewImagesMenu';
 import Start from './start';
 import Upload from './upload';
+import CreateVideo from './createVideo';
+import CreateQuote from './createQuote';
 function App() {
   return (
     <Router>
@@ -312,6 +314,8 @@ function App() {
             <Route path="/viewImageMenu/" element= {<ViewImageMenu />} />
             <Route path="/start/" element= {<Start />} />
             <Route path="/upload/" element= {<Upload />} />
+           <Route path="/createVideo/" element= {<CreateVideo />} />
+            <Route path="/createQuote/" element= {<CreateQuote />} />
       </Routes>
     </Router>
   );
