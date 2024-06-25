@@ -27,6 +27,7 @@ function CreateQuestion() {
       questionType: '',
       questionSubType: '',
       question: '',
+      premium: '',
       questionOrder: '',
       });
     
@@ -126,6 +127,18 @@ function CreateQuestion() {
                   type="text"
                   id="question"
                   value={formData.question}
+                  onChange={handleChange}
+                  className="custom-input"
+                />
+                
+              </div>
+
+              <div className="inputs-container">
+                <label htmlFor="email" className='lab'>Premium</label>
+                <input
+                  type="text"
+                  id="premium"
+                  value={formData.premium}
                   onChange={handleChange}
                   className="custom-input"
                 />
