@@ -204,7 +204,7 @@ const handleClickSh = (id) => {
          'Content-Type': 'application/json',
          'Authorization': `Bearer ${token}` 
        },
-       body: JSON.stringify({ projectId, category, summary,userId }),
+       body: JSON.stringify({ projectId, category, summary,userId,phase }),
      });
  
      if (!response.ok) {

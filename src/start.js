@@ -43,7 +43,7 @@ function InflationRateGraph({projectId, graphType }) {
 
   const handleClickB = () => {
     localStorage.setItem('selectedCase', 'BusinessCaseBuilder');
-    navigate('/pdfEnd');
+    navigate('/pdfEnd/Ideation');
   };
 
   const handleClickTi = () => {
@@ -61,7 +61,7 @@ function InflationRateGraph({projectId, graphType }) {
   };
 
   const handleClickI = () => {
-    navigate('/pdf/ProductDefinition/BusinessAnalysisPack');
+    navigate('/pdfEnd/ProductDefinition');
   };
 
   const handleClickID = () => {

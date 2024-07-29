@@ -22,7 +22,7 @@ import API_BASE_WEB_URL from './config/apiConfigW';
 function QuestionBusIntro() {
 
     const navigate = useNavigate()
-    const { phase,category, subCategory } = useParams();
+    const { phase } = useParams();
     const onClickHandler = () => navigate(`/video`);
     const [images, setImages] = useState([]);
     const [types, setTypes] = useState([]);
@@ -86,9 +86,9 @@ function QuestionBusIntro() {
  useEffect(() => {
   console.log("fetchAnswers");
   const fetchAnswers = async () => {
-    const category = 'BusinessCaseBuilder';
+   
     try {
-      const summaryResponse = await fetch(API_BASE_URL + `/api/pdf/${projectId}/${category}`, {
+      const summaryResponse = await fetch(API_BASE_URL + `/api/pdf/end/${projectId}/${phase}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` // Include the token in the request headers
@@ -99,36 +99,21 @@ function QuestionBusIntro() {
         const dataS = await summaryResponse.json();
         console.log("data for summary:",dataS )
         // If summary exists, fetch the summary data
-        if (dataS.data) {
+        
           console.log(dataS);
           console.log(dataS.data.summary);
           setCombinedAnswer(dataS.data.summary);
           console.log("we have a summary");
-        } else {
-          const response = await fetch(API_BASE_URL + `/api/pdf/single/${projectId}/${category}`, {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}` // Include the token in the request headers
-            }
-          });
-
-          if (!response.ok) {
-            throw new Error('Failed to fetch answers');
-          }
-          const data = await response.json();
-          console.log(data);
-          console.log(data.data);
-          console.log(data.data[0].summary);
-          console.log('answers getting because no summary');
-          setAnswers(data.data);
-          const combined = data.data.map(answer => {
-            const formattedSubType = answer.questionSubType.replace(/([A-Z])/g, ' $1').trim();
-            return `<h4 style="text-align: center;">${formattedSubType}</h4><br>${answer.summary}`;
+          setAnswers(dataS.data);
+          const combined = dataS.data.map(answer => {
+            const formattedSubType = answer.questionType.replace(/([A-Z])/g, ' $1').trim();
+            return `<h2 style="text-align: center;">${formattedSubType}</h2><br>${answer.summary}`;
           }).join('<br><br>');
           console.log(combined);
           setCombinedAnswer(combined);
           setLoading(false);
-        }
+
+       
       } else {
         throw new Error('Failed to fetch summary');
       }
@@ -139,7 +124,7 @@ function QuestionBusIntro() {
   };
 
   fetchAnswers();
-}, [category, subCategory, projectId]);
+}, []);
 
 
 
@@ -184,47 +169,12 @@ const handleClickSh = (id) => {
    const { id, value } = e.target;
    setCombinedAnswer(value);
 }
- const handleSubmit = (e) => {
-   e.preventDefault();
-   createOrUpdateSummary();
-   
- };
 
 
 
 
- const createOrUpdateSummary = async (data) => {
-   try {
-       setLoading(true);
-       console.log(combinedAnswer);
-       const summary = combinedAnswer;
-       const category = 'BusinessCaseBuilder';
-     const response = await fetch(API_BASE_URL +'/api/pdf', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-         'Authorization': `Bearer ${token}` 
-       },
-       body: JSON.stringify({ projectId, category, summary,userId }),
-     });
- 
-     if (!response.ok) {
-       setLoading(false);
-       toast.error("can't save");
-       ///throw new Error('Failed to create or update summary');
-     }
 
-     const data = await response.json();
-     setLoading(false);
-     toast.success("Saved");
-     console.log(data.message); // Log success message
- 
-    
-   } catch (error) {
-     console.error('Error creating or updating summary:', error.message);
-     // Handle error
-   }
- };
+
  
 
 
@@ -293,33 +243,6 @@ const handleClickSh = (id) => {
    }
  };
 
- const fetchAnswerCut = async () => {
-       console.log("here i am");
-   try {
-     const response = await fetch(`${API_BASE_URL}/api/answer/${projectId}/${category}/${subCategory}`, {
-       headers: {
-         'Content-Type': 'application/json',
-         'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
-       }
-     });
- 
-     if (response.status === 200) {
-       const data = await response.json();
-       console.log(data)
-       setAnswers(data.data); // Adjust based on your API response structure
-      
-     }else{
-       const result = await response.json();
-       console.error('Error:', result);
-     }
- 
-     
-   } catch (error) {
-     console.log(error.message);
-   } finally {
-     setLoading(false);
-   }
- };
 
 
  const handleMouseEnter = (index) => {
@@ -649,7 +572,7 @@ const handleInsertFile = (file) => {
 
 
 
- const onClickNext = () => navigate(`/questionBusMain/${phase}/${category}`);
+ 
 
  const handleMouseDown = (event) => {
    if (event.target.tagName === 'IMG') {
@@ -687,7 +610,10 @@ const handleInsertFile = (file) => {
       
 
     <div className='container2'>
-       <SideMenu2 />
+       {phase === 'Ideation' && <SideMenu2 />}
+          {phase === 'ProductDefinition' && <SideMenu2P />}   
+          {phase === 'InitialDesign' && <SideMenu2I />}   
+          {phase === 'Commercialization' && <SideMenu2C />} 
        
          <div className="main-content">
         
@@ -703,7 +629,7 @@ const handleInsertFile = (file) => {
             <div className='quiInt'>
 
             
-            <form onSubmit={handleSubmit}>    
+            <form >    
            
             {/* <button className="btn btn-primary buttonS">Edit</button> */}
             {/*<p className= "buttonE">Save</p>

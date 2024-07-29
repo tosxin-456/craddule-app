@@ -564,7 +564,7 @@ function App() {
             <Route path="/teamAdd/" element= {<TeamAdd />} />
             <Route path="/sharePhase/" element= {<SharePhase />} />
             <Route path="/pdf/:phase/:category" element= {<PDF />} />
-            <Route path="/pdfEnd/" element= {<PDFEnd />} />
+            <Route path="/pdfEnd/:phase" element= {<PDFEnd />} />
             <Route path="/pdfEndP/" element= {<PDFEndP />} />
             <Route path="/pdfEndI/" element= {<PDFEndI />} />
             <Route path="/pdfEndV/" element= {<PDFEndV />} />
