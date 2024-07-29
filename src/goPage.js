@@ -9,12 +9,19 @@ import 'animate.css/animate.css'; // Import Animate.css
 import 'wowjs/css/libs/animate.css';
 import API_BASE_URL from './config/apiConfig';
 import { jwtDecode } from "jwt-decode";
+import SideMenu2 from './component/sideMenu2';
+import SideMenu2P from './component/sideMenu2P';
+import SideMenu2I from './component/sideMenu2I';
+import SideMenu2C from './component/sideMenu2C';
+import { useNavigate,useParams } from 'react-router-dom';
+
 function GoPage ()  {
     useEffect(() => {
         const wow = new WOW.WOW();
         wow.init();
       }, []);
 
+        const { phase } = useParams();
         const [loading, setLoading] = useState(false);
         const [gates, setGates] = useState([]);
         const [totalCount, setTotalCount] = useState(null);
@@ -22,7 +29,7 @@ function GoPage ()  {
         const [percentage, setPercentage] = useState('');
 
         const projectId = localStorage.getItem('nProject');
-        console.log(projectId);
+        console.log("pro "+projectId);
 
         const access_token = localStorage.getItem('access_token');
         const decodedToken = jwtDecode(access_token);
@@ -30,79 +37,12 @@ function GoPage ()  {
         const questionType = "BusinessCaseBuilder";
        
 
-        // useEffect(() => {
-        //     const fetchTotalQuestions = async () => {
-        //       try {
-        //         const response = await fetch(`http://localhost:3001/api/algo/qcount/${userId}/${questionType}/${projectId}`, {
-        //           method: 'POST',
-        //           headers: {
-        //             'Content-Type': 'application/json',
-        //           },
-        //         });
-        
-        //         if (!response.ok) {
-        //           throw new Error('Failed to fetch total questions');
-        //         }
-        
-        //         const data = await response.json();
-        //         setTotalCount(data.totalCount);
-        //         console.log(data.data);
-        //         console.log(totalCount+"total answerd");
-        //         console.log(totalCountQ+"total questions");
-                
-        //         const calculatedPercentage = (totalCount / totalCountQ) * 100;
-               
-        //         setPercentage(calculatedPercentage.toFixed(2) + '%');
-        //         console.log(calculatedPercentage.toFixed(2) + '%');
-
-        //       } catch (error) {
-        //         console.error('Error fetching total questions:', error);
-        //       }
-        //     };
-        
-        //     fetchTotalQuestions();
-        //   }, [userId, questionType, projectId]);
-
-        //   const fetchAllQuestionsCount = async () => {
-        //     try {
-        //         console.log("counting Main")
-        //       const response = await fetch(`http://localhost:3001/api/algo/qcountq/${questionType}`, {
-        //         method: 'POST',
-        //         headers: {
-        //           'Content-Type': 'application/json',
-        //         },
-        //       });
-      
-        //       if (!response.ok) {
-        //         throw new Error('Failed to fetch total questions');
-        //       }
-      
-        //       const data = await response.json();
-        //       setTotalCountQ(data.data);
-             
-        //       console.log(data.data);
-        //     //   calculatePercentage();
-
-            
-        //     } catch (error) {
-        //       console.error('Error fetching total questions:', error);
-        //     }
-        //   };
-
-        //   useEffect(() => {
-            
-        
-        //     fetchAllQuestionsCount();
-        //   }, [userId, questionType, projectId]);
-        
-
-
         const [projectGoGates, setProjectGoGates] = useState([]);
-        const stage = 'Ideation';
+
 
         const fetchProjectGoGates = async () => {
           try {
-              const response = await fetch(API_BASE_URL+`/api/project/go/${projectId}/${stage}`);
+              const response = await fetch(API_BASE_URL+`/api/project/go/${projectId}/${phase}`);
               if (!response != 200) {
                 console.log(response);
                 //toast.error("This Account as been Deactivated");
@@ -118,7 +58,7 @@ function GoPage ()  {
        
 
         fetchProjectGoGates();
-    }, [projectId, stage]);
+    }, [projectId, phase]);
 
     const handleAcceptClick = (id,goStatus) => {
       // Pass the _id of the ProjectGoGate entry to the updateStatus function
@@ -182,13 +122,18 @@ function GoPage ()  {
     return (
        <>
        
-       <div className='container-fluid'>
-    <Header />
-    <div className='row'>
-    <Menu />       
+       <div className='container2'>
+       {phase === 'Ideation' && <SideMenu2 />}
+       {phase === 'ProductDefinition' && <SideMenu2P />}   
+       {phase === 'InitialDesign' && <SideMenu2I />}
+       {phase === 'Commercialization' && <SideMenu2C />}    
+         <div className="main-content">
+        
+         <Header />
        
-       <div className='col-md-9'>
-            <div className='centerC'>
+         <div className='main-content2'>
+            
+            <div className='bacWHI'>
 
             <div className='text-center'>
                 <p className='centerH pa wow fadeInLeft'>Go/ No-Go Gate</p>
@@ -221,8 +166,8 @@ function GoPage ()  {
                                     ? 'gogoO' 
                                     : ''
                     }`}>
-                        <p className='goP'>{projectGoGate.phase}</p>
-                        <p className='goP2'>{projectGoGate.goGate}</p>
+                        <p className='goP'>{projectGoGate.goGateName}</p>
+                        <p className='goP2'>{projectGoGate.goStatus}</p>
 
                         {projectGoGate.goStatus === 'not started' && (
                             
@@ -271,7 +216,7 @@ function GoPage ()  {
 
                         <div className='goH'>
                             <h1 className='goTitle'>No Action</h1>
-                            <h1 className='goSub'>Can only Movge forward when you have passed previous stages</h1>
+                            <h1 className='goSub'>Can only Movge forward when you have passed previous phases</h1>
                            
                         </div>
                     </div>
@@ -282,7 +227,7 @@ function GoPage ()  {
 
                         <div className='goH'>
                             <h1 className='goTitle'>No Action</h1>
-                            <h1 className='goSub'>Can only Movge forward when you have passed previous stages</h1>
+                            <h1 className='goSub'>Can only Movge forward when you have passed previous phases</h1>
                             
                         </div>
                     </div>
@@ -293,7 +238,7 @@ function GoPage ()  {
 
                         <div className='goH'>
                             <h1 className='goTitle'>No Action</h1>
-                            <h1 className='goSub'>Can only Movge forward when you have passed previous stages</h1>
+                            <h1 className='goSub'>Can only Movge forward when you have passed previous phases</h1>
                             
                         </div>
                     </div> */}

@@ -117,15 +117,14 @@ function GeneralSetting ()  {
 
     return (
         <>
- <div className='container-fluid'>
-    <Header />
-    <div className='row'>
-    <SettingMenu /> 
-        
-        <div className='col-md-9'>
+ <div className=''>
+        <Header />
+        <div className='container'>
+
+        <div className='main-content2'>
         <h1 className='centerHh'>Settings</h1>
-        <p className='centerHh'>View and manage settings</p>
-        <img src={bci} className='bcA' type='button' onClick={onClickHandler}></img>
+        <p className='centerHh'>Change Password</p>
+       
        {/*} <button className="btn btn-primary curveNn">Save changes</button>
         <button className="btn curveIi">Discard changes</button>
         {/*<div className='gene'>General Setting</div>*/}
