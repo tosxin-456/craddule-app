@@ -6,6 +6,7 @@ import p4 from './../images/p4.jpeg';
 import p5 from './../images/p5.jpeg';
 import p6 from './../images/p6.jpeg';
 import { CiBellOn ,CiUser} from 'react-icons/ci';
+import ChatToolModal from './chatModal';
 
 const HeaderHome = () => {
     return(

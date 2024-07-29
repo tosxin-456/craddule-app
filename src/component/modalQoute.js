@@ -8,21 +8,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import YouTube from 'react-youtube';
 
-export default function ModalVideo({ open, onClose, videoId,link,id}){
+export default function ModalVideo({ open, onClose, quote,quoteId}){
 
     const navigate = useNavigate()
     const [loading, setLoading] = useState(true);
     const [showButton, setShowButton] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');  
     const access_token = localStorage.getItem('access_token');
+   const decodedToken = jwtDecode(access_token);
+   const userId = decodedToken.userId;
+   const projectId = localStorage.getItem('nProject');
     
    // const link = videoId.videoLink;
     //const newLink = link.replace('https://youtu.be/', '');
      
-    console.log("modal");
-    console.log(link);
-    console.log(videoId);
-    console.log(id);
+    console.log("quote");
+    console.log(quote);
+    console.log(quoteId);
 
    
     useEffect(() => {
@@ -49,7 +51,7 @@ export default function ModalVideo({ open, onClose, videoId,link,id}){
         try {
        
 
-          const response = await fetch(API_BASE_URL+'/api/video/status/'+id, {
+          const response = await fetch(API_BASE_URL+'/api/quote/status/'+quoteId+'/'+userId+'/'+projectId, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -65,8 +67,6 @@ export default function ModalVideo({ open, onClose, videoId,link,id}){
             console.log(responseData);
           } else {
             const result = await response.json();
-           
-           
             console.error('Error:', result['error']);
           }
         } catch (error) {
@@ -75,19 +75,19 @@ export default function ModalVideo({ open, onClose, videoId,link,id}){
             console.error('An error occurred:', error);
         }
       // Close the modal
-    
+     
     };
     if(!open) return null
     return ReactDOM.createPortal(
         <>
             <div className="modalOv"></div>
-            <div className="modalSt mdN">
+            <div className="modalSt mdN quotM">
             { errorMessage &&  <p className="createER">Project name is empty</p>}
                
-            <YouTube videoId={link} />
+            <p>{quote}</p>
             
             {/* {showButton && ( */}
-            <p onClick={handleProceed} className="closeMMM">Proceed</p>
+            <p onClick={handleProceed} className="quoteMc" style={{color:'#000'}}>Proceed</p>
               
             {/* )} */}
                 

@@ -16,8 +16,88 @@ import FontPicker from './fontPicker';
 import TrackPage from './trackPage';
 import ExecutiveSummary from './ExecutiveSummary';
 import QuestionBus from './questionBus';
+import QuestionBusMain from './questionBusMain';
+import QuestionBusMainSum from './quesBusMainSum';
+import QuestionBusMa from './questionBusMa';
+import QuestionBusSo from './questionBusSo';
+import QuestionBusRi from './questionBusRi';
+import QuestionBusIm from './questionBusIm';
+import QuestionBusIn from './questionBusIn';
+import QuestionBusOp from './questionBusOp';
+import QuestionBusCo from './questionBusCo';
+import QuestionBusCon from './questionBusCon';
+import QuestionBapEs from './questionBapEs';
+import QuestionBapCs from './questionBapCs';
+import QuestionVppVs from './questionVppVs';
+import QuestionVppPd from './questionVppPd';
+import QuestionVppPe from './questionVppPe';
+import QuestionVppVd from './questionVppVd';
+import QuestionVppPs from './questionVppPs';
+import QuestionVppVp from './questionVppVp';
+import QuestionVppFc from './questionVppFc';
+import QuestionVppVc from './questionVppVc';
+import QuestionVppC from './questionVppC';
+import QuestionSucIo from './questionSucIo';
+import QuestionSucDc from './questionSucDc';
+import QuestionSucAw from './questionSucAw';
+import QuestionSucDm from './questionSucDm';
+import QuestionSucEp from './questionSucEp';
+import QuestionSucCr from './questionSucCr';
+import QuestionSucIi from './questionSucIi';
+import QuestionDmaMa from './questionDmaMa';
+import QuestionDmaMo from './questionDmaMo';
+import QuestionDmaPm from './questionDmaPm';
+import QuestionDmaMm from './questionDmaMm';
+import QuestionDmaMc from './questionDmaMc';
+import QuestionDmaMt from './questionDmaMt';
+import QuestionDmaMn from './questionDmaMn';
+import QuestionDmaBa from './questionDmaBa';
+import QuestionDmaIp from './questionDmaIp';
+import QuestionDmaRm from './questionDmaRm';
+import QuestionDmaRo from './questionDmaRo';
+import DCF from './DCF';
+
 import ExecutiveSummarys from './executiveSummarys';
-import  QuestionBusIntro from './quesBusIntro';
+import QuestionBusIntro from './quesBusIntro';
+import QuestionBusCoSum from './quesBusCoSum';
+import QuestionBusOpSum from './quesBusOpSum';
+import QuestionBusMaSum from './quesBusMaSum';
+import QuestionBusSoSum from './quesBusSoSum';
+import QuestionBusRiSum from './quesBusRiSum';
+import QuestionBusImSum from './quesBusImSum';
+import QuestionBusInSum from './quesBusInSum';
+import QuestionBusConSum from './quesBusConSum';
+import QuestionBapCsSum from './quesBapCsSum';
+import QuestionBapEsSum from './quesBapEsSum';
+import QuestionVppVsSum from './quesVppVsSum';
+import QuestionVppPdSum from './quesVppPdSum';
+import QuestionVppPeSum from './quesVppPeSum';
+import QuestionVppVdSum from './quesVppVdSum';
+import QuestionVppPsSum from './quesVppPsSum';
+import QuestionVppVpSum from './quesVppVpSum';
+import QuestionVppFcSum from './quesVppFcSum';
+import QuestionVppVcSum from './quesVppVcSum';
+import QuestionVppCSum from './quesVppCSum';
+import QuestionSucIoSum from './quesSucIoSum';
+import QuestionSucDcSum from './quesSucDcSum';
+import QuestionSucAwSum from './quesSucAwSum';
+import QuestionSucDmSum from './quesSucDmSum';
+import QuestionSucEpSum from './quesSucEpSum';
+import QuestionSucCrSum from './quesSucCrSum';
+import QuestionSucIiSum from './quesSucIiSum';
+import QuestionDmaMaSum from './quesDmaMaSum';
+import QuestionDmaMoSum from './quesDmaMoSum';
+import QuestionDmaPmSum from './quesDmaPmSum';
+import QuestionDmaMmSum from './quesDmaMmSum';
+import QuestionDmaMcSum from './quesDmaMcSum';
+import QuestionDmaMtSum from './quesDmaMtSum';
+import QuestionDmaMnSum from './quesDmaMnSum';
+import QuestionDmaBaSum from './quesDmaBaSum';
+import QuestionDmaIpSum from './quesDmaIpSum';
+import QuestionDmaRmSum from './quesDmaRmSum';
+import QuestionDmaRoSum from './quesDmaRoSum';
+import QuestionEdit from './questionEdit';
+
 import ProblemStatement from './problemstatement';
 import PageBenefit from './pageBenefit';
 import InflationRateGraph from './inflationRateGraph';
@@ -101,7 +181,7 @@ import NetGraph from './netGraph';
 import ExpensesYoY from './exepensesYoY';
 import SectionExe from './sectionExecute';
 import PageShare from './pageShare';
-import CustomerInflux from './cutomerInflux';
+import CustomerInflux from './customerInflux';
 import SendFile from './sendFile';
 import Expenses from './expenses';
 import InflationYoY from './inflationYoY';
@@ -135,6 +215,7 @@ import PageAddKpi from './pageAddKpi';
 import GoPage from './goPage';
 import ProfitPage from './profitPage';
 import CreateProject from './createProject';
+import FirstQuestion from './firstQuestion';
 import CreateQuestion from './createQuestion';
 import InspVideo from './inspVideo';
 import Share from './share';
@@ -152,22 +233,157 @@ import ScrapCreateName from './scrapCreateName';
 import ScrapView from './scrapView';
 import CreateKpi from './kpiCreate';
 import EditKpi from './kpiEdith';
+import ViewExpensesGraph from './expensesGraphView';
 import ViewInflation from './inflationRateGraphView';
+import ViewNetProfitGraph from './netProfitGraphView';
+import CreateInflation from './inflationRateCreate';
+import CreateOperatingIncome from './operatingIncomeCreate';
+import CreateExpenses from './expensesCreate';
+import CreateNetProfit from './netProfitCreate';
+import CreateCustomerGrowth from './customerGrowthCreate';
+import CreateCustomerInflux from './customerInfluxCreate';
 import ViewImage from './viewImages';
 import ViewImageMenu from './viewImagesMenu';
 import Start from './start';
 import Upload from './upload';
+import CustomFinancial from './customFinancial';
+import Inflation from './inflationRate';
+import NetProfit from './netProfit';
+import ViewInflationGraph from './inflationRateGraphView';
+import ViewOperatingIncomeGraph from './operatingIncomeGraphView';
+import ViewCustomerGrowthGraph from './customerGrowthGraphView';
+import ViewCustomerInfluxGraph from './customerInfluxGraphView';
+import EditInflation from './inflationRateEdit';
+import EditOperatingIncome from './operatingIncomeEdit';
+import EditExpenses from './expensesEdit';
+import EditNetProfit from './netProfitEdit';
+import EditCustomerGrowth from './customerGrowthEdit';
+import EditCustomerInflux from './customerInfluxEdit';
+import TimelineView from './timelineView';
+import PitchDeckStart from './pitchDeckStart';
+import CreateTask from './taskCreate';
+import UploadTask from './timelineUpload';
 import CreateVideo from './createVideo';
 import CreateQuote from './createQuote';
+import Kpi from './kpi';
+import KpiView from './kpiView';
+import Craddule from './craddule';
+import CradduleType from './cradduleFile';
+import PitchDeckUpload from './pitchDeckUpload';
+import PitchDeckView from './pitchDeckView';
+import TeamView from './teamView';
+import TeamAdd from './teamAdd';
+import SharePhase from './sharePhase';
+import Chat from './chat';
+import Branding from './branding';
+import BrandingUpload from './brandingUpload';
+import PDF from './pdfSummary';
+import PDFEnd from './pdfSummaryEnd';
+import PDFEndP from './pdfSummaryEndP';
+import PDFEndI from './pdfSummaryEndI';
+import PDFEndV from './pdfSummaryEndV';
+import PDFEndC from './pdfSummaryEndC';
+import PDFMultiple from './pdfSummaryMultiple';
+import IdeationStart from './ideation';
+
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/pitchDeckUpload" element= {<PitchDeckUpload />} />
+        <Route path="/pitchDeckView" element= {<PitchDeckView />} />
         <Route path="/questionBus" element= {<QuestionBus />} />
+        <Route path="/questionBusMain/:phase/:category/:subCategory" element= {<QuestionBusMain />} />
+        <Route path="/questionBusMainSum/:phase/:category/:subCategory" element= {<QuestionBusMainSum />} />
+        <Route path="/questionBusCo" element= {<QuestionBusCo />} />
+        <Route path="/questionBusOp" element= {<QuestionBusOp />} />
+        <Route path="/questionBusMa" element= {<QuestionBusMa />} />
+        <Route path="/questionBusSo" element= {<QuestionBusSo />} />
+        <Route path="/questionBusRi" element= {<QuestionBusRi />} />
+        <Route path="/questionBusIm" element= {<QuestionBusIm />} />
+        <Route path="/questionBusIn" element= {<QuestionBusIn />} />
+        <Route path="/questionBusCon" element= {<QuestionBusCon />} />
+        <Route path="/questionBapEs" element= {<QuestionBapEs />} />
+        <Route path="/questionBapCs" element= {<QuestionBapCs />} />
+        <Route path="/questionVppVs" element= {<QuestionVppVs />} />
+        <Route path="/questionVppPd" element= {<QuestionVppPd />} />
+        <Route path="/questionVppPe" element= {<QuestionVppPe />} />
+        <Route path="/questionVppVd" element= {<QuestionVppVd />} />
+        <Route path="/questionVppPs" element= {<QuestionVppPs />} />
+        <Route path="/questionVppVp" element= {<QuestionVppVp />} />
+        <Route path="/questionVppFc" element= {<QuestionVppFc />} />
+        <Route path="/questionVppVc" element= {<QuestionVppVc />} />
+        <Route path="/questionVppC" element= {<QuestionVppC />} />
+        <Route path="/questionSucIo" element= {<QuestionSucIo/>} />
+        <Route path="/questionSucDc" element= {<QuestionSucDc/>} />
+        <Route path="/questionSucAw" element= {<QuestionSucAw/>} />
+        <Route path="/questionSucDm" element= {<QuestionSucDm/>} />
+        <Route path="/questionSucEp" element= {<QuestionSucEp/>} />
+        <Route path="/questionSucCr" element= {<QuestionSucCr/>} />
+        <Route path="/questionSucIi" element= {<QuestionSucIi/>} />
+        <Route path="/questionDmaMa" element= {<QuestionDmaMa/>} />
+        <Route path="/questionDmaMo" element= {<QuestionDmaMo/>} />
+        <Route path="/questionDmaPm" element= {<QuestionDmaPm/>} />
+        <Route path="/questionDmaMm" element= {<QuestionDmaMm/>} />
+        <Route path="/questionDmaMc" element= {<QuestionDmaMc/>} />
+        <Route path="/questionDmaMt" element= {<QuestionDmaMt/>} />
+        <Route path="/questionDmaMn" element= {<QuestionDmaMn/>} />
+        <Route path="/questionDmaBa" element= {<QuestionDmaBa/>} />
+        <Route path="/questionDmaIp" element= {<QuestionDmaIp/>} />
+        <Route path="/questionDmaRm" element= {<QuestionDmaRm/>} />
+        <Route path="/questionDmaRo" element= {<QuestionDmaRo/>} />
+
+
+        <Route path="/branding" element= {<Branding />} />
+        <Route path="/brandingUpload" element= {<BrandingUpload />} />
         <Route path="/marketAnalysis" element= {<MarketAnalysis />} />
         <Route path="/ExecutiveSummary" element= {<ExecutiveSummary />} />
         <Route path="/executiveSummarys" element= {<ExecutiveSummarys />} />
         <Route path="/questionBusIntro" element= {<QuestionBusIntro />} />
+        <Route path="/questionBusOpSum" element= {<QuestionBusOpSum />} />
+        <Route path="/questionBusMaSum" element= {<QuestionBusMaSum />} />
+        <Route path="/questionBusSoSum" element= {<QuestionBusSoSum />} />
+        <Route path="/questionBusCoSum" element= {<QuestionBusCoSum />} />
+        <Route path="/questionBusRiSum" element= {<QuestionBusRiSum />} />
+        <Route path="/questionBusImSum" element= {<QuestionBusImSum />} />
+        <Route path="/questionBusInSum" element= {<QuestionBusInSum />} />
+        <Route path="/questionBusConSum" element= {<QuestionBusConSum />} />
+        <Route path="/questionBapEsSum" element= {<QuestionBapEsSum />} />
+        <Route path="/questionBapCsSum" element= {<QuestionBapCsSum />} />
+        <Route path="/questionBapCsSum" element= {<QuestionBapCsSum />} />
+        <Route path="/questionVppVsSum" element= {<QuestionVppVsSum />} />
+        <Route path="/questionVppPdSum" element= {<QuestionVppPdSum />} />
+        <Route path="/questionVppPeSum" element= {<QuestionVppPeSum />} />
+        <Route path="/questionVppVdSum" element= {<QuestionVppVdSum />} />
+        <Route path="/questionVppPsSum" element= {<QuestionVppPsSum />} />
+        <Route path="/questionVppVpSum" element= {<QuestionVppVpSum />} />
+        <Route path="/questionVppFcSum" element= {<QuestionVppFcSum />} />
+        <Route path="/questionVppVcSum" element= {<QuestionVppVcSum />} />
+        <Route path="/questionVppCSum" element= {<QuestionVppCSum />} />
+        <Route path="/questionSucIoSum" element= {<QuestionSucIoSum />} />
+        <Route path="/questionSucDcSum" element= {<QuestionSucDcSum />} />
+        <Route path="/questionSucAwSum" element= {<QuestionSucAwSum />} />
+        <Route path="/questionSucDmSum" element= {<QuestionSucDmSum />} />
+        <Route path="/questionSucEpSum" element= {<QuestionSucEpSum />} />
+        <Route path="/questionSucCrSum" element= {<QuestionSucCrSum />} />
+        <Route path="/questionSucIiSum" element= {<QuestionSucIiSum />} />
+        <Route path="/questionDmaMaSum" element= {<QuestionDmaMaSum />} />
+        <Route path="/questionDmaMoSum" element= {<QuestionDmaMoSum />} />
+        <Route path="/questionDmaPmSum" element= {<QuestionDmaPmSum />} />
+        <Route path="/questionDmaMmSum" element= {<QuestionDmaMmSum />} />
+        <Route path="/questionDmaMcSum" element= {<QuestionDmaMcSum />} />
+        <Route path="/questionDmaMtSum" element= {<QuestionDmaMtSum />} />
+        <Route path="/questionDmaMnSum" element= {<QuestionDmaMnSum />} />
+        <Route path="/questionDmaBaSum" element= {<QuestionDmaBaSum />} />
+        <Route path="/questionDmaIpSum" element= {<QuestionDmaIpSum />} />
+        <Route path="/questionDmaRmSum" element= {<QuestionDmaRmSum />} />
+        <Route path="/questionDmaRoSum" element= {<QuestionDmaRoSum />} />
+        <Route path="/questionEdit/:id" element= {<QuestionEdit />} />
+        <Route path="/chat" element= {<Chat />} />
+        <Route path="/dcf" element= {<DCF />} />
+       
+
+       
         <Route path="/trackPage" element= {<TrackPage />} />
         <Route path="/progress" element= {<Progress />} />
         <Route path="/workLoad" element= {<WorkLoad />} />
@@ -209,7 +425,7 @@ function App() {
         <Route path="/expensesMoM" element= {<ExpensesMonthOnMonth />} />
         <Route path="/inflationMoM" element= {<InflationMonthOnMonth />} />
         <Route path="/customerGrowth" element= {<CustomerGrowth />} />
-        <Route path="/cutomerinflux" element= {<CustomerInflux />} />
+        <Route path="/customerInflux" element= {<CustomerInflux />} />
         <Route path="/profitPage" element= {<ProfitPage />} />
         <Route path="/expenses" element= {<Expenses />} />
         <Route path="/inflationAnalysis" element= {<InflationAnalysis />} />
@@ -226,6 +442,7 @@ function App() {
         <Route path="/chatTool" element= {<ChatTools />} />
         <Route path="/giveFeedbackModal" element= {<GiveFeedbackModal />} />
         <Route path="/welcome" element= {<Welcome />} />
+        <Route path="/netProfit" element= {<NetProfit />} />
         <Route path="/operatingIncome" element= {<OperatingIncome />} />
         <Route path="/password" element= {<Password />} />
         <Route path="/deleteModal" element= {<DeleteModal />} />
@@ -284,7 +501,7 @@ function App() {
         <Route path="/conclusion" element={<Conclusion />} />
         <Route path="costPage" element={<PageCost />} />
         <Route path="/home" element= {<LandingPage />} />
-        <Route path="/go" element= {<GoPage />} />
+        <Route path="/go/:phase" element= {<GoPage />} />
         {/* <Route path="/login" element= {<Login />} /> */}
         <Route path="/loading" element= {<LoadingPage />} />
         <Route path="/createProject" element= {<CreateProject />} />
@@ -292,7 +509,6 @@ function App() {
           <Route path="/inspVideo" element= {<InspVideo />} />  
         <Route path="/" element={<Login />} />
           <Route path="/AllFiles" element= {<AllFiles />} />
-            <Route path="/types/:type" element={<SubtypesList />} />
             <Route path="/subtypes/:type/:subtype" element={<FilesList />} />
             <Route path="/share/start/:id/" element={<Share />} />
             <Route path="/login/start/:id/" element={<LoginTeam />} />
@@ -314,8 +530,48 @@ function App() {
             <Route path="/viewImageMenu/" element= {<ViewImageMenu />} />
             <Route path="/start/" element= {<Start />} />
             <Route path="/upload/" element= {<Upload />} />
-           <Route path="/createVideo/" element= {<CreateVideo />} />
+            <Route path="/customFinancial/" element= {<CustomFinancial />} />
+            <Route path="/inflation/" element= {<Inflation />} />
+            <Route path="/inflationCreate/" element= {<CreateInflation />} />
+            <Route path="/operatingIncomeCreate/" element= {<CreateOperatingIncome />} />
+            <Route path="/expensesCreate/" element= {<CreateExpenses />} />
+            <Route path="/netProfitCreate/" element= {<CreateNetProfit />} />
+            <Route path="/customerGrowthCreate/" element= {<CreateCustomerGrowth />} />
+            <Route path="/customerInfluxCreate/" element= {<CreateCustomerInflux />} />
+            <Route path="/expensesGraphView/:id" element= {<ViewExpensesGraph />} />
+            <Route path="/inflationGraphView/:id" element= {<ViewInflationGraph />} />
+            <Route path="/operatingIncomeGraphView/:id" element= {<ViewOperatingIncomeGraph />} />
+            <Route path="/netProfitGraphView/:id" element= {<ViewNetProfitGraph />} />
+            <Route path="/customerGrowthGraphView/:id" element= {<ViewCustomerGrowthGraph />} />
+            <Route path="/customerInfluxGraphView/:id" element= {<ViewCustomerInfluxGraph />} />
+            <Route path="/inflationEdit/:id" element= {<EditInflation />} />
+            <Route path="/operatingIncomeEdit/:id" element= {<EditOperatingIncome />} />
+            <Route path="/netProfitEdit/:id" element= {<EditNetProfit />} />
+            <Route path="/expensesEdit/:id" element= {<EditExpenses />} />
+            <Route path="/customerGrowthEdit/:id" element= {<EditCustomerGrowth />} />
+            <Route path="/customerInfluxEdit/:id" element= {<EditCustomerInflux />} />
+            <Route path="/timelineView/" element= {<TimelineView />} />
+            <Route path="/pitchDeckStart/" element= {<PitchDeckStart />} />
+            <Route path="/createTask/" element= {<CreateTask />} />
+            <Route path="/uploadTask/" element= {<UploadTask />} />
+            <Route path="/createVideo/" element= {<CreateVideo />} />
             <Route path="/createQuote/" element= {<CreateQuote />} />
+            <Route path="/kpi/" element= {<Kpi />} />
+            <Route path="/kpiview/:id" element= {<KpiView />} />
+            <Route path="/craddule/" element= {<Craddule />} />
+            <Route path="/types/:id" element= {<CradduleType />} />
+            <Route path="/teamView/" element= {<TeamView />} />
+            <Route path="/teamAdd/" element= {<TeamAdd />} />
+            <Route path="/sharePhase/" element= {<SharePhase />} />
+            <Route path="/pdf/:phase/:category" element= {<PDF />} />
+            <Route path="/pdfEnd/" element= {<PDFEnd />} />
+            <Route path="/pdfEndP/" element= {<PDFEndP />} />
+            <Route path="/pdfEndI/" element= {<PDFEndI />} />
+            <Route path="/pdfEndV/" element= {<PDFEndV />} />
+            <Route path="/pdfEndC/" element= {<PDFEndC />} />
+            <Route path="/pdfMultiple/" element= {<PDFMultiple />} />
+            <Route path="/firstQuestion/" element= {<FirstQuestion />} />
+            <Route path="/ideation/" element= {<IdeationStart />} />
       </Routes>
     </Router>
   );

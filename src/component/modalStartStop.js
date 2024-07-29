@@ -27,6 +27,12 @@ export default function ModalStart({ open, onClose}){
         e.preventDefault();
         createProject(formData);
       };
+
+      const handleProceed = async () => {
+        onClose();
+        console.log('closing');
+        
+      }
     
       const createProject = async (data) => {
         setLoading(true);
@@ -56,12 +62,12 @@ export default function ModalStart({ open, onClose}){
             console.log(response.status);
             console.log(response);
 
-          
+            
             const responseData = await response.json();
             setLoading(false);
             const projectId = responseData.data._id;
             localStorage.setItem("nProject",projectId);
-            navigate(`/firstQuestion`);
+            navigate(`/loading`);
             console.log(responseData); // Parse JSON response
             console.log('Project created successfully');
 
@@ -90,6 +96,7 @@ export default function ModalStart({ open, onClose}){
         <>
             <div className="modalOv"></div>
             <div className="modalSt">
+            <span onClick={handleProceed}  style={{cursor:'pointer',marginBottom:20}}>X</span>
             { errorMessage &&  <p className="createER">Project name is empty</p>}
                
              <form onSubmit={handleSubmit}>

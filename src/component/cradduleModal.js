@@ -16,7 +16,7 @@ const ImagePopup = ({  onClose, onInsertFile}) => {
     const [types, setTypes] = useState([]);
     const [showTypes, setShowTypes] = useState(true); 
     const [showSubTypes, setShowSubTypes] = useState(true); 
-
+    const projectId = localStorage.getItem('nProject');
     const handleTypeClick = (type) => {
       setSelectedType(type);
       setSelectedSubtype(null);
@@ -72,7 +72,7 @@ const ImagePopup = ({  onClose, onInsertFile}) => {
       useEffect(() => {
         const fetchTypes = async () => {
             try {
-                const response = await axios.get(`${API_BASE_URL}/api/hub/types`);
+              const response = await axios.get(`${API_BASE_URL}/api/hub/types/${projectId}`);
                 setTypes(response.data);
                 
             } catch (error) {
@@ -94,10 +94,11 @@ const ImagePopup = ({  onClose, onInsertFile}) => {
 
     const fetchTypeDetails = async (data) => {
         try {
-            const response = await axios.get(`${API_BASE_URL}/api/hub/types/${data}`);
-            setSubtypes(response.data.subTypes);
-            console.log(response.data);
-            setFiles(response.data.files);
+          const response = await axios.get(`${API_BASE_URL}/api/hub/files/${data}`);
+          console.log(response.data);
+          setFiles(response.data);
+           
+           
             setShowTypes(false);
             setShowSubTypes(true);
             
@@ -114,13 +115,13 @@ const ImagePopup = ({  onClose, onInsertFile}) => {
      <div className='modalOv' >
            <div className='modalSt1'>
            <button className="btn btn-primary deleteNoButton modalX" onClick={onClose} >X</button>
-            <div className='grid-container'>
+            
             {showTypes && (
                     <div className='grid-container'>
                     {types.map((type) => (
-                        <div key={type} className='grid-item' onClick={() => fetchTypeDetails(type)}>
+                        <div key={type} className='grid-item' onClick={() => fetchTypeDetails(type.timelineId)}>
                         <img src={fol} alt='folder icon' className='fol' />
-                        <p className='folP'>{type}</p>
+                        <p className='folP'>{type.task}</p>
                         </div>
                     ))}
                     </div>
@@ -130,35 +131,26 @@ const ImagePopup = ({  onClose, onInsertFile}) => {
 
             {showSubTypes && (
                 <div>
-                     <div className='grid-container'>
+                     <div className='row'>
                      {files.map((file, index) => (
-                         <div key={index} className='grid-item'>
+                         <div key={index} className='col-md-3'>
+                          <div className="image-card" style={{height: 100}}>
                              <img src={API_BASE_URL+`/images/${file.hubFile}`}  alt="Image 1"
-                                 className="gallery-image imgA dd" onClick={() => handleInsertClick(file)}></img>
-                                <p className='crap'>Uploaded at: {formatDateTime(file.timeSent)}</p>
+                                 className="image-card-img" onClick={() => handleInsertClick(file)}></img>
+                                
                             
+                            </div>
                             </div>
                      ))}
                      </div>
                      
-                     <div className='grid-container'>
-                         {Object.entries(subtypes).map(([subtype, subFiles]) => (
-                             <div key={subtype} className='grid-item'>
-                             
-                                 
-                                     <img src={fol} className='fol'></img>
-                                     <p className='folP'>{subtype}</p>
-                                 
-                             
-                             </div>
-                         ))}
-                     </div>
+                     
                      </div>
             )}               
             
             </div>
            </div>
-    </div>
+    
   </>,
             document.getElementById('portal')
 
