@@ -17,7 +17,6 @@ import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
 
-
 function QuestionBusIntro() {
 
     const navigate = useNavigate()
@@ -25,10 +24,10 @@ function QuestionBusIntro() {
     const onClickHandler = () => navigate(`/video`);
     const [images, setImages] = useState([]);
     const [types, setTypes] = useState([]);
-    const [cat, setCat] = useState([]);
-    const [answered, setAnswered] = useState([]);
  const [showImagePopup, setShowImagePopup] = useState(false);
     const [answers, setAnswers] = useState([]);
+    const [cat, setCat] = useState([]);
+    const [answered, setAnswered] = useState([]);
     const [answersV, setAnswersV] = useState([]);
     const [hoveredIndex, setHoveredIndex] = useState(null);
  const [loading, setLoading] = useState(false);
@@ -41,8 +40,9 @@ function QuestionBusIntro() {
    const userId = decodedToken.userId;
 
  const questionType ="BusinessCaseBuilder";
- const questionSubType ="Introduction";
- const questionName ="Introduction";
+ const questionSubType ="RiskAndMitigationStrategies";
+ const questionName ="Risk And Mitigation Strategies";
+ 
  const token = localStorage.getItem('access_token');
  const [value, setValue] = useState('');
  const [misspelledWords, setMisspelledWords] = useState([]);
@@ -82,48 +82,48 @@ function QuestionBusIntro() {
  }, []);
 
  useEffect(() => {
-   const fetchAnswers = async () => {
-     try {
-       const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${questionType}/${questionSubType}`, {
-           headers: {
-             'Content-Type': 'application/json', 
-             'Authorization': `Bearer ${token}` // Include the token in the request headers
-           }
-         });
-       
-     if(summaryResponse.status === 200) {
-      console.log("getting");
-       // If summary exists, fetch the summary data
-       const dataS = await summaryResponse.json();
-       
-       if (dataS.data === null) {
-          console.log("in next step")
-          const response = await fetch(API_BASE_URL + `/api/new/question/BusinessCaseBuilder/Introduction/${projectId}`);
-          if (!response.ok) {
-            throw new Error('Failed to fetch answers');
+  const fetchAnswers = async () => {
+    try {
+      const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${questionType}/${questionSubType}`, {
+          headers: {
+            'Content-Type': 'application/json', 
+            'Authorization': `Bearer ${token}` // Include the token in the request headers
           }
-          const data = await response.json();
-          console.log(data);
-          setAnswers(data.data);
-          setLoading(false);
-
-       }else{
-        console.log(dataS);
-        console.log(dataS.data.summary);
-        setCombinedAnswer(dataS.data.summary);
-       }
-     }else{
-      const result = await summaryResponse.json();
-      setLoading(false);
-      toast.error(result['error']);
-      console.error('Error:', result['error']);
-     }
+        });
       
-     } catch (error) {
-       setError(error.message);
-       setLoading(false);
-     }
-   };
+    if(summaryResponse.status === 200) {
+     console.log("getting");
+      // If summary exists, fetch the summary data
+      const dataS = await summaryResponse.json();
+      
+      if (dataS.data === null) {
+         console.log("in next step")
+         const response = await fetch(API_BASE_URL + `/api/new/question/${questionType}/${questionSubType}/${projectId}`);
+         if (!response.ok) {
+           throw new Error('Failed to fetch answers');
+         }
+         const data = await response.json();
+         console.log(data);
+         setAnswers(data.data);
+         setLoading(false);
+
+      }else{
+       console.log(dataS);
+       console.log(dataS.data.summary);
+       setCombinedAnswer(dataS.data.summary);
+      }
+    }else{
+     const result = await summaryResponse.json();
+     setLoading(false);
+     toast.error(result['error']);
+     console.error('Error:', result['error']);
+    }
+     
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
 
    fetchAnswers();
  }, [questionType, questionSubType, projectId]);
@@ -296,7 +296,7 @@ function QuestionBusIntro() {
       
      }else{
        const result = await response.json();
-       console.error('Error:', result);
+       console.error('Error:', result['error']);
      }
  
      
@@ -633,7 +633,8 @@ const handleInsertFile = (file) => {
 
 
 
- const onClickNext = () => navigate(`/questionBusOp`);
+
+
 
  const handleMouseDown = (event) => {
    if (event.target.tagName === 'IMG') {
@@ -800,8 +801,8 @@ useEffect(() => {
       console.warn('Unknown questionSubType:', questionSubType);
   }
 }
-
  
+ const onClickNext = () => navigate(`/questionBusIm`);
       return (
 
        
@@ -814,7 +815,6 @@ useEffect(() => {
         
          <Header />
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
-
          <div className='catHod'>
          
          {cat.map((cat, index) => (
@@ -824,9 +824,8 @@ useEffect(() => {
          ))}
        
         </div>
-
          <div className='text-center'>
-                    <p className='textHp'>Introduction</p>
+                    <p className='textHp'>Risk And Mitigation Strategies</p>
                     <p className='textH'>Make sure you answer all questions</p>
                 </div>
             
@@ -1012,7 +1011,8 @@ useEffect(() => {
                 <p style={{marginBottom:7}}>{answered.questionId.question}</p>
             </div>
            ))}
-           
+            
+            
             {/* Add more content as needed */}
         </div>
     </div>

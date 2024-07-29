@@ -17,11 +17,10 @@ import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
 
-
 function QuestionBusIntro() {
 
     const navigate = useNavigate()
-
+    const onClickNext = () => navigate(`/questionBusIn`);
     const onClickHandler = () => navigate(`/video`);
     const [images, setImages] = useState([]);
     const [types, setTypes] = useState([]);
@@ -41,8 +40,8 @@ function QuestionBusIntro() {
    const userId = decodedToken.userId;
 
  const questionType ="BusinessCaseBuilder";
- const questionSubType ="Introduction";
- const questionName ="Introduction";
+ const questionSubType ="ImplementationPlan";
+ const questionName ="Implementation Plan";
  const token = localStorage.getItem('access_token');
  const [value, setValue] = useState('');
  const [misspelledWords, setMisspelledWords] = useState([]);
@@ -68,7 +67,7 @@ function QuestionBusIntro() {
    useEffect(() => {
      const fetchTypes = async () => {
          try {
-             const response = await axios.get(`${API_BASE_URL}/api/hub/types`);
+          const response = await axios.get(`${API_BASE_URL}/api/hub/types/${projectId}`);
              setImages(response.data);
              setLoading(false);
          } catch (error) {
@@ -82,48 +81,49 @@ function QuestionBusIntro() {
  }, []);
 
  useEffect(() => {
-   const fetchAnswers = async () => {
-     try {
-       const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${questionType}/${questionSubType}`, {
-           headers: {
-             'Content-Type': 'application/json', 
-             'Authorization': `Bearer ${token}` // Include the token in the request headers
-           }
-         });
-       
-     if(summaryResponse.status === 200) {
-      console.log("getting");
-       // If summary exists, fetch the summary data
-       const dataS = await summaryResponse.json();
-       
-       if (dataS.data === null) {
-          console.log("in next step")
-          const response = await fetch(API_BASE_URL + `/api/new/question/BusinessCaseBuilder/Introduction/${projectId}`);
-          if (!response.ok) {
-            throw new Error('Failed to fetch answers');
+  const fetchAnswers = async () => {
+    try {
+      const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${questionType}/${questionSubType}`, {
+          headers: {
+            'Content-Type': 'application/json', 
+            'Authorization': `Bearer ${token}` // Include the token in the request headers
           }
-          const data = await response.json();
-          console.log(data);
-          setAnswers(data.data);
-          setLoading(false);
-
-       }else{
-        console.log(dataS);
-        console.log(dataS.data.summary);
-        setCombinedAnswer(dataS.data.summary);
-       }
-     }else{
-      const result = await summaryResponse.json();
-      setLoading(false);
-      toast.error(result['error']);
-      console.error('Error:', result['error']);
-     }
+        });
       
-     } catch (error) {
-       setError(error.message);
-       setLoading(false);
-     }
-   };
+    if(summaryResponse.status === 200) {
+     console.log("getting");
+      // If summary exists, fetch the summary data
+      const dataS = await summaryResponse.json();
+      
+      if (dataS.data === null) {
+         console.log("in next step")
+         const response = await fetch(API_BASE_URL + `/api/new/question/${questionType}/${questionSubType}/${projectId}`);
+         if (!response.ok) {
+           throw new Error('Failed to fetch answers');
+         }
+         const data = await response.json();
+         console.log(data);
+         setAnswers(data.data);
+         setLoading(false);
+
+      }else{
+       console.log(dataS);
+       console.log(dataS.data.summary);
+       setCombinedAnswer(dataS.data.summary);
+      }
+    }else{
+     const result = await summaryResponse.json();
+     setLoading(false);
+     toast.error(result['error']);
+     console.error('Error:', result['error']);
+    }
+     
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
 
    fetchAnswers();
  }, [questionType, questionSubType, projectId]);
@@ -296,7 +296,7 @@ function QuestionBusIntro() {
       
      }else{
        const result = await response.json();
-       console.error('Error:', result);
+       console.error('Error:', result['error']);
      }
  
      
@@ -570,7 +570,7 @@ const handleInsertFile = (file) => {
  useEffect(() => {
      const fetchSubtypeFiles = async () => {
          try {
-             const response = await axios.get(`${API_BASE_URL}/api/hub/project/${projectId}`);
+          const response = await axios.get(`${API_BASE_URL}/api/hub/types/${projectId}`);
              setTypes(response.data.data);
              console.log(response.data);
             
@@ -633,7 +633,8 @@ const handleInsertFile = (file) => {
 
 
 
- const onClickNext = () => navigate(`/questionBusOp`);
+
+
 
  const handleMouseDown = (event) => {
    if (event.target.tagName === 'IMG') {
@@ -663,12 +664,8 @@ const handleInsertFile = (file) => {
      setResizingImage(null);
    }
  };
-
- const handleClick = (id) => {
-  // Handle click event and set the selected answer
-  navigate('/questionEdit/'+id);
-};
-useEffect(() => {
+ 
+ useEffect(() => {
   const createAnswered = async () => {
    console.log("here");
     setLoading(true);
@@ -766,6 +763,11 @@ useEffect(() => {
   fetchAnsweredCat();
 }, [projectId]);
 
+ const handleClick = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionEdit/'+id);
+};
+
  function handleClickM(questionSubType) {
  
   switch (questionSubType) {
@@ -801,7 +803,7 @@ useEffect(() => {
   }
 }
 
- 
+
       return (
 
        
@@ -814,7 +816,6 @@ useEffect(() => {
         
          <Header />
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
-
          <div className='catHod'>
          
          {cat.map((cat, index) => (
@@ -824,9 +825,8 @@ useEffect(() => {
          ))}
        
         </div>
-
          <div className='text-center'>
-                    <p className='textHp'>Introduction</p>
+                    <p className='textHp'>Implementation Plan</p>
                     <p className='textH'>Make sure you answer all questions</p>
                 </div>
             
@@ -995,7 +995,8 @@ useEffect(() => {
                     onInsertFile={handleInsertFile}
                   />
                 }
-             <button type="button" className='btn btn-primary curveNext' onClick={onClickNext} style={{marginTop:20}}> Next</button>
+                <button type="button" className='btn btn-primary curveNext' onClick={onClickNext} style={{marginTop:20}}> Next</button>
+            
             </div>
 
                 
@@ -1012,7 +1013,7 @@ useEffect(() => {
                 <p style={{marginBottom:7}}>{answered.questionId.question}</p>
             </div>
            ))}
-           
+            
             {/* Add more content as needed */}
         </div>
     </div>

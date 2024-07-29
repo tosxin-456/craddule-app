@@ -262,7 +262,7 @@ const [isOpen, setIsOpen]= useState(false);
         
         <div className='col-md-12'>
         <div className='centerP'>
-        <img src={bci} className='bcP1' type='button'onClick={onClickHandler}></img>
+
         <form onSubmit={handleSubmit}>
             <div><p className='centerH1a'>Profile</p>
             <p className='centerHp1a'>View, manage your memebers and send invites</p>

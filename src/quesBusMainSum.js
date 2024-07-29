@@ -2,7 +2,10 @@ import React, { useState,useEffect,useRef } from 'react';
 import bci from './images/bc.png';
 import Header from './component/header';
 import SideMenu2 from './component/sideMenu2';
-import { useNavigate, Link } from 'react-router-dom';
+import SideMenu2P from './component/sideMenu2P';
+import SideMenu2I from './component/sideMenu2I';
+import SideMenu2C from './component/sideMenu2C';
+import { useNavigate, Link,useParams } from 'react-router-dom';
 import API_BASE_URL from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,17 +19,14 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
-
-
+import ModalQoute from './component/modalQoute';
 function QuestionBusIntro() {
 
     const navigate = useNavigate()
-
-    const onClickHandler = () => navigate(`/video`);
+    const { phase,category, subCategory } = useParams();
+    const onClickHandler = () => navigate(`/quote`);
     const [images, setImages] = useState([]);
     const [types, setTypes] = useState([]);
-    const [cat, setCat] = useState([]);
-    const [answered, setAnswered] = useState([]);
  const [showImagePopup, setShowImagePopup] = useState(false);
     const [answers, setAnswers] = useState([]);
     const [answersV, setAnswersV] = useState([]);
@@ -35,14 +35,16 @@ function QuestionBusIntro() {
  const [error, setError] = useState(null);
  const projectId = localStorage.getItem('nProject');
  const [combinedAnswer, setCombinedAnswer] = useState('');
-
+ const [answered, setAnswered] = useState([]);
+ const [cat, setCat] = useState([]);
  const access_token = localStorage.getItem('access_token');
    const decodedToken = jwtDecode(access_token);
    const userId = decodedToken.userId;
 
- const questionType ="BusinessCaseBuilder";
- const questionSubType ="Introduction";
- const questionName ="Introduction";
+   const [activeId, setActiveId] = useState("");
+   const [isOpen, setIsOpen]= useState(false);
+   const [activeQuote, setActiveQuote] = useState("");
+
  const token = localStorage.getItem('access_token');
  const [value, setValue] = useState('');
  const [misspelledWords, setMisspelledWords] = useState([]);
@@ -51,19 +53,24 @@ function QuestionBusIntro() {
  const [selectedWord, setSelectedWord] = useState(null); 
 
  const [showScrollableDiv, setShowScrollableDiv] = useState(false);
+ const [showScrollableDiv2, setShowScrollableDiv2] = useState(false);
 
     const handleToggle = () => {
       setShowScrollableDiv(!showScrollableDiv);
+    };
+
+    const handleToggleSh = () => {
+      setShowScrollableDiv2(!showScrollableDiv2);
     };
 
  const [formData, setFormData] = useState({
    summary: '',
    });
    
-   useEffect(() => {
+  //  useEffect(() => {
       
-     fetchAnswerCut(); // Call the function to fetch the unanswered question
-   }, [questionType, questionSubType, projectId]);
+  //    fetchAnswerCut(); // Call the function to fetch the unanswered question
+  //  }, [category, subCategory, projectId]);
  
    useEffect(() => {
      const fetchTypes = async () => {
@@ -82,43 +89,51 @@ function QuestionBusIntro() {
  }, []);
 
  useEffect(() => {
+  getPrevious(subCategory);
+ }, []);
+
+ useEffect(() => {
+  getPreviousCategories(category);
+ }, []);
+
+ useEffect(() => {
+  console.log("fetchAnswers");
    const fetchAnswers = async () => {
      try {
-       const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${questionType}/${questionSubType}`, {
+       const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${category}/${subCategory}`, {
            headers: {
              'Content-Type': 'application/json', 
              'Authorization': `Bearer ${token}` // Include the token in the request headers
            }
          });
        
-     if(summaryResponse.status === 200) {
-      console.log("getting");
+     if(summaryResponse.ok) {
+      const dataS = await summaryResponse.json();
        // If summary exists, fetch the summary data
-       const dataS = await summaryResponse.json();
-       
-       if (dataS.data === null) {
-          console.log("in next step")
-          const response = await fetch(API_BASE_URL + `/api/new/question/BusinessCaseBuilder/Introduction/${projectId}`);
-          if (!response.ok) {
-            throw new Error('Failed to fetch answers');
+       if(dataS.data) {
+            
+            console.log(dataS);
+            console.log(dataS.data.summary);
+            setCombinedAnswer(dataS.data.summary);
+        } else {
+            const response = await fetch(API_BASE_URL + `/api/new/question/${category}/${subCategory}/${projectId}`);
+            if (!response.ok) {
+              throw new Error('Failed to fetch answers');
+            }
+            const data = await response.json();
+            console.log(data);
+            console.log('answers getting because no summary');
+            setAnswers(data.data);
+            const combined = data.data.map(answer => answer.answer).join('<br><br>');
+            console.log(combined);
+            setCombinedAnswer(combined);
+            setLoading(false);
+            fetchPreviousSummary(combined);
           }
-          const data = await response.json();
-          console.log(data);
-          setAnswers(data.data);
-          setLoading(false);
+      } else {
 
-       }else{
-        console.log(dataS);
-        console.log(dataS.data.summary);
-        setCombinedAnswer(dataS.data.summary);
-       }
-     }else{
-      const result = await summaryResponse.json();
-      setLoading(false);
-      toast.error(result['error']);
-      console.error('Error:', result['error']);
-     }
-      
+            
+      }
      } catch (error) {
        setError(error.message);
        setLoading(false);
@@ -126,13 +141,45 @@ function QuestionBusIntro() {
    };
 
    fetchAnswers();
- }, [questionType, questionSubType, projectId]);
+ }, [category, subCategory, projectId]);
 
- useEffect(() => {
-   // Combine all answers into one string
-   const combined = answers.map(answer => answer.answer).join('\n');
-   setCombinedAnswer(combined);
- }, [answers]);
+
+ //insert summary if it has not being created
+   const fetchPreviousSummary = async (data) => {
+     try {
+       const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${category}/${subCategory}`, {
+           headers: {
+             'Content-Type': 'application/json', 
+             'Authorization': `Bearer ${token}` // Include the token in the request headers
+           }
+         });
+       
+     if(summaryResponse.ok) {
+      const dataS = await summaryResponse.json();
+       // If summary exists, fetch the summary data
+       if(dataS.data) {
+            console.log(dataS);
+            console.log(dataS.data.summary);
+           // setCombinedAnswer(dataS.data.summary);
+        } else {
+          createOrUpdateSummary3(data)
+          }
+      } else {
+
+            
+      }
+     } catch (error) {
+       setError(error.message);
+       setLoading(false);
+     }
+   };
+
+
+//  useEffect(() => {
+//    // Combine all answers into one string
+//    const combined = answers.map(answer => answer.answer).join('\n');
+//    setCombinedAnswer(combined);
+//  }, [answers]);
 
  // const handleEditorChange = () => {
  //   // Get the current content of the editor
@@ -143,7 +190,74 @@ function QuestionBusIntro() {
  //   handleChange(event);
   
  // };
+ const getPrevious = async (questionSubType) => {
+  try {
+    const scrapResponse = await fetch(API_BASE_URL + `/api/answer/answered/${category}/${questionSubType}/${projectId}`, {
+        headers: {
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${access_token}` // Include the token in the request headers
+        }
+      });
+    
+  if(scrapResponse.status === 200) {
+    // If summary exists, fetch the summary data
+    const dataS = await scrapResponse.json();
+    console.log("fire");
+    console.log(dataS);
+    setAnswered(dataS.data);
+   
+ } else {
+    console.log("fireNo");
+    const data = await scrapResponse.json();
+    console.log(data);
+    setLoading(false);
+}
+  } catch (error) {
+   
+    setLoading(false);
+  }
+};
 
+const getPreviousCategories = async () => {
+  try {
+    const scrapResponse = await fetch(API_BASE_URL + `/api/finished/cat/${projectId}/${category}/`, {
+        headers: {
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${access_token}` // Include the token in the request headers
+        }
+      });
+    
+  if(scrapResponse.status === 200) {
+    // If summary exists, fetch the summary data
+    const dataS = await scrapResponse.json();
+    console.log("fireCat");
+    console.log(dataS);
+    setCat(dataS.data);
+   
+ } else {
+    console.log("fireCat");
+    const data = await scrapResponse.json();
+    console.log(data);
+    setLoading(false);
+}
+  } catch (error) {
+   
+    setLoading(false);
+  }
+};
+
+const handleClick = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionEdit/'+id);
+};
+
+const handleClickSh = (id) => {
+  // Handle click event and set the selected answer
+  console.log(id)
+ getPrevious(id);
+ handleToggleSh();
+ handleToggle();
+};
 
  const handleEditorChange = () => {
    // Get the current selection range
@@ -180,11 +294,16 @@ function QuestionBusIntro() {
 
 
 
+
+
+
  const createOrUpdateSummary = async (data) => {
    try {
        setLoading(true);
        console.log(combinedAnswer);
        const summary = combinedAnswer;
+       const questionType=category;
+       const questionSubType=subCategory;
      const response = await fetch(API_BASE_URL +'/api/summary', {
        method: 'POST',
        headers: {
@@ -211,7 +330,159 @@ function QuestionBusIntro() {
      // Handle error
    }
  };
+ const createOrUpdateSummary3 = async (data) => {
+  const summary = data;
+  try {
+      setLoading(true);
+      console.log(combinedAnswer);
+      
+      const questionType=category;
+      const questionSubType=subCategory;
+    const response = await fetch(API_BASE_URL +'/api/summary', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` 
+      },
+      body: JSON.stringify({ projectId, questionType, questionSubType, summary,userId }),
+    });
+
+    if (!response.ok) {
+      setLoading(false);
+      toast.error("can't save");
+      ///throw new Error('Failed to create or update summary');
+    }
+
+    const data = await response.json();
+    setLoading(false);
+    toast.success("Saved");
+    console.log(data.message); // Log success message
+
+   
+  } catch (error) {
+    console.error('Error creating or updating summary:', error.message);
+    // Handle error
+  }
+};
  
+
+useEffect(() => {
+  const checker = async () => {
+
+    
+    try {
+    
+      const section = subCategory        
+      const response = await fetch(API_BASE_URL+'/api/checker', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${access_token}`,
+        },
+        body: JSON.stringify({projectId, userId, section}),
+      });
+
+      if (response.status === 200) {
+        // If submission is successful, fetch another question
+        const responseData = await response.json();
+        console.log(responseData);
+        console.log(responseData.check);
+        const check = responseData.check;
+       if(responseData.check === 1){
+          console.log("active do nothing");
+          checkActiveIfEntered();
+       }else{
+          console.log("not active do shit");
+          fetchRandomQuote();
+       }
+
+
+
+      } else {
+        const result = await response.json();
+        
+        toast.error(result['error']);
+        console.error('Error:', result['error']);
+      }
+    } catch (error) {
+        //toast.error(result['error']);  
+        
+        console.error('An error occurred:', error);
+    }
+  };
+  checker();
+}, []);
+
+
+const fetchRandomQuote = async () => {
+  try {
+    console.log('random');
+    const response = await fetch(`${API_BASE_URL}/api/quote/count/${userId}/${projectId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`,
+      },
+    });
+    console.log(response);
+   
+    if (response.status == 200) {
+      const quote = await response.json();
+      console.log("quote show");
+      console.log(quote);
+      console.log(quote.Quote.quote);
+      console.log(quote.Quote.quote);
+      setActiveQuote(quote.Quote.quote); 
+      setActiveId(quote.Quote._id); 
+      setIsOpen(true);
+    } else {
+      console.error('Error fetching quote:', response.statusText);
+    }
+  } catch (error) {
+    console.error('An error occurred while fetching the random quote:', error.message);
+  }
+};
+
+
+//check if there is an active quote not finished if the user as been here before
+const checkActiveIfEntered = async () => {
+  try {
+    console.log("in active when enetered");
+    const quoteSubType  = category;
+    const response = await fetch(`${API_BASE_URL}/api/quote/active/check`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`,
+      },
+      body: JSON.stringify({ userId, projectId, quoteSubType }),
+    });
+    console.log(response);
+   
+    if (response.status == 200) {
+      const quote = await response.json();
+     
+      console.log(quote);
+      console.log(quote.active);
+      if(quote.active){
+     
+        console.log('true');
+        setActiveId(quote.quote._id); 
+       
+        setIsOpen(true);
+      }else{
+         //fetchRandomQuote();
+        console.log('false');
+       
+      }
+     
+    } else {
+      console.error('Error fetching quote:', response.statusText);
+    }
+  } catch (error) {
+    console.error('An error occurred while fetching the random quote:', error.message);
+  }
+};
 
 
 
@@ -280,9 +551,9 @@ function QuestionBusIntro() {
  };
 
  const fetchAnswerCut = async () => {
-       
+       console.log("here i am");
    try {
-     const response = await fetch(`${API_BASE_URL}/api/answer/${projectId}/${questionType}/${questionSubType}`, {
+     const response = await fetch(`${API_BASE_URL}/api/answer/${projectId}/${category}/${subCategory}`, {
        headers: {
          'Content-Type': 'application/json',
          'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
@@ -292,7 +563,7 @@ function QuestionBusIntro() {
      if (response.status === 200) {
        const data = await response.json();
        console.log(data)
-       setAnswersV(data.data); // Adjust based on your API response structure
+       setAnswers(data.data); // Adjust based on your API response structure
       
      }else{
        const result = await response.json();
@@ -306,6 +577,8 @@ function QuestionBusIntro() {
      setLoading(false);
    }
  };
+
+
 
 
  const handleMouseEnter = (index) => {
@@ -353,6 +626,8 @@ function QuestionBusIntro() {
    const editor = editorRef.current;
    if (editor && editor.innerHTML !== combinedAnswer) {
      editor.innerHTML = combinedAnswer;
+     console.log("in ref");
+     console.log(combinedAnswer);
    }
  }, [combinedAnswer]);
 
@@ -633,7 +908,7 @@ const handleInsertFile = (file) => {
 
 
 
- const onClickNext = () => navigate(`/questionBusOp`);
+ const onClickNext = () => navigate(`/questionBusMain/${phase}/${category}`);
 
  const handleMouseDown = (event) => {
    if (event.target.tagName === 'IMG') {
@@ -663,144 +938,6 @@ const handleInsertFile = (file) => {
      setResizingImage(null);
    }
  };
-
- const handleClick = (id) => {
-  // Handle click event and set the selected answer
-  navigate('/questionEdit/'+id);
-};
-useEffect(() => {
-  const createAnswered = async () => {
-   console.log("here");
-    setLoading(true);
- 
-    try {
-      const response = await fetch(API_BASE_URL+'/api/answered',{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${access_token}`,
-        },
-        body: JSON.stringify({projectId, questionType, questionSubType,questionName}),
-      });
-      if (response.status === 200) {
-        setLoading(false);
-        console.log(response.status);
-        console.log(response);   
-        console.log('Task created successfully');
-      } else {
-        const result = await response.json();
-        setLoading(false);
-        toast.error(result['error']);
-          console.error('Error:', result['error']);        
-      }
-    } catch (error) {
-      setLoading(false);
-      console.error('An error occurred:', error);
-      console.log(error.response);
-    }
-  };
-  createAnswered();
- }, []);
-
- 
- useEffect(() => {
-  const getPrevious = async () => {
-    try {
-      const scrapResponse = await fetch(API_BASE_URL + `/api/answer/answered/${questionType}/${questionSubType}/${projectId}`, {
-          headers: {
-            'Content-Type': 'application/json', 
-            'Authorization': `Bearer ${access_token}` // Include the token in the request headers
-          }
-        });
-      
-    if(scrapResponse.status === 200) {
-      // If summary exists, fetch the summary data
-      const dataS = await scrapResponse.json();
-      console.log("fire");
-      console.log(dataS);
-      setAnswered(dataS.data);
-     
-   } else {
-      console.log("fireNo");
-      const data = await scrapResponse.json();
-      console.log(data);
-      setLoading(false);
-  }
-    } catch (error) {
-      setError(error.message);
-      setLoading(false);
-    }
-  };
-
-  getPrevious();
-}, [projectId]);
-
- useEffect(() => {
-  const fetchAnsweredCat = async () => {
-    try {
-      const scrapResponse = await fetch(API_BASE_URL + `/api/answered/${projectId}/${questionType}`, {
-          headers: {
-            'Content-Type': 'application/json', 
-            'Authorization': `Bearer ${access_token}` // Include the token in the request headers
-          }
-        });
-      
-    if(scrapResponse.status === 200) {
-      // If summary exists, fetch the summary data
-      const dataS = await scrapResponse.json();
-      console.log(dataS.data.entry);
-      setCat(dataS.data.entry);
-     
-   } else {
-      
-      const data = await scrapResponse.json();
-      console.log(data);
-      setLoading(false);
-  }
-    } catch (error) {
-      setError(error.message);
-      setLoading(false);
-    }
-  };
-
-  fetchAnsweredCat();
-}, [projectId]);
-
- function handleClickM(questionSubType) {
- 
-  switch (questionSubType) {
-    case 'Introduction':
-      navigate('/questionBusIntro');
-      break;
-    case 'OpportunityAnalysis':
-      navigate('/questionBapOpSum');
-      break;
-    case 'MarketAnalysis':
-      navigate('/questionBapMaSum');
-      break;
-    case 'SolutionDescription':
-        navigate('/questionBapSoSum');
-        break;
-    case 'CostAnalysis':
-        navigate('/questionBapCoSum');
-        break;
-    case 'RiskAndMitigationStrategies':
-        navigate('/questionBapRiSum');
-        break;
-    case 'ImplementationPlan':
-        navigate('/questionBapImSum');
-        break;
-    case 'InternalGovernanaceAndApprovalProcess':
-        navigate('/questionBapInSum');
-        break;
-    case 'ConclusionAndRecommendation':
-          navigate('/questionBapConSum');
-          break;
-    default:
-      console.warn('Unknown questionSubType:', questionSubType);
-  }
-}
-
  
       return (
 
@@ -809,30 +946,29 @@ useEffect(() => {
       
 
     <div className='container2'>
-         <SideMenu2 />    
+         {phase === 'Ideation' && <SideMenu2 />}
+         {phase === 'ProductDefinition' && <SideMenu2P />} 
+         {phase === 'InitialDesign' && <SideMenu2I />} 
+         {phase === 'Commercialization' && <SideMenu2C />} 
          <div className="main-content">
         
          <Header />
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
 
-         <div className='catHod'>
-         
-         {cat.map((cat, index) => (
-        <span className='selQ' onClick={() => handleClickM(cat.questionSubType)}>
-          {cat.questionName}
-        </span>
-         ))}
-       
-        </div>
-
          <div className='text-center'>
-                    <p className='textHp'>Introduction</p>
+                    <p className='textHp'>{subCategory}</p>
                     <p className='textH'>Make sure you answer all questions</p>
                 </div>
             
-            <div className=''>
-                <p className='prq' onClick={handleToggle}>Previous Questions</p>
-            </div>
+                <div className='row'>
+                  <div className='col-md-6'>
+                    <p className='prq' onClick={handleToggle}>Previous Questions</p>
+                  </div>
+
+                  {/* <div className='col-md-6'>
+                    <p className='prq' onClick={handleToggleSh} style={{float:"right"}}>Previous Categories</p>
+                  </div> */}
+              </div>
             
             <div className='quiInt'>
 
@@ -846,24 +982,7 @@ useEffect(() => {
             {/*<p className= "buttonE">Save</p>
             <p className= "buttonS">Edit</p>*/}
             <div class = "break"></div>
-            {answersV.map((answerV, index) => (
-            <Link to={`/question/${answerV.questionId}`}>
-                <div key={answerV._id} className="qul">
-                <Tooltip content={answerV.answer}>
-                
-              
-                    <p
-                        className={`qulp ${hoveredIndex === index ? 'full' : ''}`}
-                        onMouseEnter={() => handleMouseEnter(index)}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {hoveredIndex === index ? answerV.question : answerV.question.slice(0, 10) + '...'}
-                    </p>
-                    </Tooltip>
-                    
-                </div>
-                 </Link>
-            ))}
+            
            
             <div className='container-textBs'>
 
@@ -945,46 +1064,9 @@ useEffect(() => {
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
-                // onClick={(e) => {
-                //   const selection = window.getSelection();
-                //   if (!selection.rangeCount) return;
-
-                //   const range = selection.getRangeAt(0);
-                //     const word = range.startContainer.textContent.slice(range.startOffset, range.endOffset);
-                //     console.log(word);
-                //    if (misspelledWords.includes(word)) {
-                //     const rect = e.target.getBoundingClientRect();
-                //     handleWordClick(word, rect);
-                //   }
-                // }}
-                // style={{ whiteSpace: "pre-wrap", minHeight: "200px", border: "1px solid #ccc", padding: "10px",marginTop: "0px" }}
+              
               />
   
-
-
-
-
-    {suggestions.length > 0 && (
-              <div
-                className="suggestion-box"
-                style={{
-                  position: 'absolute',
-                  top: suggestionBoxPosition.top,
-                  left: suggestionBoxPosition.left,
-                  backgroundColor: 'white',
-                  border: '1px solid #ccc',
-                  borderRadius: '4px',
-                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                  zIndex: 1000,
-                }}
-              >
-               {suggestions.map((suggestion, index) => (
-                    <div key={index} onClick={() => applySuggestion(suggestion)}>
-                      {suggestion}
-                    </div>
-                  ))}
-              </div>
-            )}
 
                 {showImagePopup && 
                   <ImagePopup 
@@ -995,7 +1077,7 @@ useEffect(() => {
                     onInsertFile={handleInsertFile}
                   />
                 }
-             <button type="button" className='btn btn-primary curveNext' onClick={onClickNext} style={{marginTop:20}}> Next</button>
+             {/* <button type="button" className='btn btn-primary curveNext' onClick={onClickNext} style={{marginTop:20}}> Next</button> */}
             </div>
 
                 
@@ -1007,14 +1089,31 @@ useEffect(() => {
 
          <div className={`scrollable-div ${showScrollableDiv ? 'show' : ''}`}>
             <button className="close-button" onClick={handleToggle}>X</button>
-            {answered.map((answered, index) => (
-            <div className='qulis'  onClick={() => handleClick(answered._id)} style={{cursor:'pointer'}}>
-                <p style={{marginBottom:7}}>{answered.questionId.question}</p>
+            {(answered || []).map((answered, index) => (
+              <div className='qulis' key={index} onClick={() => handleClick(answered._id)} style={{ cursor: 'pointer' }}>
+                <p style={{ marginBottom: 7 }}>{answered.questionId.question}</p>
+              </div>
+            ))}
+           
+            {/* Add more content as needed */}
+        </div>
+
+        <div className={`scrollable-div ${showScrollableDiv2 ? 'show' : ''}`}>
+            <button className="close-button" onClick={handleToggleSh}>X</button>
+            
+
+            {(cat || []).map((cat, index) => (
+            <div className='qulis'   key={index} onClick={() => handleClickSh(cat.questionSubType)} style={{cursor:'pointer'}}>
+                <p style={{marginBottom:7}}>{cat.questionSubType}</p>
             </div>
            ))}
            
             {/* Add more content as needed */}
         </div>
+
+        <ModalQoute open={isOpen} onClose={() => setIsOpen(false)} quote={activeQuote ? activeQuote : ''}  quoteId={activeId}>
+
+</ModalQoute>
     </div>
     <Toaster  position="top-right" />
 </div> 

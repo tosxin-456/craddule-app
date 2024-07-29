@@ -17,19 +17,14 @@ function Privacy ()  {
 
     return (
         <>
- <div className='container-fluid'>
-    <Header />
-    <div className='row'>
-    <SettingMenu /> 
-        
-        <div className='col-md-9'>
-        <h1 className='centerHh'>Settings</h1>
-        <p className='centerHh'>View and manage settings</p>
-        <img src={bci} className='bcA' type='button' onClick={onClickHandler}></img>
-        {/*<div className='gene'>General Setting</div>*/}
-        <div className='centerS'>
-        <p className='centerHhPr'>Privacy Policy</p>
-        <div>
+<div className=''>
+        <Header />
+        <div className='container'>
+
+        <div className='main-content2'>
+        <h1 className='centerHh' style={{paddingBottom:40}}>Privacy Policy</h1>
+   
+       <div className='bacWHI'>
           <p className='paragraph'>
           At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
            quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt
@@ -57,7 +52,8 @@ function Privacy ()  {
   </div>
   </div>
   </div>
-  </div>
+
+
   </>
     );
 }

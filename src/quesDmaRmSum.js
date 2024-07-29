@@ -1,7 +1,7 @@
 import React, { useState,useEffect,useRef } from 'react';
 import bci from './images/bc.png';
 import Header from './component/header';
-import SideMenu2 from './component/sideMenu2';
+import SideMenu2P from './component/sideMenu2P';
 import { useNavigate, Link } from 'react-router-dom';
 import API_BASE_URL from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
@@ -17,7 +17,6 @@ import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
 
-
 function QuestionBusIntro() {
 
     const navigate = useNavigate()
@@ -25,11 +24,11 @@ function QuestionBusIntro() {
     const onClickHandler = () => navigate(`/video`);
     const [images, setImages] = useState([]);
     const [types, setTypes] = useState([]);
-    const [cat, setCat] = useState([]);
-    const [answered, setAnswered] = useState([]);
  const [showImagePopup, setShowImagePopup] = useState(false);
     const [answers, setAnswers] = useState([]);
     const [answersV, setAnswersV] = useState([]);
+    const [cat, setCat] = useState([]);
+    const [answered, setAnswered] = useState([]);
     const [hoveredIndex, setHoveredIndex] = useState(null);
  const [loading, setLoading] = useState(false);
  const [error, setError] = useState(null);
@@ -40,9 +39,10 @@ function QuestionBusIntro() {
    const decodedToken = jwtDecode(access_token);
    const userId = decodedToken.userId;
 
- const questionType ="BusinessCaseBuilder";
- const questionSubType ="Introduction";
- const questionName ="Introduction";
+   const questionType ="DetailedMarketingStrategies";
+   const questionSubType ="RiskManagement";
+   const questionName ="Risk Management";
+   const questionSum ="questionDmaRo";
  const token = localStorage.getItem('access_token');
  const [value, setValue] = useState('');
  const [misspelledWords, setMisspelledWords] = useState([]);
@@ -55,6 +55,8 @@ function QuestionBusIntro() {
     const handleToggle = () => {
       setShowScrollableDiv(!showScrollableDiv);
     };
+
+    const onClickNext = () => navigate(`/${questionSum}`);
 
  const [formData, setFormData] = useState({
    summary: '',
@@ -82,48 +84,48 @@ function QuestionBusIntro() {
  }, []);
 
  useEffect(() => {
-   const fetchAnswers = async () => {
-     try {
-       const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${questionType}/${questionSubType}`, {
-           headers: {
-             'Content-Type': 'application/json', 
-             'Authorization': `Bearer ${token}` // Include the token in the request headers
-           }
-         });
-       
-     if(summaryResponse.status === 200) {
-      console.log("getting");
-       // If summary exists, fetch the summary data
-       const dataS = await summaryResponse.json();
-       
-       if (dataS.data === null) {
-          console.log("in next step")
-          const response = await fetch(API_BASE_URL + `/api/new/question/BusinessCaseBuilder/Introduction/${projectId}`);
-          if (!response.ok) {
-            throw new Error('Failed to fetch answers');
+  const fetchAnswers = async () => {
+    try {
+      const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${questionType}/${questionSubType}`, {
+          headers: {
+            'Content-Type': 'application/json', 
+            'Authorization': `Bearer ${token}` // Include the token in the request headers
           }
-          const data = await response.json();
-          console.log(data);
-          setAnswers(data.data);
-          setLoading(false);
-
-       }else{
-        console.log(dataS);
-        console.log(dataS.data.summary);
-        setCombinedAnswer(dataS.data.summary);
-       }
-     }else{
-      const result = await summaryResponse.json();
-      setLoading(false);
-      toast.error(result['error']);
-      console.error('Error:', result['error']);
-     }
+        });
       
-     } catch (error) {
-       setError(error.message);
-       setLoading(false);
-     }
-   };
+    if(summaryResponse.status === 200) {
+     console.log("getting");
+      // If summary exists, fetch the summary data
+      const dataS = await summaryResponse.json();
+      
+      if (dataS.data === null) {
+         console.log("in next step")
+         const response = await fetch(API_BASE_URL + `/api/new/question/${questionType}/${questionSubType}/${projectId}`);
+         if (!response.ok) {
+           throw new Error('Failed to fetch answers');
+         }
+         const data = await response.json();
+         console.log(data);
+         setAnswers(data.data);
+         setLoading(false);
+
+      }else{
+       console.log(dataS);
+       console.log(dataS.data.summary);
+       setCombinedAnswer(dataS.data.summary);
+      }
+    }else{
+     const result = await summaryResponse.json();
+     setLoading(false);
+     toast.error(result['error']);
+     console.error('Error:', result['error']);
+    }
+     
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
 
    fetchAnswers();
  }, [questionType, questionSubType, projectId]);
@@ -296,7 +298,7 @@ function QuestionBusIntro() {
       
      }else{
        const result = await response.json();
-       console.error('Error:', result);
+       console.error('Error:', result['error']);
      }
  
      
@@ -633,7 +635,8 @@ const handleInsertFile = (file) => {
 
 
 
- const onClickNext = () => navigate(`/questionBusOp`);
+
+
 
  const handleMouseDown = (event) => {
    if (event.target.tagName === 'IMG') {
@@ -663,12 +666,9 @@ const handleInsertFile = (file) => {
      setResizingImage(null);
    }
  };
+ 
 
- const handleClick = (id) => {
-  // Handle click event and set the selected answer
-  navigate('/questionEdit/'+id);
-};
-useEffect(() => {
+ useEffect(() => {
   const createAnswered = async () => {
    console.log("here");
     setLoading(true);
@@ -769,39 +769,46 @@ useEffect(() => {
  function handleClickM(questionSubType) {
  
   switch (questionSubType) {
-    case 'Introduction':
-      navigate('/questionBusIntro');
+    case 'MarketingObjectives':
+      navigate('/questionDmaMoSum');
       break;
-    case 'OpportunityAnalysis':
-      navigate('/questionBapOpSum');
+    case 'MarketingMix(4Ps)':
+      navigate('/questionDmaMmSum');
       break;
+    case 'MarketingChannels':
+      navigate('/questionDmaMcSum');
+      break;
+    case 'MarketingTacticsAndCampaigns':
+        navigate('/questionDmaMtSum');
+        break;
     case 'MarketAnalysis':
-      navigate('/questionBapMaSum');
-      break;
-    case 'SolutionDescription':
-        navigate('/questionBapSoSum');
+        navigate('/questionDmaMaSum');
         break;
-    case 'CostAnalysis':
-        navigate('/questionBapCoSum');
-        break;
-    case 'RiskAndMitigationStrategies':
-        navigate('/questionBapRiSum');
+    case 'BudgetAllocation':
+        navigate('/questionDmaBaSum');
         break;
     case 'ImplementationPlan':
-        navigate('/questionBapImSum');
+        navigate('/questionDmaIpSum');
         break;
-    case 'InternalGovernanaceAndApprovalProcess':
-        navigate('/questionBapInSum');
+    case 'RiskManagement':
+        navigate('/questionDmaRmSum');
         break;
-    case 'ConclusionAndRecommendation':
-          navigate('/questionBapConSum');
+    case 'ReviewAndOptimisation':
+          navigate('/questionDmaRoSum');
+          break;
+    case 'MeasurementAndAnalytics':
+          navigate('/questionDmaMnSum');
           break;
     default:
       console.warn('Unknown questionSubType:', questionSubType);
   }
 }
 
- 
+const handleClick = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionEdit/'+id);
+};
+
       return (
 
        
@@ -809,7 +816,7 @@ useEffect(() => {
       
 
     <div className='container2'>
-         <SideMenu2 />    
+         <SideMenu2P />    
          <div className="main-content">
         
          <Header />
@@ -824,9 +831,8 @@ useEffect(() => {
          ))}
        
         </div>
-
          <div className='text-center'>
-                    <p className='textHp'>Introduction</p>
+                    <p className='textHp'>{questionName}</p>
                     <p className='textH'>Make sure you answer all questions</p>
                 </div>
             
@@ -995,7 +1001,7 @@ useEffect(() => {
                     onInsertFile={handleInsertFile}
                   />
                 }
-             <button type="button" className='btn btn-primary curveNext' onClick={onClickNext} style={{marginTop:20}}> Next</button>
+                 <button type="button" className='btn btn-primary curveNext' onClick={onClickNext} style={{marginTop:20}}> Next</button>
             </div>
 
                 
@@ -1012,7 +1018,8 @@ useEffect(() => {
                 <p style={{marginBottom:7}}>{answered.questionId.question}</p>
             </div>
            ))}
-           
+            
+            
             {/* Add more content as needed */}
         </div>
     </div>

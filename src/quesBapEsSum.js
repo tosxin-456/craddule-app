@@ -1,7 +1,7 @@
 import React, { useState,useEffect,useRef } from 'react';
 import bci from './images/bc.png';
 import Header from './component/header';
-import SideMenu2 from './component/sideMenu2';
+import SideMenu2P from './component/sideMenu2P';
 import { useNavigate, Link } from 'react-router-dom';
 import API_BASE_URL from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
@@ -16,7 +16,6 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
-
 
 function QuestionBusIntro() {
 
@@ -39,10 +38,10 @@ function QuestionBusIntro() {
  const access_token = localStorage.getItem('access_token');
    const decodedToken = jwtDecode(access_token);
    const userId = decodedToken.userId;
-
- const questionType ="BusinessCaseBuilder";
- const questionSubType ="Introduction";
- const questionName ="Introduction";
+   
+ const questionType ="BusinessAnalysisPack";
+ const questionSubType ="ExecutiveSummary";
+ const questionName ="Executive Summary";
  const token = localStorage.getItem('access_token');
  const [value, setValue] = useState('');
  const [misspelledWords, setMisspelledWords] = useState([]);
@@ -55,6 +54,8 @@ function QuestionBusIntro() {
     const handleToggle = () => {
       setShowScrollableDiv(!showScrollableDiv);
     };
+
+    const onClickNext = () => navigate(`/questionBapCs`);
 
  const [formData, setFormData] = useState({
    summary: '',
@@ -82,48 +83,48 @@ function QuestionBusIntro() {
  }, []);
 
  useEffect(() => {
-   const fetchAnswers = async () => {
-     try {
-       const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${questionType}/${questionSubType}`, {
-           headers: {
-             'Content-Type': 'application/json', 
-             'Authorization': `Bearer ${token}` // Include the token in the request headers
-           }
-         });
-       
-     if(summaryResponse.status === 200) {
-      console.log("getting");
-       // If summary exists, fetch the summary data
-       const dataS = await summaryResponse.json();
-       
-       if (dataS.data === null) {
-          console.log("in next step")
-          const response = await fetch(API_BASE_URL + `/api/new/question/BusinessCaseBuilder/Introduction/${projectId}`);
-          if (!response.ok) {
-            throw new Error('Failed to fetch answers');
+  const fetchAnswers = async () => {
+    try {
+      const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${projectId}/${questionType}/${questionSubType}`, {
+          headers: {
+            'Content-Type': 'application/json', 
+            'Authorization': `Bearer ${token}` // Include the token in the request headers
           }
-          const data = await response.json();
-          console.log(data);
-          setAnswers(data.data);
-          setLoading(false);
-
-       }else{
-        console.log(dataS);
-        console.log(dataS.data.summary);
-        setCombinedAnswer(dataS.data.summary);
-       }
-     }else{
-      const result = await summaryResponse.json();
-      setLoading(false);
-      toast.error(result['error']);
-      console.error('Error:', result['error']);
-     }
+        });
       
-     } catch (error) {
-       setError(error.message);
-       setLoading(false);
-     }
-   };
+    if(summaryResponse.status === 200) {
+     console.log("getting");
+      // If summary exists, fetch the summary data
+      const dataS = await summaryResponse.json();
+      
+      if (dataS.data === null) {
+         console.log("in next step")
+         const response = await fetch(API_BASE_URL + `/api/new/question/${questionType}/${questionSubType}/${projectId}`);
+         if (!response.ok) {
+           throw new Error('Failed to fetch answers');
+         }
+         const data = await response.json();
+         console.log(data);
+         setAnswers(data.data);
+         setLoading(false);
+
+      }else{
+       console.log(dataS);
+       console.log(dataS.data.summary);
+       setCombinedAnswer(dataS.data.summary);
+      }
+    }else{
+     const result = await summaryResponse.json();
+     setLoading(false);
+     toast.error(result['error']);
+     console.error('Error:', result['error']);
+    }
+     
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
 
    fetchAnswers();
  }, [questionType, questionSubType, projectId]);
@@ -296,7 +297,7 @@ function QuestionBusIntro() {
       
      }else{
        const result = await response.json();
-       console.error('Error:', result);
+       console.error('Error:', result['error']);
      }
  
      
@@ -633,7 +634,8 @@ const handleInsertFile = (file) => {
 
 
 
- const onClickNext = () => navigate(`/questionBusOp`);
+
+
 
  const handleMouseDown = (event) => {
    if (event.target.tagName === 'IMG') {
@@ -664,11 +666,7 @@ const handleInsertFile = (file) => {
    }
  };
 
- const handleClick = (id) => {
-  // Handle click event and set the selected answer
-  navigate('/questionEdit/'+id);
-};
-useEffect(() => {
+ useEffect(() => {
   const createAnswered = async () => {
    console.log("here");
     setLoading(true);
@@ -766,36 +764,20 @@ useEffect(() => {
   fetchAnsweredCat();
 }, [projectId]);
 
- function handleClickM(questionSubType) {
+ const handleClick = (id) => {
+  // Handle click event and set the selected answer
+  navigate('/questionEdit/'+id);
+};
+
+function handleClickM(questionSubType) {
  
   switch (questionSubType) {
-    case 'Introduction':
-      navigate('/questionBusIntro');
+    case 'CustomerSegments':
+      navigate('/questionBapCsSum');
       break;
-    case 'OpportunityAnalysis':
-      navigate('/questionBapOpSum');
+    case 'ExecutiveSummary':
+      navigate('/questionBapEsSum');
       break;
-    case 'MarketAnalysis':
-      navigate('/questionBapMaSum');
-      break;
-    case 'SolutionDescription':
-        navigate('/questionBapSoSum');
-        break;
-    case 'CostAnalysis':
-        navigate('/questionBapCoSum');
-        break;
-    case 'RiskAndMitigationStrategies':
-        navigate('/questionBapRiSum');
-        break;
-    case 'ImplementationPlan':
-        navigate('/questionBapImSum');
-        break;
-    case 'InternalGovernanaceAndApprovalProcess':
-        navigate('/questionBapInSum');
-        break;
-    case 'ConclusionAndRecommendation':
-          navigate('/questionBapConSum');
-          break;
     default:
       console.warn('Unknown questionSubType:', questionSubType);
   }
@@ -809,24 +791,23 @@ useEffect(() => {
       
 
     <div className='container2'>
-         <SideMenu2 />    
+         <SideMenu2P />    
          <div className="main-content">
         
          <Header />
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
-
          <div className='catHod'>
          
-         {cat.map((cat, index) => (
-        <span className='selQ' onClick={() => handleClickM(cat.questionSubType)}>
-          {cat.questionName}
-        </span>
-         ))}
-       
-        </div>
+           {cat.map((cat, index) => (
+          <span className='selQ' onClick={() => handleClickM(cat.questionSubType)}>
+            {cat.questionName}
+          </span>
+           ))}
+         
+          </div>
 
          <div className='text-center'>
-                    <p className='textHp'>Introduction</p>
+                    <p className='textHp'>Executive Summary</p>
                     <p className='textH'>Make sure you answer all questions</p>
                 </div>
             
@@ -995,14 +976,14 @@ useEffect(() => {
                     onInsertFile={handleInsertFile}
                   />
                 }
-             <button type="button" className='btn btn-primary curveNext' onClick={onClickNext} style={{marginTop:20}}> Next</button>
+            <button type="button" className='btn btn-primary curveNext' onClick={onClickNext} style={{marginTop:20}}> Next</button>
             </div>
 
                 
             </form>
             </div>
 
-            
+          
          </div>
 
          <div className={`scrollable-div ${showScrollableDiv ? 'show' : ''}`}>
@@ -1012,7 +993,8 @@ useEffect(() => {
                 <p style={{marginBottom:7}}>{answered.questionId.question}</p>
             </div>
            ))}
-           
+            
+            
             {/* Add more content as needed */}
         </div>
     </div>
