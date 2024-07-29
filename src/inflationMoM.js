@@ -10,14 +10,15 @@ import { Toaster, toast } from 'sonner'
 
 function InflationMonthOnMonth ()  {
     
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [visibleYears, setVisibleYears] = useState(1);
+    const [monthInputs, setMonthInputs] = useState({});
+    const [graphName, setGraphName] = useState('');
 
      const onClickHandler = () => navigate(`/inflationRateGraph`)
      const onClickHandler1 = () => navigate(`/financialPintegrate`)
 
-    const [visibleYears, setVisibleYears] = useState(1);
-    const [monthInputs, setMonthInputs] = useState({});
-    const [graphName, setGraphName] = useState('');
+    
 
     const token = localStorage.getItem('access_token'); 
     const decodedToken = jwtDecode(token);
