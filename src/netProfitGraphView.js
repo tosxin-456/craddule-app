@@ -11,7 +11,7 @@ import { useNavigate,Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 
-function InflationRateGraph({projectId, graphType }) {
+function OperatingIncomeGraphView({projectId, graphType }) {
 
   
     
@@ -43,7 +43,7 @@ useEffect(() => {
 
     useEffect(() => {
         const projectId = localStorage.getItem('nProject');
-    const graphType = "Inflation";
+    const graphType = "NetProfit";
         const fetchData = async () => {
             try {
                 // Fetch graph data based on projectId and graphType
@@ -77,44 +77,49 @@ useEffect(() => {
   
 
     const transformGraphData = (graphData) => {
-        if (!graphData) return null;
+      if (!graphData) return null;
 
-        const series = graphData.years.map((yearData) => ({
-            name: `Year ${yearData.year}`,
-            data: yearData.months.map((monthData) => parseFloat(monthData.value))
-        }));
+      const series = graphData.years.map((yearData) => ({
+          data: yearData.months.map((monthData) => parseFloat(monthData.value))
+      }));
 
-        const options = {
-            chart: {
-                height: 150,
-                type: 'line',
-                zoom: {
-                    enabled: true
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'straight'
-            },
-            title: {
-                text: '',
-                align: 'left'
-            },
-            grid: {
-                row: {
-                    colors: ['#f3f3f3', 'transparent'],
-                    opacity: 0.5
-                },
-            },
-            xaxis: {
-                categories: graphData.years[0].months.map((monthData) => monthData.month),
-            }
-        };
+      const categories = graphData.years[0].months.map((monthData) => monthData.month);
 
-        return { series, options };
-    };
+      const options = {
+          chart: {
+              height: 350,
+              type: 'bar',
+              stacked: true,
+              events: {
+                  click: function(chart, w, e) {
+                      // console.log(chart, w, e)
+                  }
+              }
+          },
+          plotOptions: {
+              bar: {
+                  columnWidth: '90%',
+                  distributed: true,
+              }
+          },
+          dataLabels: {
+              enabled: false
+          },
+          legend: {
+              show: false
+          },
+          xaxis: {
+              categories: categories.map(month => [month]), // Ensure each month is wrapped in an array
+              labels: {
+                  style: {
+                      fontSize: '12px'
+                  }
+              }
+          }
+      };
+
+      return { series, options };
+  };
 
     const chartData = transformGraphData(selectedGraphData);
 
@@ -138,12 +143,12 @@ useEffect(() => {
                   <div id="chart">
                   {selectedGraphData && (
                 <ReactApexChart
-                    options={chartData.options}
-                    series={chartData.series}
-                    type="line"
-                    height={deviceType === 'mobile' ? 250 : deviceType === 'tablet' ? 300 : 350}
-                    width={deviceType !== 'desktop' ? '100%' : 700}
-                />
+                options={chartData.options}
+                series={chartData.series}
+                type="bar"
+                height={deviceType === 'mobile' ? 250 : deviceType === 'tablet' ? 300 : 350}
+                width={deviceType !== 'desktop' ? '100%' : 700}
+            />
             )}
                   </div>
                   <div id="html-dist"></div>
@@ -161,4 +166,4 @@ useEffect(() => {
 
 
 
-  export default InflationRateGraph;
+  export default OperatingIncomeGraphView;

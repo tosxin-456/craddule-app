@@ -7,6 +7,7 @@ import axios from 'axios';
 import API_BASE_URL from './config/apiConfig';
 import { jwtDecode } from "jwt-decode";
 import { Toaster, toast } from 'sonner'
+import SideMenu2P from './component/sideMenu2P';
 
 function CreateKpi ()  {
     
@@ -81,7 +82,7 @@ function CreateKpi ()  {
             
                 const response = await axios.post(API_BASE_URL + '/api/kpi', data)
                 console.log('Graph saved successfully:', response.data);
-                //navigate('/netGraph');
+                navigate('/kpi');
              
         } catch (error) {
             if(error.response){
@@ -186,13 +187,12 @@ function CreateKpi ()  {
         sendDataToAPI(dataToSend);
     };
     return (
-        <div className='container-fluid'>
-            <Header />
-        
-            <div className='row'>
-            <Menu /> 
-                <div className='col-md-9'>
-                    <div className='centerC'>
+        <div className='container2'>
+        <SideMenu2P />
+        <div className="main-content">
+        <Header />
+        <div className="main-content2">
+        <div className='bacWHI'>
                      <p className='text-center'>Kpi</p>   
                      <p className='gname'>Kpi Name</p>   
                     <input
@@ -209,26 +209,40 @@ function CreateKpi ()  {
                 >
                     <option value="">--Select Kpi Type--</option>
                     <option value="Histogram">Histogram</option>
-                    <option value="Pola">Pola</option>
-                    <option value="Linear">Linear</option>
+                    <option value="Area">Spline Area</option>
+                    <option value="Donut">Donut</option>
+                    <option value="Pie">Pie</option>
+                    <option value="Radar">Radar</option>
+                    <option value="Polar">Polar</option>
+                    <option value="Treemap">Treemap</option>
                 </select>
 
                     {inputPairs.map((pair, index) => (
-          <div className='columnChart' key={index}>
-            <input
-              className='monthOn1'
-              onChange={(e) => handleInputChange(index, 'x', e.target.value)}
-              type="text"
-              placeholder="Enter X value"
-              value={pair.x}
-            />
-            <input
-              className='monthOn1'
-              onChange={(e) => handleInputChange(index, 'y', e.target.value)}
-              type="number"
-              placeholder="Enter Y value"
-              value={pair.y}
-            />
+                       
+            <div className='columnChart' key={index} >
+                <div className='row' style={{paddingBottom:10}}>
+                 <div className='col-md-6'>   
+                    <input
+                    className='monthOn1'
+                    onChange={(e) => handleInputChange(index, 'x', e.target.value)}
+                    type="text"
+                    placeholder="Enter X value"
+                    value={pair.x}
+                    style={{width:" -webkit-fill-available"}}
+                    />
+                </div>
+
+                <div className='col-md-6'>   
+                <input
+                className='monthOn1'
+                onChange={(e) => handleInputChange(index, 'y', e.target.value)}
+                type="number"
+                placeholder="Enter Y value"
+                value={pair.y}
+                style={{width: "-webkit-fill-available"}}
+                />
+                </div>
+            </div>
           </div>
         ))}
                 <span className='addy' onClick={addNewPair}>+</span>

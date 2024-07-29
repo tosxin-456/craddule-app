@@ -17,7 +17,7 @@ import graph3 from './images/graph3.png'
 import graph4 from './images/graph4.png'
 import graph5 from './images/graph5.png'
 
-function OperatingIncome() {
+function InflationRate() {
 
     const navigate = useNavigate();
     const access_token = localStorage.getItem('access_token');
@@ -30,15 +30,15 @@ function OperatingIncome() {
     const [graphData, setGraphData] = useState([]);
     const [selectedGraphData, setSelectedGraphData] = useState(null);
     const [selectedGraphId, setSelectedGraphId] = useState('');
-    const graphType = "OperatingIncome";
+    const graphType = "Inflation";
 
     const handleViewClick = (id) => {
-        navigate(`/operatingIncomeGraphView/${id}`); // Navigate to the view page with the ID as a parameter
+        navigate(`/inflationGraphView/${id}`); // Navigate to the view page with the ID as a parameter
       };
 
 
       const handleEditClick = (id) => {
-        navigate(`/operatingIncomeEdit/${id}`); // Navigate to the view page with the ID as a parameter
+        navigate(`/inflationEdit/${id}`); // Navigate to the view page with the ID as a parameter
       };
 
       const handleDeleteClick = (id) => {
@@ -122,7 +122,7 @@ function OperatingIncome() {
       
         return `${time}`;
       };
-      const onClickHandler = () => navigate(`/operatingIncomeCreate`);
+      const onClickHandler = () => navigate(`/inflationCreate`);
       return (
 
        
@@ -137,7 +137,7 @@ function OperatingIncome() {
          <div className='main-content2' style={{paddingLeft:40, paddingRight:40}}>
 
          <div className='text-center'>
-                    <p className='textHp'>Operating Income</p>
+                    <p className='textHp'>Inflation</p>
                     <p className='textH'>You will need a Profesional</p>
                 </div>
             
@@ -145,7 +145,7 @@ function OperatingIncome() {
        
                 <div className="row">
             <div className="col-md-6">
-                <p style={{fontWeight:700}}>Operating Income</p>
+                <p style={{fontWeight:700}}>Inflation</p>
             </div>
 
             <div className="col-md-6">
@@ -196,4 +196,4 @@ function OperatingIncome() {
 
 
 
-  export default OperatingIncome;
+  export default InflationRate;
