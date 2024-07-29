@@ -29,7 +29,7 @@ const SideMenu2 = () => {
   const onClickCH = () => navigate(`/start`);
 
   const onClickCHPd = () => navigate(`/pdf/Ideation/BusinessCaseBuilder`);
-  const onClickCHPdA = () => navigate(`/pdfEnd`);
+  const onClickCHPdA = () => navigate(`/pdfEnd/Ideation`);
 
   const [showPopup, setShowPopup] = useState(true);
 
@@ -42,6 +42,8 @@ const SideMenu2 = () => {
   const toggleDropdown = () => {
       setIsDropdownOpen(!isDropdownOpen);
   };
+
+
 
 
   const projectId = localStorage.getItem('nProject');

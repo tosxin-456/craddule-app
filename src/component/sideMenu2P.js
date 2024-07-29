@@ -66,7 +66,7 @@ const handleSubTypeClickD = (subType) => {
   window.location.href =`/questionBusMain/ProductDefinition/DetailedMarketingStrategies/${subType}`;
 };
 
-
+const onClickCHPdA = () => navigate(`/pdfEnd/ProductDefinition`);
 
   const onClickCG = () => navigate(`/go/ProductDefinition`);
 
@@ -99,6 +99,7 @@ const toggleDropdownV = () => {
 const toggleDropdownS = () => {
   setIsDropdownOpenS(!isDropdownOpenS);
 };
+
 
 const toggleDropdownD = () => {
   setIsDropdownOpenD(!isDropdownOpenD);
@@ -345,7 +346,7 @@ useEffect(() => {
           {!isCollapsed && <span>Timeline Builder</span>}
         </li> */}
         
-        <li>
+        <li onClick={onClickCHPdA}>
             <CiServer />
           {!isCollapsed && <span>Summary Pdf</span>}
         </li>

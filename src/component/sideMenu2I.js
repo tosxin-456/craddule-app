@@ -25,6 +25,7 @@ const SideMenu2 = () => {
 
   const onClickCH = () => navigate(`/start`);
   const onClickCG = () => navigate(`/go/InitialDesign`);
+  const onClickCHPdA = () => navigate(`/pdfEnd/InitialDesign`);
 
 
 
@@ -69,7 +70,7 @@ const SideMenu2 = () => {
           {!isCollapsed && <span>Stakeholders Engagement</span>}
         </li>
 
-        <li>
+        <li onClick={onClickCHPdA}>
             <CiCalculator1 />
           
           {!isCollapsed && <span>Summary Pdf</span>}
