@@ -16,7 +16,7 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
-
+import SideMenu2P from './component/sideMenu2P';
 
 function ScrapView ({ htmlContent })  {
     
@@ -47,17 +47,92 @@ function ScrapView ({ htmlContent })  {
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionBoxPosition, setSuggestionBoxPosition] = useState({ top: 0, left: 0 });
   const [selectedWord, setSelectedWord] = useState(null); 
-  const [scraps, setScraps] = useState([]);
+  const [team, setteam] = useState([]);
+  const [linkD, setLink] = useState('');
 
   const handleDelete = (id) => {
   
     console.log(id);
   };
 
+  const [formData, setFormData] = useState({
+    email: '',
+    projectId: projectId,
+    link: ''
+  });
+
+  const createTeam = async (data) => {
+    setLoading(true);
+  
+    try {
+      const timestamp = new Date().getTime();
+      const randomString = Math.random().toString(36).substring(2, 8);
+      const uniqueCode = timestamp.toString() + randomString;
+      const link = "/login/start/" + uniqueCode;
+  
+      console.log(link);
+  
+      const updatedFormData = {
+        ...data,
+        link: link,
+        uniqueCode: uniqueCode,
+        projectId: projectId,
+        email: data.email
+      };
+  
+      const response = await fetch(API_BASE_URL + '/api/team', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${access_token}`,
+        },
+        body: JSON.stringify(updatedFormData),
+      });
+  
+      if (response.status === 200) {
+        setLoading(false);
+        console.log(response);
+        setLink('http://159.223.7.210:3000' + link);
+        //setLink(API_BASE_WEB_URL + link);
+      } else {
+        const result = await response.json();
+        setLoading(false);
+        console.error('Error:', result['error']);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error('An error occurred:', error);
+    }
+  };
+  
+const handleSubmit = (e) => {
+e.preventDefault();
+
+createTeam(formData);
+
+
+};
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(linkD).then(() => {
+      alert('Link copied to clipboard!');
+    }).catch((error) => {
+      console.error('Failed to copy the link: ', error);
+    });
+  };
+  
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+  
+
   useEffect(() => {
-    const fetchScrap = async () => {
+    const fetchTeam = async () => {
       try {
-        const scrapResponse = await fetch(API_BASE_URL + `/api/scrap/project/${projectId}`, {
+        const scrapResponse = await fetch(API_BASE_URL + `/api/team/${projectId}`, {
             headers: {
               'Content-Type': 'application/json', 
               'Authorization': `Bearer ${access_token}` // Include the token in the request headers
@@ -69,7 +144,7 @@ function ScrapView ({ htmlContent })  {
         const dataS = await scrapResponse.json();
         console.log(dataS);
         console.log("scrap "+dataS.data.scrap);
-        setScraps(dataS.data);
+        setteam(dataS.data);
        
      } else {
         
@@ -83,7 +158,7 @@ function ScrapView ({ htmlContent })  {
       }
     };
 
-    fetchScrap();
+    fetchTeam();
   }, [projectId]);
 
 
@@ -128,18 +203,18 @@ function ScrapView ({ htmlContent })  {
 
 
   const handleDeleteClick = (id) => {
-    deleteScrap(id); // Navigate to the view page with the ID as a parameter
+    deleteTeam(id); // Navigate to the view page with the ID as a parameter
   };
 
-  const deleteScrap = async (id) => {
+  const deleteTeam = async (id) => {
     try {
-        const response = await fetch(API_BASE_URL + `/api/scrap/${id}`, { method: 'DELETE' });
+        const response = await fetch(API_BASE_URL + `/api/team/${id}`, { method: 'DELETE' });
         if (!response.ok) {
             throw new Error('Failed to delete graph');
         }
 
         console.log("deleted");
-        setScraps(scraps.filter(scrap => scrap._id !== id));
+        setteam(team.filter(scrap => scrap._id !== id));
         
     } catch (error) {
         console.error('Error deleting all graphs:', error);
@@ -149,12 +224,12 @@ function ScrapView ({ htmlContent })  {
 
     return (
         <>
-<Header />
-<div className='container'>
 
-         <div className="upload-container">
+<div className='container2'>
+         <SideMenu2P />    
+         <div className="main-content">
         
-         
+         <Header />
         
          <div className='main-content2'>
             
@@ -162,45 +237,55 @@ function ScrapView ({ htmlContent })  {
 
         <div className="row">
             <div className="col-md-6">
-                <p style={{fontWeight:700}}>ScrapBook</p>
+                <p style={{fontWeight:700}}>Add Team Member</p>
             </div>
 
             <div className="col-md-6">
-                <button className="btn mainBtn" onClick={onClickHandler27}>Create</button>
+               
             </div>
                 </div>
 
                    
 
-                <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            {scraps.map((scrap, index) => (
-                <tr key={scrap._id}>
-                    <td>{index + 1}</td>
-                    <td>{scrap.scrapName}</td>
-                    <td>{formatDate(scrap.timeSent)}</td>
-                    <td>{formatTime(scrap.timeSent)}</td>
-                    <td>
-                        <button className="btn mainBtnView" onClick={() => handleViewClick(scrap._id)}>View</button>
-                        <button className="btn mainBtnDelete" onClick={() => handleDeleteClick(scrap._id)}>Delete</button>
-                        
-                    </td>
-                </tr>
-                ))}
-            </tbody>
+                {linkD && (
+                <p className='copyPp'>{linkD}
+                <button className='cop' onClick={copyToClipboard}>
+                   Copy
+                </button>
+                </p>
+                )}
+              <form onSubmit={handleSubmit}>
+              <div className='emailInvite1'>
+                <div className='enterEmail'>
+                <p className='email'>Email</p>
+                <input 
+                  type="text" 
+                  className='enterE' 
+                  placeholder="Email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                ></input>
+                {/*<textarea className='enterE'></textarea>*/}
+                </div>
 
-           
-            </table>
+
                
+               
+
+                </div>
+
+                
+
+                {/*<button className="btn btn-primary dropdown-toggle buttonSelect" type="button" data-toggle="dropdown">Select Project</button>*/}
+                <div className='shareButtonDiv'>
+           <button className="btn btn-primary curveInviteA" type='submit'>
+           { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+                { !loading && <span>Add</span>}
+            </button>
+            
+           </div>
+           </form>
         
             <div class = "break"></div>
            

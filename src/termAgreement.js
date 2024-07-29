@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import bci from './images/bc.png'; 
-import bob from './images/bob.png'; 
 import Header from './component/header';
+import bci from './images/bc.png'; 
 import SettingMenu from './component/settingMenu';
 import { useNavigate } from 'react-router-dom';
-import DeleteModal from './component/deleteModal';
 
 
 
@@ -17,29 +15,16 @@ function TermAgreement ()  {
 
     const onClickHandler = () => navigate(`/generalSetting`)
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    
-  
-    const handleTogglePassword = () => {
-      setShowPassword(!showPassword);
-    };
     return (
         <>
- <div className='container-fluid'>
-    <Header />
-    <div className='row'>
-    <SettingMenu /> 
-        
-        <div className='col-md-9'>
-        <h1 className='centerHh'>Settings</h1>
-        <p className='centerHh'>View and manage settings</p>
-        <img src={bci} className='bcA' type='button' onClick={onClickHandler}></img>
-        {/*<div className='gene'>General Setting</div>*/}
-        <div className='centerS'>
-        <p className='centerHhPr'>Terms and Agreement</p>
-        <div>
+<div className=''>
+        <Header />
+        <div className='container'>
+
+        <div className='main-content2'>
+        <h1 className='centerHh' style={{paddingBottom:40}}>Terms & Conditions</h1>
+   
+       <div className='bacWHI'>
           <p className='paragraph'>
           At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
            quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt
@@ -67,7 +52,8 @@ function TermAgreement ()  {
   </div>
   </div>
   </div>
-  </div>
+
+
   </>
     );
 }

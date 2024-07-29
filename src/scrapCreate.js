@@ -16,7 +16,7 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
-
+import SideMenu2 from './component/sideMenu2';
 import { useParams } from 'react-router-dom';
 
 
@@ -443,14 +443,13 @@ const handleInsertFile = (file) => {
     return (
         <>
 
-<div className='container-fluid'>
-    <Header />
-    <div className='row'>
-    <Menu /> 
-        
-        <div className='col-md-9'>
-            <img src={bci} className='bcA'></img>
-        <div className='lenght'>
+<Header />
+<div className='container'>
+
+         <div className="upload-container" style={{textAlign:'justify'}}>
+         <div className='main-content2'>
+            
+            <div className='bacWHI'>
                     <div className='text-center'>
                 <p className='centerH' onClick={accessToolbar}>{scrapName}</p>
                 
@@ -604,7 +603,6 @@ const handleInsertFile = (file) => {
            
         </div> 
 
-        <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
         
   </div>
   </div>

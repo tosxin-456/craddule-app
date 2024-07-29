@@ -16,8 +16,7 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
-
-
+import SideMenu2 from './component/sideMenu2';
 
 function ScrapCreateName ({ htmlContent })  {
     
@@ -120,14 +119,14 @@ function ScrapCreateName ({ htmlContent })  {
     return (
         <>
 
-<div className='container-fluid'>
-    <Header />
-    <div className='row'>
-    <Menu /> 
+<Header />
+<div className='container'>
+
+         <div className="upload-container">
         
-        <div className='col-md-9'>
-            <img src={bci} className='bcA'></img>
-        <div className='lenght'>
+         <div className='main-content2'>
+            
+            <div className='bacWHI'>
                     <div className='text-center'>
                 <p className='centerHp'>Scrapbook Name</p>
                 </div>
@@ -137,23 +136,27 @@ function ScrapCreateName ({ htmlContent })  {
                 { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
                 { !loading && <span>Save</span>}
             </button>
-            {/* <button className="btn btn-primary buttonS">Edit</button> */}
-            {/*<p className= "buttonE">Save</p>
-            <p className= "buttonS">Edit</p>*/}
+          
             <div class = "break"></div>
            
-            <div className='container-textBs'>
+           <div className='row'>
+              <div className='col-md-12'>
+                <div className='container-textBs'>
+                  <p  style={{width: '100%', marginTop:30, fontSize: 15, fontWeight:700}}>Fill in ScrapBook Name</p>
+                  <input
+                          type="text"
+                          id="scrapName"
+                          value={formData.cpassword}
+                          onChange={handleChange}
+                          className="custom-input"
+                          style={{width: '100%'}}
+                        />
 
-            <input
-                    type="text"
-                    id="scrapName"
-                    value={formData.cpassword}
-                    onChange={handleChange}
-                    className="custom-input"
-                  />
 
-
-            </div>
+                </div>
+              </div>
+           </div>
+           
 
                 
             </form>
@@ -162,7 +165,7 @@ function ScrapCreateName ({ htmlContent })  {
            
         </div> 
 
-        <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button>
+       
         
   </div>
   </div>

@@ -16,7 +16,7 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
-
+import SideMenu2P from './component/sideMenu2P';
 
 function ScrapView ({ htmlContent })  {
     
@@ -47,7 +47,7 @@ function ScrapView ({ htmlContent })  {
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionBoxPosition, setSuggestionBoxPosition] = useState({ top: 0, left: 0 });
   const [selectedWord, setSelectedWord] = useState(null); 
-  const [scraps, setScraps] = useState([]);
+  const [team, setteam] = useState([]);
 
   const handleDelete = (id) => {
   
@@ -55,9 +55,9 @@ function ScrapView ({ htmlContent })  {
   };
 
   useEffect(() => {
-    const fetchScrap = async () => {
+    const fetchTeam = async () => {
       try {
-        const scrapResponse = await fetch(API_BASE_URL + `/api/scrap/project/${projectId}`, {
+        const scrapResponse = await fetch(API_BASE_URL + `/api/team/${projectId}`, {
             headers: {
               'Content-Type': 'application/json', 
               'Authorization': `Bearer ${access_token}` // Include the token in the request headers
@@ -69,7 +69,7 @@ function ScrapView ({ htmlContent })  {
         const dataS = await scrapResponse.json();
         console.log(dataS);
         console.log("scrap "+dataS.data.scrap);
-        setScraps(dataS.data);
+        setteam(dataS.data);
        
      } else {
         
@@ -83,7 +83,7 @@ function ScrapView ({ htmlContent })  {
       }
     };
 
-    fetchScrap();
+    fetchTeam();
   }, [projectId]);
 
 
@@ -119,7 +119,7 @@ function ScrapView ({ htmlContent })  {
     return `${time}`;
   };
 
-  const onClickHandler27 = () => navigate(`/createScrapName`);
+  const onClickHandler27 = () => navigate(`/teamAdd`);
 
   const handleViewClick = (id) => {
     navigate(`/createScrap/${id}`); // Navigate to the view page with the ID as a parameter
@@ -128,33 +128,40 @@ function ScrapView ({ htmlContent })  {
 
 
   const handleDeleteClick = (id) => {
-    deleteScrap(id); // Navigate to the view page with the ID as a parameter
+    deleteTeam(id); // Navigate to the view page with the ID as a parameter
   };
 
-  const deleteScrap = async (id) => {
+  const deleteTeam = async (id) => {
     try {
-        const response = await fetch(API_BASE_URL + `/api/scrap/${id}`, { method: 'DELETE' });
+      const response = await fetch(API_BASE_URL + `/api/team/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${access_token}`,
+            'Content-Type': 'application/json'
+        }
+    });
+
         if (!response.ok) {
-            throw new Error('Failed to delete graph');
+            throw new Error('Failed to delete');
         }
 
         console.log("deleted");
-        setScraps(scraps.filter(scrap => scrap._id !== id));
+        setteam(team.filter(scrap => scrap._id !== id));
         
     } catch (error) {
-        console.error('Error deleting all graphs:', error);
+        console.error('Error deleting:', error);
         // Handle error, e.g., show an error message
     }
 };
 
     return (
         <>
-<Header />
-<div className='container'>
 
-         <div className="upload-container">
+<div className='container2'>
+         <SideMenu2P />    
+         <div className="main-content">
         
-         
+         <Header />
         
          <div className='main-content2'>
             
@@ -162,11 +169,11 @@ function ScrapView ({ htmlContent })  {
 
         <div className="row">
             <div className="col-md-6">
-                <p style={{fontWeight:700}}>ScrapBook</p>
+                <p style={{fontWeight:700}}>The Team</p>
             </div>
 
             <div className="col-md-6">
-                <button className="btn mainBtn" onClick={onClickHandler27}>Create</button>
+                <button className="btn mainBtn" onClick={onClickHandler27}>Add Members</button>
             </div>
                 </div>
 
@@ -177,22 +184,24 @@ function ScrapView ({ htmlContent })  {
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Time</th>
+                    <th scope="col">Time Added</th>
+                    <th scope="col">Date Added</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-            {scraps.map((scrap, index) => (
+            {team.map((scrap, index) => (
                 <tr key={scrap._id}>
                     <td>{index + 1}</td>
-                    <td>{scrap.scrapName}</td>
+                    <td>{scrap.userId.firstName} {scrap.userId.lastName}</td>
                     <td>{formatDate(scrap.timeSent)}</td>
                     <td>{formatTime(scrap.timeSent)}</td>
                     <td>
-                        <button className="btn mainBtnView" onClick={() => handleViewClick(scrap._id)}>View</button>
-                        <button className="btn mainBtnDelete" onClick={() => handleDeleteClick(scrap._id)}>Delete</button>
-                        
+                    {scrap.teamRole !== 'owner' ? (
+                        <button className="btn mainBtnDelete" onClick={() => handleDeleteClick(scrap._id)}>Remove</button>
+                    ) : (
+                      <button className="btn mainBtnView">No Action</button>
+                    )}
                     </td>
                 </tr>
                 ))}
