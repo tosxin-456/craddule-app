@@ -9,6 +9,8 @@ import p3 from './p3.jpeg';
 import p4 from './p4.jpeg';
 import p5 from './p5.jpeg';
 import close from './closeB.png';
+import { jwtDecode } from "jwt-decode";
+import io from 'socket.io-client';
 
 
 
@@ -19,7 +21,14 @@ export default function ChatModal ({open, onClose}) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
     const dropdownRef = useRef(null);
-
+    const projectId = localStorage.getItem('nProject');
+    const [messages, setMessages] = useState([]);
+    const [messageInput, setMessageInput] = useState('');
+    const token = localStorage.getItem('access_token');
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.userId;
+    const socket = useRef(null);
+    const messagesEndRef = useRef(null);
   
     // Function to toggle dropdown visibility
     const toggleDropdown = () => {
@@ -49,6 +58,60 @@ export default function ChatModal ({open, onClose}) {
       setSelectedOption1(option);
       setIsDropdownOpen1(false);
     };
+
+    useEffect(() => {
+      // Establish socket connection
+      socket.current = io('https://api.cradduleapi.com.ng');
+
+      // Handle incoming messages
+      socket.current.on('message', ({ projectId, content, userId, firstName, lastName, createdAt }) => {
+          setMessages(prevMessages => [...prevMessages, { projectId, content, userId, firstName, lastName, createdAt }]);
+      });
+
+      // Request initial chat history
+      socket.current.emit('loadChat', projectId);
+
+      socket.current.on('initialChat', (initialMessages) => {
+          setMessages(initialMessages);
+          scrollToBottom();
+          console.log(initialMessages);
+      });
+
+      return () => {
+          socket.current.off('message');
+          socket.current.disconnect();
+      };
+  }, [projectId]);
+
+  useEffect(() => {
+    scrollToBottom();
+}, [messages]);
+
+const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+};
+  const handleSend = () => {
+      if (messageInput.trim() && userId.trim()) {
+          const message = {
+              projectId,
+              content: messageInput,
+              userId
+          };
+          socket.current.emit('message', message);
+          setMessageInput('');
+      }
+  };
+
+  const formatDate = (dateString) => {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', options);
+  };
+
+  const formatTime = (dateString) => {
+      const date = new Date(dateString);
+      return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  };
 
 
 // Close dropdown when clicking outside of it 1
@@ -97,20 +160,22 @@ useEffect(() => {
     </div>
     <div className='chatNew'>
 
-<div className='chatNewContain'>
-
+    <div className='chatNewContain'>
+    <div style={{height:"90px"}}>
 <div className='chatTextT1'>
-      <p className='chatText1'>Today 12th March, 2024</p>
+        <p className='chatText1'>Today {formatDate(new Date())}</p>
     </div>
 
+    {messages.map((message, index) => (    
+      <div key={index}>
+      {message.userId._id === userId ? (
     <div>
-      <div className='chatConNew'>
+      <div className='chatConNew' style={{justifyContent: "end"}}>
       <div className='chatConTnew'>
         <div className='textBoxNew1'>
-          <p className='theChat1New'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-         </p>
+          <p className='theChat1New'>{message.content}</p>
              <div className='chatTimeNew'>
-      <p className='chatTextNew'>11:26</p>
+      <p className='chatTextNew'>{formatTime(message.createdAt)}</p>
     </div>
           </div>
           </div>
@@ -118,23 +183,30 @@ useEffect(() => {
       </div>
       </div>
 
+) : (
+
 
       <div>
       <div className='chatConNew'>
         <img  src={p1} className='chatImg3'></img>
         <div className='chatConTnew1'>
           {/* <p className='theChat'>Angela Onoja</p> */}
-          <div className='textBoxNew2'><p className='theChat1New'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-       </p>
+          <div className='textBoxNew2'><p className='theChat1New'>{message.content}</p>
        <div className='chatTimeNew'>
-      <p className='chatTextNew'>11:27</p>
+      <p className='chatTextNew'>{formatTime(message.createdAt)}</p>
     </div>
        </div>
         </div>
       </div>
     </div>
+    )}
+    </div>
+  ))}
+  <div ref={messagesEndRef} />
+    </div>
 
     </div>
+
 
 
 
@@ -167,10 +239,16 @@ useEffect(() => {
                     <span className='iconS3' type='button'><CiFaceSmile/></span>
                     </td>
                     <td>
-                    <input placeholder='Write your message' className='chatInputNew'></input>
+                    <input 
+                      placeholder='Write your message' 
+                      className='chatInputNew'
+                      id="message-input"
+                      value={messageInput}
+                      onChange={e => setMessageInput(e.target.value)}
+                    ></input>
                     </td>
                     <td>
-                    <button className="theChatButton1">Send</button>
+                    <button className="theChatButton1" onClick={handleSend}>Send</button>
                     </td>
                 </tr>
 

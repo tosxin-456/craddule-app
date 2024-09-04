@@ -15,6 +15,9 @@ export default function ShareModal ({open, onClose, circles, phaseNames})  {
   const [link, setLink] = useState('');
   const navigate = useNavigate()
   const projectId = localStorage.getItem('nProject');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessageTimeout, setSuccessMessageTimeout] = useState(null);
+
   const [formData, setFormData] = useState({
     email: '',
     projectId: projectId,
@@ -33,46 +36,6 @@ export default function ShareModal ({open, onClose, circles, phaseNames})  {
     
     
 
-    
- const share = async () => {
-  setLoading(true);
-  try {
-      const phases = circles
-        .map((isFilled, index) => (isFilled ? phaseNames[index] : null))
-        .filter(phase => phase !== null);
-
-        console.log(userId);
-
-        const timestamp = new Date().getTime();
-        const randomString = Math.random().toString(36).substring(2, 8);
-        const uniqueCode = timestamp.toString() + randomString;
-        const link = "/share/start/"+uniqueCode;
-
-      const response = await fetch(API_BASE_URL + '/api/share', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({ projectId, phases,userId,link }),
-      });
-
-      if (response.status === 200) {
-        setLoading(false);
-        console.log(response);
-        setLink('http://159.223.7.210:3000' + link);
-        //setLink(API_BASE_WEB_URL+link);
-      } else {
-            const result = await response.json();
-            setLoading(false);
-            //toast.error(result['error']);
-              console.error('Error:', result['error']);
-      }
-  } catch (error) {
-    setLoading(false);
-    console.error('An error occurred:', error);
-  }
-};
 
 
 const copyToClipboard = () => {
@@ -91,6 +54,7 @@ const createReview = async (data) => {
     const randomString = Math.random().toString(36).substring(2, 8);
     const uniqueCode = timestamp.toString() + randomString;
     const link = "/share/start/" + uniqueCode;
+   
 
     console.log(link);
 
@@ -120,7 +84,11 @@ const createReview = async (data) => {
     if (response.status === 200) {
       setLoading(false);
       console.log(response);
-      setLink(API_BASE_WEB_URL + link);
+      setLink("https://app.craddule.com" + link);
+      setSuccessMessage('Invitation sent successfully!');
+      setSuccessMessageTimeout(setTimeout(() => {
+        setSuccessMessage('');
+      }, 10000));
     } else {
       const result = await response.json();
       setLoading(false);
@@ -162,11 +130,16 @@ const handleChange = (e) => {
                 <p className='share'>Share this file</p>
                 <p className= 'share1'>Anyone with the link can view</p>
                 {link && (
-                <p className='copyP'>{link}
+                <div>
+                  {successMessage && (
+                    <p className="sentCop">{successMessage}</p>
+                  )}
+                <p className='text-center'>
                 <button className='cop' onClick={copyToClipboard}>
-                   Copy
+                   Copy Link
                 </button>
                 </p>
+                </div>
                 )}
                <div className='text-center'>
 
@@ -196,12 +169,7 @@ const handleChange = (e) => {
                
            
                
-            <button className="btn btn-primary curveSb shreB" onClick={share}>
-             
-              { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
-                { !loading && <span> Create Link</span>}
-              </button>
-
+           
               <button className="btn btn-primary curveSb shreB" typeof='submit' style={{marginLeft:5}}>
              
               { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}

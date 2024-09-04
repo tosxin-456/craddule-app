@@ -51,9 +51,10 @@ export default function ImageModal ( {open, onClose})  {
          console.log(formData);
 
          try {
-           const response = await axios.post(API_BASE_URL+'/api/user/upload', formData, {
+           const response = await axios.put(API_BASE_URL+'/api/user/upload', formData, {
              headers: {
-               'Content-Type': 'multipart/form-data'
+               'Content-Type': 'multipart/form-data',
+               'Authorization': `Bearer ${access_token}`
              }
            });
            console.log(response.data);

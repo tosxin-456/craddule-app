@@ -67,14 +67,16 @@ const ImagePopup = ({  onClose, onInsertFile}) => {
         console.log(file.hubFile);
         onInsertFile(file.hubFile);
       };
-    
+  
       
       useEffect(() => {
         const fetchTypes = async () => {
             try {
               const response = await axios.get(`${API_BASE_URL}/api/hub/types/${projectId}`);
+              console.log(response.data);
                 setTypes(response.data);
                 
+
             } catch (error) {
                 console.error('Error fetching types:', error);
                 

@@ -67,7 +67,7 @@ export default function ModalStart({ open, onClose}){
             setLoading(false);
             const projectId = responseData.data._id;
             localStorage.setItem("nProject",projectId);
-            navigate(`/loading`);
+            navigate(`/firstQuestion`);
             console.log(responseData); // Parse JSON response
             console.log('Project created successfully');
 

@@ -30,7 +30,7 @@ const SideMenu2 = () => {
 
   const onClickCHPd = () => navigate(`/pdf/Ideation/BusinessCaseBuilder`);
   const onClickCHPdA = () => navigate(`/pdfEnd/Ideation`);
-
+  
   const [showPopup, setShowPopup] = useState(true);
 
   const handleClosePopup = () => {
@@ -43,7 +43,7 @@ const SideMenu2 = () => {
       setIsDropdownOpen(!isDropdownOpen);
   };
 
-
+  const [percentage, setPercentage] = useState(null);
 
 
   const projectId = localStorage.getItem('nProject');
@@ -147,9 +147,41 @@ useEffect(() => {
     updateStreak();
   }, []);
 
+  useEffect(() => {
+    const fetchPercentage = async () => {
+       
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/BusinessCaseBuilder`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status === 200) {
+              
+                const data = await response.json();
+                console.log(response)
+                setPercentage(data.percentage);
+            } else {
+                console.error(`Error fetching percentage: ${response.status} - ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Error fetching percentage:', error);
+        }
+    };
+
+    if (projectId) {
+        fetchPercentage();
+    }
+}, [projectId]);
+
+
   return (
     <>
-    
+  
     <div className={`side-menu ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="menu-toggle" onClick={toggleMenu}>
         <FontAwesomeIcon icon={isCollapsed ? faPlus : faTimes} className='close2'/>
@@ -169,7 +201,7 @@ useEffect(() => {
 
         <li onClick={toggleDropdown}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Business Case Builder</span>}
+                    {!isCollapsed && <span>Business Case Builder  {percentage !== null && ` (${percentage}%)`}</span>}
                 </li>
                 {isDropdownOpen && !isCollapsed && (
                     <ul className="dropdown">
@@ -189,6 +221,11 @@ useEffect(() => {
           {!isCollapsed && <span>Custom Financial Projection</span>}
         </li>
 
+        <li onClick={onClickCHPdA}>
+            <CiServer />
+          {!isCollapsed && <span>Summary Pdf</span>}
+        </li>
+
         <li onClick={onClickCG}>
         <CiGrid2V />
           {!isCollapsed && <span>Go no Go</span>}
@@ -200,10 +237,7 @@ useEffect(() => {
           {!isCollapsed && <span>Timeline Builder</span>}
         </li> */}
         
-        <li onClick={onClickCHPdA}>
-            <CiServer />
-          {!isCollapsed && <span>Summary Pdf</span>}
-        </li>
+       
 
         {!isCollapsed && (
         <div className='text-center'>

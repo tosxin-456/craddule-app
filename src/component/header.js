@@ -7,57 +7,162 @@ import p5 from './../images/p5.jpeg';
 import p6 from './../images/p6.jpeg';
 import bbm from './../images/bggm.webp';
 import bolt from './../images/bolt2.webp';
+import logo from './../images/logoc.png';
 import { CiBellOn ,CiUser, CiChat2} from 'react-icons/ci';
 import { MdOutlineBolt} from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import ChatToolModal from './chatModal';
 import API_BASE_URL from '../config/apiConfig';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLightbulb, faTrash  } from '@fortawesome/free-solid-svg-icons';
+import { faLightbulb, faTrash,faUser  } from '@fortawesome/free-solid-svg-icons';
 import { checkTokenValidity } from '../util/auth';
 import { jwtDecode } from "jwt-decode";
+import ModalStart from './modalTellUs';
 
 const Header = () => {
     const projectId = localStorage.getItem('nProject');
+    const projectName = localStorage.getItem('nProjectName');
+
+    const [notifications, setNotifications] = useState([]);
+   
+    const token = localStorage.getItem('access_token');
+   
+
     const [isOpen, setIsOpen]= useState(false);
-    const [projectName, setProjectName] = useState('');
+    const [isOpenT, setIsOpenT]= useState(false);
+    const [isOpenQ, setIsOpenQ] = useState(false);
+
+    const [slogan, setSlogan] = useState('');
+
     const [streak, setStreak] = useState('0');
-    useEffect(() => {
-        const { isValid, expired } = checkTokenValidity();
-    
-        if (!isValid || expired) {
-          // Token doesn't exist or has expired, navigate user to login page
-          window.location.href = '/login';
-        }
-      }, []);
-      
-    const fetchProjectName = async () => {
-        try {
-          const token = localStorage.getItem('access_token'); // Get the token from localStorage
-          console.log(token);
-          const response = await fetch(API_BASE_URL + `/api/project/user/${projectId}`, {
-            headers: {
-              'Content-Type': 'application/json', 
-              'Authorization': `Bearer ${token}` // Include the token in the request headers
-            }
-          });
-          if (!response.ok) {
-            throw new Error('Failed to fetch project name');
-          }
-          const data = await response.json();
-          console.log(data);
-          setProjectName(data.name);
-        } catch (error) {
-          console.error('Error fetching project name:', error);
-        }
+    const navigate = useNavigate()
+
+    const handleToggle = () => {
+       setIsOpenQ(!isOpenQ);
       };
+      useEffect(() => {
+       
+        // Function to check if the token is invalid
+        const isTokenInvalid = (token) => {
+            if (!token) {
+                // No token found, consider it invalid
+                return true;
+            }
+
+            try {
+                // Optionally, decode the token and check its expiration (JWT example)
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                const currentTime = Math.floor(Date.now() / 1000);
+                
+                if (payload.exp && payload.exp < currentTime) {
+                    // Token is expired
+                    return true;
+                }
+            } catch (error) {
+                // If there's an error during decoding, assume the token is invalid
+                return true;
+            }
+
+            return false;
+        };
+
+        // Check the token and navigate to login if invalid or absent
+        if (isTokenInvalid(token)) {
+            // Clear the token from localStorage (optional, in case it's invalid)
+            localStorage.removeItem('access_token');
+
+            // Navigate to the login page
+            navigate('/login'); // Redirect the user to login
+        }
+    }, [navigate]); 
+
+
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.userId;
+
+      useEffect(() => {
+        const fetchNotifications = async () => {
+          const token = localStorage.getItem('access_token');
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/notification/project/${projectId}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log(data);
+                    // Filter notifications to only include those that are unread
+                    const unreadNotifications = data.data.filter(notification => !notification.read);
+                    setNotifications(unreadNotifications);
+                } else {
+                  console.log('Error fetching notifications:', response.status);
+                   
+                }
+            } catch (err) {
+              console.log(err.message)
+                //setError(err.message);
+            } finally {
+                //setLoading(false);
+            }
+        };
+
+        fetchNotifications();
+    }, [projectId, token]);
+
+      
+      useEffect(() => {
+
+        const token = localStorage.getItem('access_token');
+    
+        if (!token) {
+          // Navigate to login page if token is not found
+          navigate('/login');
+          return;
+        }
+        
+      }, [navigate]);
+
+   
+
+      // useEffect(() => {
+      //   const fetchSlogan = async () => {
+          
+      //     try {
+      //       const response = await fetch(`${API_BASE_URL}/api/brand/slogan/${projectId}`, {
+      //         method: 'GET',
+      //         headers: {
+      //           'Content-Type': 'application/json',
+      //           'Authorization': `Bearer ${token}`
+      //         }
+      //       });
+    
+      //       if (response.status === 200) {
+      //         const data = await response.json();
+      //         setSlogan(data.slogan);
+      //       } else {
+      //         console.log("cant get slogan");
+      //         //setError('Error fetching slogan.');
+      //       }
+      //     } catch (err) {
+      //       console.log("Error fetching slogan: ",err);
+      //       //setError('Error fetching slogan.');
+      //     }
+      //   };
+    
+      //   fetchSlogan();
+      // }, [projectId, token]);
+   
   
       const updateStreak = async () => {
         try {
-         const projectId = localStorage.getItem('nProject');
-          const token = localStorage.getItem('access_token'); 
-        const decodedToken = jwtDecode(token);
-        const userId = decodedToken.userId;
+        //  const projectId = localStorage.getItem('nProject');
+        //   const token = localStorage.getItem('access_token'); 
+        // const decodedToken = jwtDecode(token);
+       
     
           const response = await axios.post(API_BASE_URL+'/api/streak/', { userId,projectId });
           console.log(response);
@@ -75,11 +180,7 @@ const Header = () => {
         updateStreak();
       }, []);
 
-  useEffect(() => {
-    
-
-    fetchProjectName();
-  }, [projectId]);
+ 
 
     //first dropdown
     // State variables to manage dropdown behavior
@@ -131,35 +232,36 @@ const handleNotifyClick1 = () => {
         <>
     <div className="headerH">
         <div className='row'>
-            <div className='col-md-2'>
-                <p className='pName'>{projectName}</p>
-                <p className='pSlogan'>Just Do It</p>
+            <div className='col-md-3'>
+                
+                <img src={logo} alt="Circular Image" className="circular-image-top" style={{width:'15%'}}/>
+                <span className='tellU' type='button' style={{color:"#fff"}} onClick={()=>setIsOpenT(true)}>Tell us more</span>
 
             </div>
 
-            <div className='col-md-7'>
-                {/* <div class="proTop">
-                    <img src={p2} alt="Circular Image" className="circular-image-top"/>
-                </div>
-
-                <div class="proTop">
-                    <img src={p3} alt="Circular Image" className="circular-image-top"/>
-                </div>
-
-                <div class="proTop">
-                    <img src={p4} alt="Circular Image" className="circular-image-top"/>
-                </div>
-
-                <div class="proTop">
-                    <img src={p5} alt="Circular Image" className="circular-image-top"/>
-                </div> */}
-
-               
+            <div className='col-md-6'>
+                <p className='pName'>{projectName}</p>
+                {/* <p className='pSlogan'>{slogan}</p> */}
 
             </div>
 
             <div className='col-md-3'>
                 <div className='fll'>
+                <div className="members-dropdown">
+                  <button className="members-dropdown-button" onClick={handleToggle}>
+                    <FontAwesomeIcon icon={faUser} />
+                  </button>
+                  {isOpenQ && (
+                    <ul className="members-dropdown-list">
+                      <li>
+                        <a onClick={() => navigate('/teamAdd')}>Invite Members</a>
+                      </li>
+                      <li>
+                        <a onClick={() => navigate('/teamView')}>Manage Members</a>
+                      </li>
+                    </ul>
+                  )}
+                </div>
                     {/* <span className='iconS2 mr'><CiBellOn /></span> */}
                     <div ref={dropdownRef} className="dropdown5 iconS2 mr">
                 <div className={`select0 `}>
@@ -174,47 +276,45 @@ const handleNotifyClick1 = () => {
                  <div className='divNotify'>
                 {/* <p className='notiHead' >Notification</p> */}
                 
-                <div className='displayDeletebutton'>
-                <div className='notify' onClick={handleNotifyClick}>
-                  <FontAwesomeIcon icon={faLightbulb} className='bulb'/>
-                 <div className='notifyTxt'>
-                  <p className='notifyHead'>Team Invite</p>
-                  <p className='notBodi'>You have been added to Project A, <br></br>check Team's Menu to accept invitation</p>
-                  <p className='notTime'> 1 day ago</p>
-                 </div>
-                 </div>
-                 {showDeleteButton && (
+                {notifications.length > 0 ? (
+                notifications.map(notification => (
+                    <div key={notification._id} className='displayDeletebutton'>
+                        <div className='notify' onClick={handleNotifyClick}>
+                            <FontAwesomeIcon icon={faLightbulb} className='bulb'/>
+                            <div className='notifyTxt'>
+                                <p className='notifyHead'>{notification.notificationHead || 'Notification'}</p>
+                                <p className='notBodi'>
+                                    {notification.notification}
+                                    <br />
+                                </p>
+                                <p className='notTime'>{notification.timeSent || 'Just now'}</p>
+                            </div>
+                        </div>
+                        {/* {showDeleteButton && (
                             <button className='deleteButtonNotify'>
                                 <FontAwesomeIcon icon={faTrash} />
                             </button>
-                        )}
-                        
-                 </div>
-                 <div className='displayDeletebutton'>
-                <div className='notify' onClick={handleNotifyClick1}>
-                  <FontAwesomeIcon icon={faLightbulb} className='bulb'/>
-                 <div className='notifyTxt'>
-                  <p className='notifyHead'>Team Invite</p>
-                  <p className='notBodi'>You have been added to Project A, <br></br>check Team's Menu to accept invitation</p>
-                  <p className='notTime'> 1 day ago</p>
-                 </div>
-                 </div>
-                 {showDeleteButton1 && (
-                            <button className='deleteButtonNotify'>
-                                <FontAwesomeIcon icon={faTrash} />
-                            </button>
-                        )}
-                        
-                 </div>
+                        )} */}
+                    </div>
+                ))
+            ) : (
+                <p>No unread notifications</p>
+            )}
+                 
                  </div>
                 </div>
             </div>
                    <span className='iconS2' type='button' style={{color:"#fff"}} onClick={()=>setIsOpen(true)}><CiChat2 /></span>
+                   
                 </div>
             </div>
             <ChatToolModal open={isOpen} onClose={() => setIsOpen(false)}>
 
     </ChatToolModal>
+
+    <ModalStart open={isOpenT} onClose={() => setIsOpenT(false)}>
+
+</ModalStart>
         </div>
        
     </div>

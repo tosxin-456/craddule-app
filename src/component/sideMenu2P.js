@@ -14,6 +14,13 @@ const SideMenu2 = () => {
   const [isCollapsedS, setIsCollapsedS] = useState(false);
   const [isCollapsedD, setIsCollapsedD] = useState(false);
 
+  const [percentage, setPercentage] = useState(null);
+  const [percentageV, setPercentageV] = useState(null);
+  const [percentageS, setPercentageS] = useState(null);
+  const [percentageD, setPercentageD] = useState(null);
+
+  const projectId = localStorage.getItem('nProject');
+
   const toggleMenu = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -51,6 +58,133 @@ const SideMenu2 = () => {
 
   const onClickB = () => navigate(`/branding`);
   const onClickT = () => navigate(`/teamView`);
+
+  useEffect(() => {
+    const fetchPercentage = async () => {
+       
+  
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/BusinessAnalysisPack`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+  
+            if (response.status === 200) {
+              
+                const data = await response.json();
+                console.log(response)
+                setPercentage(data.percentage);
+            } else {
+                console.error(`Error fetching percentage: ${response.status} - ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Error fetching percentage:', error);
+        }
+    };
+  
+    if (projectId) {
+        fetchPercentage();
+    }
+  }, [projectId]);
+  
+  
+  
+  useEffect(() => {
+    const fetchPercentage2 = async () => {
+       
+  
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/ValuePropositionPack`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+  
+            if (response.status === 200) {
+              
+                const data = await response.json();
+                console.log(response)
+                setPercentageV(data.percentage);
+            } else {
+                console.error(`Error fetching percentage: ${response.status} - ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Error fetching percentage:', error);
+        }
+    };
+  
+    if (projectId) {
+      fetchPercentage2();
+    }
+  }, [projectId]);
+
+  useEffect(() => {
+    const fetchPercentage3 = async () => {
+       
+  
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/SuccessMatrix`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+  
+            if (response.status === 200) {
+              
+                const data = await response.json();
+                console.log(response)
+                setPercentageS(data.percentage);
+            } else {
+                console.error(`Error fetching percentage: ${response.status} - ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Error fetching percentage:', error);
+        }
+    };
+  
+    if (projectId) {
+      fetchPercentage3();
+    }
+  }, [projectId]);
+
+  useEffect(() => {
+    const fetchPercentage4 = async () => {
+       
+  
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/DetailedMarketingStrategies`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+  
+            if (response.status === 200) {
+              
+                const data = await response.json();
+                console.log(response)
+                setPercentageD(data.percentage);
+            } else {
+                console.error(`Error fetching percentage: ${response.status} - ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Error fetching percentage:', error);
+        }
+    };
+  
+    if (projectId) {
+      fetchPercentage4();
+    }
+  }, [projectId]);
+
   const handleSubTypeClick = (subType) => {
     window.location.href =`/questionBusMain/ProductDefinition/BusinessAnalysisPack/${subType}`;
 };
@@ -72,7 +206,6 @@ const onClickCHPdA = () => navigate(`/pdfEnd/ProductDefinition`);
 
   const onClickCH = () => navigate(`/start`);
 
-  const projectId = localStorage.getItem('nProject');
   const token = localStorage.getItem('access_token'); 
 const decodedToken = jwtDecode(token);
 const userId = decodedToken.userId;
@@ -91,6 +224,7 @@ const [isDropdownOpenD, setIsDropdownOpenD] = useState(false);
 const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
 };
+
 
 const toggleDropdownV = () => {
   setIsDropdownOpenV(!isDropdownOpenV);
@@ -248,10 +382,11 @@ useEffect(() => {
           <CiBoxes />
           {!isCollapsed && <span>Home</span>}
         </li>
+        
 
         <li onClick={toggleDropdown}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Business Analysis Pack</span>}
+                    {!isCollapsed && <span>Business Analysis Pack {percentage !== null && ` (${percentage}%)`}</span>}
                 </li>
                 {isDropdownOpen && !isCollapsed && (
                     <ul className="dropdown">
@@ -269,9 +404,9 @@ useEffect(() => {
           
 <li onClick={toggleDropdownV}>
                     <CiBoxes />
-                    {!isCollapsedV && <span>Value Proposition Pack (VPP)</span>}
+                    {!isCollapsed && <span>Value Proposition Pack (VPP) {percentageV !== null && ` (${percentageV}%)`}</span>}
                 </li>
-                {isDropdownOpenV && !isCollapsedV && (
+                {isDropdownOpenV && !isCollapsed && (
                     <ul className="dropdown">
                           {subTypesV.map((subType, index) => (
                               <li key={index} className='dropDownNew' onClick={() => handleSubTypeClickV(subType.subCategory)}>
@@ -287,9 +422,9 @@ useEffect(() => {
 
       <li onClick={toggleDropdownS}>
                     <CiBoxes />
-                    {!isCollapsedS && <span>Success Matrix</span>}
+                    {!isCollapsed && <span>Success Matrix {percentageS !== null && ` (${percentageS}%)`}</span>}
                 </li>
-                {isDropdownOpenS && !isCollapsedS && (
+                {isDropdownOpenS && !isCollapsed && (
                     <ul className="dropdown">
                           {subTypesS.map((subType, index) => (
                               <li key={index} className='dropDownNew' onClick={() => handleSubTypeClickS(subType.subCategory)}>
@@ -312,9 +447,9 @@ useEffect(() => {
 
         <li onClick={toggleDropdownD}>
                     <CiBoxes />
-                    {!isCollapsedD && <span>Detailed Marketing Strategies</span>}
+                    {!isCollapsed && <span>Detailed Marketing Strategies {percentageD !== null && ` (${percentageD}%)`}</span>}
                 </li>
-                {isDropdownOpenD && !isCollapsedD && (
+                {isDropdownOpenD && !isCollapsed && (
                     <ul className="dropdown">
                           {subTypesD.map((subType, index) => (
                               <li key={index} className='dropDownNew' onClick={() => handleSubTypeClickD(subType.subCategory)}>
@@ -334,6 +469,11 @@ useEffect(() => {
           
           {!isCollapsed && <span>Branding</span>}
         </li>
+        
+        <li onClick={onClickCHPdA}>
+            <CiServer />
+          {!isCollapsed && <span>Summary Pdf</span>}
+        </li>
 
         <li onClick={onClickCG}>
         <CiGrid2V />
@@ -346,10 +486,7 @@ useEffect(() => {
           {!isCollapsed && <span>Timeline Builder</span>}
         </li> */}
         
-        <li onClick={onClickCHPdA}>
-            <CiServer />
-          {!isCollapsed && <span>Summary Pdf</span>}
-        </li>
+       
 
         {!isCollapsed && (
         <div className='text-center'>

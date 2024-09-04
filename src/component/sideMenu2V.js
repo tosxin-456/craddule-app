@@ -8,55 +8,70 @@ import API_BASE_URL from '../config/apiConfig';
 import { jwtDecode } from "jwt-decode";
 
 const SideMenu2 = () => {
-
   const token = localStorage.getItem('access_token'); 
   const decodedToken = jwtDecode(token);
-  const projectId = localStorage.getItem('nProject');
-  
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [subTypesD, setSubTypesD] = useState([]);
-  const [isCollapsedD, setIsCollapsedD] = useState(false);
-  const [isDropdownOpenD, setIsDropdownOpenD] = useState(false);
 
-  const [subTypesS, setSubTypesS] = useState([]);
-  const [isCollapsedS, setIsCollapsedS] = useState(false);
-  const [isDropdownOpenS, setIsDropdownOpenS] = useState(false);
+  const [subTypesB, setSubTypesB] = useState([]);
+  const [isCollapsedB, setIsCollapsedB] = useState(false);
+  const [isDropdownOpenB, setIsDropdownOpenB] = useState(false);
+
+  const [subTypesE, setSubTypesE] = useState([]);
+  const [isCollapsedE, setIsCollapsedE] = useState(false);
+  const [isDropdownOpenE, setIsDropdownOpenE] = useState(false);
+
+  const [subTypesF, setSubTypesF] = useState([]);
+  const [isCollapsedF, setIsCollapsedF] = useState(false);
+  const [isDropdownOpenF, setIsDropdownOpenF] = useState(false);
 
   const [percentage, setPercentage] = useState(null);
-  const [percentageS, setPercentageS] = useState(null);
+  const [percentageD, setPercentageD] = useState(null);
+  const [percentageDE, setPercentageDE] = useState(null);
 
   const toggleMenu = () => {
     setIsCollapsed(!isCollapsed);
   };
-  const toggleMenuD = () => {
-    setIsCollapsedD(!isCollapsedD);
+
+
+  const toggleMenuB = () => {
+    setIsCollapsedB(!isCollapsedB);
   };
-  const toggleMenuS = () => {
-    setIsCollapsedS(!isCollapsedD);
+
+  const toggleMenuE = () => {
+    setIsCollapsedE(!isCollapsedE);
   };
-  const toggleDropdownD = () => {
-    setIsDropdownOpenD(!isDropdownOpenD);
+
+  const toggleMenuF = () => {
+    setIsCollapsedF(!isCollapsedF);
+  };
+  
+
+  const toggleDropdownB = () => {
+    setIsDropdownOpenB(!isDropdownOpenB);
 };
 
-const toggleDropdownS = () => {
-  setIsDropdownOpenS(!isDropdownOpenS);
+const toggleDropdownF = () => {
+  setIsDropdownOpenF(!isDropdownOpenF);
+};
+
+
+const toggleDropdownE = () => {
+  setIsDropdownOpenE(!isDropdownOpenE);
 };
   const navigate = useNavigate();
-
-  const onClickCB = () => navigate(`/questionBusMain/InitialDesign/DomainName/DomainName`);
-
-  const onClickCV = () => navigate(`/questionBusMain/InitialDesign/TrademarkOrCopyright`);
-
-  const onClickD = () => navigate(`/questionBusMain/InitialDesign/StakeholdersEngagement/StakeholdersEngagement`);
+  const projectId = localStorage.getItem('nProject');
+ 
 
   const onClickCH = () => navigate(`/start`);
-  const onClickCG = () => navigate(`/go/InitialDesign`);
-  const onClickCHPdA = () => navigate(`/pdfEnd/InitialDesign`);
+  const onClickCG = () => navigate(`/go/ValidatingAndTesting`);
+  const onClickCHPdA = () => navigate(`/pdfEnd/ValidatingAndTesting`);
+
   const onClickCHPd = (subType) => {
-    navigate(`/pdf/InitialDesign/${subType}`);
+    navigate(`/pdf/ValidatingAndTesting/${subType}`);
   };
+
   useEffect(() => {
-    const questionType = 'ClaimTheDomain'
+    const questionType = 'FullProductProjectReview'
     const fetchSubTypes = async () => {
       try {
         const response = await fetch(`${API_BASE_URL}/api/question/cat/${questionType}`, {
@@ -71,7 +86,7 @@ const toggleDropdownS = () => {
           const data = await response.json();
           console.log(data);
           console.log(data.data);
-          setSubTypesD(data);
+          setSubTypesF(data);
         
         } else {
           console.error('Failed to fetch next question');
@@ -84,8 +99,9 @@ const toggleDropdownS = () => {
     fetchSubTypes();
   }, []);
 
+
   useEffect(() => {
-    const questionType = 'StakeholdersEngagement'
+    const questionType = 'DetailedMarketingRtmTesting'
     const fetchSubTypes = async () => {
       try {
         const response = await fetch(`${API_BASE_URL}/api/question/cat/${questionType}`, {
@@ -100,7 +116,7 @@ const toggleDropdownS = () => {
           const data = await response.json();
           console.log(data);
           console.log(data.data);
-          setSubTypesS(data);
+          setSubTypesE(data);
         
         } else {
           console.error('Failed to fetch next question');
@@ -113,13 +129,41 @@ const toggleDropdownS = () => {
     fetchSubTypes();
   }, []);
 
+  useEffect(() => {
+    const questionType = 'DevelopmentCostReview'
+    const fetchSubTypes = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/question/cat/${questionType}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        
+        if(response.ok) {
+          const data = await response.json();
+          console.log(data);
+          console.log(data.data);
+          setSubTypesB(data);
+        
+        } else {
+          console.error('Failed to fetch next question');
+        }
+      } catch (error) {
+        console.error('Error fetching next question:', error);
+      }
+    };
+  
+    fetchSubTypes();
+  }, []);
 
   useEffect(() => {
     const fetchPercentage = async () => {
        
   
         try {
-            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/ClaimTheDomain`, {
+            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/FullProductProjectReview`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -152,7 +196,7 @@ const toggleDropdownS = () => {
        
   
         try {
-            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/StakeholdersEngagement`, {
+            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/DevelopmentCostReview`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -164,7 +208,7 @@ const toggleDropdownS = () => {
               
                 const data = await response.json();
                 console.log(response)
-                setPercentageS(data.percentage);
+                setPercentageDE(data.percentage);
             } else {
                 console.error(`Error fetching percentage: ${response.status} - ${response.statusText}`);
             }
@@ -178,13 +222,47 @@ const toggleDropdownS = () => {
     }
   }, [projectId]);
 
+  useEffect(() => {
+    const fetchPercentage3 = async () => {
+       
+  
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/DetailedMarketingRtmTesting`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+  
+            if (response.status === 200) {
+              
+                const data = await response.json();
+                console.log(response)
+                setPercentageD(data.percentage);
+            } else {
+                console.error(`Error fetching percentage: ${response.status} - ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Error fetching percentage:', error);
+        }
+    };
+  
+    if (projectId) {
+      fetchPercentage3();
+    }
+  }, [projectId]);
 
   const handleSubTypeClick = (subType) => {
-    window.location.href =`/questionBusMain/InitialDesign/ClaimTheDomain/${subType}`;
+    window.location.href =`/questionBusMain/ValidatingAndTesting/FullProductProjectReview/${subType}`;
 };
 
-const handleSubTypeClickS = (subType) => {
-  window.location.href =`/questionBusMain/InitialDesign/StakeholdersEngagement/${subType}`;
+const handleSubTypeClickE = (subType) => {
+  window.location.href =`/questionBusMain/ValidatingAndTesting/DetailedMarketingRtmTesting/${subType}`;
+};
+
+const handleSubTypeClickB = (subType) => {
+  window.location.href =`/questionBusMain/ValidatingAndTesting/DevelopmentCostReview/${subType}`;
 };
 
 
@@ -206,7 +284,7 @@ const handleSubTypeClickS = (subType) => {
       <ul>
       {!isCollapsed && (
         <div className='text-center'>
-            <span className='menuHeader'>Initial Design</span>
+            <span className='menuHeader'>Validating And Testing</span>
         </div>
        )}
 
@@ -215,58 +293,71 @@ const handleSubTypeClickS = (subType) => {
           {!isCollapsed && <span>Home</span>}
         </li>
 
-        <li onClick={toggleDropdownD}>
+        <li onClick={toggleDropdownF}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Claim Domian Name {percentage !== null && ` (${percentage}%)`}</span>}
+                    {!isCollapsed && <span>Full Product/Project Review {percentage !== null && ` (${percentage}%)`}</span>}
                 </li>
-                {isDropdownOpenD && !isCollapsedD && (
+                {isDropdownOpenF && !isCollapsed && (
                     <ul className="dropdown">
-                          {subTypesD.map((subType, index) => (
+                          {subTypesF.map((subType, index) => (
                               <li key={index} className='dropDownNew' onClick={() => handleSubTypeClick(subType.subCategory)}>
                                  {subType.subCategoryName}
                               </li>
                           ))}
-                          <li className='dropDownNew' onClick={() => onClickCHPd('ClaimTheDomain')}>
+                          <li className='dropDownNew' onClick={() => onClickCHPd('FullProductProjectReview')}>
                             Summary PDF
                           </li>
                     </ul>
                 )}
 
-          
-<li onClick={toggleDropdownS}>
+
+<li onClick={toggleDropdownE}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Stakeholders Engagement {percentageS !== null && ` (${percentageS}%)`}</span>}
+                    {!isCollapsed && <span>Detailed Marketing Testing {percentageD !== null && ` (${percentageD}%)`}</span>}
                 </li>
-                {isDropdownOpenS && !isCollapsed && (
+                {isDropdownOpenE && !isCollapsed && (
                     <ul className="dropdown">
-                          {subTypesS.map((subType, index) => (
-                              <li key={index} className='dropDownNew' onClick={() => handleSubTypeClickS(subType.subCategory)}>
+                          {subTypesE.map((subType, index) => (
+                              <li key={index} className='dropDownNew' onClick={() => handleSubTypeClickE(subType.subCategory)}>
                                  {subType.subCategoryName}
                               </li>
                           ))}
-                          <li className='dropDownNew' onClick={() => onClickCHPd('StakeholdersEngagement')}>
+                          <li className='dropDownNew' onClick={() => onClickCHPd('DetailedMarketingRtmTesting')}>
                             Summary PDF
                           </li>
                     </ul>
                 )}
 
-        {/* <li onClick={onClickD}>
-            <CiCalculator1 />
-          
-          {!isCollapsed && <span>Stakeholders Engagement</span>}
-        </li> */}
-      <li onClick={onClickCHPdA}>
+
+<li onClick={toggleDropdownB}>
+                    <CiBoxes />
+                    {!isCollapsed && <span>Development Cost Review {percentageDE !== null && ` (${percentageDE}%)`}</span>}
+                </li>
+                {isDropdownOpenB && !isCollapsed && (
+                    <ul className="dropdown">
+                          {subTypesB.map((subType, index) => (
+                              <li key={index} className='dropDownNew' onClick={() => handleSubTypeClickB(subType.subCategory)}>
+                                 {subType.subCategoryName}
+                              </li>
+                          ))}
+                          <li className='dropDownNew' onClick={() => onClickCHPd('DevelopmentCostReview')}>
+                            Summary PDF
+                          </li>
+                    </ul>
+                )}
+
+        <li onClick={onClickCHPdA}>
             <CiCalculator1 />
           
           {!isCollapsed && <span>Summary Pdf</span>}
         </li>
 
-      <li onClick={onClickCG}>
+        <li onClick={onClickCG}>
         <CiGrid2V />
           {!isCollapsed && <span>Go no Go</span>}
         </li>
-
-      
+        
+       
 
 
        

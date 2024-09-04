@@ -31,7 +31,8 @@ export default function ModalQuestion({ open, onClose}){
             console.log(data);
             if (!data.data) {
                //navigate to loading
-               navigate(`/loading`);
+               navigate(`/accelerate`);
+               //navigate(`/loading`);
             } else {
               console.log(data.data.questionOrder);
               setQuestion(data.data);
