@@ -7,6 +7,7 @@ import SideMenu2 from './component/sideMenu2';
 import SideMenu2P from './component/sideMenu2P';
 import SideMenu2I from './component/sideMenu2I';
 import SideMenu2C from './component/sideMenu2C';
+import SideMenu2V from './component/sideMenu2V';
 import API_BASE_URL from './config/apiConfig';
 import { useNavigate,useParams } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
@@ -15,9 +16,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import ModalVideo from './component/modalVideo';
 import ideationPop from './component/ideationModal';
-
+import ModalVideoN from './component/modalNewVideo';
+import ReactGA from "react-ga4";
 
 function QuestionBus() {
+  
+  ReactGA.initialize("G-P450CRB987");
+  ReactGA.send({ 
+   hitType: "pageview", 
+   page: window.location.pathname, 
+   title: "Questions" 
+ });
 
     const navigate = useNavigate()
     
@@ -31,6 +40,7 @@ function QuestionBus() {
     const [activeVideo, setActiveVideo] = useState("");
     const [activeLink, setActiveLink] = useState("");
     const [activeId, setActiveId] = useState("");
+    const [activeTime, setActiveTime] = useState("");
     const [isOpen, setIsOpen]= useState(false);
 
     const projectId = localStorage.getItem('nProject');
@@ -45,9 +55,10 @@ function QuestionBus() {
     const [subCategoryName, setSubCategoryName] = useState(null);
     const [answered, setAnswered] = useState([]);
 
-  
+    const projectCount = localStorage.getItem('nProjectCount');
 
   const [showPopup, setShowPopup] = useState(true);
+  const [showYou, setShowYou] = useState(false);
 
   const handleClosePopup = () => {
     setShowPopup(false);
@@ -103,6 +114,7 @@ function QuestionBus() {
                 createFinish(subCategoryPassed);
                 
             } else {
+              console.log(data.data.premium);
               console.log(data.data.questionOrder);
               setQuestion(data.data);
               if(data.data.questionOrder ==  3){
@@ -223,7 +235,8 @@ function QuestionBus() {
       
         const handleClick = (id) => {
           // Handle click event and set the selected answer
-          navigate('/questionEdit/'+id);
+          //history.push(`/questionEdit/${phase}/${id}`);
+          navigate('/questionEdit/'+phase+'/'+id);
         };
         
 
@@ -266,55 +279,115 @@ function QuestionBus() {
               console.error('An error occurred:', error);
           }
         };
-       
 
-        //Check if user as started Section
         useEffect(() => {
-          const checker = async () => {
-       
-            
+          const fetchVideo = async () => {
             try {
-            
-              const section = category        
-              const response = await fetch(API_BASE_URL+'/api/checker', {
-                method: 'POST',
+              
+              const response = await fetch(`${API_BASE_URL}/api/ourVideo/video/${phase}/beginning/${userId}/${projectId}`, {
+                method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${access_token}`,
                 },
-                body: JSON.stringify({projectId, userId, section}),
-              });
         
+              });
               if (response.status === 200) {
-                // If submission is successful, fetch another question
-                const responseData = await response.json();
-                console.log(responseData);
-                console.log(responseData.check);
-                const check = responseData.check;
-               if(responseData.check === 1){
-                  console.log("active do nothing");
-                  checkActiveIfEntered();
-               }else{
-                  console.log("not active do shit");
-                  fetchRandomVideo();
-               }
-    
-    
-    
-              } else {
-                const result = await response.json();
+                const data = await response.json();
                 
-                toast.error(result['error']);
-                console.error('Error:', result['error']);
+                if (data.status == 'still watching') {
+                  console.log(data);
+                  console.log(data.video._id);
+                  const newLink = data.video.videolink.replace('https://youtu.be/', '');
+                  setActiveLink(newLink); // Assuming the video link is in the videolink field
+                  setActiveId(data.video._id); 
+                  setActiveTime(data.video.watchTime)// Assuming the video link is in the videolink field
+                  setShowYou(true); // Open the modal if a video is found
+                } else {
+                  console.error('Video already watched or not found');
+                }
+              } else {
+                console.error('Failed to fetch video. Status code: '+phase, response.status);
               }
             } catch (error) {
-                //toast.error(result['error']);  
-                
-                console.error('An error occurred:', error);
+              console.error('Failed to fetch video:', error);
             }
           };
-          checker();
-        }, []);
+        
+          fetchVideo();
+        }, [phase]);
+
+        //Check if user as started Section
+        // useEffect(() => {
+        //   const checker = async () => {
+       
+            
+        //     try {
+            
+        //       const section = category        
+        //       const response = await fetch(API_BASE_URL+'/api/checker', {
+        //         method: 'POST',
+        //         headers: {
+        //           'Content-Type': 'application/json',
+        //           'Authorization': `Bearer ${access_token}`,
+        //         },
+        //         body: JSON.stringify({projectId, userId, section}),
+        //       });
+        
+        //       if (response.status === 200) {
+        //         // If submission is successful, fetch another question
+        //         const responseData = await response.json();
+        //         console.log(responseData);
+        //         console.log(responseData.check);
+        //         const check = responseData.check;
+        //        if(responseData.check === 1){
+        //           console.log("active do nothing");
+        //           checkActiveIfEntered();
+        //        }else{
+                
+        //           console.log("not active do shit");
+        //           if(projectCount == 2){
+        //             if(phase == 'Ideation'){
+        //               const vid = 'https://youtu.be/__x1zapKHmc';
+        //               const link = vid.replace('https://youtu.be/', '');
+        //               setActiveLink(link); 
+        //             }
+  
+        //             if(phase == 'ProductDefinition'){
+        //               const vid = 'https://youtu.be/AY7efwPzoL0';
+        //               const link = vid.replace('https://youtu.be/', '');
+        //               setActiveLink(link); 
+        //             }
+  
+        //             if(phase == 'InitialDesign'){
+        //               const vid = 'https://youtu.be/v0KFI1yK0rA';
+        //               const link = vid.replace('https://youtu.be/', '');
+        //               setActiveLink(link); 
+        //             }
+        //           }else{
+        //             fetchRandomVideo();
+        //           }
+                  
+                  
+        //           //
+        //        }
+    
+    
+    
+        //       } else {
+        //         const result = await response.json();
+                
+        //         toast.error(result['error']);
+        //         console.error('Error:', result['error']);
+        //       }
+        //     } catch (error) {
+        //         //toast.error(result['error']);  
+                
+        //         console.error('An error occurred:', error);
+        //     }
+        //   };
+        //   checker();
+        // }, []);
 
         const fetchRandomVideo = async () => {
           try {
@@ -409,7 +482,8 @@ function QuestionBus() {
                 setActiveLink(link); 
                 setActiveId(video.video._id); 
                 // setActiveLink(video.video.videoId.videoLink); 
-                setIsOpen(true);
+                //setIsOpen(true);
+                setIsOpen(true)
               }else{
                  //fetchRandomVideo();
                 console.log('false');
@@ -435,6 +509,7 @@ function QuestionBus() {
           {phase === 'ProductDefinition' && <SideMenu2P />}   
           {phase === 'InitialDesign' && <SideMenu2I />}   
           {phase === 'Commercialization' && <SideMenu2C />} 
+          {phase === 'ValidatingAndTesting' && <SideMenu2V />} 
          <div className="main-content">
         
          <Header />
@@ -465,7 +540,7 @@ function QuestionBus() {
                 <div className='container-textAs'>
                     <textarea className='textAs' id="answer"  value={formData.answer} onChange={handleChange}></textarea>
                 </div>
-                <p className='suggest'>Your answer shouldn't be about money, It should be about solving a problem</p>
+                <p className='suggest'>{question.premium}</p>
                 <button type="submit" className='btn btn-primary curveNext' disabled={loading}>
                 
                     { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
@@ -494,6 +569,10 @@ function QuestionBus() {
             <ModalVideo open={isOpen} onClose={() => setIsOpen(false)} videoId={activeVideo ? activeVideo : ''} link={activeLink} id={activeId}>
 
 </ModalVideo>
+
+<ModalVideoN open={showYou} onClose={() => setShowYou(false)}  link={activeLink} id ={activeId} time={activeTime}>
+
+</ModalVideoN>
             {/* Add more content as needed */}
 
             <ideationPop open={showPopup} onClose={() => setShowPopup(false)} >

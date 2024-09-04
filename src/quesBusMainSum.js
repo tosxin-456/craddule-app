@@ -5,6 +5,7 @@ import SideMenu2 from './component/sideMenu2';
 import SideMenu2P from './component/sideMenu2P';
 import SideMenu2I from './component/sideMenu2I';
 import SideMenu2C from './component/sideMenu2C';
+import SideMenu2V from './component/sideMenu2V';
 import { useNavigate, Link,useParams } from 'react-router-dom';
 import API_BASE_URL from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
@@ -248,7 +249,7 @@ const getPreviousCategories = async () => {
 
 const handleClick = (id) => {
   // Handle click event and set the selected answer
-  navigate('/questionEdit/'+id);
+  navigate('/questionEdit/'+phase+'/'+id);
 };
 
 const handleClickSh = (id) => {
@@ -382,15 +383,18 @@ useEffect(() => {
         body: JSON.stringify({projectId, userId, section}),
       });
 
+
+      console.log(projectId);
       if (response.status === 200) {
         // If submission is successful, fetch another question
         const responseData = await response.json();
         console.log(responseData);
         console.log(responseData.check);
         const check = responseData.check;
-       if(responseData.check === 1){
+        console.log("about to check:", check)
+       if(responseData.check === "1"){
           console.log("active do nothing");
-          checkActiveIfEntered();
+          
        }else{
           console.log("not active do shit");
           fetchRandomQuote();
@@ -904,8 +908,10 @@ const handleInsertFile = (file) => {
    setInitialX(null);
    setInitialY(null);
  }
-
-
+ const separateSubCategory = (subCategory) => {
+  return subCategory.replace(/([A-Z])/g, ' $1').trim();
+};
+ const separatedSubCategory = separateSubCategory(subCategory);
 
 
  const onClickNext = () => navigate(`/questionBusMain/${phase}/${category}`);
@@ -950,13 +956,14 @@ const handleInsertFile = (file) => {
          {phase === 'ProductDefinition' && <SideMenu2P />} 
          {phase === 'InitialDesign' && <SideMenu2I />} 
          {phase === 'Commercialization' && <SideMenu2C />} 
+         {phase === 'ValidatingAndTesting' && <SideMenu2V />} 
          <div className="main-content">
         
          <Header />
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
 
          <div className='text-center'>
-                    <p className='textHp'>{subCategory}</p>
+                    <p className='textHp'>{separatedSubCategory}</p>
                     <p className='textH'>Make sure you answer all questions</p>
                 </div>
             

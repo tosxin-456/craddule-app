@@ -3,13 +3,18 @@ import bci from './images/bc.png';
 import bro from './images/bro.png'; 
 import Header from './component/header';
 import Menu from './component/menu';
+import SideMenu2 from './component/sideMenu2';
 import SideMenu2P from './component/sideMenu2P';
+import SideMenu2I from './component/sideMenu2I';
+import SideMenu2C from './component/sideMenu2C';
+import SideMenu2V from './component/sideMenu2V';
 import API_BASE_URL from './config/apiConfig';
 import { useNavigate,useParams } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
 import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+
 
 
 function QuestionBus() {
@@ -23,11 +28,11 @@ function QuestionBus() {
     const access_token = localStorage.getItem('access_token');
     const decodedToken = jwtDecode(access_token);
     const userId = decodedToken.userId;
-
+    
     const projectId = localStorage.getItem('nProject');
     const [loading, setLoading] = useState(false);
     console.log(userId);
-    const { id } = useParams();
+    const { phase,id } = useParams();
     
    
 
@@ -117,6 +122,7 @@ function QuestionBus() {
             toast.success(responseData.message);
            // fetchUnansweredQuestion();
             setLoading(false);
+            navigate(-1);
             
           } else {
             const result = await response.json();
@@ -137,10 +143,14 @@ function QuestionBus() {
 
        
        
-      
+    
 
     <div className='container2'>
-         <SideMenu2P />    
+          {phase === 'Ideation' && <SideMenu2 />}
+          {phase === 'ProductDefinition' && <SideMenu2P />}   
+          {phase === 'InitialDesign' && <SideMenu2I />}   
+          {phase === 'Commercialization' && <SideMenu2C />} 
+          {phase === 'ValidatingAndTesting' && <SideMenu2V />} 
          <div className="main-content">
         
          <Header />
