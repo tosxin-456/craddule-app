@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect,useRef } from "react";
 import Chart from "react-apexcharts";
 import ReactDOM from "react-dom";
 import ReactApexChart from 'react-apexcharts';
@@ -9,7 +9,10 @@ import API_BASE_URL from './config/apiConfig';
 import SideMenu2 from './component/sideMenu2';
 import { useNavigate,Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
+import { Toaster, toast } from 'sonner';
+import axios from 'axios';
+import { jwtDecode } from "jwt-decode";
+import html2canvas from 'html2canvas';
 
 function OperatingIncomeGraphView({projectId, graphType }) {
 
@@ -19,8 +22,11 @@ function OperatingIncomeGraphView({projectId, graphType }) {
     const [graphData, setGraphData] = useState([]);
     const [selectedGraphData, setSelectedGraphData] = useState(null);
     const [graphName, setGraphName] = useState('');
-    
+    const [loading, setLoading] = useState(false);
     const [deviceType, setDeviceType] = useState('desktop');
+    const access_token = localStorage.getItem('access_token');
+    const decodedToken = jwtDecode(access_token);
+    const userId = decodedToken.userId;
     const { id } = useParams(); 
 
 // Function to update deviceType state based on window width
@@ -61,7 +67,7 @@ useEffect(() => {
                 if (data.length > 0) {
                     const selectedData = data.find(item => item._id === id);
                     setSelectedGraphData(selectedData);
-                    setGraphName(selectedGraphData.graphName)
+                    setGraphName(selectedData.graphName)
                     console.log(selectedData);
                     
                 }
@@ -103,9 +109,54 @@ useEffect(() => {
       return { series, options };
   };
 
+    const notifyDivRef = useRef(null);
     const chartData = transformGraphData(selectedGraphData);
 
+    const handleScreenshotAndUpload = async () => {
+        setLoading(true);
   
+        try {
+            const element = notifyDivRef.current;
+            if (element) {
+                const projectId = localStorage.getItem('nProject');
+                const canvas = await html2canvas(element);
+                canvas.toBlob(async (blob) => {
+                    const formData = new FormData();
+                    formData.append('image',new File([blob], graphName+'.png', { type: 'image/png' })); // Append the blob as an image file
+                    formData.append('type', 'Expenses');
+                    formData.append('sequence', 0);
+                    formData.append('projectId', projectId);
+                    formData.append('userId', userId);
+                    formData.append('imageName', graphName+'.png'); // Name of the image
+  
+                    try {
+                        const response = await axios.post(`${API_BASE_URL}/api/hub/graph`, formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                                'Authorization': `Bearer ${access_token}`,
+                            },
+                        });
+                        console.log(response);
+                        if (response.status === 200) {
+                            toast.success("Screenshot uploaded successfully");
+                        }else{
+                            const result = await response.json();
+                            setLoading(false);
+                            console.error('Error:', result['error']);
+                            toast.error(result['error']);
+                        }
+                        
+                        
+                    } finally {
+                        setLoading(false);
+                    }
+                });
+            }
+        } catch (error) {
+            console.error('Error capturing screenshot:', error);
+            setLoading(false);
+        }
+    };
 
  
       return (
@@ -117,12 +168,15 @@ useEffect(() => {
         <Header />
         <div className="headGr">
             <p>{graphName}</p>
+            <div style={{marginRight:"70px"}}>
+            <button className="btn mainBtn" onClick={handleScreenshotAndUpload}>Save to Hub</button>
+            </div>
         </div>
         
         <div className="modG">
           <div className="graph1">
                 <div className="graphC">
-                  <div id="chart">
+                  <div id="chart" ref={notifyDivRef}>
                   {selectedGraphData && (
                <ReactApexChart
                options={chartData.options}
@@ -139,7 +193,7 @@ useEffect(() => {
           </div>
         </div>
 
-      
+        <Toaster  position="top-right" />    
 </div>
 </div>
       );

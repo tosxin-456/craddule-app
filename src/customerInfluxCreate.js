@@ -83,32 +83,15 @@ function CustomerInflux ()  {
     };
 
    
-
     const handleInputChange = (year, month, value) => {
         setMonthInputs(prevInputs => {
+            // Set the value to "0" if the input is empty
+            const updatedMonthValue = value.trim() === '' ? '0' : value;
+    
             const updatedYear = {
                 ...prevInputs[year],
-                [month]: value
+                [month]: updatedMonthValue // Set the month value to either the input value or "0"
             };
-    
-            // Check if any month in the year has a non-empty value
-            const hasNonEmptyMonth = Object.values(updatedYear).some(monthValue => monthValue.trim() !== '');
-    
-            // If no month has a non-empty value, remove the year from the state
-            if (!hasNonEmptyMonth) {
-                const updatedInputs = { ...prevInputs };
-                delete updatedInputs[year];
-                return updatedInputs;
-            }
-    
-            // If the month value is empty, remove it from the year
-            if (value.trim() === '') {
-                const { [month]: _, ...updatedYearWithoutEmptyMonth } = updatedYear;
-                return {
-                    ...prevInputs,
-                    [year]: updatedYearWithoutEmptyMonth
-                };
-            }
     
             return {
                 ...prevInputs,
@@ -116,6 +99,39 @@ function CustomerInflux ()  {
             };
         });
     };
+    
+    // const handleInputChange = (year, month, value) => {
+    //     setMonthInputs(prevInputs => {
+    //         const updatedYear = {
+    //             ...prevInputs[year],
+    //             [month]: value
+    //         };
+    
+    //         // Check if any month in the year has a non-empty value
+    //         const hasNonEmptyMonth = Object.values(updatedYear).some(monthValue => monthValue.trim() !== '');
+    
+    //         // If no month has a non-empty value, remove the year from the state
+    //         if (!hasNonEmptyMonth) {
+    //             const updatedInputs = { ...prevInputs };
+    //             delete updatedInputs[year];
+    //             return updatedInputs;
+    //         }
+    
+    //         // If the month value is empty, remove it from the year
+    //         if (value.trim() === '') {
+    //             const { [month]: _, ...updatedYearWithoutEmptyMonth } = updatedYear;
+    //             return {
+    //                 ...prevInputs,
+    //                 [year]: updatedYearWithoutEmptyMonth
+    //             };
+    //         }
+    
+    //         return {
+    //             ...prevInputs,
+    //             [year]: updatedYear
+    //         };
+    //     });
+    // };
     
     
     
