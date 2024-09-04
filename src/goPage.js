@@ -13,6 +13,7 @@ import SideMenu2 from './component/sideMenu2';
 import SideMenu2P from './component/sideMenu2P';
 import SideMenu2I from './component/sideMenu2I';
 import SideMenu2C from './component/sideMenu2C';
+import SideMenu2V from './component/sideMenu2V';
 import { useNavigate,useParams } from 'react-router-dom';
 
 function GoPage ()  {
@@ -126,7 +127,8 @@ function GoPage ()  {
        {phase === 'Ideation' && <SideMenu2 />}
        {phase === 'ProductDefinition' && <SideMenu2P />}   
        {phase === 'InitialDesign' && <SideMenu2I />}
-       {phase === 'Commercialization' && <SideMenu2C />}    
+       {phase === 'Commercialization' && <SideMenu2C />}   
+       {phase === 'ValidatingAndTesting' && <SideMenu2V />}  
          <div className="main-content">
         
          <Header />
@@ -186,7 +188,7 @@ function GoPage ()  {
                       
                             <div className='goH'>
                                 <h1 className='goTitle'> Select Action</h1>
-                                <h1 className='goSub'>You will have to accept or deny that this phase meets the require standard</h1>
+                                <h1 className='goSub'>You will have to accept or deny that this phase meets the required standard</h1>
                                 <span className='goBtnP' onClick={() => handleAcceptClick(projectGoGate._id,"Approved")}>Accept</span>
                                 <span className='goBtnPD' onClick={() => handleAcceptClick(projectGoGate._id,"Denied")}>Deny</span>
                             </div>
@@ -201,7 +203,7 @@ function GoPage ()  {
                       
                             <div className='goH'>
                                 <h1 className='goTitle'> Select Action</h1>
-                                <h1 className='goSub'>You will have to accept that this phase meets the require standard</h1>
+                                <h1 className='goSub'>You will have to accept that this phase meets the required standard</h1>
                                 <span className='goBtnP' onClick={() => handleAcceptClick(projectGoGate._id,"Approved")}>Accept</span>
                             </div>
     
