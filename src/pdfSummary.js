@@ -5,6 +5,7 @@ import SideMenu2 from './component/sideMenu2';
 import SideMenu2P from './component/sideMenu2P';
 import SideMenu2I from './component/sideMenu2I';
 import SideMenu2C from './component/sideMenu2C';
+import SideMenu2V from './component/sideMenu2V';
 import { useNavigate, Link,useParams } from 'react-router-dom';
 import API_BASE_URL from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
@@ -662,6 +663,8 @@ const handleInsertFile = (file) => {
           {phase === 'ProductDefinition' && <SideMenu2P />}   
           {phase === 'InitialDesign' && <SideMenu2I />}   
           {phase === 'Commercialization' && <SideMenu2C />} 
+          {phase === 'Commercialization' && <SideMenu2C />} 
+          {phase === 'ValidatingAndTesting' && <SideMenu2V />}  
        
          <div className="main-content">
         

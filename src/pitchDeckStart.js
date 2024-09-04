@@ -27,6 +27,14 @@ const PitchDeck = () => {
     navigate('/pitchDeckView');
   };
 
+  const handleClickP = () => {
+    navigate('/pitchDeckResources');
+  };
+
+  const handleClickL = () => {
+    navigate('/pitchDeckLectures');
+  };
+
   return (
     <>
     <div className='container'>
@@ -57,16 +65,16 @@ const PitchDeck = () => {
                </div> 
 
                <div className='col-md-6'>
-                <div className='caseBAVie' style={{backgroundColor:"#1b45bf"}}>
+                <div className='caseBAVie' style={{backgroundColor:"#1b45bf"}} onClick={handleClickP}>
                   <p className='conCa'>Resources</p>
-                  <p className='conCa2'>View previously Uploaded Files for Pitch deck</p>
+                  <p className='conCa2'>View Resources to help</p>
                 </div>
                </div> 
 
                <div className='col-md-6'>
-                <div className='caseBAVie' style={{backgroundColor:"#101010"}}>
-                  <p className='conCa'>Pitch Deck Offers</p>
-                  <p className='conCa2'>Upload pitch deck files for view later on</p>
+                <div className='caseBAVie' style={{backgroundColor:"#101010"}} onClick={handleClickL}>
+                  <p className='conCa'>Pitch Deck Lectures</p>
+                  <p className='conCa2'>Watch videos on Pitchdeck's and the things needed</p>
                 </div>
                </div> 
 

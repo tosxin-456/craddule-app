@@ -5,6 +5,7 @@ import SideMenu2 from './component/sideMenu2';
 import SideMenu2P from './component/sideMenu2P';
 import SideMenu2I from './component/sideMenu2I';
 import SideMenu2C from './component/sideMenu2C';
+import SideMenu2V from './component/sideMenu2V';
 import { useNavigate, Link,useParams } from 'react-router-dom';
 import API_BASE_URL from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
@@ -19,8 +20,11 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
+import ModalVideo from './component/modalNewVideo';
 function QuestionBusIntro() {
-
+  const [activeLink, setActiveLink] = useState("");
+  const [activeId, setActiveId] = useState("");
+  const [activeTime, setActiveTime] = useState("");
     const navigate = useNavigate()
     const { phase } = useParams();
     const onClickHandler = () => navigate(`/video`);
@@ -31,6 +35,7 @@ function QuestionBusIntro() {
     const [answersV, setAnswersV] = useState([]);
     const [hoveredIndex, setHoveredIndex] = useState(null);
  const [loading, setLoading] = useState(false);
+ const [isOpen, setIsOpen]= useState(false);
  const [error, setError] = useState(null);
  const projectId = localStorage.getItem('nProject');
  const [combinedAnswer, setCombinedAnswer] = useState('');
@@ -169,13 +174,6 @@ const handleClickSh = (id) => {
    const { id, value } = e.target;
    setCombinedAnswer(value);
 }
-
-
-
-
-
-
- 
 
 
 
@@ -602,6 +600,44 @@ const handleInsertFile = (file) => {
      setResizingImage(null);
    }
  };
+
+ useEffect(() => {
+  const fetchVideo = async () => {
+    try {
+      
+      const response = await fetch(`${API_BASE_URL}/api/ourVideo/video/${phase}/end/${userId}/${projectId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${access_token}`,
+        },
+
+      });
+      if (response.status === 200) {
+        const data = await response.json();
+        
+        if (data.status == 'still watching') {
+          console.log(data);
+          console.log(data.video._id);
+          const newLink = data.video.videolink.replace('https://youtu.be/', '');
+          setActiveLink(newLink); // Assuming the video link is in the videolink field
+          setActiveId(data.video._id); 
+          setActiveTime(data.video.watchTime)// Assuming the video link is in the videolink field
+          setIsOpen(true); // Open the modal if a video is found
+        } else {
+          console.error('Video already watched or not found');
+        }
+      } else {
+        console.error('Failed to fetch video. Status code:', response.status);
+      }
+    } catch (error) {
+      console.error('Failed to fetch video:', error);
+    }
+  };
+
+  fetchVideo();
+}, [phase]);
+
  
       return (
 
@@ -614,6 +650,7 @@ const handleInsertFile = (file) => {
           {phase === 'ProductDefinition' && <SideMenu2P />}   
           {phase === 'InitialDesign' && <SideMenu2I />}   
           {phase === 'Commercialization' && <SideMenu2C />} 
+          {phase === 'ValidatingAndTesting' && <SideMenu2V />} 
        
          <div className="main-content">
         
@@ -691,6 +728,10 @@ const handleInsertFile = (file) => {
             {/* Add more content as needed */}
         </div>
     </div>
+    <ModalVideo open={isOpen} onClose={() => setIsOpen(false)}  link={activeLink} id ={activeId} time={activeTime}>
+
+</ModalVideo>
+
     <Toaster  position="top-right" />
 </div> 
 

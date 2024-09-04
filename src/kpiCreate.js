@@ -187,10 +187,9 @@ function CreateKpi ()  {
         sendDataToAPI(dataToSend);
     };
     return (
-        <div className='container2'>
-        <SideMenu2P />
-        <div className="main-content">
+        <div>
         <Header />
+        <div className='container'>
         <div className="main-content2">
         <div className='bacWHI'>
                      <p className='text-center'>Kpi</p>   
@@ -226,7 +225,7 @@ function CreateKpi ()  {
                     className='monthOn1'
                     onChange={(e) => handleInputChange(index, 'x', e.target.value)}
                     type="text"
-                    placeholder="Enter X value"
+                    placeholder="Enter Input Name"
                     value={pair.x}
                     style={{width:" -webkit-fill-available"}}
                     />
@@ -237,7 +236,7 @@ function CreateKpi ()  {
                 className='monthOn1'
                 onChange={(e) => handleInputChange(index, 'y', e.target.value)}
                 type="number"
-                placeholder="Enter Y value"
+                placeholder="Enter Input Value"
                 value={pair.y}
                 style={{width: "-webkit-fill-available"}}
                 />
@@ -248,9 +247,6 @@ function CreateKpi ()  {
                 <span className='addy' onClick={addNewPair}>+</span>
                 {visibleYears > 1 &&<span className='addy mmr' onClick={removeYear}>-</span>}
                         {/* Add Year button */}
-                       
-
-                       
                         
                         <button onClick={handleSubmit} className='subm'>Submit Data</button>
                     </div>

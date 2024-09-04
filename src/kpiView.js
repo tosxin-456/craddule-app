@@ -171,8 +171,9 @@ useEffect(() => {
  
       return (
 
-        <div className='container2'>
-        <SideMenu2 />    
+        <div>
+    <Header />
+    <div className='container'>
         <div className="main-content">
        
         <Header />
@@ -201,6 +202,7 @@ useEffect(() => {
         </div>
 
       
+</div>
 </div>
 </div>
       );

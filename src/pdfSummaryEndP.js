@@ -88,7 +88,7 @@ function QuestionBusIntro() {
   const fetchAnswers = async () => {
     const category = 'BusinessCaseBuilder';
     try {
-      const summaryResponse = await fetch(API_BASE_URL + `/api/pdf/${projectId}/${category}`, {
+      const summaryResponse = await fetch(API_BASE_URL + `/api/pdf/end/${projectId}/${category}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` // Include the token in the request headers

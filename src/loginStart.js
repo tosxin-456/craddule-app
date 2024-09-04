@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Toaster, toast } from 'sonner'
@@ -33,8 +33,13 @@ function Login() {
 
     
   
-
-
+    const [currentImage, setCurrentImage] = useState(0);
+  
+    const images = [
+      "https://craddule.com/bg4.jpg",
+      "https://craddule.com/bg3.jpg",
+      "https://craddule.com/bg5.jpg",
+  ];
   
 
 
@@ -114,6 +119,14 @@ function Login() {
           console.error('An error occurred:', error);
         }
       };
+
+      useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+        }, 3000); // Change image every 3 seconds
+
+        return () => clearInterval(interval); // Cleanup interval on component unmount
+    }, []);
 
   return (
 

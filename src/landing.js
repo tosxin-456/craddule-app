@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import API_BASE_URL from './config/apiConfig';
 import API_BASE_WEB_URL from './config/apiConfigW';
 import { jwtDecode } from "jwt-decode";
+import WOW from 'wowjs';
 
 import p1 from './images/p1.jpeg';
 import p2 from './images/p2.jpeg';
@@ -25,22 +26,27 @@ import ModalStart from './component/modalStartStop';
 
 
 function LandingPage() {
+  useEffect(() => {
+    const wow = new WOW.WOW();
+    wow.init();
+  }, []);
 
    const navigate = useNavigate();
 
    const backgroundImage = `url(${depth})`;
 
-   useEffect(() => {
+  //  useEffect(() => {
 
-    const token = localStorage.getItem('access_token');
+  //   const token = localStorage.getItem('access_token');
 
-    if (!token) {
-      // Navigate to login page if token is not found
-      navigate('/login');
-      return;
-    }
+  //   if (!token) {
+  //     // Navigate to login page if token is not found
+  //     console.log("token problem")
+  //     navigate('/login');
+  //     return;
+  //   }
     
-  }, [navigate]);
+  // }, [navigate]);
     
   const currentDate = new Date();
 
@@ -63,8 +69,48 @@ const [reviewProjects, setReviewProjects] = useState([]);
 const [share, setShare] = useState([]);
 
 const access_token = localStorage.getItem('access_token');
+
+useEffect(() => {
+       
+  // Function to check if the token is invalid
+  const token = localStorage.getItem('access_token');
+  const isTokenInvalid = (token) => {
+      if (!token) {
+          // No token found, consider it invalid
+          return true;
+      }
+
+      try {
+          // Optionally, decode the token and check its expiration (JWT example)
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          const currentTime = Math.floor(Date.now() / 1000);
+          
+          if (payload.exp && payload.exp < currentTime) {
+              // Token is expired
+              return true;
+          }
+      } catch (error) {
+          // If there's an error during decoding, assume the token is invalid
+          return true;
+      }
+
+      return false;
+  };
+
+  // Check the token and navigate to login if invalid or absent
+  if (isTokenInvalid(token)) {
+      // Clear the token from localStorage (optional, in case it's invalid)
+      localStorage.removeItem('access_token');
+
+      // Navigate to the login page
+      navigate('/login'); // Redirect the user to login
+  }
+}, [navigate]); 
+
 const decodedToken = jwtDecode(access_token);
 const userId = decodedToken.userId;
+
+console.log(userId);
 
 const fetchTeamProjects= async () => {
   try {
@@ -125,7 +171,7 @@ const fetchReviewProjects= async () => {
 
 const fetchUserProjects= async () => {
   try {
-    console.log(userId);
+    
     const response = await fetch(`${API_BASE_URL}/api/project/${userId}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -139,7 +185,6 @@ const fetchUserProjects= async () => {
       const data = await response.json();
       console.log(data);
       setProjects(data.data);
-      console.log(teamMembers)
     }else{
       const result = await response.json();
       console.error('Error:', result['error']);
@@ -156,22 +201,26 @@ useEffect(() => {
   fetchTeamProjects();
   fetchUserProjects();
   fetchReviewProjects();
-        // const wow = new WOW.WOW();
-        // wow.init();
       }, []);
   
-const handleProjectClick = (projectId) => {
+const handleProjectClick = (projectId,name,count) => {
   localStorage.setItem('nProject', projectId);
+  localStorage.setItem('nProjectName', name);
+  localStorage.setItem('nProjectCount', count);
   navigate(`/start`);
 };
 
-const handleProjectTeamClick = (projectId) => {
+const handleProjectTeamClick = (projectId,name,count) => {
   localStorage.setItem('nProject', projectId);
+  localStorage.setItem('nProjectName', name);
+  localStorage.setItem('nProjectCount', count);
   navigate(`/start`);
 };
 
-const handleProjectReviowClick = (reviewId) => {
+const handleProjectReviowClick = (reviewId,name,count) => {
   localStorage.setItem('nReview', reviewId);
+  localStorage.setItem('nProjectName', name);
+  localStorage.setItem('nProjectCount', count);
   navigate(`/sharereview/${reviewId}`);
 };
 
@@ -213,10 +262,50 @@ const handleProjectReviowClick = (reviewId) => {
     };
 
   return (
-<div style={{backgroundColor:"#fff", minHeight:"100vh"}}>
+    <div >
+    
+<div className='landP'>
    <div className='container'>
-    <div className='proSeg'>
-      <p className='proMain'>Projects <span className='proAdd' onClick={handleShow}>+</span></p>
+    <div className='proSeg2'>
+      <div className='text-center'>
+        <p className='landT wow fadeInUp'>CONTINUE YOUR</p>
+        <p className='landT2 wow fadeInDown'>JOURNEY</p>
+
+      
+      </div>
+
+      <div className='row wow fadeInDown'>
+      <div className='col-md-3'>
+            <div>
+              <div className='addPro'>
+                <span className='plusP' onClick={handleShow}>+</span>
+              <div className='addProSh'>
+                <p style={{marginBottom:0}}>Create Project</p>
+              </div>
+              </div>
+              
+            </div>
+          </div>
+      {projects.map(member => (
+
+          <div className='col-md-3'>
+            <div onClick={() => handleProjectClick(member._id,member.projectName,member.projectCount)}>
+              <div className='addPro' style={{paddingTop: '65px'}}>
+                <span className='plusP' style={{fontSize: '20px'}}>Continue</span>
+              <div className='addProSh' style={{marginTop: '70px'}}>
+                <p style={{marginBottom:0}}>{member.projectName}</p>
+              </div>
+              </div>
+              
+            </div>
+          </div>
+))}
+ </div>
+
+     
+
+
+      {/* <p className='proMain'>Projects <span className='proAdd' onClick={handleShow}>+</span></p>
       {projects.length > 0 && <p className='proSubTitle'>Owned By You</p>}
       {projects.map(member => (
       <div className='row' style={{marginBottom:20}}>
@@ -225,7 +314,7 @@ const handleProjectReviowClick = (reviewId) => {
             <p className='proSlog'>Started {formatDate(member.timeSent)}</p>
             <p className='proName'>{member.projectName}</p>
             
-            <p className='proCon' onClick={() => handleProjectClick(member._id)}>Continue</p>
+            <p className='proCon' onClick={() => handleProjectClick(member._id,member.projectName)}>Continue</p>
           </div>
 
           <div className='col-md-4'>
@@ -250,7 +339,7 @@ const handleProjectReviowClick = (reviewId) => {
               <p className='proSlog'>Started {formatDate(member.timeSent)}</p>
                 <p className='proName'>{member.projectDetails.project}</p>
                 
-                <p className='proCon' onClick={() => handleProjectTeamClick(member.projectId)}>Continue</p>
+                <p className='proCon' onClick={() => handleProjectTeamClick(member.projectId,member.projectDetails.project)}>Continue</p>
               </div>
 
               <div className='col-md-4'>
@@ -273,7 +362,7 @@ const handleProjectReviowClick = (reviewId) => {
               <p className='proSlog'>Started {formatDate(member.timeSent)}</p>
                 <p className='proName'>{member.projectName}</p>
                 
-                <p className='proCon' onClick={() => handleProjectReviowClick(member._id)}>Continue</p>
+                <p className='proCon' onClick={() => handleProjectReviowClick(member._id,member.projectName)}>Continue</p>
               </div>
 
               <div className='col-md-4'>
@@ -289,9 +378,65 @@ const handleProjectReviowClick = (reviewId) => {
           ))}
 
     </div>
-    
+     */}
     
   </div> 
+  </div> 
+
+  </div>
+  
+
+  <div style={{backgroundColor:'#1b45bf', paddingBottom:'40px',paddingTop:'40px'}}>
+    <div className='container'>
+  {teamMembers.length > 0 && <p className='proSubTitle' style={{color: '#fff'}}>Team Member</p>}
+  {teamMembers.map(member => (
+           <div className='row wow fadeInDown'>
+          <div className='col-md-3'>
+            <div onClick={() => handleProjectTeamClick(member.projectId,member.projectDetails.project,member.projectDetails.projectCount)}>
+              <div className='addPro' style={{paddingTop: '65px'}}>
+                <span className='plusP' style={{fontSize: '20px'}}>Continue</span>
+              <div className='addProSh' style={{marginTop: '70px'}}>
+                <p style={{marginBottom:0}}>{member.projectDetails.project}</p>
+              </div>
+              </div>
+              
+            </div>
+          </div>
+
+         
+
+
+
+        </div>
+
+))}
+
+{reviewProjects.length > 0 && <p className='proSubTitle' style={{color: '#fff'}}>Review Project</p>}
+          {reviewProjects.map(member => (
+      <div className='row wow fadeInDown'>
+
+         <div className='col-md-3'>
+           <div onClick={() => handleProjectReviowClick(member._id,member.projectName,member.projectCount)}>
+             <div className='addPro' style={{paddingTop: '65px'}}>
+               <span className='plusP' style={{fontSize: '20px'}}>Continue</span>
+             <div className='addProSh' style={{marginTop: '70px'}}>
+               <p style={{marginBottom:0}}>{member.projectName}</p>
+             </div>
+             </div>
+             
+           </div>
+         </div>
+
+        
+
+
+
+       </div>
+
+          ))}
+
+  </div>
+  </div>
   <ModalStart open={isOpen} onClose={() => setIsOpen(false)}>
 
 </ModalStart>

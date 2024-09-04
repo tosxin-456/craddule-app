@@ -34,24 +34,28 @@ function OperatingIncomeEdit() {
     };
 
     const handleInputChange = (year, month, value) => {
+        const updatedValue = value.trim() === '' ? '0' : value;
+    
+        // Update monthInputs state
         setMonthInputs(prevInputs => {
             const updatedYear = {
                 ...prevInputs[`year${year}`],
-                [month]: value
+                [month]: updatedValue
             };
-
+    
             return {
                 ...prevInputs,
                 [`year${year}`]: updatedYear
             };
         });
-
+    
+        // Update yearsData state
         setYearsData(prevYearsData => {
             const updatedYearsData = [...prevYearsData];
             const yearIndex = updatedYearsData.findIndex(y => y.year === year);
             if (yearIndex !== -1) {
                 updatedYearsData[yearIndex].months = updatedYearsData[yearIndex].months.map(m =>
-                    m.month === month ? { ...m, value } : m
+                    m.month === month ? { ...m, value: updatedValue } : m
                 );
             }
             return updatedYearsData;

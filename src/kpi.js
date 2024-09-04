@@ -75,6 +75,7 @@ const KPI = () => {
    };
    const [kpi, setKpi] = useState([]);
  
+
    //Second Dropdown
  
          // State variables to manage dropdown behavior
@@ -241,11 +242,10 @@ const KPI = () => {
 
 
   return (
-
-    <div className='container2'>
-    <SideMenu2P />
-    <div className="main-content">
+    <div>
     <Header />
+    <div className='container'>
+    
     <div className="main-content2">
     
     <div className='row'>
@@ -257,7 +257,7 @@ const KPI = () => {
                 <button className="btn mainBtn" onClick={onClickHandler27} style={{marginTop:50,marginBottom:20}}>Create KPI</button>
             </div>
     </div>
-    <div className='row'>
+    {/* <div className='row'>
         <div className='col-md-3'>
             <div className='kpiB2' style={{backgroundColor: "#b1e6ff"}}>
                 <div className='row'>
@@ -337,35 +337,11 @@ const KPI = () => {
         </div>
 
        
-    </div>
+    </div> */}
     
                  
       <div className='row'>
-            {/* <div className='col-md-6'>
-                <div className='kpiB'>
-                <ReactApexChart
-                    options={chartData.options}
-                    series={chartData.series}
-                    type="line"
-                   
-                />
-                </div>
-            </div>
-
-
-            <div className='col-md-6'>
-                <div className='kpiB'>
-                <ReactApexChart
-                    options={chartData.options}
-                    series={chartData.series}
-                    type="line"
-                   
-                />
-                </div>
-            </div> */}
-    
-
-          
+           
       </div>
 
       <div className='bacWHI'>      

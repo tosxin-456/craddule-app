@@ -71,10 +71,9 @@ function KPIPage ()  {
 
         <>
 
-        <div className='container-fluid'>
-            <Header />
-            <div className='row'>
-            <Menu /> 
+<div>
+    <Header />
+    <div className='container'>
                 <div className='col-md-9'>
                     <img src={bci} className='bcA' onClick={onClickHandler}></img>
                     <div className='div-kpi1'><p>KPI</p></div>
