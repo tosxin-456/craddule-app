@@ -108,6 +108,7 @@ const ImageUpload = () => {
   const fetchTask = async () => {
       try {
         console.log(projectId);
+        console.log(API_BASE_URL);
         const response = await fetch(`${API_BASE_URL}/api/timeline/projects/${projectId}`, {
           headers: {
             'Content-Type': 'application/json',

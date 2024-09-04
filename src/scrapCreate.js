@@ -440,13 +440,26 @@ const handleInsertFile = (file) => {
     }
   };
 
+  function handleHome() {  
+    // Redirect to login page or any other appropriate action
+    window.location.href = '/home';
+  }
+
+  function handleCrea() {  
+    // Redirect to login page or any other appropriate action
+    window.location.href = '/createScrapName';
+  }
+  
+
     return (
         <>
 
 <Header />
 <div className='container'>
-
+<button className="buttonLo" onClick={handleCrea} >Create another scrap book</button>
+<button className="buttonLo" onClick={handleHome} style={{float:'right'}}>Home</button>
          <div className="upload-container" style={{textAlign:'justify'}}>
+         
          <div className='main-content2'>
             
             <div className='bacWHI'>

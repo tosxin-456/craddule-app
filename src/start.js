@@ -16,13 +16,18 @@ import { CiLock,CiMemoPad,CiGrid2V,CiViewTimeline,CiServer,CiTextAlignJustify,Ci
 import bolt from './images/bolt.png';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
+import ReactGA from "react-ga4";
 
+function InflationRateGraph({ graphType }) {
 
-function InflationRateGraph({projectId, graphType }) {
+  ReactGA.initialize("G-P450CRB987");
+  ReactGA.send({ 
+   hitType: "pageview", 
+   page: window.location.pathname, 
+   title: "Start Page" 
+ });
 
-  
-    
-
+ 
     const [streak, setStreak] = useState('');
     const [timelineCount, setTimelineCount] = useState('');
     const [selectedGraphData, setSelectedGraphData] = useState(null);
@@ -34,16 +39,21 @@ function InflationRateGraph({projectId, graphType }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-
+    const projectId = localStorage.getItem('nProject');
     const navigate = useNavigate();
 
     const token = localStorage.getItem('access_token'); 
     const decodedToken = jwtDecode(token);
     const userId = decodedToken.userId;
 
+    const [projectDetails, setProjectDetails] = useState([]);
+
   const handleClickB = () => {
     localStorage.setItem('selectedCase', 'BusinessCaseBuilder');
-    navigate('/pdfEnd/Ideation');
+   // navigate('/pdfEnd/Ideation');
+
+   navigate('/questionBusMain/Ideation/BusinessCaseBuilder/Introduction');
+    
   };
 
   const handleClickTi = () => {
@@ -61,14 +71,23 @@ function InflationRateGraph({projectId, graphType }) {
   };
 
   const handleClickI = () => {
-    navigate('/pdfEnd/ProductDefinition');
+    //navigate('/pdfEnd/ProductDefinition');
+    navigate('/questionBusMain/ProductDefinition/BusinessAnalysisPack/CustomerSegments');
   };
 
+  const handleClickV = () => {
+    //navigate('/pdfEnd/ValidatingAndTesting');
+    navigate('/questionBusMain/ValidatingAndTesting/FullProductProjectReview/Review');
+  };
+
+
   const handleClickID = () => {
-    navigate('/pdf/InitialDesign/InitialDesign');
+    //navigate('/pdfEnd/InitialDesign');
+    navigate('/questionBusMain/InitialDesign/ClaimTheDomain/DomainName');
   };
   const handleClickCO = () => {
-    navigate('/pdf/Commercialization/Commercialization');
+    //navigate('/pdfEnd/Commercialization');
+    navigate('/questionBusMain/Commercialization/BringTheMVPToFullScale/GetTheMVPToFruition');
   };
 
   const handleClickCh = () => {
@@ -109,7 +128,7 @@ function InflationRateGraph({projectId, graphType }) {
   
   const updateStreak = async () => {
     try {
-     const projectId = localStorage.getItem('nProject');
+     
       const token = localStorage.getItem('access_token'); 
     const decodedToken = jwtDecode(token);
     const userId = decodedToken.userId;
@@ -125,7 +144,97 @@ function InflationRateGraph({projectId, graphType }) {
       console.log(error.response)
     }
   };
- 
+
+  useEffect(() => {
+    const fetchProjectDetails = async () => {
+      console.log("getting details")
+      const id = projectId;
+      console.log("getting details:"+ id)
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/project/project/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status === 200) {
+              const responseData = await response.json();
+              console.log('Response:', responseData.data.phases);
+              setProjectDetails(responseData.data.phases);
+            }else{
+              const result = await response.json();
+              console.error('Error:', result.error);
+            }
+
+           
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (projectId) {
+        fetchProjectDetails();
+    }
+}, [projectId]);
+
+const allPhases = [
+  "Ideation",
+  "Product Definition",
+  "Initial Design",
+  "Commercialization",
+  "Validating and Testing"
+];
+
+
+
+useEffect(() => {
+  // Define an async function to fetch goStatus data
+  const fetchGoStatus = async () => {
+    try {
+      // Make API request to check goStatus with Bearer token
+      const response = await fetch(`${API_BASE_URL}/api/project/go/status/${projectId}/ideation/${status}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`, // Include Bearer token
+          'Content-Type': 'application/json'
+        }
+      });
+
+      // Check if the response status is 200
+      if (response.status === 200) {
+        const data = await response.json();
+        setMessage(data.message);
+      } else {
+        setError('Failed to fetch goStatus. Please try again later.');
+      }
+    } catch (err) {
+      setError('An error occurred while checking goStatus.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Call the async function
+  fetchGoStatus();
+}, [projectId, phase, status, token]);
+
+
+function handleLogout() {
+  // Clear local storage
+  localStorage.clear();
+  
+  // Redirect to login page or any other appropriate action
+  window.location.href = '/login';
+}
+
+function handleHome() {  
+  // Redirect to login page or any other appropriate action
+  window.location.href = '/home';
+}
+
   useEffect(() => {
     updateStreak();
   }, []);
@@ -137,7 +246,7 @@ function InflationRateGraph({projectId, graphType }) {
     useEffect(() => {
       const fetchTimelines = async () => {
         try {
-            const projectId = localStorage.getItem('nProject');
+            
           const response = await axios.get(API_BASE_URL+`/api/algo/${projectId}`);
           console.log(response);
           setTimelines(response.data);
@@ -149,14 +258,14 @@ function InflationRateGraph({projectId, graphType }) {
       };
   
       fetchTimelines();
-    }, [projectId]);
+    }, []);
 
 
     useEffect(() => {
       console.log("counting")
         const fetchTimelinesCount = async () => {
           try {
-            const projectId = localStorage.getItem('nProject');
+           
             const response = await fetch(`${API_BASE_URL}/api/timeline/count/projects/${userId}/${projectId}`, {
               method: 'GET',
               headers: {
@@ -186,7 +295,7 @@ function InflationRateGraph({projectId, graphType }) {
         };
     
         fetchTimelinesCount();
-      }, [projectId]);
+      }, []);
 
 
       return (
@@ -198,35 +307,82 @@ function InflationRateGraph({projectId, graphType }) {
        <div className=''>
         <Header />
         <div className='container'>
-            
+            <button className="buttonLo" onClick={handleLogout}>Logout</button>
+            <button className="buttonLo" onClick={handleHome} style={{float:'right'}}>Home</button>
             <div className="row">
                 <div className="col-md-3">
                     <div className="caseBA" onClick={handleClickB}>
                         <p className="caseBAPV">View</p>
                         <p className="caseBAP">Ideation</p>
                         <p className="caseBAP2">Create your Idea from start to finish</p>
-                        <p className="caseBAP3">10:20pm 10.10.2022</p>
-                        <p className="caseBAP2">5 Documents</p>
+                        {/* <p className="caseBAP3">10:20pm 10.10.2022</p> */}
+                        <p className="caseBAP2">7 Documents</p>
                     </div>
                 </div>
 
+                {projectDetails && !projectDetails.includes("Product Definition") && (
                 <div className="col-md-3">
                     <div className="caseBA2" onClick={handleClickI}>
                         <p className="caseBA2PV">View</p>
                         <p className="caseBA2P">Product Definition</p>
                         <p className="caseBA2P2">Design your business processes and flow</p>
-                        <p className="caseBA2P3">10:20pm 10.10.2022</p>
-                        <p className="caseBA2P2">5 Documents</p>
+                        {/* <p className="caseBA2P3">10:20pm 10.10.2022</p> */}
+                        <p className="caseBA2P2">4 Documents</p>
                     </div>
                 </div>
+                )}
                 
+                
+            
+
+
+               
+                  {projectDetails && !projectDetails.includes("Initial Design") && (
+                  <div className="col-md-3">
+                      <div className="caseBA3" onClick={handleClickID}>
+                          <p className="caseBA3PV">View</p>
+                          <p className="caseBA3P">Initial Design</p>
+                          <p className="caseBA3P2">Plan design and add members to Team</p>
+                          {/* <p className="caseBA3P3">10:20pm 10.10.2022</p> */}
+                          <p className="caseBA3P2">2 Documents</p>
+                          <div style={{paddingBottom:10}}></div>
+                      </div>
+                  </div>
+              )}
+
+                {projectDetails && !projectDetails.includes("Validating and Testing") && (           
                 <div className="col-md-3">
+                    <div className="caseBA" onClick={handleClickV}>
+                        <p className="caseBAPV">View</p>
+                        <p className="caseBAP">Validating and Testing</p>
+                        <p className="caseBAP2">Test and validate your prodduct</p>
+                        {/* <p className="caseBAP3">10:20pm 10.10.2022</p> */}
+                        <p className="caseBAP2">3 Documents</p>
+                    </div>
+                </div>
+                 )}
+
+              {projectDetails && !projectDetails.includes("Commercialization") && (
+             
+                <div className="col-md-3">
+                    <div className="caseBA2" onClick={handleClickCO}>
+                        <p className="caseBA2PV">View</p>
+                        <p className="caseBA2P">Commercialization</p>
+                        <p className="caseBA2P2">Get your product ready to launch for production</p>
+                        {/* <p className="caseBA2P3">10:20pm 10.10.2022</p> */}
+                        <p className="caseBA2P2">2 Documents</p>
+                        <div style={{paddingBottom:10}}></div>
+                    </div>
+                </div>
+                )}
+
+              <div className="col-md-3">
                     <div className="caseBA3" onClick={handleClickP}>
                         <p className="caseBA3PV">View</p>
-                        <p className="caseBA3P">Kpi</p>
+                        <p className="caseBA3P">KPI</p>
                         <p className="caseBA3P2">Create Custom Graphs that gives you more insight</p>
-                        <p className="caseBA3P3">10:20pm 10.10.2022</p>
-                        <p className="caseBA3P2">7 Graph Types</p>
+                        {/* <p className="caseBA3P3">10:20pm 10.10.2022</p> */}
+                        <p className="caseBA3P2">6 Graph Types</p>
                     </div>
                 </div>
 
@@ -242,49 +398,13 @@ function InflationRateGraph({projectId, graphType }) {
                     </div>
                 </div>
 
-
-
-               
-               
-
-                <div className="col-md-3">
-                    <div className="caseBA3" onClick={handleClickID}>
-                        <p className="caseBA3PV">View</p>
-                        <p className="caseBA3P">Initial Design</p>
-                        <p className="caseBA3P2">Plan design and add memebers to Team</p>
-                        <p className="caseBA3P3">10:20pm 10.10.2022</p>
-                        <p className="caseBA3P2">5 Documents</p>
-                        <div style={{paddingBottom:10}}></div>
-                    </div>
-                </div>
-
-                <div className="col-md-3">
-                    <div className="caseBA">
-                        <p className="caseBAPV">View</p>
-                        <p className="caseBAP">Validating and Testing</p>
-                        <p className="caseBAP2">Test and validate your prodduct</p>
-                        <p className="caseBAP3">10:20pm 10.10.2022</p>
-                        <p className="caseBAP2">5 Documents</p>
-                    </div>
-                </div>
-
-                <div className="col-md-3">
-                    <div className="caseBA2" onClick={handleClickCO}>
-                        <p className="caseBA2PV">View</p>
-                        <p className="caseBA2P">Commercialization</p>
-                        <p className="caseBA2P2">Get your product ready to launch for production</p>
-                        <p className="caseBA2P3">10:20pm 10.10.2022</p>
-                        <p className="caseBA2P2">5 Documents</p>
-                        <div style={{paddingBottom:10}}></div>
-                    </div>
-                </div>
                 
                 <div className="col-md-3">
                     <div className="caseBA3" onClick={handleClickPi}>
                         <p className="caseBA3PV">View</p>
                         <p className="caseBA3P">Pitch Deck</p>
                         <p className="caseBA3P2">Store Pitch Decks and have access to resources</p>
-                        <p className="caseBA3P3">10:20pm 10.10.2022</p>
+                        {/* <p className="caseBA3P3">10:20pm 10.10.2022</p> */}
                         <p className="caseBA3P2">5 Documents</p>
                         <div style={{paddingBottom:10}}></div>
                     </div>

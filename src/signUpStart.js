@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { useParams } from 'react-router-dom';
@@ -8,6 +8,8 @@ import { Toaster, toast } from 'sonner'
 import API_BASE_URL from './config/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+
+
 function SignUp() {
     const location = useLocation();
     const link = `${window.location.origin}${location.pathname}${location.search}${location.hash}`;
@@ -17,6 +19,15 @@ function SignUp() {
     console.log('Unique Code:', uniqueCode);
     const newLink = '/login/start/'+uniqueCode;
     console.log(newLink);
+
+    const [currentImage, setCurrentImage] = useState(0);
+  
+    const images = [
+      "https://craddule.com/bg4.jpg",
+      "https://craddule.com/bg3.jpg",
+      "https://craddule.com/bg5.jpg",
+  ];
+  
  
     const [showPassword, setShowPassword] = useState(false);
 
@@ -116,6 +127,14 @@ function SignUp() {
         }
       };
 
+      useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+        }, 3000); // Change image every 3 seconds
+
+        return () => clearInterval(interval); // Cleanup interval on component unmount
+    }, []);
+
   return (
 
 <div className='container'>
@@ -206,13 +225,14 @@ function SignUp() {
         </div>
 
         <div className='col-md-6'>
-          <div className='halfWhS'>
-            <div className='blurry'>
-              <p>You will never do anything in this world without courage. It is the greatest quality of the mind next to honor</p>
-
-              
+            <div 
+                className='halfWh' 
+                style={{ backgroundImage: `url(${images[currentImage]})` }}
+            >
+                <div className='blurry'>
+                    <p>You will never do anything in this world without courage. It is the greatest quality of the mind next to honor.</p>
+                </div>
             </div>
-          </div>
         </div>
     </div>
     

@@ -33,7 +33,8 @@ function ScrapView ({ htmlContent })  {
   const [error, setError] = useState(null);
   const projectId = localStorage.getItem('nProject');
   const [scrap, setScrap] = useState('');
-
+  const [nda, setNda] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
    const access_token = localStorage.getItem('access_token');
   console.log(access_token);
     const decodedToken = jwtDecode(access_token);
@@ -60,6 +61,190 @@ function ScrapView ({ htmlContent })  {
     projectId: projectId,
     link: ''
   });
+  
+  const handleCheckboxChange = (e) => {
+    console.log(e.target.checked);
+    setIsChecked(e.target.checked);
+  };
+
+  useEffect(() => {
+    const getNda = async () => {
+        try {
+            const scrapResponse = await fetch(`${API_BASE_URL}/api/nda/project/${projectId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${access_token}` // Include the token in the request headers
+                }
+            });
+
+            if (scrapResponse.status === 200) {
+                // If NDA exists, fetch the NDA data
+                const dataS = await scrapResponse.json();
+                console.log(dataS);
+                console.log("NDA found: " + dataS.nda);
+                setNda(dataS.nda);  // Assuming `nda` contains the NDA content
+
+            } else if (scrapResponse.status === 404) {
+                // If NDA does not exist (404), create a new NDA
+                const newNdaContent = `
+                   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confidentiality and Non-Disclosure Agreement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #2E86C1;
+            font-size: 24px;
+        }
+        h2 {
+            color: #2874A6;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        p {
+            margin: 15px 0;
+        }
+        .signature {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CONFIDENTIALITY AND NON-DISCLOSURE AGREEMENT</h1>
+        <p>This Confidentiality and Non-disclosure agreement is made this <strong>XXXXXXXXX</strong></p>
+
+        <h2>PARTIES</h2>
+        <p>The Parties to this Agreement are:</p>
+        <p><strong>Your Entity/Project Owner Name/Project Name</strong> incorporated under the laws of the Federal Republic of Nigeria with its principal offices at <strong>Address of your entity</strong> (“Company”). Or Your Ideas as contained in this Craddule Project Workspace. (The Disclosing Party).</p>
+        <p>And</p>
+        <p><strong>Name of Contributor</strong> with Craddule account and access to the project. (The Receiving Party/Developer).</p>
+
+        <h2>INTRODUCTION</h2>
+        <p>It is hereby agreed as follows:</p>
+        <p>The parties are desirous of engaging in discussions for certain purposes (“the Purpose”).</p>
+        <p>During the course of their business discussions and transactions, it is anticipated that one party ("the Disclosing Party") may disclose certain confidential and proprietary information related to or in connection with the Parties to the other party ("the Receiving Party"). This disclosure is for the purpose of enabling the Receiving Party to assess, evaluate, provide advice, or fulfill its obligations.</p>
+        <p>The Parties recognize that the unauthorized disclosure or use of the Disclosing Party's confidential information by third parties could result in significant harm or prejudice to the Disclosing Party.</p>
+        <p>In acknowledgment of the need for confidentiality, the Parties have mutually agreed to enter into this Confidentiality and Non-Disclosure Agreement ("the Agreement").</p>
+
+        <h2>DEFINITIONS AND INTERPRETATION</h2>
+        <p>In this Agreement, unless the context otherwise requires:</p>
+        <ul>
+            <li><strong>“Affiliate”</strong> means, with respect to any person that directly, or indirectly through one or more intermediaries, controls, is controlled by, or is under common control with such person; the term “control” (including the term “controlling”, “controlled by” and “under common control with”) means the possession, direct or indirect, of the power to direct or cause the direction of the management and policies of a person, whether through the ownership of voting securities, by contract, or otherwise.</li>
+            <li><strong>"Disclosing Party"</strong> means a Party when it discloses its Confidential Information, directly or indirectly, to the Receiving Party.</li>
+            <li><strong>"Confidential Information"</strong> includes, but is not limited to:
+                <ul>
+                    <li>All information, in any form, disclosed or supplied to a Receiving Party by a Disclosing Party relating to (i) the Purpose, (ii) past, present, or future business partners, joint ventures, or affiliates, or (iii) the Disclosing Party’s, or any of the Disclosing Party’s Representatives’ past, present, or future research, development, or business activities.</li>
+                    <li>All business data, Personal Data, technical, financial, operational, administrative, legal, economic, and other information in whatever form (including in written, oral, visual, or electronic form) relating directly or indirectly to the Purpose.</li>
+                    <li>All information in whatever form relating to the existence, status, or progress of the Purpose, including the existence and contents of this Agreement and the fact that discussions and negotiations may be taking place in relation to the Purpose.</li>
+                    <li>All documents and any other material that contains, reflects, or is generated from any of the foregoing, and all copies of any of the foregoing.</li>
+                </ul>
+            </li>
+            <li><strong>“Personal Data”</strong> means any data which relates to an identified or identifiable person, be it sensitive or non-sensitive data.</li>
+            <li><strong>“Representatives”</strong> means, in relation to a Party, its Affiliates and their respective directors, officers, employees, agents, consultants, and advisers.</li>
+        </ul>
+
+        <h2>UNDERTAKING</h2>
+        <p>The Receiving Party undertakes:</p>
+        <ul>
+            <li>That all information obtained from the Disclosing Party shall be regarded and treated as confidential and the property of the Disclosing Party.</li>
+            <li>To maintain in secrecy any and all Proprietary Information of the Disclosing Party and to act in good faith at all times in performing its obligations under this Agreement.</li>
+            <li>Not to disclose the Proprietary Information to any third parties, except where necessary for the performance of obligations under this Agreement.</li>
+            <li>To return all Proprietary Information upon termination or expiration of this Agreement.</li>
+        </ul>
+
+        <h2>INDEMNITY</h2>
+        <p>The Receiving Party indemnifies and holds the Disclosing Party harmless against any loss, expense, claim, harm, damage, or liability of whatsoever nature suffered or sustained by the Disclosing Party resulting from any action, proceeding, or claim made by any person against the Disclosing Party as a result of the breach of this Agreement by the Receiving Party or any of its employees, agents, independent contractors, or consultants.</p>
+
+        <h2>BREACH</h2>
+        <p>Should the Receiving Party commit a breach of its obligations in terms of this Agreement, the Disclosing Party has the right to claim actual damages as it may suffer. In addition, the Disclosing Party may apply to Court for an injunction restraining the Receiving Party from using, disclosing, or exploiting the Proprietary Information of the Disclosing Party.</p>
+
+        <h2>DOMICILIUM</h2>
+        <p>The Parties respectively choose their respective addresses set forth above as their domicilium citandi et executandi for all purposes of giving any notice, the serving of any process, and for any purpose arising from this Agreement.</p>
+
+        <h2>CONFIDENTIAL INFORMATION USAGE</h2>
+        <p>The Developer will hold the Confidential Information in strict confidence and will not disclose, reproduce, reprocess, or distribute any Confidential Information in whole or in part, directly or indirectly, to any persons, other than to its Representatives and with the prior consent of the Company, to the extent that such disclosure, reproduction, or distribution is strictly necessary for the Purpose of this Agreement.</p>
+
+        <h2>CONFIDENTIAL INFORMATION STORAGE</h2>
+        <p>The Receiving Party shall store the received/obtained Confidential Information under this Agreement within Nigeria, or the Geographic location of the Disclosing Party.</p>
+
+        <h2>RETURN OR DESTRUCTION OF CONFIDENTIAL INFORMATION</h2>
+        <p>Upon termination or expiration of this Agreement, the Developer shall immediately erase/delete all Confidential Information obtained under this Agreement, including operational, archived, and backup Confidential Information.</p>
+
+        <h2>DATA PROTECTION</h2>
+        <p>Both parties agree to comply with all applicable data protection laws and regulations concerning the processing of personal data. Each party shall be responsible for ensuring that it has a valid legal basis for processing personal data and obtaining any necessary consents or authorizations as required by law.</p>
+
+        <h2>GENERAL</h2>
+        <p>This Agreement contains the entire agreement between the Parties and no variation or consensual cancellation thereof shall be of any force or effect unless reduced to writing and signed by both Parties.</p>
+
+        <div class="signature">
+            <p>Signed for and on behalf of</p>
+            <p><strong>Project Name</strong></p>
+            <p>____________________</p>
+            <p><strong>Name</strong></p>
+            <p><strong>Designation</strong></p>
+        </div>
+
+        <div class="signature">
+            <p>Developer</p>
+            <p>____________________</p>
+            <p><strong>Name</strong></p>
+            <p><strong>Designation</strong></p>
+        </div>
+    </div>
+</body>
+</html>
+
+                `;
+
+                const createNdaResponse = await fetch(`${API_BASE_URL}/api/nda`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${access_token}` // Include the token in the request headers
+                    },
+                    body: JSON.stringify({
+                        projectId: projectId,
+                        nda: newNdaContent
+                    })
+                });
+
+                if (createNdaResponse.status === 200) {
+                    const createdNda = await createNdaResponse.json();
+                    console.log("New NDA created: " + createdNda);
+                    setNda(createdNda.nda);
+                    
+                } else {
+                    console.log('Failed to create NDA');
+                    setLoading(false);
+                }
+            } else {
+                const data = await scrapResponse.json();
+                console.log(data);
+                setLoading(false);
+            }
+        } catch (error) {
+            setError(error.message);
+            setLoading(false);
+        }
+    };
+
+    getNda();
+}, [projectId, access_token]);
 
   const createTeam = async (data) => {
     setLoading(true);
@@ -71,13 +256,21 @@ function ScrapView ({ htmlContent })  {
       const link = "/login/start/" + uniqueCode;
   
       console.log(link);
+
+      let ndaC = "";
+
+      if(isChecked){
+        ndaC = nda;
+        console.log(ndaC);
+      }
   
       const updatedFormData = {
         ...data,
         link: link,
         uniqueCode: uniqueCode,
         projectId: projectId,
-        email: data.email
+        email: data.email,
+        nda :ndaC,
       };
   
       const response = await fetch(API_BASE_URL + '/api/team', {
@@ -92,12 +285,14 @@ function ScrapView ({ htmlContent })  {
       if (response.status === 200) {
         setLoading(false);
         console.log(response);
-        setLink('http://159.223.7.210:3000' + link);
+        setLink('https://app.craddule.com' + link);
+        toast.success('Invite Sent');
         //setLink(API_BASE_WEB_URL + link);
       } else {
         const result = await response.json();
         setLoading(false);
         console.error('Error:', result['error']);
+        toast.error(result['error']);
       }
     } catch (error) {
       setLoading(false);
@@ -196,8 +391,8 @@ createTeam(formData);
 
   const onClickHandler27 = () => navigate(`/createScrapName`);
 
-  const handleViewClick = (id) => {
-    navigate(`/createScrap/${id}`); // Navigate to the view page with the ID as a parameter
+  const handleN = () => {
+    navigate(`/nda`); // Navigate to the view page with the ID as a parameter
   };
 
 
@@ -230,9 +425,9 @@ createTeam(formData);
          <div className="main-content">
         
          <Header />
-        
+         
          <div className='main-content2'>
-            
+        
         <div className='bacWHI'>
 
         <div className="row">
@@ -241,7 +436,7 @@ createTeam(formData);
             </div>
 
             <div className="col-md-6">
-               
+              <button className="btn mainBtn" onClick={handleN}>Manage NDA</button>
             </div>
                 </div>
 
@@ -268,12 +463,21 @@ createTeam(formData);
                 ></input>
                 {/*<textarea className='enterE'></textarea>*/}
                 </div>
-
-
-               
+                
                
 
                 </div>
+
+                <div className='text-center'>
+                <input 
+                type="checkbox" 
+                label="NDA"
+                name="nda"
+                checked={isChecked} // Bind checked attribute to state
+                onChange={handleCheckboxChange}
+              />
+              <span style={{paddingLeft:10}}>Send NDA</span>
+              </div>
 
                 
 

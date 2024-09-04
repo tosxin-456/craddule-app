@@ -281,7 +281,7 @@ const CreateTask = () => {
                
             <div className='row'>
               <div className='col-md-6'>
-                <p htmlFor="task" className='timeTxt'>Task</p>
+                <p htmlFor="task" className='timeTxt'>Task Name</p>
                       <input 
                       className='inpTask'
                       type="text"
@@ -323,8 +323,15 @@ const CreateTask = () => {
                           <option value="ValuePropositionPack">Value Proposition Pack</option>
                           <option value="SuccessMatrix">Success Matrix</option>
                           <option value="DetailedMarketingStrategies">Detailed Marketing Strategies</option>
+                          <option value="ClaimTheDomain">Claim The Domain</option>
+                          <option value="StakeholdersEngagement">Stakeholders Engagement</option>
+                          <option value="FullProductOrProjectReview">Full Product Or Project Review</option>
+                          <option value="DetailedMarketingRtmTesting">Detailed Marketing Testing</option>
+                          <option value="DevelopmentCostReview">Development Cost Review</option>
+                          <option value="BringTheMVPToFullScale">Bring The MVP To Full Scale</option>
+                          <option value="ExecuteTheMarketingAndRouteToMarketStrategies">Execute Marketing Route</option>
                       </select>
-
+                      
 
                     {showPicker && (
                       <div className="pickerStylesT">
@@ -396,6 +403,7 @@ const CreateTask = () => {
                 value={selectedUsers}
                 onChange={handleChangeUsers}
                 className='dropT2'
+                placeholder="Select Team Member"
               />
               </div>
 
