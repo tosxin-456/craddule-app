@@ -14,7 +14,7 @@ import API_BASE_URL from './config/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
-
+import ModalVideo from './component/modalVideoAny';
 
 
 function PagePositioning ()  {
@@ -24,6 +24,8 @@ function PagePositioning ()  {
      const [loading, setLoading] = useState(false);
      const [font, setFont] = useState(null);
      const [selectedImage, setSelectedImage] = useState(null);
+     const [isOpenY, setIsOpenY]= useState(false);
+     const [activeLink, setActiveLink] = useState("");
 
      const access_token = localStorage.getItem('access_token');
    const decodedToken = jwtDecode(access_token);
@@ -185,6 +187,27 @@ function PagePositioning ()  {
       navigate('/brandingUpload');
     };
 
+    const handleBrand = () => {
+      const vid = 'https://youtu.be/sO4te2QNsHY?si=XA8Rev4mJgpssCDZ';
+            const link = vid.replace('https://youtu.be/', '');
+            setActiveLink(link); 
+            setIsOpenY(true);
+    };
+
+    const handleBrandM = () => {
+      const vid = 'https://youtu.be/zpzZumZCdWA?si=AQOc6FW6l3sZ_v6d';
+            const link = vid.replace('https://youtu.be/', '');
+            setActiveLink(link); 
+            setIsOpenY(true);
+    };
+
+    const handleBrandL = () => {
+      const vid = 'https://youtu.be/51hnOZ-gU7k?si=ktpXTWPFBAY_YZup';
+            const link = vid.replace('https://youtu.be/', '');
+            setActiveLink(link); 
+            setIsOpenY(true);
+    };
+
     return (
         <>
   <div className='container2'>
@@ -203,7 +226,8 @@ function PagePositioning ()  {
         <p className='centerHp'>Here we create a brand</p>
     </div>
 
-      <span className='selQ' onClick={handleB}>Upload Brand Pictures and Logo</span>
+      <span className='selQ' onClick={handleB}>Upload Brand Pictures and Logo </span>
+      <span className='knmc' onClick={handleBrandL}>know more</span>
       <div className='row' style={{paddingTop:20}}>
       {types.map((imageDetail, index) => {
          return (
@@ -220,7 +244,7 @@ function PagePositioning ()  {
        </div>
         <div>
     <div className = "titleBrand">
-    <label htmlFor="brandName" className='headBrand'>Brand Name</label>
+    <label htmlFor="brandName" className='headBrand'>Brand Name <span className='knmc' onClick={handleBrand}>know more</span></label>
         <input className='longInput'
         type="text"
         id="brandName"
@@ -296,7 +320,7 @@ function PagePositioning ()  {
 
 
         <div className = "titleBrand2">
-    <label htmlFor="vision" className='headBrand'>Vision</label>
+    <label htmlFor="vision" className='headBrand'>Vision <span className='knmc' onClick={handleBrandM}>know more</span></label>
         <input className='longInput'
         type="text"
         id="vision"
@@ -330,7 +354,7 @@ function PagePositioning ()  {
         />
         </div>
 
-
+        <Toaster  position="top-right" />
 </div> 
 
 {/* <button className="btn btn-primary curveNext" onClick={onClickHandler}>Next</button> */}
@@ -343,6 +367,9 @@ function PagePositioning ()  {
            
             
 </div>
+<ModalVideo open={isOpenY} onClose={() => setIsOpenY(false)}  link={activeLink}>
+
+</ModalVideo>
 
 <LogoModal open={isOpen} onClose={() => setIsOpen(false)}>
 

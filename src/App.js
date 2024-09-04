@@ -97,6 +97,7 @@ import QuestionDmaIpSum from './quesDmaIpSum';
 import QuestionDmaRmSum from './quesDmaRmSum';
 import QuestionDmaRoSum from './quesDmaRoSum';
 import QuestionEdit from './questionEdit';
+import GetCard from './getCard';
 
 import ProblemStatement from './problemstatement';
 import PageBenefit from './pageBenefit';
@@ -271,6 +272,8 @@ import Craddule from './craddule';
 import CradduleType from './cradduleFile';
 import PitchDeckUpload from './pitchDeckUpload';
 import PitchDeckView from './pitchDeckView';
+import PitchDeckResources from './pitchDeckResources';
+import PitchDeckLectures from './pitchDeckLectures';
 import TeamView from './teamView';
 import TeamAdd from './teamAdd';
 import SharePhase from './sharePhase';
@@ -285,13 +288,26 @@ import PDFEndV from './pdfSummaryEndV';
 import PDFEndC from './pdfSummaryEndC';
 import PDFMultiple from './pdfSummaryMultiple';
 import IdeationStart from './ideation';
+import Accelerate from './accelerate';
+import Nda from './nda';
+import CreateVideosAdmin from './createVideosAdmin';
+import ReactGA from "react-ga4";
 
 function App() {
+  // ReactGA.initialize("G-B7LBY51F0E");
+  //  ReactGA.send({ 
+  //   hitType: "pageview", 
+  //   page: window.location.pathname, 
+  //   title: "Custom Title" 
+  // });
+
   return (
     <Router>
       <Routes>
         <Route path="/pitchDeckUpload" element= {<PitchDeckUpload />} />
         <Route path="/pitchDeckView" element= {<PitchDeckView />} />
+        <Route path="/pitchDeckResources" element= {<PitchDeckResources />} />
+        <Route path="/pitchDeckLectures" element= {<PitchDeckLectures />} />
         <Route path="/questionBus" element= {<QuestionBus />} />
         <Route path="/questionBusMain/:phase/:category/:subCategory" element= {<QuestionBusMain />} />
         <Route path="/questionBusMainSum/:phase/:category/:subCategory" element= {<QuestionBusMainSum />} />
@@ -378,7 +394,7 @@ function App() {
         <Route path="/questionDmaIpSum" element= {<QuestionDmaIpSum />} />
         <Route path="/questionDmaRmSum" element= {<QuestionDmaRmSum />} />
         <Route path="/questionDmaRoSum" element= {<QuestionDmaRoSum />} />
-        <Route path="/questionEdit/:id" element= {<QuestionEdit />} />
+        <Route path="/questionEdit/:phase/:id" element= {<QuestionEdit />} />
         <Route path="/chat" element= {<Chat />} />
         <Route path="/dcf" element= {<DCF />} />
        
@@ -572,6 +588,10 @@ function App() {
             <Route path="/pdfMultiple/" element= {<PDFMultiple />} />
             <Route path="/firstQuestion/" element= {<FirstQuestion />} />
             <Route path="/ideation/" element= {<IdeationStart />} />
+            <Route path="/accelerate/" element= {<Accelerate />} />
+            <Route path="/nda/" element= {<Nda />} />
+            <Route path="/card/" element= {<GetCard />} />
+            <Route path="/createVideoAdmin/" element= {<CreateVideosAdmin />} />
       </Routes>
     </Router>
   );

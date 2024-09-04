@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import API_BASE_URL from './config/apiConfig';
 import io from 'socket.io-client';
 
 function QuestionBus() {
@@ -7,25 +6,30 @@ function QuestionBus() {
     const [messageInput, setMessageInput] = useState('');
     const [userId, setUserId] = useState('');
     const projectId = '6675678ac8768de3d516dbc1';
-    const socket = io('http://localhost:3001');
+    const socket = useRef(null);
+
     useEffect(() => {
-        socket.on('message', ({ projectId, content, userId, firstName, lastName }) => {
-            setMessages(prevMessages => [...prevMessages, { projectId, content, userId, firstName, lastName }]);
+        // Establish socket connection
+        socket.current = io('http://localhost:3001');
+
+        // Handle incoming messages
+        socket.current.on('message', ({ projectId, content, userId, firstName, lastName,createdAt }) => {
+            setMessages(prevMessages => [...prevMessages, { projectId, content, userId, firstName, lastName,createdAt }]);
+            
+        });
+
+        // Request initial chat history
+        socket.current.emit('loadChat', projectId);
+
+        socket.current.on('initialChat', (initialMessages) => {
+            console.log(initialMessages);
+            setMessages(initialMessages);
         });
 
         return () => {
-            socket.off('message');
+            socket.current.off('message');
+            socket.current.disconnect();
         };
-    }, []);
-
-    useEffect(() => {
-        async function fetchMessages() {
-            const response = await fetch(`${API_BASE_URL}/chat/${projectId}`);
-            const data = await response.json();
-            setMessages(data);
-        }
-
-        fetchMessages();
     }, [projectId]);
 
     const handleSend = () => {
@@ -35,7 +39,7 @@ function QuestionBus() {
                 content: messageInput,
                 userId
             };
-            socket.emit('message', message);
+            socket.current.emit('message', message);
             setMessageInput('');
         }
     };
@@ -45,7 +49,7 @@ function QuestionBus() {
             <div id="messages">
                 {messages.map((message, index) => (
                     <div key={index}>
-                        {message.userId.firstName} {message.userId.lastName}: {message.content}
+                        {message.userId.first_name} {message.userId.last_name}: {message.content}
                     </div>
                 ))}
             </div>

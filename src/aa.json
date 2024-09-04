@@ -226,25 +226,116 @@
         "subCategory": "DomainName",
         "subCategoryName": "Domain Name",
         "order": 1,
-        "category": "DomainName"
+        "category": "ClaimTheDomain"
     },
     {
         "subCategory": "TrademarkOrCopyright",
         "subCategoryName": "Trademark Or Copyright",
-        "order": 1,
-        "category": "TrademarkOrCopyright"
+        "order": 2,
+        "category": "ClaimTheDomain"
     },
+    {
+        "subCategory": "BusinessNameOrCompanyRegistrations",
+        "subCategoryName": "Business Name Or Company Registrations",
+        "order": 3,
+        "category": "ClaimTheDomain"
+    },
+    
     {
         "subCategory": "Patent",
         "subCategoryName": "Patent",
-        "order": 1,
-        "category": "Patent"
+        "order": 4,
+        "category": "ClaimTheDomain"
     },
     {
-        "subCategory": "StakeholdersEngagement",
-        "subCategoryName": "Stakeholders Engagement",
+        "subCategory": "Feedback",
+        "subCategoryName": "Feedback",
         "order": 1,
         "category": "StakeholdersEngagement"
+    },
+    {
+        "subCategory": "Review",
+        "subCategoryName": "Review",
+        "order": 1,
+        "category": "FullProductProjectReview"
+    },
+    {
+        "subCategory": "DefineTestingObjectives",
+        "subCategoryName": "Define Testing Objectives",
+        "order": 1,
+        "category": "DetailedMarketingRtmTesting"
+    },
+    {
+        "subCategory": "IdentifyKeyVariables",
+        "subCategoryName": "Identify Key Variables",
+        "order": 2,
+        "category": "DetailedMarketingRtmTesting"
+    },
+    {
+        "subCategory": "DevelopTestingHypotheses",
+        "subCategoryName": "Develop Testing Hypotheses",
+        "order": 3,
+        "category": "DetailedMarketingRtmTesting"
+    },
+    {
+        "subCategory": "DesignTestScenarios:",
+        "subCategoryName": "Design Test Scenarios",
+        "order": 4,
+        "category": "DetailedMarketingRtmTesting"
+    },
+    {
+        "subCategory": "SelectTestMarketsOrSegments",
+        "subCategoryName": "Select Test Markets or Segments",
+        "order": 5,
+        "category": "DetailedMarketingRtmTesting"
+    },
+    {
+        "subCategory": "ImplementTestingPlan",
+        "subCategoryName": "Implement Testing Plan",
+        "order": 6,
+        "category": "DetailedMarketingRtmTesting"
+    },
+    {
+        "subCategory": "CollectDataAndFeedback:",
+        "subCategoryName": "CollectDataAndFeedback:",
+        "order": 7,
+        "category": "DetailedMarketingRtmTesting"
+    },
+    {
+        "subCategory": "AnalyzeResults",
+        "subCategoryName": "Analyze Results",
+        "order": 8,
+        "category": "DetailedMarketingRtmTesting"
+    },
+    {
+        "subCategory": "IterateAndOptimize:",
+        "subCategoryName": "Iterate and Optimize",
+        "order": 9,
+        "category": "DetailedMarketingRtmTesting"
+    },
+    {
+        "subCategory": "ScaleSuccessfulStrategies:",
+        "subCategoryName": "Scale Successful Strategies",
+        "order": 10,
+        "category": "DetailedMarketingRtmTesting"
+    },
+    {
+        "subCategory": "MonitorAndTrackPerformance",
+        "subCategoryName": "Monitor And Track Performance",
+        "order": 11,
+        "category": "DetailedMarketingRtmTesting"
+    },
+    {
+        "subCategory": "DocumentLearningsAndBestPractices",
+        "subCategoryName": "Document Learnings And Best Practices",
+        "order": 12,
+        "category": "DetailedMarketingRtmTesting"
+    },
+    {
+        "subCategory": "Review.",
+        "subCategoryName": "Review",
+        "order": 1,
+        "category": "DevelopmentCostReview"
     },
     {
         "subCategory": "FullProductOrProjectReview",
@@ -253,14 +344,14 @@
         "category": "FullProductOrProjectReview"
     },
     {
-        "subCategory": "BringTheMVPToFullScale",
-        "subCategoryName": "Bring The MVP To Full Scale",
+        "subCategory": "GetTheMVPToFruition",
+        "subCategoryName": "Get The MVP To Fruition",
         "order": 1,
         "category": "BringTheMVPToFullScale"
     },
     {
-        "subCategory": "ExecuteTheMarketingAndRouteToMarketStrategies",
-        "subCategoryName": "Execute Marketing",
+        "subCategory": "NowWeAreLive",
+        "subCategoryName": "Now we are live",
         "order": 1,
         "category": "ExecuteTheMarketingAndRouteToMarketStrategies"
     }
