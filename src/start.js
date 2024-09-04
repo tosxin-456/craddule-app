@@ -36,10 +36,12 @@ function InflationRateGraph({ graphType }) {
     const [deviceType, setDeviceType] = useState('desktop');
 
     const [timelines, setTimelines] = useState([]);
+    const [unlock, setUnlock] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const projectId = localStorage.getItem('nProject');
+    console.log("use projectId: "+projectId)
     const navigate = useNavigate();
 
     const token = localStorage.getItem('access_token'); 
@@ -195,7 +197,7 @@ useEffect(() => {
   const fetchGoStatus = async () => {
     try {
       // Make API request to check goStatus with Bearer token
-      const response = await fetch(`${API_BASE_URL}/api/project/go/status/${projectId}/ideation/${status}`, {
+      const response = await fetch(`${API_BASE_URL}/api/project/go/${projectId}/Ideation/Approved`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`, // Include Bearer token
@@ -206,20 +208,25 @@ useEffect(() => {
       // Check if the response status is 200
       if (response.status === 200) {
         const data = await response.json();
-        setMessage(data.message);
+        console.log("go status");
+        console.log(data.message);
+        console.log(data.allCompleted);
+        setUnlock(data.allCompleted);
       } else {
-        setError('Failed to fetch goStatus. Please try again later.');
+        const data = await response.json();
+        console.log(data.message);
+        console.log('Failed to fetch goStatus. Please try again later.');
       }
     } catch (err) {
-      setError('An error occurred while checking goStatus.');
+      console.log('An error occurred while checking goStatus.');
     } finally {
-      setLoading(false);
+     //setLoading(false);
     }
   };
 
   // Call the async function
   fetchGoStatus();
-}, [projectId, phase, status, token]);
+}, [projectId]);
 
 
 function handleLogout() {
@@ -322,12 +329,17 @@ function handleHome() {
 
                 {projectDetails && !projectDetails.includes("Product Definition") && (
                 <div className="col-md-3">
-                    <div className="caseBA2" onClick={handleClickI}>
+                  <div 
+                    className={`caseBA2 ${!unlock ? 'locked' : ''}`}  
+                    onClick={unlock ? handleClickI : null}
+                  >
+                    
                         <p className="caseBA2PV">View</p>
                         <p className="caseBA2P">Product Definition</p>
                         <p className="caseBA2P2">Design your business processes and flow</p>
                         {/* <p className="caseBA2P3">10:20pm 10.10.2022</p> */}
                         <p className="caseBA2P2">4 Documents</p>
+                        
                     </div>
                 </div>
                 )}
@@ -339,7 +351,11 @@ function handleHome() {
                
                   {projectDetails && !projectDetails.includes("Initial Design") && (
                   <div className="col-md-3">
-                      <div className="caseBA3" onClick={handleClickID}>
+                    <div 
+                    className={`caseBA3 ${!unlock ? 'locked' : ''}`}  
+                    onClick={unlock ? handleClickID : null}
+                    >
+                      
                           <p className="caseBA3PV">View</p>
                           <p className="caseBA3P">Initial Design</p>
                           <p className="caseBA3P2">Plan design and add members to Team</p>
@@ -352,7 +368,11 @@ function handleHome() {
 
                 {projectDetails && !projectDetails.includes("Validating and Testing") && (           
                 <div className="col-md-3">
-                    <div className="caseBA" onClick={handleClickV}>
+                    
+                    <div 
+                      className={`caseBA ${!unlock ? 'locked' : ''}`}  
+                      onClick={unlock ? handleClickV : null}
+                    >
                         <p className="caseBAPV">View</p>
                         <p className="caseBAP">Validating and Testing</p>
                         <p className="caseBAP2">Test and validate your prodduct</p>
@@ -365,7 +385,11 @@ function handleHome() {
               {projectDetails && !projectDetails.includes("Commercialization") && (
              
                 <div className="col-md-3">
-                    <div className="caseBA2" onClick={handleClickCO}>
+                     <div 
+                      className={`caseBA2 ${!unlock ? 'locked' : ''}`}  
+                      onClick={unlock ? handleClickCO : null}
+                    >
+                    
                         <p className="caseBA2PV">View</p>
                         <p className="caseBA2P">Commercialization</p>
                         <p className="caseBA2P2">Get your product ready to launch for production</p>

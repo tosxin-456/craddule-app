@@ -6801,6 +6801,25 @@ color: red;
   font-size: 25px;
   
 }
+
+.locked {
+  position: relative; /* Ensure the overlay is positioned correctly */
+  opacity: 0.6; /* Make the whole div semi-transparent */
+  pointer-events: none; /* Disable interaction */
+}
+
+.locked:before {
+  content: "\1F512"; /* Unicode for padlock */
+  font-size: 48px;
+  color: rgba(255, 255, 255, 0.7); /* White padlock with transparency */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* Ensure the padlock icon is above the content */
+}
+
+
 .caseBA{
   margin-top:30px;
   background-color: #FACC05;
