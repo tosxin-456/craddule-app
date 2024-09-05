@@ -211,7 +211,6 @@ import Cost from './cost';
 import Login from './login';
 import ExpensesGraph from './ExpensesGraph';
 import LandingPage from './landing';
-import LoadingPage from './laodingPage';
 import PageAddKpi from './pageAddKpi';
 import GoPage from './goPage';
 import ProfitPage from './profitPage';
@@ -315,7 +314,6 @@ function App() {
         <Route path="/signup/start/:id/" element={<SignUpTeam />} />
 
         <Route path="/home" element= {<LandingPage />} />
-        <Route path="/loading" element= {<LoadingPage />} />
 
         <Route path="/pitchDeckUpload" element= {<PitchDeckUpload />} />
         <Route path="/pitchDeckView" element= {<PitchDeckView />} />

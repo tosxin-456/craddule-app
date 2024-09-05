@@ -5,6 +5,7 @@ import './App.css';
 import depth from './images/depth.png';
 import { useNavigate } from 'react-router-dom';
 import ModalStart from './component/modalStartStop';
+import Loading from './component/loading.js';  // Import the Loading component
 import {
   useValidateToken,
   useFetchUserProjects,
@@ -18,6 +19,7 @@ function LandingPage() {
   const [projects, setProjects] = useState([]);
   const [teamMembers, setTeamMembers] = useState([]);
   const [reviewProjects, setReviewProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -25,7 +27,11 @@ function LandingPage() {
   useValidateToken();
   const userId = getUserIdFromToken();
 
-  useFetchUserProjects(userId, setProjects);
+  // Fetch data and update loading state
+  useFetchUserProjects(userId, (data) => {
+    setProjects(data);
+    setIsLoading(false); // Set loading to false after fetching
+  });
   useFetchTeamProjects(userId, setTeamMembers);
   useFetchReviewProjects(userId, setReviewProjects);
 
@@ -43,12 +49,17 @@ function LandingPage() {
     navigate(`/start`);
   };
 
-  const handleProjectReviowClick = (reviewId, name, count) => {
+  const handleProjectReviewClick = (reviewId, name, count) => {
     localStorage.setItem('nReview', reviewId);
     localStorage.setItem('nProjectName', name);
     localStorage.setItem('nProjectCount', count);
     navigate(`/sharereview/${reviewId}`);
   };
+
+  if (isLoading) {
+    // Render the Loading component if data is still being fetched
+    return <Loading label="Loading your projects..." />;
+  }
 
   return (
     <div>
@@ -109,7 +120,7 @@ function LandingPage() {
           {reviewProjects.map((review) => (
             <div className='row wow fadeInDown' key={review._id}>
               <div className='col-md-3'>
-                <div onClick={() => handleProjectReviowClick(review._id, review.projectName, review.projectCount)}>
+                <div onClick={() => handleProjectReviewClick(review._id, review.projectName, review.projectCount)}>
                   <div className='addPro' style={{ paddingTop: '65px' }}>
                     <span className='plusP' style={{ fontSize: '20px' }}>Continue</span>
                     <div className='addProSh' style={{ marginTop: '70px' }}>

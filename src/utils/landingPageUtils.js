@@ -1,4 +1,3 @@
-// LandingPageUtils.js
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API_BASE_URL from '../config/apiConfig';
@@ -112,7 +111,7 @@ export const useFetchReviewProjects = (userId, setReviewProjects) => {
   }, [userId, setReviewProjects]);
 };
 
-// Utility function to format date
+// Format date
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
 
@@ -135,7 +134,7 @@ export const formatDate = (dateString) => {
   return `${dayWithSuffix} ${month} ${year}`;
 };
 
-// Utility function to decode JWT token and get user ID
+// Decode JWT token and get user ID
 export const getUserIdFromToken = () => {
   const access_token = localStorage.getItem('access_token');
   const decodedToken = jwtDecode(access_token);
