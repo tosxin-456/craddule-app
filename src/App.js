@@ -314,6 +314,8 @@ function App() {
         <Route path="/login/start/:id/" element={<LoginTeam />} />
         <Route path="/signup/start/:id/" element={<SignUpTeam />} />
 
+        <Route path="/home" element= {<LandingPage />} />
+        <Route path="/loading" element= {<LoadingPage />} />
 
         <Route path="/pitchDeckUpload" element= {<PitchDeckUpload />} />
         <Route path="/pitchDeckView" element= {<PitchDeckView />} />
@@ -520,9 +522,7 @@ function App() {
         <Route path="/Financials" element= {<Financials />} />
         <Route path="/conclusion" element={<Conclusion />} />
         <Route path="costPage" element={<PageCost />} />
-        <Route path="/home" element= {<LandingPage />} />
         <Route path="/go/:phase" element= {<GoPage />} />
-        <Route path="/loading" element= {<LoadingPage />} />
         <Route path="/createProject" element= {<CreateProject />} />
         <Route path="/createQuestion" element= {<CreateQuestion />} />  
         <Route path="/inspVideo" element= {<InspVideo />} />  

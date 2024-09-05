@@ -6,7 +6,7 @@ import { Toaster } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-import { handleTogglePassword, login } from './util/login.js';
+import { handleTogglePassword, login } from './utils/loginUtils.js';
 
 function Login() {
   const [email, setEmail] = useState('');

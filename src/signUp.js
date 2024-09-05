@@ -9,7 +9,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import ReactGA from "react-ga4";
-import { handleTogglePassword, handleToggleCPassword, validatePassword, createUser } from './util/signup.js';
+import { handleTogglePassword, handleToggleCPassword, validatePassword, createUser } from './utils/signUpUtils.js';
 
 function SignUp() {
   ReactGA.initialize("G-P450CRB987");

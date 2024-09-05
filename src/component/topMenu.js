@@ -11,7 +11,7 @@ import ChatToolModal from './chatToolModal';
 import API_BASE_URL from '../config/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faTrash  } from '@fortawesome/free-solid-svg-icons';
-import { checkTokenValidity } from '../util/auth';
+import { checkTokenValidity } from '../utils/auth';
 
 const TopMenu = () => {
     const [isOpen, setIsOpen]= useState(false);
