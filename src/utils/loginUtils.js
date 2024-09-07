@@ -1,0 +1,40 @@
+// utils.js
+import API_BASE_URL from '../config/apiConfig.js';
+import { toast } from 'sonner';
+
+export const handleTogglePassword = (showPassword, setShowPassword) => {
+  setShowPassword(!showPassword);
+};
+
+export const login = async (data, setLoading, navigate) => {
+  setLoading(true);
+  try {
+    console.log(data);
+    const response = await fetch(API_BASE_URL + '/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.status === 200) {
+      const responseData = await response.json(); 
+      const { token } = responseData;
+
+      if (responseData.user.status === 'deactivated') {
+        toast.error("This Account has been Deactivated");
+      } else {
+        localStorage.setItem('access_token', token);
+        navigate(`/home`);
+      }
+    } else {
+      const result = await response.json();
+      toast.error(result.error);
+    }
+  } catch (error) {
+    console.error('An error occurred:', error);
+  } finally {
+    setLoading(false);
+  }
+};

@@ -16,7 +16,7 @@ import API_BASE_URL from '../config/apiConfig';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faTrash,faUser  } from '@fortawesome/free-solid-svg-icons';
-import { checkTokenValidity } from '../util/auth';
+import { checkTokenValidity } from '../utils/auth';
 import { jwtDecode } from "jwt-decode";
 import ModalStart from './modalTellUs';
 
