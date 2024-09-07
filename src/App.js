@@ -314,6 +314,7 @@ function App() {
         <Route path="/signup/start/:id/" element={<SignUpTeam />} />
 
         <Route path="/home" element= {<LandingPage />} />
+        <Route path="/start/" element= {<Start />} />
 
         <Route path="/pitchDeckUpload" element= {<PitchDeckUpload />} />
         <Route path="/pitchDeckView" element= {<PitchDeckView />} />
@@ -542,7 +543,6 @@ function App() {
         <Route path="/kpiEdit/:id" element= {<EditKpi />} />
         <Route path="/viewImage/" element= {<ViewImage />} />
         <Route path="/viewImageMenu/" element= {<ViewImageMenu />} />
-        <Route path="/start/" element= {<Start />} />
         <Route path="/upload/" element= {<Upload />} />
         <Route path="/customFinancial/" element= {<CustomFinancial />} />
         <Route path="/inflation/" element= {<Inflation />} />

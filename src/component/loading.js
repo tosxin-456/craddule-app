@@ -8,13 +8,13 @@ function Loading({label}) {
   return (
     <div className='loadP'>
       <div className='text-center'>
-      <ScaleLoader
-              color={'#facc04'}
-              loading={true}
-              size={30}
-              aria-label="Loading Spinner"
-              data-testid="loader"
-            />
+        <ScaleLoader
+          color={'#facc04'}
+          loading={true}
+          size={30}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
         <p className='loadPt'>{label}</p>
         </div>
     </div>
