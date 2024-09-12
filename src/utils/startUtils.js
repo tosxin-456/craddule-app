@@ -14,8 +14,13 @@ export const handleClickStorage = (selectedCase, url) => {
 
 // Function to handle logout
 export const handleLogout = () => {
-    localStorage.clear();
-    window.location.href = '/login';
+  const preservedKeys = ['username', 'password', 'rememberMe'];
+  Object.keys(localStorage).forEach((key) => {
+    if (!preservedKeys.includes(key)) {
+      localStorage.removeItem(key);
+    }
+  });
+  window.location.href = '/login';
 };
   
 // Function to handle home redirection

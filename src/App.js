@@ -305,6 +305,7 @@ function App() {
       <Routes>
         {/* Auth */}
         <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signUp" element= {<SignUp />} />
         <Route path="/pageLogin" element= {<PageLogin />} />
         <Route path="/termAgreement" element= {<TermAgreement />} />

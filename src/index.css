@@ -32,5 +32,6 @@ h6{
 }
 
 a{
-  text-decoration: none;
+  @apply
+  no-underline
 }
