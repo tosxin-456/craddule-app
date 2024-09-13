@@ -10,6 +10,7 @@ import design from './images/design.png'
 import logo from './images/logo.png'
 import signUpImage from './images/signup.png'
 import { handleTogglePassword, handleToggleCPassword, validatePassword} from './utils/signUpUtils.js';
+import { confirmOTP, resetPassword, sendOTP } from './utils/passwordUtils.js';
 
 function Password() {
   const length = 6;
@@ -32,6 +33,8 @@ function Password() {
     capital: false,
     special: false,
   });
+  const [userId, setUserId] = useState(0)
+
   const handleOtpChange = (e, index) => {
     const { value } = e.target;
 
@@ -77,8 +80,16 @@ function Password() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPage(page+1)
-    // createUser(formData, setLoading, navigate);
+    console.log(e.target.id)
+    if (e.target.id=='sendOtp') {
+      sendOTP(formData, setUserId, setLoading, setPage, navigate, toast)      
+    }
+    if (e.target.id=='confirmOtp') {
+      confirmOTP(formData, userId, setLoading, setPage, navigate, toast)      
+    }
+    if (e.target.id=='resetPassword') {
+      resetPassword(formData, userId, setLoading, setPage, navigate, toast)      
+    }
   };
 
 
@@ -107,7 +118,7 @@ function Password() {
           <div className={page === 1 ?'pt-32':'hidden'}>
             <h3 className='font-bold'>Forgot Password?</h3>
             <p className='texet-[16px] text-black200'>Don’t worry! it happens, we’ll send you a reset code to the email linked to your account.</p>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} id='sendOtp'>
               <div className="mt-20">
                 <div className="mt-[16px]">
                   <label htmlFor="email" className='text-p18 font-semibold pb-1 block'>Email</label>
