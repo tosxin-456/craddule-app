@@ -1,7 +1,7 @@
 // signUpUtils.js
 import API_BASE_URL from '../config/apiConfig';
 
-export const sendOTP = async (data, setUserId, setLoading, setPage, navigate, toast) => {
+export const sendOTP = async (data, setLoading, setPage, navigate, toast) => {
   setLoading(true);
   try {
     const response = await fetch(`${API_BASE_URL}/api/user/sendotp`, {
@@ -15,9 +15,10 @@ export const sendOTP = async (data, setUserId, setLoading, setPage, navigate, to
     if (response.status == 200) {
       const responseData = await response.json();
       const { userId } = responseData.data;
-      setUserId(userId)
+      localStorage.setItem('userId', userId);
       setLoading(false);
-      setPage(2)
+      setPage(2);
+      console.log(userId)
       toast.success('Check mail for the OTP sent')
     } else {
       const {error} = await response.json();
@@ -31,8 +32,9 @@ export const sendOTP = async (data, setUserId, setLoading, setPage, navigate, to
   }
 };
 
-export const confirmOTP = async (data, userId, setLoading, setPage, navigate, toast) => {
+export const confirmOTP = async (data, setLoading, setPage, navigate, toast) => {
   setLoading(true);
+  const userId = localStorage.getItem('userId');
   try {
     const response = await fetch(`${API_BASE_URL}/api/user/confirmotp/${userId}`, {
       method: 'POST',
@@ -46,18 +48,22 @@ export const confirmOTP = async (data, userId, setLoading, setPage, navigate, to
       setLoading(false);
       setPage(3)
     } else {
-      const result = await response.json();
+      const {error} = await response.json();
+      console.log(error);
       setLoading(false);
-      toast.error(result.error);
+      toast.error(error);
     }
   } catch (error) {
     setLoading(false);
     console.error('An error occurred:', error);
+    // toast.error(error);
+    toast.error('A problem occurred. Try again.');
   }
 };
 
-export const resetPassword = async (data, userId, setLoading, setPage, navigate, toast) => {
+export const resetPassword = async (data, setLoading, setPage, navigate, toast) => {
   setLoading(true);
+  const userId = localStorage.getItem('userId');
   try {
     if (data.password !== data.cpassword) {
       setLoading(false);
@@ -65,8 +71,8 @@ export const resetPassword = async (data, userId, setLoading, setPage, navigate,
       return;
     }
 
-    const response = await fetch(`${API_BASE_URL}/api/resetPassword/${userId}`, {
-      method: 'POST',
+    const response = await fetch(`${API_BASE_URL}/api/user/resetPassword/${userId}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -74,12 +80,11 @@ export const resetPassword = async (data, userId, setLoading, setPage, navigate,
     });
 
     if (response.status === 200) {
-      const responseData = await response.json();
-      const { access_token } = responseData.data;
-      localStorage.setItem('access_token', access_token);
+      const res = await response.json();
       setLoading(false);
-      setPage(3)
-      navigate(`/card`);
+      toast.success(res?.message);
+      localStorage.removeItem('userId');
+      navigate(`/login`);
     } else {
       const result = await response.json();
       setLoading(false);
