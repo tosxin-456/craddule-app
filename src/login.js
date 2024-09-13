@@ -73,7 +73,7 @@ function Login() {
                     id="username"
                     value={formData.username}
                     onChange={handleChange}
-                    className="w-full border border-black400 px-3 py-2 rounded-full"
+                    className="w-full border border-black400 px-3 py-[10px] rounded-full"
                   />
                 </div>
                 <div className='relative'>
@@ -83,7 +83,7 @@ function Login() {
                     id="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="w-full border border-black400 px-3 py-2 rounded-full"
+                    className="w-full border border-black400 px-3 py-[10px] rounded-full"
                   />
                   <span className="absolute top-9 right-5 cursor-pointer" onClick={() => handleTogglePassword(showPassword, setShowPassword)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" className={showPassword ? 'hidden' : 'block'}>
