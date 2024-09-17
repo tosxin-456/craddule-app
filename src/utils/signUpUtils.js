@@ -19,7 +19,7 @@ export const validatePassword = (password, setPasswordValid) => {
   setPasswordValid({ length, number, capital, special });
 };
 
-export const createUser = async (data, setLoading, navigate) => {
+export const createUser = async (data, referralCode, setLoading, toast, navigate) => {
   setLoading(true);
   try {
     if (data.password !== data.cpassword) {
@@ -28,7 +28,7 @@ export const createUser = async (data, setLoading, navigate) => {
       return;
     }
 
-    const response = await fetch(`${API_BASE_URL}/api/user`, {
+    const response = await fetch(`${API_BASE_URL}/api/user/${referralCode}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export const createUser = async (data, setLoading, navigate) => {
       const { access_token } = responseData.data;
       localStorage.setItem('access_token', access_token);
       setLoading(false);
-      navigate(`/card`);
+      navigate(`/home`);
     } else {
       const result = await response.json();
       setLoading(false);

@@ -14,6 +14,7 @@ import {
   formatDate,
   getUserIdFromToken,
 } from './utils/landingPageUtils.js'; // Import utilities
+import GetCard from './getCard.js';
 
 function LandingPage() {
   const [projects, setProjects] = useState([]);
@@ -135,6 +136,7 @@ function LandingPage() {
       </div>
 
       <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />
+      <GetCard/>
     </div>
   );
 }

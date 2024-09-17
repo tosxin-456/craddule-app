@@ -137,6 +137,9 @@ export const formatDate = (dateString) => {
 // Decode JWT token and get user ID
 export const getUserIdFromToken = () => {
   const access_token = localStorage.getItem('access_token');
+  if (access_token == null) {
+    return access_token;
+  }
   const decodedToken = jwtDecode(access_token);
   return decodedToken.userId;
 };

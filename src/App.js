@@ -307,6 +307,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signUp" element= {<SignUp />} />
+        <Route path="/signUp/:referralCode" element= {<SignUp />} />
         <Route path="/pageLogin" element= {<PageLogin />} />
         <Route path="/terms&conditions" element= {<TermAgreement />} />
         <Route path="/privacy" element= {<Privacy />} />

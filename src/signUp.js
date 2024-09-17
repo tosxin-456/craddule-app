@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';import design from './images/design.png'
 import logo from './images/logo.png'
 import signUpImage from './images/signup.png'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import PhoneInput from 'react-phone-input-2';
@@ -32,6 +32,7 @@ function SignUp() {
     special: false,
   });
   const [loading, setLoading] = useState(false);
+  const [referralCode, setReferralCode] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -41,6 +42,7 @@ function SignUp() {
   });
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -63,8 +65,18 @@ function SignUp() {
       toast.error('Password does not meet the requirements');
       return;
     }
-    createUser(formData, setLoading, navigate);
+    createUser(formData, referralCode, setLoading, toast, navigate);
   };
+
+  useEffect(()=>{
+    const pathname = location.pathname.split('/');
+    const lastPath = pathname[pathname.length-1];
+    if (lastPath == 'signUp'){
+      setReferralCode(0);
+    }else{
+      setReferralCode(lastPath)
+    }
+  })
 
   return (
     <>
