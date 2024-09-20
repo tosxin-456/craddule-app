@@ -42,7 +42,7 @@ function GetCard() {
               setPhone(phoneNumber);
               setTimeRef(timeSent);
               setAuthCode(data?.authCode)
-              console.log(data?.authCode)
+              // console.log(data?.authCode)
               currency = phoneNumber.startsWith('234') ? 'NGN' : 'USD';
 
           } else {
@@ -149,17 +149,21 @@ function GetCard() {
   
   useEffect(()=>{
     if (email == '' || timeRef == ''){
+      
+      console.log(email);
+      console.log(timeRef);
       console.log('No email, no click');
     }
     else{
       console.log(email);
       console.log(timeRef);
       const today = new Date();
+      const timereference = new Date(timeRef)
       const secondsToday = Math.floor(today.getTime()/1000);
-      const seconds = Math.floor(timeRef.getTime()/1000);
-      const secondsIn3Weeks = seconds + 1814400;
-      if (seconds >= 1814400) {  
-        document.getElementsByClassName('cardBtn')[0].click()
+      const seconds = Math.floor(timereference.getTime()/1000);
+      console.log(seconds);
+      if (seconds >= 1814400 && authCode=='') {  
+        document.getElementsByClassName('cardBtn')[0].click();
         console.log('clicked');
       }
     }

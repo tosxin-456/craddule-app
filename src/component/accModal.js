@@ -43,7 +43,7 @@ const ModalQoute = ({ open, onClose, completedPhases }) => {
 
         toast.success('Project updated successfully!');
         setLoading(false);
-        navigate('/loading');
+        navigate('/home');
 
       } else {
         const result = await response.json();

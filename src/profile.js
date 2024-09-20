@@ -1,26 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import p1 from './images/p1.jpeg'; 
-import bci from './images/bc.png'; 
-import solution from './images/solution.png'; 
 import Header from './component/header';
-import API_BASE_URL from './config/apiConfig';
-import Menu from './component/menu';
+import {API_BASE_URL, APP_BASE_URL} from './config/apiConfig';
 import { useNavigate } from 'react-router-dom';
 import ImageModal from './component/imageModal';
-import { Toaster, toast } from 'sonner'
 import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
-
-
+import { ToastContainer, toast } from 'react-toastify';
 
 const Profile = () =>  {
-
-     // State variables to manage dropdown behavior
+  // State variables to manage dropdown behavior
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
-  const dropdownRef = useRef(null);
-
+  const [referralCode, setReferralCode] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [text, setText] = useState('');  const dropdownRef = useRef(null);
 
   // Function to toggle dropdown visibility
   const toggleDropdown = () => {
@@ -33,12 +28,11 @@ const Profile = () =>  {
     setIsDropdownOpen(false);
   };
 
-  
-//Second Dropdown
+  //Second Dropdown
   // State variables to manage dropdown behavior
-       const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
-       const [selectedOption1, setSelectedOption1] = useState('');
-       const dropdownRef1 = useRef(null);
+  const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
+  const [selectedOption1, setSelectedOption1] = useState('');
+  const dropdownRef1 = useRef(null);
 
 
   // Function to toggle dropdown visibility
@@ -46,51 +40,51 @@ const Profile = () =>  {
     setIsDropdownOpen1(!isDropdownOpen1);
   };
 
-   // Function to handle option selection
-   const handleOptionSelect1 = (option) => {
-    setSelectedOption1(option);
-    setIsDropdownOpen1(false);
+  // Function to handle option selection
+  const handleOptionSelect1 = (option) => {
+  setSelectedOption1(option);
+  setIsDropdownOpen1(false);
   };
 
 
-//Third Dropdown
+  //Third Dropdown
   // State variables to manage dropdown behavior
   const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
   const [selectedOption2, setSelectedOption2] = useState('');
   const dropdownRef2 = useRef(null);
 
 
-// Function to toggle dropdown visibility
-const toggleDropdown2 = () => {
-setIsDropdownOpen2(!isDropdownOpen2);
-};
+  // Function to toggle dropdown visibility
+  const toggleDropdown2 = () => {
+  setIsDropdownOpen2(!isDropdownOpen2);
+  };
 
-// Function to handle option selection
-const handleOptionSelect2 = (option) => {
-setSelectedOption2(option);
-setIsDropdownOpen2(false);
-};
+  // Function to handle option selection
+  const handleOptionSelect2 = (option) => {
+  setSelectedOption2(option);
+  setIsDropdownOpen2(false);
+  };
 
 
-//fourth Dropdown
+  //fourth Dropdown
   // State variables to manage dropdown behavior
   const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
   const [selectedOption3, setSelectedOption3] = useState('');
   const dropdownRef3 = useRef(null);
 
 
-// Function to toggle dropdown visibility
-const toggleDropdown3 = () => {
-setIsDropdownOpen3(!isDropdownOpen3);
-};
+  // Function to toggle dropdown visibility
+  const toggleDropdown3 = () => {
+  setIsDropdownOpen3(!isDropdownOpen3);
+  };
 
-// Function to handle option selection
-const handleOptionSelect3 = (option) => {
-setSelectedOption3(option);
-setIsDropdownOpen3(false);
-};
+  // Function to handle option selection
+  const handleOptionSelect3 = (option) => {
+  setSelectedOption3(option);
+  setIsDropdownOpen3(false);
+  };
 
- // Close dropdown when clicking outside of it 1
+  // Close dropdown when clicking outside of it 1
  useEffect(() => {
     const handleClickOutside = (event) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -102,7 +96,7 @@ setIsDropdownOpen3(false);
     return () => {
         document.removeEventListener('mousedown', handleClickOutside);
     };
-}, []);
+    }, []);
 
   // Close dropdown when clicking outside of it 2
   useEffect(() => {
@@ -116,10 +110,10 @@ setIsDropdownOpen3(false);
     return () => {
         document.removeEventListener('mousedown', handleClickOutside);
     };
-}, []);
+  }, []);
 
- // Close dropdown when clicking outside of it 3
- useEffect(() => {
+  // Close dropdown when clicking outside of it 3
+  useEffect(() => {
   const handleClickOutside = (event) => {
       if (dropdownRef2.current && !dropdownRef2.current.contains(event.target)) {
           setIsDropdownOpen2(false);
@@ -130,10 +124,10 @@ setIsDropdownOpen3(false);
   return () => {
       document.removeEventListener('mousedown', handleClickOutside);
   };
-}, []);
+  }, []);
 
-// Close dropdown when clicking outside of it 4
-useEffect(() => {
+  // Close dropdown when clicking outside of it 4
+  useEffect(() => {
 const handleClickOutside = (event) => {
     if (dropdownRef3.current && !dropdownRef3.current.contains(event.target)) {
         setIsDropdownOpen3(false);
@@ -144,19 +138,19 @@ document.addEventListener('mousedown', handleClickOutside);
 return () => {
     document.removeEventListener('mousedown', handleClickOutside);
 };
-}, []);
+  }, []);
 
-const access_token = localStorage.getItem('access_token');
-const decodedToken = jwtDecode(access_token);
-const userId = decodedToken.userId;
+  const access_token = localStorage.getItem('access_token');
+  const decodedToken = jwtDecode(access_token);
+  const userId = decodedToken.userId;
 
-//Register
+  //Register
 
-const [errorMessage, setErrorMessage] = useState('');
-const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-const [loading, setLoading] = useState(false);
-const [formData, setFormData] = useState({
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -191,7 +185,8 @@ const [formData, setFormData] = useState({
     };
 
     fetchUserDetails();
-}, []);
+  }, []);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -201,11 +196,7 @@ const [formData, setFormData] = useState({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    
     updateUser(formData);
-
-   
   };
 
   const updateUser = async (data) => {
@@ -247,226 +238,170 @@ const [formData, setFormData] = useState({
     }
   };
 
+  const navigate = useNavigate()
+  const [isOpen, setIsOpen]= useState(false);
 
-const navigate = useNavigate()
-const [isOpen, setIsOpen]= useState(false);
+  const onClickHandler = () => navigate(`/introduction1`)
 
-    const onClickHandler = () => navigate(`/introduction1`)
-    return (
+  const handleCopy = () => {
+    navigator.clipboard.writeText(`${APP_BASE_URL}/signUp/${referralCode}`)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => {
+          setCopied(false);
+        }, 5000);
+      })
+      .catch((err) => {
+        console.error('Failed to copy text: ', err);
+      });
+  };
+
+  useEffect(()=>{
+    const fetchCode = async()=>{
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/user/referralcode/get/${userId}`, {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+              }
+            });
+            console.log(response);
+            if (response.status === 200) {
+              const data = await response.json();
+              console.log(data);
+              setReferralCode(data.referralCode);
+            } else {
+              console.error('Error fetching user referral code:', await response.json());
+            }
+          } catch (err) {
+            console.log('here')
+            console.log(err);
+          }
+    }
+    fetchCode()
+  })
+
+  return (
+      
+    <>
+      <Header />
+      <div className="mb-20"></div>
+      <div className="mx-20 mt-20 p-10 bg-white rounded-[30px]">
+        <h4 className='text-center mt-10'>Profile</h4>
+        <p className='text-gray800 text-center mb-10'>View, manage your memebers and send invites</p>
+        <div className='flex justify-end gap-3 pt-10'>
+          <button className="btn btn-primary curveN"  disabled={loading}>
+            { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+            { !loading && <span>Save changes</span>}
+          </button>
+          <button className="btn btn-primary curveN"  disabled={loading}>
+            { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+            { !loading && <span>Discard changes</span>}
+          </button>
+        </div>
         
-        <>
-
-<div className='container-fluid'>
-    <Header />
-    <div className='row'>
-        
-        <div className='col-md-12'>
-        <div className='centerP'>
-
-        <form onSubmit={handleSubmit}>
-            <div><p className='centerH1a'>Profile</p>
-            <p className='centerHp1a'>View, manage your memebers and send invites</p>
-
-
-
-            <button className="btn btn-primary curveN"  disabled={loading}>
-              { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
-                { !loading && <span>Save changes</span>}
-                
+        <div className="grid grid-cols-12 ">
+          <div className='col-span-4'>
+            <p className='text-center font-semibold'>Profile picture/company logo</p>
+            <div className=''>
+              <img src={p1} className='rounded-full w-[287px] h-[287px]' type='button'></img>
+              <button className="px-3 py-2 m-auto mt-1 bg-blue600 rounded-[30px] text-white text-[12px] justify-self-center"  disabled={loading} onClick={()=>setIsOpen(true)}>
+                { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+                { !loading && <span>Change picture</span>}
               </button>
-
-            {/* <button className="btn btn-primary curveI">Discard changes</button></div> */}
             </div>
-            <p className='profileTitle'>Profile picture or company logo</p>
-
-            <div className='profilePic'>
-               <img src= {p1} className='imgPic' type='button'></img>
-              {/* <p className='imgTittle' type='button'>Edit</p>*/}
-                 <div ref={dropdownRef3} className="dropdown4 imgTittle">
-                <div className={`select4 ${isDropdownOpen3 ? 'select-clicked' : ''}`} onClick={toggleDropdown3}>
-                    <span classname="selected">{selectedOption3 || "Edit"}</span>
-                    <div class=""></div>
-                </div>
-                <ul className={`menu6 ${isDropdownOpen3 ? 'menu-open6' : ''}`}>
-                    <li type='button' className='imgItem' onClick={()=>setIsOpen(true)}>Upload a photo</li>
-                    <hr className='listMar1'></hr>
-                    <li type='button' className='imgItem'>Remove photo</li>
-                </ul>
-            </div>
-            </div>
-
-
-            <div className='filled1'>
-            <label htmlFor="firstName" className='pageTittle'>First Name</label>
+          </div>
+          <div className='col-span-1'></div>
+          <div className='col-span-7'>
+            <form onSubmit={handleSubmit} className='w-full'>
+              <div className='mb-2'>
+                <label htmlFor="firstName" className='text-[16px] font-medium'>First Name</label>
                 <input 
                 type="text"
                 id="firstName" 
                 value= {formData.firstName}
                 onChange={handleChange}
-                className='profileInput' 
+                className='block px-4 py-2 bg-black50 w-full rounded-[10px]' 
                 placeholder='First Name'
                 />
-                
-            </div>
-            <div className='filled2'>
-                <label htmlFor="lastName" className='pageTittle'>Last Name</label>
+              </div>
+              <div className='mb-2'>
+                <label htmlFor="lastName" className='text-[16px] font-medium'>Last Name</label>
                 <input 
                 type="text"
                 id="lastName" 
                 value= {formData.lastName}
                 onChange={handleChange}
-                className='profileInput' 
+                className='block px-4 py-2 bg-black50 w-full rounded-[10px]' 
                 placeholder='Last Name'
                 />
-            </div>
-
-            <div className='filled2'>
-                <label htmlFor="email" className='pageTittle'>Email</label>
+              </div>
+              <div className='mb-2'>
+                <label htmlFor="email" className='text-[16px] font-medium'>Email</label>
                 <input 
                 type="email"
                 id="email"
                 value={formData.email}
                 onChange={handleChange}
-                className='profileInput' 
+                className='block px-4 py-2 bg-black50 w-full rounded-[10px]' 
                 placeholder='Email'
                 />
-            </div>
-
-            <div className='filled2'>
-                <label htmlFor="phone" className='pageTittle'>Phone Number</label>
+              </div>
+              <div className='mb-2'>
+                <label htmlFor="phone" className='text-[16px] font-medium'>Phone Number</label>
                 <input 
-                 type="tel"
-                 id="phoneNumber" 
-                 value= {formData.phoneNumber}
-                 onChange={handleChange}
-                className='profileInput'  
+                type="tel"
+                id="phoneNumber" 
+                value= {formData.phoneNumber}
+                onChange={handleChange}
+                className='block px-4 py-2 bg-black50 w-full rounded-[10px]'  
                 placeholder='Phone Number'
                 />
-            </div>
-         </form>
-
-
-            {/* <div className='filledd'>
-            <div className="dropdown">
-             <p class='pageTitle1'>Assign super admin/delegated</p> </div>
-             <div className="dropdown">
-             <p class='pageTitle1'>Delegate authority period</p>
               </div>
-              </div>   */}
-           
-
-            {/* <div className='filled3a'>    
-            <div ref={dropdownRef} className="dropdown">
-                <div className={`select ${isDropdownOpen ? 'select-clicked' : ''}`} onClick={toggleDropdown}>
-                    <span classname="selected">{selectedOption|| "Select from team member"}</span>
-                    <div class="caret"></div>
-                </div>
-                <ul className={`menu ${isDropdownOpen ? 'menu-open' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect("Ade Yemaja")}>Ade Yemaja</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect("Jide Arowolo")}>Jide Arowolo</li>
-                </ul>
-            </div>
-
-            
-            <div ref={dropdownRef1} className="dropdown">
-                <div className={`select ${isDropdownOpen1 ? 'select-clicked' : ''}`} onClick={toggleDropdown1}>
-                    <span classname="selected" >{selectedOption1|| "Choose period"}</span>
-                    <div class="caret"></div>
-                </div>
-                <ul className={`menu ${isDropdownOpen1? 'menu-open' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect1("One Week")}>One Week</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect1("Two Weeks")}>Two Weeks</li>
-                </ul>
-            </div>
-            </div> */}
-
-         
-       {/*<div class='dropdown'>
-        <select class='dropdown-select'>
-            <option value='' class="opP">Select from team member</option>
-        </select>
-        <div class='dropdown-arrow'></div>
-    </div>
-</div>
-            <div className='filled2'>
-                <p className='pageTittle'>Assign super admin/ delegated</p>
-                <div className='member'><p className='textdiv'>Select from team member</p></div>
-    </div>
-       <div class='filled3'>
-    <p class='pageTitle'>Assign super admin/delegated</p>
-    <div class='dropdown'>
-        <div class='custom-dropdown'>
-            <span class='selected-option'>Select from team member</span>
-            <ul class='options'>
-                <li>Option 1</li>
-                <li>Option 2</li>
-            </ul>
-        </div>
-        <div class='dropdown-arrow'></div>
-    </div>
-</div>
-            <div className='filledd'>
-            <div className="dropdown">
-                <p className='pageTittle1'>Age</p>
-                <input className='profileInput'></input></div>
-                <div className="dropdown">
-                <div className={`select ${isDropdownOpen2 ? 'select-clicked' : ''}`} onClick={toggleDropdown2}>
-                    <span classname="selected">{selectedOption1|| "Gender"}</span>
-                    <div class="caret"></div>
-                </div>
-                <ul className={`menu ${isDropdownOpen2 ? 'menu-open' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect2("Ade Yemaja")}>Ade Yemaja</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect2("Jide Arowolo")}>Jide Arowolo</li>
-                </ul>
-            </div>
-                
-            </div>*/}
-{/* 
-<div className='filledd'>
-            <div className="dropdown">
-             <p class='pageTitle1'>Age</p> </div>
-             <div className="dropdown">
-             <p class='pageTitle1'>Gender</p>
-              </div>
-              </div>  
-           
-
-            <div className='filled3'>    
-            <div className="dropdown">
-            <input className='profileInput1'></input></div>
-
-
-               
-
-            
-            <div ref={dropdownRef2} className="dropdown">
-                <div className={`select ${isDropdownOpen2 ? 'select-clicked' : ''}`} onClick={toggleDropdown2}>
-                    <span classname="selected" >{selectedOption2|| "Select Gender"}</span>
-                    <div class="caret"></div>
-                </div>
-                <ul className={`menu ${isDropdownOpen2? 'menu-open' : ''}`}>
-                    <li type='button' onClick={() => handleOptionSelect2("Male")}>Male</li>
-                    <hr className='listMar'></hr>
-                    <li type='button' onClick={() => handleOptionSelect2("Female")}>Female</li>
-                </ul>
-            </div>
-            </div> */}
-            
-            <ImageModal open={isOpen} onClose={() => setIsOpen(false)}>
-
+            </form>
+          </div>          
+          <ImageModal open={isOpen} onClose={() => setIsOpen(false)}>
           </ImageModal>
-      </div>  
-        
-  </div>
-  <Toaster  position="top-right" />
+          <ToastContainer />
+        </div>
+        <div className='mt-10 border-dotted border-black100 rounded-[30px] p-10'>
+            <h4 className='text-center mt-10'>Refer a friend</h4>
+            <p className='text-gray800 text-center mb-5'>Refer friend and get free gift when the join and complete their application</p>
+            <div className='w-fit m-auto'>
+              <p className="mb-1">Your referral link:</p>
+              <div className='flex gap-3 items-center'>
+                <div className="px-4 py-2 bg-black50 rounded-[10px]">
+                  <span className='p8'>{`${APP_BASE_URL}/signUp/${referralCode}`}</span>
+                </div>
+                <button className='px-3 py-1 bg-blue600 rounded-[30px] text-white text-[12px]' onClick={handleCopy}>{copied ? 'Copied!' : 'Copy link'}</button>
+              </div>
+            </div>
+            <div className="mt-5 p-10 bg-gray200 rounded-[20px]">
+              <h5 className='text-center'>Track friends you’ve referred</h5>
 
-  </div>
-  </div>
-  </>
-    );
+              <div className='mx-20 mt-5'>
+                <div className='flex justify-between text-[16px]' >
+                  <p>Visited Craddule</p>
+                  <p>1</p>
+                </div>
+                <div className='flex justify-between'>
+                  <p>Started Application</p>
+                  <p>1</p>
+                </div>
+                <div className='flex justify-between'>
+                  <p>Completed Application</p>
+                  <p>1</p>
+                </div>
+                <div className='flex justify-between'>
+                  <p>Already subscribed</p>
+                  <p>1</p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default Profile

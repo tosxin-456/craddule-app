@@ -162,7 +162,7 @@ function InflationRateGraph({ graphType }) {
 
 
 
-              <div className="col-md-12">
+              {/* <div className="col-md-12">
                   <div className="innerStart2">
                       <div style={{padding:37}}>
                           <p className="ttas">Create Task</p>
@@ -175,6 +175,29 @@ function InflationRateGraph({ graphType }) {
                               <div className="col-md-9">
                                   <div className="upgi" onClick={()=>handleClick('/createTask')}>
                                       <p style={{marginBottom:0, color:"#fff"}}>Create Task</p>
+                                      
+                                  </div>
+                              </div>
+                              
+                          </div>
+                          
+                      </div>
+                    
+                  </div>
+              </div> */}
+              <div className="col-md-12">
+                  <div className="innerStart2">
+                      <div style={{padding:37}}>
+                          <p className="ttas">Share Phases</p>
+                          <div className="row">
+                              <div className="col-md-3">
+                                  <p style={{marginBottom:0, fontSize:13}}>You Feel your file is ready</p>
+                                  <p style={{marginBottom:0, fontSize:13}}>For review</p>
+                              </div>
+
+                              <div className="col-md-9">
+                                  <div className="upgi" onClick={()=>handleClick('/sharePhase')}>
+                                      <p style={{marginBottom:0, color:"#fff"}}>Review</p>
                                       
                                   </div>
                               </div>
@@ -198,8 +221,6 @@ function InflationRateGraph({ graphType }) {
                       
                   </div>
               </div>
-
-            
 
 
               <div className="col-md-6">
@@ -240,17 +261,15 @@ function InflationRateGraph({ graphType }) {
           <div className="col-md-12">
                   <div className="innerStart2">
                       <div style={{padding:37}}>
-                          <p className="ttas">Share Phases</p>
+                          <p className="ttas">Refer a Friend</p>
                           <div className="row">
                               <div className="col-md-3">
-                                  <p style={{marginBottom:0, fontSize:13}}>You Feel your file is ready</p>
-                                  <p style={{marginBottom:0, fontSize:13}}>For review</p>
+                                  <p style={{marginBottom:0, fontSize:13}}>Invite friends and collegues to join Craddule</p>
                               </div>
 
                               <div className="col-md-9">
-                                  <div className="upgi" onClick={()=>handleClick('/sharePhase')}>
-                                      <p style={{marginBottom:0, color:"#fff"}}>Review</p>
-                                      
+                                  <div className="upgi" onClick={()=>handleClick('/referral')}>
+                                      <p style={{marginBottom:0, color:"#fff"}}>Refer</p>
                                   </div>
                               </div>
                               

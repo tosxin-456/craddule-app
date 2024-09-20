@@ -291,6 +291,7 @@ import Accelerate from './accelerate';
 import Nda from './nda';
 import CreateVideosAdmin from './createVideosAdmin';
 import ReactGA from "react-ga4";
+import Referral from './referral';
 
 function App() {
   // ReactGA.initialize("G-B7LBY51F0E");
@@ -312,6 +313,7 @@ function App() {
         <Route path="/terms&conditions" element= {<TermAgreement />} />
         <Route path="/privacy" element= {<Privacy />} />
         <Route path="/welcome" element= {<Welcome />} />
+        <Route path="/referral" element= {<Referral />} />
         <Route path="/login/start/:id/" element={<LoginTeam />} />
         <Route path="/signup/start/:id/" element={<SignUpTeam />} />
 
