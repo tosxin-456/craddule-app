@@ -220,7 +220,7 @@ function InflationRateGraph({ graphType }) {
                   <div className="innerStart">
                   
                       <div className="text-center">
-                      <img src={bolt} alt="Streak" className="datImage" style={{width:"20%"}}/>
+                      <img src={bolt} alt="Streak" className="datImage m-auto" style={{width:"20%"}}/>
                       </div>
                           
                           <p className='dat2' style={{marginBottom:0}}>{streak} Days!</p>
@@ -305,7 +305,7 @@ function InflationRateGraph({ graphType }) {
           <div className="row">
               <div className="col-md-3">
                   <div className="caseBA5" onClick={()=>handleClick('/generalSetting')}>
-                      <CiLock style={{color: "#fff",fontSize: 25}}/>
+                      <CiLock className="m-auto" style={{color: "#fff",fontSize: 25}}/>
                       <p className="caseBA5P">Change Password</p>
                       
                       
@@ -314,7 +314,7 @@ function InflationRateGraph({ graphType }) {
 
               <div className="col-md-3">
                   <div className="caseBA5" onClick={()=>handleClick('/profile')}>
-                      <CiUser style={{color: "#fff",fontSize: 25}}/>
+                      <CiUser className="m-auto" style={{color: "#fff",fontSize: 25}}/>
                       <p className="caseBA5P">Edit Profile</p>
                       
                       
@@ -323,7 +323,7 @@ function InflationRateGraph({ graphType }) {
 
               <div className="col-md-3">
                   <div className="caseBA5" onClick={()=>handleClick('/termAgreement')}>
-                      <CiMemoPad style={{color: "#fff",fontSize: 25}}/>
+                      <CiMemoPad className="m-auto" style={{color: "#fff",fontSize: 25}}/>
                       <p className="caseBA5P">Terms & Conditions</p>
                       
                       
@@ -333,7 +333,7 @@ function InflationRateGraph({ graphType }) {
 
               <div className="col-md-3">
                   <div className="caseBA5" onClick={()=>handleClick('/privacy')}>
-                      <CiMemoPad style={{color: "#fff",fontSize: 25}}/>
+                      <CiMemoPad className="m-auto" style={{color: "#fff",fontSize: 25}}/>
                       <p className="caseBA5P">Privacy Policy</p>
                   </div>
               </div>

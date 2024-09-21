@@ -195,7 +195,7 @@ function GetCard() {
       const secondsToday = Math.floor(today.getTime()/1000);
       const seconds = Math.floor(timereference.getTime()/1000);
       console.log(seconds, secondsToday, secondsToday-seconds);
-      if ((secondsToday-seconds) >= 1209600 && !authCode) {  
+      if ((secondsToday-seconds) >= 200 && (!authCode || authCode=='')) {  
         console.log('clicked');
         setShow(true);
       }

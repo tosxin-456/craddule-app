@@ -103,13 +103,16 @@ function Password() {
     if (e.target.id=='confirmOtp') {
       setOtpData(otp.join(''));
       console.log(otpData)
-      confirmOTP(otpData, setLoading, setPage, navigate, toast)      
+      confirmOTP({'otp':otpData}, setLoading, setPage, navigate, toast)      
     }
     if (e.target.id=='resetPassword') {
       resetPassword(form3Data, setLoading, setPage, navigate, toast)      
     }
   };
 
+  const handleResend = (e) => {
+    sendOTP(formData, setLoading, setPage, navigate, toast)      
+  };
 
   return (
     <>
@@ -186,7 +189,7 @@ function Password() {
                 {!loading && <span>Continue</span>}
               </button>
             </form>
-            <p className='mt-8 font-medium text-[16px]'>Didn’t receive the code?<a className='ps-2 no-underline text-[#1B45BF]' href='/login'>Resend code</a></p>
+            <p className='mt-8 font-medium text-[16px]'>Didn’t receive the code?<span className='ps-2 no-underline text-[#1B45BF] cursor-pointer' onClick={()=>handleResend()}>Resend code</span></p>
           </div>
           <div className={page === 3 ?'pt-32':'hidden'}>
             <h3 className='font-bold'>Set new password</h3>

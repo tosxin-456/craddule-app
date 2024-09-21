@@ -4,7 +4,7 @@ import {API_BASE_URL} from '../config/apiConfig';
 export const sendOTP = async (data, setLoading, setPage, navigate, toast) => {
   setLoading(true);
   try {
-    const response = await fetch(`${API_BASE_URL}/api/user/sendotp`, {
+    const response = await fetch(`${API_BASE_URL}/api/user/otp/send`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -35,8 +35,9 @@ export const sendOTP = async (data, setLoading, setPage, navigate, toast) => {
 export const confirmOTP = async (data, setLoading, setPage, navigate, toast) => {
   setLoading(true);
   const userId = localStorage.getItem('userId');
+  console.log(data);
   try {
-    const response = await fetch(`${API_BASE_URL}/api/user/confirmotp/${userId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/user/otp/confirm/${userId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
