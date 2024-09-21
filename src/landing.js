@@ -1,5 +1,5 @@
 // LandingPage.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import depth from './images/depth.png';
@@ -12,9 +12,9 @@ import {
   useFetchTeamProjects,
   useFetchReviewProjects,
   formatDate,
-  getUserIdFromToken,
 } from './utils/landingPageUtils.js'; // Import utilities
 import GetCard from './getCard.js';
+import { getUserIdFromToken } from './utils/startUtils.js';
 
 function LandingPage() {
   const [projects, setProjects] = useState([]);
@@ -27,10 +27,6 @@ function LandingPage() {
   // Utility hooks
   // useValidateToken();
   const {userId} = getUserIdFromToken();
-
-  if (userId == null){
-    navigate('/login');
-  }
 
   // Fetch data and update loading state
   useFetchUserProjects(userId, (data) => {
@@ -78,9 +74,9 @@ function LandingPage() {
 
             <div className='row wow fadeInDown'>
               <div className='col-md-3'>
-                <div className='addPro'>
+                <div className='addPro cursor-pointer'>
                   <span className='plusP' onClick={() => setIsOpen(true)}>+</span>
-                  <div className='addProSh'>
+                  <div className='addProSh cursor-pointer'>
                     <p style={{ marginBottom: 0 }}>Create Project</p>
                   </div>
                 </div>
@@ -88,9 +84,9 @@ function LandingPage() {
               {projects.map((member) => (
                 <div className='col-md-3' key={member._id}>
                   <div onClick={() => handleProjectClick(member._id, member.projectName, member.projectCount)}>
-                    <div className='addPro' style={{ paddingTop: '65px' }}>
+                    <div className='addPro cursor-pointer' style={{ paddingTop: '65px' }}>
                       <span className='plusP' style={{ fontSize: '20px' }}>Continue</span>
-                      <div className='addProSh' style={{ marginTop: '70px' }}>
+                      <div className='addProSh cursor-pointer' style={{ marginTop: '70px' }}>
                         <p style={{ marginBottom: 0 }}>{member.projectName}</p>
                       </div>
                     </div>
