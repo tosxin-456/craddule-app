@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import API_BASE_URL from '../config/apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 
@@ -14,8 +14,13 @@ export const handleClickStorage = (selectedCase, url) => {
 
 // Function to handle logout
 export const handleLogout = () => {
-    localStorage.clear();
-    window.location.href = '/login';
+  const preservedKeys = ['username', 'password', 'rememberMe'];
+  Object.keys(localStorage).forEach((key) => {
+    if (!preservedKeys.includes(key)) {
+      localStorage.removeItem(key);
+    }
+  });
+  window.location.href = '/login';
 };
   
 // Function to handle home redirection
@@ -41,9 +46,12 @@ export const updateStreak = async (setStreak) => {
 // Decode JWT token and get user ID
 export const getUserIdFromToken = () => {
   const access_token = localStorage.getItem('access_token');
-  const decodedToken = jwtDecode(access_token);
-  const userId = decodedToken.userId
-  return {access_token, userId};
+  if (access_token){
+    const decodedToken = jwtDecode(access_token);
+    const userId = decodedToken.userId
+    return {access_token, userId};
+  }
+  return {access_token:null, userId:null};
 };
 
 export const FetchProjectDetails = (projectId, setProjectDetails, setError, setLoading) => {

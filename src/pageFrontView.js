@@ -13,7 +13,7 @@ import imgC from './images/imgC.jpeg'
 import imgD from './images/imgD.jpeg'
 import imgE from './images/imgE.jpeg'
 import Menu from './component/menu';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import axios from 'axios';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'

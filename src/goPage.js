@@ -7,7 +7,7 @@ import { Toaster, toast } from 'sonner'
 import WOW from 'wowjs';
 import 'animate.css/animate.css'; // Import Animate.css
 import 'wowjs/css/libs/animate.css';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { jwtDecode } from "jwt-decode";
 import SideMenu2 from './component/sideMenu2';
 import SideMenu2P from './component/sideMenu2P';

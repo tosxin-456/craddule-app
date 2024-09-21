@@ -13,7 +13,7 @@ import imgD from './images/imgD.jpeg'
 import imgE from './images/imgE.jpeg'
 import { jwtDecode } from "jwt-decode";
 import EditModelModal from './component/editModelModal';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import Header from './component/header';
 import model from './images/model.png';

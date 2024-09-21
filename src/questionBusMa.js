@@ -5,7 +5,7 @@ import Header from './component/header';
 import Menu from './component/menu';
 import SideMenu2 from './component/sideMenu2';
 import SideMenu2P from './component/sideMenu2P';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { useNavigate } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
 import { jwtDecode } from "jwt-decode";

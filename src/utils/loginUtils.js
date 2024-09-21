@@ -1,15 +1,14 @@
 // utils.js
-import API_BASE_URL from '../config/apiConfig.js';
-import { toast } from 'sonner';
+import { API_BASE_URL } from '../config/apiConfig.js';
 
 export const handleTogglePassword = (showPassword, setShowPassword) => {
   setShowPassword(!showPassword);
 };
 
-export const login = async (data, setLoading, navigate) => {
+export const login = async (data, setLoading, navigate, rememberMe, toast) => {
   setLoading(true);
+  console.log(API_BASE_URL);
   try {
-    console.log(data);
     const response = await fetch(API_BASE_URL + '/api/login', {
       method: 'POST',
       headers: {
@@ -17,7 +16,6 @@ export const login = async (data, setLoading, navigate) => {
       },
       body: JSON.stringify(data),
     });
-
     if (response.status === 200) {
       const responseData = await response.json(); 
       const { token } = responseData;
@@ -25,6 +23,15 @@ export const login = async (data, setLoading, navigate) => {
       if (responseData.user.status === 'deactivated') {
         toast.error("This Account has been Deactivated");
       } else {
+        if (rememberMe) {
+          localStorage.setItem("username", data.username);
+          localStorage.setItem("password", data.password);
+          localStorage.setItem("rememberMe", true);
+        } else {
+          localStorage.removeItem("username");
+          localStorage.removeItem("password");
+          localStorage.removeItem("rememberMe");
+        }
         localStorage.setItem('access_token', token);
         navigate(`/home`);
       }

@@ -73,4 +73,3 @@ const Accelerate = () => {
 };
 
 export default Accelerate;
-

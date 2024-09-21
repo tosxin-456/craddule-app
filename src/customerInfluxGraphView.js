@@ -5,7 +5,7 @@ import ReactApexChart from 'react-apexcharts';
 import ApexCharts from 'apexcharts';
 import Header from './component/header';
 import Menu from './component/menu';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import SideMenu2 from './component/sideMenu2';
 import { useNavigate,Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';

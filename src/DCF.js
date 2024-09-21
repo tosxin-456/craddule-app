@@ -3,7 +3,7 @@ import * as XLSX from 'xlsx';
 import { useNavigate } from 'react-router-dom';
 import SideMenu2 from './component/sideMenu2';
 import './App.css'; // Import the CSS file
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 
 
 const fetchExcelFile = async () => {

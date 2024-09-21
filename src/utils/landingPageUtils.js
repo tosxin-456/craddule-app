@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import API_BASE_URL from '../config/apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 import {jwtDecode} from 'jwt-decode';
 
 // Token validation logic
@@ -27,8 +27,8 @@ export const useValidateToken = () => {
       localStorage.removeItem('access_token');
       navigate('/login');
     }
-  }, [navigate]);
-};
+    }, [navigate]);
+  };
 
 // Fetch user projects
 export const useFetchUserProjects = (userId, setProjects) => {
@@ -137,6 +137,9 @@ export const formatDate = (dateString) => {
 // Decode JWT token and get user ID
 export const getUserIdFromToken = () => {
   const access_token = localStorage.getItem('access_token');
+  if (access_token == null) {
+    return access_token;
+  }
   const decodedToken = jwtDecode(access_token);
   return decodedToken.userId;
 };

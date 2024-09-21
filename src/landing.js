@@ -14,6 +14,7 @@ import {
   formatDate,
   getUserIdFromToken,
 } from './utils/landingPageUtils.js'; // Import utilities
+import GetCard from './getCard.js';
 
 function LandingPage() {
   const [projects, setProjects] = useState([]);
@@ -24,8 +25,12 @@ function LandingPage() {
   const navigate = useNavigate();
 
   // Utility hooks
-  useValidateToken();
-  const userId = getUserIdFromToken();
+  // useValidateToken();
+  const {userId} = getUserIdFromToken();
+
+  if (userId == null){
+    navigate('/login');
+  }
 
   // Fetch data and update loading state
   useFetchUserProjects(userId, (data) => {
@@ -135,6 +140,7 @@ function LandingPage() {
       </div>
 
       <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />
+      <GetCard/>
     </div>
   );
 }

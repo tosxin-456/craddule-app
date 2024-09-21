@@ -14,7 +14,7 @@ import imgD from './images/imgD.jpeg'
 import imgE from './images/imgE.jpeg'
 import { jwtDecode } from "jwt-decode";
 import EditPresentModal from './component/editPresentModal';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import Menu from './component/menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

@@ -8,7 +8,7 @@ import weWork from './images/weWork.png';
 import gusto from './images/gusto.png';
 import excel from './images/excel.png'; 
 import { jwtDecode } from "jwt-decode";
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import PitchDocumentModal from './component/pitchDocumentModal';
 import { useNavigate } from 'react-router-dom';

@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { jwtDecode } from "jwt-decode";
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';

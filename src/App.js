@@ -1,5 +1,6 @@
 // App.js or index.js
-import React from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import {API_BASE_URL, APP_BASE_URL} from './config/apiConfig';
 import './App.css';
 
 import {
@@ -7,6 +8,8 @@ import {
   Routes,
   Route,
   Navigate,
+  useLocation,
+  useNavigate,
 } from "react-router-dom";
 
 import MarketAnalysis from './marketAnalysis';
@@ -291,25 +294,76 @@ import Accelerate from './accelerate';
 import Nda from './nda';
 import CreateVideosAdmin from './createVideosAdmin';
 import ReactGA from "react-ga4";
+import Referral from './referral';
+import { getUserIdFromToken } from './utils/startUtils';
 
 function App() {
-  // ReactGA.initialize("G-B7LBY51F0E");
-  //  ReactGA.send({ 
-  //   hitType: "pageview", 
-  //   page: window.location.pathname, 
-  //   title: "Custom Title" 
-  // });
+  const { io } = require("socket.io-client");
+  const [isTrialExpired, setIsTrialExpired] = useState(true)
 
+  const socket = io('http://localhost:3001');
+  const {userId} = getUserIdFromToken();
+
+  useEffect(()=>{
+    const checkTrial = async () => {
+      console.log("checking")
+      try {
+        const response = await fetch(API_BASE_URL+'/api/user/'+userId, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        });
+         
+        if (response.status === 200) {
+          console.log(response);
+  
+          const responseData = await response.json(); // Parse JSON response
+          console.log(responseData.trialPopUp)
+          if (responseData.trialPopUp == 'true'){
+            setIsTrialExpired(false)
+          }else{
+            setIsTrialExpired(true)
+          }
+        } else {
+          setIsTrialExpired(false)          
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
+
+    if (userId==null) {
+      return
+    }else{
+      checkTrial()
+    }
+  })
+
+  // socket.on("connect", () => {
+  //   console.log(socket.id);
+  //   socket.on('access', (msg) => {
+  //     console.log('message: ' + msg);
+  //     if (msg){
+  //       setIsTrialExpired(msg)
+  //     }
+  //   });
+  // });
   return (
+    <>
     <Router>
       <Routes>
         {/* Auth */}
         <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signUp" element= {<SignUp />} />
+        <Route path="/signUp/:referralCode" element= {<SignUp />} />
         <Route path="/pageLogin" element= {<PageLogin />} />
-        <Route path="/termAgreement" element= {<TermAgreement />} />
+        <Route path="/terms&conditions" element= {<TermAgreement />} />
         <Route path="/privacy" element= {<Privacy />} />
         <Route path="/welcome" element= {<Welcome />} />
+        <Route path="/referral" element= {<Referral />} />
         <Route path="/login/start/:id/" element={<LoginTeam />} />
         <Route path="/signup/start/:id/" element={<SignUpTeam />} />
 
@@ -409,7 +463,7 @@ function App() {
         <Route path="/questionEdit/:phase/:id" element= {<QuestionEdit />} />
         <Route path="/chat" element= {<Chat />} />
         <Route path="/dcf" element= {<DCF />} />
-       
+        
 
         <Route path="/trackPage" element= {<TrackPage />} />
         <Route path="/progress" element= {<Progress />} />
@@ -427,7 +481,7 @@ function App() {
         <Route path="/pageBenefit" element= {<PageBenefit />} />
         <Route path="/viewDocument" element= {<ViewDocument />} />
         <Route path="/video" element= {<VideoDemo />} />
-        <Route path="/fontPicker" element= {<FontPicker />} />
+        {/* <Route path="/fontPicker" element= {<FontPicker />} /> */}
         <Route path="/planSub" element= {<PlanSub />} />
         <Route path="/financialPnet" element= {<FinancialPnet />} />
         <Route path="/financialPincome" element= {<FinancialPincome />} />
@@ -442,7 +496,7 @@ function App() {
         <Route path="/operatingIncomeYoY" element= {<OperatingIncomeYoY />} />
         <Route path="/customerYoYinflux" element= {<CustomerYoYInflux />} />
         <Route path="/model" element= {<Model />} />
-        <Route path="/updateImage" element= {<UpdateImage />} />
+        {/* <Route path="/updateImage" element= {<UpdateImage />} /> */}
         <Route path="/foreCast" element= {<ForeCast />} />
         <Route path="/expensesYoY" element= {<ExpensesYoY />} />
         <Route path="/inflationYoY" element= {<InflationYoY />} />
@@ -463,7 +517,7 @@ function App() {
         <Route path="/yearOnyear" element= {<YearOnYear />} />
         <Route path="/settingMenu" element= {<SettingMenu />} />
         <Route path="/financialP" element= {<FinancialProject />} />
-        <Route path="/chatTool" element= {<ChatTools />} />
+        {/* <Route path="/chatTool" element= {<ChatTools />} /> */}
         <Route path="/giveFeedbackModal" element= {<GiveFeedbackModal />} />
         <Route path="/netProfit" element= {<NetProfit />} />
         <Route path="/operatingIncome" element= {<OperatingIncome />} />
@@ -476,19 +530,19 @@ function App() {
         <Route path="/homeStarter" element= {<HomeStarter />} />
         <Route path="/generalSetting" element= {<GeneralSetting />} />
         <Route path="/pageSummary" element= {<PageSummary />} />
-        <Route path="/searchKpi" element= {<SearchKpi />} />
-        <Route path="/pageAddKpi" element= {<PageAddKpi />} />
+        {/* <Route path="/searchKpi" element= {<SearchKpi />} /> */}
+        {/* <Route path="/pageAddKpi" element= {<PageAddKpi />} /> */}
         <Route path="/prototype" element= {<Prototype />} />
-        <Route path="/sendFile" element= {<SendFile />} />
+        {/* <Route path="/sendFile" element= {<SendFile />} /> */}
         <Route path="/graphPage" element= {<GraphPage />} />
         <Route path="/wireFrame" element= {<WireFrame />} />
         <Route path="/niceWork" element= {<NiceWork />} />
         <Route path="/sectionManagement" element= {<SectionManagement />} />
         <Route path="/teamManagement" element= {<TeamManagement />} />
-        <Route path="/uploadLogo" element= {<UploadLogo />} />
+        {/* <Route path="/uploadLogo" element= {<UploadLogo />} /> */}
         <Route path="/Sectiondcf" element= {<CashFlow />} />
-        <Route path="/sectionInvite" element= {<PageInvite />} />
-        <Route path="/pageTeam" element= {<PageTeam />} />
+        {/* <Route path="/sectionInvite" element= {<PageInvite />} /> */}
+        {/* <Route path="/pageTeam" element= {<PageTeam />} /> */}
         <Route path="/pageProject" element= {<PageProject/>} />
         <Route path="/pageSuccess" element= {<PageSuccess />} />
         <Route path="/kpiPage" element= {<KPIPage />} />
@@ -496,7 +550,7 @@ function App() {
         <Route path="/summary" element= {<Summary />} />
         <Route path="/presentation" element= {<Presentation />} />
         <Route path="/pageFrontView" element= {<PageFrontView />} />
-        <Route path="/shareFile" element= {<ShareFile />} />
+        {/* <Route path="/shareFile" element= {<ShareFile />} /> */}
         <Route path="/planDesign" element= {<PlanDesign />} />
         <Route path="/pageTrack" element= {<PageTrack />} />
         <Route path="/pitchDeck" element= {<PitchDeck />} />
@@ -592,6 +646,10 @@ function App() {
         <Route path="/createVideoAdmin/" element= {<CreateVideosAdmin />} />
       </Routes>
     </Router>
+    {isTrialExpired && (
+      <GetCard/>
+    )}
+    </>
   );
 }
 

@@ -7,7 +7,7 @@ import bro from './images/bro.png';
 import HeaderHome from './component/headerHome';
 import MenuHome from './component/menuHome';
 import { useNavigate } from 'react-router-dom';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import API_BASE_WEB_URL from './config/apiConfigW';
 import { jwtDecode } from "jwt-decode";
 

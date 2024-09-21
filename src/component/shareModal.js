@@ -4,7 +4,7 @@ import ViewSharedModal from './viewSharedModal';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch, faCopy } from '@fortawesome/free-solid-svg-icons'
-import API_BASE_URL from '../config/apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 import API_BASE_WEB_URL from '../config/apiConfigW';
 import { Toaster, toast } from 'sonner'
 import { jwtDecode } from "jwt-decode";

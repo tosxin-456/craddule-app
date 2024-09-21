@@ -17,7 +17,7 @@ import Menu from './component/menu';
 import EditDesignModal from './component/editDesignModal';
 import PlanModal from './component/planModal';
 import { jwtDecode } from "jwt-decode";
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import cloud from './images/cloud.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

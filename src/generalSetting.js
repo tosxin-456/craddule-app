@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import bci from './images/bc.png'; 
 import bob from './images/bob.png'; 
 import Header from './component/header';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { Toaster, toast } from 'sonner'
 import SettingMenu from './component/settingMenu';
 import { useNavigate } from 'react-router-dom';

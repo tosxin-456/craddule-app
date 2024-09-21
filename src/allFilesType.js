@@ -9,7 +9,7 @@ import Menu from './component/menu';
 import cloud from './images/cloud.png'
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import TopMenu from './component/topMenu';

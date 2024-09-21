@@ -13,7 +13,7 @@ import cloud from './images/cloud.png'
 import PrototypeModal from './component/prototypeModal';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import EditModal from './component/editModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

@@ -8,7 +8,7 @@ import SideMenu2P from './component/sideMenu2P';
 import SideMenu2I from './component/sideMenu2I';
 import SideMenu2C from './component/sideMenu2C';
 import SideMenu2V from './component/sideMenu2V';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { useNavigate,useParams } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
 import { jwtDecode } from "jwt-decode";

@@ -4,7 +4,7 @@ import bro from './images/bro.png';
 import Header from './component/header';
 import Menu from './component/menu';
 import SideMenu2 from './component/sideMenu2';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { useNavigate } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
 import { jwtDecode } from "jwt-decode";
