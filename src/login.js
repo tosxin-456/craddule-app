@@ -42,7 +42,7 @@ function Login() {
     const storedEmail = localStorage.getItem("username");
     const storedPassword = localStorage.getItem("password");
     const storedRememberMe = localStorage.getItem("rememberMe");
-    console.log(storedEmail, storedPassword, storedRememberMe);
+    // console.log(storedEmail, storedPassword, storedRememberMe);
     if ( storedRememberMe === "true") {
         // document.getElementById("username").value = storedEmail;
         // document.getElementById("password").value = storedPassword;

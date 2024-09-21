@@ -4,6 +4,7 @@ import { CiLock,CiMemoPad,CiUser} from 'react-icons/ci';
 import bolt from './images/bolt.png';
 import ReactGA from "react-ga4";
 import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak, getUserIdFromToken, FetchProjectDetails, FetchGoStatus, FetchTimelines, FetchTimelinesCount } from "./utils/startUtils";
+import { useNavigate } from "react-router-dom";
 
 function InflationRateGraph({ graphType }) {
 
@@ -23,6 +24,12 @@ function InflationRateGraph({ graphType }) {
   const projectId = localStorage.getItem('nProject');
   const {access_token, userId} = getUserIdFromToken();
   const [projectDetails, setProjectDetails] = useState([]);
+
+  const navigate = useNavigate();
+
+  if (userId == null){
+    navigate('/login');
+  }
 
   FetchProjectDetails(projectId, setProjectDetails, setError, setLoading)
 
@@ -112,7 +119,7 @@ function InflationRateGraph({ graphType }) {
             
               <div className="col-md-3">
                     <div 
-                    className={`caseBA2 ${!unlock ? 'locked' : ''}`}  
+                    // className={`caseBA2 ${!unlock ? 'locked' : ''}`}  
                     onClick={unlock ? ()=>handleClick('/questionBusMain/Commercialization/BringTheMVPToFullScale/GetTheMVPToFruition') : null}
                   >
                   

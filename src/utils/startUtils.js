@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import API_BASE_URL from '../config/apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 
@@ -46,9 +46,12 @@ export const updateStreak = async (setStreak) => {
 // Decode JWT token and get user ID
 export const getUserIdFromToken = () => {
   const access_token = localStorage.getItem('access_token');
-  const decodedToken = jwtDecode(access_token);
-  const userId = decodedToken.userId
-  return {access_token, userId};
+  if (access_token){
+    const decodedToken = jwtDecode(access_token);
+    const userId = decodedToken.userId
+    return {access_token, userId};
+  }
+  return {access_token:null, userId:null};
 };
 
 export const FetchProjectDetails = (projectId, setProjectDetails, setError, setLoading) => {

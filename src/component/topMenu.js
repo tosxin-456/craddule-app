@@ -8,7 +8,7 @@ import p6 from './../images/p6.jpeg';
 import logo from './../images/CradduleL.png';
 import { CiBellOn ,CiUser, CiChat2} from 'react-icons/ci';
 import ChatToolModal from './chatToolModal';
-import API_BASE_URL from '../config/apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faTrash  } from '@fortawesome/free-solid-svg-icons';
 import { checkTokenValidity } from '../utils/auth';

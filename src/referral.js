@@ -3,6 +3,7 @@ import Header from './component/header';
 import {API_BASE_URL, APP_BASE_URL} from './config/apiConfig';
 import refer from './images/refer.png';
 import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak, getUserIdFromToken, FetchProjectDetails, FetchGoStatus, FetchTimelines, FetchTimelinesCount } from "./utils/startUtils";
+import { useNavigate } from "react-router-dom";
 
 function Referral() {
 
@@ -10,6 +11,11 @@ function Referral() {
   const [copied, setCopied] = useState(false);
   const [text, setText] = useState('');
   const {userId} = getUserIdFromToken();
+  const navigate = useNavigate();
+
+  if (userId == null){
+    navigate('/login');
+  }
 
   const handleCopy = () => {
     navigator.clipboard.writeText(`${APP_BASE_URL}/signUp/${referralCode}`)

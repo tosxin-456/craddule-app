@@ -4,7 +4,7 @@ import { CiBellOn ,CiUser, CiChat2} from 'react-icons/ci';
 import { MdOutlineBolt} from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import ChatToolModal from './chatModal';
-import API_BASE_URL from '../config/apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faTrash,faUser  } from '@fortawesome/free-solid-svg-icons';

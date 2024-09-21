@@ -1,5 +1,5 @@
 // utils.js
-import API_BASE_URL from '../config/apiConfig.js';
+import { API_BASE_URL } from '../config/apiConfig.js';
 
 export const handleTogglePassword = (showPassword, setShowPassword) => {
   setShowPassword(!showPassword);
@@ -7,7 +7,7 @@ export const handleTogglePassword = (showPassword, setShowPassword) => {
 
 export const login = async (data, setLoading, navigate, rememberMe, toast) => {
   setLoading(true);
-
+  console.log(API_BASE_URL);
   try {
     const response = await fetch(API_BASE_URL + '/api/login', {
       method: 'POST',

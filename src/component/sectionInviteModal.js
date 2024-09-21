@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import closeB from './closeB.png'
 import ReactDOM from "react-dom";
-import API_BASE_URL from '../config/apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 import API_BASE_WEB_URL from '../config/apiConfigW';
 import { Toaster, toast } from 'sonner'
 import { jwtDecode } from "jwt-decode";

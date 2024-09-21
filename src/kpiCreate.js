@@ -4,7 +4,7 @@ import Header from './component/header';
 import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { jwtDecode } from "jwt-decode";
 import { Toaster, toast } from 'sonner'
 import SideMenu2P from './component/sideMenu2P';

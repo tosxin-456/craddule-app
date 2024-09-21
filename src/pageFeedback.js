@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './component/header';
 import Menu from './component/menu';
 import ShareModal from './component/shareModal';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 
 import { useNavigate } from 'react-router-dom';
 import ImageModal from './component/imageModal';

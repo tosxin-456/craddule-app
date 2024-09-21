@@ -7,7 +7,7 @@ import Progress from './progress';
 import WorkLoad from './workLoad';
 import Task from './task';
 import Cost from './cost';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import ReactApexChart from 'react-apexcharts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom';

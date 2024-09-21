@@ -25,8 +25,12 @@ function LandingPage() {
   const navigate = useNavigate();
 
   // Utility hooks
-  useValidateToken();
-  const userId = getUserIdFromToken();
+  // useValidateToken();
+  const {userId} = getUserIdFromToken();
+
+  if (userId == null){
+    navigate('/login');
+  }
 
   // Fetch data and update loading state
   useFetchUserProjects(userId, (data) => {

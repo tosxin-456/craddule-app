@@ -1,5 +1,5 @@
 // signUpUtils.js
-import API_BASE_URL from '../config/apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 import { toast } from 'sonner';
 
 export const handleTogglePassword = (showPassword, setShowPassword) => {

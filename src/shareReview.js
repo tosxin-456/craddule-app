@@ -5,7 +5,7 @@ import ShareModal from './component/shareModal';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import API_BASE_WEB_URL from './config/apiConfigW';
 import axios from 'axios';
 const phaseNames = [

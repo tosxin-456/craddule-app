@@ -21,7 +21,7 @@ import UploadLogoModal from './component/brandLogoModal'
 import Menu from './component/menu';
 import cloud from './images/cloud.png'
 import { useNavigate } from 'react-router-dom';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import axios from 'axios';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from "react-dom";
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
-import API_BASE_URL from '../config/apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 import fol from '../images/fol.png'; 
 import { Link } from 'react-router-dom';
 

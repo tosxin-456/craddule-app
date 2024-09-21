@@ -3,7 +3,7 @@ import p1 from './images/p1.jpeg';
 import bci from './images/bc.png'; 
 import solution from './images/solution.png'; 
 import Header from './component/header';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 import Menu from './component/menu';
 import { useNavigate } from 'react-router-dom';
 import ImageModal from './component/imageModal';

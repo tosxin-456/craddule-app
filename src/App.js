@@ -1,5 +1,6 @@
 // App.js or index.js
-import React from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import {API_BASE_URL, APP_BASE_URL} from './config/apiConfig';
 import './App.css';
 
 import {
@@ -7,6 +8,8 @@ import {
   Routes,
   Route,
   Navigate,
+  useLocation,
+  useNavigate,
 } from "react-router-dom";
 
 import MarketAnalysis from './marketAnalysis';
@@ -292,16 +295,63 @@ import Nda from './nda';
 import CreateVideosAdmin from './createVideosAdmin';
 import ReactGA from "react-ga4";
 import Referral from './referral';
+import { getUserIdFromToken } from './utils/startUtils';
 
 function App() {
-  // ReactGA.initialize("G-B7LBY51F0E");
-  //  ReactGA.send({ 
-  //   hitType: "pageview", 
-  //   page: window.location.pathname, 
-  //   title: "Custom Title" 
-  // });
+  const { io } = require("socket.io-client");
+  const [isTrialExpired, setIsTrialExpired] = useState(true)
 
+  const socket = io('http://localhost:3001');
+  const {userId} = getUserIdFromToken();
+
+  useEffect(()=>{
+    const checkTrial = async () => {
+      console.log("checking")
+      try {
+        const response = await fetch(API_BASE_URL+'/api/user/'+userId, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        });
+         
+        if (response.status === 200) {
+          console.log(response);
+  
+          const responseData = await response.json(); // Parse JSON response
+          console.log(responseData.trialPopUp)
+          if (responseData.trialPopUp == 'true'){
+            setIsTrialExpired(false)
+          }else{
+            setIsTrialExpired(true)
+          }
+        } else {
+          setIsTrialExpired(false)          
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
+
+    if (userId==null) {
+      return
+    }else{
+      checkTrial()
+    }
+  })
+
+  // socket.on("connect", () => {
+  //   console.log(socket.id);
+  //   socket.on('access', (msg) => {
+  //     console.log('message: ' + msg);
+  //     if (msg){
+  //       setIsTrialExpired(msg)
+  //     }
+  //   });
+  // });
   return (
+    <>
     <Router>
       <Routes>
         {/* Auth */}
@@ -413,7 +463,7 @@ function App() {
         <Route path="/questionEdit/:phase/:id" element= {<QuestionEdit />} />
         <Route path="/chat" element= {<Chat />} />
         <Route path="/dcf" element= {<DCF />} />
-       
+        
 
         <Route path="/trackPage" element= {<TrackPage />} />
         <Route path="/progress" element= {<Progress />} />
@@ -596,6 +646,10 @@ function App() {
         <Route path="/createVideoAdmin/" element= {<CreateVideosAdmin />} />
       </Routes>
     </Router>
+    {isTrialExpired && (
+      <GetCard/>
+    )}
+    </>
   );
 }
 

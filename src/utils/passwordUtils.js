@@ -1,5 +1,5 @@
 // signUpUtils.js
-import API_BASE_URL from '../config/apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 
 export const sendOTP = async (data, setLoading, setPage, navigate, toast) => {
   setLoading(true);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal';
-import API_BASE_URL from '../config/apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 import { Toaster, toast } from 'sonner'
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';

@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import cloud from './cloud.png'; 
 import ReactDOM from "react-dom";
 import { useNavigate } from 'react-router-dom';
-import API_BASE_URL from './apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

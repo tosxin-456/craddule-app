@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { jwtDecode } from "jwt-decode";
 import { HiOutlineArrowSmallRight } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom';
-import API_BASE_URL from '../config/apiConfig';
+import {API_BASE_URL} from '../config/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 

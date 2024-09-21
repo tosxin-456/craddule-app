@@ -7,7 +7,7 @@ import { Toaster, toast } from 'sonner';
 import { jwtDecode } from "jwt-decode";
 import logobg from './images/logobg.png'; 
 import ModalStart from './component/modalStart';
-import API_BASE_URL from './config/apiConfig';
+import {API_BASE_URL} from './config/apiConfig';
 
 function CreateProject() {
 
