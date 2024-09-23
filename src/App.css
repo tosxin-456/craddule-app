@@ -1509,10 +1509,6 @@ background-color: white!important;
   cursor: pointer;
   float: inline-end;
 }
-.input-containerC {
-  position: relative;
-  margin-bottom: 20px; /* Adjust margin as needed */
-}
 
 .creT {
   text-align: center;

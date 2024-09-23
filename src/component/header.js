@@ -6,9 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import ChatToolModal from './chatModal';
 import {API_BASE_URL} from '../config/apiConfig';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLightbulb, faTrash,faUser  } from '@fortawesome/free-solid-svg-icons';
-import { checkTokenValidity } from '../utils/auth';
 import { jwtDecode } from "jwt-decode";
 import ModalStart from './modalTellUs';
 import { handleLogout } from '../utils/startUtils';
@@ -191,7 +188,7 @@ const handleNotifyClick1 = () => {
   return(
     <>
       <div className=''>
-        <div className='bg-blue600 py-4 px-6 sticky'>
+        <div className='bg-blue600 py-4 px-6 fixed w-full z-[1000]'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center gap-3'>
               <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 24 24">
@@ -252,6 +249,7 @@ const handleNotifyClick1 = () => {
           <ModalStart open={isOpenT}>
           </ModalStart>
         </div>
+        <div className='pb-[100px]'></div>
       </div>
     </>
   )
