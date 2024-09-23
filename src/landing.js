@@ -136,7 +136,6 @@ function LandingPage() {
       </div>
 
       <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />
-      <GetCard/>
     </div>
   );
 }

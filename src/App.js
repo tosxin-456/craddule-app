@@ -298,10 +298,10 @@ import Referral from './referral';
 import { getUserIdFromToken } from './utils/startUtils';
 
 function App() {
-  const { io } = require("socket.io-client");
-  const [isTrialExpired, setIsTrialExpired] = useState(true)
+  // const { io } = require("socket.io-client");
+  const [isTrialExpired, setIsTrialExpired] = useState(false)
 
-  const socket = io('http://localhost:3001');
+  // const socket = io('http://localhost:3001');
   const {userId} = getUserIdFromToken();
 
   useEffect(()=>{
@@ -341,15 +341,6 @@ function App() {
     }
   })
 
-  // socket.on("connect", () => {
-  //   console.log(socket.id);
-  //   socket.on('access', (msg) => {
-  //     console.log('message: ' + msg);
-  //     if (msg){
-  //       setIsTrialExpired(msg)
-  //     }
-  //   });
-  // });
   return (
     <>
     <Router>
