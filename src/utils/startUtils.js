@@ -89,7 +89,7 @@ export const FetchProjectDetails = (projectId, setProjectDetails, setError, setL
   }, [projectId, setProjectDetails, setError, setLoading]);
 };
 
-export const FetchGoStatus = (projectId, access_token, setUnlock) => {
+export const FetchGoStatus = (projectId, access_token, setUnlock, setUnlockIn) => {
   useEffect(() => {
     // Define an async function to fetch goStatus data
     const fetchGoStatus = async () => {
@@ -110,6 +110,7 @@ export const FetchGoStatus = (projectId, access_token, setUnlock) => {
           console.log(data.message);
           console.log(data.allCompleted);
           setUnlock(data.allCompleted);
+          setUnlockIn(data.allCompleted);
         } else {
           const data = await response.json();
           console.log(data.message);
@@ -124,7 +125,7 @@ export const FetchGoStatus = (projectId, access_token, setUnlock) => {
 
     // Call the async function
     fetchGoStatus();
-  }, [projectId, access_token, setUnlock]);
+  }, [projectId, access_token, setUnlock, setUnlockIn]);
 };
 
 export const FetchTimelines = (projectId, setTimelines, setLoading, setError) => {
