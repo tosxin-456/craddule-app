@@ -83,3 +83,8 @@ a{
   transition: width 0.5s ease;
   @apply bg-blue-600 !important
 }
+
+button:disabled{
+  cursor: not-allowed;
+  opacity: 70%;
+}

@@ -300,7 +300,7 @@ const Profile = () =>  {
       <Header />
       <BreadCrumb page={'Profile'}/>
 
-      <div className="mx-20 mt-5 p-10 bg-white rounded-[30px]">
+      <div className="mx-40 mt-5 p-10 px-20 bg-white rounded-[30px]">
         <h4 className='text-center mt-8'>My Profile</h4>
         <p className='text-gray800 text-center mb-10'>Your profile is a record of your personal information that defines who you are</p>
         <div className='flex justify-end gap-3 mt-5'>
@@ -315,10 +315,10 @@ const Profile = () =>  {
         
         <div className="grid grid-cols-12 ">
           <div className='col-span-4 mt-10'>
-            <p className='text-center font-semibold'>Profile picture/company logo</p>
-            <div className=''>
-              <img src={p1} className='rounded-full w-[287px] h-[287px]' type='button'></img>
-              <button className="px-3 py-2 m-auto mt-1 bg-blue600 rounded-[30px] text-white text-[12px] justify-self-center"  disabled={loading} onClick={()=>setIsOpen(true)}>
+            <p className='text-center font-semibold text-p18'>Profile picture/company logo</p>
+            <div className='mt-4'>
+              <img src={p1} className='rounded-full w-[287px] h-[287px] m-auto' type='button'></img>
+              <button className="block px-5 py-3 m-auto mt-4 bg-blue600 rounded-[30px] text-white text-[12px] justify-self-center"  disabled={loading} onClick={()=>setIsOpen(true)}>
                 { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
                 { !loading && <span>Change picture</span>}
               </button>
@@ -386,7 +386,7 @@ const Profile = () =>  {
           </ImageModal>
           <ToastContainer />
         </div>
-        <div className='mt-10 border-dotted border-black100 rounded-[30px] p-10'>
+        <div className='mt-10 border-1 border-dashed border-black100 rounded-[30px] p-10'>
             <h4 className='text-center mt-10'>Refer a friend</h4>
             <p className='text-gray800 text-center mb-5'>Refer friend and get free gift when the join and complete their application</p>
             <div className='w-fit m-auto'>
@@ -401,7 +401,7 @@ const Profile = () =>  {
             <div className="mt-5 p-10 bg-gray200 rounded-[20px]">
               <h5 className='text-center'>Track friends you’ve referred</h5>
 
-              <div className='mx-20 mt-5'>
+              <div className='mx-40 mt-5'>
                 <div className='flex justify-between text-[16px]' >
                   <p>Visited Craddule</p>
                   <p>1</p>

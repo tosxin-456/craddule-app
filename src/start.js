@@ -65,7 +65,7 @@ function InflationRateGraph({ graphType }) {
         <div className="grid grid-cols-5 gap-3 mt-14">
             <div className="col-span-4">
                 <div className="grid grid-cols-4 gap-3">
-                <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/ideation.png')] bg-no-repeat bg-cover">
+                <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/ideation.png')] bg-no-repeat bg-cover cursor-pointer">
                     <div className="tilt-box bg-[#E8C400D9]" onClick={()=>handleClickStorage('BusinessCaseBuilder','/questionBusMain/Ideation/BusinessCaseBuilder/Introduction')}>
                         <button className="px-2 py-1 bg-black400 rounded-[10px] mb-[16px] text-white text-[14px]">View</button>
                         <p className="p18">Ideation</p>
@@ -75,7 +75,7 @@ function InflationRateGraph({ graphType }) {
                 </div>
 
                 {projectDetails && !projectDetails.includes("Product Definition") && (
-                <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/product_definition.png')] bg-no-repeat bg-cover ${!unlock ? 'locked' : ''}`}>
+                <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/product_definition.png')] bg-no-repeat bg-cover cursor-pointer ${!unlock ? 'locked' : ''}`}>
                 <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? ()=>handleClick('/questionBusMain/ProductDefinition/BusinessAnalysisPack/CustomerSegments') : null}>
                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                         <p className="p18">Product Definition</p>
@@ -87,7 +87,7 @@ function InflationRateGraph({ graphType }) {
                 )}
 
                 {projectDetails && !projectDetails.includes("Initial Design") && (
-                <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/initial_design.png')] bg-no-repeat bg-cover ${!unlock ? 'locked' : ''}`}>
+                <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/initial_design.png')] bg-no-repeat bg-cover cursor-pointer ${!unlock ? 'locked' : ''}`}>
                     <div 
                     className={`tilt-box bg-[#193FAEDE] text-white ${!unlockIn ? 'lockedIn' : ''}`}  
                     onClick={unlock ? ()=>handleClick('/questionBusMain/InitialDesign/ClaimTheDomain/DomainName') : null}
@@ -102,7 +102,7 @@ function InflationRateGraph({ graphType }) {
                 )}
 
                 {projectDetails && !projectDetails.includes("Validating and Testing") && (           
-                    <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/validating.png')] bg-no-repeat bg-cover ${!unlock ? 'locked' : ''}`}>
+                    <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/validating.png')] bg-no-repeat bg-cover cursor-pointer ${!unlock ? 'locked' : ''}`}>
                         <div 
                         className={`tilt-box bg-[#FFD700DE] text-white ${!unlockIn ? 'lockedIn' : ''}`}  
                         onClick={unlock ? ()=>handleClick('/questionBusMain/ValidatingAndTesting/FullProductProjectReview/Review') : null}>
@@ -116,7 +116,7 @@ function InflationRateGraph({ graphType }) {
                 )}
 
                 {projectDetails && !projectDetails.includes("Commercialization") && (
-                    <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/commercialization.png')] bg-no-repeat bg-cover ${!unlock ? 'locked' : ''}`}>
+                    <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/commercialization.png')] bg-no-repeat bg-cover cursor-pointer ${!unlock ? 'locked' : ''}`}>
                         <div 
                             className={`tilt-box bg-[#333333DE] text-[white] ${!unlockIn ? 'lockedIn' : ''}`}  
                             onClick={unlock ? ()=>handleClick('/questionBusMain/Commercialization/BringTheMVPToFullScale/GetTheMVPToFruition') : null}
@@ -131,7 +131,7 @@ function InflationRateGraph({ graphType }) {
                     </div>
                 )}
 
-                <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/kpi.png')] bg-no-repeat bg-cover`}>
+                <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/kpi.png')] bg-no-repeat bg-cover cursor-pointer`}>
                     <div className={`tilt-box bg-[#133188DE] text-white`} onClick={()=>handleClickStorage('Kpi', '/kpi')}>
                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                         <p className="p18">KPI</p>
@@ -140,7 +140,7 @@ function InflationRateGraph({ graphType }) {
                     </div>
                 </div>
 
-                <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/scrab_book.png')] bg-no-repeat bg-cover border-3 border-black">
+                <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/scrab_book.png')] bg-no-repeat bg-cover border-3 border-black cursor-pointer">
                     <div className="tilt-box bg-[#E6E6E6D9] text-black400" onClick={()=>handleClick('/scrapView')}>
                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                         <p className="p18">ScrapBook</p>
@@ -149,7 +149,7 @@ function InflationRateGraph({ graphType }) {
                     </div>
                 </div>
 
-                <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/pitch_deck.png')] bg-no-repeat bg-cover">
+                <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/pitch_deck.png')] bg-no-repeat bg-cover cursor-pointer">
                     <div className="tilt-box bg-[#193FAE99] text-white" onClick={()=>handleClick('/pitchDeckStart')}>
                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                         <p className="p18">Pitch Deck</p>
