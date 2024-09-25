@@ -34,7 +34,8 @@ function SignUp() {
   const [loading, setLoading] = useState(false);
   const [referralCode, setReferralCode] = useState('');
   const [formData, setFormData] = useState({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phoneNumber: '',
     password: '',
@@ -106,7 +107,7 @@ function SignUp() {
 
             <form onSubmit={handleSubmit}>
               <div className="">
-                {/* <div className="mt-[16px]">
+                <div className="mt-[16px]">
                   <label htmlFor="firstName" className='text-p18 font-semibold pb-1 block'>First Name</label>
                   <input
                     type="text"
@@ -123,17 +124,6 @@ function SignUp() {
                     type="text"
                     id="lastName"
                     value={formData.lastName}
-                    onChange={handleChange}
-                    className="w-full border border-black400 px-3 py-[10px] rounded-full"
-                  />
-                </div> */}
-
-                <div className="mt-[16px] pt-3">
-                  <label htmlFor="fullName" className='text-p18 font-semibold pb-1 block'>Full Name</label>
-                  <input
-                    type="text"
-                    id="fullName"
-                    value={formData.fullName}
                     onChange={handleChange}
                     className="w-full border border-black400 px-3 py-[10px] rounded-full"
                   />

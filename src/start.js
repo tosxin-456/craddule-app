@@ -3,8 +3,9 @@ import Header from './component/header';
 import { CiLock,CiMemoPad,CiUser} from 'react-icons/ci';
 import bolt from './images/bolt.png';
 import ReactGA from "react-ga4";
-import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak, getUserIdFromToken, FetchProjectDetails, FetchGoStatus, FetchTimelines, FetchTimelinesCount } from "./utils/startUtils";
+import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak, getUserIdFromToken, FetchProjectDetails, FetchGoStatus, FetchTimelines, FetchTimelinesCount, FetchUser } from "./utils/startUtils";
 import { useNavigate } from "react-router-dom";
+import ModalStart from "./component/modalStartStop";
 
 function InflationRateGraph({ graphType }) {
 
@@ -23,21 +24,24 @@ function InflationRateGraph({ graphType }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const projectId = localStorage.getItem('nProject');
-  const {access_token, userId} = getUserIdFromToken();
   const [projectDetails, setProjectDetails] = useState([]);
-
+  const [userDetails, setUserDetails] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+
+  const {access_token, userId} = getUserIdFromToken();
 
   if (userId == null){
     navigate('/login');
   }
+  FetchUser(userId, setUserDetails, setError, setLoading);
 
   FetchProjectDetails(projectId, setProjectDetails, setError, setLoading)
 
   FetchGoStatus(projectId, access_token, setUnlock, setUnlockIn)
 
   useEffect(() => {
-  updateStreak(setStreak);
+    updateStreak(setStreak);
   }, []);
   
 //   FetchTimelines(projectId, setTimelines, setLoading, setError)
@@ -50,12 +54,12 @@ function InflationRateGraph({ graphType }) {
       <div className='container'>
         <div className="flex justify-between items-center mt-10">
             <div>
-                <h4 className="text-blue600">Hello, Joshua!</h4>
+                <h4 className="text-blue600">Hello, {userDetails?.firstName}!</h4>
                 <h6 className="text-gray-800">Begin your launch to success!</h6>
             </div>
             <div className="grid">
-                <button className='block px-3 py-2 bg-black400 rounded-[5px] mb-[15px] text-white'>Create new project</button>
-                <button className='block px-3 py-2 bg-none border border-black500 rounded-[5px]'>Select Project</button>
+                <button className='block px-3 py-2 bg-black400 rounded-[5px] mb-[15px] text-white' onClick={()=>setIsOpen(true)}>Create new project</button>
+                <button className='block px-3 py-2 bg-none border border-black500 rounded-[5px]' onClick={()=>handleClick('/home')}>Select Project</button>
             </div>
         </div>
         <div className="grid grid-cols-5 gap-3 mt-14">
@@ -72,7 +76,7 @@ function InflationRateGraph({ graphType }) {
 
                 {projectDetails && !projectDetails.includes("Product Definition") && (
                 <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/product_definition.png')] bg-no-repeat bg-cover ${!unlock ? 'locked' : ''}`}>
-                <div className={`tilt-box bg-[#333333] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? ()=>handleClick('/questionBusMain/ProductDefinition/BusinessAnalysisPack/CustomerSegments') : null}>
+                <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? ()=>handleClick('/questionBusMain/ProductDefinition/BusinessAnalysisPack/CustomerSegments') : null}>
                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                         <p className="p18">Product Definition</p>
                         <p className="text-[12px]">Design your business processes and flow</p>
@@ -85,7 +89,7 @@ function InflationRateGraph({ graphType }) {
                 {projectDetails && !projectDetails.includes("Initial Design") && (
                 <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/initial_design.png')] bg-no-repeat bg-cover ${!unlock ? 'locked' : ''}`}>
                     <div 
-                    className={`tilt-box bg-[#193FAE] text-white ${!unlockIn ? 'lockedIn' : ''}`}  
+                    className={`tilt-box bg-[#193FAEDE] text-white ${!unlockIn ? 'lockedIn' : ''}`}  
                     onClick={unlock ? ()=>handleClick('/questionBusMain/InitialDesign/ClaimTheDomain/DomainName') : null}
                     >
                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
@@ -100,7 +104,7 @@ function InflationRateGraph({ graphType }) {
                 {projectDetails && !projectDetails.includes("Validating and Testing") && (           
                     <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/validating.png')] bg-no-repeat bg-cover ${!unlock ? 'locked' : ''}`}>
                         <div 
-                        className={`tilt-box bg-[#FFD700] text-white ${!unlockIn ? 'lockedIn' : ''}`}  
+                        className={`tilt-box bg-[#FFD700DE] text-white ${!unlockIn ? 'lockedIn' : ''}`}  
                         onClick={unlock ? ()=>handleClick('/questionBusMain/ValidatingAndTesting/FullProductProjectReview/Review') : null}>
                         <button className="px-2 py-1 bg-black400 rounded-[10px] mb-[16px] text-white text-[14px]">View</button>
                             <p className="p18">Validating and Testing</p>
@@ -114,7 +118,7 @@ function InflationRateGraph({ graphType }) {
                 {projectDetails && !projectDetails.includes("Commercialization") && (
                     <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/commercialization.png')] bg-no-repeat bg-cover ${!unlock ? 'locked' : ''}`}>
                         <div 
-                            className={`tilt-box bg-[#333333] text-[white] ${!unlockIn ? 'lockedIn' : ''}`}  
+                            className={`tilt-box bg-[#333333DE] text-[white] ${!unlockIn ? 'lockedIn' : ''}`}  
                             onClick={unlock ? ()=>handleClick('/questionBusMain/Commercialization/BringTheMVPToFullScale/GetTheMVPToFruition') : null}
                         >
                             <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
@@ -136,8 +140,8 @@ function InflationRateGraph({ graphType }) {
                     </div>
                 </div>
 
-                <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/scrab_book.png')] bg-no-repeat bg-cover">
-                    <div className="tilt-box bg-[#E6E6E6D9] text-black400"onClick={()=>handleClick('/scrapView')}>
+                <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/scrab_book.png')] bg-no-repeat bg-cover border-3 border-black">
+                    <div className="tilt-box bg-[#E6E6E6D9] text-black400" onClick={()=>handleClick('/scrapView')}>
                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                         <p className="p18">ScrapBook</p>
                         <p className="text-[12px]">Create Notes that you can look back at later</p>
@@ -277,6 +281,7 @@ function InflationRateGraph({ graphType }) {
 
         <div className="startWrap"></div>
       </div>    
+      <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />
     </div> 
   );
 }

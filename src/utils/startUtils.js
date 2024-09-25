@@ -89,6 +89,41 @@ export const FetchProjectDetails = (projectId, setProjectDetails, setError, setL
   }, [projectId, setProjectDetails, setError, setLoading]);
 };
 
+export const FetchUser = (userId, setUserDetails, setError, setLoading) => {
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      console.log("getting details")
+      const id = userId;
+      console.log("getting details:"+ id)
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/user/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status === 200) {
+              const responseData = await response.json();
+              console.log('Response:', responseData);
+              setUserDetails(responseData);
+            }else{
+              const result = await response.json();
+              console.error('Error:', result.error);
+            }          
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (userId) {
+        fetchUserDetails();
+    }
+  }, [userId, setUserDetails, setError, setLoading]);
+};
+
 export const FetchGoStatus = (projectId, access_token, setUnlock, setUnlockIn) => {
   useEffect(() => {
     // Define an async function to fetch goStatus data
