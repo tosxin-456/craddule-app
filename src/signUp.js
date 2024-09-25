@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';import design from './images/design.png'
+import 'react-toastify/dist/ReactToastify.css';
+import design from './images/design.png'
 import logo from './images/logo.png'
 import signUpImage from './images/signup.png'
 import { useLocation, useNavigate } from 'react-router-dom';

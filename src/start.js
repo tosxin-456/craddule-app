@@ -248,29 +248,29 @@ function InflationRateGraph({ graphType }) {
         </div>
 
         <div className="grid grid-cols-12 gap-3 text-white mt-10">
-            <div className="col-span-3">
+            <div className="col-span-3 cursor-pointer">
                 <div className="bg-black400 py-7 rounded-5" onClick={()=>handleClick('/generalSetting')}>
                 <svg xmlns="http://www.w3.org/2000/svg"  className='m-auto' width="25px" height="25px" viewBox="0 0 24 24"><path fill="white" d="M17 9V7c0-2.8-2.2-5-5-5S7 4.2 7 7v2c-1.7 0-3 1.3-3 3v7c0 1.7 1.3 3 3 3h10c1.7 0 3-1.3 3-3v-7c0-1.7-1.3-3-3-3M9 7c0-1.7 1.3-3 3-3s3 1.3 3 3v2H9zm4.1 8.5l-.1.1V17c0 .6-.4 1-1 1s-1-.4-1-1v-1.4c-.6-.6-.7-1.5-.1-2.1s1.5-.7 2.1-.1c.6.5.7 1.5.1 2.1"/></svg>
                 <p className="p20 text-center mt-2">Change Password</p>                      
                 </div>
             </div>
 
-            <div className="col-span-3">
+            <div className="col-span-3 cursor-pointer">
                 <div className="bg-black400 py-7 rounded-5" onClick={()=>handleClick('/profile')}>
                 <svg xmlns="http://www.w3.org/2000/svg" className='m-auto' width="25px" height="25px" viewBox="0 0 24 24"><g fill="none"><path stroke="white" stroke-width="2" d="M21 12a8.96 8.96 0 0 1-1.526 5.016A8.99 8.99 0 0 1 12 21a8.99 8.99 0 0 1-7.474-3.984A9 9 0 1 1 21 12Z"/><path fill="white" d="M13 9a1 1 0 0 1-1 1v2a3 3 0 0 0 3-3zm-1 1a1 1 0 0 1-1-1H9a3 3 0 0 0 3 3zm-1-1a1 1 0 0 1 1-1V6a3 3 0 0 0-3 3zm1-1a1 1 0 0 1 1 1h2a3 3 0 0 0-3-3zm-6.834 9.856l-.959-.285l-.155.523l.355.413zm13.668 0l.76.651l.354-.413l-.155-.523zM9 16h6v-2H9zm0-2a5 5 0 0 0-4.793 3.571l1.917.57A3 3 0 0 1 9 16zm3 6a7.98 7.98 0 0 1-6.075-2.795l-1.518 1.302A9.98 9.98 0 0 0 12 22zm3-4c1.357 0 2.506.902 2.876 2.142l1.916-.571A5 5 0 0 0 15 14zm3.075 1.205A7.98 7.98 0 0 1 12 20v2a9.98 9.98 0 0 0 7.593-3.493z"/></g></svg>
                 <p className="p20 text-center mt-2">Edit Profile</p>
                 </div>
             </div>
 
-            <div className="col-span-3">
-                <div className="bg-black400 py-7 rounded-5" onClick={()=>handleClick('/termAgreement')}>
+            <div className="col-span-3 cursor-pointer">
+                <div className="bg-black400 py-7 rounded-5" onClick={()=>handleClick('/terms&conditions')}>
                 <svg xmlns="http://www.w3.org/2000/svg" className='m-auto' width="25px" height="25px" viewBox="0 0 256 256"><path fill="white" d="m213.66 82.34l-56-56A8 8 0 0 0 152 24H56a16 16 0 0 0-16 16v176a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V88a8 8 0 0 0-2.34-5.66M160 176H96a8 8 0 0 1 0-16h64a8 8 0 0 1 0 16m0-32H96a8 8 0 0 1 0-16h64a8 8 0 0 1 0 16m-8-56V44l44 44Z"/></svg>
                     <p className="p20 text-center mt-2">Terms & Conditions</p>                      
                 </div>
             </div>
 
 
-            <div className="col-span-3">
+            <div className="col-span-3 cursor-pointer">
                 <div className="bg-black400 py-7 rounded-5" onClick={()=>handleClick('/privacy')}>
                 <svg xmlns="http://www.w3.org/2000/svg" className='m-auto' width="25px" height="25px" viewBox="0 0 256 256"><path fill="white" d="m213.66 82.34l-56-56A8 8 0 0 0 152 24H56a16 16 0 0 0-16 16v176a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V88a8 8 0 0 0-2.34-5.66M160 176H96a8 8 0 0 1 0-16h64a8 8 0 0 1 0 16m0-32H96a8 8 0 0 1 0-16h64a8 8 0 0 1 0 16m-8-56V44l44 44Z"/></svg>
                     <p className="p20 text-center mt-2">Privacy Policy</p>
