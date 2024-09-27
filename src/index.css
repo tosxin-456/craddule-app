@@ -8,27 +8,27 @@ body {
 }
 
 h1{
-  @apply text-[45px]
+  @apply text-[45px] !important
 }
 
 h2{
-  @apply text-[40px]
+  @apply text-[40px] !important
 }
 
 h3{
-  @apply text-[36px]
+  @apply text-[36px] !important
 }
 
 h4{
-  @apply text-[32px]
+  @apply text-[32px] !important
 }
 
 h5{
-  @apply text-[28px]
+  @apply text-[28px] !important
 }
 
 h6{
-  @apply text-[22px]
+  @apply text-[22px] !important
 }
 
 a{
@@ -59,4 +59,32 @@ a{
   outline: none;
   border-color: #aaa;
   box-shadow: 0 0 5px #aaa;
+}
+
+.tilt-box{
+  padding: 16px;
+  border-radius: 0px 30px 0px 30px;
+  @apply
+  w-full h-full
+}
+
+.progress-bar {
+  width: 100%;
+  height: 9px;
+  border-radius: 30px;
+  overflow: hidden;
+  @apply bg-black50
+  border border-blue-200
+}
+
+.progress {
+  height: 100%;
+  border-radius: 30px;
+  transition: width 0.5s ease;
+  @apply bg-blue-600 !important
+}
+
+button:disabled{
+  cursor: not-allowed;
+  opacity: 70%;
 }

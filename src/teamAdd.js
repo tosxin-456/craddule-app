@@ -17,6 +17,7 @@ import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
 import SideMenu2P from './component/sideMenu2P';
+import BreadCrumb from './component/breadCrumb';
 
 function ScrapView ({ htmlContent })  {
     
@@ -334,19 +335,17 @@ createTeam(formData);
             }
           });
         
-      if(scrapResponse.status === 200) {
-        // If summary exists, fetch the summary data
-        const dataS = await scrapResponse.json();
-        console.log(dataS);
-        console.log("scrap "+dataS.data.scrap);
-        setteam(dataS.data);
-       
-     } else {
-        
-        const data = await scrapResponse.json();
-        console.log(data);
-        setLoading(false);
-    }
+        if(scrapResponse.status === 200) {
+          // If summary exists, fetch the summary data
+          const dataS = await scrapResponse.json();
+          console.log(dataS);
+          console.log("scrap "+dataS.data.scrap);
+          setteam(dataS.data);
+        } else {
+            const data = await scrapResponse.json();
+            console.log(data);
+            setLoading(false);
+        }
       } catch (error) {
         setError(error.message);
         setLoading(false);
@@ -417,96 +416,72 @@ createTeam(formData);
     }
 };
 
-    return (
-        <>
+  return (
+    <>
 
-<div className='container2'>
-         <SideMenu2P />    
-         <div className="main-content">
-        
-         <Header />
-         
-         <div className='main-content2'>
-        
-        <div className='bacWHI'>
-
-        <div className="row">
-            <div className="col-md-6">
-                <p style={{fontWeight:700}}>Add Team Member</p>
-            </div>
-
-            <div className="col-md-6">
-              <button className="btn mainBtn" onClick={handleN}>Manage NDA</button>
-            </div>
+      <div className=''>
+        <div className="">
+          <Header />
+          <BreadCrumb page={'Add team member'}/>
+          <div className='w-[975px] m-auto mt-5'>
+            <div className='bacWHI'>
+              <div className="row">
+                <div className="">
+                    <h4 className='text-center'>Add Team Member</h4>
                 </div>
-
-                   
-
-                {linkD && (
-                <p className='copyPp'>{linkD}
-                <button className='cop' onClick={copyToClipboard}>
-                   Copy
-                </button>
-                </p>
-                )}
-              <form onSubmit={handleSubmit}>
-              <div className='emailInvite1'>
-                <div className='enterEmail'>
-                <p className='email'>Email</p>
-                <input 
-                  type="text" 
-                  className='enterE' 
-                  placeholder="Email"
-                  id="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                ></input>
-                {/*<textarea className='enterE'></textarea>*/}
-                </div>
-                
-               
-
-                </div>
-
-                <div className='text-center'>
-                <input 
-                type="checkbox" 
-                label="NDA"
-                name="nda"
-                checked={isChecked} // Bind checked attribute to state
-                onChange={handleCheckboxChange}
-              />
-              <span style={{paddingLeft:10}}>Send NDA</span>
+                {/* <div className="col-md-6">
+                  <button className="btn mainBtn" onClick={handleN}>Manage NDA</button>
+                </div> */}
               </div>
 
+              {linkD && (
+              <p className='copyPp'>{linkD}
+              <button className='cop' onClick={copyToClipboard}>
+                  Copy
+              </button>
+              </p>
+              )}
+              <form onSubmit={handleSubmit}>
+                <div className="mt-[16px]">
+                  <label htmlFor="email" className='text-[22px] font-normal pb-1 block'>Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder='Enter email'
+                    className="w-full border border-black400 bg-gray200 px-3 ps-4 py-3 rounded-[20px]"
+                  />
+                </div>
+
+                <div className='text-center mt-4 flex justify-center items-center gap-3'>
+                  <input 
+                    type="checkbox" 
+                    label="NDA"
+                    name="nda"
+                    checked={isChecked} // Bind checked attribute to state
+                    onChange={handleCheckboxChange}
+                    className=''
+                  />
+                  <span>Send NDA</span>
+                </div>
                 
-
-                {/*<button className="btn btn-primary dropdown-toggle buttonSelect" type="button" data-toggle="dropdown">Select Project</button>*/}
-                <div className='shareButtonDiv'>
-           <button className="btn btn-primary curveInviteA" type='submit'>
-           { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
-                { !loading && <span>Add</span>}
-            </button>
-            
-           </div>
-           </form>
-        
-            <div class = "break"></div>
-           
-           
-            
-           
-           
-        </div> 
-
-        
-        
-  </div>
-  </div>
-  <Toaster  position="top-right" />
-  </div>
-  </>
-    );
+                <div className='mt-4'>
+                  <button className="bg-blue600 w-[171px] block m-auto py-2 rounded-[15px] text-white" type='submit'>
+                    { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+                    { !loading && <span>Send invite</span>}
+                  </button>
+                </div>
+              </form>
+          
+              <div class = "break"></div>
+            </div>     
+          </div>
+        </div>
+        <Toaster  position="top-right" />
+      </div>
+    </>
+  );
 }
 
 export default ScrapView

@@ -2,6 +2,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import {API_BASE_URL, APP_BASE_URL} from './config/apiConfig';
 import './App.css';
+// import './index.css';
 
 import {
   BrowserRouter as Router,

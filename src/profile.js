@@ -8,6 +8,8 @@ import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { ToastContainer, toast } from 'react-toastify';
+import BreadCrumb from './component/breadCrumb';
+import PhoneInput from 'react-phone-input-2';
 
 const Profile = () =>  {
   // State variables to manage dropdown behavior
@@ -84,6 +86,10 @@ const Profile = () =>  {
   setIsDropdownOpen3(false);
   };
 
+  const handlePhoneChange = (value) => {
+    setFormData({ ...formData, phoneNumber: value });
+  };
+
   // Close dropdown when clicking outside of it 1
  useEffect(() => {
     const handleClickOutside = (event) => {
@@ -128,16 +134,16 @@ const Profile = () =>  {
 
   // Close dropdown when clicking outside of it 4
   useEffect(() => {
-const handleClickOutside = (event) => {
-    if (dropdownRef3.current && !dropdownRef3.current.contains(event.target)) {
-        setIsDropdownOpen3(false);
-    }
-};
+    const handleClickOutside = (event) => {
+        if (dropdownRef3.current && !dropdownRef3.current.contains(event.target)) {
+            setIsDropdownOpen3(false);
+        }
+    };
 
-document.addEventListener('mousedown', handleClickOutside);
-return () => {
-    document.removeEventListener('mousedown', handleClickOutside);
-};
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   const access_token = localStorage.getItem('access_token');
@@ -157,33 +163,33 @@ return () => {
     phoneNumber: '',
   });
 
+  const fetchUserDetails = async () => {
+    try {
+      const response = await fetch(API_BASE_URL+'/api/user/'+userId, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${access_token}`,
+        },
+      });
+        if (response.status === 200) {
+            const data = await response.json();
+            console.log(data);
+            // Update user details state with fetched data
+            const { firstName, lastName, email, phoneNumber } = data;
+            setFormData({ firstName, lastName, email, phoneNumber });
+        } else {
+            const data = await response.json();
+            console.log(data);
+            console.error('Failed to fetch user details');
+        }
+    } catch (error) {
+        console.error('Error fetching user details:', error);
+    }
+  };
+
   useEffect(() => {
     // Simulating fetching user details from an API
-    const fetchUserDetails = async () => {
-        try {
-          const response = await fetch(API_BASE_URL+'/api/user/'+userId, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${access_token}`,
-            },
-          });
-            if (response.status === 200) {
-                const data = await response.json();
-                console.log(data);
-                // Update user details state with fetched data
-                const { firstName, lastName, email, phoneNumber } = data;
-                setFormData({ firstName, lastName, email, phoneNumber });
-            } else {
-                const data = await response.json();
-                console.log(data);
-                console.error('Failed to fetch user details');
-            }
-        } catch (error) {
-            console.error('Error fetching user details:', error);
-        }
-    };
-
     fetchUserDetails();
   }, []);
 
@@ -196,6 +202,7 @@ return () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('click')
     updateUser(formData);
   };
 
@@ -222,8 +229,9 @@ return () => {
 
         const responseData = await response.json(); // Parse JSON response
         console.log(responseData)
+        toast.success(responseData.message)
   
-  setLoading(false);      
+        setLoading(false);      
 
       } else {
         const result = await response.json();
@@ -241,8 +249,6 @@ return () => {
   const navigate = useNavigate()
   const [isOpen, setIsOpen]= useState(false);
 
-  const onClickHandler = () => navigate(`/introduction1`)
-
   const handleCopy = () => {
     navigator.clipboard.writeText(`${APP_BASE_URL}/signUp/${referralCode}`)
       .then(() => {
@@ -255,6 +261,15 @@ return () => {
         console.error('Failed to copy text: ', err);
       });
   };
+
+  const submitForm = () =>{
+    console.log('dafad')
+    document.getElementById('userUpdateForm').click();
+  }
+
+  const handleDiscard = () => {
+    fetchUserDetails();
+  }
 
   useEffect(()=>{
     const fetchCode = async()=>{
@@ -285,86 +300,95 @@ return () => {
       
     <>
       <Header />
-      <div className="mb-20"></div>
-      <div className="mx-20 mt-20 p-10 bg-white rounded-[30px]">
-        <h4 className='text-center mt-10'>Profile</h4>
-        <p className='text-gray800 text-center mb-10'>View, manage your memebers and send invites</p>
-        <div className='flex justify-end gap-3 pt-10'>
-          <button className="btn btn-primary curveN"  disabled={loading}>
+      <BreadCrumb page={'Profile'}/>
+
+      <div className="mx-40 mt-5 p-10 px-20 bg-white rounded-[30px]">
+        <h4 className='text-center mt-8'>My Profile</h4>
+        <p className='text-gray800 text-center mb-10'>Your profile is a record of your personal information that defines who you are</p>
+        <div className='flex justify-end gap-3 mt-5'>
+          <button className="px-3 py-2 bg-blue600 text-white rounded-full"  disabled={loading} onClick={submitForm}>
             { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
             { !loading && <span>Save changes</span>}
           </button>
-          <button className="btn btn-primary curveN"  disabled={loading}>
-            { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
-            { !loading && <span>Discard changes</span>}
+          <button className="px-3 py-2 border border-gray900 rounded-full"  disabled={loading} onClick={handleDiscard}>
+            <span>Discard changes</span>
           </button>
         </div>
         
         <div className="grid grid-cols-12 ">
-          <div className='col-span-4'>
-            <p className='text-center font-semibold'>Profile picture/company logo</p>
-            <div className=''>
-              <img src={p1} className='rounded-full w-[287px] h-[287px]' type='button'></img>
-              <button className="px-3 py-2 m-auto mt-1 bg-blue600 rounded-[30px] text-white text-[12px] justify-self-center"  disabled={loading} onClick={()=>setIsOpen(true)}>
+          <div className='col-span-4 mt-10'>
+            <p className='text-center font-semibold text-p18'>Profile picture/company logo</p>
+            <div className='mt-4'>
+              <img src={p1} className='rounded-full w-[287px] h-[287px] m-auto' type='button'></img>
+              <button className="block px-5 py-3 m-auto mt-4 bg-blue600 rounded-[30px] text-white text-[12px] justify-self-center"  disabled={loading} onClick={()=>setIsOpen(true)}>
                 { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
                 { !loading && <span>Change picture</span>}
               </button>
             </div>
           </div>
           <div className='col-span-1'></div>
-          <div className='col-span-7'>
-            <form onSubmit={handleSubmit} className='w-full'>
-              <div className='mb-2'>
-                <label htmlFor="firstName" className='text-[16px] font-medium'>First Name</label>
-                <input 
-                type="text"
-                id="firstName" 
-                value= {formData.firstName}
-                onChange={handleChange}
-                className='block px-4 py-2 bg-black50 w-full rounded-[10px]' 
-                placeholder='First Name'
-                />
+          <div className='col-span-7 mt-16'>
+          <form onSubmit={handleSubmit}>
+              <div className="">
+                <div className="mt-[16px]">
+                  <label htmlFor="firstName" className='text-p18 font-semibold pb-1 block'>First Name</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className="w-full border border-black400 px-3 py-[10px] rounded-full"
+                  />
+                </div>
+
+                <div className="mt-[16px]">
+                  <label htmlFor="lastName" className='text-p18 font-semibold pb-1 block'>Last Name</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className="w-full border border-black400 px-3 py-[10px] rounded-full"
+                  />
+                </div>
+
+                <div className="mt-[16px]">
+                  <label htmlFor="email" className='text-p18 font-semibold pb-1 block'>Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full border border-black400 px-3 py-[10px] rounded-full"
+                  />
+                </div>
+
+                <div className="mt-[16px]">
+                  <label htmlFor="phoneNumber" className='text-p18 font-semibold pb-1 block'>Phone Number</label>
+                  <PhoneInput
+                    country={'ng'}
+                    value={formData.phoneNumber}
+                    onChange={handlePhoneChange}
+                    inputProps={{
+                      name: 'phoneNumber',
+                      required: true,
+                      autoFocus: true,
+                      className: 'custom-input2',
+                    }}
+                  />
+                </div>
               </div>
-              <div className='mb-2'>
-                <label htmlFor="lastName" className='text-[16px] font-medium'>Last Name</label>
-                <input 
-                type="text"
-                id="lastName" 
-                value= {formData.lastName}
-                onChange={handleChange}
-                className='block px-4 py-2 bg-black50 w-full rounded-[10px]' 
-                placeholder='Last Name'
-                />
-              </div>
-              <div className='mb-2'>
-                <label htmlFor="email" className='text-[16px] font-medium'>Email</label>
-                <input 
-                type="email"
-                id="email"
-                value={formData.email}
-                onChange={handleChange}
-                className='block px-4 py-2 bg-black50 w-full rounded-[10px]' 
-                placeholder='Email'
-                />
-              </div>
-              <div className='mb-2'>
-                <label htmlFor="phone" className='text-[16px] font-medium'>Phone Number</label>
-                <input 
-                type="tel"
-                id="phoneNumber" 
-                value= {formData.phoneNumber}
-                onChange={handleChange}
-                className='block px-4 py-2 bg-black50 w-full rounded-[10px]'  
-                placeholder='Phone Number'
-                />
-              </div>
-            </form>
+              <button type='submit' id='userUpdateForm' className="px-3 py-2 bg-blue600 text-white rounded-full hidden"  disabled={loading} onClick={()=>submitForm()}>
+                { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+                { !loading && <span>Save changes</span>}
+              </button>
+          </form>
           </div>          
           <ImageModal open={isOpen} onClose={() => setIsOpen(false)}>
           </ImageModal>
           <ToastContainer />
         </div>
-        <div className='mt-10 border-dotted border-black100 rounded-[30px] p-10'>
+        <div className='mt-10 border-1 border-dashed border-black100 rounded-[30px] p-10'>
             <h4 className='text-center mt-10'>Refer a friend</h4>
             <p className='text-gray800 text-center mb-5'>Refer friend and get free gift when the join and complete their application</p>
             <div className='w-fit m-auto'>
@@ -379,17 +403,9 @@ return () => {
             <div className="mt-5 p-10 bg-gray200 rounded-[20px]">
               <h5 className='text-center'>Track friends you’ve referred</h5>
 
-              <div className='mx-20 mt-5'>
+              <div className='mx-40 mt-5'>
                 <div className='flex justify-between text-[16px]' >
                   <p>Visited Craddule</p>
-                  <p>1</p>
-                </div>
-                <div className='flex justify-between'>
-                  <p>Started Application</p>
-                  <p>1</p>
-                </div>
-                <div className='flex justify-between'>
-                  <p>Completed Application</p>
                   <p>1</p>
                 </div>
                 <div className='flex justify-between'>
