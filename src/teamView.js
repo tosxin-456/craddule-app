@@ -17,6 +17,7 @@ import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
 import SideMenu2P from './component/sideMenu2P';
+import BreadCrumb from './component/breadCrumb';
 
 function ScrapView ({ htmlContent })  {
     
@@ -29,7 +30,7 @@ function ScrapView ({ htmlContent })  {
      const [answers, setAnswers] = useState([]);
      const [answersV, setAnswersV] = useState([]);
      const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const projectId = localStorage.getItem('nProject');
   const [scrap, setScrap] = useState('');
@@ -47,7 +48,7 @@ function ScrapView ({ htmlContent })  {
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionBoxPosition, setSuggestionBoxPosition] = useState({ top: 0, left: 0 });
   const [selectedWord, setSelectedWord] = useState(null); 
-  const [team, setteam] = useState([]);
+  const [team, setTeam] = useState([]);
 
   const handleDelete = (id) => {
   
@@ -64,19 +65,18 @@ function ScrapView ({ htmlContent })  {
             }
           });
         
-      if(scrapResponse.status === 200) {
-        // If summary exists, fetch the summary data
-        const dataS = await scrapResponse.json();
-        console.log(dataS);
-        console.log("scrap "+dataS.data.scrap);
-        setteam(dataS.data);
-       
-     } else {
-        
-        const data = await scrapResponse.json();
-        console.log(data);
-        setLoading(false);
-    }
+        if(scrapResponse.status === 200) {
+          // If summary exists, fetch the summary data
+          const dataS = await scrapResponse.json();
+          console.log(dataS);
+          console.log("scrap "+dataS.data.scrap);
+          setTeam(dataS.data);
+          setLoading(false);
+        } else {
+            const data = await scrapResponse.json();
+            console.log(data);
+            setLoading(false);
+        }
       } catch (error) {
         setError(error.message);
         setLoading(false);
@@ -146,7 +146,7 @@ function ScrapView ({ htmlContent })  {
         }
 
         console.log("deleted");
-        setteam(team.filter(scrap => scrap._id !== id));
+        setTeam(team.filter(scrap => scrap._id !== id));
         
     } catch (error) {
         console.error('Error deleting:', error);
@@ -154,44 +154,38 @@ function ScrapView ({ htmlContent })  {
     }
 };
 
-    return (
-        <>
-
-<div className='container2'>
-         <SideMenu2P />    
-         <div className="main-content">
-        
-         <Header />
-        
-         <div className='main-content2'>
-            
-        <div className='bacWHI'>
-
-        <div className="row">
-            <div className="col-md-6">
-                <p style={{fontWeight:700}}>The Team</p>
-            </div>
-
-            <div className="col-md-6">
-                <button className="btn mainBtn" onClick={onClickHandler27}>Add Members</button>
-            </div>
+  return (
+    <>
+      <div className=''>
+        <div className="">
+          <Header />
+          <BreadCrumb page={'Manage team'}/>
+          <div className='w-[1142px] m-auto mt-5'>  
+            <div className='bacWHI'>
+              <div className="text-center">
+                  <h4>Manage team member</h4>
+              </div>
+              <div className='flex justify-between mt-5'>
+                <div className="">
+                    <p className="text-p20" onClick={onClickHandler27}>The Team</p>
                 </div>
-
-                   
-
-                <table class="table">
-            <thead>
-                <tr>
+                <div className="">
+                  <button className='px-3 py-2 bg-blue600 text-white rounded-[5px]' onClick={onClickHandler27}>Add members</button>
+                </div>
+              </div>
+              <table class="table mt-3">
+                <thead>
+                  <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Time Added</th>
                     <th scope="col">Date Added</th>
                     <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            {team.map((scrap, index) => (
-                <tr key={scrap._id}>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loading && team.map((scrap, index) => (
+                  <tr key={scrap._id}>
                     <td>{index + 1}</td>
                     <td>{scrap.userId.firstName} {scrap.userId.lastName}</td>
                     <td>{formatDate(scrap.timeSent)}</td>
@@ -203,30 +197,17 @@ function ScrapView ({ htmlContent })  {
                       <button className="btn mainBtnView">No Action</button>
                     )}
                     </td>
-                </tr>
-                ))}
-            </tbody>
-
-           
-            </table>
-               
-        
-            <div class = "break"></div>
-           
-           
-            
-           
-           
-        </div> 
-
-        
-        
-  </div>
-  </div>
-  <Toaster  position="top-right" />
-  </div>
+                  </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div class = "break"></div> 
+            </div> 
+          </div>
+        </div>
+        <Toaster  position="top-right" />
+      </div>
   </>
-    );
-}
+)}
 
 export default ScrapView
