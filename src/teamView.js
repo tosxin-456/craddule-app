@@ -184,7 +184,7 @@ function ScrapView ({ htmlContent })  {
                   </tr>
                 </thead>
                 <tbody>
-                  {loading && team.map((scrap, index) => (
+                  {!loading && team.map((scrap, index) => (
                   <tr key={scrap._id}>
                     <td>{index + 1}</td>
                     <td>{scrap.userId.firstName} {scrap.userId.lastName}</td>
@@ -199,6 +199,11 @@ function ScrapView ({ htmlContent })  {
                     </td>
                   </tr>
                   ))}
+                  {loading && <tr>
+                    <td colSpan={5}>
+                      <p className='text-center py-5'>Loading team members. Please wait...</p>
+                    </td>
+                    </tr>}
                 </tbody>
               </table>
               <div class = "break"></div> 
