@@ -17,6 +17,7 @@ const Profile = () =>  {
   const [selectedOption, setSelectedOption] = useState('');
   const [referralCode, setReferralCode] = useState('');
   const [copied, setCopied] = useState(false);
+  const [image, setImage] = useState('');
   const [text, setText] = useState('');  const dropdownRef = useRef(null);
 
   // Function to toggle dropdown visibility
@@ -263,7 +264,6 @@ const Profile = () =>  {
   };
 
   const submitForm = () =>{
-    console.log('dafad')
     document.getElementById('userUpdateForm').click();
   }
 
@@ -319,7 +319,7 @@ const Profile = () =>  {
           <div className='col-span-4 mt-10'>
             <p className='text-center font-semibold text-p18'>Profile picture/company logo</p>
             <div className='mt-4'>
-              <img src={p1} className='rounded-full w-[287px] h-[287px] m-auto' type='button'></img>
+              <img src={API_BASE_URL+'/images/users/'+image} className='rounded-full w-[287px] h-[287px] m-auto' type='button'></img>
               <button className="block px-5 py-3 m-auto mt-4 bg-blue600 rounded-[30px] text-white text-[12px] justify-self-center"  disabled={loading} onClick={()=>setIsOpen(true)}>
                 { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
                 { !loading && <span>Change picture</span>}
@@ -329,62 +329,62 @@ const Profile = () =>  {
           <div className='col-span-1'></div>
           <div className='col-span-7 mt-16'>
           <form onSubmit={handleSubmit}>
-              <div className="">
-                <div className="mt-[16px]">
-                  <label htmlFor="firstName" className='text-p18 font-semibold pb-1 block'>First Name</label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className="w-full border border-black400 px-3 py-[10px] rounded-full"
-                  />
-                </div>
-
-                <div className="mt-[16px]">
-                  <label htmlFor="lastName" className='text-p18 font-semibold pb-1 block'>Last Name</label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className="w-full border border-black400 px-3 py-[10px] rounded-full"
-                  />
-                </div>
-
-                <div className="mt-[16px]">
-                  <label htmlFor="email" className='text-p18 font-semibold pb-1 block'>Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full border border-black400 px-3 py-[10px] rounded-full"
-                  />
-                </div>
-
-                <div className="mt-[16px]">
-                  <label htmlFor="phoneNumber" className='text-p18 font-semibold pb-1 block'>Phone Number</label>
-                  <PhoneInput
-                    country={'ng'}
-                    value={formData.phoneNumber}
-                    onChange={handlePhoneChange}
-                    inputProps={{
-                      name: 'phoneNumber',
-                      required: true,
-                      autoFocus: true,
-                      className: 'custom-input2',
-                    }}
-                  />
-                </div>
+            <div className="">
+              <div className="mt-[16px]">
+                <label htmlFor="firstName" className='text-p18 font-semibold pb-1 block'>First Name</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="w-full border border-black400 px-3 py-[10px] rounded-full"
+                />
               </div>
-              <button type='submit' id='userUpdateForm' className="px-3 py-2 bg-blue600 text-white rounded-full hidden"  disabled={loading} onClick={()=>submitForm()}>
-                { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
-                { !loading && <span>Save changes</span>}
-              </button>
+
+              <div className="mt-[16px]">
+                <label htmlFor="lastName" className='text-p18 font-semibold pb-1 block'>Last Name</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="w-full border border-black400 px-3 py-[10px] rounded-full"
+                />
+              </div>
+
+              <div className="mt-[16px]">
+                <label htmlFor="email" className='text-p18 font-semibold pb-1 block'>Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full border border-black400 px-3 py-[10px] rounded-full"
+                />
+              </div>
+
+              <div className="mt-[16px]">
+                <label htmlFor="phoneNumber" className='text-p18 font-semibold pb-1 block'>Phone Number</label>
+                <PhoneInput
+                  country={'ng'}
+                  value={formData.phoneNumber}
+                  onChange={handlePhoneChange}
+                  inputProps={{
+                    name: 'phoneNumber',
+                    required: true,
+                    autoFocus: true,
+                    className: 'custom-input2',
+                  }}
+                />
+              </div>
+            </div>
+            <button type='submit' id='userUpdateForm' className="px-3 py-2 bg-blue600 text-white rounded-full hidden"  disabled={loading} onClick={()=>submitForm()}>
+              { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+              { !loading && <span>Save changes</span>}
+            </button>
           </form>
           </div>          
-          <ImageModal open={isOpen} onClose={() => setIsOpen(false)}>
+          <ImageModal open={isOpen} onClose={() => {setIsOpen(false)}} setImage={setImage}>
           </ImageModal>
           <ToastContainer />
         </div>
