@@ -164,36 +164,33 @@ const Profile = () =>  {
     phoneNumber: '',
   });
 
+  const fetchUserDetails = async () => {
+    try {
+      const response = await fetch(API_BASE_URL+'/api/user/'+userId, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${access_token}`,
+        },
+      });
+        if (response.status === 200) {
+            const data = await response.json();
+            console.log(data);
+            // Update user details state with fetched data
+            const { firstName, lastName, email, phoneNumber } = data;
+            setFormData({ firstName, lastName, email, phoneNumber });
+        } else {
+            const data = await response.json();
+            console.log(data);
+            console.error('Failed to fetch user details');
+        }
+    } catch (error) {
+        console.error('Error fetching user details:', error);
+    }
+  };
+
   useEffect(() => {
     // Simulating fetching user details from an API
-    const fetchUserDetails = async () => {
-        try {
-          const response = await fetch(API_BASE_URL+'/api/user/'+userId, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${access_token}`,
-            },
-          });
-            if (response.status === 200) {
-                const data = await response.json();
-                console.log(data);
-                // Update user details state with fetched data
-                const { firstName, lastName, email, phoneNumber, image } = data;
-                setFormData({ firstName, lastName, email, phoneNumber });
-                const imageFile = image.split('/');
-                console.log(imageFile);
-                setImage(imageFile[3]);
-            } else {
-                const data = await response.json();
-                console.log(data);
-                console.error('Failed to fetch user details');
-            }
-        } catch (error) {
-            console.error('Error fetching user details:', error);
-        }
-    };
-
     fetchUserDetails();
   }, []);
 
@@ -253,8 +250,6 @@ const Profile = () =>  {
   const navigate = useNavigate()
   const [isOpen, setIsOpen]= useState(false);
 
-  const onClickHandler = () => navigate(`/introduction1`)
-
   const handleCopy = () => {
     navigator.clipboard.writeText(`${APP_BASE_URL}/signUp/${referralCode}`)
       .then(() => {
@@ -270,6 +265,10 @@ const Profile = () =>  {
 
   const submitForm = () =>{
     document.getElementById('userUpdateForm').click();
+  }
+
+  const handleDiscard = () => {
+    fetchUserDetails();
   }
 
   useEffect(()=>{
@@ -311,7 +310,7 @@ const Profile = () =>  {
             { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
             { !loading && <span>Save changes</span>}
           </button>
-          <button className="px-3 py-2 border border-gray900 rounded-full"  disabled={loading}>
+          <button className="px-3 py-2 border border-gray900 rounded-full"  disabled={loading} onClick={handleDiscard}>
             <span>Discard changes</span>
           </button>
         </div>
