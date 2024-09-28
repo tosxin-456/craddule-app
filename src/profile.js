@@ -385,7 +385,7 @@ const Profile = () =>  {
             </button>
           </form>
           </div>          
-          <ImageModal open={isOpen} onClose={() => setIsOpen(false)} setImage={setImage}>
+          <ImageModal open={isOpen} onClose={() => {setIsOpen(false)}} setImage={setImage}>
           </ImageModal>
           <ToastContainer />
         </div>

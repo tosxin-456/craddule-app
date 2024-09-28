@@ -65,19 +65,16 @@ export default function ImageModal ( {open, onClose, setImage})  {
       console.log(imageFile);
       setImage(imageFile[3]);
       setLoading(false);
+      setSelectedFile(null);
       document.getElementById('closal').click();
     } catch (error) {
       console.error('Error uploading image:', error);
       toast.error(error)
       setLoading(false);
-
+      setSelectedFile(null);
       // Handle error
     }
   };
-
-  const handleClose = () => {
-    document.getElementById('modalOv').hidden = true;
-  }
  
   const handleClick = () => {
     setWaiting(true);
@@ -87,7 +84,7 @@ export default function ImageModal ( {open, onClose, setImage})  {
    return ReactDOM.createPortal (
       <>
       <div className='modalOv' id='modalOv'>
-        <div className='fixed top-0 left-0 w-full h-full z-[-999]' id='closal' onClick={onClose}></div>
+        <div className='fixed top-0 left-0 w-full h-full z-[-999]' id='closal' onClick={()=>{setSelectedFile(null);onClose()}}></div>
         <div className='w-[800px] m-auto mt-5 bg-white rounded-xl translate-y-[20%]'>
           <div className='p-10 px-44'>
             <h4 className='font-semibold text-center'>Upload Picture</h4>
