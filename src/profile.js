@@ -16,9 +16,11 @@ const Profile = () =>  {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
   const [referralCode, setReferralCode] = useState('');
+  const [referralCount, setReferralCount] = useState(null);
   const [copied, setCopied] = useState(false);
   const [image, setImage] = useState('');
-  const [text, setText] = useState('');  const dropdownRef = useRef(null);
+  const [text, setText] = useState('');  
+  const dropdownRef = useRef(null);
 
   // Function to toggle dropdown visibility
   const toggleDropdown = () => {
@@ -157,6 +159,7 @@ const Profile = () =>  {
   const [successMessage, setSuccessMessage] = useState('');
 
   const [loading, setLoading] = useState(false);
+  const [loadingDiscard, setLoadingDiscard] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -177,8 +180,11 @@ const Profile = () =>  {
             const data = await response.json();
             console.log(data);
             // Update user details state with fetched data
-            const { firstName, lastName, email, phoneNumber } = data;
+            const { firstName, lastName, email, phoneNumber, image } = data;
             setFormData({ firstName, lastName, email, phoneNumber });
+            const imageFile = image.split('/');
+            console.log(imageFile)
+            setImage(imageFile[3]);
         } else {
             const data = await response.json();
             console.log(data);
@@ -268,7 +274,9 @@ const Profile = () =>  {
   }
 
   const handleDiscard = () => {
+    setLoadingDiscard(true)
     fetchUserDetails();
+    setLoadingDiscard(false)
   }
 
   useEffect(()=>{
@@ -294,7 +302,31 @@ const Profile = () =>  {
           }
     }
     fetchCode()
-  })
+  },[])
+
+  useEffect(()=>{
+    const fetchReferrals = async()=>{
+        try {
+          const response = await fetch(`${API_BASE_URL}/api/user/referral/${userId}`, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            }
+          });
+          console.log(response);
+          if (response.status === 200) {
+            const data = await response.json();
+            console.log(data);
+            setReferralCount(data);
+          } else {
+            console.error('Error fetching user referrals:', await response.json());
+          }
+        } catch (err) {
+          console.log(err);
+        }
+    }
+    fetchReferrals()
+  },[])
 
   return (
       
@@ -310,8 +342,9 @@ const Profile = () =>  {
             { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
             { !loading && <span>Save changes</span>}
           </button>
-          <button className="px-3 py-2 border border-gray900 rounded-full"  disabled={loading} onClick={handleDiscard}>
-            <span>Discard changes</span>
+          <button className="px-3 py-2 border border-gray900 rounded-full"  disabled={loadingDiscard} onClick={handleDiscard}>
+            { loadingDiscard && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
+            { !loadingDiscard && <span>Discard changes</span>}          
           </button>
         </div>
         
@@ -320,9 +353,8 @@ const Profile = () =>  {
             <p className='text-center font-semibold text-p18'>Profile picture/company logo</p>
             <div className='mt-4'>
               <img src={API_BASE_URL+'/images/users/'+image} className='rounded-full w-[287px] h-[287px] m-auto' type='button'></img>
-              <button className="block px-5 py-3 m-auto mt-4 bg-blue600 rounded-[30px] text-white text-[12px] justify-self-center"  disabled={loading} onClick={()=>setIsOpen(true)}>
-                { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
-                { !loading && <span>Change picture</span>}
+              <button className="block px-5 py-3 m-auto mt-4 bg-blue600 rounded-[30px] text-white text-[12px] justify-self-center" onClick={()=>setIsOpen(true)}>
+                <span>Change picture</span>
               </button>
             </div>
           </div>
@@ -406,11 +438,11 @@ const Profile = () =>  {
               <div className='mx-40 mt-5'>
                 <div className='flex justify-between text-[16px]' >
                   <p>Visited Craddule</p>
-                  <p>1</p>
+                  <p>{referralCount ? referralCount.visited:'0'}</p>
                 </div>
                 <div className='flex justify-between'>
-                  <p>Already subscribed</p>
-                  <p>1</p>
+                  <p>Subscribed</p>
+                  <p>{referralCount ? referralCount.subscribed:'0'}</p>
                 </div>
               </div>
             </div>
