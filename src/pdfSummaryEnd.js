@@ -7,7 +7,7 @@ import SideMenu2I from './component/sideMenu2I';
 import SideMenu2C from './component/sideMenu2C';
 import SideMenu2V from './component/sideMenu2V';
 import { useNavigate, Link,useParams } from 'react-router-dom';
-import API_BASE_URL from './config/apiConfig';
+import { API_BASE_URL } from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch,faChevronDown,faBold, faItalic, faUnderline, faStrikethrough, faQuoteRight, faCode, faLink, faImage, faTextHeight, faListOl, faListUl, faSubscript, faSuperscript, faOutdent, faIndent, faAlignRight, faHeading } from '@fortawesome/free-solid-svg-icons';
