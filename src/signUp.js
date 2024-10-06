@@ -223,7 +223,7 @@ function SignUp() {
               </button>
             </form>
 
-            <p className='mt-8 font-medium text-[16px]'>Alreeady on Craddule?<a className='ps-2 no-underline text-[#1B45BF]' href='/login'>Login</a></p>
+            <p className='mt-8 font-medium text-[16px]'>Already on Craddule?<a className='ps-2 no-underline text-[#1B45BF]' href='/login'>Login</a></p>
           </div>
         </div>
       </div>
