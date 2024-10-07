@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import p1 from './images/p1.jpeg';
 import Header from './component/header';
-import { API_BASE_URL, APP_BASE_URL } from './config/apiConfig';
+import { API_BASE_URL, APP_BASE_URL, APP_REFER_URL } from './config/apiConfig';
 import { useNavigate } from 'react-router-dom';
 import ImageModal from './component/imageModal';
 import { jwtDecode } from "jwt-decode";
@@ -257,7 +257,7 @@ const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(`${APP_BASE_URL}/signUp/${referralCode}`)
+    navigator.clipboard.writeText(`${APP_REFER_URL}/${referralCode}`)
       .then(() => {
         setCopied(true);
         setTimeout(() => {
@@ -434,7 +434,7 @@ const Profile = () => {
             <p className="mb-1">Your referral link:</p>
             <div className='flex gap-3 items-center'>
               <div className="px-4 py-2 bg-black50 rounded-[10px]">
-                <span className='p8'>{`${APP_BASE_URL}/signUp/${referralCode}`}</span>
+                <span className='p8'>{`${APP_REFER_URL}/${referralCode}`}</span>
               </div>
               <button className='px-3 py-1 bg-blue600 rounded-[30px] text-white text-[12px]' onClick={handleCopy}>{copied ? 'Copied!' : 'Copy link'}</button>
             </div>
