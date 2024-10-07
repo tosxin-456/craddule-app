@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from './component/header';
-import {API_BASE_URL, APP_BASE_URL} from './config/apiConfig';
+import {API_BASE_URL, APP_BASE_URL, APP_REFER_URL} from './config/apiConfig';
 import refer from './images/refer.png';
 import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak, getUserIdFromToken, FetchProjectDetails, FetchGoStatus, FetchTimelines, FetchTimelinesCount } from "./utils/startUtils";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ function Referral() {
   }
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(`${APP_BASE_URL}/signUp/${referralCode}`)
+    navigator.clipboard.writeText(`${APP_REFER_URL}/${referralCode}`)
       .then(() => {
         setCopied(true);
         setTimeout(() => {
@@ -67,7 +67,7 @@ function Referral() {
                 <div>
                     <p className="-mb-0">Your referral link:</p>
                     <div className="px-4 py-2 bg-black50 flex items-center rounded-[10px]">
-                        <h8>{`${APP_BASE_URL}/signUp/${referralCode}`}</h8>
+                        <h8>{`${APP_REFER_URL}/${referralCode}`}</h8>
                     </div>
                     <button className='px-3 py-1 mt-1 bg-blue600 float-right rounded-[30px] text-white text-[12px]' onClick={handleCopy}>{copied ? 'Copied!' : 'Copy link'}</button>
                 </div>

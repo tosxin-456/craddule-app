@@ -83,11 +83,12 @@ function SignUp() {
   return (
     <>
       <div className='mt-[100px]'></div>
-      <div className='w-[90%] m-auto grid grid-cols-2 bg-white rounded-xl'>
-        <div className='bg-[#193FAE] relative'>
+      <div className='w-[90%] m-auto lg:grid lg:grid-cols-2 bg-white rounded-xl'>
+        <div className='bg-[#193FAE] hidden lg:block relative'>
           <img src={design} alt="" className="w-[196px] h-[219px] absolute bottom-0 right-0" />
           <img src={design} alt="" className="w-[196px] h-[219px] absolute top-0 left-0 rotate-180" />
           <div className='flex justify-center items-center h-full'>
+            
             <div className='w-fit m-auto'>
               <img src={signUpImage} className='m-auto'></img>
               <h4 className='font-semibold text-white w-3/4 text-center m-auto mt-3'>We help guide your ideas.</h4>
@@ -95,14 +96,12 @@ function SignUp() {
             </div>
           </div>
         </div>
-        <div className='p-10 px-20 pt-16 pb-16'>
-          <div className='float-right'>
-            <div className='flex justify-start items-center gap-[6px] relative -top-8 -right-9'>
-              <img src={logo} className='w-[40.12px] h-[40px]'></img>
-              <span className='text-[16px] font-semibold'>Craddule</span>
-            </div>
+        <div className=' lg:p-10 lg:px-20 p-5 px-12 pt-10 lg:pt-16 lg:pb-20'>
+          <div className='flex justify-start items-center lg:gap-[6px] relative -top-8 lg:-left-12 -left-10'>
+            <img src={logo} className='w-[40.12px] h-[40px]'></img>
+            <span className='text-[16px] font-semibold'>Craddule</span>
           </div>
-          <div className='pt-3'>
+          <div className='pt-3 '>
             <h3 className='font-bold'>Sign Up</h3>
             <p className='texet-[16px] text-black200'>Begin your success story with Craddule</p>
 

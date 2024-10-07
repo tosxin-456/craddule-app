@@ -6,7 +6,7 @@ import ReactGA from "react-ga4";
 import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak, getUserIdFromToken, FetchProjectDetails, FetchGoStatus, FetchTimelines, FetchTimelinesCount, FetchUser } from "./utils/startUtils";
 import { useNavigate } from "react-router-dom";
 import ModalStart from "./component/modalStartStop";
-import "./pop-up.css";
+// import "./pop-up.css";
 
 function InflationRateGraph({ graphType }) {
 
