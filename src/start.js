@@ -6,7 +6,7 @@ import ReactGA from "react-ga4";
 import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak, getUserIdFromToken, FetchProjectDetails, FetchGoStatus, FetchTimelines, FetchTimelinesCount, FetchUser } from "./utils/startUtils";
 import { useNavigate } from "react-router-dom";
 import ModalStart from "./component/modalStartStop";
-// import "./pop-up.css";
+import "./pop-up.css";
 
 function InflationRateGraph({ graphType }) {
 
@@ -52,8 +52,8 @@ function InflationRateGraph({ graphType }) {
     return (
         <div className=''>
             <Header />
-            <div className='container'>
-                <div className="flex justify-between items-center mt-10">
+            <div className='container '>
+                <div className="flex-row lg:flex justify-between items-center mt-10">
                     <div>
                         <h4 className="text-blue600">Hello, {userDetails?.firstName}!</h4>
                         <h6 className="text-gray-800">Begin your launch to success!</h6>
@@ -63,10 +63,10 @@ function InflationRateGraph({ graphType }) {
                         <button className='block px-3 py-2 bg-none border border-black500 rounded-[5px]' onClick={() => handleClick('/home')}>Select Project</button>
                     </div>
                 </div>
-                <div className="grid grid-cols-5 gap-3 mt-14">
+                <div className="lg:grid grid-cols-2 lg:grid-cols-5 lg:gap-3 mt-14">
                     <div className="col-span-4">
-                        <div className="grid grid-cols-4 gap-3">
-                            <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/ideation.png')] bg-no-repeat bg-cover cursor-pointer relative group">
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                            <div className="lg:w-[225px] w-[180px]  h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/ideation.png')] bg-no-repeat bg-cover cursor-pointer relative group">
                                 <div
                                     className="tilt-box bg-[#E8C400D9]"
                                     onClick={() =>
@@ -92,7 +92,7 @@ function InflationRateGraph({ graphType }) {
 
 
                             {projectDetails && !projectDetails.includes("Product Definition") && (
-                                <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/product_definition.png')] bg-no-repeat bg-cover cursor-pointer relative">
+                                <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/product_definition.png')] bg-no-repeat bg-cover cursor-pointer relative">
                                     <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleClick('/questionBusMain/ProductDefinition/BusinessAnalysisPack/CustomerSegments') : null}>
                                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                         <p className="p18">Product Definition</p>
@@ -108,7 +108,7 @@ function InflationRateGraph({ graphType }) {
                             )}
 
                             {projectDetails && !projectDetails.includes("Initial Design") && (
-                                <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/initial_design.png')] bg-no-repeat bg-cover cursor-pointer relative">
+                                <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/initial_design.png')] bg-no-repeat bg-cover cursor-pointer relative">
                                     <div className={`tilt-box bg-[#193FAEDE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleClick('/questionBusMain/InitialDesign/ClaimTheDomain/DomainName') : null}>
                                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                         <p className="p18">Initial Design</p>
@@ -124,7 +124,7 @@ function InflationRateGraph({ graphType }) {
                             )}
 
                             {projectDetails && !projectDetails.includes("Validating and Testing") && (
-                                <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/validating.png')] bg-no-repeat bg-cover cursor-pointer relative">
+                                <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/validating.png')] bg-no-repeat bg-cover cursor-pointer relative">
                                     <div className={`tilt-box bg-[#FFD700DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleClick('/questionBusMain/ValidatingAndTesting/FullProductProjectReview/Review') : null}>
                                         <button className="px-2 py-1 bg-black400 rounded-[10px] mb-[16px] text-white text-[14px]">View</button>
                                         <p className="p18">Validating and Testing</p>
@@ -140,7 +140,7 @@ function InflationRateGraph({ graphType }) {
                             )}
 
                             {projectDetails && !projectDetails.includes("Commercialization") && (
-                                <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/commercialization.png')] bg-no-repeat bg-cover cursor-pointer relative">
+                                <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/commercialization.png')] bg-no-repeat bg-cover cursor-pointer relative">
                                     <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleClick('/questionBusMain/Commercialization/BringTheMVPToFullScale/GetTheMVPToFruition') : null}>
                                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                         <p className="p18">Commercialization</p>
@@ -155,7 +155,7 @@ function InflationRateGraph({ graphType }) {
                                 </div>
                             )}
 
-                            <div className={`w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/kpi.png')] bg-no-repeat bg-cover cursor-pointer relative group`}>
+                            <div className={` lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/kpi.png')] bg-no-repeat bg-cover cursor-pointer relative group`}>
                                 <div className={`tilt-box bg-[#133188DE] text-white`} onClick={() => handleClickStorage('Kpi', '/kpi')}>
                                     <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                     <p className="p18">KPI</p>
@@ -171,7 +171,7 @@ function InflationRateGraph({ graphType }) {
                             </div>
 
 
-                            <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/scrab_book.png')] bg-no-repeat bg-cover border-3 border-black cursor-pointer relative group">
+                            <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/scrab_book.png')] bg-no-repeat bg-cover border-3 border-black cursor-pointer relative group">
                                 <div className="tilt-box bg-[#E6E6E6D9] text-black400" onClick={() => handleClick('/scrapView')}>
                                     <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                     <p className="p18">ScrapBook</p>
@@ -186,7 +186,7 @@ function InflationRateGraph({ graphType }) {
                                 </div>
                             </div>
 
-                            <div className="w-[225px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/pitch_deck.png')] bg-no-repeat bg-cover cursor-pointer relative group">
+                            <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/pitch_deck.png')] bg-no-repeat bg-cover cursor-pointer relative group">
                                 <div className="tilt-box bg-[#193FAE99] text-white" onClick={() => handleClick('/pitchDeckStart')}>
                                     <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                     <p className="p18">Pitch Deck</p>
@@ -205,7 +205,7 @@ function InflationRateGraph({ graphType }) {
                     </div>
 
                     <div className="col-span-1">
-                        <div className="bg-white p-3 rounded-[10px] bg-[url('./images/pattern.png')] bg-cover">
+                        <div className="bg-white mt-[10px] lg:ml-[10px] p-3 rounded-[10px] bg-[url('./images/pattern.png')] bg-cover">
                             <h5 className="text-center">Your Task</h5>
                             <p className="block p18 p-0 mb-3 text-center text-black200">Total Task : {timelines.length}</p>
                             {timelines.map((timeline) => (
@@ -242,28 +242,28 @@ function InflationRateGraph({ graphType }) {
                 </div>
 
 
-                <div className="grid grid-cols-12 gap-3 mt-10">
-                    <div className="col-span-3">
+                <div className="grid grid-cols-12 gap-3 mt-10 md:grid-cols-6 lg:grid-cols-12">
+                    <div className="col-span-12 md:col-span-6 lg:col-span-3">
                         <div className="bg-white py-[42px] rounded-[10px]">
                             <div className="flex justify-center items-center gap-4">
                                 <img src={bolt} alt="Streak" className="" style={{ width: "20%" }} />
-                                <div className="">
-                                    <h6 className=''>{streak} Days!</h6>
+                                <div>
+                                    <h6>{streak} Days!</h6>
                                     <h6 className='font-semibold'>Streak</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="col-span-6 relative group ">
-                        <div className="bg-white py-[42px] px-[36px] rounded-[10px] flex justify-between items-center hover:shadow-lg ">
+                    <div className="col-span-12 md:col-span-6 lg:col-span-6 relative group">
+                        <div className="bg-white py-[42px] px-[36px] rounded-[10px] flex justify-between items-center hover:shadow-lg">
                             <div>
-                                <h5 className="">Craddule Hub</h5>
+                                <h5>Craddule Hub</h5>
                                 <p className="text-[14px] text-black300">Upload and view uploaded files in your project</p>
                             </div>
                             <div>
-                                <button className="block w-full px-3 py-2 bg-black400 rounded-[5px] mb-[16px] text-white text-[14px] " onClick={() => handleClick('/craddule')}>View Files</button>
-                                <button className="block w-full px-3 py-2 border border-black rounded-[5px] text-black400 text-[14px] " onClick={() => handleClick('/craddule')}>Upload Files</button>
+                                <button className="block w-full px-3 py-2 bg-black400 rounded-[5px] mb-[16px] text-white text-[14px]" onClick={() => handleClick('/craddule')}>View Files</button>
+                                <button className="block w-full px-3 py-2 border border-black rounded-[5px] text-black400 text-[14px]" onClick={() => handleClick('/craddule')}>Upload Files</button>
                             </div>
 
                             {/* Hover pop-up description */}
@@ -274,18 +274,17 @@ function InflationRateGraph({ graphType }) {
                         </div>
                     </div>
 
-                    <div className="col-span-3">
-                        <div className="bg-white py-[24px] px-[36px] rounded-[10px] hover:shadow-lg ">
+                    <div className="col-span-12 md:col-span-6 lg:col-span-3">
+                        <div className="bg-white py-[24px] px-[36px] rounded-[10px] hover:shadow-lg">
                             <div>
                                 <h5 className="text-center">Create Task</h5>
                                 <p className="text-[14px] text-black300 text-center">You can create tasks and assign them to team members</p>
-                                <button className="block w-full px-3 py-2 border bg-black400 rounded-[5px] text-white text-[14px]" onClick={() => handleClick('/uploadTask')}>Upload Files</button>
+                                <button className="block w-full px-3 py-2 bg-black400 rounded-[5px] text-white text-[14px]" onClick={() => handleClick('/uploadTask')}>Upload Files</button>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
+
 
                 <div className="bg-white bg-[url('./images/pattern_landscape.png')] bg-contain rounded-[10px] mt-10 relative group hover:shadow-lg">
                     <div className="w-full py-16 px-5">

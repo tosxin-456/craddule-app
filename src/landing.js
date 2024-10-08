@@ -26,7 +26,7 @@ function LandingPage() {
 
   // Utility hooks
   // useValidateToken();
-  const {userId} = getUserIdFromToken();
+  const { userId } = getUserIdFromToken();
 
   // Fetch data and update loading state
   useFetchUserProjects(userId, (data) => {
@@ -72,15 +72,15 @@ function LandingPage() {
       <div className='container'>
         <div className='proSeg2'>
           <div className='text-center'>
-            <p className='text-[80px] font-bold text-white'>{`${projects.length==0 ? `BEGIN YOUR LAUNCH`:'CONTINUE YOUR'}`}</p>
-            <p className='text-[80px] font-bold text-white'>{`${projects.length==0 ? `TO SUCCESS`:'JOURNEY'}`}</p>
+            <p className='text-[18px] lg:text-[80px]  font-bold text-white'>{`${projects.length == 0 ? `BEGIN YOUR LAUNCH` : 'CONTINUE YOUR'}`}</p>
+            <p className='text-[18px] lg:text-[80px] font-bold text-white'>{`${projects.length == 0 ? `TO SUCCESS` : 'JOURNEY'}`}</p>
           </div>
 
-          <div className='grid grid-cols-12 gap-0'>
-            <div className={`${projects.length==0 ? 'col-span-12':'col-span-4'} m-auto mb-5`}>
-              <div className='w-[311px] h-[202px] text-white cursor-pointer' onClick={()=>setIsOpen(true)}>
+          <div className='lg:grid   lg:grid-cols-12 lg:gap-0 gap-5 justify-center '>
+            <div className={`${projects.length == 0 ? 'col-span-12' : 'col-span-4'} m-auto mb-5`}>
+              <div className='w-[311px] h-[202px] text-white cursor-pointer' onClick={() => setIsOpen(true)}>
                 <div className='bg-blue800 h-full flex justify-center items-center'>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 20 20"><path fill="#FFFFFF" d="M10 0c.423 0 .766.343.766.766v8.467h8.468a.766.766 0 1 1 0 1.533h-8.468v8.468a.766.766 0 1 1-1.532 0l-.001-8.468H.766a.766.766 0 0 1 0-1.532l8.467-.001V.766A.77.77 0 0 1 10 0"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 20 20"><path fill="#FFFFFF" d="M10 0c.423 0 .766.343.766.766v8.467h8.468a.766.766 0 1 1 0 1.533h-8.468v8.468a.766.766 0 1 1-1.532 0l-.001-8.468H.766a.766.766 0 0 1 0-1.532l8.467-.001V.766A.77.77 0 0 1 10 0" /></svg>
                 </div>
                 <div className='bg-blue900 h-8 flex justify-center items-center'>
                   <span className='text-center'>Create Project</span>
@@ -88,8 +88,8 @@ function LandingPage() {
               </div>
             </div>
             {projects.map((project) => (
-              <div className='col-span-4 justify-center m-auto mb-5' key={project._id}>
-                  <div className='block w-[311px] h-[202px] text-white cursor-pointer' onClick={() => handleProjectClick(project._id, project.projectName, project.projectCount)}>
+              <div className='lg:col-span-4 flex-row justify-center m-auto mb-5' key={project._id}>
+                <div className='block w-[311px] h-[202px] text-white cursor-pointer' onClick={() => handleProjectClick(project._id, project.projectName, project.projectCount)}>
                   <div className='bg-blue800 h-full flex justify-center items-center'>
                     <span>Continue</span>
                   </div>
