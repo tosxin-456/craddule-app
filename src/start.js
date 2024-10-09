@@ -82,11 +82,6 @@ function InflationRateGraph({ graphType }) {
                                     <p className="text-[12px]">7 Documents</p>
                                 </div>
 
-                                {/* Hover pop-up description */}
-                                <div className="absolute border-[1px] border-solid border-[#B0B0B0] hidden group-hover:block bg-[#E6FFE6] text-black text-[15px] p-[7px] rounded-[10px] w-[200px] top-[0] left-0 z-10 ideation-tooltip shadow-md ">
-                                    <p>Here you answer questions to help you create your idea from start to finish.</p>
-                                    <div className="tooltip-arrow"></div> {/* Arrow div */}
-                                </div>
                             </div>
 
 
@@ -99,11 +94,7 @@ function InflationRateGraph({ graphType }) {
                                         <p className="text-[12px]">Design your business processes and flow</p>
                                         <p className="text-[12px]">4 Documents</p>
                                     </div>
-                                    {/* Hover pop-up description */}
-                                    <div className="absolute border-[1px] border-solid border-[#B0B0B0] hidden group-hover:block bg-[#E6FFE6] text-black text-[15px] p-[7px] rounded-[10px] w-[200px] top-[0] left-0 z-10 ideation-tooltip shadow-lg">
-                                        <p>Here you answer all questions to guide and  help you Design your Business processes and flow</p>
-                                        <div className="tooltip-arrow"></div> {/* Arrow div */}
-                                    </div>
+                                    
                                 </div>
                             )}
 
@@ -115,11 +106,7 @@ function InflationRateGraph({ graphType }) {
                                         <p className="text-[12px]">Plan design and add members to Team</p>
                                         <p className="text-[12px]">2 Documents</p>
                                     </div>
-                                    {/* Hover pop-up description */}
-                                    <div className="absolute border-[1px] border-solid border-[#B0B0B0] hidden group-hover:block bg-[#E6FFE6] text-black text-[15px] p-[7px] rounded-[10px] w-[200px] top-[0] left-0 z-10 ideation-tooltip shadow-md">
-                                        <p>Here you get to Plan your Design and Add members to your team</p>
-                                        <div className="tooltip-arrow"></div> {/* Arrow div */}
-                                    </div>
+                                  
                                 </div>
                             )}
 
@@ -131,11 +118,7 @@ function InflationRateGraph({ graphType }) {
                                         <p className="text-[12px]">Test and validate your product</p>
                                         <p className="text-[12px]">3 Documents</p>
                                     </div>
-                                    {/* Hover pop-up description */}
-                                    <div className="absolute border-[1px] border-solid border-[#B0B0B0] hidden group-hover:block bg-[#E6FFE6] text-black text-[15px] p-[7px] rounded-[10px] w-[200px] top-[0] left-0 z-10 ideation-tooltip shadow-md">
-                                        <p>Here you get to Test and Validate your product before launch</p>
-                                        <div className="tooltip-arrow"></div> {/* Arrow div */}
-                                    </div>
+                                   
                                 </div>
                             )}
 
@@ -147,11 +130,7 @@ function InflationRateGraph({ graphType }) {
                                         <p className="text-[12px]">Get your product ready to launch for production</p>
                                         <p className="text-[12px]">2 Documents</p>
                                     </div>
-                                    {/* Hover pop-up description */}
-                                    <div className="absolute border-[1px] border-solid border-[#B0B0B0] hidden group-hover:block bg-[#E6FFE6] text-black text-[15px] p-[7px] rounded-[10px] w-[200px] top-[0] left-0 z-10 ideation-tooltip shadow-md">
-                                        <p>Here you answer questions to get your product ready to launch for production.</p>
-                                        <div className="tooltip-arrow"></div> {/* Arrow div */}
-                                    </div>
+                                    
                                 </div>
                             )}
 
@@ -163,11 +142,7 @@ function InflationRateGraph({ graphType }) {
                                     <p className="text-[12px]">6 Graph Types</p>
                                 </div>
 
-                                {/* Hover pop-up description */}
-                                <div className="absolute border-[1px] border-solid border-[#B0B0B0] hidden group-hover:block bg-[#E6FFE6] text-black text-[15px] p-[7px] rounded-[10px] w-[200px] top-[0] left-0 z-10 kpi-tooltip shadow-md">
-                                    <p>Here you get to Craddule Tools and  Create custom Graphs that gives you more insight</p>
-                                    <div className="tooltip-arrow"></div> {/* Arrow div */}
-                                </div>
+                                
                             </div>
 
 
@@ -179,11 +154,7 @@ function InflationRateGraph({ graphType }) {
                                     <p className="text-[12px]">6 Graph Types</p>
                                 </div>
 
-                                {/* Hover pop-up description */}
-                                <div className="absolute border-[1px] border-solid border-[#B0B0B0] hidden group-hover:block bg-[#E6FFE6] text-black text-[15px] p-[7px] rounded-[10px] w-[200px] top-[0] left-0 z-10 scrap-tooltip shadow-md">
-                                    <p>Here you Create Notes that you can look back at later.</p>
-                                    <div className="tooltip-arrow"></div> {/* Arrow div */}
-                                </div>
+                              
                             </div>
 
                             <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/pitch_deck.png')] bg-no-repeat bg-cover cursor-pointer relative group">
@@ -194,11 +165,7 @@ function InflationRateGraph({ graphType }) {
                                     <p className="text-[12px]">5 Documents</p>
                                 </div>
 
-                                {/* Hover pop-up description */}
-                                <div className="absolute border-[1px] border-solid border-[#B0B0B0] hidden group-hover:block bg-[#E6FFE6] text-black text-[15px] p-[7px] rounded-[10px] w-[200px] top-[0] left-0 z-10 pitch-tooltip shadow-md">
-                                    <p>Here you Store your Pitch Decks and have access to Resources</p>
-                                    <div className="tooltip-arrow"></div> {/* Arrow div */}
-                                </div>
+                              
                             </div>
 
                         </div>
@@ -223,7 +190,7 @@ function InflationRateGraph({ graphType }) {
                     </div>
                 </div>
 
-                <div className="bg-white bg-[url('./images/pattern_landscape.png')] bg-contain rounded-[10px] mt-10 relative group hover:shadow-lg ">
+                <div className="bg-white bg-[url('./images/pattern_landscape.png')] bg-contain rounded-[10px] mt-10 relative group ">
                     <div className="w-full py-16 px-5">
                         <div className="flex justify-between items-center">
                             <div>
@@ -234,11 +201,7 @@ function InflationRateGraph({ graphType }) {
                         </div>
                     </div>
 
-                    {/* Hover pop-up description */}
-                    <div className="absolute hidden group-hover:flex bg-[#E6FFE6] text-black text-[18px] p-[10px] rounded-[10px] w-[200px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 shadow-md justify-center items-center">
-                        <p className="text-center">Here you can share all your work or your completed phases to your team or co-collaborators</p>
-                        <div className="tooltip-arrow"></div> {/* Arrow div */}
-                    </div>
+                   
                 </div>
 
 
@@ -256,7 +219,7 @@ function InflationRateGraph({ graphType }) {
                     </div>
 
                     <div className="col-span-12 md:col-span-6 lg:col-span-6 relative group">
-                        <div className="bg-white py-[42px] px-[36px] rounded-[10px] flex justify-between items-center hover:shadow-lg">
+                        <div className="bg-white py-[42px] px-[36px] rounded-[10px] flex justify-between items-center">
                             <div>
                                 <h5>Craddule Hub</h5>
                                 <p className="text-[14px] text-black300">Upload and view uploaded files in your project</p>
@@ -266,16 +229,12 @@ function InflationRateGraph({ graphType }) {
                                 <button className="block w-full px-3 py-2 border border-black rounded-[5px] text-black400 text-[14px]" onClick={() => handleClick('/craddule')}>Upload Files</button>
                             </div>
 
-                            {/* Hover pop-up description */}
-                            <div className="absolute hidden group-hover:flex bg-[#E6FFE6] text-black text-[15px] p-[7px] rounded-[10px] w-[200px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 shadow-md justify-center items-center">
-                                <p className="text-center">Here you can Upload and View uploaded files in your project</p>
-                                <div className="tooltip-arrow"></div> {/* Arrow div */}
-                            </div>
+                           
                         </div>
                     </div>
 
                     <div className="col-span-12 md:col-span-6 lg:col-span-3">
-                        <div className="bg-white py-[24px] px-[36px] rounded-[10px] hover:shadow-lg">
+                        <div className="bg-white py-[24px] px-[36px] rounded-[10px]">
                             <div>
                                 <h5 className="text-center">Create Task</h5>
                                 <p className="text-[14px] text-black300 text-center">You can create tasks and assign them to team members</p>
@@ -286,7 +245,7 @@ function InflationRateGraph({ graphType }) {
                 </div>
 
 
-                <div className="bg-white bg-[url('./images/pattern_landscape.png')] bg-contain rounded-[10px] mt-10 relative group hover:shadow-lg">
+                <div className="bg-white bg-[url('./images/pattern_landscape.png')] bg-contain rounded-[10px] mt-10 relative group">
                     <div className="w-full py-16 px-5">
                         <div className="flex justify-between items-center">
                             <div>
@@ -297,11 +256,7 @@ function InflationRateGraph({ graphType }) {
                         </div>
                     </div>
 
-                    {/* Hover pop-up description */}
-                    <div className="absolute hidden group-hover:flex bg-[#E6FFE6] text-black text-[18px] p-[10px] rounded-[10px] w-[200px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 shadow-md justify-center items-center">
-                        <p className="text-center">Here you can invite  friends or colleagues  to join Craddule</p>
-                        <div className="tooltip-arrow"></div> {/* Arrow div */}
-                    </div>
+                   
                 </div>
 
 
