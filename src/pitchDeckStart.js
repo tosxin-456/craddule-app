@@ -8,6 +8,7 @@ import { Toaster, toast } from 'sonner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SideMenu2P from './component/sideMenu2P';
+import ReferralModal from './component/randomPopUp';
 
 const PitchDeck = () => {
   const navigate = useNavigate()
@@ -80,8 +81,7 @@ const PitchDeck = () => {
 
              </div>
             </div>
-          </div>
-        
+          </div> 
         </div>
 
        

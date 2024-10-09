@@ -7,6 +7,7 @@ import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak
 import { useNavigate } from "react-router-dom";
 import ModalStart from "./component/modalStartStop";
 import "./pop-up.css";
+import ReferralModal from "./component/randomPopUp";
 
 function InflationRateGraph({ graphType }) {
 

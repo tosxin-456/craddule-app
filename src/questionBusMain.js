@@ -18,6 +18,7 @@ import ModalVideo from './component/modalVideo';
 import ideationPop from './component/ideationModal';
 import ModalVideoN from './component/modalNewVideo';
 import ReactGA from "react-ga4";
+import ReferralModal from './component/randomPopUp';
 
 function QuestionBus() {
   
@@ -557,6 +558,9 @@ function QuestionBus() {
             </div> 
            
          </div>
+         <ReferralModal/>
+
+
 
          <div className={`scrollable-div ${showScrollableDiv ? 'show' : ''}`}>
             <button className="close-button" onClick={handleToggle}>X</button>
