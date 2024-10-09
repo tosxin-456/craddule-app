@@ -175,8 +175,6 @@ useEffect(() => {
     <Header />
     <div className='container'>
         <div className="main-content">
-       
-        <Header />
         <div className="headGr">
             <p>{graphName}</p>
         </div>

@@ -56,9 +56,9 @@ function Login() {
   return (
     <>
       <div className='mt-[100px]'></div>
-      <div className='w-[90%] m-auto grid grid-cols-2 bg-white rounded-xl'>
-        <div className='p-10 px-20 pt-16 pb-20'>
-          <div className='flex justify-start items-center gap-[6px] relative -top-8 -left-12'>
+      <div className='w-[90%] m-auto lg:grid lg:grid-cols-2 bg-white rounded-xl'>
+        <div className=' lg:p-10 lg:px-20 p-5 px-12 pt-10 lg:pt-16 lg:pb-20'>
+          <div className='flex justify-start items-center lg:gap-[6px] relative -top-8 lg:-left-12 -left-10'>
             <img src={logo} className='w-[40.12px] h-[40px]'></img>
             <span className='text-[16px] font-semibold'>Craddule</span>
           </div>
@@ -112,7 +112,7 @@ function Login() {
               <p className='mt-8 font-medium text-[16px]'>Not registered yet?<a className='ps-2 no-underline text-[#1B45BF] ' href='/signUp'>Create an Account</a></p>
           </div>
         </div>
-        <div className='bg-[#193FAE] relative'>
+        <div className='bg-[#193FAE] hidden lg:block relative'>
           <img src={design} alt="" className="w-[196px] h-[219px] absolute bottom-0 right-0" />
           <img src={design} alt="" className="w-[196px] h-[219px] absolute top-0 left-0 rotate-180" />
           <div className='w-fit m-auto pt-20'>
