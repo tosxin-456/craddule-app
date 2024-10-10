@@ -204,7 +204,7 @@ function CreateKpi() {
                         </div>
                         <div className=' m-auto' >
                             <p className='text-center font-bolder text-[17px] ' > KPI</p>
-                            <p className='text-center' >Here Create custom graphs that gives you more insight</p>
+                            <p className='text-center text-[#545454] font-semibold ' >Here Create custom graphs that gives you more insight</p>
                         </div>
                         <div>
                             <img src={home} />
