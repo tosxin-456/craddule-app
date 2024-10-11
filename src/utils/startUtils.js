@@ -181,6 +181,26 @@ export const FetchTimelines = (projectId, setTimelines, setLoading, setError) =>
   }, [projectId, setTimelines, setLoading, setError]);
 };
 
+export const updateOnboardingStatus = async () => {
+  try {
+    const token = localStorage.getItem('access_token');
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.userId;
+
+    const response = await axios.patch(`${API_BASE_URL}/api/onboarding/${userId}`, { onboarding: true }, {
+      headers: {
+        Authorization: `Bearer ${token}`, 
+      },
+    });
+
+    if (response.data.status === 200) {
+      localStorage.setItem('onboarding', 'true')
+    }
+  } catch (error) {
+    console.error(error.response || error.message);
+  }
+};
+
 export const FetchTimelinesCount = (projectId, userId, access_token, setTimelineCount, setLoading, setError) => {
   useEffect(() => {
     const fetchTimelinesCount = async () => {

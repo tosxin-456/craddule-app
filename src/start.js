@@ -71,10 +71,7 @@ function InflationRateGraph({ graphType }) {
                                 <div
                                     className="tilt-box bg-[#E8C400D9]"
                                     onClick={() =>
-                                        handleClickStorage(
-                                            'BusinessCaseBuilder',
-                                            '/questionBusMain/Ideation/BusinessCaseBuilder/Introduction'
-                                        )
+                                       navigate('/ideation')
                                     }
                                 >
                                     <button className="px-2 py-1 bg-black400 rounded-[10px] mb-[16px] text-white text-[14px]">View</button>
@@ -84,8 +81,6 @@ function InflationRateGraph({ graphType }) {
                                 </div>
 
                             </div>
-
-
 
                             {projectDetails && !projectDetails.includes("Product Definition") && (
                                 <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/product_definition.png')] bg-no-repeat bg-cover cursor-pointer relative">

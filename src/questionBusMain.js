@@ -19,6 +19,10 @@ import ideationPop from './component/ideationModal';
 import ModalVideoN from './component/modalNewVideo';
 import ReactGA from "react-ga4";
 import ReferralModal from './component/randomPopUp';
+import HeaderIdeation from './component/headerIdeation';
+
+
+
 
 function QuestionBus() {
   
@@ -512,8 +516,11 @@ function QuestionBus() {
           {phase === 'Commercialization' && <SideMenu2C />} 
           {phase === 'ValidatingAndTesting' && <SideMenu2V />} 
          <div className="main-content">
+          <div className='w-[100%]' >
+
+         <HeaderIdeation />
+          </div>
         
-         <Header />
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
 
          <div className='text-center'>
@@ -524,7 +531,7 @@ function QuestionBus() {
             <div>
               <div className='row'>
                   <div className='col-md-6'>
-                    <p className='prq' onClick={handleToggle}>Previous Questions</p>
+                    <p className='prq' onClick={handleToggle}>Question</p>
                   </div>
               </div>
                

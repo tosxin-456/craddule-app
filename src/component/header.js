@@ -197,7 +197,7 @@ const Header = () => {
   return (
     <>
       <div className=''>
-        <div className='bg-blue600 py-4 px-6 fixed w-full z-[1000]'>
+        <div className='bg-blue600 py-4 px-6 fixed w-[100%] z-[1000]'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center gap-3'>
               <button className="lg:hidden" onClick={handleClick}>
