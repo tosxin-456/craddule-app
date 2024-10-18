@@ -196,7 +196,7 @@ const HeaderIdeation = () => {
 
     return (
         <>
-            <div className=''>
+            <div className='relative'>
                 <div className='bg-blue600 py-4 px-6 absolute w-[100%] z-[1000]'>
                     <div className='flex justify-between items-center'>
                         <div className='flex items-center gap-3'>
