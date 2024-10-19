@@ -299,6 +299,7 @@ import Referral from './referral';
 import { getUserIdFromToken } from './utils/startUtils';
 import IdeationPage from './component/ideationOnboarding';
 import IdeationMain from './ideationMain';
+import GoNoGoMain from './GoNoGo';
 
 function App() {
   // const { io } = require("socket.io-client");
@@ -638,6 +639,7 @@ function App() {
           <Route path="/firstQuestion/" element={<FirstQuestion />} />
           <Route path="/ideation/" element={<IdeationStart />} />
           <Route path="/accelerate/" element={<Accelerate />} />
+          <Route path="/go-no-go" element={<GoNoGoMain />} />
           <Route path="/nda/" element={<Nda />} />
           <Route path="/card/" element={<GetCard />} />
           <Route path="/createVideoAdmin/" element={<CreateVideosAdmin />} />

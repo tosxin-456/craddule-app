@@ -97,7 +97,7 @@ function IdeationMain() {
                                         </div>
                                         <p className='mt-[-30px]'>32%</p>
                                         <p className='text-[14px]'>progress</p>
-                                        <button className='m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[14px]'>Continue</button>
+                                        <button onClick={() => navigate('/customFinancial')} className='m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[14px]'>Continue</button>
                                     </div>
                                 </div>
 
@@ -133,7 +133,7 @@ function IdeationMain() {
                                         </div>
                                         <p className='mt-[-30px]' >32%</p>
                                         <p className='text-[14px]' >progress</p>
-                                        <button className='m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[14px] '>Continue</button>
+                                        <button onClick={() => navigate('/go-no-go')} className='m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[14px] '>Continue</button>
                                     </div>
                                 </div>
                             </div>
