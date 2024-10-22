@@ -207,11 +207,11 @@ const Profile = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('click')
-    updateUser(formData);
-  };
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log('click');
+  updateUser(formData); // Directly call updateUser with form data
+};
 
   const updateUser = async (data) => {
     setLoading(true);
@@ -336,11 +336,12 @@ const Profile = () => {
       <Header />
       <BreadCrumb page={'Profile'} />
 
-      <div className="mx-40 mt-5 p-10 px-20 bg-white rounded-[30px]">
-        <h4 className='text-center mt-8'>My Profile</h4>
-        <p className='text-gray800 text-center mb-10'>Your profile is a record of your personal information that defines who you are</p>
-        <div className='flex justify-end gap-3 mt-5'>
-          <button className="px-3 py-2 bg-blue600 text-white rounded-full" disabled={loading} onClick={submitForm}>
+      <div className="mx-4 sm:mx-10 md:mx-20 lg:mx-40 mt-5 p-5 sm:p-10 px-5 sm:px-20 bg-white rounded-[20px] sm:rounded-[30px]">
+        <h4 className='text-center mt-8 text-[18px] sm:text-[24px]'>My Profile</h4>
+        <p className='text-gray800 text-center mb-10 text-[14px] sm:text-[16px]'>Your profile is a record of your personal information that defines who you are</p>
+
+        <div className='flex flex-col sm:flex-row justify-end gap-3 mt-5'>
+          <button className="px-3 py-2 bg-blue600 text-white rounded-full" disabled={loading} onClick={handleSubmit}>
             {loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' />}
             {!loading && <span>Save changes</span>}
           </button>
@@ -350,104 +351,104 @@ const Profile = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-12 ">
+        <div className="grid grid-cols-1 sm:grid-cols-12 mt-5">
           <div className='col-span-4 mt-10'>
-            <p className='text-center font-semibold text-p18'>Profile picture/company logo</p>
+            <p className='text-center font-semibold  sm:text-[18px]'>Profile picture/company logo</p>
             <div className='mt-4'>
               <img
                 src={image ? (API_BASE_URL + '/images/users/' + image) : 'https://www.gravatar.com/avatar/c7763a1c6be16ffb347e8500434b61eb?s=200&r=pg&d=mm'}
-                className='rounded-full w-[287px] h-[287px] m-auto'
+                className='rounded-full w-[150px] sm:w-[300px] h-[150px] sm:h-[300px] m-auto'
                 alt='User avatar'
-                type='button'
               />
               <button className="block px-5 py-3 m-auto mt-4 bg-blue600 rounded-[30px] text-white text-[12px] justify-self-center" onClick={() => setIsOpen(true)}>
                 <span>Change picture</span>
               </button>
             </div>
           </div>
-          <div className='col-span-1'></div>
-          <div className='col-span-7 mt-16'>
+
+          <div className='col-span-1 hidden sm:block'></div>
+
+          <div className='col-span-7 mt-10 sm:mt-16'>
             <form onSubmit={handleSubmit}>
-              <div className="">
-                <div className="mt-[16px]">
-                  <label htmlFor="firstName" className='text-p18 font-semibold pb-1 block'>First Name</label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className="w-full border border-black400 px-3 py-[10px] rounded-full"
-                  />
-                </div>
-
-                <div className="mt-[16px]">
-                  <label htmlFor="lastName" className='text-p18 font-semibold pb-1 block'>Last Name</label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className="w-full border border-black400 px-3 py-[10px] rounded-full"
-                  />
-                </div>
-
-                <div className="mt-[16px]">
-                  <label htmlFor="email" className='text-p18 font-semibold pb-1 block'>Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full border border-black400 px-3 py-[10px] rounded-full"
-                  />
-                </div>
-
-                <div className="mt-[16px]">
-                  <label htmlFor="phoneNumber" className='text-p18 font-semibold pb-1 block'>Phone Number</label>
-                  <PhoneInput
-                    country={'ng'}
-                    value={formData.phoneNumber}
-                    onChange={handlePhoneChange}
-                    inputProps={{
-                      name: 'phoneNumber',
-                      required: true,
-                      autoFocus: true,
-                      className: 'custom-input2',
-                    }}
-                  />
-                </div>
+              <div className="mt-[16px]">
+                <label htmlFor="firstName" className='text-[16px] sm:text-[18px] font-semibold pb-1 block'>First Name</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="w-full border border-black400 px-3 py-[10px] rounded-full"
+                />
               </div>
-              <button type='submit' id='userUpdateForm' className="px-3 py-2 bg-blue600 text-white rounded-full hidden" disabled={loading} onClick={() => submitForm()}>
-                {loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' />}
-                {!loading && <span>Save changes</span>}
-              </button>
+
+              <div className="mt-[16px]">
+                <label htmlFor="lastName" className='text-[16px] sm:text-[18px] font-semibold pb-1 block'>Last Name</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="w-full border border-black400 px-3 py-[10px] rounded-full"
+                />
+              </div>
+
+              <div className="mt-[16px]">
+                <label htmlFor="email" className='text-[16px] sm:text-[18px] font-semibold pb-1 block'>Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full border border-black400 px-3 py-[10px] rounded-full"
+                />
+              </div>
+
+              <div className="mt-[16px]">
+                <label htmlFor="phoneNumber" className='text-[16px] sm:text-[18px] font-semibold pb-1 block'>Phone Number</label>
+                <PhoneInput
+                  country={'ng'}
+                  value={formData.phoneNumber}
+                  onChange={handlePhoneChange}
+                  inputProps={{
+                    name: 'phoneNumber',
+                    required: true,
+                    autoFocus: true,
+                    className: 'custom-input2',
+                  }}
+                />
+              </div>
             </form>
           </div>
-          <ImageModal open={isOpen} onClose={() => { setIsOpen(false) }} setImage={setImage}>
-          </ImageModal>
-          <ToastContainer />
         </div>
-        <div className='mt-10 border-1 border-dashed border-black100 rounded-[30px] p-10'>
-          <h4 className='text-center mt-10'>Refer a friend</h4>
-          <p className='text-gray800 text-center mb-5'>Refer friend and get free gift when the join and complete their application</p>
+
+        <ImageModal open={isOpen} onClose={() => { setIsOpen(false) }} setImage={setImage}></ImageModal>
+        <ToastContainer />
+
+        <div className='mt-10 border-1 border-dashed border-black100 rounded-[20px] sm:rounded-[30px] p-5 sm:p-10'>
+          <h4 className='text-center mt-5 sm:mt-10 text-[16px] sm:text-[18px]'>Refer a friend</h4>
+          <p className='text-gray800 text-center mb-5 text-[14px] sm:text-[16px]'>Refer a friend and get a free gift when they join and complete their application</p>
+
           <div className='w-fit m-auto'>
-            <p className="mb-1">Your referral link:</p>
-            <div className='flex gap-3 items-center'>
-              <div className="px-4 py-2 bg-black50 rounded-[10px]">
+            <p className="mb-1 text-[14px] sm:text-[16px]">Your referral link:</p>
+            <div className='flex gap-2 sm:gap-3 items-center'>
+              <div className="px-3 py-2 bg-black50 rounded-[10px]">
                 <span className='p8'>{`${APP_REFER_URL}/${referralCode}`}</span>
               </div>
-              <button className='px-3 py-1 bg-blue600 rounded-[30px] text-white text-[12px]' onClick={handleCopy}>{copied ? 'Copied!' : 'Copy link'}</button>
+              <button className='px-3 py-1 bg-blue600 rounded-[20px] sm:rounded-[30px] text-white text-[12px]' onClick={handleCopy}>
+                {copied ? 'Copied!' : 'Copy link'}
+              </button>
             </div>
           </div>
-          <div className="mt-5 p-10 bg-gray200 rounded-[20px]">
-            <h5 className='text-center'>Track friends you’ve referred</h5>
 
-            <div className='mx-40 mt-5'>
-              <div className='flex justify-between text-[16px]' >
+          <div className="mt-5 p-5 sm:p-10 bg-gray200 rounded-[20px]">
+            <h5 className='text-center text-[14px] sm:text-[16px]'>Track friends you’ve referred</h5>
+
+            <div className='mx-10 sm:mx-40 mt-5'>
+              <div className='flex justify-between text-[14px] sm:text-[16px]'>
                 <p>Visited Craddule</p>
                 <p>{referralCount ? referralCount.visited : '0'}</p>
               </div>
-              <div className='flex justify-between'>
+              <div className='flex justify-between text-[14px] sm:text-[16px]'>
                 <p>Subscribed</p>
                 <p>{referralCount ? referralCount.subscribed : '0'}</p>
               </div>
@@ -455,6 +456,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
+
     </>
   );
 }
