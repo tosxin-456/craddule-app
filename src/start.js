@@ -3,7 +3,7 @@ import Header from './component/header';
 import { CiLock, CiMemoPad, CiUser } from 'react-icons/ci';
 import bolt from './images/bolt.png';
 import ReactGA from "react-ga4";
-import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak, getUserIdFromToken, FetchProjectDetails, FetchGoStatus, FetchTimelines, FetchTimelinesCount, FetchUser } from "./utils/startUtils";
+import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak, getUserIdFromToken, FetchProjectDetails, FetchGoStatus, FetchTimelines, FetchTimelinesCount, FetchUser, GetOnboardingStatus, UpdateOnboardingSeenStatus } from "./utils/startUtils";
 import { useNavigate } from "react-router-dom";
 import ModalStart from "./component/modalStartStop";
 import "./pop-up.css";
@@ -22,6 +22,8 @@ function InflationRateGraph({ graphType }) {
     const [timelineCount, setTimelineCount] = useState('');
     const [timelines, setTimelines] = useState([]);
     const [unlock, setUnlock] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+
     const [unlockIn, setUnlockIn] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -30,6 +32,16 @@ function InflationRateGraph({ graphType }) {
     const [userDetails, setUserDetails] = useState({});
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
+
+    const handleNavigation = async () => {
+        const ideationSeen = localStorage.getItem('ideationseen') === 'true'; 
+        if (!ideationSeen) {
+            navigate('/ideation');
+        } else {
+            navigate('/ideation/start');
+        }
+    };
+
 
     const { access_token, userId } = getUserIdFromToken();
 
@@ -41,6 +53,8 @@ function InflationRateGraph({ graphType }) {
     FetchProjectDetails(projectId, setProjectDetails, setError, setLoading)
 
     FetchGoStatus(projectId, access_token, setUnlock, setUnlockIn)
+
+    GetOnboardingStatus(projectId, userId, access_token, setShowModal, setLoading, setError)
 
     useEffect(() => {
         updateStreak(setStreak);
@@ -71,7 +85,7 @@ function InflationRateGraph({ graphType }) {
                                 <div
                                     className="tilt-box bg-[#E8C400D9]"
                                     onClick={() =>
-                                       navigate('/ideation')
+                                        handleNavigation()
                                     }
                                 >
                                     <button className="px-2 py-1 bg-black400 rounded-[10px] mb-[16px] text-white text-[14px]">View</button>

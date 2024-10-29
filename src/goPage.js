@@ -1,79 +1,80 @@
 import React, { useEffect, useState } from 'react';
-import bci from './images/bc.png'; 
-import bob from './images/bob.png'; 
+import bci from './images/bc.png';
+import bob from './images/bob.png';
 import Header from './component/header';
 import Menu from './component/menu';
 import { Toaster, toast } from 'sonner'
 import WOW from 'wowjs';
 import 'animate.css/animate.css'; // Import Animate.css
 import 'wowjs/css/libs/animate.css';
-import {API_BASE_URL} from './config/apiConfig';
+import { API_BASE_URL } from './config/apiConfig';
 import { jwtDecode } from "jwt-decode";
 import SideMenu2 from './component/sideMenu2';
 import SideMenu2P from './component/sideMenu2P';
 import SideMenu2I from './component/sideMenu2I';
 import SideMenu2C from './component/sideMenu2C';
 import SideMenu2V from './component/sideMenu2V';
-import { useNavigate,useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import HeaderIdeation from './component/headerIdeation';
 
-function GoPage ()  {
-    useEffect(() => {
-        const wow = new WOW.WOW();
-        wow.init();
-      }, []);
+function GoPage() {
+  useEffect(() => {
+    const wow = new WOW.WOW();
+    wow.init();
+  }, []);
 
-        const { phase } = useParams();
-        const [loading, setLoading] = useState(false);
-        const [gates, setGates] = useState([]);
-        const [totalCount, setTotalCount] = useState(null);
-        const [totalCountQ, setTotalCountQ] = useState(null);
-        const [percentage, setPercentage] = useState('');
+  const { phase } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [gates, setGates] = useState([]);
+  const [totalCount, setTotalCount] = useState(null);
+  const [totalCountQ, setTotalCountQ] = useState(null);
+  const [percentage, setPercentage] = useState('');
 
-        const projectId = localStorage.getItem('nProject');
-        console.log("pro "+projectId);
+  const projectId = localStorage.getItem('nProject');
+  console.log("pro " + projectId);
 
-        const access_token = localStorage.getItem('access_token');
-        const decodedToken = jwtDecode(access_token);
-        const userId = decodedToken.userId;
-        const questionType = "BusinessCaseBuilder";
-       
-
-        const [projectGoGates, setProjectGoGates] = useState([]);
+  const access_token = localStorage.getItem('access_token');
+  const decodedToken = jwtDecode(access_token);
+  const userId = decodedToken.userId;
+  const questionType = "BusinessCaseBuilder";
 
 
-        const fetchProjectGoGates = async () => {
-          try {
-              const response = await fetch(API_BASE_URL+`/api/project/go/${projectId}/${phase}`);
-              if (!response != 200) {
-                console.log(response);
-                //toast.error("This Account as been Deactivated");
-              }
-              const data = await response.json();
-              console.log(data);
-              setProjectGoGates(data.data);
-          } catch (error) {
-              console.error('Error fetching projectGoGates:', error);
-          }
-      };
-    useEffect(() => {
-       
+  const [projectGoGates, setProjectGoGates] = useState([]);
 
-        fetchProjectGoGates();
-    }, [projectId, phase]);
 
-    const handleAcceptClick = (id,goStatus) => {
-      // Pass the _id of the ProjectGoGate entry to the updateStatus function
-      updateStatus(id,goStatus);
+  const fetchProjectGoGates = async () => {
+    try {
+      const response = await fetch(API_BASE_URL + `/api/project/go/${projectId}/${phase}`);
+      if (!response != 200) {
+        console.log(response);
+        //toast.error("This Account as been Deactivated");
+      }
+      const data = await response.json();
+      console.log(data);
+      setProjectGoGates(data.data);
+    } catch (error) {
+      console.error('Error fetching projectGoGates:', error);
+    }
+  };
+  useEffect(() => {
+
+
+    fetchProjectGoGates();
+  }, [projectId, phase]);
+
+  const handleAcceptClick = (id, goStatus) => {
+    // Pass the _id of the ProjectGoGate entry to the updateStatus function
+    updateStatus(id, goStatus);
   };
 
   const updateStatus = async (id, goStatus) => {
     setLoading(true);
     console.log("at change");
     try {
-      
-    
-      const requestBody = { newStatus: goStatus,  gateId:id};
-      const response = await fetch(API_BASE_URL+'/api/project/go/status/', {
+
+
+      const requestBody = { newStatus: goStatus, gateId: id };
+      const response = await fetch(API_BASE_URL + '/api/project/go/status/', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +83,7 @@ function GoPage ()  {
         body: JSON.stringify(requestBody),
       });
 
-     // const data = response.json();
+      // const data = response.json();
 
       if (response.status === 200) {
         console.log(response.status);
@@ -95,12 +96,12 @@ function GoPage ()  {
         setLoading(false);
         // Save access token to local storage
 
-     
+
       } else {
         const result = await response.json();
         setLoading(false);
         toast.error(result['error']);
-          console.error('Error:', result['error']);
+        console.error('Error:', result['error']);
         //console.error('Failed to create User');
       }
     } catch (error) {
@@ -109,116 +110,119 @@ function GoPage ()  {
     }
   };
 
-        const calculatePercentage = () => {
-            if (!totalCount || !totalCountQ) {
-               // alert('Please enter both values.');
-                return;
-            }
-            
-            const calculatedPercentage = (totalCount / totalCountQ) * 100;
-            setPercentage(calculatedPercentage.toFixed(2) + '%');
-            console.log(calculatedPercentage.toFixed(2) + '%');
-        };
+  const calculatePercentage = () => {
+    if (!totalCount || !totalCountQ) {
+      // alert('Please enter both values.');
+      return;
+    }
 
-    return (
-       <>
-       
-       <div className='container2'>
-       {phase === 'Ideation' && <SideMenu2 />}
-       {phase === 'ProductDefinition' && <SideMenu2P />}   
-       {phase === 'InitialDesign' && <SideMenu2I />}
-       {phase === 'Commercialization' && <SideMenu2C />}   
-       {phase === 'ValidatingAndTesting' && <SideMenu2V />}  
-         <div className="main-content">
-        
-         <Header />
-       
-         <div className='main-content2'>
-            
+    const calculatedPercentage = (totalCount / totalCountQ) * 100;
+    setPercentage(calculatedPercentage.toFixed(2) + '%');
+    console.log(calculatedPercentage.toFixed(2) + '%');
+  };
+
+  return (
+    <>
+
+      <div className='container2'
+        style={{
+          fontFamily: '"Manrope", sans-serif'
+        }}
+      >
+        {phase === 'Ideation' && <SideMenu2 />}
+        {phase === 'ProductDefinition' && <SideMenu2P />}
+        {phase === 'InitialDesign' && <SideMenu2I />}
+        {phase === 'Commercialization' && <SideMenu2C />}
+        {phase === 'ValidatingAndTesting' && <SideMenu2V />}
+        <div className="main-content">
+
+          <HeaderIdeation />
+
+          <div className='main-content2'>
+
             <div className='bacWHI'>
 
-            <div className='text-center'>
+              <div className='text-center'>
                 <p className='centerH pa wow fadeInLeft'>Go/ No-Go Gate</p>
-               
-            </div>
 
-            <div className='wrapper'>
+              </div>
+
+              <div className='wrapper'>
 
                 <div className='columns'>
-                    {/* <div className='columnG gogo wow fadeInUp'>
+                  {/* <div className='columnG gogo wow fadeInUp'>
                         <p className='goP'>Phase 1</p>
                         <p className='goP2'>Business Case Builder</p>
 
                         <div className='goH'>
                             <h1 className='goTitle'> Select Action</h1>
-                            <h1 className='goSub'>This Phase as been accomplished, you can still go back to see what was done</h1>
+                            <h1 className='goSub text-[16px] '>This Phase as been accomplished, you can still go back to see what was done</h1>
                             <span className='goBtnP'>Revisit</span>
                         </div>
                     </div> */}
 
-                {projectGoGates.map((projectGoGate, index) => (
-                    <div className={`columnG gogo wow fadeInUp ${
-                      projectGoGate.goStatus === 'not started' || projectGoGate.goStatus === 'denied' 
-                          ? 'gogoN' 
-                          : projectGoGate.goStatus === 'Approved' 
-                              ? 'gogoA' 
-                              : projectGoGate.goStatus === 'Denied' 
-                              ? 'gogoD' 
-                                : projectGoGate.goStatus === 'ongoing' 
-                                    ? 'gogoO' 
-                                    : ''
-                    }`}>
-                        <p className='goP'>{projectGoGate.goGateName}</p>
-                        <p className='goP2'>{projectGoGate.goStatus}</p>
+                  {projectGoGates.map((projectGoGate, index) => (
+                    <div className={`columnG gogo wow fadeInUp ${projectGoGate.goStatus === 'not started' || projectGoGate.goStatus === 'denied'
+                        ? 'gogoN'
+                        : projectGoGate.goStatus === 'Approved'
+                          ? 'gogoA'
+                          : projectGoGate.goStatus === 'Denied'
+                            ? 'gogoD'
+                            : projectGoGate.goStatus === 'ongoing'
+                              ? 'gogoO'
+                              : ''
+                      }`}>
+                      <p className='goP'>{projectGoGate.goGateName}</p>
+                      <p className='goP2'>{projectGoGate.goStatus}</p>
 
-                        {projectGoGate.goStatus === 'not started' && (
-                            
-                      
+                      {projectGoGate.goStatus === 'not started' && (
+
+
                         <div className='goH'>
-                            <h1 className='goTitle'> Select Action</h1>
-                            <h1 className='goSub'>Lets begin this phase</h1>
-                            <span className='goBtnP' onClick={() => handleAcceptClick(projectGoGate._id,"Ongoing")}>Begin</span>
-                           
+                          <p className='goTitle'> Select Action</p>
+                          <p className='goSub text-[16px] '>Lets begin this phase</p>
+                          <span className='goBtnP' onClick={() => handleAcceptClick(projectGoGate._id, "Ongoing")}>Begin</span>
+
                         </div>
 
-                          )}
+                      )}
 
-                        {projectGoGate.goStatus === 'Ongoing' && (
-                            
-                      
-                            <div className='goH'>
-                                <h1 className='goTitle'> Select Action</h1>
-                                <h1 className='goSub'>You will have to accept or deny that this phase meets the required standard</h1>
-                                <span className='goBtnP' onClick={() => handleAcceptClick(projectGoGate._id,"Approved")}>Accept</span>
-                                <span className='goBtnPD' onClick={() => handleAcceptClick(projectGoGate._id,"Denied")}>Deny</span>
-                            </div>
-    
-                              )}
+                      {projectGoGate.goStatus === 'Ongoing' && (
 
 
-                       
+                        <div className='goH'>
+                          <p className='goTitle'> Select Action</p>
+                          <p className='goSub text-[16px] '>You will have to accept or deny that this phase meets the required standard</p>
+                          <span className='goBtnP' onClick={() => handleAcceptClick(projectGoGate._id, "Approved")}>Accept</span>
+                          <span className='goBtnPD' onClick={() => handleAcceptClick(projectGoGate._id, "Denied")}>Deny</span>
+                        </div>
 
-                            {projectGoGate.goStatus === 'Denied' && (
-                            
-                      
-                            <div className='goH'>
-                                <h1 className='goTitle'> Select Action</h1>
-                                <h1 className='goSub'>You will have to accept that this phase meets the required standard</h1>
-                                <span className='goBtnP' onClick={() => handleAcceptClick(projectGoGate._id,"Approved")}>Accept</span>
-                            </div>
-    
-                              )}
+                      )}
+
+
+
+
+                      {projectGoGate.goStatus === 'Denied' && (
+
+
+                        <div className='goH'>
+                          <p className='font-bold text-[15px]'> Select Action</p>
+                          <p className='goSub text-[16px] '>You will have to accept that this phase meets the required standard</p>
+                          <span className='goBtnP' onClick={() => handleAcceptClick(projectGoGate._id, "Approved")}>Accept</span>
+                        </div>
+
+                      )}
                     </div>
 
                   ))}
 
-                    {/* <div className='columnG gogoG wow fadeInUp'>
+                  {/* <div className='columnG gogoG wow fadeInUp'>
                         <p className='goP'>Phase 2</p>
                         <p className='goP2'>Custom Financial Projection</p>
 
                         <div className='goH'>
                             <h1 className='goTitle'>No Action</h1>
-                            <h1 className='goSub'>Can only Movge forward when you have passed previous phases</h1>
+                            <h1 className='goSub text-[16px] '>Can only Movge forward when you have passed previous phases</h1>
                            
                         </div>
                     </div>
@@ -229,7 +233,7 @@ function GoPage ()  {
 
                         <div className='goH'>
                             <h1 className='goTitle'>No Action</h1>
-                            <h1 className='goSub'>Can only Movge forward when you have passed previous phases</h1>
+                            <h1 className='goSub text-[16px] '>Can only Movge forward when you have passed previous phases</h1>
                             
                         </div>
                     </div>
@@ -240,25 +244,29 @@ function GoPage ()  {
 
                         <div className='goH'>
                             <h1 className='goTitle'>No Action</h1>
-                            <h1 className='goSub'>Can only Movge forward when you have passed previous phases</h1>
+                            <h1 className='goSub text-[16px] '>Can only Movge forward when you have passed previous phases</h1>
                             
                         </div>
                     </div> */}
 
-                    
-                    
+
+
                 </div>
+              </div>
             </div>
+
+
+            <div className='flex justify-center mt-[20px]'>
+              <button className='bg-[#E8C400] p-[10px] pr-[10px] w-[20rem] rounded-full'>
+                End Phase
+              </button>
             </div>
 
-           
-
-
+          </div>
         </div>
-        </div>
-        </div>
-        </>
-    );
+      </div>
+    </>
+  );
 }
 
 export default GoPage

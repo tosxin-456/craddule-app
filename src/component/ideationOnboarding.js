@@ -6,14 +6,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import logo from '../images/Craddule logo - PNG 2 4.svg'
 import onboard1 from '../images/onboardingIdeation1.svg';
 import onboard2 from '../images/onboardingIdeation2.svg';
-import { updateOnboardingStatus } from '../utils/startUtils';
-
+import { updateOnboardingStatus, UpdateOnboardingSeenStatus, getUserIdFromToken } from '../utils/startUtils';
+const { access_token, userId } = getUserIdFromToken;
 
 function IdeationOnboarding() {
     const token = localStorage.getItem('onboarding');
     const [page, setPage] = useState(1)
     const navigate = useNavigate();
-
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const projectId = localStorage.getItem('nProject');
     useEffect(() => {
         const onboarding = localStorage.getItem('onboarding');
 
@@ -24,15 +26,17 @@ function IdeationOnboarding() {
     }, [navigate]);
 
     const handleNextClick = async () => {
-        // Update the onboarding status
-        await updateOnboardingStatus();
-
-        // After onboarding is updated, navigate to /ideation/start
-        navigate('/ideation/start');
+        try {
+            await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError);
+            navigate('/ideation/start');
+        } catch (error) {
+            console.error('Error updating onboarding status:', error);
+        }
     };
+
   
     const handleNext = () => {
-        setPage(2); // Switch to page 2 when clicked
+        setPage(2); 
     };
     return (
         <>

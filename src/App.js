@@ -300,11 +300,11 @@ import { getUserIdFromToken } from './utils/startUtils';
 import IdeationPage from './component/ideationOnboarding';
 import IdeationMain from './ideationMain';
 import GoNoGoMain from './GoNoGo';
+import { clarity } from 'react-microsoft-clarity';
 
 function App() {
-  // const { io } = require("socket.io-client");
   const [isTrialExpired, setIsTrialExpired] = useState(false)
-
+  clarity.init('opznx72eqw');
   // const socket = io('http://localhost:3001');
   const { userId } = getUserIdFromToken();
 
