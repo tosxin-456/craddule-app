@@ -1,15 +1,15 @@
 import { useEffect } from "react";
-import {API_BASE_URL} from '../config/apiConfig';
+import { API_BASE_URL } from '../config/apiConfig';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 
 export const handleClick = (url) => {
-    window.location.href = url;
+  window.location.href = url;
 };
 
 export const handleClickStorage = (selectedCase, url) => {
-    localStorage.setItem('selectedCase', selectedCase);
-    window.location.href = url;
+  localStorage.setItem('selectedCase', selectedCase);
+  window.location.href = url;
 };
 
 // Function to handle logout
@@ -22,16 +22,16 @@ export const handleLogout = () => {
   });
   window.location.href = '/login';
 };
-  
+
 // Function to handle home redirection
 export const handleHome = () => {
-    window.location.href = '/home';
+  window.location.href = '/home';
 };
 
 // Update Streak
 export const updateStreak = async (setStreak) => {
   try {
-    const token = localStorage.getItem('access_token'); 
+    const token = localStorage.getItem('access_token');
     const decodedToken = jwtDecode(token);
     const userId = decodedToken.userId;
     const projectId = localStorage.getItem('nProject');
@@ -46,12 +46,12 @@ export const updateStreak = async (setStreak) => {
 // Decode JWT token and get user ID
 export const getUserIdFromToken = () => {
   const access_token = localStorage.getItem('access_token');
-  if (access_token){
+  if (access_token) {
     const decodedToken = jwtDecode(access_token);
     const userId = decodedToken.userId
-    return {access_token, userId};
+    return { access_token, userId };
   }
-  return {access_token:null, userId:null};
+  return { access_token: null, userId: null };
 };
 
 export const FetchProjectDetails = (projectId, setProjectDetails, setError, setLoading) => {
@@ -59,32 +59,32 @@ export const FetchProjectDetails = (projectId, setProjectDetails, setError, setL
     const fetchProjectDetails = async () => {
       console.log("getting details")
       const id = projectId;
-      console.log("getting details:"+ id)
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/project/project/${id}`, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-                    'Content-Type': 'application/json'
-                }
-            });
+      console.log("getting details:" + id)
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/project/project/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+            'Content-Type': 'application/json'
+          }
+        });
 
-            if (response.status === 200) {
-              const responseData = await response.json();
-              console.log('Response:', responseData.data.phases);
-              setProjectDetails(responseData.data.phases);
-            }else{
-              const result = await response.json();
-              console.error('Error:', result.error);
-            }          
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
+        if (response.status === 200) {
+          const responseData = await response.json();
+          console.log('Response:', responseData.data.phases);
+          setProjectDetails(responseData.data.phases);
+        } else {
+          const result = await response.json();
+          console.error('Error:', result.error);
         }
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
     if (projectId) {
-        fetchProjectDetails();
+      fetchProjectDetails();
     }
   }, [projectId, setProjectDetails, setError, setLoading]);
 };
@@ -94,32 +94,32 @@ export const FetchUser = (userId, setUserDetails, setError, setLoading) => {
     const fetchUserDetails = async () => {
       console.log("getting details")
       const id = userId;
-      console.log("getting details:"+ id)
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/user/${id}`, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-                    'Content-Type': 'application/json'
-                }
-            });
+      console.log("getting details:" + id)
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/user/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+            'Content-Type': 'application/json'
+          }
+        });
 
-            if (response.status === 200) {
-              const responseData = await response.json();
-              console.log('Response:', responseData);
-              setUserDetails(responseData);
-            }else{
-              const result = await response.json();
-              console.error('Error:', result.error);
-            }          
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
+        if (response.status === 200) {
+          const responseData = await response.json();
+          console.log('Response:', responseData);
+          setUserDetails(responseData);
+        } else {
+          const result = await response.json();
+          console.error('Error:', result.error);
         }
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
     if (userId) {
-        fetchUserDetails();
+      fetchUserDetails();
     }
   }, [userId, setUserDetails, setError, setLoading]);
 };
@@ -137,9 +137,11 @@ export const FetchGoStatus = (projectId, access_token, setUnlock, setUnlockIn) =
             'Content-Type': 'application/json'
           }
         });
-
+        console.log("here")
         // Check if the response status is 200
         if (response.status === 200) {
+          console.log("here status")
+
           const data = await response.json();
           console.log("go status");
           console.log(data.message);
@@ -152,7 +154,7 @@ export const FetchGoStatus = (projectId, access_token, setUnlock, setUnlockIn) =
           console.log('Failed to fetch goStatus. Please try again later.');
         }
       } catch (err) {
-        console.log('An error occurred while checking goStatus.');
+        console.log('An error occurred while checking goStatus.', err);
       } finally {
         //setLoading(false);
       }
@@ -166,8 +168,8 @@ export const FetchGoStatus = (projectId, access_token, setUnlock, setUnlockIn) =
 export const FetchTimelines = (projectId, setTimelines, setLoading, setError) => {
   useEffect(() => {
     const fetchTimelines = async () => {
-      try { 
-        const response = await axios.get(API_BASE_URL+`/api/algo/${projectId}`);
+      try {
+        const response = await axios.get(API_BASE_URL + `/api/algo/${projectId}`);
         console.log(response);
         setTimelines(response.data);
         setLoading(false);
@@ -181,6 +183,26 @@ export const FetchTimelines = (projectId, setTimelines, setLoading, setError) =>
   }, [projectId, setTimelines, setLoading, setError]);
 };
 
+export const updateOnboardingStatus = async () => {
+  try {
+    const token = localStorage.getItem('access_token');
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.userId;
+
+    const response = await axios.patch(`${API_BASE_URL}/api/onboarding/${userId}`, { onboarding: true }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.data.status === 200) {
+      localStorage.setItem('onboarding', 'true')
+    }
+  } catch (error) {
+    console.error(error.response || error.message);
+  }
+};
+
 export const FetchTimelinesCount = (projectId, userId, access_token, setTimelineCount, setLoading, setError) => {
   useEffect(() => {
     const fetchTimelinesCount = async () => {
@@ -191,18 +213,18 @@ export const FetchTimelinesCount = (projectId, userId, access_token, setTimeline
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${access_token}`,
           },
-        });       
-        if(response.ok) {
+        });
+        if (response.ok) {
           const data = await response.json();
           console.log(data);
           console.log(data.count);
-        setTimelineCount(data.count);
-        setLoading(false);
-        
+          setTimelineCount(data.count);
+          setLoading(false);
+
         } else {
           console.error('Failed count');
         }
-        
+
       } catch (error) {
         setError(error);
         setLoading(false);
@@ -211,3 +233,68 @@ export const FetchTimelinesCount = (projectId, userId, access_token, setTimeline
     fetchTimelinesCount();
   }, [projectId, userId, access_token, setTimelineCount, setLoading, setError]);
 };
+
+export const GetOnboardingStatus = (projectId, userId, access_token, setShowModal, setLoading, setError) => {
+  useEffect(() => {
+    const fetchOnboardingStatus = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/onboarding/${projectId}/${userId}/Ideation`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${access_token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+
+          // Store the `seen` status in local storage
+          localStorage.setItem('ideationseen', data.data.seen);
+          setShowModal(data.showModal);
+        } else {
+          console.error('Failed to fetch onboarding status');
+        }
+      } catch (error) {
+        console.error(error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOnboardingStatus();
+  }, [projectId, userId, access_token, setShowModal, setLoading, setError]);
+};
+
+export const UpdateOnboardingSeenStatus = async (projectId, userId, access_token, setError) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/onboarding`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${access_token}`,
+            },
+            body: JSON.stringify({ projectId, userId, seen: true }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to update onboarding status');
+        }
+
+        const data = await response.json();
+        console.log('Onboarding status updated:', data);
+
+        // Update the `seen` status in local storage to 'true'
+        localStorage.setItem('ideationseen', true);
+    } catch (error) {
+        console.error(error);
+        setError(error);
+        // Rethrow the error to be caught in handleNextClick
+        throw error;
+    }
+};
+
+
+

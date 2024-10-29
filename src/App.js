@@ -1,6 +1,6 @@
 // App.js or index.js
 import React, { createContext, useEffect, useState } from 'react';
-import {API_BASE_URL, APP_BASE_URL} from './config/apiConfig';
+import { API_BASE_URL, APP_BASE_URL } from './config/apiConfig';
 import './App.css';
 // import './index.css';
 
@@ -297,350 +297,357 @@ import CreateVideosAdmin from './createVideosAdmin';
 import ReactGA from "react-ga4";
 import Referral from './referral';
 import { getUserIdFromToken } from './utils/startUtils';
+import IdeationPage from './component/ideationOnboarding';
+import IdeationMain from './ideationMain';
+import GoNoGoMain from './GoNoGo';
+import { clarity } from 'react-microsoft-clarity';
 
 function App() {
-  // const { io } = require("socket.io-client");
   const [isTrialExpired, setIsTrialExpired] = useState(false)
-
+  clarity.init('opznx72eqw');
   // const socket = io('http://localhost:3001');
-  const {userId} = getUserIdFromToken();
+  const { userId } = getUserIdFromToken();
 
-  useEffect(()=>{
+  useEffect(() => {
     const checkTrial = async () => {
       console.log("checking")
       try {
-        const response = await fetch(API_BASE_URL+'/api/user/'+userId, {
+        const response = await fetch(API_BASE_URL + '/api/user/' + userId, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
           },
         });
-         
+
         if (response.status === 200) {
           console.log(response);
-  
+
           const responseData = await response.json(); // Parse JSON response
           console.log(responseData.trialPopUp)
-          if (responseData.trialPopUp == 'true'){
+          if (responseData.trialPopUp == 'true') {
             setIsTrialExpired(false)
-          }else{
+          } else {
             setIsTrialExpired(true)
           }
         } else {
-          setIsTrialExpired(false)          
+          setIsTrialExpired(false)
         }
       } catch (error) {
         console.error('An error occurred:', error);
       }
     };
 
-    if (userId==null) {
+    if (userId == null) {
       return
-    }else{
+    } else {
       checkTrial()
     }
   })
 
   return (
     <>
-    <Router>
-      <Routes>
-        {/* Auth */}
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signUp" element= {<SignUp />} />
-        <Route path="/signUp/:referralCode" element= {<SignUp />} />
-        <Route path="/pageLogin" element= {<PageLogin />} />
-        <Route path="/terms&conditions" element= {<TermAgreement />} />
-        <Route path="/privacy" element= {<Privacy />} />
-        <Route path="/welcome" element= {<Welcome />} />
-        <Route path="/referral" element= {<Referral />} />
-        <Route path="/login/start/:id/" element={<LoginTeam />} />
-        <Route path="/signup/start/:id/" element={<SignUpTeam />} />
+      <Router>
+        <Routes>
+          {/* Auth */}
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/signUp/:referralCode" element={<SignUp />} />
+          <Route path="/pageLogin" element={<PageLogin />} />
+          <Route path="/terms&conditions" element={<TermAgreement />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/referral" element={<Referral />} />
+          <Route path="/login/start/:id/" element={<LoginTeam />} />
+          <Route path="/signup/start/:id/" element={<SignUpTeam />} />
 
-        <Route path="/home" element= {<LandingPage />} />
-        <Route path="/start/" element= {<Start />} />
-
-        <Route path="/pitchDeckUpload" element= {<PitchDeckUpload />} />
-        <Route path="/pitchDeckView" element= {<PitchDeckView />} />
-        <Route path="/pitchDeckResources" element= {<PitchDeckResources />} />
-        <Route path="/pitchDeckLectures" element= {<PitchDeckLectures />} />
-        <Route path="/questionBus" element= {<QuestionBus />} />
-        <Route path="/questionBusMain/:phase/:category/:subCategory" element= {<QuestionBusMain />} />
-        <Route path="/questionBusMainSum/:phase/:category/:subCategory" element= {<QuestionBusMainSum />} />
-        <Route path="/questionBusCo" element= {<QuestionBusCo />} />
-        <Route path="/questionBusOp" element= {<QuestionBusOp />} />
-        <Route path="/questionBusMa" element= {<QuestionBusMa />} />
-        <Route path="/questionBusSo" element= {<QuestionBusSo />} />
-        <Route path="/questionBusRi" element= {<QuestionBusRi />} />
-        <Route path="/questionBusIm" element= {<QuestionBusIm />} />
-        <Route path="/questionBusIn" element= {<QuestionBusIn />} />
-        <Route path="/questionBusCon" element= {<QuestionBusCon />} />
-        <Route path="/questionBapEs" element= {<QuestionBapEs />} />
-        <Route path="/questionBapCs" element= {<QuestionBapCs />} />
-        <Route path="/questionVppVs" element= {<QuestionVppVs />} />
-        <Route path="/questionVppPd" element= {<QuestionVppPd />} />
-        <Route path="/questionVppPe" element= {<QuestionVppPe />} />
-        <Route path="/questionVppVd" element= {<QuestionVppVd />} />
-        <Route path="/questionVppPs" element= {<QuestionVppPs />} />
-        <Route path="/questionVppVp" element= {<QuestionVppVp />} />
-        <Route path="/questionVppFc" element= {<QuestionVppFc />} />
-        <Route path="/questionVppVc" element= {<QuestionVppVc />} />
-        <Route path="/questionVppC" element= {<QuestionVppC />} />
-        <Route path="/questionSucIo" element= {<QuestionSucIo/>} />
-        <Route path="/questionSucDc" element= {<QuestionSucDc/>} />
-        <Route path="/questionSucAw" element= {<QuestionSucAw/>} />
-        <Route path="/questionSucDm" element= {<QuestionSucDm/>} />
-        <Route path="/questionSucEp" element= {<QuestionSucEp/>} />
-        <Route path="/questionSucCr" element= {<QuestionSucCr/>} />
-        <Route path="/questionSucIi" element= {<QuestionSucIi/>} />
-        <Route path="/questionDmaMa" element= {<QuestionDmaMa/>} />
-        <Route path="/questionDmaMo" element= {<QuestionDmaMo/>} />
-        <Route path="/questionDmaPm" element= {<QuestionDmaPm/>} />
-        <Route path="/questionDmaMm" element= {<QuestionDmaMm/>} />
-        <Route path="/questionDmaMc" element= {<QuestionDmaMc/>} />
-        <Route path="/questionDmaMt" element= {<QuestionDmaMt/>} />
-        <Route path="/questionDmaMn" element= {<QuestionDmaMn/>} />
-        <Route path="/questionDmaBa" element= {<QuestionDmaBa/>} />
-        <Route path="/questionDmaIp" element= {<QuestionDmaIp/>} />
-        <Route path="/questionDmaRm" element= {<QuestionDmaRm/>} />
-        <Route path="/questionDmaRo" element= {<QuestionDmaRo/>} />
+          <Route path="/home" element={<LandingPage />} />
+          <Route path="/start/" element={<Start />} />
+          <Route path="/ideation/" element={<IdeationPage />} />
+          <Route path="/ideation/start" element={<IdeationMain />} />
 
 
-        <Route path="/branding" element= {<Branding />} />
-        <Route path="/brandingUpload" element= {<BrandingUpload />} />
-        <Route path="/marketAnalysis" element= {<MarketAnalysis />} />
-        <Route path="/ExecutiveSummary" element= {<ExecutiveSummary />} />
-        <Route path="/executiveSummarys" element= {<ExecutiveSummarys />} />
-        <Route path="/questionBusIntro" element= {<QuestionBusIntro />} />
-        <Route path="/questionBusOpSum" element= {<QuestionBusOpSum />} />
-        <Route path="/questionBusMaSum" element= {<QuestionBusMaSum />} />
-        <Route path="/questionBusSoSum" element= {<QuestionBusSoSum />} />
-        <Route path="/questionBusCoSum" element= {<QuestionBusCoSum />} />
-        <Route path="/questionBusRiSum" element= {<QuestionBusRiSum />} />
-        <Route path="/questionBusImSum" element= {<QuestionBusImSum />} />
-        <Route path="/questionBusInSum" element= {<QuestionBusInSum />} />
-        <Route path="/questionBusConSum" element= {<QuestionBusConSum />} />
-        <Route path="/questionBapEsSum" element= {<QuestionBapEsSum />} />
-        <Route path="/questionBapCsSum" element= {<QuestionBapCsSum />} />
-        <Route path="/questionBapCsSum" element= {<QuestionBapCsSum />} />
-        <Route path="/questionVppVsSum" element= {<QuestionVppVsSum />} />
-        <Route path="/questionVppPdSum" element= {<QuestionVppPdSum />} />
-        <Route path="/questionVppPeSum" element= {<QuestionVppPeSum />} />
-        <Route path="/questionVppVdSum" element= {<QuestionVppVdSum />} />
-        <Route path="/questionVppPsSum" element= {<QuestionVppPsSum />} />
-        <Route path="/questionVppVpSum" element= {<QuestionVppVpSum />} />
-        <Route path="/questionVppFcSum" element= {<QuestionVppFcSum />} />
-        <Route path="/questionVppVcSum" element= {<QuestionVppVcSum />} />
-        <Route path="/questionVppCSum" element= {<QuestionVppCSum />} />
-        <Route path="/questionSucIoSum" element= {<QuestionSucIoSum />} />
-        <Route path="/questionSucDcSum" element= {<QuestionSucDcSum />} />
-        <Route path="/questionSucAwSum" element= {<QuestionSucAwSum />} />
-        <Route path="/questionSucDmSum" element= {<QuestionSucDmSum />} />
-        <Route path="/questionSucEpSum" element= {<QuestionSucEpSum />} />
-        <Route path="/questionSucCrSum" element= {<QuestionSucCrSum />} />
-        <Route path="/questionSucIiSum" element= {<QuestionSucIiSum />} />
-        <Route path="/questionDmaMaSum" element= {<QuestionDmaMaSum />} />
-        <Route path="/questionDmaMoSum" element= {<QuestionDmaMoSum />} />
-        <Route path="/questionDmaPmSum" element= {<QuestionDmaPmSum />} />
-        <Route path="/questionDmaMmSum" element= {<QuestionDmaMmSum />} />
-        <Route path="/questionDmaMcSum" element= {<QuestionDmaMcSum />} />
-        <Route path="/questionDmaMtSum" element= {<QuestionDmaMtSum />} />
-        <Route path="/questionDmaMnSum" element= {<QuestionDmaMnSum />} />
-        <Route path="/questionDmaBaSum" element= {<QuestionDmaBaSum />} />
-        <Route path="/questionDmaIpSum" element= {<QuestionDmaIpSum />} />
-        <Route path="/questionDmaRmSum" element= {<QuestionDmaRmSum />} />
-        <Route path="/questionDmaRoSum" element= {<QuestionDmaRoSum />} />
-        <Route path="/questionEdit/:phase/:id" element= {<QuestionEdit />} />
-        <Route path="/chat" element= {<Chat />} />
-        <Route path="/dcf" element= {<DCF />} />
-        
+          <Route path="/pitchDeckUpload" element={<PitchDeckUpload />} />
+          <Route path="/pitchDeckView" element={<PitchDeckView />} />
+          <Route path="/pitchDeckResources" element={<PitchDeckResources />} />
+          <Route path="/pitchDeckLectures" element={<PitchDeckLectures />} />
+          <Route path="/questionBus" element={<QuestionBus />} />
+          <Route path="/questionBusMain/:phase/:category/:subCategory" element={<QuestionBusMain />} />
+          <Route path="/questionBusMainSum/:phase/:category/:subCategory" element={<QuestionBusMainSum />} />
+          <Route path="/questionBusCo" element={<QuestionBusCo />} />
+          <Route path="/questionBusOp" element={<QuestionBusOp />} />
+          <Route path="/questionBusMa" element={<QuestionBusMa />} />
+          <Route path="/questionBusSo" element={<QuestionBusSo />} />
+          <Route path="/questionBusRi" element={<QuestionBusRi />} />
+          <Route path="/questionBusIm" element={<QuestionBusIm />} />
+          <Route path="/questionBusIn" element={<QuestionBusIn />} />
+          <Route path="/questionBusCon" element={<QuestionBusCon />} />
+          <Route path="/questionBapEs" element={<QuestionBapEs />} />
+          <Route path="/questionBapCs" element={<QuestionBapCs />} />
+          <Route path="/questionVppVs" element={<QuestionVppVs />} />
+          <Route path="/questionVppPd" element={<QuestionVppPd />} />
+          <Route path="/questionVppPe" element={<QuestionVppPe />} />
+          <Route path="/questionVppVd" element={<QuestionVppVd />} />
+          <Route path="/questionVppPs" element={<QuestionVppPs />} />
+          <Route path="/questionVppVp" element={<QuestionVppVp />} />
+          <Route path="/questionVppFc" element={<QuestionVppFc />} />
+          <Route path="/questionVppVc" element={<QuestionVppVc />} />
+          <Route path="/questionVppC" element={<QuestionVppC />} />
+          <Route path="/questionSucIo" element={<QuestionSucIo />} />
+          <Route path="/questionSucDc" element={<QuestionSucDc />} />
+          <Route path="/questionSucAw" element={<QuestionSucAw />} />
+          <Route path="/questionSucDm" element={<QuestionSucDm />} />
+          <Route path="/questionSucEp" element={<QuestionSucEp />} />
+          <Route path="/questionSucCr" element={<QuestionSucCr />} />
+          <Route path="/questionSucIi" element={<QuestionSucIi />} />
+          <Route path="/questionDmaMa" element={<QuestionDmaMa />} />
+          <Route path="/questionDmaMo" element={<QuestionDmaMo />} />
+          <Route path="/questionDmaPm" element={<QuestionDmaPm />} />
+          <Route path="/questionDmaMm" element={<QuestionDmaMm />} />
+          <Route path="/questionDmaMc" element={<QuestionDmaMc />} />
+          <Route path="/questionDmaMt" element={<QuestionDmaMt />} />
+          <Route path="/questionDmaMn" element={<QuestionDmaMn />} />
+          <Route path="/questionDmaBa" element={<QuestionDmaBa />} />
+          <Route path="/questionDmaIp" element={<QuestionDmaIp />} />
+          <Route path="/questionDmaRm" element={<QuestionDmaRm />} />
+          <Route path="/questionDmaRo" element={<QuestionDmaRo />} />
 
-        <Route path="/trackPage" element= {<TrackPage />} />
-        <Route path="/progress" element= {<Progress />} />
-        <Route path="/workLoad" element= {<WorkLoad />} />
-        <Route path="/cost" element= {<Cost />} />
-        <Route path="/time" element= {<Time />} />
-        <Route path="/timelineBuilder" element= {<TimelineBuilder />} />
-        <Route path="/viewSheetModal" element= {<ViewSheetModal />} />
-        <Route path="/problemstatement" element= {<ProblemStatement />} />
-        <Route path="/Solution" element= {<Solution />} />
-        <Route path="/inflationRateGraph" element= {<InflationRateGraph />} />
-        <Route path="/niceWorkModal" element= {<NiceWorkModal />} />
-        <Route path="/customerGrowthMoM" element= {<CustomerGrowthMoM />} />
-        <Route path="/pageShare" element= {<PageShare />} />
-        <Route path="/pageBenefit" element= {<PageBenefit />} />
-        <Route path="/viewDocument" element= {<ViewDocument />} />
-        <Route path="/video" element= {<VideoDemo />} />
-        {/* <Route path="/fontPicker" element= {<FontPicker />} /> */}
-        <Route path="/planSub" element= {<PlanSub />} />
-        <Route path="/financialPnet" element= {<FinancialPnet />} />
-        <Route path="/financialPincome" element= {<FinancialPincome />} />
-        <Route path="/financialPexpense" element= {<FinancialPexpense />} />
-        <Route path="/fincialPinflux" element= {<FinancialPinflux />} />
-        <Route path="/financialPcomp" element= {<FinancialPcomp />} />
-        <Route path="/financialPintegrate" element= {<FinancialPintegrate/>} />
-        <Route path="/ExpensesGraph" element= {<ExpensesGraph />} />
-        <Route path="/multipleGraph" element= {<MultipleGraph />} />
-        <Route path="/customerGrowthYoY" element= {<CustomerGrowthYoY />} />
-        <Route path="/profitYoYpage" element= {<ProfitYoYpage/>} />
-        <Route path="/operatingIncomeYoY" element= {<OperatingIncomeYoY />} />
-        <Route path="/customerYoYinflux" element= {<CustomerYoYInflux />} />
-        <Route path="/model" element= {<Model />} />
-        {/* <Route path="/updateImage" element= {<UpdateImage />} /> */}
-        <Route path="/foreCast" element= {<ForeCast />} />
-        <Route path="/expensesYoY" element= {<ExpensesYoY />} />
-        <Route path="/inflationYoY" element= {<InflationYoY />} />
-        <Route path="/customerInfluxMoM" element= {<CustomerInfluxMoM />} />
-        <Route path="/profitPageMoM" element= {<ProfitPageMOM />} />
-        <Route path="/operatingIncomeMoM" element= {<OperatingIncomeMoM />} />
-        <Route path="/expensesMoM" element= {<ExpensesMonthOnMonth />} />
-        <Route path="/inflationMoM" element= {<InflationMonthOnMonth />} />
-        <Route path="/customerGrowth" element= {<CustomerGrowth />} />
-        <Route path="/customerInflux" element= {<CustomerInflux />} />
-        <Route path="/profitPage" element= {<ProfitPage />} />
-        <Route path="/expenses" element= {<Expenses />} />
-        <Route path="/inflationAnalysis" element= {<InflationAnalysis />} />
-        <Route path="/pageSub" element= {<PageSub />} />
-        <Route path="/exepensesYoY" element= {<ExpensesYoY/>} />
-        <Route path="/comparative" element= {<Comparative />} />
-        <Route path="/monthOnmonth" element= {<MonthOnMonth/>} />
-        <Route path="/yearOnyear" element= {<YearOnYear />} />
-        <Route path="/settingMenu" element= {<SettingMenu />} />
-        <Route path="/financialP" element= {<FinancialProject />} />
-        {/* <Route path="/chatTool" element= {<ChatTools />} /> */}
-        <Route path="/giveFeedbackModal" element= {<GiveFeedbackModal />} />
-        <Route path="/netProfit" element= {<NetProfit />} />
-        <Route path="/operatingIncome" element= {<OperatingIncome />} />
-        <Route path="/password" element= {<Password />} />
-        <Route path="/deleteModal" element= {<DeleteModal />} />
-        <Route path="/growthRateGraph" element= {<GrowthRateGraph />} />
-        <Route path="/netGraph" element= {<NetGraph/>} />
-        <Route path="/profile" element= {<Profile />} />
-        <Route path="/incomeGraph" element= {<IncomeGraph />} />
-        <Route path="/homeStarter" element= {<HomeStarter />} />
-        <Route path="/generalSetting" element= {<GeneralSetting />} />
-        <Route path="/pageSummary" element= {<PageSummary />} />
-        {/* <Route path="/searchKpi" element= {<SearchKpi />} /> */}
-        {/* <Route path="/pageAddKpi" element= {<PageAddKpi />} /> */}
-        <Route path="/prototype" element= {<Prototype />} />
-        {/* <Route path="/sendFile" element= {<SendFile />} /> */}
-        <Route path="/graphPage" element= {<GraphPage />} />
-        <Route path="/wireFrame" element= {<WireFrame />} />
-        <Route path="/niceWork" element= {<NiceWork />} />
-        <Route path="/sectionManagement" element= {<SectionManagement />} />
-        <Route path="/teamManagement" element= {<TeamManagement />} />
-        {/* <Route path="/uploadLogo" element= {<UploadLogo />} /> */}
-        <Route path="/Sectiondcf" element= {<CashFlow />} />
-        {/* <Route path="/sectionInvite" element= {<PageInvite />} /> */}
-        {/* <Route path="/pageTeam" element= {<PageTeam />} /> */}
-        <Route path="/pageProject" element= {<PageProject/>} />
-        <Route path="/pageSuccess" element= {<PageSuccess />} />
-        <Route path="/kpiPage" element= {<KPIPage />} />
-        <Route path="/engagement" element= {<Engagement />} />
-        <Route path="/summary" element= {<Summary />} />
-        <Route path="/presentation" element= {<Presentation />} />
-        <Route path="/pageFrontView" element= {<PageFrontView />} />
-        {/* <Route path="/shareFile" element= {<ShareFile />} /> */}
-        <Route path="/planDesign" element= {<PlanDesign />} />
-        <Route path="/pageTrack" element= {<PageTrack />} />
-        <Route path="/pitchDeck" element= {<PitchDeck />} />
-        <Route path="/sectionScale" element= {<SectionScale />} />
-        <Route path="/claimDomain" element= {<ClaimDomain />} />
-        <Route path="/sectionExecute" element= {<SectionExe />} />
-        <Route path="/SectiondcfTwo" element= {<SectiondcfTwo />} />
-        <Route path="/SectionDiscount" element= {<Sectiondcf3 />} />
-        <Route path="/sectionPrototype" element= {<SectionPrototype />} />
-        <Route path="/pageCustomer" element= {<PageCustomer />} />
-        <Route path="/marketing" element= {<PageMarketing />} />
-        <Route path="/pagePositioning" element= {<PagePositioning />} />
-        <Route path="/customerSegment" element= {<CustomerSegment />} />
-        <Route path="/pageBusiness" element= {<PageBusiness/>} />
-        <Route path="/pageIntro" element= {<PageIntro />} />
-        <Route path="/pageSummarys" element= {<PageSummarys />} />
-        <Route path="/sectionSummary" element= {<SectionExecute />} />
-        <Route path="/govPage" element= {<PageGovernance />} />
-        <Route path="/sectionSummary" element= {<VideoDemo />} />
-        <Route path="/implementation" element= {<Implementation />} />
-        <Route path="/mitigation" element= {<RiskMitigation />} />
-        <Route path="/Financials" element= {<Financials />} />
-        <Route path="/conclusion" element={<Conclusion />} />
-        <Route path="costPage" element={<PageCost />} />
-        <Route path="/go/:phase" element= {<GoPage />} />
-        <Route path="/createProject" element= {<CreateProject />} />
-        <Route path="/createQuestion" element= {<CreateQuestion />} />  
-        <Route path="/inspVideo" element= {<InspVideo />} />  
-        <Route path="/AllFiles" element= {<AllFiles />} />
-        <Route path="/subtypes/:type/:subtype" element={<FilesList />} />
-        <Route path="/share/start/:id/" element={<Share />} />
-        <Route path="/question/:id" element= {<AllQuestions />} />
-        <Route path="/sharereview/:id" element= {<ShareReview />} />
-        <Route path="/shareview/:id/:phase" element= {<ShareView />} />
-        <Route path="/sharefeedback/:id/:phase" element= {<ShareFeedback />} />
-        <Route path="/feedback" element= {<PageFeedback />} />
-        <Route path="/timeline" element= {<Timeline />} />
-        <Route path="/inflationMoME/:id" element= {<InflationMoME />} />
-        <Route path="/viewInflation/" element= {<ViewInflation />} />
-        <Route path="/createScrap/:id" element= {<ScrapCreate />} />
-        <Route path="/createScrapName/" element= {<ScrapCreateName />} />
-        <Route path="/scrapView/" element= {<ScrapView />} />
-        <Route path="/createKpi/" element= {<CreateKpi />} />
-        <Route path="/kpiEdit/:id" element= {<EditKpi />} />
-        <Route path="/viewImage/" element= {<ViewImage />} />
-        <Route path="/viewImageMenu/" element= {<ViewImageMenu />} />
-        <Route path="/upload/" element= {<Upload />} />
-        <Route path="/customFinancial/" element= {<CustomFinancial />} />
-        <Route path="/inflation/" element= {<Inflation />} />
-        <Route path="/inflationCreate/" element= {<CreateInflation />} />
-        <Route path="/operatingIncomeCreate/" element= {<CreateOperatingIncome />} />
-        <Route path="/expensesCreate/" element= {<CreateExpenses />} />
-        <Route path="/netProfitCreate/" element= {<CreateNetProfit />} />
-        <Route path="/customerGrowthCreate/" element= {<CreateCustomerGrowth />} />
-        <Route path="/customerInfluxCreate/" element= {<CreateCustomerInflux />} />
-        <Route path="/expensesGraphView/:id" element= {<ViewExpensesGraph />} />
-        <Route path="/inflationGraphView/:id" element= {<ViewInflationGraph />} />
-        <Route path="/operatingIncomeGraphView/:id" element= {<ViewOperatingIncomeGraph />} />
-        <Route path="/netProfitGraphView/:id" element= {<ViewNetProfitGraph />} />
-        <Route path="/customerGrowthGraphView/:id" element= {<ViewCustomerGrowthGraph />} />
-        <Route path="/customerInfluxGraphView/:id" element= {<ViewCustomerInfluxGraph />} />
-        <Route path="/inflationEdit/:id" element= {<EditInflation />} />
-        <Route path="/operatingIncomeEdit/:id" element= {<EditOperatingIncome />} />
-        <Route path="/netProfitEdit/:id" element= {<EditNetProfit />} />
-        <Route path="/expensesEdit/:id" element= {<EditExpenses />} />
-        <Route path="/customerGrowthEdit/:id" element= {<EditCustomerGrowth />} />
-        <Route path="/customerInfluxEdit/:id" element= {<EditCustomerInflux />} />
-        <Route path="/timelineView/" element= {<TimelineView />} />
-        <Route path="/pitchDeckStart/" element= {<PitchDeckStart />} />
-        <Route path="/createTask/" element= {<CreateTask />} />
-        <Route path="/uploadTask/" element= {<UploadTask />} />
-        <Route path="/createVideo/" element= {<CreateVideo />} />
-        <Route path="/createQuote/" element= {<CreateQuote />} />
-        <Route path="/kpi/" element= {<Kpi />} />
-        <Route path="/kpiview/:id" element= {<KpiView />} />
-        <Route path="/craddule/" element= {<Craddule />} />
-        <Route path="/types/:id" element= {<CradduleType />} />
-        <Route path="/teamView/" element= {<TeamView />} />
-        <Route path="/teamAdd/" element= {<TeamAdd />} />
-        <Route path="/sharePhase/" element= {<SharePhase />} />
-        <Route path="/pdf/:phase/:category" element= {<PDF />} />
-        <Route path="/pdfEnd/:phase" element= {<PDFEnd />} />
-        <Route path="/pdfEndP/" element= {<PDFEndP />} />
-        <Route path="/pdfEndI/" element= {<PDFEndI />} />
-        <Route path="/pdfEndV/" element= {<PDFEndV />} />
-        <Route path="/pdfEndC/" element= {<PDFEndC />} />
-        <Route path="/pdfMultiple/" element= {<PDFMultiple />} />
-        <Route path="/firstQuestion/" element= {<FirstQuestion />} />
-        <Route path="/ideation/" element= {<IdeationStart />} />
-        <Route path="/accelerate/" element= {<Accelerate />} />
-        <Route path="/nda/" element= {<Nda />} />
-        <Route path="/card/" element= {<GetCard />} />
-        <Route path="/createVideoAdmin/" element= {<CreateVideosAdmin />} />
-      </Routes>
-    </Router>
-    {isTrialExpired && (
-      <GetCard/>
-    )}
+
+          <Route path="/branding" element={<Branding />} />
+          <Route path="/brandingUpload" element={<BrandingUpload />} />
+          <Route path="/marketAnalysis" element={<MarketAnalysis />} />
+          <Route path="/ExecutiveSummary" element={<ExecutiveSummary />} />
+          <Route path="/executiveSummarys" element={<ExecutiveSummarys />} />
+          <Route path="/questionBusIntro" element={<QuestionBusIntro />} />
+          <Route path="/questionBusOpSum" element={<QuestionBusOpSum />} />
+          <Route path="/questionBusMaSum" element={<QuestionBusMaSum />} />
+          <Route path="/questionBusSoSum" element={<QuestionBusSoSum />} />
+          <Route path="/questionBusCoSum" element={<QuestionBusCoSum />} />
+          <Route path="/questionBusRiSum" element={<QuestionBusRiSum />} />
+          <Route path="/questionBusImSum" element={<QuestionBusImSum />} />
+          <Route path="/questionBusInSum" element={<QuestionBusInSum />} />
+          <Route path="/questionBusConSum" element={<QuestionBusConSum />} />
+          <Route path="/questionBapEsSum" element={<QuestionBapEsSum />} />
+          <Route path="/questionBapCsSum" element={<QuestionBapCsSum />} />
+          <Route path="/questionBapCsSum" element={<QuestionBapCsSum />} />
+          <Route path="/questionVppVsSum" element={<QuestionVppVsSum />} />
+          <Route path="/questionVppPdSum" element={<QuestionVppPdSum />} />
+          <Route path="/questionVppPeSum" element={<QuestionVppPeSum />} />
+          <Route path="/questionVppVdSum" element={<QuestionVppVdSum />} />
+          <Route path="/questionVppPsSum" element={<QuestionVppPsSum />} />
+          <Route path="/questionVppVpSum" element={<QuestionVppVpSum />} />
+          <Route path="/questionVppFcSum" element={<QuestionVppFcSum />} />
+          <Route path="/questionVppVcSum" element={<QuestionVppVcSum />} />
+          <Route path="/questionVppCSum" element={<QuestionVppCSum />} />
+          <Route path="/questionSucIoSum" element={<QuestionSucIoSum />} />
+          <Route path="/questionSucDcSum" element={<QuestionSucDcSum />} />
+          <Route path="/questionSucAwSum" element={<QuestionSucAwSum />} />
+          <Route path="/questionSucDmSum" element={<QuestionSucDmSum />} />
+          <Route path="/questionSucEpSum" element={<QuestionSucEpSum />} />
+          <Route path="/questionSucCrSum" element={<QuestionSucCrSum />} />
+          <Route path="/questionSucIiSum" element={<QuestionSucIiSum />} />
+          <Route path="/questionDmaMaSum" element={<QuestionDmaMaSum />} />
+          <Route path="/questionDmaMoSum" element={<QuestionDmaMoSum />} />
+          <Route path="/questionDmaPmSum" element={<QuestionDmaPmSum />} />
+          <Route path="/questionDmaMmSum" element={<QuestionDmaMmSum />} />
+          <Route path="/questionDmaMcSum" element={<QuestionDmaMcSum />} />
+          <Route path="/questionDmaMtSum" element={<QuestionDmaMtSum />} />
+          <Route path="/questionDmaMnSum" element={<QuestionDmaMnSum />} />
+          <Route path="/questionDmaBaSum" element={<QuestionDmaBaSum />} />
+          <Route path="/questionDmaIpSum" element={<QuestionDmaIpSum />} />
+          <Route path="/questionDmaRmSum" element={<QuestionDmaRmSum />} />
+          <Route path="/questionDmaRoSum" element={<QuestionDmaRoSum />} />
+          <Route path="/questionEdit/:phase/:id" element={<QuestionEdit />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/dcf" element={<DCF />} />
+
+
+          <Route path="/trackPage" element={<TrackPage />} />
+          <Route path="/progress" element={<Progress />} />
+          <Route path="/workLoad" element={<WorkLoad />} />
+          <Route path="/cost" element={<Cost />} />
+          <Route path="/time" element={<Time />} />
+          <Route path="/timelineBuilder" element={<TimelineBuilder />} />
+          <Route path="/viewSheetModal" element={<ViewSheetModal />} />
+          <Route path="/problemstatement" element={<ProblemStatement />} />
+          <Route path="/Solution" element={<Solution />} />
+          <Route path="/inflationRateGraph" element={<InflationRateGraph />} />
+          <Route path="/niceWorkModal" element={<NiceWorkModal />} />
+          <Route path="/customerGrowthMoM" element={<CustomerGrowthMoM />} />
+          <Route path="/pageShare" element={<PageShare />} />
+          <Route path="/pageBenefit" element={<PageBenefit />} />
+          <Route path="/viewDocument" element={<ViewDocument />} />
+          <Route path="/video" element={<VideoDemo />} />
+          {/* <Route path="/fontPicker" element= {<FontPicker />} /> */}
+          <Route path="/planSub" element={<PlanSub />} />
+          <Route path="/financialPnet" element={<FinancialPnet />} />
+          <Route path="/financialPincome" element={<FinancialPincome />} />
+          <Route path="/financialPexpense" element={<FinancialPexpense />} />
+          <Route path="/fincialPinflux" element={<FinancialPinflux />} />
+          <Route path="/financialPcomp" element={<FinancialPcomp />} />
+          <Route path="/financialPintegrate" element={<FinancialPintegrate />} />
+          <Route path="/ExpensesGraph" element={<ExpensesGraph />} />
+          <Route path="/multipleGraph" element={<MultipleGraph />} />
+          <Route path="/customerGrowthYoY" element={<CustomerGrowthYoY />} />
+          <Route path="/profitYoYpage" element={<ProfitYoYpage />} />
+          <Route path="/operatingIncomeYoY" element={<OperatingIncomeYoY />} />
+          <Route path="/customerYoYinflux" element={<CustomerYoYInflux />} />
+          <Route path="/model" element={<Model />} />
+          {/* <Route path="/updateImage" element= {<UpdateImage />} /> */}
+          <Route path="/foreCast" element={<ForeCast />} />
+          <Route path="/expensesYoY" element={<ExpensesYoY />} />
+          <Route path="/inflationYoY" element={<InflationYoY />} />
+          <Route path="/customerInfluxMoM" element={<CustomerInfluxMoM />} />
+          <Route path="/profitPageMoM" element={<ProfitPageMOM />} />
+          <Route path="/operatingIncomeMoM" element={<OperatingIncomeMoM />} />
+          <Route path="/expensesMoM" element={<ExpensesMonthOnMonth />} />
+          <Route path="/inflationMoM" element={<InflationMonthOnMonth />} />
+          <Route path="/customerGrowth" element={<CustomerGrowth />} />
+          <Route path="/customerInflux" element={<CustomerInflux />} />
+          <Route path="/profitPage" element={<ProfitPage />} />
+          <Route path="/expenses" element={<Expenses />} />
+          <Route path="/inflationAnalysis" element={<InflationAnalysis />} />
+          <Route path="/pageSub" element={<PageSub />} />
+          <Route path="/exepensesYoY" element={<ExpensesYoY />} />
+          <Route path="/comparative" element={<Comparative />} />
+          <Route path="/monthOnmonth" element={<MonthOnMonth />} />
+          <Route path="/yearOnyear" element={<YearOnYear />} />
+          <Route path="/settingMenu" element={<SettingMenu />} />
+          <Route path="/financialP" element={<FinancialProject />} />
+          {/* <Route path="/chatTool" element= {<ChatTools />} /> */}
+          <Route path="/giveFeedbackModal" element={<GiveFeedbackModal />} />
+          <Route path="/netProfit" element={<NetProfit />} />
+          <Route path="/operatingIncome" element={<OperatingIncome />} />
+          <Route path="/password" element={<Password />} />
+          <Route path="/deleteModal" element={<DeleteModal />} />
+          <Route path="/growthRateGraph" element={<GrowthRateGraph />} />
+          <Route path="/netGraph" element={<NetGraph />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/incomeGraph" element={<IncomeGraph />} />
+          <Route path="/homeStarter" element={<HomeStarter />} />
+          <Route path="/generalSetting" element={<GeneralSetting />} />
+          <Route path="/pageSummary" element={<PageSummary />} />
+          {/* <Route path="/searchKpi" element= {<SearchKpi />} /> */}
+          {/* <Route path="/pageAddKpi" element= {<PageAddKpi />} /> */}
+          <Route path="/prototype" element={<Prototype />} />
+          {/* <Route path="/sendFile" element= {<SendFile />} /> */}
+          <Route path="/graphPage" element={<GraphPage />} />
+          <Route path="/wireFrame" element={<WireFrame />} />
+          <Route path="/niceWork" element={<NiceWork />} />
+          <Route path="/sectionManagement" element={<SectionManagement />} />
+          <Route path="/teamManagement" element={<TeamManagement />} />
+          {/* <Route path="/uploadLogo" element= {<UploadLogo />} /> */}
+          <Route path="/Sectiondcf" element={<CashFlow />} />
+          {/* <Route path="/sectionInvite" element= {<PageInvite />} /> */}
+          {/* <Route path="/pageTeam" element= {<PageTeam />} /> */}
+          <Route path="/pageProject" element={<PageProject />} />
+          <Route path="/pageSuccess" element={<PageSuccess />} />
+          <Route path="/kpiPage" element={<KPIPage />} />
+          <Route path="/engagement" element={<Engagement />} />
+          <Route path="/summary" element={<Summary />} />
+          <Route path="/presentation" element={<Presentation />} />
+          <Route path="/pageFrontView" element={<PageFrontView />} />
+          {/* <Route path="/shareFile" element= {<ShareFile />} /> */}
+          <Route path="/planDesign" element={<PlanDesign />} />
+          <Route path="/pageTrack" element={<PageTrack />} />
+          <Route path="/pitchDeck" element={<PitchDeck />} />
+          <Route path="/sectionScale" element={<SectionScale />} />
+          <Route path="/claimDomain" element={<ClaimDomain />} />
+          <Route path="/sectionExecute" element={<SectionExe />} />
+          <Route path="/SectiondcfTwo" element={<SectiondcfTwo />} />
+          <Route path="/SectionDiscount" element={<Sectiondcf3 />} />
+          <Route path="/sectionPrototype" element={<SectionPrototype />} />
+          <Route path="/pageCustomer" element={<PageCustomer />} />
+          <Route path="/marketing" element={<PageMarketing />} />
+          <Route path="/pagePositioning" element={<PagePositioning />} />
+          <Route path="/customerSegment" element={<CustomerSegment />} />
+          <Route path="/pageBusiness" element={<PageBusiness />} />
+          <Route path="/pageIntro" element={<PageIntro />} />
+          <Route path="/pageSummarys" element={<PageSummarys />} />
+          <Route path="/sectionSummary" element={<SectionExecute />} />
+          <Route path="/govPage" element={<PageGovernance />} />
+          <Route path="/sectionSummary" element={<VideoDemo />} />
+          <Route path="/implementation" element={<Implementation />} />
+          <Route path="/mitigation" element={<RiskMitigation />} />
+          <Route path="/Financials" element={<Financials />} />
+          <Route path="/conclusion" element={<Conclusion />} />
+          <Route path="costPage" element={<PageCost />} />
+          <Route path="/go/:phase" element={<GoPage />} />
+          <Route path="/createProject" element={<CreateProject />} />
+          <Route path="/createQuestion" element={<CreateQuestion />} />
+          <Route path="/inspVideo" element={<InspVideo />} />
+          <Route path="/AllFiles" element={<AllFiles />} />
+          <Route path="/subtypes/:type/:subtype" element={<FilesList />} />
+          <Route path="/share/start/:id/" element={<Share />} />
+          <Route path="/question/:id" element={<AllQuestions />} />
+          <Route path="/sharereview/:id" element={<ShareReview />} />
+          <Route path="/shareview/:id/:phase" element={<ShareView />} />
+          <Route path="/sharefeedback/:id/:phase" element={<ShareFeedback />} />
+          <Route path="/feedback" element={<PageFeedback />} />
+          <Route path="/timeline" element={<Timeline />} />
+          <Route path="/inflationMoME/:id" element={<InflationMoME />} />
+          <Route path="/viewInflation/" element={<ViewInflation />} />
+          <Route path="/createScrap/:id" element={<ScrapCreate />} />
+          <Route path="/createScrapName/" element={<ScrapCreateName />} />
+          <Route path="/scrapView/" element={<ScrapView />} />
+          <Route path="/createKpi/" element={<CreateKpi />} />
+          <Route path="/kpiEdit/:id" element={<EditKpi />} />
+          <Route path="/viewImage/" element={<ViewImage />} />
+          <Route path="/viewImageMenu/" element={<ViewImageMenu />} />
+          <Route path="/upload/" element={<Upload />} />
+          <Route path="/customFinancial/" element={<CustomFinancial />} />
+          <Route path="/inflation/" element={<Inflation />} />
+          <Route path="/inflationCreate/" element={<CreateInflation />} />
+          <Route path="/operatingIncomeCreate/" element={<CreateOperatingIncome />} />
+          <Route path="/expensesCreate/" element={<CreateExpenses />} />
+          <Route path="/netProfitCreate/" element={<CreateNetProfit />} />
+          <Route path="/customerGrowthCreate/" element={<CreateCustomerGrowth />} />
+          <Route path="/customerInfluxCreate/" element={<CreateCustomerInflux />} />
+          <Route path="/expensesGraphView/:id" element={<ViewExpensesGraph />} />
+          <Route path="/inflationGraphView/:id" element={<ViewInflationGraph />} />
+          <Route path="/operatingIncomeGraphView/:id" element={<ViewOperatingIncomeGraph />} />
+          <Route path="/netProfitGraphView/:id" element={<ViewNetProfitGraph />} />
+          <Route path="/customerGrowthGraphView/:id" element={<ViewCustomerGrowthGraph />} />
+          <Route path="/customerInfluxGraphView/:id" element={<ViewCustomerInfluxGraph />} />
+          <Route path="/inflationEdit/:id" element={<EditInflation />} />
+          <Route path="/operatingIncomeEdit/:id" element={<EditOperatingIncome />} />
+          <Route path="/netProfitEdit/:id" element={<EditNetProfit />} />
+          <Route path="/expensesEdit/:id" element={<EditExpenses />} />
+          <Route path="/customerGrowthEdit/:id" element={<EditCustomerGrowth />} />
+          <Route path="/customerInfluxEdit/:id" element={<EditCustomerInflux />} />
+          <Route path="/timelineView/" element={<TimelineView />} />
+          <Route path="/pitchDeckStart/" element={<PitchDeckStart />} />
+          <Route path="/createTask/" element={<CreateTask />} />
+          <Route path="/uploadTask/" element={<UploadTask />} />
+          <Route path="/createVideo/" element={<CreateVideo />} />
+          <Route path="/createQuote/" element={<CreateQuote />} />
+          <Route path="/kpi/" element={<Kpi />} />
+          <Route path="/kpiview/:id" element={<KpiView />} />
+          <Route path="/craddule/" element={<Craddule />} />
+          <Route path="/types/:id" element={<CradduleType />} />
+          <Route path="/teamView/" element={<TeamView />} />
+          <Route path="/teamAdd/" element={<TeamAdd />} />
+          <Route path="/sharePhase/" element={<SharePhase />} />
+          <Route path="/pdf/:phase/:category" element={<PDF />} />
+          <Route path="/pdfEnd/:phase" element={<PDFEnd />} />
+          <Route path="/pdfEndP/" element={<PDFEndP />} />
+          <Route path="/pdfEndI/" element={<PDFEndI />} />
+          <Route path="/pdfEndV/" element={<PDFEndV />} />
+          <Route path="/pdfEndC/" element={<PDFEndC />} />
+          <Route path="/pdfMultiple/" element={<PDFMultiple />} />
+          <Route path="/firstQuestion/" element={<FirstQuestion />} />
+          <Route path="/ideation/" element={<IdeationStart />} />
+          <Route path="/accelerate/" element={<Accelerate />} />
+          <Route path="/go-no-go" element={<GoNoGoMain />} />
+          <Route path="/nda/" element={<Nda />} />
+          <Route path="/card/" element={<GetCard />} />
+          <Route path="/createVideoAdmin/" element={<CreateVideosAdmin />} />
+        </Routes>
+      </Router>
+      {isTrialExpired && (
+        <GetCard />
+      )}
     </>
   );
 }

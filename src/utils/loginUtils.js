@@ -26,6 +26,7 @@ export const login = async (data, setLoading, navigate, rememberMe, toast) => {
         if (rememberMe) {
           localStorage.setItem("username", data.username);
           localStorage.setItem("password", data.password);
+          localStorage.setItem("onboarding", data.onboarding || false );
           localStorage.setItem("rememberMe", true);
         } else {
           localStorage.removeItem("username");

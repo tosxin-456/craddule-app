@@ -16,6 +16,7 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
+import ReferralModal from './component/randomPopUp';
 
 
 function ScrapView ({ htmlContent })  {
@@ -204,8 +205,6 @@ function ScrapView ({ htmlContent })  {
         
             <div class = "break"></div>
            
-           
-            
            
            
         </div> 

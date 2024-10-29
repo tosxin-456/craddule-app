@@ -9,6 +9,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SideMenu2P from './component/sideMenu2P';
 import ModalVideo from './component/modalVideoAny';
+import circle from './images/circle.png';
+import home from './images/HOME.png';
+
 
 const PitchDeck = () => {
   const navigate = useNavigate()
@@ -38,41 +41,53 @@ const PitchDeck = () => {
 
   return (
     <>
-    <div className='container'>
+    <div className='container relative'>
     
-    
+        <div className="absolute inset-0 mt-[60px] ml-[-20px] z-[-100] bg-no-repeat bg-cover w-[200px] h-[200px]" style={{ backgroundImage: `url(${circle})` }}></div>
+        <div className=" mr-auto mt-[50px] ">
+          <div className="flex justify-between items-center w-[100%] mt[30px] ">
+            <div className="w-fit">
+              <button onClick={() => navigate(-1)} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
+                Back
+              </button>
+            </div>
+            <div>
+              <img src={home} alt="Home Icon" />
+            </div>
+          </div>
+        </div>
         <div className='coverPit'>
           <div className='row'>
           <p className='ppit'>Pitch Deck Lectures</p>
             <div className='col-md-4'>
-            <div className='caseBAVie' style={{color:"#101010"}}  onClick={() => handleYoutube('https://youtu.be/p8_mBNyLHVA?si=GMwBp5vT-mgWZ90Z')}>
+            <div className='caseBAVieSyart' style={{color:"#101010"}}  onClick={() => handleYoutube('https://youtu.be/p8_mBNyLHVA?si=GMwBp5vT-mgWZ90Z')}>
                   <p className='conCa'>How To Write an Elevator Pitch</p>
                   <div style={{height: "130px"}}>
                   <p className='conCa2' style={{fontSize: "17px"}}>In this 2-minute video tutorial Mat Shore shares his tips on how to write an Elevator Pitch that will sell your idea in 20 seconds.</p>
                   </div>
-                  <p className="caseBA3PV">Watch Video</p>
+                 <button className=' caseBA3PV submit-button rounded-3xl '>Watch Video</button>
                 </div>
 
             </div>
 
             <div className='col-md-4'>
-            <div className='caseBAVie' style={{color:"#101010"}}  onClick={() => handleYoutube('https://youtu.be/PgbjBI8RpkU?si=jDbwVZHxw2qe2dxb')}>
+            <div className='caseBAVieSyart' style={{color:"#101010"}}  onClick={() => handleYoutube('https://youtu.be/PgbjBI8RpkU?si=jDbwVZHxw2qe2dxb')}>
                   <p className='conCa'>How to pitch your business</p>
                   <div style={{height: "130px"}}>
                   <p className='conCa2' style={{fontSize: "17px"}}>Learn the things needed to say, do and know whne it is time to get more investors into the fold</p>
                   </div>
-                  <p className="caseBA3PV">Watch Video</p>
+                 <button className=' caseBA3PV submit-button rounded-3xl '>Watch Video</button>
                 </div>
 
             </div>
 
             <div className='col-md-4'>
-            <div className='caseBAVie' style={{color:"#101010"}}  onClick={() => handleYoutube('https://youtu.be/r-iETptU7JY?si=BV--q-KvjMHC4b1p')}>
+            <div className='caseBAVieSyart' style={{color:"#101010"}}  onClick={() => handleYoutube('https://youtu.be/r-iETptU7JY?si=BV--q-KvjMHC4b1p')}>
                   <p className='conCa'>The Perfect Elevator Pitch</p>
                   <div style={{height: "130px"}}>
                   <p className='conCa2' style={{fontSize: "17px"}}>Learn how to craft the perfect elevator pitch</p>
                   </div>
-                  <p className="caseBA3PV">Watch Video</p>
+                 <button className=' caseBA3PV submit-button rounded-3xl '>Watch Video</button>
                 </div>
 
             </div>

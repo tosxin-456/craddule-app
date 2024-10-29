@@ -38,8 +38,9 @@ export const createUser = async (data, referralCode, setLoading, toast, navigate
 
     if (response.status === 200) {
       const responseData = await response.json();
-      const { access_token } = responseData.data;
+      const { access_token, id } = responseData.data;
       localStorage.setItem('access_token', access_token);
+      localStorage.setItem('id', id);
       setLoading(false);
       navigate(`/home`);
     } else {

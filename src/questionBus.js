@@ -323,8 +323,8 @@ function QuestionBus() {
     <div className='container2'>
          <SideMenu2 />    
          <div className="main-content">
-        
          <Header />
+        
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
 
          <div className='text-center'>
