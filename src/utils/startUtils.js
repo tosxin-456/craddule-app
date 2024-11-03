@@ -46,11 +46,18 @@ export const updateStreak = async (setStreak) => {
 // Decode JWT token and get user ID
 export const getUserIdFromToken = () => {
   const access_token = localStorage.getItem('access_token');
+
   if (access_token) {
-    const decodedToken = jwtDecode(access_token);
-    const userId = decodedToken.userId
-    return { access_token, userId };
+    try {
+      const decodedToken = jwtDecode(access_token);
+      const userId = decodedToken?.userId || null;
+      return { access_token, userId };
+    } catch (error) {
+      console.error('Invalid token:', error.message);
+      return { access_token: null, userId: null };
+    }
   }
+
   return { access_token: null, userId: null };
 };
 
@@ -234,44 +241,12 @@ export const FetchTimelinesCount = (projectId, userId, access_token, setTimeline
   }, [projectId, userId, access_token, setTimelineCount, setLoading, setError]);
 };
 
-export const GetOnboardingStatus = (projectId, userId, access_token, setShowModal, setLoading, setError) => {
-  useEffect(() => {
-    const fetchOnboardingStatus = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/onboarding/${projectId}/${userId}/Ideation`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${access_token}`,
-          },
-        });
 
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-
-          // Store the `seen` status in local storage
-          localStorage.setItem('ideationseen', data.data.seen);
-          setShowModal(data.showModal);
-        } else {
-          console.error('Failed to fetch onboarding status');
-        }
-      } catch (error) {
-        console.error(error);
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchOnboardingStatus();
-  }, [projectId, userId, access_token, setShowModal, setLoading, setError]);
-};
-
-export const UpdateOnboardingSeenStatus = async (projectId, userId, access_token, setError) => {
+export const UpdateOnboardingSeenStatus = async (projectId, userId, access_token, setError, phase) => {
+  console.log(projectId, userId, access_token, phase)
     try {
-        const response = await fetch(`${API_BASE_URL}/api/onboarding`, {
-            method: 'PATCH',
+        const response = await fetch(`${API_BASE_URL}/api/onboarding/${projectId}/${userId}/${phase}`, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${access_token}`,
@@ -287,7 +262,7 @@ export const UpdateOnboardingSeenStatus = async (projectId, userId, access_token
         console.log('Onboarding status updated:', data);
 
         // Update the `seen` status in local storage to 'true'
-        localStorage.setItem('ideationseen', true);
+        localStorage.setItem('onboarding', true);
     } catch (error) {
         console.error(error);
         setError(error);

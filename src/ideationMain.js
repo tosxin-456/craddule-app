@@ -6,7 +6,7 @@ import home from './images/HOME.png';
 import circle from './images/circle.png';
 import HeaderIdeation from './component/headerIdeation';
 import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak, getUserIdFromToken, FetchProjectDetails, FetchGoStatus, FetchTimelines, FetchTimelinesCount, FetchUser } from "./utils/startUtils";
-
+import feedback from './images/feedback.svg';
 
 function IdeationMain() {
     const navigate = useNavigate();
@@ -27,7 +27,12 @@ function IdeationMain() {
                         style={{ backgroundImage: `url(${circle})` }}
                     ></div>
                     <div className="main-content2">
-                        <div className="w-fit ml-auto">
+                        <div className="flex mt-[40px] justify-between items-center w-[100%]">
+                            <div className="w-fit">
+                                <button onClick={() => navigate(-1)} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
+                                    Back
+                                </button>
+                            </div>
                             <div>
                                 <img src={home} alt="Home Icon" />
                             </div>
@@ -149,7 +154,7 @@ function IdeationMain() {
                                         <p className="mt-[-20px] sm:mt-[-30px]">32%</p>
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
                                         <button
-                                            onClick={() => navigate("/go")}
+                                            onClick={() => navigate("/go/Ideation")}
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
                                             Continue
@@ -161,6 +166,17 @@ function IdeationMain() {
                     </div>
                 </div>
             </div>
+            <div
+                className="fixed bottom-0 right-0 z-[-100] m-0 p-0 w-[150px] h-[150px] bg-no-repeat"
+                style={{
+                    backgroundImage: `url(${feedback})`,
+                    backgroundSize: '100% 100%', // Stretches image to fit exactly
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    margin: '0',
+                    padding: '0',
+                }}
+            ></div>
         </div>
     );
 }

@@ -141,7 +141,7 @@ function CustomerGrowth ()  {
             <div className='wrapperChart'>
                 <div className='row'>
                     <div className='col-md-4'>
-                        <input style={{width:"auto"}}className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'JAN', e.target.value)} type="number"></input>
+                        <input style={{width:"auto", }}className='monthOn1' onChange={(e) => handleInputChange(index + 1, 'JAN', e.target.value)} type="number"></input>
                         <p className='monthOn1T'>JAN</p>
                     </div>
                     <div className='col-md-4'>

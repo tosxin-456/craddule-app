@@ -4,10 +4,11 @@ import { CiLock, CiMemoPad, CiUser } from 'react-icons/ci';
 import bolt from './images/bolt.png';
 import ReactGA from "react-ga4";
 import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak, getUserIdFromToken, FetchProjectDetails, FetchGoStatus, FetchTimelines, FetchTimelinesCount, FetchUser, GetOnboardingStatus, UpdateOnboardingSeenStatus } from "./utils/startUtils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ModalStart from "./component/modalStartStop";
 import "./pop-up.css";
 import ReferralModal from "./component/randomPopUp";
+import WhereDidYouHearModal from "./gotToKnowUsModal";
 
 function InflationRateGraph({ graphType }) {
 
@@ -17,7 +18,6 @@ function InflationRateGraph({ graphType }) {
         page: window.location.pathname,
         title: "Start Page"
     });
-
     const [streak, setStreak] = useState('');
     const [timelineCount, setTimelineCount] = useState('');
     const [timelines, setTimelines] = useState([]);
@@ -34,7 +34,7 @@ function InflationRateGraph({ graphType }) {
     const navigate = useNavigate();
 
     const handleNavigation = async () => {
-        const ideationSeen = localStorage.getItem('ideationseen') === 'true'; 
+        const ideationSeen = localStorage.getItem('onboarding') === 'true'; 
         if (!ideationSeen) {
             navigate('/ideation');
         } else {
@@ -54,8 +54,6 @@ function InflationRateGraph({ graphType }) {
 
     FetchGoStatus(projectId, access_token, setUnlock, setUnlockIn)
 
-    GetOnboardingStatus(projectId, userId, access_token, setShowModal, setLoading, setError)
-
     useEffect(() => {
         updateStreak(setStreak);
     }, []);
@@ -65,9 +63,10 @@ function InflationRateGraph({ graphType }) {
     FetchTimelinesCount(projectId, userId, access_token, setTimelineCount, setLoading, setError)
 
     return (
-        <div className=''>
+        <div>
             <Header />
             <div className='container '>
+                <WhereDidYouHearModal />  
                 <div className="flex-row lg:flex justify-between items-center mt-10">
                     <div>
                         <h4 className="text-blue600">Hello, {userDetails?.firstName}!</h4>
