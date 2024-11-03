@@ -7238,8 +7238,11 @@ td {
 }
 .caseBAVieSyart {
   margin-top: 30px;
-  background-color: #FFD700;
-  border-radius: 15px;
+  background-color: #FFD700; /* Bright yellow background color */
+  background-image: linear-gradient(rgba(255, 215, 0, 0.8), rgba(255, 215, 0, 0.8)), url('./images/pitch_deck yellow1.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px 0px;
   width: 100%;
   padding: 40px 30px;
   color: black;
@@ -7248,10 +7251,33 @@ td {
   min-height: 200px;
 }
 
+
+.caseBAVieSyartLecture {
+  margin-top: 30px;
+  background-color: #FFD700; 
+  background-image: linear-gradient(rgba(255, 215, 0, 0.7), rgba(255, 215, 0, 0.7)), url('./images/lectures.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px 0px;
+  width: 100%;
+  padding: 40px 30px;
+  color: black;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  min-height: 200px;
+}
+
+
+
+
+
 .caseBAVie {
   margin-top: 30px;
-  background-color: #1B45BF;
-  border-radius: 15px;
+  background-color: #1B45BF; /* Strong blue background color */
+  background-image: linear-gradient(rgba(27, 69, 191, 0.8), rgba(27, 69, 191, 0.8)), url('./images/resources.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px 0px;
   width: 100%;
   padding: 40px 30px;
   color: white;
@@ -7259,6 +7285,23 @@ td {
   transition: box-shadow 0.3s ease;
   min-height: 200px;
 }
+
+.caseBAVieUpload {
+  margin-top: 30px;
+  background-color: #101010; /* Dark background color */
+  background-image: linear-gradient(rgba(16, 16, 16, 0.8), rgba(16, 16, 16, 0.8)), url('./images/upload_file.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px 0px;
+  width: 100%;
+  padding: 40px 30px;
+  color: white;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  min-height: 200px;
+}
+
+
 
 .caseBAVie:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add box shadow on hover */
@@ -7906,17 +7949,19 @@ td {
 }
 
 /* Modal content */
-.modal-content {
+.modal {
   background: #fff;
   padding: 20px;
   border-radius: 8px;
   width: 300px;
   position: relative;
   text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.modal-content h2 {
+.modal h2 {
   margin-top: 0;
+  font-size: 1.5em;
 }
 
 /* Close button */
@@ -7931,27 +7976,29 @@ td {
 }
 
 /* Options styling */
-.options {
+.modal-body {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin: 20px 0;
 }
 
-.options label {
+.modal-body label {
   font-size: 16px;
 }
 
 /* Other input styling */
-.other-input {
+.modal-body input[type="text"] {
   margin-top: 10px;
-  padding: 5px;
+  padding: 8px;
   font-size: 16px;
-  width: calc(100% - 10px);
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 /* Submit button styling */
-.submit-button {
+.modal-footer .submit-button {
   background-color: #007bff;
   color: white;
   border: none;
@@ -7962,7 +8009,11 @@ td {
   transition: background-color 0.3s ease;
 }
 
-.submit-button:disabled {
+.modal-footer .submit-button:hover {
+  background-color: #0056b3;
+}
+
+.modal-footer .submit-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }

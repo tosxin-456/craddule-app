@@ -10,7 +10,7 @@ import { Toaster, toast } from 'sonner'
 import SideMenu2P from './component/sideMenu2P';
 import home from './images/Create.svg';
 import plus from './images/plus.svg';
-
+import feedback from './images/feedback.svg';
 
 function CreateKpi() {
 
@@ -276,13 +276,24 @@ function CreateKpi() {
                         {visibleYears > 1 && <span className='addy mmr' onClick={removeYear}>-</span>}
                         {/* Add Year button */}
                         <div className='w-fit m-auto' >
-                        <button onClick={handleSubmit} className='subm  '>Submit Data</button>
+                            <button onClick={handleSubmit} className='subm  '>Submit Data</button>
 
                         </div>
                     </div>
                 </div>
             </div>
             <Toaster position="top-right" />
+            <div
+                className="fixed bottom-0 right-0 z-[-100] m-0 p-0 w-[150px] h-[150px] bg-no-repeat"
+                style={{
+                    backgroundImage: `url(${feedback})`,
+                    backgroundSize: '100% 100%', // Stretches image to fit exactly
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    margin: '0',
+                    padding: '0',
+                }}
+            ></div>
         </div>
     );
 

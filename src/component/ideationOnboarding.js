@@ -7,7 +7,7 @@ import logo from '../images/Craddule logo - PNG 2 4.svg'
 import onboard1 from '../images/onboardingIdeation1.svg';
 import onboard2 from '../images/onboardingIdeation2.svg';
 import { updateOnboardingStatus, UpdateOnboardingSeenStatus, getUserIdFromToken } from '../utils/startUtils';
-const { access_token, userId } = getUserIdFromToken;
+const { access_token, userId } = getUserIdFromToken();
 
 function IdeationOnboarding() {
     const token = localStorage.getItem('onboarding');
@@ -16,27 +16,25 @@ function IdeationOnboarding() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const projectId = localStorage.getItem('nProject');
-    useEffect(() => {
-        const onboarding = localStorage.getItem('onboarding');
-
-        // Check if onboarding is 'true' (as a string)
-        if (onboarding === 'true') {
-            navigate('/ideation/start'); // Redirect to /ideation/start
-        }
-    }, [navigate]);
-
+    console.log(access_token, userId);
     const handleNextClick = async () => {
+        const onboarding = localStorage.getItem('onboarding');
+        if (onboarding === "true") {
+            navigate('/ideation/start');
+            return;
+        }
         try {
-            await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError);
+            await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError, 'Ideation');
             navigate('/ideation/start');
         } catch (error) {
             console.error('Error updating onboarding status:', error);
         }
     };
 
-  
+
+
     const handleNext = () => {
-        setPage(2); 
+        setPage(2);
     };
     return (
         <>

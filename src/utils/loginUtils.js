@@ -19,21 +19,26 @@ export const login = async (data, setLoading, navigate, rememberMe, toast) => {
     if (response.status === 200) {
       const responseData = await response.json(); 
       const { token } = responseData;
-
+      // console.log(responseData.user.howDidYouKnowUs)
       if (responseData.user.status === 'deactivated') {
         toast.error("This Account has been Deactivated");
       } else {
         if (rememberMe) {
           localStorage.setItem("username", data.username);
           localStorage.setItem("password", data.password);
-          localStorage.setItem("onboarding", data.onboarding || false );
+          localStorage.setItem("onboarding", responseData.onboarding || false );
           localStorage.setItem("rememberMe", true);
+          localStorage.setItem("gottenThrough", responseData.user.howDidYouKnowUs);
+
         } else {
           localStorage.removeItem("username");
           localStorage.removeItem("password");
           localStorage.removeItem("rememberMe");
         }
         localStorage.setItem('access_token', token);
+        localStorage.setItem("onboarding", responseData.onboarding || false);
+        localStorage.setItem("gottenThrough", responseData.user.howDidYouKnowUs);
+
         navigate(`/home`);
       }
     } else {
