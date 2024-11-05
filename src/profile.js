@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import p1 from './images/p1.jpeg';
 import Header from './component/header';
-import { API_BASE_URL, APP_BASE_URL, APP_REFER_URL } from './config/apiConfig';
+import { API_BASE_URL, API_IMAGE_BASE_URL, APP_BASE_URL, APP_REFER_URL } from './config/apiConfig';
 import { useNavigate } from 'react-router-dom';
 import ImageModal from './component/imageModal';
 import { jwtDecode } from "jwt-decode";
@@ -219,7 +219,7 @@ const handleSubmit = (e) => {
     try {
 
       console.log(data);
-      const response = await fetch(API_BASE_URL + '/api/user/' + userId, {
+      const response = await fetch(`${API_BASE_URL}/api/user/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -234,7 +234,7 @@ const handleSubmit = (e) => {
         console.log(response.status);
         console.log(response);
 
-        const responseData = await response.json(); // Parse JSON response
+        const responseData = await response.json(); 
         console.log(responseData)
         toast.success(responseData.message)
 
@@ -244,7 +244,7 @@ const handleSubmit = (e) => {
         const result = await response.json();
         setLoading(false);
         toast.error(result['error']);
-        console.error('Error:', result['error']);
+        console.log('Error:', result);
 
       }
     } catch (error) {

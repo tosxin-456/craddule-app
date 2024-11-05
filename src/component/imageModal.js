@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import 'react-toastify/dist/ReactToastify.css';
-import { API_BASE_URL } from '../config/apiConfig';
+import { API_BASE_URL, API_IMAGE_BASE_URL } from '../config/apiConfig';
 
 export default function ImageModal({ open, onClose, setImage }) {
   const [selectedFile, setSelectedFile] = useState(null);

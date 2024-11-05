@@ -7,7 +7,7 @@ import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak
 import { useNavigate, useParams } from "react-router-dom";
 import ModalStart from "./component/modalStartStop";
 import "./pop-up.css";
-import ReferralModal from "./component/randomPopUp";
+import VideoPopup from "./component/kpiVideo";
 import WhereDidYouHearModal from "./gotToKnowUsModal";
 
 function InflationRateGraph({ graphType }) {
@@ -23,7 +23,9 @@ function InflationRateGraph({ graphType }) {
     const [timelines, setTimelines] = useState([]);
     const [unlock, setUnlock] = useState(false);
     const [showModal, setShowModal] = useState(false);
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
     const [unlockIn, setUnlockIn] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -144,7 +146,7 @@ function InflationRateGraph({ graphType }) {
                             )}
 
                             <div className={` lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/kpi.png')] bg-no-repeat bg-cover cursor-pointer relative group`}>
-                                <div className={`tilt-box bg-[#133188DE] text-white`} onClick={() => handleClickStorage('Kpi', '/kpi')}>
+                                <div className={`tilt-box bg-[#133188DE] text-white`} onClick={openModal}>
                                     <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                     <p className="p18">KPI</p>
                                     <p className="text-[12px]">Create Custom Graphs that give you more insight</p>
@@ -307,6 +309,7 @@ function InflationRateGraph({ graphType }) {
                 </div>
 
                 <div className="startWrap"></div>
+                <VideoPopup isOpen={isModalOpen} closeModal={closeModal} />
             </div>
             <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />
         </div>
