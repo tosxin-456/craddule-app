@@ -19,7 +19,7 @@ export const login = async (data, setLoading, navigate, rememberMe, toast) => {
     if (response.status === 200) {
       const responseData = await response.json(); 
       const { token } = responseData;
-      // console.log(responseData.user.howDidYouKnowUs)
+      console.log(responseData.user.howDidYouKnowUs)
       if (responseData.user.status === 'deactivated') {
         toast.error("This Account has been Deactivated");
       } else {

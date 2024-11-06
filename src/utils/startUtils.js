@@ -271,5 +271,26 @@ export const UpdateOnboardingSeenStatus = async (projectId, userId, access_token
     }
 };
 
+// startUtils.js
+export const FetchGraphData = async (userId, projectId, access_token) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/user/graph/${userId}/${projectId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch graph data');
+    }
+    const data = await response.json();
+    console.log(data)
+    return data;
+  } catch (error) {
+    console.error("Error fetching graph data:", error);
+    throw error;
+  }
+};
 
 
