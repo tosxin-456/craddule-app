@@ -7,7 +7,6 @@ import circle from './images/circle.png';
 import HeaderIdeation from './component/headerIdeation';
 import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
-import VideoPopupFinancial from './component/customFinan';
 
 function IdeationMain() {
     const navigate = useNavigate();
@@ -17,7 +16,7 @@ function IdeationMain() {
     const [projectPercentage, setProjectPercentage] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const projectId = localStorage.getItem('nProject');
     const { access_token, userId } = getUserIdFromToken();
 
@@ -142,7 +141,7 @@ function IdeationMain() {
                                         <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
                                         <button
-                                            onClick={() => setIsModalOpen(true)}
+                                            onClick={() => navigate("/customFinancial")}
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
                                             Continue
@@ -190,7 +189,6 @@ function IdeationMain() {
                         </div>
                     </div>
                 </div>
-                <VideoPopupFinancial isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
             </div>
             <div className="fixed bottom-0 right-0 z-[-100] m-0 p-0 w-[150px] h-[150px] bg-no-repeat"
                 style={{
