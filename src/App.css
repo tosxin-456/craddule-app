@@ -660,9 +660,9 @@ body {
   height: 40px;
   outline: none;
   padding: 5px;
-  border: 1px #e3e3e3 solid;
+  border: 1px #8a8a8a solid;
   border-radius: 5px;
-  background-color: #f0f0f0;
+  background-color: white;
 }
 
 .bigBrand {
@@ -675,9 +675,9 @@ body {
   height: 40px;
   outline: none;
   padding: 5px;
-  border: 1px #e3e3e3 solid;
+  border: 1px #8a8a8a solid;
   border-radius: 5px;
-  background-color: #f0f0f0;
+  background-color: white;
 }
 
 .createBrandA {
@@ -698,7 +698,9 @@ body {
 }
 
 .brandlogo {
-  width: -webkit-fill-available;
+    width: 100px;
+  height: 100px;
+  margin:auto;
 }
 
 /* new menu */
@@ -2711,7 +2713,7 @@ hr {
 }
 
 .textH {
-  color: #8A8A8A;
+  color: #8a8a8a;
 }
 
 .imgX {
@@ -2846,7 +2848,7 @@ hr {
 }
 .goBtnP {
   color: #000 !important;
-  background-color: #B0B0B0 !important;
+  background-color: #b0b0b0 !important;
   padding: 5px 5px !important;
   border-radius: 20px !important;
   text-transform: capitalize !important;
@@ -2879,7 +2881,7 @@ hr {
   padding-top: 70px;
   padding-bottom: 70px;
   border-radius: 20px;
-  background-color: #8A8A8A;
+  background-color: #8a8a8a;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -2897,7 +2899,7 @@ hr {
   padding-top: 70px;
   padding-bottom: 70px;
   border-radius: 20px;
-  background-color: #E8C400;
+  background-color: #e8c400;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -5020,7 +5022,7 @@ margin-left:5px;
 .subm {
   border-radius: 15px;
   border: 0px;
-  background-color: #193FAE;
+  background-color: #193fae;
   padding: 10px 25px;
   font-size: 15px;
   color: #fff;
@@ -5274,7 +5276,7 @@ margin-left:5px;
 
 .color-picker-container {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   margin-bottom: 15px;
 }
 
@@ -6609,8 +6611,12 @@ td {
   left: 0;
   display: flex;
   flex-direction: column;
-  background-color: #B29104; 
-  background-image: linear-gradient(rgba(178, 145, 4, 0.5), rgba(178, 145, 4, 0.5)), url("./images/webb.jpg"); 
+  background-color: #b29104;
+  background-image: linear-gradient(
+      rgba(178, 145, 4, 0.5),
+      rgba(178, 145, 4, 0.5)
+    ),
+    url("./images/webb.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -7234,12 +7240,15 @@ td {
   font-size: 30px;
   font-weight: 600;
   margin-top: 10px;
-  
 }
 .caseBAVieSyart {
   margin-top: 30px;
-  background-color: #FFD700; /* Bright yellow background color */
-  background-image: linear-gradient(rgba(255, 215, 0, 0.8), rgba(255, 215, 0, 0.8)), url('./images/pitch_deck yellow1.jpg');
+  background-color: #ffd700; /* Bright yellow background color */
+  background-image: linear-gradient(
+      rgba(255, 215, 0, 0.8),
+      rgba(255, 215, 0, 0.8)
+    ),
+    url('./images/pitch_deck yellow1.jpg');
   background-size: cover;
   background-position: center;
   border-radius: 30px 0px;
@@ -7250,12 +7259,15 @@ td {
   transition: box-shadow 0.3s ease;
   min-height: 200px;
 }
-
 
 .caseBAVieSyartLecture {
   margin-top: 30px;
-  background-color: #FFD700; 
-  background-image: linear-gradient(rgba(255, 215, 0, 0.7), rgba(255, 215, 0, 0.7)), url('./images/lectures.png');
+  background-color: #ffd700;
+  background-image: linear-gradient(
+      rgba(255, 215, 0, 0.7),
+      rgba(255, 215, 0, 0.7)
+    ),
+    url('./images/lectures.png');
   background-size: cover;
   background-position: center;
   border-radius: 30px 0px;
@@ -7267,14 +7279,14 @@ td {
   min-height: 200px;
 }
 
-
-
-
-
 .caseBAVie {
   margin-top: 30px;
-  background-color: #1B45BF; /* Strong blue background color */
-  background-image: linear-gradient(rgba(27, 69, 191, 0.8), rgba(27, 69, 191, 0.8)), url('./images/resources.png');
+  background-color: #1b45bf; /* Strong blue background color */
+  background-image: linear-gradient(
+      rgba(27, 69, 191, 0.8),
+      rgba(27, 69, 191, 0.8)
+    ),
+    url('./images/resources.png');
   background-size: cover;
   background-position: center;
   border-radius: 30px 0px;
@@ -7289,7 +7301,11 @@ td {
 .caseBAVieUpload {
   margin-top: 30px;
   background-color: #101010; /* Dark background color */
-  background-image: linear-gradient(rgba(16, 16, 16, 0.8), rgba(16, 16, 16, 0.8)), url('./images/upload_file.png');
+  background-image: linear-gradient(
+      rgba(16, 16, 16, 0.8),
+      rgba(16, 16, 16, 0.8)
+    ),
+    url('./images/upload_file.png');
   background-size: cover;
   background-position: center;
   border-radius: 30px 0px;
@@ -7300,8 +7316,6 @@ td {
   transition: box-shadow 0.3s ease;
   min-height: 200px;
 }
-
-
 
 .caseBAVie:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add box shadow on hover */
@@ -7889,12 +7903,27 @@ td {
 }
 
 .knmc {
-  font-size: 10px;
-  background: #ffe000;
-  padding: 4px;
-  border-radius: 5px;
+  /* font-size: 10px; */
+  background: black;
+  padding: 4px 6px;
+  border-radius: 15px;
   margin-left: 10px;
   cursor: pointer;
+  color: white;
+  font-weight: 200;
+  font-size: 12px;
+
+}
+
+.knmcbranding {
+  font-size: 12px;
+  background: white;
+  padding: 4px;
+  border-radius: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  color: black;
+  border: 1px solid black;
 }
 
 .buttonLo {

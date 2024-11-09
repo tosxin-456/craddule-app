@@ -41,6 +41,8 @@ function ScrapView ({ htmlContent })  {
     const decodedToken = jwtDecode(access_token);
     const userId = decodedToken.userId;
     console.log(userId);
+  const projectName = localStorage.getItem('nProjectName');
+  const userName = localStorage.getItem('username');
 
   const questionType ="BusinessCaseBuilder";
   const questionSubType ="Introduction";
@@ -131,9 +133,9 @@ function ScrapView ({ htmlContent })  {
 
         <h2>PARTIES</h2>
         <p>The Parties to this Agreement are:</p>
-        <p><strong>Your Entity/Project Owner Name/Project Name</strong> incorporated under the laws of the Federal Republic of Nigeria with its principal offices at <strong>Address of your entity</strong> (“Company”). Or Your Ideas as contained in this Craddule Project Workspace. (The Disclosing Party).</p>
+        <p><strong>${userName} with project${projectName}</strong> incorporated under the laws of the Federal Republic of Nigeria with its principal offices at <strong>Address of your entity</strong> (“Company”). Or Your Ideas as contained in this Craddule Project Workspace. (The Disclosing Party).</p>
         <p>And</p>
-        <p><strong>Name of Contributor</strong> with Craddule account and access to the project. (The Receiving Party/Developer).</p>
+        <p><strong>${formData.email}</strong> with Craddule account and access to the project. (The Receiving Party/Developer).</p>
 
         <h2>INTRODUCTION</h2>
         <p>It is hereby agreed as follows:</p>
@@ -194,16 +196,16 @@ function ScrapView ({ htmlContent })  {
 
         <div class="signature">
             <p>Signed for and on behalf of</p>
-            <p><strong>Project Name</strong></p>
+            <p><strong>${projectName}</strong></p>
             <p>____________________</p>
-            <p><strong>Name</strong></p>
+            <p><strong>${userName}</strong></p>
             <p><strong>Designation</strong></p>
         </div>
 
         <div class="signature">
             <p>Developer</p>
             <p>____________________</p>
-            <p><strong>Name</strong></p>
+            <p><strong>${formData.email}</strong></p>
             <p><strong>Designation</strong></p>
         </div>
     </div>
@@ -273,6 +275,7 @@ function ScrapView ({ htmlContent })  {
         email: data.email,
         nda :ndaC,
       };
+   
   
       const response = await fetch(API_BASE_URL + '/api/team', {
         method: 'POST',
@@ -284,6 +287,7 @@ function ScrapView ({ htmlContent })  {
       });
   
       if (response.status === 200) {
+        console.log(updatedFormData)
         setLoading(false);
         console.log(response);
         setLink('https://app.craddule.com' + link);
@@ -450,7 +454,7 @@ createTeam(formData);
                     value={formData.email}
                     onChange={handleChange}
                     placeholder='Enter email'
-                    className="w-full border border-black400 bg-gray200 px-3 ps-4 py-3 rounded-[20px]"
+                    className="w-full border border-[#8A8A8A] bg-white px-3 ps-4 py-3 rounded-[15px]"
                   />
                 </div>
 
@@ -461,13 +465,13 @@ createTeam(formData);
                     name="nda"
                     checked={isChecked} // Bind checked attribute to state
                     onChange={handleCheckboxChange}
-                    className=''
+                    className='bg-[#8A8A8A]'
                   />
                   <span>Send NDA</span>
                 </div>
                 
                 <div className='mt-4'>
-                  <button className="bg-blue600 w-[171px] block m-auto py-2 rounded-[15px] text-white" type='submit'>
+                  <button className="bg-black w-[171px] block m-auto py-1 rounded-[15px] text-white" type='submit'>
                     { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
                     { !loading && <span>Send invite</span>}
                   </button>

@@ -200,12 +200,12 @@ useEffect(() => {
   return (
     <>
     
-    <div className={`side-menu ${isCollapsed ? 'collapsed' : ''}`}>
+    <div className={`side-menu ${!isCollapsed ? 'collapsed' : ''}`}>
       <div className="menu-toggle" onClick={toggleMenu}>
-        <FontAwesomeIcon icon={isCollapsed ? faPlus : faTimes} className='close2'/>
+        <FontAwesomeIcon icon={!isCollapsed ? faPlus : faTimes} className='close2'/>
       </div>
       <ul>
-      {!isCollapsed && (
+      {isCollapsed && (
         <div className='text-center'>
             <span className='menuHeader'>Commercialization</span>
         </div>
@@ -213,12 +213,12 @@ useEffect(() => {
 
         <li onClick={onClickCH}> 
           <CiBoxes />
-          {!isCollapsed && <span>Home</span>}
+          {isCollapsed && <span>Home</span>}
         </li>
 
         <li onClick={toggleDropdownB}>
                     <CiBoxes />
-                    {!isCollapsedB && <span>Bring The MVP To Full Scale {percentage !== null && ` (${percentage}%)`}</span>}
+                    {isCollapsedB && <span>Bring The MVP To Full Scale {percentage !== null && ` (${percentage}%)`}</span>}
                 </li>
                 {isDropdownOpenB && !isCollapsedB && (
                     <ul className="dropdown">
@@ -236,7 +236,7 @@ useEffect(() => {
 
 <li onClick={toggleDropdownE}>
                     <CiBoxes />
-                    {!isCollapsedE && <span>Execute Marketing Route {percentageE !== null && ` (${percentageE}%)`}</span>}
+                    {isCollapsedE && <span>Execute Marketing Route {percentageE !== null && ` (${percentageE}%)`}</span>}
                 </li>
                 {isDropdownOpenE && !isCollapsedE && (
                     <ul className="dropdown">
@@ -254,12 +254,12 @@ useEffect(() => {
 <li onClick={onClickCHPdA}>
             <CiCalculator1 />
           
-          {!isCollapsed && <span>Summary Pdf</span>}
+          {isCollapsed && <span>Summary Pdf</span>}
         </li>
         
         <li onClick={onClickCG}>
         <CiGrid2V />
-          {!isCollapsed && <span>Go no Go</span>}
+          {isCollapsed && <span>Go no Go</span>}
         </li>
         
        
@@ -269,7 +269,7 @@ useEffect(() => {
 
       
        
-        {!isCollapsed && (
+        {isCollapsed && (
         <div className='text-center'>
             <hr className='buiy'></hr>
             <p style={{paddingTop:0}}>Account</p>
@@ -287,7 +287,7 @@ useEffect(() => {
 
         <li onClick={handleLogout}>
           <FontAwesomeIcon icon={faCog} />
-          {!isCollapsed && <span>Logout</span>}
+          {isCollapsed && <span>Logout</span>}
         </li>
 
       </ul>
