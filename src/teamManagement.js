@@ -285,9 +285,9 @@ function TeamManagement ()  {
 
             <div className='text-center'>
                 <p className='centerH'>Getting your Team</p>
-                <p className='centerHp'>Make sure you answer all questions</p>               
+                                <p className='centerHp'>Here you add your team mate</p>               
             </div>
-            <p className='centerH1'>Team Management</p>
+                            <p className='centerH1'>Manage team member</p>
             <p className='centerHp1'>View, manage your memebers and send invites</p>
             <input type="text" className='input2' placeholder="Search.."></input>
             <p type='button' className='curveSend' onClick={()=>setIsOpen(true)}>Invite</p>

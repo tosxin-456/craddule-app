@@ -16,6 +16,7 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
+import HeaderIdeation from './component/headerIdeation';
 
 function QuestionBusIntro() {
 
@@ -821,7 +822,7 @@ const handleClick = (id) => {
          <SideMenu2P />    
          <div className="main-content">
         
-         <Header />
+        
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
          <div className='catHod'>
          

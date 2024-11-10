@@ -369,9 +369,9 @@ useEffect(() => {
   return (
     <>
     
-    <div className={`side-menu ${isCollapsed ? 'collapsed' : ''}`}>
+    <div className={`side-menu ${!isCollapsed ? 'collapsed' : ''}`}>
       <div className="menu-toggle" onClick={toggleMenu}>
-        <FontAwesomeIcon icon={isCollapsed ? faPlus : faTimes} className='close2'/>
+        <FontAwesomeIcon icon={!isCollapsed ? faPlus : faTimes} className='close2'/>
       </div>
       <div className="menu-content">
       <ul>
@@ -380,13 +380,13 @@ useEffect(() => {
 
         <li onClick={onClickCH}> 
           <CiBoxes />
-          {!isCollapsed && <span>Home</span>}
+          {isCollapsed && <span>Home</span>}
         </li>
         
 
         <li onClick={toggleDropdown}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Business Analysis Pack {percentage !== null && ` (${percentage}%)`}</span>}
+                    {isCollapsed && <span>Business Analysis Pack {percentage !== null && ` (${percentage}%)`}</span>}
                 </li>
                 {isDropdownOpen && !isCollapsed && (
                     <ul className="dropdown">
@@ -404,7 +404,7 @@ useEffect(() => {
           
 <li onClick={toggleDropdownV}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Value Proposition Pack (VPP) {percentageV !== null && ` (${percentageV}%)`}</span>}
+                    {isCollapsed && <span>Value Proposition Packs (VPP) {percentageV !== null && ` (${percentageV}%)`}</span>}
                 </li>
                 {isDropdownOpenV && !isCollapsed && (
                     <ul className="dropdown">
@@ -422,9 +422,9 @@ useEffect(() => {
 
       <li onClick={toggleDropdownS}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Success Matrix {percentageS !== null && ` (${percentageS}%)`}</span>}
+                    {isCollapsed && <span>Success Matrix {percentageS !== null && ` (${percentageS}%)`}</span>}
                 </li>
-                {isDropdownOpenS && !isCollapsed && (
+                {isDropdownOpenS && isCollapsed && (
                     <ul className="dropdown">
                           {subTypesS.map((subType, index) => (
                               <li key={index} className='dropDownNew' onClick={() => handleSubTypeClickS(subType.subCategory)}>
@@ -442,12 +442,12 @@ useEffect(() => {
         <li onClick={onClickT}>
             <CiCalculator1 />
           
-          {!isCollapsed && <span>Getting Your Team</span>}
+          {isCollapsed && <span>Getting Your Team</span>}
         </li>
 
         <li onClick={toggleDropdownD}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Detailed Marketing Strategies {percentageD !== null && ` (${percentageD}%)`}</span>}
+                    {isCollapsed && <span>Detailed Marketing Strategies {percentageD !== null && ` (${percentageD}%)`}</span>}
                 </li>
                 {isDropdownOpenD && !isCollapsed && (
                     <ul className="dropdown">
@@ -467,17 +467,17 @@ useEffect(() => {
         <li onClick={onClickB}>
             <CiCalculator1 />
           
-          {!isCollapsed && <span>Branding</span>}
+          {isCollapsed && <span>Branding</span>}
         </li>
         
         <li onClick={onClickCHPdA}>
             <CiServer />
-          {!isCollapsed && <span>Summary Pdf</span>}
+          {isCollapsed && <span>Summary Pdf</span>}
         </li>
 
         <li onClick={onClickCG}>
         <CiGrid2V />
-          {!isCollapsed && <span>Go no Go</span>}
+          {isCollapsed && <span>Go no Go</span>}
         </li>
 
         {/* <li>
@@ -488,7 +488,7 @@ useEffect(() => {
         
        
 
-        {!isCollapsed && (
+        {isCollapsed && (
         <div className='text-center'>
             <hr className='buiy'></hr>
             <p style={{paddingTop:0}}>Account</p>
@@ -506,7 +506,7 @@ useEffect(() => {
 
         <li onClick={handleLogout}>
           <FontAwesomeIcon icon={faCog} />
-          {!isCollapsed && <span>Logout</span>}
+          {isCollapsed && <span>Logout</span>}
         </li>
 
       </ul>

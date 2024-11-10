@@ -10,6 +10,7 @@ import { faCircleNotch,faChevronDown,faBold, faItalic, faUnderline, faStrikethro
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { jwtDecode } from "jwt-decode";
+import circle from './images/circle.png';
 import ImageResize from 'quill-image-resize-vue';
 import Tooltip from './component/tooltip';
 import ImagePopup from './component/cradduleModal';
@@ -18,6 +19,7 @@ import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
 import SideMenu2P from './component/sideMenu2P';
 import BreadCrumb from './component/breadCrumb';
+import feedback from './images/feedback.svg';
 
 function ScrapView ({ htmlContent })  {
     
@@ -156,10 +158,19 @@ function ScrapView ({ htmlContent })  {
 
   return (
     <>
-      <div className=''>
+      <div style={{
+        fontFamily: '"Manrope", sans-serif'
+      }}>
         <div className="">
           <Header />
           <BreadCrumb page={'Manage team'}/>
+          <div className='text-center'>
+            <p className='centerH'>Getting your Team</p>
+            <p className='centerHp'>Here you add your team mate</p>
+          </div>
+          <div className="absolute inset-0 mt-[150px] ml-[20px] sm:ml-[60px] z-[-100] bg-no-repeat bg-cover w-[150px] sm:w-[200px] h-[150px] sm:h-[200px]"
+            style={{ backgroundImage: `url(${circle})` }}
+          ></div>
           <div className='w-[1142px] m-auto mt-5'>  
             <div className='bacWHI'>
               <div className="text-center">
@@ -170,7 +181,7 @@ function ScrapView ({ htmlContent })  {
                     <p className="text-p20" onClick={onClickHandler27}>The Team</p>
                 </div>
                 <div className="">
-                  <button className='px-3 py-2 bg-blue600 text-white rounded-[5px]' onClick={onClickHandler27}>Add members</button>
+                  <button className='px-1 py-1 bg-black text-white rounded-[10px]' onClick={onClickHandler27}>Add members</button>
                 </div>
               </div>
               <table class="table mt-3">
@@ -211,6 +222,17 @@ function ScrapView ({ htmlContent })  {
           </div>
         </div>
         <Toaster  position="top-right" />
+        <div
+          className="fixed bottom-0 right-0 z-[-100] m-0 p-0 w-[250px] h-[250px] bg-no-repeat"
+          style={{
+            backgroundImage: `url(${feedback})`,
+            backgroundSize: '100% 100%', // Stretches image to fit exactly
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            margin: '0',
+            padding: '0',
+          }}
+        ></div>
       </div>
   </>
 )}

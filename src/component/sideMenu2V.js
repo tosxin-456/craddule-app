@@ -277,12 +277,12 @@ const handleSubTypeClickB = (subType) => {
   return (
     <>
     
-    <div className={`side-menu ${isCollapsed ? 'collapsed' : ''}`}>
+    <div className={`side-menu ${!isCollapsed ? 'collapsed' : ''}`}>
       <div className="menu-toggle" onClick={toggleMenu}>
-        <FontAwesomeIcon icon={isCollapsed ? faPlus : faTimes} className='close2'/>
+        <FontAwesomeIcon icon={!isCollapsed ? faPlus : faTimes} className='close2'/>
       </div>
       <ul>
-      {!isCollapsed && (
+      {isCollapsed && (
         <div className='text-center'>
             <span className='menuHeader'>Validating And Testing</span>
         </div>
@@ -290,12 +290,12 @@ const handleSubTypeClickB = (subType) => {
 
         <li onClick={onClickCH}> 
           <CiBoxes />
-          {!isCollapsed && <span>Home</span>}
+          {isCollapsed && <span>Home</span>}
         </li>
 
         <li onClick={toggleDropdownF}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Full Product/Project Review {percentage !== null && ` (${percentage}%)`}</span>}
+                    {isCollapsed && <span>Full Product/Project Review {percentage !== null && ` (${percentage}%)`}</span>}
                 </li>
                 {isDropdownOpenF && !isCollapsed && (
                     <ul className="dropdown">
@@ -313,7 +313,7 @@ const handleSubTypeClickB = (subType) => {
 
 <li onClick={toggleDropdownE}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Detailed Marketing Testing {percentageD !== null && ` (${percentageD}%)`}</span>}
+                    {isCollapsed && <span>Detailed Marketing Testing {percentageD !== null && ` (${percentageD}%)`}</span>}
                 </li>
                 {isDropdownOpenE && !isCollapsed && (
                     <ul className="dropdown">
@@ -331,7 +331,7 @@ const handleSubTypeClickB = (subType) => {
 
 <li onClick={toggleDropdownB}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Development Cost Review {percentageDE !== null && ` (${percentageDE}%)`}</span>}
+                    {isCollapsed && <span>Development Cost Review {percentageDE !== null && ` (${percentageDE}%)`}</span>}
                 </li>
                 {isDropdownOpenB && !isCollapsed && (
                     <ul className="dropdown">
@@ -349,12 +349,12 @@ const handleSubTypeClickB = (subType) => {
         <li onClick={onClickCHPdA}>
             <CiCalculator1 />
           
-          {!isCollapsed && <span>Summary Pdf</span>}
+          {isCollapsed && <span>Summary Pdf</span>}
         </li>
 
         <li onClick={onClickCG}>
         <CiGrid2V />
-          {!isCollapsed && <span>Go no Go</span>}
+          {isCollapsed && <span>Go no Go</span>}
         </li>
         
        
@@ -364,7 +364,7 @@ const handleSubTypeClickB = (subType) => {
 
       
        
-        {!isCollapsed && (
+        {isCollapsed && (
         <div className='text-center'>
             <hr className='buiy'></hr>
             <p style={{paddingTop:0}}>Account</p>
@@ -382,7 +382,7 @@ const handleSubTypeClickB = (subType) => {
 
         <li onClick={handleLogout}>
           <FontAwesomeIcon icon={faCog} />
-          {!isCollapsed && <span>Logout</span>}
+          {isCollapsed && <span>Logout</span>}
         </li>
 
       </ul>

@@ -199,12 +199,12 @@ const handleSubTypeClickS = (subType) => {
   return (
     <>
     
-    <div className={`side-menu ${isCollapsed ? 'collapsed' : ''}`}>
+    <div className={`side-menu ${!isCollapsed ? 'collapsed' : ''}`}>
       <div className="menu-toggle" onClick={toggleMenu}>
-        <FontAwesomeIcon icon={isCollapsed ? faPlus : faTimes} className='close2'/>
+        <FontAwesomeIcon icon={!isCollapsed ? faPlus : faTimes} className='close2'/>
       </div>
       <ul>
-      {!isCollapsed && (
+      {isCollapsed && (
         <div className='text-center'>
             <span className='menuHeader'>Initial Design</span>
         </div>
@@ -212,12 +212,12 @@ const handleSubTypeClickS = (subType) => {
 
         <li onClick={onClickCH}> 
           <CiBoxes />
-          {!isCollapsed && <span>Home</span>}
+          {isCollapsed && <span>Home</span>}
         </li>
 
         <li onClick={toggleDropdownD}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Claim Domian Name {percentage !== null && ` (${percentage}%)`}</span>}
+                    {isCollapsed && <span>Claim Domian Name {percentage !== null && ` (${percentage}%)`}</span>}
                 </li>
                 {isDropdownOpenD && !isCollapsedD && (
                     <ul className="dropdown">
@@ -235,7 +235,7 @@ const handleSubTypeClickS = (subType) => {
           
 <li onClick={toggleDropdownS}>
                     <CiBoxes />
-                    {!isCollapsed && <span>Stakeholders Engagement {percentageS !== null && ` (${percentageS}%)`}</span>}
+                    {isCollapsed && <span>Stakeholders Engagement {percentageS !== null && ` (${percentageS}%)`}</span>}
                 </li>
                 {isDropdownOpenS && !isCollapsed && (
                     <ul className="dropdown">
@@ -258,12 +258,12 @@ const handleSubTypeClickS = (subType) => {
       <li onClick={onClickCHPdA}>
             <CiCalculator1 />
           
-          {!isCollapsed && <span>Summary Pdf</span>}
+          {isCollapsed && <span>Summary Pdf</span>}
         </li>
 
       <li onClick={onClickCG}>
         <CiGrid2V />
-          {!isCollapsed && <span>Go no Go</span>}
+          {isCollapsed && <span>Go no Go</span>}
         </li>
 
       
@@ -273,7 +273,7 @@ const handleSubTypeClickS = (subType) => {
 
       
        
-        {!isCollapsed && (
+        {isCollapsed && (
         <div className='text-center'>
             <hr className='buiy'></hr>
             <p style={{paddingTop:0}}>Account</p>
@@ -291,7 +291,7 @@ const handleSubTypeClickS = (subType) => {
 
         <li onClick={handleLogout}>
           <FontAwesomeIcon icon={faCog} />
-          {!isCollapsed && <span>Logout</span>}
+          {isCollapsed && <span>Logout</span>}
         </li>
 
       </ul>

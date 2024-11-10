@@ -16,6 +16,7 @@ import graph2 from './images/graph2.png'
 import graph3 from './images/graph3.png'
 import graph4 from './images/graph4.png'
 import graph5 from './images/graph5.png'
+import HeaderIdeation from './component/headerIdeation';
 
 function CustomerGrowth() {
 
@@ -133,7 +134,7 @@ function CustomerGrowth() {
          <SideMenu2 />    
          <div className="main-content">
         
-         <Header />
+         <HeaderIdeation />
          <div className='main-content2' style={{paddingLeft:40, paddingRight:40}}>
 
          <div className='text-center'>
