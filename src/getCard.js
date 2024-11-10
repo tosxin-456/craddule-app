@@ -11,8 +11,8 @@ function GetCard() {
   const {access_token, userId} = getUserIdFromToken();
   console.log(userId);
 
-  // const publicKey = "pk_live_ad719098c01b1d5e280aa45492782cb661b74d46";
-  const publicKey = "pk_test_5b18272091e43f312490878eb3f0002fb4242ac6";
+  const publicKey = "pk_live_ad719098c01b1d5e280aa45492782cb661b74d46";
+  //const publicKey = "pk_test_5b18272091e43f312490878eb3f0002fb4242ac6";
   const [ email, setEmail ] = useState("");
   const [ amount, setAmount ] = useState(50);
   const [ name, setName ] = useState("");
