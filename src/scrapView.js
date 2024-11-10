@@ -160,7 +160,7 @@ function ScrapView({ htmlContent }) {
         }}
       className='container'>
         <div className="absolute inset-0 mt-[180px] ml-[60px]  z-[-100] bg-no-repeat bg-cover w-[200px] h-[200px] " style={{ backgroundImage: `url(${circle})` }}></div>
-        <div className=' flex justify-evenly' >
+        <div className=' flex justify-evenly mt-[50px] ' >
           <div className="mr-auto ">
             <button className="mainBtn" onClick={() => navigate('/start')} >Back</button>
           </div>
