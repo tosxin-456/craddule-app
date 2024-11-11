@@ -97,7 +97,7 @@ function InflationRateGraph({ graphType }) {
 
                             {projectDetails && !projectDetails.includes("Product Definition") && (
                                 <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/product_definition.png')] bg-no-repeat bg-cover cursor-pointer relative">
-                                    <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleClick('/questionBusMain/ProductDefinition/BusinessAnalysisPack/CustomerSegments') : null}>
+                                    <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () =>   navigate('/product') : null}>
                                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                         <p className="p18">Product Definition</p>
                                         <p className="text-[12px]">Design your business processes and flow</p>
@@ -109,7 +109,7 @@ function InflationRateGraph({ graphType }) {
 
                             {projectDetails && !projectDetails.includes("Initial Design") && (
                                 <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/initial_design.png')] bg-no-repeat bg-cover cursor-pointer relative">
-                                    <div className={`tilt-box bg-[#193FAEDE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleClick('/questionBusMain/InitialDesign/ClaimTheDomain/DomainName') : null}>
+                                    <div className={`tilt-box bg-[#193FAEDE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleClick('/design') : null}>
                                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                         <p className="p18">Initial Design</p>
                                         <p className="text-[12px]">Plan design and add members to Team</p>
@@ -121,7 +121,7 @@ function InflationRateGraph({ graphType }) {
 
                             {projectDetails && !projectDetails.includes("Validating and Testing") && (
                                 <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/validating.png')] bg-no-repeat bg-cover cursor-pointer relative">
-                                    <div className={`tilt-box bg-[#FFD700DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleClick('/questionBusMain/ValidatingAndTesting/FullProductProjectReview/Review') : null}>
+                                    <div className={`tilt-box bg-[#FFD700DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => navigate('/validate'): null}>
                                         <button className="px-2 py-1 bg-black400 rounded-[10px] mb-[16px] text-white text-[14px]">View</button>
                                         <p className="p18">Validating and Testing</p>
                                         <p className="text-[12px]">Test and validate your product</p>
@@ -133,7 +133,7 @@ function InflationRateGraph({ graphType }) {
 
                             {projectDetails && !projectDetails.includes("Commercialization") && (
                                 <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/commercialization.png')] bg-no-repeat bg-cover cursor-pointer relative">
-                                    <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleClick('/questionBusMain/Commercialization/BringTheMVPToFullScale/GetTheMVPToFruition') : null}>
+                                    <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => navigate('/commercialization') : null}>
                                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                         <p className="p18">Commercialization</p>
                                         <p className="text-[12px]">Get your product ready to launch for production</p>
