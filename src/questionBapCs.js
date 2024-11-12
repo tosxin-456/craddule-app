@@ -10,6 +10,8 @@ import { Toaster, toast } from 'sonner';
 import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import HeaderIdeation from './component/headerIdeation';
+
 
 
 function QuestionBus() {
@@ -127,10 +129,10 @@ function QuestionBus() {
       
 
     <div className='container2'>
-         <SideMenu2P />    
+        <SideMenu2P />    
          <div className="main-content">
         
-         <Header />
+         <HeaderIdeation />
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
 
          <div className='text-center'>

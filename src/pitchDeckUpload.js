@@ -9,7 +9,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SideMenu2P from './component/sideMenu2P';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import HeaderIdeation from './component/headerIdeation';;
 import circle from './images/circle.png';
 import home from './images/HOME.png';
 

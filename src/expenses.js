@@ -10,6 +10,7 @@ import { Toaster, toast } from 'sonner';
 import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import HeaderIdeation from './component/headerIdeation';
 import graph6 from './images/graph6.png'
 import graph1 from './images/graph1.png'
 import graph2 from './images/graph2.png'
@@ -133,7 +134,7 @@ function OperatingIncome() {
          <SideMenu2 />    
          <div className="main-content">
         
-         <Header />
+                  <HeaderIdeation />
          <div className='main-content2' style={{paddingLeft:40, paddingRight:40}}>
 
          <div className='text-center'>

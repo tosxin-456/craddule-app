@@ -12,6 +12,7 @@ import DatePicker from 'react-datepicker';
 import { SketchPicker } from 'react-color'; // Importing SketchPicker from react-color
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import HeaderIdeation from './component/headerIdeation';
 import 'react-datepicker/dist/react-datepicker.css';
 import Select from 'react-select';
 import Header from './component/header';

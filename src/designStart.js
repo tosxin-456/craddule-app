@@ -71,190 +71,214 @@ function DesignMain() {
                                     Here you see your progress and how far you've gone
                                 </p>
                             </div>
-                            {/* Business Case Builder Progress */}
-                            <div className="flex flex-row sm:flex-col w-full lg:w-[50%] m-auto space-y-4 sm:space-y-5">
-                                
-                                <div className="w-full sm:w-auto">
-                                    <p className="text-center font-bold text-[14px] sm:text-[15px]">
-                                        Business Case Builder
-                                    </p>
-                                    <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
-                                        <div className="flex justify-center items-center">
-                                            <svg width="100" height="60" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M 10,50 A 40,40 0 1,1 90,50"
-                                                    fill="none"
-                                                    stroke="#e0e0e0"
-                                                    strokeWidth="10"
-                                                    strokeLinecap="round"
-                                                />
-                                                <path
-                                                    d="M 10,50 A 40,40 0 1,1 90,50"
-                                                    fill="none"
-                                                    stroke="#1B45BF"
-                                                    strokeWidth="10"
-                                                    strokeDasharray="126"
-                                                    strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
-                                                    strokeLinecap="round"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
-                                        <p className="text-[12px] sm:text-[14px]">progress</p>
-                                        <button
-                                            onClick={() =>
-                                                handleClickStorage(
-                                                    "BusinessCaseBuilder",
-                                                    "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
-                                                )
-                                            }
-                                            className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
-                                        >
-                                            Continue
-                                        </button>
-                                    </div>
-                                </div>
+                            <div className=' lg:flex lg:justify-evenly ' >
+                                <div className="flex flex-row sm:flex-col w-full lg:w-[45%] m-auto space-y-2 sm:space-y-0">
 
-                                {/* Custom Financial Project Progress */}
-                                <div className="w-full sm:w-auto sm:ml-auto">
-                                    <p className="text-center font-bold text-[14px] sm:text-[15px]">Custom Financial Projection</p>
-                                    <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
-                                        <div className="flex justify-center items-center">
-                                            <svg width="100" height="60" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M 10,50 A 40,40 0 1,1 90,50"
-                                                    fill="none"
-                                                    stroke="#e0e0e0"
-                                                    strokeWidth="10"
-                                                    strokeLinecap="round"
-                                                />
-                                                <path
-                                                    d="M 10,50 A 40,40 0 1,1 90,50"
-                                                    fill="none"
-                                                    stroke="#1B45BF"
-                                                    strokeWidth="10"
-                                                    strokeDasharray="126"
-                                                    strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
-                                                    strokeLinecap="round"
-                                                />
-                                            </svg>
+                                    {/* Business Case Builder Progress */}
+                                    <div className="w-full sm:w-auto">
+                                        <p className="text-center font-bold text-[14px] sm:text-[15px]">
+                                            Claim Domain
+                                        </p>
+                                        <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
+                                            <div className="flex justify-center items-center">
+                                                <svg width="100" height="60" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M 10,50 A 40,40 0 1,1 90,50"
+                                                        fill="none"
+                                                        stroke="#e0e0e0"
+                                                        strokeWidth="10"
+                                                        strokeLinecap="round"
+                                                    />
+                                                    <path
+                                                        d="M 10,50 A 40,40 0 1,1 90,50"
+                                                        fill="none"
+                                                        stroke="#1B45BF"
+                                                        strokeWidth="10"
+                                                        strokeDasharray="126"
+                                                        strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                        strokeLinecap="round"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                            <p className="text-[12px] sm:text-[14px]">progress</p>
+                                            <button
+                                                onClick={() =>
+                                                    handleClickStorage(
+                                                        "BusinessCaseBuilder",
+                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                    )
+                                                }
+                                                className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
+                                            >
+                                                Continue
+                                            </button>
                                         </div>
-                                        <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
-                                        <p className="text-[12px] sm:text-[14px]">progress</p>
-                                        <button
-                                            onClick={() => navigate("/customFinancial")}
-                                            className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
-                                        >
-                                            Continue
-                                        </button>
                                     </div>
-                                </div>
 
-                                <div className="w-full sm:w-auto sm:ml-auto">
-                                    <p className="text-center font-bold text-[14px] sm:text-[15px]">Custom Projection</p>
-                                    <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
-                                        <div className="flex justify-center items-center">
-                                            <svg width="100" height="60" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M 10,50 A 40,40 0 1,1 90,50"
-                                                    fill="none"
-                                                    stroke="#e0e0e0"
-                                                    strokeWidth="10"
-                                                    strokeLinecap="round"
-                                                />
-                                                <path
-                                                    d="M 10,50 A 40,40 0 1,1 90,50"
-                                                    fill="none"
-                                                    stroke="#1B45BF"
-                                                    strokeWidth="10"
-                                                    strokeDasharray="126"
-                                                    strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
-                                                    strokeLinecap="round"
-                                                />
-                                            </svg>
+                                    {/* Custom Financial Project Progress */}
+                                    <div className="w-full sm:w-auto sm:ml-auto">
+                                        <p className="text-center font-bold text-[14px] sm:text-[15px]">Stakeholder Engagement</p>
+                                        <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
+                                            <div className="flex justify-center items-center">
+                                                <svg width="100" height="60" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M 10,50 A 40,40 0 1,1 90,50"
+                                                        fill="none"
+                                                        stroke="#e0e0e0"
+                                                        strokeWidth="10"
+                                                        strokeLinecap="round"
+                                                    />
+                                                    <path
+                                                        d="M 10,50 A 40,40 0 1,1 90,50"
+                                                        fill="none"
+                                                        stroke="#1B45BF"
+                                                        strokeWidth="10"
+                                                        strokeDasharray="126"
+                                                        strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
+                                                        strokeLinecap="round"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
+                                            <p className="text-[12px] sm:text-[14px]">progress</p>
+                                            <button
+                                                onClick={() => navigate("/customFinancial")}
+                                                className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
+                                            >
+                                                Continue
+                                            </button>
                                         </div>
-                                        <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
-                                        <p className="text-[12px] sm:text-[14px]">progress</p>
-                                        <button
-                                            onClick={() => navigate("/customFinancial")}
-                                            className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
-                                        >
-                                            Continue
-                                        </button>
                                     </div>
-                                </div>
 
-                                <div className="w-full sm:w-auto sm:ml-auto">
-                                    <p className="text-center font-bold text-[14px] sm:text-[15px]">Custom Freedom Projection</p>
-                                    <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
-                                        <div className="flex justify-center items-center">
-                                            <svg width="100" height="60" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M 10,50 A 40,40 0 1,1 90,50"
-                                                    fill="none"
-                                                    stroke="#e0e0e0"
-                                                    strokeWidth="10"
-                                                    strokeLinecap="round"
-                                                />
-                                                <path
-                                                    d="M 10,50 A 40,40 0 1,1 90,50"
-                                                    fill="none"
-                                                    stroke="#1B45BF"
-                                                    strokeWidth="10"
-                                                    strokeDasharray="126"
-                                                    strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
-                                                    strokeLinecap="round"
-                                                />
-                                            </svg>
+
+                                </div>
+                                <div className="flex flex-row sm:flex-col w-full lg:w-[45%] m-auto ml-[30px] space-y-2 sm:space-y-0">
+
+                                    {/* Business Case Builder Progress */}
+                                    <div className="w-full sm:w-auto">
+                                        <p className="text-center font-bold text-[14px] sm:text-[15px]">
+                                            Stakeholders Feedback
+                                        </p>
+                                        <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
+                                            <div className="flex justify-center items-center">
+                                                <svg width="100" height="60" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M 10,50 A 40,40 0 1,1 90,50"
+                                                        fill="none"
+                                                        stroke="#e0e0e0"
+                                                        strokeWidth="10"
+                                                        strokeLinecap="round"
+                                                    />
+                                                    <path
+                                                        d="M 10,50 A 40,40 0 1,1 90,50"
+                                                        fill="none"
+                                                        stroke="#1B45BF"
+                                                        strokeWidth="10"
+                                                        strokeDasharray="126"
+                                                        strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                        strokeLinecap="round"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                            <p className="text-[12px] sm:text-[14px]">progress</p>
+                                            <button
+                                                onClick={() =>
+                                                    handleClickStorage(
+                                                        "BusinessCaseBuilder",
+                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                    )
+                                                }
+                                                className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
+                                            >
+                                                Continue
+                                            </button>
                                         </div>
-                                        <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
-                                        <p className="text-[12px] sm:text-[14px]">progress</p>
-                                        <button
-                                            onClick={() => navigate("/customFinancial")}
-                                            className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
-                                        >
-                                            Continue
-                                        </button>
                                     </div>
-                                </div>
 
+                                    {/* Custom Financial Project Progress */}
+                                    <div className="w-full sm:w-auto sm:ml-auto">
+                                        <p className="text-center font-bold text-[14px] sm:text-[15px]">Summary PDF</p>
+                                        <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
+                                            <div className="flex justify-center items-center">
+                                                <svg width="100" height="60" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M 10,50 A 40,40 0 1,1 90,50"
+                                                        fill="none"
+                                                        stroke="#e0e0e0"
+                                                        strokeWidth="10"
+                                                        strokeLinecap="round"
+                                                    />
+                                                    <path
+                                                        d="M 10,50 A 40,40 0 1,1 90,50"
+                                                        fill="none"
+                                                        stroke="#1B45BF"
+                                                        strokeWidth="10"
+                                                        strokeDasharray="126"
+                                                        strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
+                                                        strokeLinecap="round"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
+                                            <p className="text-[12px] sm:text-[14px]">progress</p>
+                                            <button
+                                                onClick={() => navigate("/customFinancial")}
+                                                className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
+                                            >
+                                                Continue
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
                             </div>
 
-                            
+                            <div className=' lg:flex lg:justify-center ' >
+                                <div className="flex flex-row sm:flex-col w-full lg:w-[45%] m-auto space-y-2 sm:space-y-0  mt-[30px] ">
 
-                            {/* Go no Go Progress */}
-                            <div className="flex justify-center mt-[20px]">
-                                <div className="w-full sm:w-auto">
-                                    <p className="text-center font-bold text-[14px] sm:text-[15px]">Go no Go</p>
-                                    <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
-                                        <div className="flex justify-center items-center">
-                                            <svg width="100" height="60" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M 10,50 A 40,40 0 1,1 90,50"
-                                                    fill="none"
-                                                    stroke="#e0e0e0"
-                                                    strokeWidth="10"
-                                                    strokeLinecap="round"
-                                                />
-                                                <path
-                                                    d="M 10,50 A 40,40 0 1,1 90,50"
-                                                    fill="none"
-                                                    stroke="#1B45BF"
-                                                    strokeWidth="10"
-                                                    strokeDasharray="126"
-                                                    strokeDashoffset={126 - (projectPercentage / 100) * 126}
-                                                    strokeLinecap="round"
-                                                />
-                                            </svg>
+                                    {/* Business Case Builder Progress */}
+                                    <div className="w-full m-auto sm:w-auto">
+                                        <p className="text-center font-bold text-[14px] sm:text-[15px]">
+                                         Go no GO
+                                        </p>
+                                        <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
+                                            <div className="flex justify-center items-center">
+                                                <svg width="100" height="60" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M 10,50 A 40,40 0 1,1 90,50"
+                                                        fill="none"
+                                                        stroke="#e0e0e0"
+                                                        strokeWidth="10"
+                                                        strokeLinecap="round"
+                                                    />
+                                                    <path
+                                                        d="M 10,50 A 40,40 0 1,1 90,50"
+                                                        fill="none"
+                                                        stroke="#1B45BF"
+                                                        strokeWidth="10"
+                                                        strokeDasharray="126"
+                                                        strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                        strokeLinecap="round"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                            <p className="text-[12px] sm:text-[14px]">progress</p>
+                                            <button
+                                                onClick={() =>
+                                                    handleClickStorage(
+                                                        "BusinessCaseBuilder",
+                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                    )
+                                                }
+                                                className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
+                                            >
+                                                Continue
+                                            </button>
                                         </div>
-                                        <p className="mt-[-20px] sm:mt-[-30px]">{projectPercentage}%</p>
-                                        <p className="text-[12px] sm:text-[14px]">progress</p>
-                                        <button
-                                            onClick={() => navigate("/go/Ideation")}
-                                            className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
-                                        >
-                                            Continue
-                                        </button>
                                     </div>
                                 </div>
                             </div>

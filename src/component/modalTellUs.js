@@ -5,7 +5,7 @@ import { HiOutlineArrowSmallRight } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom';
 import {API_BASE_URL} from '../config/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
 export default function ModalStart({ open, onClose }) {
     const navigate = useNavigate();

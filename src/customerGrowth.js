@@ -10,13 +10,14 @@ import { Toaster, toast } from 'sonner';
 import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import HeaderIdeation from './component/headerIdeation';
 import graph6 from './images/graph6.png'
 import graph1 from './images/graph1.png'
 import graph2 from './images/graph2.png'
 import graph3 from './images/graph3.png'
 import graph4 from './images/graph4.png'
 import graph5 from './images/graph5.png'
-import HeaderIdeation from './component/headerIdeation';
+
 
 function CustomerGrowth() {
 

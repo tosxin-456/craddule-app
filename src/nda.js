@@ -16,6 +16,7 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
+import HeaderIdeation from './component/headerIdeation';
 import SideMenu2 from './component/sideMenu2';
 import { useParams } from 'react-router-dom';
 

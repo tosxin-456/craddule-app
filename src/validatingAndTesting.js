@@ -20,12 +20,12 @@ function ValidatingOnboarding() {
     const handleNextClick = async () => {
         const onboarding = localStorage.getItem('onboarding');
         if (onboarding === "true") {
-            navigate('/validating/start');
+            navigate('/validate/start');
             return;
         }
         try {
             await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError, 'Validating');
-            navigate('/validating/start');
+            navigate('/validate/start');
         } catch (error) {
             console.error('Error updating onboarding status:', error);
         }

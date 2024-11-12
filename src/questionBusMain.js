@@ -14,12 +14,12 @@ import { Toaster, toast } from 'sonner';
 import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import HeaderIdeation from './component/headerIdeation';
 import ModalVideo from './component/modalVideo';
 import ideationPop from './component/ideationModal';
 import ModalVideoN from './component/modalNewVideo';
 import ReactGA from "react-ga4";
 import ReferralModal from './component/randomPopUp';
-import HeaderIdeation from './component/headerIdeation';
 
 
 

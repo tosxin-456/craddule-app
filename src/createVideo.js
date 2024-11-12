@@ -8,6 +8,7 @@ import { jwtDecode } from "jwt-decode";
 import {API_BASE_URL} from './config/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import HeaderIdeation from './component/headerIdeation';
 
 function CreateVideo() {
 

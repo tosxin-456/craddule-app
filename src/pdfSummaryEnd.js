@@ -20,6 +20,7 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
+import HeaderIdeation from './component/headerIdeation';
 import ModalVideo from './component/modalNewVideo';
 function QuestionBusIntro() {
   const [activeLink, setActiveLink] = useState("");
