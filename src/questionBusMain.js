@@ -566,7 +566,7 @@ function QuestionBus() {
           </div>
 
         </div>
-        <ReferralModal />
+
 
 
 

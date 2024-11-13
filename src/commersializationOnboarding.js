@@ -18,11 +18,13 @@ function CommersialzationOnboarding() {
     const projectId = localStorage.getItem('nProject');
     console.log(access_token, userId);
     const handleNextClick = async () => {
-        const onboarding = localStorage.getItem('onboarding');
-        if (onboarding === "true") {
+        const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');
+
+        if (onboarding.Commercialization === true) {
             navigate('/commercialization/start');
             return;
         }
+
         try {
             await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError, 'Commercialization');
             navigate('/commercialization/start');
@@ -30,6 +32,7 @@ function CommersialzationOnboarding() {
             console.error('Error updating onboarding status:', error);
         }
     };
+
 
 
 

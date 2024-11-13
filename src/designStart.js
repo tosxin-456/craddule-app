@@ -7,7 +7,7 @@ import circle from './images/circle.png';
 import HeaderIdeation from './component/headerIdeation';
 import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
-
+import SideMenu2I from './component/sideMenu2I';
 function DesignMain() {
     const navigate = useNavigate();
     const [showScrollableDiv, setShowScrollableDiv] = useState(false);
@@ -44,7 +44,7 @@ function DesignMain() {
 
     return (
         <div style={{ fontFamily: '"Manrope", sans-serif' }} className="container2">
-            <SideMenu2 />
+            <SideMenu2I />
             <div className="main-content">
                 <HeaderIdeation />
                 <div className="container relative">

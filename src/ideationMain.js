@@ -54,7 +54,7 @@ function IdeationMain() {
                     <div className="main-content2">
                         <div className="flex mt-[40px] justify-between items-center w-[100%]">
                             <div className="w-fit">
-                                <button onClick={() => navigate(-1)} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
+                                <button onClick={() => navigate('/start')} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
                                     Back
                                 </button>
                             </div>

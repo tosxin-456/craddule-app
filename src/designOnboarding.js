@@ -18,18 +18,22 @@ function DesignOnboarding() {
     const projectId = localStorage.getItem('nProject');
     console.log(access_token, userId);
     const handleNextClick = async () => {
-        const onboarding = localStorage.getItem('onboarding');
-        if (onboarding === "true") {
-            navigate('/design/start');
+
+        const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');
+
+        if (onboarding.InitialDesign === true) {
+           navigate('/design/start');
             return;
         }
+
         try {
-            await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError, 'Design');
-            navigate('/design/start');
+            await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError, 'InitialDesign');
+           navigate('/design/start');
         } catch (error) {
             console.error('Error updating onboarding status:', error);
         }
     };
+
 
 
 
