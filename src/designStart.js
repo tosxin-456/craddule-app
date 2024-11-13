@@ -105,8 +105,8 @@ function DesignMain() {
                                             <button
                                                 onClick={() =>
                                                     handleClickStorage(
-                                                        "BusinessCaseBuilder",
-                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                        "ClaimDomain",
+                                                        "/questionBusMain/InitialDesign/ClaimDomain/Introduction"
                                                     )
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
@@ -186,8 +186,8 @@ function DesignMain() {
                                             <button
                                                 onClick={() =>
                                                     handleClickStorage(
-                                                        "BusinessCaseBuilder",
-                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                        " StakeholdersFeedback",
+                                                        "/questionBusMain/InitialDesign/ StakeholdersFeedback/Introduction"
                                                     )
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
@@ -224,7 +224,12 @@ function DesignMain() {
                                             <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
-                                                onClick={() => navigate("/customFinancial")}
+                                                onClick={() =>
+                                                    handleClickStorage(
+                                                        "SummaryPDF",
+                                                        "/questionBusMain/InitialDesign/SummaryPDF/Introduction"
+                                                    )
+                                                }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
@@ -270,8 +275,8 @@ function DesignMain() {
                                             <button
                                                 onClick={() =>
                                                     handleClickStorage(
-                                                        "BusinessCaseBuilder",
-                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                        "GonoGO",
+                                                        "/questionBusMain/InitialDesign/GonoGO/Introduction"
                                                     )
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"

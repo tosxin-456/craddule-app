@@ -110,8 +110,8 @@ function CommercializationMain() {
                                             <button
                                                 onClick={() =>
                                                     handleClickStorage(
-                                                        "BusinessCaseBuilder",
-                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                        "MVPToFullScale",
+                                                        "/questionBusMain/Commercialization/MVPToFullScale/Introduction"
                                                     )
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
@@ -148,7 +148,12 @@ function CommercializationMain() {
                                             <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
-                                                onClick={() => navigate("/customFinancial")}
+                                                 onClick={() =>
+                                                    handleClickStorage(
+                                                        "RoutetoMarketStrategies",
+                                                        "/questionBusMain/Commercialization/RoutetoMarketStrategies/Introduction"
+                                                    )
+                                                }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
@@ -191,8 +196,8 @@ function CommercializationMain() {
                                             <button
                                                 onClick={() =>
                                                     handleClickStorage(
-                                                        "BusinessCaseBuilder",
-                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                        "SummaryPDF",
+                                                        "/questionBusMain/Commercialization/SummaryPDF/Introduction"
                                                     )
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
@@ -229,7 +234,12 @@ function CommercializationMain() {
                                             <p className="mt-[-20px] sm:mt-[-30px]">{projectPercentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
-                                                onClick={() => navigate("/customFinancial")}
+                                                 onClick={() =>
+                                                    handleClickStorage(
+                                                        "MVPToFullScale",
+                                                        "/questionBusMain/Commercialization/MVPToFullScale/Introduction"
+                                                    )
+                                                }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue

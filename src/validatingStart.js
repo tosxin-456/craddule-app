@@ -114,8 +114,8 @@ function ValidatingMain() {
                                             <button
                                                 onClick={() =>
                                                     handleClickStorage(
-                                                        "BusinessCaseBuilder",
-                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                        " FullProductReview",
+                                                        "/questionBusMain/ValidatingandTesting/ FullProductReview/Introduction"
                                                     )
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
@@ -195,8 +195,8 @@ function ValidatingMain() {
                                             <button
                                                 onClick={() =>
                                                     handleClickStorage(
-                                                        "BusinessCaseBuilder",
-                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                        "  DevelopmentCostReview",
+                                                        "/questionBusMain/ValidatingandTesting/  DevelopmentCostReview/Introduction"
                                                     )
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
@@ -233,7 +233,12 @@ function ValidatingMain() {
                                             <p className="mt-[-20px] sm:mt-[-30px]">{SummaryPDF}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
-                                                onClick={() => navigate("/customFinancial")}
+                                                onClick={() =>
+                                                    handleClickStorage(
+                                                        " SummaryPDF",
+                                                        "/questionBusMain/ValidatingandTesting/ SummaryPDF/Introduction"
+                                                    )
+                                                }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
@@ -279,8 +284,8 @@ function ValidatingMain() {
                                             <button
                                                 onClick={() =>
                                                     handleClickStorage(
-                                                        "BusinessCaseBuilder",
-                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                        " GonoGO",
+                                                        "/questionBusMain/ValidatingandTesting/ GonoGO/Introduction"
                                                     )
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
