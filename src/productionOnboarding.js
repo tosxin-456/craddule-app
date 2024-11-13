@@ -18,18 +18,21 @@ function ProductionOnboarding() {
     const projectId = localStorage.getItem('nProject');
     console.log(access_token, userId);
     const handleNextClick = async () => {
-        const onboarding = localStorage.getItem('onboarding');
-        if (onboarding === "true") {
+        const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');
+
+        if (onboarding.ProductDefinition === true) {
             navigate('/product/start');
             return;
         }
+
         try {
-            await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError, 'Product');
+            await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError, 'ProductDefinition');
             navigate('/product/start');
         } catch (error) {
             console.error('Error updating onboarding status:', error);
         }
     };
+
 
 
 

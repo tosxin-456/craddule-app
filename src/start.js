@@ -33,14 +33,28 @@ function InflationRateGraph({ graphType }) {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
 
-    const handleNavigation = async () => {
-        const ideationSeen = localStorage.getItem('onboarding') === 'true'; 
-        if (!ideationSeen) {
-            navigate('/ideation');
+    const handleNavigation = async (phase) => {
+        const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');
+
+        const phasePaths = {
+            Ideation: '/ideation',
+            ProductDefinition: '/product',
+            InitialDesign: '/design',
+            ValidatingandTesting: '/validate',
+            Commercialization: '/commercialization'
+        };
+
+        // Check if the provided phase has been marked as seen
+        if (onboarding[phase]) {
+            // If seen, navigate to the start page for the phase
+            navigate(`${phasePaths[phase]}/start`);
         } else {
-            navigate('/ideation/start');
+            // If not seen, navigate to the onboarding page for the phase
+            navigate(phasePaths[phase]);
         }
     };
+
+
 
 
     const { access_token, userId } = getUserIdFromToken();
@@ -84,7 +98,7 @@ function InflationRateGraph({ graphType }) {
                                 <div
                                     className="tilt-box bg-[#E8C400D9]"
                                     onClick={() =>
-                                        handleNavigation()
+                                        handleNavigation('Ideation')
                                     }
                                 >
                                     <button className="px-2 py-1 bg-black400 rounded-[10px] mb-[16px] text-white text-[14px]">View</button>
@@ -97,7 +111,7 @@ function InflationRateGraph({ graphType }) {
 
                             {projectDetails && !projectDetails.includes("Product Definition") && (
                                 <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/product_definition.png')] bg-no-repeat bg-cover cursor-pointer relative">
-                                    <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () =>   navigate('/product') : null}>
+                                    <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleNavigation('ProductDefinition') : null}>
                                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                         <p className="p18">Product Definition</p>
                                         <p className="text-[12px]">Design your business processes and flow</p>
@@ -109,7 +123,7 @@ function InflationRateGraph({ graphType }) {
 
                             {projectDetails && !projectDetails.includes("Initial Design") && (
                                 <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/initial_design.png')] bg-no-repeat bg-cover cursor-pointer relative">
-                                    <div className={`tilt-box bg-[#193FAEDE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleClick('/design') : null}>
+                                    <div className={`tilt-box bg-[#193FAEDE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleNavigation('InitialDesign') : null}>
                                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                         <p className="p18">Initial Design</p>
                                         <p className="text-[12px]">Plan design and add members to Team</p>
@@ -121,7 +135,7 @@ function InflationRateGraph({ graphType }) {
 
                             {projectDetails && !projectDetails.includes("Validating and Testing") && (
                                 <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/validating.png')] bg-no-repeat bg-cover cursor-pointer relative">
-                                    <div className={`tilt-box bg-[#FFD700DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => navigate('/validate'): null}>
+                                    <div className={`tilt-box bg-[#FFD700DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleNavigation('ValidatingandTesting') : null}>
                                         <button className="px-2 py-1 bg-black400 rounded-[10px] mb-[16px] text-white text-[14px]">View</button>
                                         <p className="p18">Validating and Testing</p>
                                         <p className="text-[12px]">Test and validate your product</p>
@@ -133,7 +147,7 @@ function InflationRateGraph({ graphType }) {
 
                             {projectDetails && !projectDetails.includes("Commercialization") && (
                                 <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/commercialization.png')] bg-no-repeat bg-cover cursor-pointer relative">
-                                    <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => navigate('/commercialization') : null}>
+                                    <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleNavigation('Commercialization') : null}>
                                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                         <p className="p18">Commercialization</p>
                                         <p className="text-[12px]">Get your product ready to launch for production</p>

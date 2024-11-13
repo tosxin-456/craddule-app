@@ -18,8 +18,8 @@ function IdeationOnboarding() {
     const projectId = localStorage.getItem('nProject');
     console.log(access_token, userId);
     const handleNextClick = async () => {
-        const onboarding = localStorage.getItem('onboarding');
-        if (onboarding === "true") {
+        const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');
+        if (onboarding.Ideation === true) {
             navigate('/ideation/start');
             return;
         }
@@ -30,6 +30,7 @@ function IdeationOnboarding() {
             console.error('Error updating onboarding status:', error);
         }
     };
+
 
 
 

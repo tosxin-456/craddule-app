@@ -4,10 +4,10 @@ import SideMenu2 from './component/sideMenu2';
 import { useNavigate } from 'react-router-dom';
 import home from './images/HOME.png';
 import circle from './images/circle.png';
-
 import HeaderIdeation from './component/headerIdeation';
 import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
+import SideMenu2C from './component/sideMenu2C';
 
 function CommercializationMain() {
     const navigate = useNavigate();
@@ -49,7 +49,7 @@ function CommercializationMain() {
 
     return (
         <div style={{ fontFamily: '"Manrope", sans-serif' }} className="container2">
-            <SideMenu2 />
+            <SideMenu2C />
             <div className="main-content">
                 <HeaderIdeation />
                 <div className="container relative">

@@ -7,6 +7,7 @@ import circle from './images/circle.png';
 import HeaderIdeation from './component/headerIdeation';
 import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
+import SideMenu2P from './component/sideMenu2P';
 
 function ProductionMain() {
     const navigate = useNavigate();
@@ -58,7 +59,7 @@ function ProductionMain() {
 
     return (
         <div style={{ fontFamily: '"Manrope", sans-serif' }} className="container2">
-            <SideMenu2 />
+            <SideMenu2P />
             <div className="main-content">
                 <HeaderIdeation />
                 <div className="container relative">

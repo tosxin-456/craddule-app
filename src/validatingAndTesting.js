@@ -17,19 +17,25 @@ function ValidatingOnboarding() {
     const [error, setError] = useState(null);
     const projectId = localStorage.getItem('nProject');
     console.log(access_token, userId);
+    
     const handleNextClick = async () => {
-        const onboarding = localStorage.getItem('onboarding');
-        if (onboarding === "true") {
+        // Retrieve and parse the onboarding object from localStorage
+        const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');
+
+        // Check if the Ideation phase is true
+        if (onboarding.ValidatingandTesting === true) {
             navigate('/validate/start');
             return;
         }
+
         try {
-            await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError, 'Validating');
+            await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError, 'ValidatingandTesting');
             navigate('/validate/start');
         } catch (error) {
             console.error('Error updating onboarding status:', error);
         }
     };
+
 
     const handleNext = () => {
         setPage(2);

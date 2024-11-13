@@ -243,38 +243,45 @@ export const FetchTimelinesCount = (projectId, userId, access_token, setTimeline
 
 
 export const UpdateOnboardingSeenStatus = async (projectId, userId, access_token, setError, phase) => {
-  console.log(projectId, userId, access_token, phase)
-    try {
-        const response = await fetch(`${API_BASE_URL}/api/onboarding/${projectId}/${userId}/${phase}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${access_token}`,
-            },
-            body: JSON.stringify({ projectId, userId, seen: true }),
-        });
+  console.log(projectId, userId, access_token, phase);
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/onboarding/${projectId}/${userId}/${phase}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`,
+      },
+      body: JSON.stringify({ projectId, userId, seen: true }),
+    });
 
-        if (!response.ok) {
-            throw new Error('Failed to update onboarding status');
-        }
-
-        const data = await response.json();
-        console.log('Onboarding status updated:', data);
-
-        // Update the `seen` status in local storage to 'true'
-        localStorage.setItem('onboarding', true);
-    } catch (error) {
-        console.error(error);
-        setError(error);
-        // Rethrow the error to be caught in handleNextClick
-        throw error;
+    if (!response.ok) {
+      throw new Error('Failed to update onboarding status');
     }
+
+    const data = await response.json();
+    console.log('Onboarding status updated:', data);
+
+    // Retrieve the existing onboarding object from localStorage
+    const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');
+
+    // Update the specific phase's seen status
+    onboarding[phase] = true;
+
+    // Save the updated onboarding object back to localStorage
+    localStorage.setItem('onboarding', JSON.stringify(onboarding));
+  } catch (error) {
+    console.error(error);
+    setError(error);
+    // Rethrow the error to be caught in handleNextClick
+    throw error;
+  }
 };
+
 
 // startUtils.js
 export const FetchGraphData = async (userId, projectId, access_token) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/user/graph-validate/${userId}/${projectId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/user/graph/${userId}/${projectId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
