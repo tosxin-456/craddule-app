@@ -221,6 +221,7 @@ export const FetchTimelinesCount = (projectId, userId, access_token, setTimeline
             'Authorization': `Bearer ${access_token}`,
           },
         });
+        
         if (response.ok) {
           const data = await response.json();
           console.log(data);
