@@ -51,25 +51,27 @@ const ImageUpload = () => {
     <div className=' w-[100%] '>
       <HeaderIdeation />
       <div className="const relative">
-      <div className="flex mt-[40px] justify-between items-center w-[100%]">
-        <div className="w-fit">
-          <button onClick={() => navigate('/start')} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
-            Back
-          </button>
+        <div className="flex mt-[40px] justify-between items-center w-[100%]">
+          <div className="w-fit">
+            <button onClick={() => navigate('/start')} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
+              Back
+            </button>
+          </div>
+          <div>
+            <img src={home} alt="Home Icon" />
+          </div>
         </div>
-        <div>
-          <img src={home} alt="Home Icon" />
-        </div>
-      </div>
         <div className="absolute inset-0 mt-[80px] ml-[20px] sm:ml-[60px] z-[-100] bg-no-repeat bg-cover w-[150px] sm:w-[200px] h-[150px] sm:h-[200px]"
           style={{ backgroundImage: `url(${circle})` }}
         ></div>
         <div className='BoxPhase1'>
-        <div className='text-center'>
-          <p className='centerH'>Share</p>
-          <p className='centerHp'>Here you can share your work</p>
-        </div>
-          <button className="bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl ml-auto " onClick={onClickHandler21}>Feedback</button>
+          <div className='text-center'>
+            <p className='centerH'>Share</p>
+            <p className='centerHp'>Here you can share your work</p>
+          </div>
+          <div className=' w-fit ml-auto' >
+            <button className="bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl " onClick={onClickHandler21}>Feedback</button>
+          </div>
           <div className="lg:grid grid-cols-2 lg:grid-cols-3 lg:gap-3 mt-14">
             <div className="col-span-4">
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
