@@ -16,6 +16,7 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
+import HeaderIdeation from './component/headerIdeation';
 import SideMenu2 from './component/sideMenu2';
 import home from './images/HOME.png';
 import circle from './images/circle.png';
@@ -128,7 +129,22 @@ function ScrapCreateName({ htmlContent }) {
           fontFamily: '"Manrope", sans- serif'
         }}
         className='container'>
+
         <div className="absolute inset-0 mt-[180px] ml-[60px]  z-[-100] bg-no-repeat bg-cover w-[200px] h-[200px] " style={{ backgroundImage: `url(${circle})` }}></div>
+        <div className=' flex justify-evenly mt-[50px] ' >
+          <div className="mr-auto ">
+            <button className="mainBtn" onClick={() => navigate('/start')} >Back</button>
+          </div>
+          <div className=' m-auto' >
+            <p className='text-center font-bold text-[17px] ' > ScrapBook</p>
+            <p className='text-center text-[#545454] font-semibold ' >Create note that you can look back to later</p>
+          </div>
+          <div>
+            <img src={home} />
+
+          </div>
+        </div>
+
         <div className="upload-container">
 
           <div className='main-content2'>

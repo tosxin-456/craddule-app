@@ -17,6 +17,7 @@ import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
+import HeaderIdeation from './component/headerIdeation';
 import SideMenu2P from './component/sideMenu2P';
 import BreadCrumb from './component/breadCrumb';
 import feedback from './images/feedback.svg';

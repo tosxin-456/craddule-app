@@ -301,6 +301,14 @@ import IdeationPage from './component/ideationOnboarding';
 import IdeationMain from './ideationMain';
 import GoNoGoMain from './GoNoGo';
 import { clarity } from 'react-microsoft-clarity';
+import ProductionOnboarding from './productionOnboarding';
+import ProductionMain from './productionStart';
+import DesignOnboarding from './designOnboarding';
+import DesignMain from './designStart';
+import ValidatingOnboarding from './validatingAndTesting';
+import ValidatingMain from './validatingStart';
+import CommersialzationOnboarding from './commersializationOnboarding';
+import CommercializationMain from './commersialzationStart';
 
 function App() {
   const [isTrialExpired, setIsTrialExpired] = useState(false)
@@ -352,8 +360,8 @@ function App() {
           {/* Auth */}
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signUp" element={<SignUp />} />
-          <Route path="/signUp/:referralCode" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup/:referralCode" element={<SignUp />} />
           <Route path="/pageLogin" element={<PageLogin />} />
           <Route path="/terms&conditions" element={<TermAgreement />} />
           <Route path="/privacy" element={<Privacy />} />
@@ -364,12 +372,22 @@ function App() {
 
           <Route path="/home" element={<LandingPage />} />
           <Route path="/start/" element={<Start />} />
-          <Route path="/ideation/" element={<IdeationPage />} />
+          <Route path="/ideation" element={<IdeationPage />} />
+          <Route path="/validate" element={<ValidatingOnboarding />} />
+          <Route path="/commercialization" element={<CommersialzationOnboarding />} />
+          <Route path="/commercialization/start" element={<CommercializationMain />} />
+          <Route path="/validate/start" element={<ValidatingMain />} />
           <Route path="/ideation/start" element={<IdeationMain />} />
+          <Route path="/product/start" element={<ProductionMain />} />
+          <Route path="/design" element={<DesignOnboarding />} />
+          <Route path="/design/start" element={<DesignMain />} />
+
+          <Route path="/product" element={<ProductionOnboarding />} />
 
 
           <Route path="/pitchDeckUpload" element={<PitchDeckUpload />} />
           <Route path="/pitchDeckView" element={<PitchDeckView />} />
+
           <Route path="/pitchDeckResources" element={<PitchDeckResources />} />
           <Route path="/pitchDeckLectures" element={<PitchDeckLectures />} />
           <Route path="/questionBus" element={<QuestionBus />} />
@@ -637,7 +655,7 @@ function App() {
           <Route path="/pdfEndC/" element={<PDFEndC />} />
           <Route path="/pdfMultiple/" element={<PDFMultiple />} />
           <Route path="/firstQuestion/" element={<FirstQuestion />} />
-          <Route path="/ideation/" element={<IdeationStart />} />
+          {/* <Route path="/ideation/" element={<IdeationStart />} /> */}
           <Route path="/accelerate/" element={<Accelerate />} />
           <Route path="/go-no-go" element={<GoNoGoMain />} />
           <Route path="/nda/" element={<Nda />} />

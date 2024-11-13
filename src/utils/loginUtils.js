@@ -28,7 +28,7 @@ export const login = async (data, setLoading, navigate, rememberMe, toast) => {
           localStorage.setItem("password", data.password);
           localStorage.setItem("onboarding", responseData.onboarding || false );
           localStorage.setItem("rememberMe", true);
-          localStorage.setItem("gottenThrough", responseData.user.howDidYouKnowUs);
+          localStorage.setItem("gottenThrough", responseData.user.howDidYouKnowUs || false);
 
         } else {
           localStorage.removeItem("username");
@@ -37,7 +37,7 @@ export const login = async (data, setLoading, navigate, rememberMe, toast) => {
         }
         localStorage.setItem('access_token', token);
         localStorage.setItem("onboarding", responseData.onboarding || false);
-        localStorage.setItem("gottenThrough", responseData.user.howDidYouKnowUs);
+        localStorage.setItem("gottenThrough", responseData.user.howDidYouKnowUs || false);
 
         navigate(`/home`);
       }

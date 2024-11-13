@@ -7,6 +7,7 @@ import ImageModal from './component/imageModal';
 import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import HeaderIdeation from './component/headerIdeation';
 import { ToastContainer, toast } from 'react-toastify';
 import BreadCrumb from './component/breadCrumb';
 import PhoneInput from 'react-phone-input-2';

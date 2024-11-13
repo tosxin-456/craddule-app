@@ -8,7 +8,8 @@ import {API_BASE_URL} from './config/apiConfig';
 import {jwtDecode} from 'jwt-decode';
 import { Toaster, toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import HeaderIdeation from './component/headerIdeation';;
 import { useParams } from 'react-router-dom';
 
 function ExpensesMonthOnMonth() {

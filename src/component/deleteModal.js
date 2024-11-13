@@ -67,7 +67,7 @@ export default function DeleteModal ({open, onClose})  {
             console.log('Access Token:', token);
             localStorage.removeItem('access_token', token);
                   console.log('Logged successfully');
-                    navigate(`/signUp`)
+                    navigate(`/signup`)
         
 
           } else {

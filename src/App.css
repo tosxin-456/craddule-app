@@ -4594,7 +4594,7 @@ HEAD
   flex: 0 0 auto;
   /* margin:5px; */
   transition: 0.3s;
-  border-radius: 20px;
+  border-radius: 25px 0px;
   cursor: pointer;
   transition: 0.5s;
 }

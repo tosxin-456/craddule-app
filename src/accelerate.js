@@ -4,7 +4,8 @@ import { FetchUser, getUserIdFromToken } from './utils/startUtils';
 import updateProject from './utils/projectUtils';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import HeaderIdeation from './component/headerIdeation';;
 
 
 const Accelerate = () => {

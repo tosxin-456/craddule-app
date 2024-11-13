@@ -25,6 +25,7 @@ import {API_BASE_URL} from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import axios from 'axios';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import HeaderIdeation from './component/headerIdeation';
 import { jwtDecode } from "jwt-decode";
 
 

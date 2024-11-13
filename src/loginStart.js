@@ -6,6 +6,7 @@ import { useNavigate,useLocation } from 'react-router-dom';
 import {API_BASE_URL} from './config/apiConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import HeaderIdeation from './component/headerIdeation';
 import { useParams } from 'react-router-dom';
 
 function Login() {
@@ -171,7 +172,7 @@ function Login() {
                 
               </button>
               </form>
-              <button className='btn loginBtn2' onClick={onClickHandler}>Sign Up</button>
+              <button className='btn loginBtn2' onClick={onClickHandler}></button>
           </div>
           
         </div>

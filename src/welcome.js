@@ -21,7 +21,7 @@ function Welcome() {
     };
     const navigate = useNavigate()
     const onClickHandler = () => navigate(`/password`)
-    const onClickHandler1 = () => navigate(`/signUp`)
+    const onClickHandler1 = () => navigate(`/signup`)
     const onClickHandler2 = () => navigate(`/login`)
   return (
 

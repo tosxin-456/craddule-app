@@ -16,6 +16,9 @@ import SideMenu2C from './component/sideMenu2C';
 import SideMenu2V from './component/sideMenu2V';
 import { useNavigate, useParams } from 'react-router-dom';
 import HeaderIdeation from './component/headerIdeation';
+import home from './images/HOME.png';
+import circle from './images/circle.png';
+import feedback from './images/feedback.svg';
 
 function GoPage() {
   useEffect(() => {
@@ -29,7 +32,7 @@ function GoPage() {
   const [totalCount, setTotalCount] = useState(null);
   const [totalCountQ, setTotalCountQ] = useState(null);
   const [percentage, setPercentage] = useState('');
-
+const navigate = useNavigate()
   const projectId = localStorage.getItem('nProject');
   console.log("pro " + projectId);
 
@@ -134,11 +137,23 @@ function GoPage() {
         {phase === 'InitialDesign' && <SideMenu2I />}
         {phase === 'Commercialization' && <SideMenu2C />}
         {phase === 'ValidatingAndTesting' && <SideMenu2V />}
-        <div className="main-content">
+        <div className="main-content relative ">
 
           <HeaderIdeation />
-
+            <div className="absolute inset-0 mt-[80px] ml-[20px] sm:ml-[60px] z-[-100] bg-no-repeat bg-cover w-[150px] sm:w-[200px] h-[150px] sm:h-[200px]"
+              style={{ backgroundImage: `url(${circle})` }}
+            ></div>
           <div className='main-content2'>
+            <div className="flex mt-[40px]  mb-[30px] justify-between items-center w-[100%]">
+              <div className="w-fit">
+                <button onClick={() => navigate('/start')} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
+                  Back
+                </button>
+              </div>
+              <div>
+                <img src={home} alt="Home Icon" />
+              </div>
+            </div>
 
             <div className='bacWHI'>
 
@@ -264,6 +279,16 @@ function GoPage() {
 
           </div>
         </div>
+        <div className="fixed bottom-0 right-0 z-[-100] m-0 p-0 w-[150px] h-[150px] bg-no-repeat"
+          style={{
+            backgroundImage: `url(${feedback})`,
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            margin: '0',
+            padding: '0',
+          }}
+        ></div>
       </div>
     </>
   );

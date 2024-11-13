@@ -20,7 +20,7 @@ function PageLogin() {
     };
     const navigate = useNavigate()
     const onClickHandler = () => navigate(`/viewDocument`)
-    const onClickHandler1 = () => navigate(`/signUp`)
+    const onClickHandler1 = () => navigate(`/signup`)
   return (
 
 <div className='container'>
