@@ -42,6 +42,7 @@ function CommercializationMain() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
+    
     return (
         <div style={{ fontFamily: '"Manrope", sans-serif' }} className="container2">
             <SideMenu2 />
