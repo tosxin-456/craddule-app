@@ -11,8 +11,15 @@ import feedback from './images/feedback.svg';
 function ProductionMain() {
     const navigate = useNavigate();
     const [showScrollableDiv, setShowScrollableDiv] = useState(false);
-    const [businessCaseBuilderPercentage, setBusinessCaseBuilderPercentage] = useState(0);
-    const [customFinancialProjectPercentage, setCustomFinancialProjectPercentage] = useState(0);
+    const [businessAnalysisPack, setBusinessAnalysisPack] = useState(0);
+    const [valueProposition, setValueProposition] = useState(0);
+    const [sucessMatrix, setSucessMatrix] = useState(0);
+    const [branding, setBranding] = useState(0);
+
+    const [gettingyourTeam, setGettingyourTeam] = useState(0);
+    const [marketingStrategies, setMarketingStrategies] = useState(0);
+    const [summaryPDF, setSummaryPDF] = useState(0);
+
     const [projectPercentage, setProjectPercentage] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -24,8 +31,15 @@ function ProductionMain() {
         const loadGraphData = async () => {
             try {
                 const data = await FetchGraphData(userId, projectId, access_token);
-                setBusinessCaseBuilderPercentage(data.businessCaseBuilderPercentage || 0);
-                setCustomFinancialProjectPercentage(data.customFinancialProjectPercentage || 0);
+                setBusinessAnalysisPack(data.BusinessAnalysisPack || 0);
+                setValueProposition(data.ValuePropositionPack || 0);
+                setSucessMatrix(data.SuccessMatrix || 0);
+                setBranding(data.Branding || 0);
+                setMarketingStrategies(data.MarketingStrategies || 0);
+                setSummaryPDF(data.SummaryPDF || 0);
+
+
+                setGettingyourTeam(data.GettingyourTeam || 0);
                 setProjectPercentage(data.projectPercentage || 0);
             } catch (error) {
                 setError(error.message);
@@ -95,18 +109,18 @@ function ProductionMain() {
                                                     stroke="#1B45BF"
                                                     strokeWidth="10"
                                                     strokeDasharray="126"
-                                                    strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (businessAnalysisPack / 100) * 126}
                                                     strokeLinecap="round"
                                                 />
                                             </svg>
                                         </div>
-                                        <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessAnalysisPack}%</p>
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
                                         <button
                                             onClick={() =>
                                                 handleClickStorage(
-                                                    "BusinessCaseBuilder",
-                                                    "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                    "BusinessAnalysisPack",
+                                                    "/questionBusMain/Product/BusinessAnalysisPack/Introduction"
                                                 )
                                             }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
@@ -135,15 +149,20 @@ function ProductionMain() {
                                                     stroke="#1B45BF"
                                                     strokeWidth="10"
                                                     strokeDasharray="126"
-                                                    strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
+                                                    strokeDashoffset={126 - (valueProposition / 100) * 126}
                                                     strokeLinecap="round"
                                                 />
                                             </svg>
                                         </div>
-                                        <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
+                                        <p className="mt-[-20px] sm:mt-[-30px]">{valueProposition}%</p>
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
                                         <button
-                                            onClick={() => navigate("/customFinancial")}
+                                                onClick={() =>
+                                                    handleClickStorage(
+                                                        "ValuePropositionPack",
+                                                        "/questionBusMain/Product/ValuePropositionPack/Introduction"
+                                                    )
+                                                }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
                                             Continue
@@ -176,18 +195,18 @@ function ProductionMain() {
                                                     stroke="#1B45BF"
                                                     strokeWidth="10"
                                                     strokeDasharray="126"
-                                                    strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                    strokeDashoffset={126 - (sucessMatrix / 100) * 126}
                                                     strokeLinecap="round"
                                                 />
                                             </svg>
                                         </div>
-                                        <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                        <p className="mt-[-20px] sm:mt-[-30px]">{sucessMatrix}%</p>
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
                                         <button
                                             onClick={() =>
                                                 handleClickStorage(
-                                                    "BusinessCaseBuilder",
-                                                    "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                    "SuccessMatrix",
+                                                    "/questionBusMain/Product/SuccessMatrix/Introduction"
                                                 )
                                             }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
@@ -216,15 +235,20 @@ function ProductionMain() {
                                                     stroke="#1B45BF"
                                                     strokeWidth="10"
                                                     strokeDasharray="126"
-                                                    strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
+                                                    strokeDashoffset={126 - (gettingyourTeam / 100) * 126}
                                                     strokeLinecap="round"
                                                 />
                                             </svg>
                                         </div>
-                                        <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
+                                        <p className="mt-[-20px] sm:mt-[-30px]">{gettingyourTeam}%</p>
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
                                         <button
-                                            onClick={() => navigate("/customFinancial")}
+                                                onClick={() =>
+                                                    handleClickStorage(
+                                                        "GettingyourTeam",
+                                                        "/questionBusMain/Product/GettingyourTeam/Introduction"
+                                                    )
+                                                }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
                                             Continue
@@ -260,18 +284,18 @@ function ProductionMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (marketingStrategies / 100) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{marketingStrategies}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
                                                     handleClickStorage(
-                                                        "BusinessCaseBuilder",
-                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                        "MarketingStrategies",
+                                                        "/questionBusMain/Product/MarketingStrategies/Introduction"
                                                     )
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
@@ -300,15 +324,20 @@ function ProductionMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (branding / 100) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{branding}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
-                                                onClick={() => navigate("/customFinancial")}
+                                                onClick={() =>
+                                                    handleClickStorage(
+                                                        "Branding",
+                                                        "/questionBusMain/Product/Branding/Introduction"
+                                                    )
+                                                }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
@@ -341,18 +370,18 @@ function ProductionMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (summaryPDF / 100) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{summaryPDF}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
                                                     handleClickStorage(
-                                                        "BusinessCaseBuilder",
-                                                        "/questionBusMain/Ideation/BusinessCaseBuilder/Introduction"
+                                                        " SummaryPDF",
+                                                        "/questionBusMain/Product/ SummaryPDF/Introduction"
                                                     )
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
@@ -381,12 +410,12 @@ function ProductionMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (projectPercentage / 100) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{projectPercentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() => navigate("/customFinancial")}

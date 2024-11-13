@@ -62,7 +62,7 @@ const ImageUpload = () => {
             <img src={home} alt="Home Icon" />
           </div>
         </div>
-        <div className="absolute inset-0 mt-[80px] ml-[20px] sm:ml-[60px] z-[-100] bg-no-repeat bg-cover w-[150px] sm:w-[200px] h-[150px] sm:h-[200px]"
+        <div className="absolute inset-0 mt-[40px] ml-[20px] sm:ml-[60px] z-[-100] bg-no-repeat bg-cover w-[150px] sm:w-[200px] h-[150px] sm:h-[200px]"
           style={{ backgroundImage: `url(${circle})` }}
         ></div>
         <div className='BoxPhase1'>

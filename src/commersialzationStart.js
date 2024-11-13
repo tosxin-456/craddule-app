@@ -14,6 +14,7 @@ function CommercializationMain() {
     const [showScrollableDiv, setShowScrollableDiv] = useState(false);
     const [businessCaseBuilderPercentage, setBusinessCaseBuilderPercentage] = useState(0);
     const [customFinancialProjectPercentage, setCustomFinancialProjectPercentage] = useState(0);
+    const [summaryPDF, setSummaryPDF] = useState(0);
     const [projectPercentage, setProjectPercentage] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -25,9 +26,11 @@ function CommercializationMain() {
         const loadGraphData = async () => {
             try {
                 const data = await FetchGraphData(userId, projectId, access_token);
-                setBusinessCaseBuilderPercentage(data.businessCaseBuilderPercentage || 0);
-                setCustomFinancialProjectPercentage(data.customFinancialProjectPercentage || 0);
+                setBusinessCaseBuilderPercentage(data.MVPToFullScale || 0);
+                setCustomFinancialProjectPercentage(data.RoutetoMarketStrategies || 0);
                 setProjectPercentage(data.projectPercentage || 0);
+                setSummaryPDF(data.SummaryPDF || 0);
+
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -178,12 +181,12 @@ function CommercializationMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (summaryPDF / 100) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{summaryPDF}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
@@ -218,12 +221,12 @@ function CommercializationMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (projectPercentage / 100) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{projectPercentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() => navigate("/customFinancial")}

@@ -11,8 +11,13 @@ import feedback from './images/feedback.svg';
 function ValidatingMain() {
     const navigate = useNavigate();
     const [showScrollableDiv, setShowScrollableDiv] = useState(false);
-    const [businessCaseBuilderPercentage, setBusinessCaseBuilderPercentage] = useState(0);
-    const [customFinancialProjectPercentage, setCustomFinancialProjectPercentage] = useState(0);
+    const [fullProductReview, setFullProductReview] = useState(0);
+    const [GoNoGo, setGoNoGo] = useState(0);
+    const [DetailedMarketingTesting, setDetailedMarketingTesting] = useState(0);
+    const [DevelopmentCostReview, setDevelopmentCostReview] = useState(0);
+    const [SummaryPDF, setSummaryPDF] = useState(0);
+
+
     const [projectPercentage, setProjectPercentage] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -24,9 +29,13 @@ function ValidatingMain() {
         const loadGraphData = async () => {
             try {
                 const data = await FetchGraphData(userId, projectId, access_token);
-                setBusinessCaseBuilderPercentage(data.businessCaseBuilderPercentage || 0);
-                setCustomFinancialProjectPercentage(data.customFinancialProjectPercentage || 0);
+                setFullProductReview(data.FullProductReview || 0);
+                setDetailedMarketingTesting(data.DetailedMarketingTesting || 0);
+                setDevelopmentCostReview(data.DevelopmentCostReview || 0);
+                setSummaryPDF(data.SummaryPDF || 0);
                 setProjectPercentage(data.projectPercentage || 0);
+
+
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -77,7 +86,7 @@ function ValidatingMain() {
                                     {/* Business Case Builder Progress */}
                                     <div className="w-full sm:w-auto">
                                         <p className="text-center font-bold text-[14px] sm:text-[15px]">
-                                            Claim Domain
+                                            Full Product Review
                                         </p>
                                         <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
                                             <div className="flex justify-center items-center">
@@ -95,12 +104,12 @@ function ValidatingMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (fullProductReview / 100) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{fullProductReview}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
@@ -118,7 +127,7 @@ function ValidatingMain() {
 
                                     {/* Custom Financial Project Progress */}
                                     <div className="w-full sm:w-auto sm:ml-auto">
-                                        <p className="text-center font-bold text-[14px] sm:text-[15px]">Stakeholder Engagement</p>
+                                        <p className="text-center font-bold text-[14px] sm:text-[15px]">Detailed Marketing Testing</p>
                                         <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
                                             <div className="flex justify-center items-center">
                                                 <svg width="100" height="60" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
@@ -135,12 +144,12 @@ function ValidatingMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (DetailedMarketingTesting / 100) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{DetailedMarketingTesting}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() => navigate("/customFinancial")}
@@ -158,7 +167,7 @@ function ValidatingMain() {
                                     {/* Business Case Builder Progress */}
                                     <div className="w-full sm:w-auto">
                                         <p className="text-center font-bold text-[14px] sm:text-[15px]">
-                                            Stakeholders Feedback
+                                            Development Cost  Review
                                         </p>
                                         <div className="bg-[#0B1D50] p-[10px] sm:p-[15px] px-[20px] sm:px-[40px] text-white rounded-md text-center">
                                             <div className="flex justify-center items-center">
@@ -176,12 +185,12 @@ function ValidatingMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (DevelopmentCostReview / 100) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{DevelopmentCostReview}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
@@ -216,12 +225,12 @@ function ValidatingMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (SummaryPDF / 100) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{SummaryPDF}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() => navigate("/customFinancial")}
@@ -260,12 +269,12 @@ function ValidatingMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (projectPercentage / 100) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{projectPercentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>

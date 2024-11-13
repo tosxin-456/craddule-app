@@ -274,7 +274,7 @@ export const UpdateOnboardingSeenStatus = async (projectId, userId, access_token
 // startUtils.js
 export const FetchGraphData = async (userId, projectId, access_token) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/user/graph/${userId}/${projectId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/user/graph-validate/${userId}/${projectId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
