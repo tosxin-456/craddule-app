@@ -18,7 +18,7 @@ function Password() {
   const inputs = useRef([]);
   const navigate = useNavigate()
   const onClickHandler = () => navigate(`/viewDocument`)
-  const onClickHandler1 = () => navigate(`/signUp`)
+  const onClickHandler1 = () => navigate(`/signup`)
   const [formData, setFormData] = useState({
     email: ''
   });

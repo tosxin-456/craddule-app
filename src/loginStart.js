@@ -172,7 +172,7 @@ function Login() {
                 
               </button>
               </form>
-              <button className='btn loginBtn2' onClick={onClickHandler}>Sign Up</button>
+              <button className='btn loginBtn2' onClick={onClickHandler}></button>
           </div>
           
         </div>

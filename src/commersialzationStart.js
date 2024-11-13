@@ -4,6 +4,7 @@ import SideMenu2 from './component/sideMenu2';
 import { useNavigate } from 'react-router-dom';
 import home from './images/HOME.png';
 import circle from './images/circle.png';
+
 import HeaderIdeation from './component/headerIdeation';
 import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
@@ -42,7 +43,7 @@ function CommercializationMain() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
-    
+
     return (
         <div style={{ fontFamily: '"Manrope", sans-serif' }} className="container2">
             <SideMenu2 />

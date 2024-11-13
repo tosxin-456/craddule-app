@@ -11,6 +11,7 @@ import home from './images/HOME.png';
 import HeaderIdeation from './component/headerIdeation';
 import circle from './images/circle.png';
 import feedback from './images/feedback.svg';
+import Header from './component/header';
 
 const ImageUpload = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const ImageUpload = () => {
 
   return (
     <div className=' w-[100%] '>
-      <HeaderIdeation />
+      <Header />
       <div className="const relative">
         <div className="flex mt-[40px] justify-between items-center w-[100%]">
           <div className="w-fit">
@@ -101,8 +102,10 @@ const ImageUpload = () => {
           <ShareModal
             open={isOpen}
             onClose={() => setIsOpen(false)}
-            phaseName={selectedPhase}
+            phaseNames={phaseDetails.map((phase) => phase.name)} 
+            selectedPhase={selectedPhase} 
           />
+
         </div>
       </div>
       <div className="fixed bottom-0 right-0 z-[-100] m-0 p-0 w-[150px] h-[150px] bg-no-repeat"

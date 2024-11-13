@@ -360,8 +360,8 @@ function App() {
           {/* Auth */}
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signUp" element={<SignUp />} />
-          <Route path="/signUp/:referralCode" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup/:referralCode" element={<SignUp />} />
           <Route path="/pageLogin" element={<PageLogin />} />
           <Route path="/terms&conditions" element={<TermAgreement />} />
           <Route path="/privacy" element={<Privacy />} />
@@ -655,7 +655,7 @@ function App() {
           <Route path="/pdfEndC/" element={<PDFEndC />} />
           <Route path="/pdfMultiple/" element={<PDFMultiple />} />
           <Route path="/firstQuestion/" element={<FirstQuestion />} />
-          <Route path="/ideation/" element={<IdeationStart />} />
+          {/* <Route path="/ideation/" element={<IdeationStart />} /> */}
           <Route path="/accelerate/" element={<Accelerate />} />
           <Route path="/go-no-go" element={<GoNoGoMain />} />
           <Route path="/nda/" element={<Nda />} />
