@@ -218,7 +218,7 @@ useEffect(() => {
 
         <li onClick={toggleDropdownB}>
                     <CiBoxes />
-                    {isCollapsedB && <span>Bring The MVP To Full Scale {percentage !== null && ` (${percentage}%)`}</span>}
+                    {!isCollapsedB && <span>Bring The MVP To Full Scale {percentage !== null && ` (${percentage}%)`}</span>}
                 </li>
                 {isDropdownOpenB && !isCollapsedB && (
                     <ul className="dropdown">
@@ -236,7 +236,7 @@ useEffect(() => {
 
 <li onClick={toggleDropdownE}>
                     <CiBoxes />
-                    {isCollapsedE && <span>Execute Marketing Route {percentageE !== null && ` (${percentageE}%)`}</span>}
+                    {!isCollapsedE && <span>Execute Marketing Route {percentageE !== null && ` (${percentageE}%)`}</span>}
                 </li>
                 {isDropdownOpenE && !isCollapsedE && (
                     <ul className="dropdown">

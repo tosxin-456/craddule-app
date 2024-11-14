@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import home from './images/HOME.png';
 import circle from './images/circle.png';
 import HeaderIdeation from './component/headerIdeation';
-import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData } from "./utils/startUtils";
+import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData, FetchGraphDataCommerce } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
 import SideMenu2C from './component/sideMenu2C';
 
@@ -25,7 +25,7 @@ function CommercializationMain() {
     useEffect(() => {
         const loadGraphData = async () => {
             try {
-                const data = await FetchGraphData(userId, projectId, access_token);
+                const data = await FetchGraphDataCommerce(userId, projectId, access_token);
                 setBusinessCaseBuilderPercentage(data.MVPToFullScale || 0);
                 setCustomFinancialProjectPercentage(data.RoutetoMarketStrategies || 0);
                 setProjectPercentage(data.projectPercentage || 0);

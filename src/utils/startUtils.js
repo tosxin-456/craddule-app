@@ -221,7 +221,7 @@ export const FetchTimelinesCount = (projectId, userId, access_token, setTimeline
             'Authorization': `Bearer ${access_token}`,
           },
         });
-        
+
         if (response.ok) {
           const data = await response.json();
           console.log(data);
@@ -300,5 +300,90 @@ export const FetchGraphData = async (userId, projectId, access_token) => {
     throw error;
   }
 };
+
+export const FetchGraphDataValidate = async (userId, projectId, access_token) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/user/graph-validate/${userId}/${projectId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch graph data');
+    }
+    const data = await response.json();
+    console.log(data)
+    return data;
+  } catch (error) {
+    console.error("Error fetching graph data:", error);
+    throw error;
+  }
+};
+
+export const FetchGraphDataProduct = async (userId, projectId, access_token) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/user/graph-product/${userId}/${projectId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch graph data');
+    }
+    const data = await response.json();
+    console.log(data)
+    return data;
+  } catch (error) {
+    console.error("Error fetching graph data:", error);
+    throw error;
+  }
+};
+
+export const FetchGraphDataDesign = async (userId, projectId, access_token) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/user/graph-design/${userId}/${projectId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch graph data');
+    }
+    const data = await response.json();
+    console.log(data)
+    return data;
+  } catch (error) {
+    console.error("Error fetching graph data:", error);
+    throw error;
+  }
+};
+
+export const FetchGraphDataCommerce = async (userId, projectId, access_token) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/user/graph-commerce/${userId}/${projectId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch graph data');
+    }
+    const data = await response.json();
+    console.log(data)
+    return data;
+  } catch (error) {
+    console.error("Error fetching graph data:", error);
+    throw error;
+  }
+};
+
 
 

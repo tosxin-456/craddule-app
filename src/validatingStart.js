@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import home from './images/HOME.png';
 import circle from './images/circle.png';
 import HeaderIdeation from './component/headerIdeation';
-import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData } from "./utils/startUtils";
+import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData, FetchGraphDataValidate } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
 import SideMenu2V from './component/sideMenu2V';
 
@@ -29,7 +29,7 @@ function ValidatingMain() {
     useEffect(() => {
         const loadGraphData = async () => {
             try {
-                const data = await FetchGraphData(userId, projectId, access_token);
+                const data = await FetchGraphDataValidate(userId, projectId, access_token);
                 setFullProductReview(data.FullProductReview || 0);
                 setDetailedMarketingTesting(data.DetailedMarketingTesting || 0);
                 setDevelopmentCostReview(data.DevelopmentCostReview || 0);

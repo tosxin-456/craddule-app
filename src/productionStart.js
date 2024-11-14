@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import home from './images/HOME.png';
 import circle from './images/circle.png';
 import HeaderIdeation from './component/headerIdeation';
-import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData } from "./utils/startUtils";
+import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData, FetchGraphDataProduct } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
 import SideMenu2P from './component/sideMenu2P';
 
@@ -31,7 +31,7 @@ function ProductionMain() {
     useEffect(() => {
         const loadGraphData = async () => {
             try {
-                const data = await FetchGraphData(userId, projectId, access_token);
+                const data = await FetchGraphDataProduct(userId, projectId, access_token);
                 setBusinessAnalysisPack(data.BusinessAnalysisPack || 0);
                 setValueProposition(data.ValuePropositionPack || 0);
                 setSucessMatrix(data.SuccessMatrix || 0);

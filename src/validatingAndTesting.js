@@ -7,7 +7,7 @@ import logo from './images/Craddule logo - PNG 2 4.svg'
 import onboard1 from './images/onboardingvalidating1.svg';
 import onboard2 from './images/onboardingdesign2.svg';
 import { updateOnboardingStatus, UpdateOnboardingSeenStatus, getUserIdFromToken } from './utils/startUtils';
-const { access_token, userId } = getUserIdFromToken();
+import { jwtDecode } from "jwt-decode";
 
 function ValidatingOnboarding() {
     const token = localStorage.getItem('onboarding');
@@ -16,8 +16,10 @@ function ValidatingOnboarding() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const projectId = localStorage.getItem('nProject');
-    console.log(access_token, userId);
-    
+    const access_token = localStorage.getItem('access_token');
+    const decodedToken = jwtDecode(access_token);
+    const userId = decodedToken?.userId || null;
+
     const handleNextClick = async () => {
         // Retrieve and parse the onboarding object from localStorage
         const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');
