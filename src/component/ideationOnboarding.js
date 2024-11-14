@@ -7,7 +7,10 @@ import logo from '../images/Craddule logo - PNG 2 4.svg'
 import onboard1 from '../images/onboardingIdeation1.svg';
 import onboard2 from '../images/onboardingIdeation2.svg';
 import { updateOnboardingStatus, UpdateOnboardingSeenStatus, getUserIdFromToken } from '../utils/startUtils';
-const { access_token, userId } = getUserIdFromToken();
+import { jwtDecode } from "jwt-decode";
+const access_token = localStorage.getItem('access_token');
+const decodedToken = jwtDecode(access_token);
+const userId = decodedToken?.userId || null;
 
 function IdeationOnboarding() {
     const token = localStorage.getItem('onboarding');

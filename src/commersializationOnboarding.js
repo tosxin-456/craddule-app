@@ -7,7 +7,10 @@ import logo from './images/Craddule logo - PNG 2 4 (1).svg'
 import onboard1 from './images/onboardingcommersialilzation1.svg';
 import onboard2 from './images/onboardingcommersialilzation2.svg';
 import { updateOnboardingStatus, UpdateOnboardingSeenStatus, getUserIdFromToken } from './utils/startUtils';
-const { access_token, userId } = getUserIdFromToken();
+import { jwtDecode } from "jwt-decode";
+const access_token = localStorage.getItem('access_token');
+const decodedToken = jwtDecode(access_token);
+const userId = decodedToken?.userId || null;
 
 function CommersialzationOnboarding() {
     const token = localStorage.getItem('onboarding');
@@ -16,6 +19,9 @@ function CommersialzationOnboarding() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const projectId = localStorage.getItem('nProject');
+    const access_token = localStorage.getItem('access_token');
+    const decodedToken = jwtDecode(access_token);
+    const userId = decodedToken?.userId || null;
     console.log(access_token, userId);
     const handleNextClick = async () => {
         const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');

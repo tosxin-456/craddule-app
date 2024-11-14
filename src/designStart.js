@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import home from './images/HOME.png';
 import circle from './images/circle.png';
 import HeaderIdeation from './component/headerIdeation';
-import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData } from "./utils/startUtils";
+import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData, FetchGraphDataDesign } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
 import SideMenu2I from './component/sideMenu2I';
 function DesignMain() {
@@ -23,7 +23,7 @@ function DesignMain() {
     useEffect(() => {
         const loadGraphData = async () => {
             try {
-                const data = await FetchGraphData(userId, projectId, access_token);
+                const data = await FetchGraphDataDesign(userId, projectId, access_token);
                 setBusinessCaseBuilderPercentage(data.businessCaseBuilderPercentage || 0);
                 setCustomFinancialProjectPercentage(data.customFinancialProjectPercentage || 0);
                 setProjectPercentage(data.projectPercentage || 0);
@@ -104,10 +104,7 @@ function DesignMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        "ClaimDomain",
-                                                        "/questionBusMain/InitialDesign/ClaimDomain/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/InitialDesign')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
@@ -143,7 +140,7 @@ function DesignMain() {
                                             <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
-                                                onClick={() => navigate("/customFinancial")}
+                                                onClick={() => navigate('pdfEnd/InitialDesign')}
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
@@ -185,10 +182,7 @@ function DesignMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        " StakeholdersFeedback",
-                                                        "/questionBusMain/InitialDesign/ StakeholdersFeedback/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/InitialDesign')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
@@ -225,10 +219,7 @@ function DesignMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        "SummaryPDF",
-                                                        "/questionBusMain/InitialDesign/SummaryPDF/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/InitialDesign')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
@@ -274,10 +265,7 @@ function DesignMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        "GonoGO",
-                                                        "/questionBusMain/InitialDesign/GonoGO/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/InitialDesign')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
