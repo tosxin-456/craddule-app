@@ -1,15 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { CiBoxes,CiCalculator1 ,CiDiscount1,CiGrid2V,CiViewTimeline,CiServer,CiTextAlignJustify,CiVideoOn,CiExport,CiDatabase,CiSettings,CiMicrochip,CiUser} from 'react-icons/ci';
-import { faHome, faUser, faCog, faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import {API_BASE_URL} from '../config/apiConfig';
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  CiBoxes,
+  CiCalculator1,
+  CiDiscount1,
+  CiGrid2V,
+  CiViewTimeline,
+  CiServer,
+  CiTextAlignJustify,
+  CiVideoOn,
+  CiExport,
+  CiDatabase,
+  CiSettings,
+  CiMicrochip,
+  CiUser,
+} from "react-icons/ci";
+import {
+  faHome,
+  faUser,
+  faCog,
+  faTimes,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_BASE_URL } from "../config/apiConfig";
 import { jwtDecode } from "jwt-decode";
 
 const SideMenu2 = () => {
-  
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsedB, setIsCollapsedB] = useState(false);
   const [isCollapsedV, setIsCollapsedV] = useState(false);
   const [isCollapsedS, setIsCollapsedS] = useState(false);
   const [isCollapsedD, setIsCollapsedD] = useState(false);
@@ -19,12 +39,11 @@ const SideMenu2 = () => {
   const [percentageS, setPercentageS] = useState(null);
   const [percentageD, setPercentageD] = useState(null);
 
-  const projectId = localStorage.getItem('nProject');
+  const projectId = localStorage.getItem("nProject");
 
   const toggleMenu = () => {
     setIsCollapsed(!isCollapsed);
   };
-
 
   const toggleMenuV = () => {
     setIsCollapsedV(!isCollapsedV);
@@ -38,86 +57,89 @@ const SideMenu2 = () => {
     setIsCollapsedD(!isCollapsedD);
   };
 
- 
-
-
   const [subTypes, setSubTypes] = useState([]);
   const [subTypesV, setSubTypesV] = useState([]);
   const [subTypesS, setSubTypesS] = useState([]);
   const [subTypesD, setSubTypesD] = useState([]);
-  
+
   const navigate = useNavigate();
 
-  const onClickCB = () => navigate(`/questionBusMain/ProductDefinition/BusinessAnalysisPack`);
+  const onClickCB = () =>
+    navigate(`/questionBusMain/ProductDefinition/BusinessAnalysisPack`);
 
-  const onClickCV = () => navigate(`/questionBusMain/ProductDefinition/ValuePropositionPack`);
+  const onClickCV = () =>
+    navigate(`/questionBusMain/ProductDefinition/ValuePropositionPack`);
 
-  const onClickS = () => navigate(`/questionBusMain/ProductDefinition/SuccessMatrix`);
+  const onClickS = () =>
+    navigate(`/questionBusMain/ProductDefinition/SuccessMatrix`);
 
-  const onClickD = () => navigate(`/questionBusMain/ProductDefinition/DetailedMarketingStrategies`);
+  const onClickD = () =>
+    navigate(`/questionBusMain/ProductDefinition/DetailedMarketingStrategies`);
 
   const onClickB = () => navigate(`/branding`);
   const onClickT = () => navigate(`/teamView`);
 
   useEffect(() => {
     const fetchPercentage = async () => {
-       
-  
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/BusinessAnalysisPack`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-  
-            if (response.status === 200) {
-              
-                const data = await response.json();
-                console.log(response)
-                setPercentage(data.percentage);
-            } else {
-                console.error(`Error fetching percentage: ${response.status} - ${response.statusText}`);
-            }
-        } catch (error) {
-            console.error('Error fetching percentage:', error);
+      try {
+        const response = await fetch(
+          `${API_BASE_URL}/api/algo/${projectId}/BusinessAnalysisPack`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          const data = await response.json();
+          console.log(response);
+          setPercentage(data.percentage);
+        } else {
+          console.error(
+            `Error fetching percentage: ${response.status} - ${response.statusText}`
+          );
         }
+      } catch (error) {
+        console.error("Error fetching percentage:", error);
+      }
     };
-  
+
     if (projectId) {
-        fetchPercentage();
+      fetchPercentage();
     }
   }, [projectId]);
-  
-  
-  
+
   useEffect(() => {
     const fetchPercentage2 = async () => {
-       
-  
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/ValuePropositionPack`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-  
-            if (response.status === 200) {
-              
-                const data = await response.json();
-                console.log(response)
-                setPercentageV(data.percentage);
-            } else {
-                console.error(`Error fetching percentage: ${response.status} - ${response.statusText}`);
-            }
-        } catch (error) {
-            console.error('Error fetching percentage:', error);
+      try {
+        const response = await fetch(
+          `${API_BASE_URL}/api/algo/${projectId}/ValuePropositionPack`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          const data = await response.json();
+          console.log(response);
+          setPercentageV(data.percentage);
+        } else {
+          console.error(
+            `Error fetching percentage: ${response.status} - ${response.statusText}`
+          );
         }
+      } catch (error) {
+        console.error("Error fetching percentage:", error);
+      }
     };
-  
+
     if (projectId) {
       fetchPercentage2();
     }
@@ -125,30 +147,32 @@ const SideMenu2 = () => {
 
   useEffect(() => {
     const fetchPercentage3 = async () => {
-       
-  
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/SuccessMatrix`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-  
-            if (response.status === 200) {
-              
-                const data = await response.json();
-                console.log(response)
-                setPercentageS(data.percentage);
-            } else {
-                console.error(`Error fetching percentage: ${response.status} - ${response.statusText}`);
-            }
-        } catch (error) {
-            console.error('Error fetching percentage:', error);
+      try {
+        const response = await fetch(
+          `${API_BASE_URL}/api/algo/${projectId}/SuccessMatrix`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          const data = await response.json();
+          console.log(response);
+          setPercentageS(data.percentage);
+        } else {
+          console.error(
+            `Error fetching percentage: ${response.status} - ${response.statusText}`
+          );
         }
+      } catch (error) {
+        console.error("Error fetching percentage:", error);
+      }
     };
-  
+
     if (projectId) {
       fetchPercentage3();
     }
@@ -156,345 +180,410 @@ const SideMenu2 = () => {
 
   useEffect(() => {
     const fetchPercentage4 = async () => {
-       
-  
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/algo/${projectId}/DetailedMarketingStrategies`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-  
-            if (response.status === 200) {
-              
-                const data = await response.json();
-                console.log(response)
-                setPercentageD(data.percentage);
-            } else {
-                console.error(`Error fetching percentage: ${response.status} - ${response.statusText}`);
-            }
-        } catch (error) {
-            console.error('Error fetching percentage:', error);
+      try {
+        const response = await fetch(
+          `${API_BASE_URL}/api/algo/${projectId}/DetailedMarketingStrategies`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          const data = await response.json();
+          console.log(response);
+          setPercentageD(data.percentage);
+        } else {
+          console.error(
+            `Error fetching percentage: ${response.status} - ${response.statusText}`
+          );
         }
+      } catch (error) {
+        console.error("Error fetching percentage:", error);
+      }
     };
-  
+
     if (projectId) {
       fetchPercentage4();
     }
   }, [projectId]);
 
   const handleSubTypeClick = (subType) => {
-    window.location.href =`/questionBusMain/ProductDefinition/BusinessAnalysisPack/${subType}`;
-};
-const handleSubTypeClickV = (subType) => {
-  window.location.href =`/questionBusMain/ProductDefinition/ValuePropositionPack/${subType}`;
-};
+    window.location.href = `/questionBusMain/ProductDefinition/BusinessAnalysisPack/${subType}`;
+  };
+  const handleSubTypeClickV = (subType) => {
+    window.location.href = `/questionBusMain/ProductDefinition/ValuePropositionPack/${subType}`;
+  };
 
-const handleSubTypeClickS = (subType) => {
-  window.location.href =`/questionBusMain/ProductDefinition/SuccessMatrix/${subType}`;
-};
+  const handleSubTypeClickS = (subType) => {
+    window.location.href = `/questionBusMain/ProductDefinition/SuccessMatrix/${subType}`;
+  };
 
-const handleSubTypeClickD = (subType) => {
-  window.location.href =`/questionBusMain/ProductDefinition/DetailedMarketingStrategies/${subType}`;
-};
+  const handleSubTypeClickD = (subType) => {
+    window.location.href = `/questionBusMain/ProductDefinition/DetailedMarketingStrategies/${subType}`;
+  };
 
-const onClickCHPdA = () => navigate(`/pdfEnd/ProductDefinition`);
+  const onClickCHPdA = () => navigate(`/pdfEnd/ProductDefinition`);
 
   const onClickCG = () => navigate(`/go/ProductDefinition`);
 
   const onClickCH = () => navigate(`/start`);
 
-  const token = localStorage.getItem('access_token'); 
-const decodedToken = jwtDecode(token);
-const userId = decodedToken.userId;
+  const token = localStorage.getItem("access_token");
+  const decodedToken = jwtDecode(token);
+  const userId = decodedToken.userId;
 
-const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(true);
 
-const handleClosePopup = () => {
-  setShowPopup(false);
-};
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
 
-const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-const [isDropdownOpenV, setIsDropdownOpenV] = useState(false);
-const [isDropdownOpenS, setIsDropdownOpenS] = useState(false);
-const [isDropdownOpenD, setIsDropdownOpenD] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpenV, setIsDropdownOpenV] = useState(false);
+  const [isDropdownOpenS, setIsDropdownOpenS] = useState(false);
+  const [isDropdownOpenD, setIsDropdownOpenD] = useState(false);
 
-const toggleDropdown = () => {
+  const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
-};
+  };
 
+  const toggleDropdownV = () => {
+    setIsDropdownOpenV(!isDropdownOpenV);
+  };
 
-const toggleDropdownV = () => {
-  setIsDropdownOpenV(!isDropdownOpenV);
-};
+  const toggleDropdownS = () => {
+    setIsDropdownOpenS(!isDropdownOpenS);
+  };
 
-const toggleDropdownS = () => {
-  setIsDropdownOpenS(!isDropdownOpenS);
-};
-
-
-const toggleDropdownD = () => {
-  setIsDropdownOpenD(!isDropdownOpenD);
-};
-const onClickCHPd = (subType) => {
-  navigate(`/pdf/ProductDefinition/${subType}`);
-};
-useEffect(() => {
-    const questionType = 'BusinessAnalysisPack'
+  const toggleDropdownD = () => {
+    setIsDropdownOpenD(!isDropdownOpenD);
+  };
+  const onClickCHPd = (subType) => {
+    navigate(`/pdf/ProductDefinition/${subType}`);
+  };
+  useEffect(() => {
+    const questionType = "BusinessAnalysisPack";
     const fetchSubTypes = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/question/cat/${questionType}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-        
-        if(response.ok) {
+        const response = await fetch(
+          `${API_BASE_URL}/api/question/cat/${questionType}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
           const data = await response.json();
+          console.log(data);
           console.log(data);
           console.log(data.data);
           setSubTypes(data);
-        
         } else {
-          console.error('Failed to fetch next question');
+          console.error("Failed to fetch next question");
         }
       } catch (error) {
-        console.error('Error fetching next question:', error);
+        console.error("Error fetching next question:", error);
       }
     };
-  
+
     fetchSubTypes();
   }, []);
 
   useEffect(() => {
-    const questionType = 'ValuePropositionPack'
+    const questionType = "ValuePropositionPack";
     const fetchSubTypes = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/question/cat/${questionType}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-        
-        if(response.ok) {
+        const response = await fetch(
+          `${API_BASE_URL}/api/question/cat/${questionType}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
           const data = await response.json();
           console.log(data);
           console.log(data.data);
           setSubTypesV(data);
-        
         } else {
-          console.error('Failed to fetch next question');
+          console.error("Failed to fetch next question");
         }
       } catch (error) {
-        console.error('Error fetching next question:', error);
+        console.error("Error fetching next question:", error);
       }
     };
-  
+
     fetchSubTypes();
   }, []);
 
   useEffect(() => {
-    const questionType = 'SuccessMatrix'
+    const questionType = "SuccessMatrix";
     const fetchSubTypes = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/question/cat/${questionType}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-        
-        if(response.ok) {
+        const response = await fetch(
+          `${API_BASE_URL}/api/question/cat/${questionType}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
           const data = await response.json();
           console.log(data);
           console.log(data.data);
           setSubTypesS(data);
-        
         } else {
-          console.error('Failed to fetch next question');
+          console.error("Failed to fetch next question");
         }
       } catch (error) {
-        console.error('Error fetching next question:', error);
+        console.error("Error fetching next question:", error);
       }
     };
-  
+
     fetchSubTypes();
   }, []);
 
-
   useEffect(() => {
-    const questionType = 'DetailedMarketingStrategies'
+    const questionType = "DetailedMarketingStrategies";
     const fetchSubTypes = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/question/cat/${questionType}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-        
-        if(response.ok) {
+        const response = await fetch(
+          `${API_BASE_URL}/api/question/cat/${questionType}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
           const data = await response.json();
           console.log(data);
           console.log(data.data);
           setSubTypesD(data);
-        
         } else {
-          console.error('Failed to fetch next question');
+          console.error("Failed to fetch next question");
         }
       } catch (error) {
-        console.error('Error fetching next question:', error);
+        console.error("Error fetching next question:", error);
       }
     };
-  
+
     fetchSubTypes();
   }, []);
 
   function handleLogout() {
     // Clear local storage
     localStorage.clear();
-    
+
     // Redirect to login page or any other appropriate action
-    window.location.href = '/login';
+    window.location.href = "/login";
   }
 
   return (
     <>
-    
-    <div className={`side-menu ${!isCollapsed ? 'collapsed' : ''}`}>
-      <div className="menu-toggle" onClick={toggleMenu}>
-        <FontAwesomeIcon icon={!isCollapsed ? faPlus : faTimes} className='close2'/>
-      </div>
-      <div className="menu-content">
-      <ul>
-     
+      <div className={`side-menu ${!isCollapsed ? "collapsed" : ""}`}>
+        <div className="menu-toggle" onClick={toggleMenu}>
+          <FontAwesomeIcon
+            icon={!isCollapsed ? faPlus : faTimes}
+            className="close2"
+          />
+        </div>
+        <div className="menu-content">
+          <ul>
+            <li onClick={onClickCH}>
+              <CiBoxes />
+              {isCollapsed && <span>Home</span>}
+            </li>
 
-
-        <li onClick={onClickCH}> 
-          <CiBoxes />
-          {isCollapsed && <span>Home</span>}
-        </li>
-        
-
-        <li onClick={toggleDropdown}>
-                    <CiBoxes />
-                    {isCollapsed && <span>Business Analysis Pack {percentage !== null && ` (${percentage}%)`}</span>}
+            <li onClick={toggleDropdown}>
+              <CiBoxes />
+              {isCollapsed && (
+                <span>
+                  Business Analysis Pack{" "}
+                  {percentage !== null && ` (${percentage}%)`}
+                </span>
+              )}
+            </li>
+            {isDropdownOpen && !isCollapsedB && (
+              <ul className="dropdown">
+                {subTypes.map((subType, index) => (
+                  <li
+                    key={index}
+                    className="dropDownNew"
+                    onClick={() => handleSubTypeClick(subType.subCategory)}
+                  >
+                    {subType.subCategoryName}
+                  </li>
+                ))}
+                <li
+                  className="dropDownNew"
+                  onClick={() => onClickCHPd("BusinessAnalysisPack")}
+                >
+                  Summary PDF
                 </li>
-                {isDropdownOpen && !isCollapsed && (
-                    <ul className="dropdown">
-                          {subTypes.map((subType, index) => (
-                              <li key={index} className='dropDownNew' onClick={() => handleSubTypeClick(subType.subCategory)}>
-                                 {subType.subCategoryName}
-                              </li>
-                          ))}
-                          <li className='dropDownNew' onClick={() => onClickCHPd('BusinessAnalysisPack')}>
-                            Summary PDF
-                          </li>
-                    </ul>
-                )}
+              </ul>
+            )}
 
-          
-<li onClick={toggleDropdownV}>
-                    <CiBoxes />
-                    {isCollapsed && <span>Value Proposition Packs (VPP) {percentageV !== null && ` (${percentageV}%)`}</span>}
+            <li onClick={toggleDropdownV}>
+              <CiBoxes />
+              {isCollapsed && (
+                <span>
+                  Value Proposition Packs (VPP){" "}
+                  {percentageV !== null && ` (${percentageV}%)`}
+                </span>
+              )}
+            </li>
+            {isDropdownOpenV && !isCollapsedV && (
+              <ul className="dropdown">
+                {subTypesV.map((subType, index) => (
+                  <li
+                    key={index}
+                    className="dropDownNew"
+                    onClick={() => handleSubTypeClickV(subType.subCategory)}
+                  >
+                    {subType.subCategoryName}
+                  </li>
+                ))}
+                <li
+                  className="dropDownNew"
+                  onClick={() => onClickCHPd("ValuePropositionPack")}
+                >
+                  Summary PDF
                 </li>
-                {isDropdownOpenV && !isCollapsed && (
-                    <ul className="dropdown">
-                          {subTypesV.map((subType, index) => (
-                              <li key={index} className='dropDownNew' onClick={() => handleSubTypeClickV(subType.subCategory)}>
-                                 {subType.subCategoryName}
-                              </li>
-                          ))}
-                          <li className='dropDownNew' onClick={() => onClickCHPd('ValuePropositionPack')}>
-                            Summary PDF
-                          </li>
-                    </ul>
-                )}
+              </ul>
+            )}
 
+            <li onClick={toggleDropdownS}>
+              <CiBoxes />
+              {isCollapsed && (
+                <span>
+                  Success Matrix {percentageS !== null && ` (${percentageS}%)`}
+                </span>
+              )}
+            </li>
 
-      <li onClick={toggleDropdownS}>
-                    <CiBoxes />
-                    {isCollapsed && <span>Success Matrix {percentageS !== null && ` (${percentageS}%)`}</span>}
+            {isDropdownOpenS && isCollapsed && (
+              <ul className="dropdown">
+                {subTypesS.map((subType, index) => (
+                  <li
+                    key={index}
+                    className="dropDownNew"
+                    onClick={() => handleSubTypeClickS(subType.subCategory)}
+                  >
+                    {subType.subCategoryName}
+                  </li>
+                ))}
+                <li
+                  className="dropDownNew"
+                  onClick={() => onClickCHPd("SuccessMatrix")}
+                >
+                  Summary PDF
                 </li>
-                {isDropdownOpenS && isCollapsed && (
-                    <ul className="dropdown">
-                          {subTypesS.map((subType, index) => (
-                              <li key={index} className='dropDownNew' onClick={() => handleSubTypeClickS(subType.subCategory)}>
-                                 {subType.subCategoryName}
-                              </li>
-                          ))}
-                          <li className='dropDownNew' onClick={() => onClickCHPd('SuccessMatrix')}>
-                            Summary PDF
-                          </li>
-                    </ul>
-                )}
-
-
-       
-        <li onClick={onClickT}>
-            <CiCalculator1 />
-          
-          {isCollapsed && <span>Getting Your Team</span>}
-        </li>
-
-        <li onClick={toggleDropdownD}>
-                    <CiBoxes />
-                    {isCollapsed && <span>Detailed Marketing Strategies {percentageD !== null && ` (${percentageD}%)`}</span>}
+              </ul>
+            )}
+            {isDropdownOpenS && isCollapsedS && (
+              <ul className="dropdown">
+                {subTypesS.map((subType, index) => (
+                  <li
+                    key={index}
+                    className="dropDownNew"
+                    onClick={() => handleSubTypeClickS(subType.subCategory)}
+                  >
+                    {subType.subCategoryName}
+                  </li>
+                ))}
+                <li
+                  className="dropDownNew"
+                  onClick={() => onClickCHPd("SuccessMatrix")}
+                >
+                  Summary PDF
                 </li>
-                {isDropdownOpenD && !isCollapsed && (
-                    <ul className="dropdown">
-                          {subTypesD.map((subType, index) => (
-                              <li key={index} className='dropDownNew' onClick={() => handleSubTypeClickD(subType.subCategory)}>
-                                 {subType.subCategoryName}
-                              </li>
-                          ))}
-                          <li className='dropDownNew' onClick={() => onClickCHPd('DetailedMarketingStrategies')}>
-                            Summary PDF
-                          </li>
-                    </ul>
-                )}
+              </ul>
+            )}
 
-       
+            <li onClick={onClickT}>
+              <CiCalculator1 />
 
-        <li onClick={onClickB}>
-            <CiCalculator1 />
-          
-          {isCollapsed && <span>Branding</span>}
-        </li>
-        
-        <li onClick={onClickCHPdA}>
-            <CiServer />
-          {isCollapsed && <span>Summary Pdf</span>}
-        </li>
+              {isCollapsed && <span>Getting Your Team</span>}
+            </li>
 
-        <li onClick={onClickCG}>
-        <CiGrid2V />
-          {isCollapsed && <span>Go no Go</span>}
-        </li>
+            <li onClick={toggleDropdownD}>
+              <CiBoxes />
+              {isCollapsed && (
+                <span>
+                  Detailed Marketing Strategies{" "}
+                  {percentageD !== null && ` (${percentageD}%)`}
+                </span>
+              )}
+            </li>
+            {isDropdownOpenD && !isCollapsedD && (
+              <ul className="dropdown">
+                {subTypesD.map((subType, index) => (
+                  <li
+                    key={index}
+                    className="dropDownNew"
+                    onClick={() => handleSubTypeClickD(subType.subCategory)}
+                  >
+                    {subType.subCategoryName}
+                  </li>
+                ))}
+                <li
+                  className="dropDownNew"
+                  onClick={() => onClickCHPd("DetailedMarketingStrategies")}
+                >
+                  Summary PDF
+                </li>
+              </ul>
+            )}
 
-        {/* <li>
+            <li onClick={onClickB}>
+              <CiCalculator1 />
+
+              {isCollapsed && <span>Branding</span>}
+            </li>
+
+            <li onClick={onClickCHPdA}>
+              <CiServer />
+              {isCollapsed && <span>Summary Pdf</span>}
+            </li>
+
+            <li onClick={onClickCG}>
+              <CiGrid2V />
+              {isCollapsed && <span>Go no Go</span>}
+            </li>
+
+            {/* <li>
 
           <CiViewTimeline />
           {!isCollapsed && <span>Timeline Builder</span>}
         </li> */}
-        
-       
 
-        {isCollapsed && (
-        <div className='text-center'>
-            <hr className='buiy'></hr>
-            <p style={{paddingTop:0}}>Account</p>
-        </div>
-        )}
-        {/* <li>
+            {isCollapsed && (
+              <div className="text-center">
+                <hr className="buiy"></hr>
+                <p style={{ paddingTop: 0 }}>Account</p>
+              </div>
+            )}
+            {/* <li>
           <FontAwesomeIcon icon={faCog} />
           {!isCollapsed && <span>Change Password</span>}
         </li>
@@ -504,14 +593,13 @@ useEffect(() => {
           {!isCollapsed && <span>Edit Profile</span>}
         </li> */}
 
-        <li onClick={handleLogout}>
-          <FontAwesomeIcon icon={faCog} />
-          {isCollapsed && <span>Logout</span>}
-        </li>
-
-      </ul>
+            <li onClick={handleLogout}>
+              <FontAwesomeIcon icon={faCog} />
+              {isCollapsed && <span>Logout</span>}
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
     </>
   );
 };
