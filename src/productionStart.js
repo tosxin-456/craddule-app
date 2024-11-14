@@ -119,10 +119,7 @@ function ProductionMain() {
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
                                         <button
                                             onClick={() =>
-                                                handleClickStorage(
-                                                    "BusinessAnalysisPack",
-                                                    "/questionBusMain/ProductDefinition/BusinessAnalysisPack/Introduction"
-                                                )
+                                                    navigate('pdfEnd/ProductDefinition')
                                             }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
@@ -159,10 +156,7 @@ function ProductionMain() {
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
                                         <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        "ValuePropositionPack",
-                                                        "/questionBusMain/ProductDefinition/ValuePropositionPack/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/ProductDefinition')
                                                 }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
@@ -205,10 +199,7 @@ function ProductionMain() {
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
                                         <button
                                             onClick={() =>
-                                                handleClickStorage(
-                                                    "SuccessMatrix",
-                                                    "/questionBusMain/ProductDefinition/SuccessMatrix/Introduction"
-                                                )
+                                                    navigate('pdfEnd/ProductDefinition')
                                             }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
@@ -245,10 +236,7 @@ function ProductionMain() {
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
                                         <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        "GettingyourTeam",
-                                                        "/questionBusMain/ProductDefinition/GettingyourTeam/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/ProductDefinition')
                                                 }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
@@ -294,10 +282,7 @@ function ProductionMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        "MarketingStrategies",
-                                                        "/questionBusMain/ProductDefinition/MarketingStrategies/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/ProductDefinition')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
@@ -334,10 +319,7 @@ function ProductionMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        "Branding",
-                                                        "/questionBusMain/ProductDefinition/Branding/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/ProductDefinition')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
@@ -380,10 +362,7 @@ function ProductionMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        " SummaryPDF",
-                                                        "/questionBusMain/ProductDefinition/ SummaryPDF/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/ProductDefinition')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >

@@ -109,10 +109,7 @@ function CommercializationMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        "MVPToFullScale",
-                                                        "/questionBusMain/Commercialization/MVPToFullScale/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/ProductDefinition')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >

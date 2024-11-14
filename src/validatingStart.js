@@ -114,10 +114,7 @@ function ValidatingMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        " FullProductReview",
-                                                        "/questionBusMain/ValidatingandTesting/ FullProductReview/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/ValidatingAndTesting')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
@@ -153,7 +150,7 @@ function ValidatingMain() {
                                             <p className="mt-[-20px] sm:mt-[-30px]">{DetailedMarketingTesting}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
-                                                onClick={() => navigate("/customFinancial")}
+                                                onClick={() => navigate('pdfEnd/ValidatingAndTesting')}
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
@@ -195,10 +192,7 @@ function ValidatingMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        "  DevelopmentCostReview",
-                                                        "/questionBusMain/ValidatingandTesting/  DevelopmentCostReview/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/ValidatingAndTesting')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
@@ -235,10 +229,7 @@ function ValidatingMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        " SummaryPDF",
-                                                        "/questionBusMain/ValidatingandTesting/ SummaryPDF/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/ValidatingAndTesting')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
@@ -284,10 +275,7 @@ function ValidatingMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        " GonoGO",
-                                                        "/questionBusMain/ValidatingandTesting/ GonoGO/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/ValidatingAndTesting')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >

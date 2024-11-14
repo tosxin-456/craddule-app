@@ -104,10 +104,7 @@ function DesignMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        "ClaimDomain",
-                                                        "/questionBusMain/InitialDesign/ClaimDomain/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/InitialDesign')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
@@ -143,7 +140,7 @@ function DesignMain() {
                                             <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
-                                                onClick={() => navigate("/customFinancial")}
+                                                onClick={() => navigate('pdfEnd/InitialDesign')}
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
@@ -185,10 +182,7 @@ function DesignMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        " StakeholdersFeedback",
-                                                        "/questionBusMain/InitialDesign/ StakeholdersFeedback/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/InitialDesign')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
@@ -225,10 +219,7 @@ function DesignMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        "SummaryPDF",
-                                                        "/questionBusMain/InitialDesign/SummaryPDF/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/InitialDesign')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
@@ -274,10 +265,7 @@ function DesignMain() {
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
-                                                    handleClickStorage(
-                                                        "GonoGO",
-                                                        "/questionBusMain/InitialDesign/GonoGO/Introduction"
-                                                    )
+                                                    navigate('pdfEnd/InitialDesign')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
