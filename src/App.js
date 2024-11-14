@@ -312,7 +312,7 @@ import CommercializationMain from './commersialzationStart';
 
 function App() {
   const [isTrialExpired, setIsTrialExpired] = useState(false)
-  clarity.init('opznx72eqw');
+  clarity.init('ocijdfgrpz');
   // const socket = io('http://localhost:3001');
   const { userId } = getUserIdFromToken();
 
