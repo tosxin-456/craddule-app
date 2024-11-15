@@ -43,6 +43,21 @@ export const updateStreak = async (setStreak) => {
   }
 };
 
+export const CheckOnboarding = async () => {
+  try {
+    const token = localStorage.getItem('access_token');
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.userId;
+    const projectId = localStorage.getItem('nProject');
+
+    const response = await axios.post(`${API_BASE_URL}/api/onboarding${projectId}/${userId}/picked`);
+    console.log(response)
+    localStorage.setItem("onboarding", JSON.stringify(response.onboardingStatuses));
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
 // Decode JWT token and get user ID
 export const getUserIdFromToken = () => {
   const access_token = localStorage.getItem('access_token');

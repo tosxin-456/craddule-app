@@ -14,7 +14,7 @@ import {
   formatDate,
 } from './utils/landingPageUtils.js'; // Import utilities
 import GetCard from './getCard.js';
-import { getUserIdFromToken } from './utils/startUtils.js';
+import { CheckOnboarding, getUserIdFromToken } from './utils/startUtils.js';
 
 function LandingPage() {
   const [projects, setProjects] = useState([]);
@@ -40,6 +40,7 @@ function LandingPage() {
     localStorage.setItem('nProject', projectId);
     localStorage.setItem('nProjectName', name);
     localStorage.setItem('nProjectCount', count);
+    CheckOnboarding()
     navigate(`/start`);
   };
 
