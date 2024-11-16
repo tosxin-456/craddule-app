@@ -12,6 +12,7 @@ import home from './images/Create.svg';
 import plus from './images/plus.svg';
 import feedback from './images/feedback.svg';
 import circle from './images/circle.png';
+import bg from './images/pattern_big.png';
 
 function CreateKpi() {
 
@@ -214,13 +215,15 @@ function CreateKpi() {
 
                         </div>
                     </div>
-                    <div className='bacWHI'>
+                    <div >
+                        <div className="bacWHITe"
+                    >
                         <p className='text-center text-black font-bolder '>Create KPI</p>
                         <p className='gname'>Kpi Name</p>
                         <input
                             placeholder='Input KPI name'
                             className='monthOn1 mmj'
-                            value={graphName} // Bind the value of the input field to the state variable
+                            value={graphName} // Bind the value oTef the input field to the state variable
                             onChange={handleInputChangeName} // Call the handleInputChange function when the input value changes
                         />
                         <p className='mt-[10px] text-[#BOBOBO] mb-[7px]  ' >Kpi Name</p>
@@ -282,6 +285,8 @@ function CreateKpi() {
                             <button onClick={handleSubmit} className='subm  '>Submit Data</button>
 
                         </div>
+                    </div>
+
                     </div>
                 </div>
             </div>
