@@ -8,6 +8,8 @@ import HeaderIdeation from './component/headerIdeation';
 import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData, FetchGraphDataCommerce } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
 import SideMenu2C from './component/sideMenu2C';
+import { API_BASE_URL } from "./config/apiConfig";
+const token = localStorage.getItem("access_token");
 
 function CommercializationMain() {
     const navigate = useNavigate();
@@ -18,9 +20,77 @@ function CommercializationMain() {
     const [projectPercentage, setProjectPercentage] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [percentage, setPercentage] = useState(null);
+    const [percentageE, setPercentageE] = useState(null);
 
     const projectId = localStorage.getItem('nProject');
     const { access_token, userId } = getUserIdFromToken();
+
+    useEffect(() => {
+        const fetchPercentage = async () => {
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/algo/${projectId}/BringTheMVPToFullScale`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log(response);
+                    setPercentage(data.percentage);
+                } else {
+                    console.error(
+                        `Error fetching percentage: ${response.status} - ${response.statusText}`
+                    );
+                }
+            } catch (error) {
+                console.error("Error fetching percentage:", error);
+            }
+        };
+
+        if (projectId) {
+            fetchPercentage();
+        }
+    }, [projectId]);
+
+    useEffect(() => {
+        const fetchPercentage2 = async () => {
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/algo/${projectId}/ExecuteTheMarketingAndRouteToMarketStrategies`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log(response);
+                    setPercentageE(data.percentage);
+                } else {
+                    console.error(
+                        `Error fetching percentage: ${response.status} - ${response.statusText}`
+                    );
+                }
+            } catch (error) {
+                console.error("Error fetching percentage:", error);
+            }
+        };
+
+        if (projectId) {
+            fetchPercentage2();
+        }
+    }, [projectId]);
 
     useEffect(() => {
         const loadGraphData = async () => {
@@ -100,21 +170,21 @@ function CommercializationMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (percentage) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{percentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
-                                            <button
+                                            {/* <button
                                                 onClick={() =>
                                                     navigate('pdfEnd/ProductDefinition')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </div>
 
@@ -137,12 +207,12 @@ function CommercializationMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (percentageE) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{percentageE}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                  onClick={() =>
@@ -190,7 +260,7 @@ function CommercializationMain() {
                                             </div>
                                             <p className="mt-[-20px] sm:mt-[-30px]">{summaryPDF}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
-                                            <button
+                                            {/* <button
                                                 onClick={() =>
                                                     handleClickStorage(
                                                         "SummaryPDF",
@@ -200,7 +270,7 @@ function CommercializationMain() {
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </div>
 
@@ -230,7 +300,7 @@ function CommercializationMain() {
                                             </div>
                                             <p className="mt-[-20px] sm:mt-[-30px]">{projectPercentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
-                                            <button
+                                            {/* <button
                                                  onClick={() =>
                                                     handleClickStorage(
                                                         "MVPToFullScale",
@@ -240,7 +310,7 @@ function CommercializationMain() {
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </div>
 

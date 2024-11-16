@@ -11,6 +11,7 @@ import SideMenu2P from './component/sideMenu2P';
 import home from './images/Create.svg';
 import plus from './images/plus.svg';
 import feedback from './images/feedback.svg';
+import circle from './images/circle.png';
 
 function CreateKpi() {
 
@@ -202,10 +203,12 @@ function CreateKpi() {
                         <div className="mr-auto ">
                             <button className="mainBtn" onClick={() => navigate('/kpi')} >Back</button>
                         </div>
+                        <div className="absolute inset-0 mt-[150px] ml-[60px]  z-[-100] bg-no-repeat bg-cover w-[200px] h-[200px] " style={{ backgroundImage: `url(${circle})` }}></div>
                         <div className=' m-auto' >
                             <p className='text-center font-bolder text-[17px] ' > KPI</p>
                             <p className='text-center text-[#545454] font-semibold ' >Here Create custom graphs that gives you more insight</p>
                         </div>
+                        
                         <div>
                             <img src={home} />
 

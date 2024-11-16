@@ -36,11 +36,11 @@ function LandingPage() {
   useFetchTeamProjects(userId, setTeamMembers);
   useFetchReviewProjects(userId, setReviewProjects);
 
-  const handleProjectClick = (projectId, name, count) => {
+  const handleProjectClick = async(projectId, name, count) => {
     localStorage.setItem('nProject', projectId);
     localStorage.setItem('nProjectName', name);
     localStorage.setItem('nProjectCount', count);
-    CheckOnboarding()
+    await CheckOnboarding()
     navigate(`/start`);
   };
 

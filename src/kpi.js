@@ -255,7 +255,7 @@ const KPI = () => {
             <Header />
             <div className='container relative'>
 
-                <div className="absolute inset-0 mt-[80px] ml-[60px]  z-[-100] bg-no-repeat bg-cover w-[200px] h-[200px] " style={{ backgroundImage: `url(${circle})` }}></div>
+                <div className="absolute inset-0 mt-[50px] ml-[60px]  z-[-100] bg-no-repeat bg-cover w-[200px] h-[200px] " style={{ backgroundImage: `url(${circle})` }}></div>
 
 
 

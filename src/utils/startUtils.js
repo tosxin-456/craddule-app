@@ -45,16 +45,55 @@ export const updateStreak = async (setStreak) => {
 
 export const CheckOnboarding = async () => {
   try {
-    const token = localStorage.getItem('access_token');
-    const decodedToken = jwtDecode(token);
-    const userId = decodedToken.userId;
-    const projectId = localStorage.getItem('nProject');
+    // Fetch access token from localStorage
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      throw new Error("Access token is missing");
+    }
 
-    const response = await axios.post(`${API_BASE_URL}/api/onboarding${projectId}/${userId}/picked`);
-    console.log(response)
-    localStorage.setItem("onboarding", JSON.stringify(response.onboardingStatuses));
+    // Decode token to extract user ID
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken?.userId;
+    if (!userId) {
+      throw new Error("User ID is missing in token");
+    }
+
+    // Fetch project ID from localStorage
+    const projectId = localStorage.getItem("nProject");
+    if (!projectId) {
+      throw new Error("Project ID is missing");
+    }
+
+    // Make API request to fetch onboarding statuses
+    const response = await fetch(
+      `${API_BASE_URL}/api/onboarding/picked/${projectId}/${userId}`,
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    // Handle non-200 responses
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to fetch onboarding statuses");
+    }
+
+    // Parse response data
+    const data = await response.json();
+    console.log(data);
+
+    // Save onboarding statuses to localStorage
+    if (data?.onboardingStatuses) {
+      localStorage.setItem("onboarding", JSON.stringify(data.onboardingStatuses));
+    } else {
+      console.warn("onboardingStatuses not found in the response.");
+    }
   } catch (error) {
-    console.log(error.response);
+    console.error("Error during onboarding check:", error);
   }
 };
 
@@ -259,39 +298,42 @@ export const FetchTimelinesCount = (projectId, userId, access_token, setTimeline
 
 
 export const UpdateOnboardingSeenStatus = async (projectId, userId, access_token, setError, phase) => {
-  console.log(projectId, userId, access_token, phase);
   try {
-    const response = await fetch(`${API_BASE_URL}/api/onboarding/${projectId}/${userId}/${phase}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${access_token}`,
-      },
-      body: JSON.stringify({ projectId, userId, seen: true }),
-    });
+    if (!projectId || !userId || !access_token || !phase) {
+      throw new Error("Missing required parameters for updating onboarding status.");
+    }
+
+    console.log("Updating onboarding status for:", { projectId, userId, phase });
+
+    const response = await fetch(
+      `${API_BASE_URL}/api/onboarding/${projectId}/${userId}/${phase}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
 
     if (!response.ok) {
-      throw new Error('Failed to update onboarding status');
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to update onboarding status");
     }
 
     const data = await response.json();
-    console.log('Onboarding status updated:', data);
-
-    // Retrieve the existing onboarding object from localStorage
-    const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');
-
-    // Update the specific phase's seen status
-    onboarding[phase] = true;
-
-    // Save the updated onboarding object back to localStorage
-    localStorage.setItem('onboarding', JSON.stringify(onboarding));
+    console.log("Onboarding status updated:", data);
+    const onboarding = JSON.parse(localStorage.getItem("onboarding") || "{}");
+    onboarding[phase] = true; 
+    localStorage.setItem("onboarding", JSON.stringify(onboarding));
   } catch (error) {
-    console.error(error);
+    console.error("Error updating onboarding status:", error.message);
     setError(error);
-    // Rethrow the error to be caught in handleNextClick
     throw error;
   }
 };
+
+
 
 
 // startUtils.js

@@ -20,6 +20,8 @@ function IdeationMain() {
     const projectId = localStorage.getItem('nProject');
     const { access_token, userId } = getUserIdFromToken();
 
+    
+
     useEffect(() => {
         const loadGraphData = async () => {
             try {

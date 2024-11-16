@@ -8,9 +8,12 @@ import HeaderIdeation from './component/headerIdeation';
 import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData, FetchGraphDataValidate } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
 import SideMenu2V from './component/sideMenu2V';
+import { API_BASE_URL } from "./config/apiConfig";
+import { jwtDecode } from "jwt-decode";
 
 function ValidatingMain() {
     const navigate = useNavigate();
+    const token = localStorage.getItem("access_token");
     const [showScrollableDiv, setShowScrollableDiv] = useState(false);
     const [fullProductReview, setFullProductReview] = useState(0);
     const [GoNoGo, setGoNoGo] = useState(0);
@@ -18,6 +21,9 @@ function ValidatingMain() {
     const [DevelopmentCostReview, setDevelopmentCostReview] = useState(0);
     const [SummaryPDF, setSummaryPDF] = useState(0);
 
+    const [percentage, setPercentage] = useState(null);
+    const [percentageD, setPercentageD] = useState(null);
+    const [percentageDE, setPercentageDE] = useState(null);
 
     const [projectPercentage, setProjectPercentage] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -25,6 +31,108 @@ function ValidatingMain() {
 
     const projectId = localStorage.getItem('nProject');
     const { access_token, userId } = getUserIdFromToken();
+
+    
+
+    useEffect(() => {
+        const fetchPercentage = async () => {
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/algo/${projectId}/FullProductProjectReview`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log(response);
+                    setPercentage(data.percentage);
+                } else {
+                    console.error(
+                        `Error fetching percentage: ${response.status} - ${response.statusText}`
+                    );
+                }
+            } catch (error) {
+                console.error("Error fetching percentage:", error);
+            }
+        };
+
+        if (projectId) {
+            fetchPercentage();
+        }
+    }, [projectId]);
+
+    useEffect(() => {
+        const fetchPercentage2 = async () => {
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/algo/${projectId}/DevelopmentCostReview`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log(response);
+                    setPercentageDE(data.percentage);
+                } else {
+                    console.error(
+                        `Error fetching percentage: ${response.status} - ${response.statusText}`
+                    );
+                }
+            } catch (error) {
+                console.error("Error fetching percentage:", error);
+            }
+        };
+
+        if (projectId) {
+            fetchPercentage2();
+        }
+    }, [projectId]);
+
+    useEffect(() => {
+        const fetchPercentage3 = async () => {
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/algo/${projectId}/DetailedMarketingRtmTesting`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log(response);
+                    setPercentageD(data.percentage);
+                } else {
+                    console.error(
+                        `Error fetching percentage: ${response.status} - ${response.statusText}`
+                    );
+                }
+            } catch (error) {
+                console.error("Error fetching percentage:", error);
+            }
+        };
+
+        if (projectId) {
+            fetchPercentage3();
+        }
+    }, [projectId]);
+
 
     useEffect(() => {
         const loadGraphData = async () => {
@@ -105,12 +213,12 @@ function ValidatingMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (fullProductReview / 100) * 126}
+                                                        strokeDashoffset={126 - (percentage) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{fullProductReview}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{percentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
@@ -142,12 +250,12 @@ function ValidatingMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (DetailedMarketingTesting / 100) * 126}
+                                                        strokeDashoffset={126 - (percentageD) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{DetailedMarketingTesting}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{percentageD}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() => navigate('pdfEnd/ValidatingAndTesting')}
@@ -183,12 +291,12 @@ function ValidatingMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (DevelopmentCostReview / 100) * 126}
+                                                        strokeDashoffset={126 - (percentageDE) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{DevelopmentCostReview}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{percentageDE}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>

@@ -14,6 +14,7 @@ import {
   CiSettings,
   CiMicrochip,
   CiUser,
+  CiLineHeight
 } from "react-icons/ci";
 import {
   faHome,
@@ -21,6 +22,7 @@ import {
   faCog,
   faTimes,
   faPlus,
+  faBarChart
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -31,7 +33,7 @@ const SideMenu2 = () => {
   const token = localStorage.getItem("access_token");
   const decodedToken = jwtDecode(token);
   const [isCollapsed, setIsCollapsed] = useState(false);
-
+  const [isMobile, setIsMobile] = useState(false);
   const [subTypesB, setSubTypesB] = useState([]);
   const [isCollapsedB, setIsCollapsedB] = useState(false);
   const [isDropdownOpenB, setIsDropdownOpenB] = useState(false);
@@ -48,6 +50,7 @@ const SideMenu2 = () => {
   const [percentageD, setPercentageD] = useState(null);
   const [percentageDE, setPercentageDE] = useState(null);
 
+    const onClickStatistics = () => navigate(`/validate/start`);
   const toggleMenu = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -75,6 +78,25 @@ const SideMenu2 = () => {
   const toggleDropdownE = () => {
     setIsDropdownOpenE(!isDropdownOpenE);
   };
+
+  const detectMobile = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobileScreen = window.innerWidth <= 800; // Adjust breakpoint as needed
+      setIsMobile(isMobileScreen);
+      setIsCollapsed(!isMobileScreen);
+    };
+
+    handleResize(); // Set initial state based on screen size
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const navigate = useNavigate();
   const projectId = localStorage.getItem("nProject");
 
@@ -317,6 +339,11 @@ const SideMenu2 = () => {
           <li onClick={onClickCH}>
             <CiBoxes />
             {isCollapsed && <span>Home</span>}
+          </li>
+
+       <li onClick={onClickStatistics}>
+            <CiLineHeight />
+            {isCollapsed && <span>Statistics</span>}
           </li>
 
           <li onClick={toggleDropdownF}>

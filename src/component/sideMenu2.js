@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { CiBoxes,CiCalculator1 ,CiDiscount1,CiGrid2V,CiViewTimeline,CiServer,CiTextAlignJustify,CiVideoOn,CiExport,CiDatabase,CiSettings,CiMicrochip,CiUser} from 'react-icons/ci';
-import { faHome, faUser, faCog, faTimes, faPlus, faBars, faX } from '@fortawesome/free-solid-svg-icons';
+import { CiBoxes, CiCalculator1, CiDiscount1, CiGrid2V, CiViewTimeline, CiServer, CiTextAlignJustify, CiVideoOn, CiExport, CiDatabase, CiSettings, CiMicrochip, CiUser, CiLineHeight } from 'react-icons/ci';
+import { faHome, faUser, faCog, faTimes, faPlus, faBars, faX, faBarChart } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {API_BASE_URL} from '../config/apiConfig';
@@ -19,6 +19,21 @@ const SideMenu2 = () => {
   
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [subTypes, setSubTypes] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+  const onClickStatistics = () => navigate(`/design/start`);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobileScreen = window.innerWidth <= 768;
+      setIsMobile(isMobileScreen);
+      setIsCollapsed(isMobileScreen);
+    };
+
+    handleResize(); // Set initial state based on screen size
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const toggleMenu = () => {
     setIsCollapsed(!isCollapsed);
@@ -212,6 +227,11 @@ useEffect(() => {
 
               {!isCollapsed && <span className=' text-black font-bold '>Home</span>}
         </li>
+
+            <li onClick={onClickStatistics}>
+              <CiLineHeight />
+              {!isCollapsed && <span className=' text-black font-bold ' >Statistics</span>}
+            </li>
 
         <li onClick={toggleDropdown}>
               <img width={20} height={20} src={pdf} />

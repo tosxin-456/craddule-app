@@ -8,6 +8,7 @@ import HeaderIdeation from './component/headerIdeation';
 import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData, FetchGraphDataProduct } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
 import SideMenu2P from './component/sideMenu2P';
+import { API_BASE_URL } from "./config/apiConfig";
 
 function ProductionMain() {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ function ProductionMain() {
     const [valueProposition, setValueProposition] = useState(0);
     const [sucessMatrix, setSucessMatrix] = useState(0);
     const [branding, setBranding] = useState(0);
-
+    const token = localStorage.getItem("access_token");
     const [gettingyourTeam, setGettingyourTeam] = useState(0);
     const [marketingStrategies, setMarketingStrategies] = useState(0);
     const [summaryPDF, setSummaryPDF] = useState(0);
@@ -27,6 +28,142 @@ function ProductionMain() {
 
     const projectId = localStorage.getItem('nProject');
     const { access_token, userId } = getUserIdFromToken();
+    const [percentage, setPercentage] = useState(null);
+    const [percentageV, setPercentageV] = useState(null);
+    const [percentageS, setPercentageS] = useState(null);
+    const [percentageD, setPercentageD] = useState(null);
+
+    useEffect(() => {
+        const fetchPercentage = async () => {
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/algo/${projectId}/BusinessAnalysisPack`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log(response);
+                    setPercentage(data.percentage);
+                } else {
+                    console.error(
+                        `Error fetching percentage: ${response.status} - ${response.statusText}`
+                    );
+                }
+            } catch (error) {
+                console.error("Error fetching percentage:", error);
+            }
+        };
+
+        if (projectId) {
+            fetchPercentage();
+        }
+    }, [projectId]);
+
+    useEffect(() => {
+        const fetchPercentage2 = async () => {
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/algo/${projectId}/ValuePropositionPack`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log(response);
+                    setPercentageV(data.percentage);
+                } else {
+                    console.error(
+                        `Error fetching percentage: ${response.status} - ${response.statusText}`
+                    );
+                }
+            } catch (error) {
+                console.error("Error fetching percentage:", error);
+            }
+        };
+
+        if (projectId) {
+            fetchPercentage2();
+        }
+    }, [projectId]);
+
+    useEffect(() => {
+        const fetchPercentage3 = async () => {
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/algo/${projectId}/SuccessMatrix`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log(response);
+                    setPercentageS(data.percentage);
+                } else {
+                    console.error(
+                        `Error fetching percentage: ${response.status} - ${response.statusText}`
+                    );
+                }
+            } catch (error) {
+                console.error("Error fetching percentage:", error);
+            }
+        };
+
+        if (projectId) {
+            fetchPercentage3();
+        }
+    }, [projectId]);
+
+    useEffect(() => {
+        const fetchPercentage4 = async () => {
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/algo/${projectId}/DetailedMarketingStrategies`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log(response);
+                    setPercentageD(data.percentage);
+                } else {
+                    console.error(
+                        `Error fetching percentage: ${response.status} - ${response.statusText}`
+                    );
+                }
+            } catch (error) {
+                console.error("Error fetching percentage:", error);
+            }
+        };
+
+        if (projectId) {
+            fetchPercentage4();
+        }
+    }, [projectId]);
 
     useEffect(() => {
         const loadGraphData = async () => {
@@ -56,6 +193,7 @@ function ProductionMain() {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
+    
 
     return (
         <div style={{ fontFamily: '"Manrope", sans-serif' }} className="container2">
@@ -110,21 +248,21 @@ function ProductionMain() {
                                                     stroke="#1B45BF"
                                                     strokeWidth="10"
                                                     strokeDasharray="126"
-                                                        strokeDashoffset={126 - (businessAnalysisPack / 100) * 126}
+                                                        strokeDashoffset={126 - (percentage) * 126}
                                                     strokeLinecap="round"
                                                 />
                                             </svg>
                                         </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessAnalysisPack}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{percentage}%</p>
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
-                                        <button
+                                        {/* <button
                                             onClick={() =>
                                                     navigate('pdfEnd/ProductDefinition')
                                             }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
                                             Continue
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
 
@@ -147,21 +285,21 @@ function ProductionMain() {
                                                     stroke="#1B45BF"
                                                     strokeWidth="10"
                                                     strokeDasharray="126"
-                                                    strokeDashoffset={126 - (valueProposition / 100) * 126}
+                                                    strokeDashoffset={126 - (percentageV) * 126}
                                                     strokeLinecap="round"
                                                 />
                                             </svg>
                                         </div>
-                                        <p className="mt-[-20px] sm:mt-[-30px]">{valueProposition}%</p>
+                                        <p className="mt-[-20px] sm:mt-[-30px]">{percentageV}%</p>
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
-                                        <button
+                                        {/* <button
                                                 onClick={() =>
                                                     navigate('pdfEnd/ProductDefinition')
                                                 }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
                                             Continue
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
 
@@ -190,21 +328,21 @@ function ProductionMain() {
                                                     stroke="#1B45BF"
                                                     strokeWidth="10"
                                                     strokeDasharray="126"
-                                                    strokeDashoffset={126 - (sucessMatrix / 100) * 126}
+                                                    strokeDashoffset={126 - (percentageS) * 126}
                                                     strokeLinecap="round"
                                                 />
                                             </svg>
                                         </div>
-                                        <p className="mt-[-20px] sm:mt-[-30px]">{sucessMatrix}%</p>
+                                        <p className="mt-[-20px] sm:mt-[-30px]">{percentageS}%</p>
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
-                                        <button
+                                        {/* <button
                                             onClick={() =>
                                                     navigate('pdfEnd/ProductDefinition')
                                             }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
                                             Continue
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
 
@@ -234,14 +372,14 @@ function ProductionMain() {
                                         </div>
                                         <p className="mt-[-20px] sm:mt-[-30px]">{gettingyourTeam}%</p>
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
-                                        <button
+                                        {/* <button
                                                 onClick={() =>
                                                     navigate('pdfEnd/ProductDefinition')
                                                 }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
                                             Continue
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
 
@@ -273,21 +411,21 @@ function ProductionMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (marketingStrategies / 100) * 126}
+                                                        strokeDashoffset={126 - (percentageD) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{marketingStrategies}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{percentageD}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
-                                            <button
+                                            {/* <button
                                                 onClick={() =>
                                                     navigate('pdfEnd/ProductDefinition')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </div>
 
@@ -317,14 +455,14 @@ function ProductionMain() {
                                             </div>
                                             <p className="mt-[-20px] sm:mt-[-30px]">{branding}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
-                                            <button
+                                            {/* <button
                                                 onClick={() =>
                                                     navigate('pdfEnd/ProductDefinition')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </div>
 
@@ -360,14 +498,14 @@ function ProductionMain() {
                                             </div>
                                             <p className="mt-[-20px] sm:mt-[-30px]">{summaryPDF}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
-                                            <button
+                                            {/* <button
                                                 onClick={() =>
                                                     navigate('pdfEnd/ProductDefinition')
                                                 }
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </div>
 
@@ -397,12 +535,12 @@ function ProductionMain() {
                                             </div>
                                             <p className="mt-[-20px] sm:mt-[-30px]">{projectPercentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
-                                            <button
+                                            {/* <button
                                                 onClick={() => navigate("/customFinancial")}
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </div>
 
