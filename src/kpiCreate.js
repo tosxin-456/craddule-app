@@ -11,6 +11,8 @@ import SideMenu2P from './component/sideMenu2P';
 import home from './images/Create.svg';
 import plus from './images/plus.svg';
 import feedback from './images/feedback.svg';
+import circle from './images/circle.png';
+import bg from './images/pattern_big.png';
 
 function CreateKpi() {
 
@@ -202,22 +204,26 @@ function CreateKpi() {
                         <div className="mr-auto ">
                             <button className="mainBtn" onClick={() => navigate('/kpi')} >Back</button>
                         </div>
+                        <div className="absolute inset-0 mt-[150px] ml-[60px]  z-[-100] bg-no-repeat bg-cover w-[200px] h-[200px] " style={{ backgroundImage: `url(${circle})` }}></div>
                         <div className=' m-auto' >
                             <p className='text-center font-bolder text-[17px] ' > KPI</p>
                             <p className='text-center text-[#545454] font-semibold ' >Here Create custom graphs that gives you more insight</p>
                         </div>
+                        
                         <div>
                             <img src={home} />
 
                         </div>
                     </div>
-                    <div className='bacWHI'>
+                    <div >
+                        <div className="bacWHITe"
+                    >
                         <p className='text-center text-black font-bolder '>Create KPI</p>
                         <p className='gname'>Kpi Name</p>
                         <input
                             placeholder='Input KPI name'
                             className='monthOn1 mmj'
-                            value={graphName} // Bind the value of the input field to the state variable
+                            value={graphName} // Bind the value oTef the input field to the state variable
                             onChange={handleInputChangeName} // Call the handleInputChange function when the input value changes
                         />
                         <p className='mt-[10px] text-[#BOBOBO] mb-[7px]  ' >Kpi Name</p>
@@ -279,6 +285,8 @@ function CreateKpi() {
                             <button onClick={handleSubmit} className='subm  '>Submit Data</button>
 
                         </div>
+                    </div>
+
                     </div>
                 </div>
             </div>

@@ -6952,6 +6952,33 @@ td {
   padding: 20px 20px;
 }
 
+.bacWHITe {
+  position: relative; /* Needed for the pseudo-element to position relative to this container */
+  background-image: url('./images/pattern_landscape.png');
+  background-size: cover; /* Ensures the background image covers the entire container */
+  background-position: center; /* Centers the image */
+  border-radius: 20px;
+  padding: 20px;
+  overflow: hidden; /* Ensures the pseudo-element doesn't extend outside the container */
+}
+
+.bacWHITe::before {
+  content: ''; /* Creates a pseudo-element */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8); /* White overlay with 80% opacity */
+  border-radius: 20px; /* Matches the parent container's border-radius */
+  z-index: 1; /* Places the overlay above the image */
+}
+
+.bacWHITe > * {
+  position: relative; /* Ensures the content stays above the overlay */
+  z-index: 2;
+}
+
 .graphC {
   background-color: #fff;
   border-radius: 20px;

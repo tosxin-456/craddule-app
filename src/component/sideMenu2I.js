@@ -14,6 +14,8 @@ import {
   CiSettings,
   CiMicrochip,
   CiUser,
+  CiBurger,
+  CiLineHeight
 } from "react-icons/ci";
 import {
   faHome,
@@ -21,6 +23,7 @@ import {
   faCog,
   faTimes,
   faPlus,
+  faBarChart
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -31,18 +34,34 @@ const SideMenu2 = () => {
   const token = localStorage.getItem("access_token");
   const decodedToken = jwtDecode(token);
   const projectId = localStorage.getItem("nProject");
-
+  const [isMobile, setIsMobile] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [subTypesD, setSubTypesD] = useState([]);
   const [isCollapsedD, setIsCollapsedD] = useState(false);
   const [isDropdownOpenD, setIsDropdownOpenD] = useState(false);
-
   const [subTypesS, setSubTypesS] = useState([]);
   const [isCollapsedS, setIsCollapsedS] = useState(false);
   const [isDropdownOpenS, setIsDropdownOpenS] = useState(false);
 
   const [percentage, setPercentage] = useState(null);
   const [percentageS, setPercentageS] = useState(null);
+
+  const detectMobile = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobileScreen = window.innerWidth <= 800; // Adjust breakpoint as needed
+      setIsMobile(isMobileScreen);
+      setIsCollapsed(!isMobileScreen);
+    };
+
+    handleResize(); // Set initial state based on screen size
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const toggleMenu = () => {
     setIsCollapsed(!isCollapsed);
@@ -74,6 +93,7 @@ const SideMenu2 = () => {
     );
 
   const onClickCH = () => navigate(`/start`);
+  const onClickStatistics = () => navigate(`/design/start`);
   const onClickCG = () => navigate(`/go/InitialDesign`);
   const onClickCHPdA = () => navigate(`/pdfEnd/InitialDesign`);
   const onClickCHPd = (subType) => {
@@ -242,6 +262,11 @@ const SideMenu2 = () => {
           <li onClick={onClickCH}>
             <CiBoxes />
             {isCollapsed && <span>Home</span>}
+          </li>
+  
+          <li onClick={onClickStatistics}>
+            <CiLineHeight />
+            {isCollapsed && <span>Statistics</span>}
           </li>
 
           <li onClick={toggleDropdownD}>

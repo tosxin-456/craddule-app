@@ -8,6 +8,9 @@ import HeaderIdeation from './component/headerIdeation';
 import { handleClick, handleClickStorage, getUserIdFromToken, FetchGraphData, FetchGraphDataDesign } from "./utils/startUtils";
 import feedback from './images/feedback.svg';
 import SideMenu2I from './component/sideMenu2I';
+import { API_BASE_URL } from "./config/apiConfig";
+const token = localStorage.getItem("access_token");
+
 function DesignMain() {
     const navigate = useNavigate();
     const [showScrollableDiv, setShowScrollableDiv] = useState(false);
@@ -16,9 +19,77 @@ function DesignMain() {
     const [projectPercentage, setProjectPercentage] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [percentage, setPercentage] = useState(null);
+    const [percentageS, setPercentageS] = useState(null);
 
     const projectId = localStorage.getItem('nProject');
     const { access_token, userId } = getUserIdFromToken();
+
+    useEffect(() => {
+        const fetchPercentage = async () => {
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/algo/${projectId}/ClaimTheDomain`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log(response);
+                    setPercentage(data.percentage);
+                } else {
+                    console.error(
+                        `Error fetching percentage: ${response.status} - ${response.statusText}`
+                    );
+                }
+            } catch (error) {
+                console.error("Error fetching percentage:", error);
+            }
+        };
+
+        if (projectId) {
+            fetchPercentage();
+        }
+    }, [projectId]);
+
+    useEffect(() => {
+        const fetchPercentage2 = async () => {
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/algo/${projectId}/StakeholdersEngagement`,
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    console.log(response);
+                    setPercentageS(data.percentage);
+                } else {
+                    console.error(
+                        `Error fetching percentage: ${response.status} - ${response.statusText}`
+                    );
+                }
+            } catch (error) {
+                console.error("Error fetching percentage:", error);
+            }
+        };
+
+        if (projectId) {
+            fetchPercentage2();
+        }
+    }, [projectId]);
 
     useEffect(() => {
         const loadGraphData = async () => {
@@ -95,12 +166,12 @@ function DesignMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (businessCaseBuilderPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (percentage) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{businessCaseBuilderPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{percentage}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() =>
@@ -132,12 +203,12 @@ function DesignMain() {
                                                         stroke="#1B45BF"
                                                         strokeWidth="10"
                                                         strokeDasharray="126"
-                                                        strokeDashoffset={126 - (customFinancialProjectPercentage / 100) * 126}
+                                                        strokeDashoffset={126 - (percentageS) * 126}
                                                         strokeLinecap="round"
                                                     />
                                                 </svg>
                                             </div>
-                                            <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
+                                            <p className="mt-[-20px] sm:mt-[-30px]">{percentageS}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
                                             <button
                                                 onClick={() => navigate('pdfEnd/InitialDesign')}

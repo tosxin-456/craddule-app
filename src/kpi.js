@@ -20,6 +20,9 @@ import ReactApexChart from 'react-apexcharts';
 import { CiBoxes, CiCalculator1, CiDiscount1, CiGrid2V, CiViewTimeline, CiServer, CiTextAlignJustify, CiVideoOn, CiExport, CiDatabase, CiSettings, CiMicrochip, CiUser } from 'react-icons/ci';
 import home from './images/HOME.png';
 import circle from './images/circle.png';
+import bg from './images/pattern_landscape.png';
+
+
 import feedback from './images/feedback.svg';
 
 
@@ -255,11 +258,15 @@ const KPI = () => {
             <Header />
             <div className='container relative'>
 
-                <div className="absolute inset-0 mt-[80px] ml-[60px]  z-[-100] bg-no-repeat bg-cover w-[200px] h-[200px] " style={{ backgroundImage: `url(${circle})` }}></div>
+                <div className="absolute inset-0 mt-[50px] ml-[60px]  z-[-100] bg-no-repeat bg-cover w-[200px] h-[200px] " style={{ backgroundImage: `url(${circle})` }}></div>
 
 
 
-                <div className="main-content2">
+                <div
+                    className=" bg-cover bg-center h-screen"
+                    style={{ backgroundImage: `url(${bg})` }}
+                >
+
                     <div className=' flex justify-evenly' >
                         <div className="mr-auto ">
                             <button className="mainBtn" onClick={() => navigate('/start')} >Back</button>
@@ -281,7 +288,9 @@ const KPI = () => {
 
                     </div>
 
-                    <div className='bacWHI'>
+                    <div
+                        className="bacWHITe bg-cover bg-center bg-no-repeat"
+                    >
                         <div className='flex' >
                             <p className='text-center font-bold text-[17px] ' > KPI</p>
                             <div className="ml-auto">
@@ -335,8 +344,6 @@ const KPI = () => {
                     padding: '0',
                 }}
             ></div>
-
-
 
         </div>
 

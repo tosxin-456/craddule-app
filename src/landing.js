@@ -14,7 +14,7 @@ import {
   formatDate,
 } from './utils/landingPageUtils.js'; // Import utilities
 import GetCard from './getCard.js';
-import { getUserIdFromToken } from './utils/startUtils.js';
+import { CheckOnboarding, getUserIdFromToken } from './utils/startUtils.js';
 
 function LandingPage() {
   const [projects, setProjects] = useState([]);
@@ -36,10 +36,11 @@ function LandingPage() {
   useFetchTeamProjects(userId, setTeamMembers);
   useFetchReviewProjects(userId, setReviewProjects);
 
-  const handleProjectClick = (projectId, name, count) => {
+  const handleProjectClick = async(projectId, name, count) => {
     localStorage.setItem('nProject', projectId);
     localStorage.setItem('nProjectName', name);
     localStorage.setItem('nProjectCount', count);
+    await CheckOnboarding()
     navigate(`/start`);
   };
 
