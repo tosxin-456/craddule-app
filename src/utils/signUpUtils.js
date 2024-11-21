@@ -2,6 +2,7 @@
 import {API_BASE_URL} from '../config/apiConfig';
 import { toast } from 'sonner';
 
+
 export const handleTogglePassword = (showPassword, setShowPassword) => {
   setShowPassword(!showPassword);
 };
@@ -42,7 +43,7 @@ export const createUser = async (data, referralCode, setLoading, toast, navigate
       localStorage.setItem('access_token', access_token);
       localStorage.setItem('id', id);
       setLoading(false);
-      navigate(`/home`);
+      navigate(`/card`);
     } else {
       const result = await response.json();
       setLoading(false);
