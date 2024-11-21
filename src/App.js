@@ -339,7 +339,7 @@ function App() {
             setIsTrialExpired(true)
           }
         } else {
-          setIsTrialExpired(false)
+          setIsTrialExpired(true)
         }
       } catch (error) {
         console.error('An error occurred:', error);
@@ -423,6 +423,8 @@ function App() {
           <Route path="/questionDmaMo" element={<QuestionDmaMo />} />
           <Route path="/questionDmaPm" element={<QuestionDmaPm />} />
           <Route path="/questionDmaMm" element={<QuestionDmaMm />} />
+          <Route path="/card" element={<GetCard />} />
+
           <Route path="/questionDmaMc" element={<QuestionDmaMc />} />
           <Route path="/questionDmaMt" element={<QuestionDmaMt />} />
           <Route path="/questionDmaMn" element={<QuestionDmaMn />} />
