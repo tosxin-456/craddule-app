@@ -6,12 +6,11 @@ import 'react-phone-input-2/lib/style.css';
 import { PaystackButton } from 'react-paystack';
 import { jwtDecode } from "jwt-decode";
 import { getUserIdFromToken } from './utils/startUtils';
-import { useNavigate } from 'react-router-dom';
 
 function GetCard() {
   const {access_token, userId} = getUserIdFromToken();
   console.log(userId);
-  const navigate = useNavigate()
+
   const publicKey = "pk_live_ad719098c01b1d5e280aa45492782cb661b74d46";
   //const publicKey = "pk_test_5b18272091e43f312490878eb3f0002fb4242ac6";
   const [ email, setEmail ] = useState("");
@@ -102,8 +101,6 @@ function GetCard() {
       localStorage.setItem('auth_code', response.data.authorization.authorization_code);
       
       updateUser(response.data.authorization.authorization_code);
-
-      navigate('/home')
       //setResponse(data);
     } catch (error) {
       console.log(error.message);
@@ -209,9 +206,11 @@ function GetCard() {
     <div className={show ? "w-full h-full fixed left-0 top-0 px-20":"hidden"} id='popup'>
       <div className='w-fit m-auto p-10 bg-white rounded-[30px] drop-shadow-lg translate-y-[50%]'>
         <h4 className='text-center mt-10'>Subscribe to Craddule</h4>
-        <p className='text-gray800 text-center m-auto mb-5 w-[90%]'>To continue your journey and enjoy our various features, we would be charging an amount of  NGN 10,000 for full access.</p>
+        <p className='text-gray800 text-center m-auto mb-5 w-[90%]'>To continue enjoying all the amazing features Craddule has to offer, we’ll need your card details to set up your subscription. The monthly subscription fee is NGN 10,000, granting you uninterrupted access to everything Craddule has to offer.
+        Let’s get you started seamlessly—because greatness awaits!</p>
         <div className='flex items-center gap-2 justify-center'>
           <button className='px-4 py-2 bg-blue600 rounded-[30px] text-white text-[16px]' onClick={handleClick}>Subscribe</button>
+          {/* <button className='px-4 py-2 bg-gray-600 rounded-[30px] text-white text-[16px]' onClick={handleCancel}>Not now</button> */}
         </div>
       </div>
     </div>
