@@ -324,7 +324,7 @@ export const UpdateOnboardingSeenStatus = async (projectId, userId, access_token
     const data = await response.json();
     console.log("Onboarding status updated:", data);
     const onboarding = JSON.parse(localStorage.getItem("onboarding") || "{}");
-    onboarding[phase] = true; 
+    onboarding[phase] = true; // Update the 'seen' status for the specified phase
     localStorage.setItem("onboarding", JSON.stringify(onboarding));
   } catch (error) {
     console.error("Error updating onboarding status:", error.message);

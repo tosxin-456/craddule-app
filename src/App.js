@@ -312,9 +312,10 @@ import CommercializationMain from './commersialzationStart';
 
 function App() {
   const [isTrialExpired, setIsTrialExpired] = useState(false)
-  clarity.init('ocijdfgrpz');
+  clarity.init('opznx72eqw');
   // const socket = io('http://localhost:3001');
   const { userId } = getUserIdFromToken();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const checkTrial = async () => {
@@ -337,9 +338,10 @@ function App() {
             setIsTrialExpired(false)
           } else {
             setIsTrialExpired(true)
+            navigate("/card")
           }
         } else {
-          setIsTrialExpired(true)
+          setIsTrialExpired(false)
         }
       } catch (error) {
         console.error('An error occurred:', error);
@@ -381,6 +383,7 @@ function App() {
           <Route path="/product/start" element={<ProductionMain />} />
           <Route path="/design" element={<DesignOnboarding />} />
           <Route path="/design/start" element={<DesignMain />} />
+          <Route path="/card" element={<GetCard />} />
 
           <Route path="/product" element={<ProductionOnboarding />} />
 
@@ -423,8 +426,6 @@ function App() {
           <Route path="/questionDmaMo" element={<QuestionDmaMo />} />
           <Route path="/questionDmaPm" element={<QuestionDmaPm />} />
           <Route path="/questionDmaMm" element={<QuestionDmaMm />} />
-          <Route path="/card" element={<GetCard />} />
-
           <Route path="/questionDmaMc" element={<QuestionDmaMc />} />
           <Route path="/questionDmaMt" element={<QuestionDmaMt />} />
           <Route path="/questionDmaMn" element={<QuestionDmaMn />} />
