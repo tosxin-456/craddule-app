@@ -102,7 +102,6 @@ import QuestionDmaRmSum from './quesDmaRmSum';
 import QuestionDmaRoSum from './quesDmaRoSum';
 import QuestionEdit from './questionEdit';
 import GetCard from './getCard';
-
 import ProblemStatement from './problemstatement';
 import PageBenefit from './pageBenefit';
 import InflationRateGraph from './inflationRateGraph';
@@ -309,13 +308,14 @@ import ValidatingOnboarding from './validatingAndTesting';
 import ValidatingMain from './validatingStart';
 import CommersialzationOnboarding from './commersializationOnboarding';
 import CommercializationMain from './commersialzationStart';
+import Subfolder from './subfolder';
+import SubFolderUpload from './subfolderupload';
 
 function App() {
   const [isTrialExpired, setIsTrialExpired] = useState(false)
   clarity.init('opznx72eqw');
   // const socket = io('http://localhost:3001');
   const { userId } = getUserIdFromToken();
-  const navigate = useNavigate()
 
   useEffect(() => {
     const checkTrial = async () => {
@@ -338,7 +338,6 @@ function App() {
             setIsTrialExpired(false)
           } else {
             setIsTrialExpired(true)
-            navigate("/card")
           }
         } else {
           setIsTrialExpired(false)
@@ -663,6 +662,8 @@ function App() {
           <Route path="/go-no-go" element={<GoNoGoMain />} />
           <Route path="/nda/" element={<Nda />} />
           <Route path="/card/" element={<GetCard />} />
+          <Route path="/craddule/:hubType" element={<Subfolder />} />
+          <Route path="/craddule/:hubType/upload" element={<SubFolderUpload />} />
           <Route path="/createVideoAdmin/" element={<CreateVideosAdmin />} />
         </Routes>
       </Router>

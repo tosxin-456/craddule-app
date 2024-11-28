@@ -21,15 +21,13 @@ import circle from './images/circle.png';
 import home from './images/HOME.png';
 import Header from './component/header';
 import file from './images/file image.svg';
-import pdf from './images/pdf.svg';
 
-
-const Craddule = () => {
+const CraddulePitchDeck = () => {
   const navigate = useNavigate()
   const [images, setImages] = useState([]);
-  const [files, setFiles] = useState([])
   const projectId = localStorage.getItem('nProject');
   const prototypeType = localStorage.getItem('selectedPrototype');
+
   const access_token = localStorage.getItem('access_token');
   const decodedToken = jwtDecode(access_token);
   const userId = decodedToken.userId;
@@ -50,8 +48,6 @@ const Craddule = () => {
   const [setError, error] = useState('');
 
   const [users, setUsers] = useState([]);
-  const [boxes, setBoxes] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   const handleUpload = async () => {
     setLoading(true);
@@ -122,36 +118,8 @@ const Craddule = () => {
     handleUpload();
   };
 
-  const fetchTask = async () => {
-    try {
-      console.log(projectId);
-      console.log(API_BASE_URL);
-      const response = await fetch(`${API_BASE_URL}/api/timeline/projects/${projectId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
-        }
-      });
 
-      console.log("here");
-      console.log("here");
-      if (response.status === 200) {
-        const data = await response.json();
-        console.log(data);
-        setBoxes(data);
-        setLoading(false);
-      } else {
-        const result = await response.json();
-        console.error('Error:', result['error']);
-      }
-
-    } catch (err) {
-
-      setLoading(false);
-      console.log(err);
-    }
-  };
-
+  const [loading, setLoading] = useState(false);
   const onClickHandler = () => navigate(`/pageFrontView`)
 
   // Function to toggle dropdown visibility
@@ -188,8 +156,6 @@ const Craddule = () => {
         console.log(response.data.data);
         setTypes(response.data.data);
         setHubs(response.data.data)
-        setFiles(response.data.data)
-
 
       } catch (error) {
         console.error('Error fetching types:', error);
@@ -241,28 +207,17 @@ const Craddule = () => {
               <p>Here you can view and upload your files</p>
             </div>
             <div className='modalStTask'>
-              <div className="flex flex-wrap justify-between">
-                {Object.entries(groupedData).map(([hubType, { count, items }]) => (
-                  <div
-                    key={hubType}
-                    className="w-full sm:w-1/2 md:w-1/4 p-2 hover:cursor-pointer"
-                  >
-                    <div onClick={() =>
-                      navigate(`/craddule/${hubType}`, {
-                        state: { files: items },
-                      })
-                    } className="hub-group bg-white rounded-lg  p-4 text-center">
-                      <img src={file} className="fol mx-auto" alt={hubType.hubFileName} />
-                      <p className="text-gray-600 mt-2 text-[20px] ">{hubType}</p>
-                      <p className="text-gray-600">{count} page(s)</p>
+              <div className="flex  justify-between ">
+                {Object.entries(groupedData).map(([hubType, { count }]) => (
+                  <div key={hubType} className="col-md-3">
+                    <div className="hub-group">
+                      {/* <Link to={`/types/${item._id}`} className="dd"> */}
+                        <img src={file} className="fol" alt={hubType.hubFileName} />
+                      <h3>{hubType}</h3>
+                      <p> {count} page(s)</p>
                     </div>
                   </div>
                 ))}
-              </div>
-
-              <div className="flex justify-center items-center">
-                <button onClick={() => navigate('/uploadTask')} className='submit-button rounded-3xl'>Upload file</button>
-                <button onClick={handleSubmit} className='border-solid border-[1px] p-[10px] border-[red] rounded-3xl delete-button ml-4'>Delete</button>
               </div>
             </div>
             <Toaster position="top-right" />
@@ -278,4 +233,4 @@ const Craddule = () => {
   );
 };
 
-export default Craddule;
+export default CraddulePitchDeck;
