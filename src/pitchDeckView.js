@@ -14,7 +14,7 @@ import { faCircleNotch, faDeleteLeft } from '@fortawesome/free-solid-svg-icons'
 import circle from './images/circle.png';
 import home from './images/HOME.png';
 import file from './images/file image.svg';
-
+import pdf from './images/pdf.svg';
 
 const PitchDeck = () => {
   const navigate = useNavigate()
@@ -127,27 +127,31 @@ const PitchDeck = () => {
         <div className='coverPit'>
 
 
-
-          <div className='row'>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {types.map((imageDetail, index) => {
+              // Check if the file is a PDF by examining its extension
+              const isPdf = imageDetail.hubFileName.toLowerCase().endsWith('.pdf');
+              const fileSrc = isPdf ? pdf : `${API_BASE_URL}/images/${imageDetail.hubFile}`;
+
               return (
                 <div className="col-md-4" key={index}>
                   <div className='imgCo'>
-                    <div className="image-card">
-                      {/* Display only the file logo */}
-                      <img src={file} alt="file-logo" className="image-card-img" onClick={() => openModal(imageDetail)} />
-                      {/* <FontAwesomeIcon icon={faDeleteLeft} className="edit-icon" /> */}
-                    <p className='fileName'>{imageDetail.hubFileName}</p>
-                    <p>1 page</p>
+                    <div className="">
+                      <img
+                        width={'100px'}
+                        src={fileSrc}
+                        alt={isPdf ? "PDF Icon" : "File Preview"}
+                        className="image-card-img"
+                        onClick={() => !isPdf && openModal(imageDetail)} // Open modal only for non-PDF files
+                      />
+                      <p className='fileName'>{imageDetail.hubFileName}</p>
                     </div>
-
-                    {/* Display file name and number of pages */}
-
                   </div>
                 </div>
               );
             })}
           </div>
+
           <div className="flex justify-center items-center">
             {loading ? (
               <button disabled={true} className='submit-button'>

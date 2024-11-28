@@ -247,10 +247,10 @@ body {
 }
 
 .centerGive {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 0;
-  color: #dac78b;
+  color: white;
   text-align: center !important;
 }
 
@@ -3657,7 +3657,7 @@ hr {
 }
 
 .textBk {
-  background-color: #f9f9f9;
+  background-color: #E8E8E8;
   border: none;
   width: 100%;
   font-size: 12px;
@@ -3676,10 +3676,11 @@ hr {
   display: inline-block;
   font-size: 18px;
   text-align: center;
-  padding: 0px 20px 0px 20px;
-  background-color: #e6b800;
+  padding: 10px 20px 10px 20px;
+  background-color: #193FAE;
   border-radius: 5px;
   margin: 0px !important;
+  color: white;
 }
 
 .giveButton {

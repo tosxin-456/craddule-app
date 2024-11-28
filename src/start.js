@@ -9,6 +9,7 @@ import ModalStart from "./component/modalStartStop";
 import "./pop-up.css";
 import ReferralModal from "./component/randomPopUp";
 import WhereDidYouHearModal from "./gotToKnowUsModal";
+import GiveFeedbackModal from "./component/giveFeedbackModal";
 
 function InflationRateGraph({ graphType }) {
 
@@ -31,6 +32,10 @@ function InflationRateGraph({ graphType }) {
     const [projectDetails, setProjectDetails] = useState([]);
     const [userDetails, setUserDetails] = useState({});
     const [isOpen, setIsOpen] = useState(false);
+    const [isOpenFeed, setIsOpenFeed] = useState(true);
+
+    const handleOpenModal = () => setIsOpenFeed(true);
+    const handleCloseModal = () => setIsOpenFeed(false);
     const navigate = useNavigate();
 
     const handleNavigation = async (phase) => {
@@ -249,7 +254,7 @@ function InflationRateGraph({ graphType }) {
                             </div>
                             <div>
                                 <button className="block w-full px-3 py-2 bg-black400 rounded-[5px] mb-[16px] text-white text-[14px]" onClick={() => handleClick('/craddule')}>View Files</button>
-                                <button className="block w-full px-3 py-2 border border-black rounded-[5px] text-black400 text-[14px]" onClick={() => handleClick('/craddule')}>Upload Files</button>
+                                <button className="block w-full px-3 py-2 border border-black rounded-[5px] text-black400 text-[14px]" onClick={() => handleClick('/uploadTask')}>Upload Files</button>
                             </div>
 
                            
@@ -261,7 +266,7 @@ function InflationRateGraph({ graphType }) {
                             <div>
                                 <h5 className="text-center">Create Task</h5>
                                 <p className="text-[14px] text-black300 text-center">You can create tasks and assign them to team members</p>
-                                <button className="block w-full px-3 py-2 bg-black400 rounded-[5px] text-white text-[14px]" onClick={() => handleClick('/uploadTask')}>Upload Files</button>
+                                <button className="block w-full px-3 py-2 bg-black400 rounded-[5px] text-white text-[14px]" onClick={() => handleClick('/createTask')}>Create Task</button>
                             </div>
                         </div>
                     </div>
@@ -323,6 +328,7 @@ function InflationRateGraph({ graphType }) {
                 <div className="startWrap"></div>
             </div>
             <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />
+            <GiveFeedbackModal open={isOpenFeed} onClose={handleCloseModal} />
         </div>
     );
 }

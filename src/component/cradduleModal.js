@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import {API_BASE_URL} from '../config/apiConfig';
 import fol from '../images/fol.png'; 
 import { Link } from 'react-router-dom';
+import file from '../images/file image.svg';
 
 
 const ImagePopup = ({  onClose, onInsertFile}) => {
@@ -122,7 +123,7 @@ const ImagePopup = ({  onClose, onInsertFile}) => {
                     <div className='grid-container'>
                     {types.map((type) => (
                         <div key={type} className='grid-item' onClick={() => fetchTypeDetails(type.timelineId)}>
-                        <img src={fol} alt='folder icon' className='fol' />
+                        <img src={file} alt='folder icon' className='fol' />
                         <p className='folP'>{type.task}</p>
                         </div>
                     ))}
