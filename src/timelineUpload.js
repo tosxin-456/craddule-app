@@ -113,7 +113,7 @@ const ImageUpload = () => {
       const response = await fetch(`${API_BASE_URL}/api/timeline/projects/${projectId}`, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
+          'Authorization': `Bearer ${access_token}` 
         }
       });
 
