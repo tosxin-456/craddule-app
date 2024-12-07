@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CreateFeedback, getUserIdFromToken } from '../utils/startUtils';
+import { CreateTellUs, getUserIdFromToken } from '../utils/startUtils';
 
-export default function GiveFeedbackModal({ open, onClose }) {
+export default function GiveFeedbackModal({ open, onClose, clickPosition }) {
     const navigate = useNavigate();
     const projectId = localStorage.getItem('nProject');
     const { access_token, userId } = getUserIdFromToken();
@@ -10,21 +10,16 @@ export default function GiveFeedbackModal({ open, onClose }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const handleOverlayClick = (e) => {
-        if (e.target.id === 'modal-overlay') {
-            onClose();
-        }
-    };
+    const modalRef = useRef(null);
 
     const handleFeedbackSubmit = async () => {
         const feedbackData = {
             projectId,
-            // phase: "Feedback Phase",
             userId,
-            summary: feedback,
+            tellUs: feedback,
         };
 
-        await CreateFeedback(
+        await CreateTellUs(
             feedbackData,
             (response) => {
                 console.log('Feedback Submitted:', response);
@@ -41,49 +36,47 @@ export default function GiveFeedbackModal({ open, onClose }) {
 
     if (!open) return null;
 
+ 
+
     return (
         <div
-            id="modal-overlay"
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-            onClick={handleOverlayClick}
+            className="absolute w-[350px] right-8 bg-white"
         >
-            <div className="relative bg-white rounded-lg shadow-lg w-[90%] max-w-md">
-                {/* Close Button */}
-                <button
-                    className="absolute top-4 right-4 text-white hover:text-gray-700"
-                    aria-label="Close"
-                    onClick={() => {
-                        setFeedback(''); // Clear feedback input
-                        setError(null);  // Clear any previous error
-                        onClose();
-                    }}
-                >
-                    X
-                </button>
-                {/* Modal Header */}
-                <div className="text-center bg-[#193FAE] text-white rounded-t-lg py-4">
-                    <p className="text-lg font-semibold">Tell us more</p>
-                    <p className="text-sm">Let us know what you think</p>
-                </div>
-                {/* Modal Content */}
-                <div className="p-6">
-                    <textarea
-                        className="w-full h-32 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#193FAE]"
-                        placeholder="Write your feedback here..."
-                        value={feedback}
-                        onChange={(e) => setFeedback(e.target.value)}
-                    ></textarea>
-                    {error && <p className="text-red-500 mt-2">{error}</p>}
-                    <div className="mt-4">
-                        <button
-                            className="w-full bg-[#193FAE] text-white py-2 rounded-lg hover:bg-blue-700"
-                            type="button"
-                            onClick={handleFeedbackSubmit}
-                            disabled={loading}
-                        >
-                            {loading ? 'Submitting...' : 'Share Feedback'}
-                        </button>
-                    </div>
+            {/* Close Button */}
+            <button
+                className="absolute z-20 top-2 right-2 text-white hover:text-gray-700"
+                aria-label="Close"
+                onClick={() => {
+                    setFeedback(''); // Clear feedback input
+                    setError(null);  // Clear any previous error
+                    onClose();
+                }}
+            >
+                X
+            </button>
+            {/* Modal Header */}
+            <div className="text-center bg-[#193FAE] text-white rounded-t-lg py-4">
+                <p className="text-lg font-semibold">Tell us more</p>
+                <p className="text-sm">Let us know what you think</p>
+            </div>
+            {/* Modal Content */}
+            <div className="p-6">
+                <textarea
+                    className="w-full h-32 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#193FAE]"
+                    placeholder="Write your feedback here..."
+                    value={feedback}
+                    onChange={(e) => setFeedback(e.target.value)}
+                ></textarea>
+                {error && <p className="text-red-500 mt-2">{error}</p>}
+                <div className="mt-4">
+                    <button
+                        className="w-full bg-[#193FAE] text-white py-2 rounded-lg hover:bg-blue-700"
+                        type="button"
+                        onClick={handleFeedbackSubmit}
+                        disabled={loading}
+                    >
+                        {loading ? 'Submitting...' : 'Share Feedback'}
+                    </button>
                 </div>
             </div>
         </div>

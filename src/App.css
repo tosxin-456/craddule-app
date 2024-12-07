@@ -8086,3 +8086,63 @@ td {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+/* modal.css */
+
+.modal-container {
+    position: absolute;
+    z-index: 50;
+    max-width: 400px; /* Adjust modal width */
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.modal-container .modal-header {
+    background-color: #193fae;
+    color: white;
+    border-radius: 8px 8px 0 0;
+    padding: 16px;
+    text-align: center;
+}
+
+.modal-container .modal-header p {
+    margin: 0;
+}
+
+.modal-container .close-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.modal-container .feedback-textarea {
+    width: 100%;
+    height: 128px;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    resize: none;
+}
+
+.modal-container .feedback-button {
+    width: 100%;
+    background-color: #193fae;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.modal-container .feedback-button:hover {
+    background-color: #1d4ed8;
+}
+
+.modal-container .error-message {
+    color: red;
+    margin-top: 8px;
+}
