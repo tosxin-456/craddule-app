@@ -32,7 +32,7 @@ function InflationRateGraph({ graphType }) {
     const [projectDetails, setProjectDetails] = useState([]);
     const [userDetails, setUserDetails] = useState({});
     const [isOpen, setIsOpen] = useState(false);
-    const [isOpenFeed, setIsOpenFeed] = useState(true);
+    const [isOpenFeed, setIsOpenFeed] = useState(false);
 
     const handleOpenModal = () => setIsOpenFeed(true);
     const handleCloseModal = () => setIsOpenFeed(false);
@@ -85,7 +85,7 @@ function InflationRateGraph({ graphType }) {
         <div>
             <Header />
             <div className='container '>
-                <WhereDidYouHearModal />  
+                <WhereDidYouHearModal />
                 <div className="flex-row lg:flex justify-between items-center mt-10">
                     <div>
                         <h4 className="text-blue600">Hello, {userDetails?.firstName}!</h4>
@@ -122,7 +122,7 @@ function InflationRateGraph({ graphType }) {
                                         <p className="text-[12px]">Design your business processes and flow</p>
                                         <p className="text-[12px]">4 Documents</p>
                                     </div>
-                                    
+
                                 </div>
                             )}
 
@@ -134,7 +134,7 @@ function InflationRateGraph({ graphType }) {
                                         <p className="text-[12px]">Plan design and add members to Team</p>
                                         <p className="text-[12px]">2 Documents</p>
                                     </div>
-                                  
+
                                 </div>
                             )}
 
@@ -146,7 +146,7 @@ function InflationRateGraph({ graphType }) {
                                         <p className="text-[12px]">Test and validate your product</p>
                                         <p className="text-[12px]">3 Documents</p>
                                     </div>
-                                   
+
                                 </div>
                             )}
 
@@ -158,7 +158,7 @@ function InflationRateGraph({ graphType }) {
                                         <p className="text-[12px]">Get your product ready to launch for production</p>
                                         <p className="text-[12px]">2 Documents</p>
                                     </div>
-                                    
+
                                 </div>
                             )}
 
@@ -170,7 +170,7 @@ function InflationRateGraph({ graphType }) {
                                     <p className="text-[12px]">6 Graph Types</p>
                                 </div>
 
-                                
+
                             </div>
 
 
@@ -182,7 +182,7 @@ function InflationRateGraph({ graphType }) {
                                     <p className="text-[12px]">6 Graph Types</p>
                                 </div>
 
-                              
+
                             </div>
 
                             <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/pitch_deck.png')] bg-no-repeat bg-cover cursor-pointer relative group">
@@ -193,7 +193,7 @@ function InflationRateGraph({ graphType }) {
                                     <p className="text-[12px]">5 Documents</p>
                                 </div>
 
-                              
+
                             </div>
 
                         </div>
@@ -229,7 +229,7 @@ function InflationRateGraph({ graphType }) {
                         </div>
                     </div>
 
-                   
+
                 </div>
 
 
@@ -257,7 +257,7 @@ function InflationRateGraph({ graphType }) {
                                 <button className="block w-full px-3 py-2 border border-black rounded-[5px] text-black400 text-[14px]" onClick={() => handleClick('/uploadTask')}>Upload Files</button>
                             </div>
 
-                           
+
                         </div>
                     </div>
 
@@ -284,11 +284,13 @@ function InflationRateGraph({ graphType }) {
                         </div>
                     </div>
 
-                   
+
                 </div>
 
 
-                <div className="flex justify-end gap-2 items-center mt-10">
+                <div onClick={() =>
+                    setIsOpenFeed(true)
+                } className="flex justify-end gap-2 items-center mt-10 cursor-pointer ">
                     <svg xmlns="http://www.w3.org/2000/svg" className="" width="50px" height="50px" viewBox="0 0 20 20"><path fill="black" d="M10 0c5.342 0 10 4.41 10 9.5c0 5.004-4.553 8.942-10 8.942a11 11 0 0 1-3.43-.546c-.464.45-.623.603-1.608 1.553c-.71.536-1.378.718-1.975.38c-.602-.34-.783-1.002-.66-1.874l.4-2.319C.99 14.002 0 11.842 0 9.5C0 4.41 4.657 0 10 0m0 1.4c-4.586 0-8.6 3.8-8.6 8.1c0 2.045.912 3.928 2.52 5.33l.02.017l.297.258l-.067.39l-.138.804l-.037.214l-.285 1.658a3 3 0 0 0-.03.337v.095q0 .007-.002.008c.007-.01.143-.053.376-.223l2.17-2.106l.414.156a9.6 9.6 0 0 0 3.362.605c4.716 0 8.6-3.36 8.6-7.543c0-4.299-4.014-8.1-8.6-8.1M5.227 7.813a1.5 1.5 0 1 1 0 2.998a1.5 1.5 0 0 1 0-2.998m4.998 0a1.5 1.5 0 1 1 0 2.998a1.5 1.5 0 0 1 0-2.998m4.997 0a1.5 1.5 0 1 1 0 2.998a1.5 1.5 0 0 1 0-2.998" /></svg>
                     <p className="text-[16px] font-semibold text-black500 mt-3">Tell us More</p>
                 </div>
