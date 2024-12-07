@@ -150,6 +150,39 @@ export const FetchProjectDetails = (projectId, setProjectDetails, setError, setL
   }, [projectId, setProjectDetails, setError, setLoading]);
 };
 
+export const CreateFeedback = async (feedbackData, setResponse, setError, setLoading) => {
+  try {
+    console.log("Submitting feedback...");
+    console.log("Feedback Data:", feedbackData);
+
+    setLoading(true); // Start loading state
+
+    const response = await fetch(`${API_BASE_URL}/api/feedback`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(feedbackData),
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log('Feedback Response:', responseData);
+      setResponse(responseData);
+    } else {
+      const errorData = await response.json();
+      console.error('Error:', errorData.error);
+      setError(errorData.error || 'Something went wrong.');
+    }
+  } catch (error) {
+    console.error('Network Error:', error);
+    setError(error.message || 'Network Error');
+  } finally {
+    setLoading(false); // End loading state
+  }
+};
+
 export const FetchUser = (userId, setUserDetails, setError, setLoading) => {
   useEffect(() => {
     const fetchUserDetails = async () => {
