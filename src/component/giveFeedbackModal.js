@@ -36,7 +36,7 @@ export default function GiveFeedbackModal({ open, onClose, clickPosition }) {
         const feedbackData = {
             projectId,
             userId,
-            tellUs: feedback,
+            feedback,
         };
 
         await CreateTellUs(

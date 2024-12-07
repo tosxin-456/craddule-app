@@ -171,8 +171,8 @@ export const CreateTellUs = async (feedbackData, setResponse, setError, setLoadi
       setResponse(responseData);
     } else {
       const errorData = await response.json();
-      console.error('Error:', errorData.error);
-      setError(errorData.error || 'Something went wrong.');
+      console.error('Error:', errorData);
+      setError( 'Something went wrong.');
     }
   } catch (error) {
     console.error('Network Error:', error);
