@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CreateTellUs, getUserIdFromToken } from '../utils/startUtils';
 
@@ -11,6 +11,26 @@ export default function GiveFeedbackModal({ open, onClose, clickPosition }) {
     const [error, setError] = useState(null);
 
     const modalRef = useRef(null);
+
+    // Handle click outside to close modal
+    useEffect(() => {
+        // Event listener to detect click outside modal
+        const handleClickOutside = (e) => {
+            if (modalRef.current && !modalRef.current.contains(e.target)) {
+                onClose();
+            }
+        };
+
+        // Add event listener when modal is open
+        if (open) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        // Clean up the event listener when modal is closed
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [open, onClose]);
 
     const handleFeedbackSubmit = async () => {
         const feedbackData = {
@@ -36,11 +56,10 @@ export default function GiveFeedbackModal({ open, onClose, clickPosition }) {
 
     if (!open) return null;
 
- 
-
     return (
         <div
-            className="absolute w-[350px] right-8 bg-white"
+            ref={modalRef}
+            className="absolute top-[5] w-[350px] bg-white"
         >
             {/* Close Button */}
             <button
