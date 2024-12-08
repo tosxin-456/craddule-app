@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import logo from './../images/logoc.png';
 import { CiBellOn, CiUser, CiChat2 } from 'react-icons/ci';
 import { MdOutlineBolt } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ChatToolModal from './chatModal';
 import { API_BASE_URL } from '../config/apiConfig';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 import ModalStart from './modalTellUs';
 import { handleLogout } from '../utils/startUtils';
+import NotificationModal from './notificationModal';
 
 const Header = () => {
   const projectId = localStorage.getItem('nProject');
@@ -20,9 +21,10 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenT, setIsOpenT] = useState(false);
+  const [isOpenN, setIsOpenN] = useState(false);
   const [isOpenQ, setIsOpenQ] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
-
+  const location = useLocation()
 
   const [slogan, setSlogan] = useState('');
 
@@ -125,6 +127,7 @@ const Header = () => {
     }
 
   }, [navigate]);
+  const handleCloseModal = () => setIsOpenN(false);
 
   const updateStreak = async () => {
     try {
@@ -259,7 +262,7 @@ const Header = () => {
                     <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>
                   Messages
-                  <svg xmlns="http://www.w3.org/2000/svg" className='cursor-pointer' width="25" height="25" viewBox="0 0 24 24" onClick={toggleDropdown}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className='cursor-pointer' width="25" height="25" viewBox="0 0 24 24" onClick={() => setIsOpenN(true)}>
                     <rect width="24" height="24" fill="none" />
                     <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9m4.3 13a1.94 1.94 0 0 0 3.4 0" />
                   </svg>
@@ -273,7 +276,14 @@ const Header = () => {
                     </g>
                   </svg>
                   Profiles
-                  <button onClick={handleLogout} className='px-3 py-2 bg-yellow500 rounded-[5px]'>Logout</button>
+                  {location.pathname !== '/start' && ( // Check if not on '/start' page
+                    <button
+                      onClick={handleLogout}
+                      className="px-3 py-2 bg-yellow-500 text-white rounded-[5px] hover:bg-yellow-600"
+                    >
+                      Logout
+                    </button>
+                  )}
                 </div>
               </div>
             )}
@@ -294,7 +304,7 @@ const Header = () => {
                   <rect width="24" height="24" fill="none" />
                   <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                 </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" className='cursor-pointer' width="25" height="25" viewBox="0 0 24 24" onClick={toggleDropdown}>
+                <svg xmlns="http://www.w3.org/2000/svg" className='cursor-pointer' width="25" height="25" viewBox="0 0 24 24" onClick={() => setIsOpenN(true)}>
                   <rect width="24" height="24" fill="none" />
                   <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9m4.3 13a1.94 1.94 0 0 0 3.4 0" />
                 </svg>
@@ -324,6 +334,7 @@ const Header = () => {
           </div>
           <ChatToolModal open={isOpen} onClose={() => setIsOpen(false)}>
           </ChatToolModal>
+          <NotificationModal open={isOpenN} onClose={handleCloseModal} />
           <ModalStart open={isOpenT}>
           </ModalStart>
         </div>

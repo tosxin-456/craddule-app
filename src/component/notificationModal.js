@@ -1,114 +1,117 @@
-// import React, { useState, useEffect, useRef } from 'react';
-// import {CiCamera, CiShare1, CiFaceSmile, CiUndo, CiMobile1, CiPaperplane, CiCircleRemove, CiFolderOn} from 'react-icons/ci';
-// import { useNavigate } from 'react-router-dom';
-// import ReactDOM from "react-dom";
-// import close from './closeB.png';
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getUserIdFromToken } from '../utils/startUtils';
+import { API_BASE_URL } from '../config/apiConfig';
 
+export default function NotificationModal({ open, onClose, clickPosition }) {
+    const navigate = useNavigate();
+    const projectId = localStorage.getItem('nProject');
+    const { access_token, userId } = getUserIdFromToken();
+    const [notifications, setNotifications] = useState([]);
+    const modalRef = useRef(null);
 
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            const token = localStorage.getItem('access_token');
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/notification/project/${projectId}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
 
+                if (response.status === 200) {
+                    const data = await response.json();
+                    const unreadNotifications = data.data.filter(notification => !notification.read);
+                    setNotifications(unreadNotifications);
+                } else {
+                    console.log('Error fetching notifications:', response.status);
+                }
+            } catch (err) {
+                console.log(err.message);
+            }
+        };
 
-// export default function NotificationModal ({open, onClose}) {
+        fetchNotifications();
+    }, [projectId]);
 
-//   //first dropdown
-//     // State variables to manage dropdown behavior
-//     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-//     const [selectedOption, setSelectedOption] = useState('');
-//     const dropdownRef = useRef(null);
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (modalRef.current && !modalRef.current.contains(e.target)) {
+                onClose();
+            }
+        };
 
-  
-//     // Function to toggle dropdown visibility
-//     const toggleDropdown = () => {
-//       setIsDropdownOpen(!isDropdownOpen);
-//     };
-  
-//     // Function to handle option selection
-//     const handleOptionSelect = (option) => {
-//       setSelectedOption(option);
-//       setIsDropdownOpen(false);
-//     };
+        if (open) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
 
-// //second dropdown
-//     // State variables to manage dropdown behavior
-//     const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
-//     const [selectedOption1, setSelectedOption1] = useState('');
-//     const dropdownRef1 = useRef(null);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [open, onClose]);
 
-  
-//     // Function to toggle dropdown visibility
-//     const toggleDropdown1 = () => {
-//       setIsDropdownOpen1(!isDropdownOpen1);
-//     };
-  
-//     // Function to handle option selection
-//     const handleOptionSelect1 = (option) => {
-//       setSelectedOption1(option);
-//       setIsDropdownOpen1(false);
-//     };
+    const formatTimeSent = (timeSent) => {
+        const date = new Date(timeSent);
+        const today = new Date();
 
+        const isToday =
+            date.getDate() === today.getDate() &&
+            date.getMonth() === today.getMonth() &&
+            date.getFullYear() === today.getFullYear();
 
-// // Close dropdown when clicking outside of it 1
-// useEffect(() => {
-//   const handleClickOutside = (event) => {
-//       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-//           setIsDropdownOpen(false);
-//       }
-//   };
+        return isToday
+            ? 'Today'
+            : date.toLocaleDateString('en-US', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+            });
+    };
 
-//   document.addEventListener('mousedown', handleClickOutside);
-//   return () => {
-//       document.removeEventListener('mousedown', handleClickOutside);
-//   };
-// }, []);
+    if (!open) return null;
 
-// // Close dropdown when clicking outside of it 2
-// useEffect(() => {
-//   const handleClickOutside = (event) => {
-//       if (dropdownRef1.current && !dropdownRef1.current.contains(event.target)) {
-//           setIsDropdownOpen1(false);
-//       }
-//   };
-
-//   document.addEventListener('mousedown', handleClickOutside);
-//   return () => {
-//       document.removeEventListener('mousedown', handleClickOutside);
-//   };
-// }, []);
-
-
-//     const [isOpen, setIsOpen]= useState(false);
-//     const navigate = useNavigate()
-//     const onClickHandler = () => navigate(`/login`)
-//     if(!open) return null
-//     return ReactDOM.createPortal(
-//     <>
-//   <div className='container-fluid1 chat modalOv1'>
-//   <div className='col-lg-3'>
-//   <div className='newMHold'>
-//   <div className='newMHold3'>
-//     <div className='chatIcon1'>
-
-//       <img src={close} className='iconSs3' onClick={onClose} type='button'></img>
-//     </div>
-   
-  
- 
-
-      
-      
-      
-
-
-   
-
-  
-//   </div>
-//   </div>
-//   </div>
-//   </div>
-//   </>,
-//   document.getElementById('portal')
-//   )
-// }
-
-
-
+    return (
+        <div
+            ref={modalRef}
+            className="absolute top-[5] right-0 w-[350px] bg-white h-[350px] border shadow-lg rounded-lg"
+        >
+            {/* Close Button */}
+            <button
+                className="absolute z-20 top-2 right-2 text-white hover:text-gray-700"
+                aria-label="Close"
+                onClick={onClose}
+            >
+                X
+            </button>
+            {/* Modal Header */}
+            <div className="text-center bg-[#193FAE] text-white rounded-t-lg py-2">
+                <p className="text-lg font-semibold">Notifications</p>
+            </div>
+            {/* Modal Content */}
+            <div className="p-4 space-y-4 overflow-y-auto h-[calc(100%-60px)]">
+                {notifications.length > 0 ? (
+                    notifications.map((notification, index) => (
+                        <div
+                            key={index}
+                            className="p-3 bg-gray-100 rounded-md shadow-sm border border-gray-200"
+                        >
+                            <h3 className="text-base font-bold text-gray-700">
+                                {notification.notificationHead}
+                            </h3>
+                            <p className="text-sm text-gray-600">
+                                {notification.notification}
+                            </p>
+                            <span className="text-xs text-gray-500">
+                                {formatTimeSent(notification.timeSent)}
+                            </span>
+                        </div>
+                    ))
+                ) : (
+                    <p className="text-gray-500 text-sm text-center">No new notifications</p>
+                )}
+            </div>
+        </div>
+    );
+}
