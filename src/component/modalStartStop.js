@@ -187,7 +187,7 @@ export default function ModalStart({ open, onClose}){
     <>
       <div className="modalOv"></div>
       {showProjectModal && 
-      <div className="modalSt">
+        <div className="modalSt ">
         <div className="relative flex justify-end mb-3">
           <span onClick={handleProceed} className="block w-fit p-2 px-3 rounded-md border border-blue50 text-gray900 cursor-pointer">X</span>
         </div>

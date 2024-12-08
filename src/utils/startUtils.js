@@ -23,6 +23,12 @@ export const handleLogout = () => {
   window.location.href = '/login';
 };
 
+export const handleLogoutLanding = () => {
+  localStorage.clear();
+  window.location.href = '/login';
+};
+
+
 // Function to handle home redirection
 export const handleHome = () => {
   window.location.href = '/home';

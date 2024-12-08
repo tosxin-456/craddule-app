@@ -14,7 +14,7 @@ import {
   formatDate,
 } from './utils/landingPageUtils.js'; // Import utilities
 import GetCard from './getCard.js';
-import { CheckOnboarding, getUserIdFromToken } from './utils/startUtils.js';
+import { CheckOnboarding, getUserIdFromToken, handleLogoutLanding } from './utils/startUtils.js';
 
 function LandingPage() {
   const [projects, setProjects] = useState([]);
@@ -58,6 +58,7 @@ function LandingPage() {
     navigate(`/sharereview/${reviewId}`);
   };
 
+
   if (isLoading) {
     // Render the Loading component if data is still being fetched
     return <Loading label="Loading your projects..." />;
@@ -67,8 +68,14 @@ function LandingPage() {
     <div>
       <div className='fixed w-full h-full top-0 left-0 z-[-999] landP'>
       </div>
-      <div className='absolute top-10 left-10'>
-        <img src={logo} className='w-[86.49px] h-[90px]' />
+      <div className="absolute top-10 left-10 flex items-center justify-between gap-4">
+        <img src={logo} alt="Logo" className="w-[86.49px] h-[90px]" />
+        <button
+          onClick={handleLogoutLanding}
+          className="px-3 py-2 bg-yellow-500 text-white rounded-[5px] hover:bg-yellow-600 transition"
+        >
+          Logout
+        </button>
       </div>
       <div className='container'>
         <div className='proSeg2'>
