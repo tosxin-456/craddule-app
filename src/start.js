@@ -300,7 +300,7 @@ function InflationRateGraph({ graphType }) {
                     <p className="text-[16px] font-semibold text-black500 mt-3">Tell us More</p>
                 </div>
                 {isOpenFeed && (
-                    <div className="modal-overlay">
+                    <div className="modal-overlayV">
                         <GiveFeedbackModal open={isOpenFeed} onClose={handleCloseModal} clickPosition={clickPosition} />
                     </div>
                 )}
