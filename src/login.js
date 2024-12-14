@@ -16,7 +16,7 @@ function Login() {
   const [rememberMe, setRememberMe] = useState(false)
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({ username: '', password: ''});
+  const [formData, setFormData] = useState({ username: '', password: '' });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -43,12 +43,12 @@ function Login() {
     const storedPassword = localStorage.getItem("password");
     const storedRememberMe = localStorage.getItem("rememberMe");
     // console.log(storedEmail, storedPassword, storedRememberMe);
-    if ( storedRememberMe === "true") {
-        // document.getElementById("username").value = storedEmail;
-        // document.getElementById("password").value = storedPassword;
-        // document.getElementById("rememberMe").checked = storedRememberMe;
-        setFormData({ username: storedEmail, password: storedPassword});
-        setRememberMe(storedRememberMe)
+    if (storedRememberMe === "true") {
+      // document.getElementById("username").value = storedEmail;
+      // document.getElementById("password").value = storedPassword;
+      // document.getElementById("rememberMe").checked = storedRememberMe;
+      setFormData({ username: storedEmail, password: storedPassword });
+      setRememberMe(storedRememberMe)
     }
   }, []);
 
@@ -58,11 +58,12 @@ function Login() {
       <div className='mt-[100px]'></div>
       <div className='w-[90%] m-auto lg:grid lg:grid-cols-2 bg-white rounded-xl'>
         <div className=' lg:p-10 lg:px-20 p-5 px-12 pt-10 lg:pt-16 lg:pb-20'>
-          <div className='flex justify-start items-center lg:gap-[6px] relative -top-8 lg:-left-12 -left-10'>
-            <img src={logo} className='w-[40.12px] h-[40px]'></img>
-            <span className='text-[16px] font-semibold'>Craddule</span>
-          </div>
-          <div className=''>
+          <div className=' lg:p-10 lg:px-20 p-5 px-12 pt-10 lg:pt-16 lg:pb-20'>
+            <div className='flex justify-start items-center lg:gap-[6px] relative -top-8 lg:-left-12 -left-10'>
+              <img src={logo} className='w-[40.12px] h-[40px]'></img>
+              <span className='text-[16px] font-semibold'>Craddule</span>
+            </div>
+            <div className=''>
               <h3 className='font-bold'>Welcome back!</h3>
               <p className='texet-[16px] text-black200'>Continue your growth with Craddule!</p>
               <form onSubmit={handleSubmit} className='mt-14'>
@@ -98,7 +99,7 @@ function Login() {
                 </div>
                 <div className='flex justify-between items-center text-[16px] mt-3'>
                   <div className='flex justify-start items-center gap-1'>
-                    <input type="checkbox" name="remember_me" id="rememberMe" className='cursor-pointer' checked={rememberMe} onChange={(e)=>setRememberMe(e.target.checked)}/>
+                    <input type="checkbox" name="remember_me" id="rememberMe" className='cursor-pointer' checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
                     <label htmlFor="remember-me" className='font-semibold'>Remember me</label>
                   </div>
                   <div>
@@ -110,20 +111,22 @@ function Login() {
                 </button>
               </form>
               <p className='mt-8 font-medium text-[16px]'>Not registered yet?<a className='ps-2 no-underline text-[#1B45BF] ' href='/signUp'>Create an Account</a></p>
+            </div>
           </div>
         </div>
-        <div className='bg-[#193FAE] hidden lg:block relative'>
-          <img src={design} alt="" className="w-[196px] h-[219px] absolute bottom-0 right-0" />
-          <img src={design} alt="" className="w-[196px] h-[219px] absolute top-0 left-0 rotate-180" />
-          <div className='w-fit m-auto pt-20'>
-            <img src={loginImage} className='m-auto'></img>
-            <h4 className='font-semibold text-white w-2/3 text-center m-auto'>Turn your ideas into reality</h4>
-            <p className='text-[16px] text-white w-2/3 text-center m-auto'>We know that your ideas are unique, We provide requisite tailored tools.</p>
+        <div className='col-md-6'>
+          <div className='bg-[#193FAE] hidden lg:block relative'>
+            <img src={design} alt="" className="w-[196px] h-[219px] absolute bottom-0 right-0" />
+            <img src={design} alt="" className="w-[196px] h-[219px] absolute top-0 left-0 rotate-180" />
+            <div className='w-fit m-auto pt-20'>
+              <img src={loginImage} className='m-auto'></img>
+              <h4 className='font-semibold text-white w-2/3 text-center m-auto'>Turn your ideas into reality</h4>
+              <p className='text-[16px] text-white w-2/3 text-center m-auto'>We know that your ideas are unique, We provide requisite tailored tools.</p>
+            </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
-      <div className='mb-[300px]'></div>
-      <ToastContainer />
     </>
   );
 }

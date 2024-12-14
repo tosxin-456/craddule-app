@@ -1,12 +1,12 @@
-import React, { useState,useEffect,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import bci from './images/bc.png';
 import Header from './component/header';
 import Menu from './component/menu';
 import { useNavigate, Link } from 'react-router-dom';
-import {API_BASE_URL} from './config/apiConfig';
+import { API_BASE_URL } from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleNotch,faChevronDown,faBold, faItalic, faUnderline, faStrikethrough, faQuoteRight, faCode, faLink, faImage, faTextHeight, faListOl, faListUl, faSubscript, faSuperscript, faOutdent, faIndent, faAlignRight, faHeading } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch, faChevronDown, faBold, faItalic, faUnderline, faStrikethrough, faQuoteRight, faCode, faLink, faImage, faTextHeight, faListOl, faListUl, faSubscript, faSuperscript, faOutdent, faIndent, faAlignRight, faHeading } from '@fortawesome/free-solid-svg-icons';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { jwtDecode } from "jwt-decode";
@@ -19,44 +19,71 @@ import API_BASE_WEB_URL from './config/apiConfigW';
 import HeaderIdeation from './component/headerIdeation';
 import SideMenu2P from './component/sideMenu2P';
 import BreadCrumb from './component/breadCrumb';
+import { FetchUser } from './utils/startUtils';
 
-function ScrapView ({ htmlContent })  {
-    
-    const navigate = useNavigate()
+function getFormattedDate() {
+  const date = new Date();
 
-     const onClickHandler = () => navigate(`/video`);
-     const [images, setImages] = useState([]);
-     const [types, setTypes] = useState([]);
+  // Get the day
+  const day = date.getDate();
+
+  // Add the appropriate suffix (st, nd, rd, th)
+  const suffix =
+    day % 10 === 1 && day !== 11 ? "st" :
+      day % 10 === 2 && day !== 12 ? "nd" :
+        day % 10 === 3 && day !== 13 ? "rd" : "th";
+
+  // Get the month name
+  const month = date.toLocaleString("default", { month: "long" });
+
+  // Get the year
+  const year = date.getFullYear();
+
+  // Return the formatted string
+  return `${day}${suffix} ${month} ${year}`;
+}
+
+// Example usage
+// console.log(getFormattedDate());
+
+
+function ScrapView({ htmlContent }) {
+
+  const navigate = useNavigate()
+
+  const onClickHandler = () => navigate(`/video`);
+  const [images, setImages] = useState([]);
+  const [types, setTypes] = useState([]);
   const [showImagePopup, setShowImagePopup] = useState(false);
-     const [answers, setAnswers] = useState([]);
-     const [answersV, setAnswersV] = useState([]);
-     const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [answers, setAnswers] = useState([]);
+  const [answersV, setAnswersV] = useState([]);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const projectId = localStorage.getItem('nProject');
   const [scrap, setScrap] = useState('');
   const [nda, setNda] = useState('');
   const [isChecked, setIsChecked] = useState(false);
-   const access_token = localStorage.getItem('access_token');
+  const access_token = localStorage.getItem('access_token');
   console.log(access_token);
-    const decodedToken = jwtDecode(access_token);
-    const userId = decodedToken.userId;
-    console.log(userId);
+  const decodedToken = jwtDecode(access_token);
+  const userId = decodedToken.userId;
+  console.log(userId);
   const projectName = localStorage.getItem('nProjectName');
   const userName = localStorage.getItem('username');
 
-  const questionType ="BusinessCaseBuilder";
-  const questionSubType ="Introduction";
+  const questionType = "BusinessCaseBuilder";
+  const questionSubType = "Introduction";
   const [value, setValue] = useState('');
   const [misspelledWords, setMisspelledWords] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionBoxPosition, setSuggestionBoxPosition] = useState({ top: 0, left: 0 });
-  const [selectedWord, setSelectedWord] = useState(null); 
+  const [selectedWord, setSelectedWord] = useState(null);
   const [team, setteam] = useState([]);
   const [linkD, setLink] = useState('');
-
+  const [userDetails, setUserDetails] = useState({});
   const handleDelete = (id) => {
-  
+
     console.log(id);
   };
 
@@ -65,32 +92,38 @@ function ScrapView ({ htmlContent })  {
     projectId: projectId,
     link: ''
   });
-  
+
   const handleCheckboxChange = (e) => {
     console.log(e.target.checked);
     setIsChecked(e.target.checked);
   };
 
+  if (access_token) {
+    FetchUser(userId, setUserDetails, setError, setLoading);
+  }
+
+  console.log(userDetails?.firstName)
   useEffect(() => {
     const getNda = async () => {
-        try {
-            const scrapResponse = await fetch(`${API_BASE_URL}/api/nda/project/${projectId}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${access_token}` // Include the token in the request headers
-                }
-            });
+      try {
+        
+        const scrapResponse = await fetch(`${API_BASE_URL}/api/nda/project/${projectId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${access_token}` // Include the token in the request headers
+          }
+        });
 
-            if (scrapResponse.status === 200) {
-                // If NDA exists, fetch the NDA data
-                const dataS = await scrapResponse.json();
-                console.log(dataS);
-                console.log("NDA found: " + dataS.nda);
-                setNda(dataS.nda);  // Assuming `nda` contains the NDA content
+        if (scrapResponse.status === 200) {
+          // If NDA exists, fetch the NDA data
+          const dataS = await scrapResponse.json();
+          console.log(dataS);
+          console.log("NDA found: " + dataS.nda);
+          setNda(dataS.nda);  // Assuming `nda` contains the NDA content
 
-            } else if (scrapResponse.status === 404) {
-                // If NDA does not exist (404), create a new NDA
-                const newNdaContent = `
+        } else if (scrapResponse.status === 404) {
+          // If NDA does not exist (404), create a new NDA
+          const newNdaContent = `
                    <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,11 +163,11 @@ function ScrapView ({ htmlContent })  {
 <body>
     <div class="container">
         <h1>CONFIDENTIALITY AND NON-DISCLOSURE AGREEMENT</h1>
-        <p>This Confidentiality and Non-disclosure agreement is made this <strong>XXXXXXXXX</strong></p>
+        <p>This Confidentiality and Non-disclosure agreement is made this <strong>${getFormattedDate()}</strong></p>
 
         <h2>PARTIES</h2>
         <p>The Parties to this Agreement are:</p>
-        <p><strong>${userName} with project${projectName}</strong> incorporated under the laws of the Federal Republic of Nigeria with its principal offices at <strong>Address of your entity</strong> (“Company”). Or Your Ideas as contained in this Craddule Project Workspace. (The Disclosing Party).</p>
+        <p><strong>${userDetails?.firstName} with project${projectName}</strong> incorporated under the laws of the Federal Republic of Nigeria with its principal offices at <strong>${projectName}</strong>. Or Your Ideas as contained in this Craddule Project Workspace. (The Disclosing Party).</p>
         <p>And</p>
         <p><strong>${formData.email}</strong> with Craddule account and access to the project. (The Receiving Party/Developer).</p>
 
@@ -199,7 +232,7 @@ function ScrapView ({ htmlContent })  {
             <p>Signed for and on behalf of</p>
             <p><strong>${projectName}</strong></p>
             <p>____________________</p>
-            <p><strong>${userName}</strong></p>
+            <p><strong>${userDetails?.firstName + " " +  userDetails?.lastName }</strong></p>
             <p><strong>Designation</strong></p>
         </div>
 
@@ -215,69 +248,70 @@ function ScrapView ({ htmlContent })  {
 
                 `;
 
-                const createNdaResponse = await fetch(`${API_BASE_URL}/api/nda`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${access_token}` // Include the token in the request headers
-                    },
-                    body: JSON.stringify({
-                        projectId: projectId,
-                        nda: newNdaContent
-                    })
-                });
+          const createNdaResponse = await fetch(`${API_BASE_URL}/api/nda`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${access_token}` // Include the token in the request headers
+            },
+            body: JSON.stringify({
+              projectId: projectId,
+              nda: newNdaContent
+            })
+          });
+          setNda(newNdaContent)
 
-                if (createNdaResponse.status === 200) {
-                    const createdNda = await createNdaResponse.json();
-                    console.log("New NDA created: " + createdNda);
-                    setNda(createdNda.nda);
-                    
-                } else {
-                    console.log('Failed to create NDA');
-                    setLoading(false);
-                }
-            } else {
-                const data = await scrapResponse.json();
-                console.log(data);
-                setLoading(false);
-            }
-        } catch (error) {
-            setError(error.message);
+          if (createNdaResponse.status === 200) {
+            const createdNda = await createNdaResponse.json();
+            console.log("New NDA created: " + createdNda);
+            setNda(createdNda.nda);
+
+          } else {
+            console.log('Failed to create NDA');
             setLoading(false);
+          }
+        } else {
+          const data = await scrapResponse.json();
+          console.log(data);
+          setLoading(false);
         }
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
     };
 
     getNda();
-}, [projectId, access_token]);
+  }, [projectId, access_token]);
 
   const createTeam = async (data) => {
     setLoading(true);
-  
+
     try {
       const timestamp = new Date().getTime();
       const randomString = Math.random().toString(36).substring(2, 8);
       const uniqueCode = timestamp.toString() + randomString;
       const link = "/login/start/" + uniqueCode;
-  
+
       console.log(link);
 
       let ndaC = "";
 
-      if(isChecked){
+      if (isChecked) {
         ndaC = nda;
         console.log(ndaC);
       }
-  
+
       const updatedFormData = {
         ...data,
         link: link,
         uniqueCode: uniqueCode,
         projectId: projectId,
         email: data.email,
-        nda :ndaC,
+        nda: ndaC,
       };
-   
-  
+
+
       const response = await fetch(API_BASE_URL + '/api/team', {
         method: 'POST',
         headers: {
@@ -286,7 +320,7 @@ function ScrapView ({ htmlContent })  {
         },
         body: JSON.stringify(updatedFormData),
       });
-  
+
       if (response.status === 200) {
         console.log(updatedFormData)
         setLoading(false);
@@ -305,14 +339,14 @@ function ScrapView ({ htmlContent })  {
       console.error('An error occurred:', error);
     }
   };
-  
-const handleSubmit = (e) => {
-e.preventDefault();
 
-createTeam(formData);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    createTeam(formData);
 
 
-};
+  };
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(linkD).then(() => {
@@ -321,35 +355,35 @@ createTeam(formData);
       console.error('Failed to copy the link: ', error);
     });
   };
-  
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
   };
-  
+
 
   useEffect(() => {
     const fetchTeam = async () => {
       try {
         const scrapResponse = await fetch(API_BASE_URL + `/api/team/${projectId}`, {
-            headers: {
-              'Content-Type': 'application/json', 
-              'Authorization': `Bearer ${access_token}` // Include the token in the request headers
-            }
-          });
-        
-        if(scrapResponse.status === 200) {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${access_token}` // Include the token in the request headers
+          }
+        });
+
+        if (scrapResponse.status === 200) {
           // If summary exists, fetch the summary data
           const dataS = await scrapResponse.json();
           console.log(dataS);
-          console.log("scrap "+dataS.data.scrap);
+          console.log("scrap " + dataS.data.scrap);
           setteam(dataS.data);
         } else {
-            const data = await scrapResponse.json();
-            console.log(data);
-            setLoading(false);
+          const data = await scrapResponse.json();
+          console.log(data);
+          setLoading(false);
         }
       } catch (error) {
         setError(error.message);
@@ -389,7 +423,7 @@ createTeam(formData);
     const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     // Get the correct suffix for the day
-  
+
     return `${time}`;
   };
 
@@ -407,86 +441,92 @@ createTeam(formData);
 
   const deleteTeam = async (id) => {
     try {
-        const response = await fetch(API_BASE_URL + `/api/team/${id}`, { method: 'DELETE' });
-        if (!response.ok) {
-            throw new Error('Failed to delete graph');
-        }
+      const response = await fetch(API_BASE_URL + `/api/team/${id}`, { method: 'DELETE' });
+      if (!response.ok) {
+        throw new Error('Failed to delete graph');
+      }
 
-        console.log("deleted");
-        setteam(team.filter(scrap => scrap._id !== id));
-        
+      console.log("deleted");
+      setteam(team.filter(scrap => scrap._id !== id));
+
     } catch (error) {
-        console.error('Error deleting all graphs:', error);
-        // Handle error, e.g., show an error message
+      console.error('Error deleting all graphs:', error);
+      // Handle error, e.g., show an error message
     }
-};
+  };
 
   return (
     <>
-
       <div className=''>
         <div className="">
           <Header />
-          <BreadCrumb page={'Add team member'}/>
-          <div className='w-[975px] m-auto mt-5'>
-            <div className='bacWHI'>
+          <BreadCrumb page={'Add team member'} />
+          <div className='w-full max-w-[975px] mx-auto mt-5 px-4 sm:px-6 lg:px-8'>
+            <div className='bg-white p-5 rounded-lg shadow-md'>
               <div className="row">
-                <div className="">
-                    <h4 className='text-center'>Add Team Member</h4>
+                <div className="mb-4">
+                  <h4 className='text-center text-lg sm:text-xl lg:text-2xl font-semibold'>Add Team Member</h4>
                 </div>
-                {/* <div className="col-md-6">
-                  <button className="btn mainBtn" onClick={handleN}>Manage NDA</button>
-                </div> */}
               </div>
 
               {linkD && (
-              <p className='copyPp'>{linkD}
-              <button className='cop' onClick={copyToClipboard}>
-                  Copy
-              </button>
-              </p>
+                <p className='copyPp text-center'>
+                  {linkD}
+                  <button className='cop text-blue-500 underline ml-2' onClick={copyToClipboard}>
+                    Copy
+                  </button>
+                </p>
               )}
+
               <form onSubmit={handleSubmit}>
-                <div className="mt-[16px]">
-                  <label htmlFor="email" className='text-[22px] font-normal pb-1 block'>Email</label>
+                <div className="mt-4">
+                  <label htmlFor="email" className='text-lg font-medium pb-1 block'>
+                    Email
+                  </label>
                   <input
                     type="email"
                     id="email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder='Enter email'
-                    className="w-full border border-[#8A8A8A] bg-white px-3 ps-4 py-3 rounded-[15px]"
+                    className="w-full border border-gray-400 bg-white px-4 py-3 rounded-lg"
                   />
                 </div>
 
                 <div className='text-center mt-4 flex justify-center items-center gap-3'>
-                  <input 
-                    type="checkbox" 
+                  <input
+                    type="checkbox"
                     label="NDA"
                     name="nda"
-                    checked={isChecked} // Bind checked attribute to state
+                    checked={isChecked}
                     onChange={handleCheckboxChange}
-                    className='bg-[#8A8A8A]'
+                    className='w-5 h-5 border-gray-400 rounded-md'
                   />
-                  <span>Send NDA</span>
+                  <span className="text-sm sm:text-base">Send NDA</span>
                 </div>
-                
+
                 <div className='mt-4'>
-                  <button className="bg-black w-[171px] block m-auto py-1 rounded-[15px] text-white" type='submit'>
-                    { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
-                    { !loading && <span>Send invite</span>}
+                  <button
+                    className="bg-black w-full sm:w-[171px] mx-auto py-2 rounded-lg text-white flex items-center justify-center"
+                    type='submit'
+                  >
+                    {loading && (
+                      <FontAwesomeIcon icon={faCircleNotch} className='fa-spin mr-2' />
+                    )}
+                    <span>{loading ? 'Sending...' : 'Send Invite'}</span>
                   </button>
                 </div>
               </form>
-          
-              <div class = "break"></div>
-            </div>     
+
+              <div className="break mt-6 border-t border-gray-300"></div>
+            </div>
           </div>
         </div>
-        <Toaster  position="top-right" />
+        <Toaster position="top-right" />
       </div>
     </>
   );
+
 }
 
 export default ScrapView

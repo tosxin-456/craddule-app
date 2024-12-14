@@ -44,6 +44,7 @@ export const useFetchUserProjects = (userId, setProjects) => {
 
         if (response.status === 200) {
           const data = await response.json();
+          // console.log(data)
           setProjects(data.data);
         } else {
           console.error('Error fetching user projects:', await response.json());

@@ -90,18 +90,15 @@ export default function NotificationModal({ open, onClose, clickPosition }) {
                 <p className="text-lg font-semibold">Notifications</p>
             </div>
             {/* Modal Content */}
-            <div className="p-4 space-y-4 overflow-y-auto h-[calc(100%-60px)]">
+            <div className="p-2 space-y-2 overflow-y-auto h-[calc(100%-60px)]">
                 {notifications.length > 0 ? (
                     notifications.map((notification, index) => (
                         <div
                             key={index}
-                            className="p-3 bg-gray-100 rounded-md shadow-sm border border-gray-200"
+                            className="p-1 bg-[#D9D9D9] rounded-md shadow-sm border border-gray-200"
                         >
-                            <h3 className="text-base font-bold text-gray-700">
+                            <p className="text-md font-bold text-[#545454]">
                                 {notification.notificationHead}
-                            </h3>
-                            <p className="text-sm text-gray-600">
-                                {notification.notification}
                             </p>
                             <span className="text-xs text-gray-500">
                                 {formatTimeSent(notification.timeSent)}

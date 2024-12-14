@@ -20,6 +20,27 @@ import HeaderIdeation from './component/headerIdeation';
 import SideMenu2 from './component/sideMenu2';
 import { useParams } from 'react-router-dom';
 
+function getFormattedDate() {
+  const date = new Date();
+
+  // Get the day
+  const day = date.getDate();
+
+  // Add the appropriate suffix (st, nd, rd, th)
+  const suffix =
+    day % 10 === 1 && day !== 11 ? "st" :
+      day % 10 === 2 && day !== 12 ? "nd" :
+        day % 10 === 3 && day !== 13 ? "rd" : "th";
+
+  // Get the month name
+  const month = date.toLocaleString("default", { month: "long" });
+
+  // Get the year
+  const year = date.getFullYear();
+
+  // Return the formatted string
+  return `${day}${suffix} ${month} ${year}`;
+}
 
 function ScrapCreate ({ htmlContent })  {
     
@@ -120,7 +141,7 @@ function ScrapCreate ({ htmlContent })  {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confidentiality and Non-Disclosure Agreement</title>
+    <title>Confidentiality and Non-Disclosure Agreements</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -154,7 +175,7 @@ function ScrapCreate ({ htmlContent })  {
 <body>
     <div class="container">
         <h1>CONFIDENTIALITY AND NON-DISCLOSURE AGREEMENT</h1>
-        <p>This Confidentiality and Non-disclosure agreement is made this <strong>XXXXXXXXX</strong></p>
+        <p>This Confidentiality and Non-disclosure agreement is made this <strong>${getFormattedDate()}</strong></p>
 
         <h2>PARTIES</h2>
         <p>The Parties to this Agreement are:</p>

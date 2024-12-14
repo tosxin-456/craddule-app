@@ -104,7 +104,6 @@ function SignUp() {
           <div className='pt-3 '>
             <h3 className='font-bold'>Sign Up</h3>
             <p className='texet-[16px] text-black200'>Begin your success story with Craddule</p>
-
             <form onSubmit={handleSubmit}>
               <div className="">
                 <div className="mt-[16px]">
