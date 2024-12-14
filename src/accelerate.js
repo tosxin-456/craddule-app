@@ -37,7 +37,7 @@ const Accelerate = () => {
   };
 
   const handleContinueClick = () => {
-    updateProject(completedPhases, 'Craddule demo', setLoading, navigate);
+    updateProject(completedPhases, 'Craddule sprint', setLoading, navigate);
     console.log("Selected Phases:", completedPhases); // For debugging purposes
   };
   // const unselectedPhases = phases.filter(phase => 
@@ -45,39 +45,73 @@ const Accelerate = () => {
   // );
   return (
     <div>
-      <div className="fixed top-0 left-0 w-full h-full bg-[url('./images/pattern_big.png')] bg-contain bg-repeat z-[-999] opacity-0">
-      </div>
-      <div className='mx-24'>
-        <div className='mt-10'>
-          <h3 className="text-blue600 text-center">Hello, {userDetails?.firstName}!</h3>
-          <h5 className="text-black400 text-center mt-8">What stages have you gone through in your Business.</h5>
-          <h5 className="text-black400 text-center">Please select what you have done</h5>
+      <div className="fixed top-0 left-0 w-full h-full bg-[url('./images/pattern_big.png')] bg-contain bg-repeat z-[-999] opacity-0"></div>
+      <div className="mx-6 md:mx-12 lg:mx-24">
+        <div className="mt-8 md:mt-10">
+          <h3 className="text-blue600 text-center text-xl md:text-2xl lg:text-3xl">
+            Hello, {userDetails?.firstName}!
+          </h3>
+          <h5 className="text-black400 text-center mt-4 md:mt-8 text-sm md:text-base lg:text-lg leading-relaxed">
+            What stages have you gone through in your Business.
+          </h5>
+          <h5 className="text-black400 text-center text-sm md:text-base lg:text-lg">
+            Please select what you have done
+          </h5>
         </div>
-        <div className='grid grid-cols-12 gap-3 mt-14'>
-          {phases.map((phase, index) => ( index<3 ?
-            <div className='col-span-4' key={phase} onClick={() => handlePhaseClick(phase)}>
-              <div className={`p-8 w-[402px] h-[416px] text-center rounded-[10px] text-white hover:bg-blue600 cursor-pointer ${completedPhases.includes(phase) ? 'bg-blue600' : 'bg-black500'}`}>
-                <h6 className=''>{phase.title}</h6>
-                <p className='mt-6 text-p18 font-light'>{phase.content}</p>
-              </div>
-            </div>
-            :
-              <div className={`col-span-6 ${index==4 ? 'justify-self-start':'justify-self-end'}`} key={phase} onClick={() => handlePhaseClick(phase)}>
-                <div className={`p-8 w-[402px] h-[416px] text-center rounded-[10px] text-white hover:bg-blue600 cursor-pointer ${completedPhases.includes(phase) ? 'bg-blue600' : 'bg-black500'}`}>
-                  <h6 className=''>{phase.title}</h6>
-                  <p className='mt-6 text-p18 font-light'>{phase.content}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 mt-10 md:mt-14">
+          {phases.map((phase, index) =>
+            index < 3 ? (
+              <div
+                className="col-span-4 md:col-span-6 lg:col-span-4"
+                key={phase}
+                onClick={() => handlePhaseClick(phase)}
+              >
+                <div
+                  className={`p-6 md:p-8 w-full md:w-[350px] lg:w-[402px] h-auto md:h-[416px] text-center rounded-[10px] text-white hover:bg-blue600 cursor-pointer ${completedPhases.includes(phase) ? 'bg-blue600' : 'bg-black500'
+                    }`}
+                >
+                  <h6 className="text-base md:text-lg">{phase.title}</h6>
+                  <p className="mt-4 md:mt-6 text-p16 md:text-p18 font-light">
+                    {phase.content}
+                  </p>
                 </div>
               </div>
-          ))}
+            ) : (
+              <div
+                className={`col-span-6 ${index === 4 ? 'justify-self-start' : 'justify-self-end'
+                  }`}
+                key={phase}
+                onClick={() => handlePhaseClick(phase)}
+              >
+                <div
+                  className={`p-6 md:p-8 w-full md:w-[350px] lg:w-[402px] h-auto md:h-[416px] text-center rounded-[10px] text-white hover:bg-blue600 cursor-pointer ${completedPhases.includes(phase) ? 'bg-blue600' : 'bg-black500'
+                    }`}
+                >
+                  <h6 className="text-base md:text-lg">{phase.title}</h6>
+                  <p className="mt-4 md:mt-6 text-p16 md:text-p18 font-light">
+                    {phase.content}
+                  </p>
+                </div>
+              </div>
+            )
+          )}
         </div>
       </div>
-      <div className='my-14'>
-        <button onClick={handleContinueClick} className='block py-3 px-52 bg-blue600 rounded-full text-white m-auto'>
-          {loading ? <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' /> : <span>Continue</span>}
+      <div className="my-8 md:my-14">
+        <button
+          onClick={handleContinueClick}
+          className="block py-3 px-10 md:px-20 lg:px-52 bg-blue600 rounded-full text-white mx-auto text-sm md:text-base"
+        >
+          {loading ? (
+            <FontAwesomeIcon icon={faCircleNotch} className="fa-spin" />
+          ) : (
+            <span>Continue</span>
+          )}
         </button>
       </div>
     </div>
   );
+
 };
 
 export default Accelerate;

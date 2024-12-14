@@ -14,6 +14,7 @@ export default function ModalStart({ open, onClose }) {
   const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({
     projectName: '',
+    projectType:'craddule sprint'
   });
   const [formQData, setFormQData] = useState({
     answer: '',

@@ -35,7 +35,7 @@ export const useFetchUserProjects = (userId, setProjects) => {
   useEffect(() => {
     const fetchUserProjects = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/project/${userId}`, {
+        const response = await fetch(`${API_BASE_URL}/api/project/${userId}/`, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('access_token')}`

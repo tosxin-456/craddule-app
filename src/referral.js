@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Header from './component/header';
-import {API_BASE_URL, APP_BASE_URL, APP_REFER_URL} from './config/apiConfig';
+import { API_BASE_URL, APP_BASE_URL, APP_REFER_URL } from './config/apiConfig';
 import refer from './images/refer.png';
 import { handleClick, handleClickStorage, handleHome, handleLogout, updateStreak, getUserIdFromToken, FetchProjectDetails, FetchGoStatus, FetchTimelines, FetchTimelinesCount } from "./utils/startUtils";
 import { useNavigate } from "react-router-dom";
+import home from './images/HOME.png';
 
 function Referral() {
 
   const [referralCode, setReferralCode] = useState('');
   const [copied, setCopied] = useState(false);
   const [text, setText] = useState('');
-  const {userId} = getUserIdFromToken();
+  const { userId } = getUserIdFromToken();
   const navigate = useNavigate();
 
-  if (userId == null){
+  if (userId == null) {
     navigate('/login');
   }
 
@@ -30,58 +31,68 @@ function Referral() {
       });
   };
 
-  useEffect(()=>{
-    const fetchCode = async()=>{
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/user/referralcode/get/${userId}`, {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-              }
-            });
-            console.log(response);
-            if (response.status === 200) {
-              const data = await response.json();
-              console.log(data);
-              setReferralCode(data.referralCode);
-            } else {
-              console.error('Error fetching user referral code:', await response.json());
-            }
-          } catch (err) {
-            console.log('here')
-            console.log(err);
+  useEffect(() => {
+    const fetchCode = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/user/referralcode/get/${userId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
           }
+        });
+        console.log(response);
+        if (response.status === 200) {
+          const data = await response.json();
+          console.log(data);
+          setReferralCode(data.referralCode);
+        } else {
+          console.error('Error fetching user referral code:', await response.json());
+        }
+      } catch (err) {
+        console.log('here')
+        console.log(err);
+      }
     }
     fetchCode()
   })
 
   return (
     <>
-        <Header />
-        <div className="mb-20"></div>
-        <div className="w-fit m-auto mt-20 p-10 bg-white rounded-[30px]">
-          <div className='grid grid-cols-12 gap-10'>
-              <div className='col-span-6'>
-                <h4 className='text-center mt-10'>Refer a friend</h4>
-                <p className='text-gray800 text-center mb-5'>Here you can invite a friend or colleagues  to join Craddule</p>
-                <div>
-                    <p className="-mb-0">Your referral link:</p>
-                    <div className="px-4 py-2 bg-black50 flex items-center rounded-[10px]">
-                        <h8>{`${APP_REFER_URL}/${referralCode}`}</h8>
-                    </div>
-                    <button className='px-3 py-1 mt-1 bg-blue600 float-right rounded-[30px] text-white text-[12px]' onClick={handleCopy}>{copied ? 'Copied!' : 'Copy link'}</button>
-                </div>
-                <div className="mt-20">
-                    <p className="-mb-0">Refer by Email</p>
-                    <input className="block px-4 py-2 bg-black50 w-full rounded-[10px]" placeholder="Enter recipient email" />
-                    <button className='px-3 py-1 mt-1 bg-blue600 float-right rounded-[30px] text-white text-[12px]'>Send Referral</button>
-                </div>
+      <Header />
+      <div className="container relative"></div>
+      <div className="flex mt-[40px] justify-between m-auto mb-[50px] items-center w-[80%]">
+        <div className="w-fit">
+          <button onClick={() => navigate(-1)} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
+            Back
+          </button>
+        </div>
+        <div>
+          <img src={home} alt="Home Icon" />
+        </div>
+      </div>
+      <div className="w-fit m-auto mt-20 p-10 bg-white rounded-[30px]">
+        <div className='grid md:grid-cols-12 gap-10'>
+          <div className='col-span-6'>
+            <h4 className='text-center mt-10'>Refer a friend</h4>
+            <p className='text-gray800 text-center mb-5'>Here you can invite a friend or colleagues  to join Craddule</p>
+            <div>
+              <p className="-mb-0">Your referral link:</p>
+              <div className="px-4 py-2 bg-black50 flex items-center rounded-[10px]">
+                <h8>{`${APP_REFER_URL}/${referralCode}`}</h8>
               </div>
-              <div className='col-span-6'>
-                  <img src={refer} className="w-[435px] h-[495px]"/>
-              </div>
+              <button className='px-3 py-1 mt-1 bg-blue600 float-right rounded-[30px] text-white text-[12px]' onClick={handleCopy}>{copied ? 'Copied!' : 'Copy link'}</button>
+            </div>
+            <div className="mt-20">
+              <p className="-mb-0">Refer by Email</p>
+              <input className="block px-4 py-2 bg-black50 w-full rounded-[10px]" placeholder="Enter recipient email" />
+              <button className='px-3 py-1 mt-1 bg-blue600 float-right rounded-[30px] text-white text-[12px]'>Send Referral</button>
+            </div>
+          </div>
+          <div className='col-span-6'>
+            <img src={refer} className="w-[435px] h-[495px]" />
           </div>
         </div>
+      </div>
     </>
   );
 }
