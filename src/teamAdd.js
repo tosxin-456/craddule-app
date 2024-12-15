@@ -106,23 +106,7 @@ function ScrapView({ htmlContent }) {
   useEffect(() => {
     const getNda = async () => {
       try {
-        
-        const scrapResponse = await fetch(`${API_BASE_URL}/api/nda/project/${projectId}`, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${access_token}` // Include the token in the request headers
-          }
-        });
-
-        if (scrapResponse.status === 200) {
-          // If NDA exists, fetch the NDA data
-          const dataS = await scrapResponse.json();
-          console.log(dataS);
-          console.log("NDA found: " + dataS.nda);
-          setNda(dataS.nda);  // Assuming `nda` contains the NDA content
-
-        } else if (scrapResponse.status === 404) {
-          // If NDA does not exist (404), create a new NDA
+        if (userDetails) {
           const newNdaContent = `
                    <!DOCTYPE html>
 <html lang="en">
@@ -232,7 +216,7 @@ function ScrapView({ htmlContent }) {
             <p>Signed for and on behalf of</p>
             <p><strong>${projectName}</strong></p>
             <p>____________________</p>
-            <p><strong>${userDetails?.firstName + " " +  userDetails?.lastName }</strong></p>
+            <p><strong>${userDetails?.firstName + " " + userDetails?.lastName}</strong></p>
             <p><strong>Designation</strong></p>
         </div>
 
@@ -252,18 +236,26 @@ function ScrapView({ htmlContent }) {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${access_token}` // Include the token in the request headers
+              'Authorization': `Bearer ${access_token}`
             },
             body: JSON.stringify({
               projectId: projectId,
               nda: newNdaContent
             })
           });
-          setNda(newNdaContent)
 
           if (createNdaResponse.status === 200) {
             const createdNda = await createNdaResponse.json();
-            console.log("New NDA created: " + createdNda);
+            // console.log("New NDA created: " + createdNda);
+            setNda(createdNda.nda);
+
+          } else {
+            console.log('Failed to create NDA');
+            setLoading(false);
+          }
+          if (createNdaResponse.status === 200) {
+            const createdNda = await createNdaResponse.json();
+            // console.log("New NDA created: " + createdNda);
             setNda(createdNda.nda);
 
           } else {
@@ -271,8 +263,8 @@ function ScrapView({ htmlContent }) {
             setLoading(false);
           }
         } else {
-          const data = await scrapResponse.json();
-          console.log(data);
+          // const data = await scrapResponse.json();
+          // console.log(data);
           setLoading(false);
         }
       } catch (error) {
