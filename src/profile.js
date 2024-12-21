@@ -425,26 +425,32 @@ const handleSubmit = (e) => {
         <ImageModal open={isOpen} onClose={() => { setIsOpen(false) }} setImage={setImage}></ImageModal>
         <ToastContainer />
 
-        <div className='mt-10 border-1 border-dashed border-black100 rounded-[20px] sm:rounded-[30px] p-5 sm:p-10'>
+        <div className='mt-10 border-1 border-dashed border-black100 rounded-[20px] sm:rounded-[30px] p-5 sm:p-2'>
           <h4 className='text-center mt-5 sm:mt-10 text-[16px] sm:text-[18px]'>Refer a friend</h4>
           <p className='text-gray800 text-center mb-5 text-[14px] sm:text-[16px]'>Refer a friend and get a free gift when they join and complete their application</p>
 
-          <div className='w-fit m-auto'>
-            <p className="mb-1 text-[14px] sm:text-[16px]">Your referral link:</p>
-            <div className='flex gap-2 sm:gap-3 items-center'>
-              <div className="px-3 py-2 bg-black50 rounded-[10px]">
-                <span className='p8'>{`${APP_REFER_URL}/${referralCode}`}</span>
+          <div className="w-full h-full flex justify-center items-center">
+            <div className="w-fit m-auto">
+              <p className="mb-1 text-[14px] sm:text-[16px]">Your referral link:</p>
+              <div className="flex flex-col lg:flex-row gap-2 sm:gap-2 items-center justify-center">
+                <div className="px-4 py-2 bg-black50 rounded-lg text-center">
+                  <span className="block text-sm">{`${APP_REFER_URL}/${referralCode}`}</span>
+                </div>
+                <button
+                  className="px-4 py-2 bg-blue600 rounded-full text-white text-sm sm:text-base sm:mt-0 mt-2"
+                  onClick={handleCopy}
+                >
+                  {copied ? 'Copied!' : 'Copy link'}
+                </button>
               </div>
-              <button className='px-3 py-1 bg-blue600 rounded-[20px] sm:rounded-[30px] text-white text-[12px]' onClick={handleCopy}>
-                {copied ? 'Copied!' : 'Copy link'}
-              </button>
             </div>
           </div>
 
-          <div className="mt-5 p-5 sm:p-10 bg-gray200 rounded-[20px]">
-            <h5 className='text-center text-[14px] sm:text-[16px]'>Track friends you’ve referred</h5>
 
-            <div className='mx-10 sm:mx-40 mt-5'>
+          <div className="mt-5 m-auto p-3 w-fit sm:p-10 bg-gray200 rounded-[20px]">
+            <h5 className='text-center text-[14px] sm:text-[12px]'>Track friends you’ve referred</h5>
+
+            <div className=' sm:mx-40 mt-5'>
               <div className='flex justify-between text-[14px] sm:text-[16px]'>
                 <p>Visited Craddule</p>
                 <p>{referralCount ? referralCount.visited : '0'}</p>

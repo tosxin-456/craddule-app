@@ -1,12 +1,12 @@
-import React, { useState,useEffect,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import bci from './images/bc.png';
 import Header from './component/header';
 import Menu from './component/menu';
 import { useNavigate, Link } from 'react-router-dom';
-import {API_BASE_URL} from './config/apiConfig';
+import { API_BASE_URL } from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleNotch,faChevronDown,faBold, faItalic, faUnderline, faStrikethrough, faQuoteRight, faCode, faLink, faImage, faTextHeight, faListOl, faListUl, faSubscript, faSuperscript, faOutdent, faIndent, faAlignRight, faHeading } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch, faChevronDown, faBold, faItalic, faUnderline, faStrikethrough, faQuoteRight, faCode, faLink, faImage, faTextHeight, faListOl, faListUl, faSubscript, faSuperscript, faOutdent, faIndent, faAlignRight, faHeading } from '@fortawesome/free-solid-svg-icons';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { jwtDecode } from "jwt-decode";
@@ -19,6 +19,7 @@ import API_BASE_WEB_URL from './config/apiConfigW';
 import HeaderIdeation from './component/headerIdeation';
 import SideMenu2 from './component/sideMenu2';
 import { useParams } from 'react-router-dom';
+import home from './images/HOME.png';
 
 function getFormattedDate() {
   const date = new Date();
@@ -42,17 +43,17 @@ function getFormattedDate() {
   return `${day}${suffix} ${month} ${year}`;
 }
 
-function ScrapCreate ({ htmlContent })  {
-    
-    const navigate = useNavigate()
+function ScrapCreate({ htmlContent }) {
 
-     const onClickHandler = () => navigate(`/video`);
-     const [images, setImages] = useState([]);
-     const [types, setTypes] = useState([]);
+  const navigate = useNavigate()
+
+  const onClickHandler = () => navigate(`/video`);
+  const [images, setImages] = useState([]);
+  const [types, setTypes] = useState([]);
   const [showImagePopup, setShowImagePopup] = useState(false);
-     const [answers, setAnswers] = useState([]);
-     const [answersV, setAnswersV] = useState([]);
-     const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [answers, setAnswers] = useState([]);
+  const [answersV, setAnswersV] = useState([]);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState(null);
@@ -61,81 +62,119 @@ function ScrapCreate ({ htmlContent })  {
   const [scrapName, setScrapName] = useState('');
 
   const access_token = localStorage.getItem('access_token');
-    const decodedToken = jwtDecode(access_token);
-    const userId = decodedToken.userId;
+  const decodedToken = jwtDecode(access_token);
+  const userId = decodedToken.userId;
 
-  const questionType ="BusinessCaseBuilder";
-  const questionSubType ="Introduction";
+  const questionType = "BusinessCaseBuilder";
+  const questionSubType = "Introduction";
   const token = localStorage.getItem('access_token');
   const [value, setValue] = useState('');
   const [misspelledWords, setMisspelledWords] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionBoxPosition, setSuggestionBoxPosition] = useState({ top: 0, left: 0 });
-  const [selectedWord, setSelectedWord] = useState(null); 
+  const [selectedWord, setSelectedWord] = useState(null);
   const { id } = useParams();
-  console.log("create id "+id)
+  console.log("create id " + id)
   const [formData, setFormData] = useState({
     scrap: '',
-    });
+  });
 
+  function getFormattedDate() {
+    const date = new Date();
 
+    // Get the day
+    const day = date.getDate();
+
+    // Add the appropriate suffix (st, nd, rd, th)
+    const suffix =
+      day % 10 === 1 && day !== 11 ? "st" :
+        day % 10 === 2 && day !== 12 ? "nd" :
+          day % 10 === 3 && day !== 13 ? "rd" : "th";
+
+    // Get the month name
+    const month = date.toLocaleString("default", { month: "long" });
+
+    // Get the year
+    const year = date.getFullYear();
+
+    // Return the formatted string
+    return `${day}${suffix} ${month} ${year}`;
+  }
 
 
   const handleEditorChange = () => {
     // Get the current selection range
-   
-     const content = editorRef.current.innerHTML;
-     const event = { target: { id: 'editor', value: content } };
+
+    const content = editorRef.current.innerHTML;
+    const event = { target: { id: 'editor', value: content } };
     // checkSpelling(event.target.innerText);
-  
+
     // Call the handleChange function to update the state with the new content
-   
+
 
     const newText = content || '';
-    setScrap(content);
+    function updateContentWithDate(content) {
+      // Check if the content contains XXXXX
+      if (content.includes("XXXXX")) {
+        // Replace XXXXX with the formatted date
+        const formattedDate = getFormattedDate();
+        content = content.replace(/XXXXX/g, formattedDate);
+      }
+      // Set the updated content
+      setScrap(content);
+    }
     console.log(content);
     console.log("checking error");
     console.log(newText);
     checkSpelling(newText);
 
     handleChange(event);
-  
-   
+
+
   };
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setScrap(value);
-}
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     updateNda();
-    
+
   };
 
 
 
   useEffect(() => {
     const fetchOrCreateNda = async () => {
-        try {
-            const scrapResponse = await fetch(`${API_BASE_URL}/api/nda/project/${projectId}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` // Include the token in the request headers
-                }
-            });
+      try {
+        const scrapResponse = await fetch(`${API_BASE_URL}/api/nda/project/${projectId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // Include the token in the request headers
+          }
+        });
 
-            if (scrapResponse.status === 200) {
-                // If NDA exists, fetch the NDA data
-                const dataS = await scrapResponse.json();
-                console.log(dataS);
-                console.log("NDA found: " + dataS.nda);
-                setScrap(dataS.nda);  // Assuming `nda` contains the NDA content
-                setScrapName(dataS.scrapName);
-            } else if (scrapResponse.status === 404) {
-                // If NDA does not exist (404), create a new NDA
-                const newNdaContent = `
+        if (scrapResponse.status === 200) {
+          // If NDA exists, fetch the NDA data
+          const dataS = await scrapResponse.json();
+          console.log(dataS);
+          console.log("NDA found: " + dataS.nda);
+
+          function updateContentWithDate(content) {
+            const formattedDate = getFormattedDate();
+            content = content.replace(/X+/g, formattedDate);
+            setScrap(content);
+            setScrapName(dataS.scrapName);
+          }
+
+          updateContentWithDate(dataS.nda);
+
+
+        } else if (scrapResponse.status === 404) {
+          // If NDA does not exist (404), create a new NDA
+          const newNdaContent = `
                    <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -260,79 +299,79 @@ function ScrapCreate ({ htmlContent })  {
 
                 `;
 
-                const createNdaResponse = await fetch(`${API_BASE_URL}/api/nda`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` // Include the token in the request headers
-                    },
-                    body: JSON.stringify({
-                        projectId: projectId,
-                        nda: newNdaContent
-                    })
-                });
+          const createNdaResponse = await fetch(`${API_BASE_URL}/api/nda`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}` // Include the token in the request headers
+            },
+            body: JSON.stringify({
+              projectId: projectId,
+              nda: newNdaContent
+            })
+          });
 
-                if (createNdaResponse.status === 200) {
-                    const createdNda = await createNdaResponse.json();
-                    console.log("New NDA created: " + createdNda);
-                    setScrap(createdNda.nda);
-                    
-                } else {
-                    console.log('Failed to create NDA');
-                    setLoading(false);
-                }
-            } else {
-                const data = await scrapResponse.json();
-                console.log(data);
-                setLoading(false);
-            }
-        } catch (error) {
-            setError(error.message);
+          if (createNdaResponse.status === 200) {
+            const createdNda = await createNdaResponse.json();
+            console.log("New NDA created: " + createdNda);
+            setScrap(createdNda.nda);
+
+          } else {
+            console.log('Failed to create NDA');
             setLoading(false);
+          }
+        } else {
+          const data = await scrapResponse.json();
+          console.log(data);
+          setLoading(false);
         }
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
     };
 
     fetchOrCreateNda();
-}, [projectId, token]);
+  }, [projectId, token]);
 
 
 
   const updateNda = async (data) => {
     try {
-        setLoading(true);
-        console.log(scrap);
-        const summary = scrap;
-      const response = await fetch(API_BASE_URL +'/api/nda/'+projectId, {
+      setLoading(true);
+      console.log(scrap);
+      const summary = scrap;
+      const response = await fetch(API_BASE_URL + '/api/nda/' + projectId, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` 
+          'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ nda:scrap }),
+        body: JSON.stringify({ nda: scrap }),
       });
-  
+
       if (response.status === 200) {
         setLoading(false);
         toast.success("Saved");
         console.log(response)
 
         ///throw new Error('Failed to create or update summary');
-      }else{
+      } else {
         const data = await response.json();
         setLoading(false);
         toast.error("can't save");
         console.log(data.message); // Log success message
       }
 
-      
-  
-     
+
+
+
     } catch (error) {
       console.error('Error creating or updating scrapbook:', error.message);
       // Handle error
     }
   };
-  
+
 
 
 
@@ -345,29 +384,29 @@ function ScrapCreate ({ htmlContent })  {
   const toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],
     ['blockquote', 'code-block'],
-  ['link', 'image'],
-  [{size: []}],
+    ['link', 'image'],
+    [{ size: [] }],
 
-  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-  [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
-  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-  [{ 'direction': 'rtl' }],                         // text direction
+    [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
+    [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+    [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+    [{ 'direction': 'rtl' }],                         // text direction
 
-  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
 
-  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-  [{ 'font': [] }],
-  [{ 'align': [] }],
+    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+    [{ 'font': [] }],
+    [{ 'align': [] }],
 
-  ['clean']         
+    ['clean']
   ];
 
 
-  const module =  {
-  
-      toolbar: toolbarOptions
+  const module = {
+
+    toolbar: toolbarOptions
   };
 
   const reactQuillRef = React.useRef(null);
@@ -376,7 +415,7 @@ function ScrapCreate ({ htmlContent })  {
     if (reactQuillRef.current) {
       // Get the Quill editor instance
       const quill = reactQuillRef.current.getEditor();
-      
+
       // Access the toolbar
       const toolbar = quill.getModule('toolbar').handlers.image;
       toolbar.addHandler('image', console.log("image toolbar"));
@@ -406,17 +445,17 @@ function ScrapCreate ({ htmlContent })  {
   useEffect(() => {
     const editor = editorRef.current;
     if (editor && editor.innerHTML !== scrap) {
-      if(scrap){
+      if (scrap) {
         editor.innerHTML = scrap;
       }
-      
+
     }
   }, [scrap]);
 
   const loadDictionary = async () => {
     const affResponse = await fetch('/dictionaries/en.aff');
     const aff = await affResponse.text();
-  
+
     const dicResponse = await fetch('/dictionaries/en.dic');
     const dic = await dicResponse.text();
     return nspell({ aff, dic });
@@ -471,7 +510,7 @@ function ScrapCreate ({ htmlContent })  {
     setScrap(newHtml);
     checkSpelling(newHtml);
     setSelectedWord(null); // Reset selected word
-    
+
   };
 
 
@@ -496,7 +535,7 @@ function ScrapCreate ({ htmlContent })  {
     }
   };
 
-  
+
   const handleImagePopup = () => {
     setShowImagePopup(!showImagePopup);
   };
@@ -504,31 +543,31 @@ function ScrapCreate ({ htmlContent })  {
   const [showHeadingDropdown, setShowHeadingDropdown] = useState(false);
 
   const toggleHeadingDropdown = () => setShowHeadingDropdown(!showHeadingDropdown);
-//   updateNda();
-  
-const handleInsertFile = (file) => {
-  const newFile = API_BASE_URL+'/images/'+file;
-  console.log(newFile);
-  setScrap((prevContent) => `${prevContent}<div contenteditable="true" style="display:inline-block; width:30%;"><img src="${newFile}" style="width:100%;" /></div>`);
-  // setScrap((prevContent) => `${prevContent}<img src="${newFile}" alt="Inserted File" />`);
+  //   updateNda();
 
-};
+  const handleInsertFile = (file) => {
+    const newFile = API_BASE_URL + '/images/' + file;
+    console.log(newFile);
+    setScrap((prevContent) => `${prevContent}<div contenteditable="true" style="display:inline-block; width:30%;"><img src="${newFile}" style="width:100%;" /></div>`);
+    // setScrap((prevContent) => `${prevContent}<img src="${newFile}" alt="Inserted File" />`);
+
+  };
 
   useEffect(() => {
-      const fetchSubtypeFiles = async () => {
-          try {
-              const response = await axios.get(`${API_BASE_URL}/api/hub/project/${projectId}`);
-              setTypes(response.data.data);
-              console.log(response.data);
-             
-          } catch (error) {
-              console.error('Error fetching files:', error);
-             
-             
-          }
-      };
-  
-      fetchSubtypeFiles();
+    const fetchSubtypeFiles = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/hub/project/${projectId}`);
+        setTypes(response.data.data);
+        console.log(response.data);
+
+      } catch (error) {
+        console.error('Error fetching files:', error);
+
+
+      }
+    };
+
+    fetchSubtypeFiles();
   }, []);
 
 
@@ -541,12 +580,12 @@ const handleInsertFile = (file) => {
     if (event.type === 'mousemove' && !isResizing) {
       return; // Ignore mousemove event if not resizing
     }
-  
+
     const imageElement = event.target;
     if (imageElement.nodeName !== 'IMG') {
       return; // Ignore if the target is not an image element
     }
-  
+
     if (event.type === 'mousedown') {
       startImageResize(event);
     } else if (event.type === 'mousemove') {
@@ -612,176 +651,185 @@ const handleInsertFile = (file) => {
     }
   };
 
-    return (
-        <>
+  return (
+    <>
 
-<Header />
-<div className='container'>
-
-         <div className="upload-container" style={{textAlign:'justify',width: "100%"}}>
-         <div className='main-content2'>
-            
-            <div className='bacWHI'>
-                    <div className='text-center'>
-                <p className='centerH' onClick={accessToolbar}>{scrapName}</p>
-                
-                </div>
-               
-                <form onSubmit={handleSubmit}>    
-            <button className="btn btn-primary buttonE" type='submit'>
-                { loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin'/>}
-                { !loading && <span>Save</span>}
+      <Header />
+      <div className='container'>
+        <div className="flex mt-[40px] justify-between items-center w-[100%]">
+          <div className="w-fit">
+            <button onClick={() => navigate(-1)} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
+              Back
             </button>
-            {/* <button className="btn btn-primary buttonS">Edit</button> */}
-            {/*<p className= "buttonE">Save</p>
-            <p className= "buttonS">Edit</p>*/}
-            <div class = "break"></div>
-           
-            <div className='container-textBs'>
+          </div>
+          <div>
+            <img src={home} alt="Home Icon" />
+          </div>
+        </div>
+        <div className="upload-container" style={{ textAlign: 'justify', width: "100%" }}>
+          <div className='main-content2'>
 
-  <div class="toolbar">
-  <button onClick={() => formatText('bold')} type='button'>
-          <FontAwesomeIcon icon={faBold} />
-        </button>
-        <button onClick={() => formatText('italic')} type='button'>
-          <FontAwesomeIcon icon={faItalic} />
-        </button>
-        <button onClick={() => formatText('underline')} type='button'>
-          <FontAwesomeIcon icon={faUnderline} />
-        </button>
-        <button onClick={() => formatText('strikeThrough')} type='button'>
-          <FontAwesomeIcon icon={faStrikethrough} />
-        </button>
-        <button onClick={() => formatText('formatBlock', 'blockquote')} type='button'>
-          <FontAwesomeIcon icon={faQuoteRight} />
-        </button>
-        <button onClick={() => formatText('formatBlock', 'pre')} type='button'>
-          <FontAwesomeIcon icon={faCode} />
-        </button>
-        <button onClick={insertLink} type='button'>
-          <FontAwesomeIcon icon={faLink} />
-        </button>
-        {/* <button onClick={handleImagePopup} type='button'>
+            <div className='bacWHI'>
+              <div className='text-center'>
+                <p className='centerH' onClick={accessToolbar}>{scrapName}</p>
+
+              </div>
+
+              <form onSubmit={handleSubmit}>
+                <button className="btn btn-primary buttonE" type='submit'>
+                  {loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' />}
+                  {!loading && <span>Save</span>}
+                </button>
+                {/* <button className="btn btn-primary buttonS">Edit</button> */}
+                {/*<p className= "buttonE">Save</p>
+            <p className= "buttonS">Edit</p>*/}
+                <div class="break"></div>
+
+                <div className='container-textBs'>
+
+                  <div class="toolbar">
+                    <button onClick={() => formatText('bold')} type='button'>
+                      <FontAwesomeIcon icon={faBold} />
+                    </button>
+                    <button onClick={() => formatText('italic')} type='button'>
+                      <FontAwesomeIcon icon={faItalic} />
+                    </button>
+                    <button onClick={() => formatText('underline')} type='button'>
+                      <FontAwesomeIcon icon={faUnderline} />
+                    </button>
+                    <button onClick={() => formatText('strikeThrough')} type='button'>
+                      <FontAwesomeIcon icon={faStrikethrough} />
+                    </button>
+                    <button onClick={() => formatText('formatBlock', 'blockquote')} type='button'>
+                      <FontAwesomeIcon icon={faQuoteRight} />
+                    </button>
+                    <button onClick={() => formatText('formatBlock', 'pre')} type='button'>
+                      <FontAwesomeIcon icon={faCode} />
+                    </button>
+                    <button onClick={insertLink} type='button'>
+                      <FontAwesomeIcon icon={faLink} />
+                    </button>
+                    {/* <button onClick={handleImagePopup} type='button'>
           <FontAwesomeIcon icon={faImage} />
         </button> */}
-        <select onChange={(e) => formatText('fontSize', e.target.value)}>
-          <option value="">Font Size</option>
-          {[...Array(23)].map((_, i) => (
-            <option key={i} value={i + 2}>{i + 2}</option>
-          ))}
-        </select>
-        <div className="dropdownM">
-          <button className="dropdown-toggle" onClick={toggleHeadingDropdown} type='button'>
-            <FontAwesomeIcon icon={faHeading} /> <FontAwesomeIcon icon={faChevronDown} />
-          </button>
-
-        
-            <select onChange={handleHeadingChange} className="headingDropdown">
-                <option value="">Heading</option>
-                {[...Array(6)].map((_, i) => (
-                  <option key={i} value={`h${i + 1}`}>H{i + 1}</option>
-                ))}
-          </select>
-     
-        </div>
-        <button onClick={() => formatText('insertOrderedList')} type='button'>
-          <FontAwesomeIcon icon={faListOl} />
-        </button>
-        <button onClick={() => formatText('insertUnorderedList')} type='button'>
-          <FontAwesomeIcon icon={faListUl} />
-        </button>
-        <button onClick={() => formatText('subscript')} type='button'>
-          <FontAwesomeIcon icon={faSubscript} />
-        </button>
-        <button onClick={() => formatText('superscript')} type='button'>
-          <FontAwesomeIcon icon={faSuperscript} />
-        </button>
-        <button onClick={() => formatText('outdent')} type='button'>
-          <FontAwesomeIcon icon={faOutdent} />
-        </button>
-        <button onClick={() => formatText('indent')} type='button'>
-          <FontAwesomeIcon icon={faIndent} />
-        </button>
-        <button onClick={() => formatText('direction', 'rtl')} type='button'>
-          <FontAwesomeIcon icon={faAlignRight} />
-        </button>
-      
-  </div>
-  <div
-      ref={editorRef}
-      contentEditable={true}
-      className="editor"
-      onInput={handleEditorChange}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                onClick={(e) => {
-                  const selection = window.getSelection();
-                  if (!selection.rangeCount) return;
-
-                  const range = selection.getRangeAt(0);
-                    const word = range.startContainer.textContent.slice(range.startOffset, range.endOffset);
-                    console.log(word);
-                   if (misspelledWords.includes(word)) {
-                    const rect = e.target.getBoundingClientRect();
-                    handleWordClick(word, rect);
-                  }
-                }}
-                style={{ whiteSpace: "pre-wrap", minHeight: "200px", border: "1px solid #ccc", padding: "10px" }}
-              />
-  
+                    <select onChange={(e) => formatText('fontSize', e.target.value)}>
+                      <option value="">Font Size</option>
+                      {[...Array(23)].map((_, i) => (
+                        <option key={i} value={i + 2}>{i + 2}</option>
+                      ))}
+                    </select>
+                    <div className="dropdownM">
+                      <button className="dropdown-toggle" onClick={toggleHeadingDropdown} type='button'>
+                        <FontAwesomeIcon icon={faHeading} /> <FontAwesomeIcon icon={faChevronDown} />
+                      </button>
 
 
+                      <select onChange={handleHeadingChange} className="headingDropdown">
+                        <option value="">Heading</option>
+                        {[...Array(6)].map((_, i) => (
+                          <option key={i} value={`h${i + 1}`}>H{i + 1}</option>
+                        ))}
+                      </select>
 
-
-    {suggestions.length > 0 && (
-              <div
-                className="suggestion-box"
-                style={{
-                  position: 'absolute',
-                  top: suggestionBoxPosition.top,
-                  left: suggestionBoxPosition.left,
-                  backgroundColor: 'white',
-                  border: '1px solid #ccc',
-                  borderRadius: '4px',
-                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                  zIndex: 1000,
-                }}
-              >
-               {suggestions.map((suggestion, index) => (
-                    <div key={index} onClick={() => applySuggestion(suggestion)}>
-                      {suggestion}
                     </div>
-                  ))}
-              </div>
-            )}
+                    <button onClick={() => formatText('insertOrderedList')} type='button'>
+                      <FontAwesomeIcon icon={faListOl} />
+                    </button>
+                    <button onClick={() => formatText('insertUnorderedList')} type='button'>
+                      <FontAwesomeIcon icon={faListUl} />
+                    </button>
+                    <button onClick={() => formatText('subscript')} type='button'>
+                      <FontAwesomeIcon icon={faSubscript} />
+                    </button>
+                    <button onClick={() => formatText('superscript')} type='button'>
+                      <FontAwesomeIcon icon={faSuperscript} />
+                    </button>
+                    <button onClick={() => formatText('outdent')} type='button'>
+                      <FontAwesomeIcon icon={faOutdent} />
+                    </button>
+                    <button onClick={() => formatText('indent')} type='button'>
+                      <FontAwesomeIcon icon={faIndent} />
+                    </button>
+                    <button onClick={() => formatText('direction', 'rtl')} type='button'>
+                      <FontAwesomeIcon icon={faAlignRight} />
+                    </button>
 
-                {showImagePopup && 
-                  <ImagePopup 
-                    
-                    
-                    onClose={() => setShowImagePopup(false)} 
-                    types={types}
-                    onInsertFile={handleInsertFile}
+                  </div>
+                  <div
+                    ref={editorRef}
+                    contentEditable={true}
+                    className="editor"
+                    onInput={handleEditorChange}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onClick={(e) => {
+                      const selection = window.getSelection();
+                      if (!selection.rangeCount) return;
+
+                      const range = selection.getRangeAt(0);
+                      const word = range.startContainer.textContent.slice(range.startOffset, range.endOffset);
+                      console.log(word);
+                      if (misspelledWords.includes(word)) {
+                        const rect = e.target.getBoundingClientRect();
+                        handleWordClick(word, rect);
+                      }
+                    }}
+                    style={{ whiteSpace: "pre-wrap", minHeight: "200px", border: "1px solid #ccc", padding: "10px" }}
                   />
-                }
-            
+
+
+
+
+
+                  {suggestions.length > 0 && (
+                    <div
+                      className="suggestion-box"
+                      style={{
+                        position: 'absolute',
+                        top: suggestionBoxPosition.top,
+                        left: suggestionBoxPosition.left,
+                        backgroundColor: 'white',
+                        border: '1px solid #ccc',
+                        borderRadius: '4px',
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                        zIndex: 1000,
+                      }}
+                    >
+                      {suggestions.map((suggestion, index) => (
+                        <div key={index} onClick={() => applySuggestion(suggestion)}>
+                          {suggestion}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {showImagePopup &&
+                    <ImagePopup
+
+
+                      onClose={() => setShowImagePopup(false)}
+                      types={types}
+                      onInsertFile={handleInsertFile}
+                    />
+                  }
+
+                </div>
+
+
+              </form>
+
+
+
             </div>
 
-                
-            </form>
-            
-           
-           
-        </div> 
 
-        
-  </div>
-  </div>
-  <Toaster  position="top-right" />
-  </div>
-  </>
-    );
+          </div>
+        </div>
+        <Toaster position="top-right" />
+      </div>
+    </>
+  );
 }
 
 export default ScrapCreate
