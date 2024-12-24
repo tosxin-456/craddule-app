@@ -127,7 +127,7 @@ const PitchDeck = () => {
         <div className='coverPit'>
 
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {types.map((imageDetail, index) => {
               // Check if the file is a PDF by examining its extension
               const isPdf = imageDetail.hubFileName.toLowerCase().endsWith('.pdf');

@@ -214,7 +214,7 @@ function CommercializationMain() {
                                             </div>
                                             <p className="mt-[-20px] sm:mt-[-30px]">{percentageE}%</p>
                                             <p className="text-[12px] sm:text-[14px]">progress</p>
-                                            <button
+                                            {/* <button
                                                  onClick={() =>
                                                     handleClickStorage(
                                                         "RoutetoMarketStrategies",
@@ -224,7 +224,7 @@ function CommercializationMain() {
                                                 className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                             >
                                                 Continue
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </div>
 

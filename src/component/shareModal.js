@@ -68,7 +68,7 @@ export default function ShareModal({ open, onClose, selectedPhase }) {
         setTimeout(() => {
           setSuccessMessage('');
         }, 10000);
-        
+
       } else {
         const result = await response.json();
         setLoading(false);
@@ -102,11 +102,9 @@ export default function ShareModal({ open, onClose, selectedPhase }) {
       <div className='modalOv'>
         <div className='modalSt'>
           <p type='button' onClick={handleClose} className='closeIcon'>X</p>
-          <p className='txt2'>Send/ Share File</p>
-          <hr></hr>
-          <div className='sendBox'>
-            <p className='share'>Share this file</p>
-            <p className='share1'>Anyone with the link can view</p>
+          {/* <hr></hr> */}
+          <div className=''>
+            <p className='text-center text-[25px] '>Share Phase</p>
             {link && (
               <div>
                 {successMessage && (
@@ -119,24 +117,24 @@ export default function ShareModal({ open, onClose, selectedPhase }) {
                 </p>
               </div>
             )}
-            <div className='text-center'>
+            <div className='text-start'>
               <form onSubmit={handleSubmit}>
-                <div className='emailInvite1'>
-                  <div className='enterEmail'>
-                    <p className='email2'>Email</p>
+                <div className=''>
+                  <div className='items-center m-5 '>
+                    <p>Email</p>
                     <input
                       type="text"
-                      className='enterE2'
-                      placeholder="Email"
+                      className='bg-[#E8ECF9] px-5 py-3 w-full rounded-2xl '
+                      placeholder="Enter recipient email"
                       id="email"
-                      value={formData.email}
+                      value={formData.email} 
                       onChange={handleChange}
                     ></input>
                   </div>
                 </div>
-                <button className="btn btn-primary curveSb shreB" typeof='submit' style={{ marginLeft: 5 }}>
+                <button className="bg-blue-900 w-full h-10 text-white rounded-3xl" typeof='submit' style={{ marginLeft: 5 }}>
                   {loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' />}
-                  {!loading && <span> Send To Email</span>}
+                  {!loading && <span> Send</span>}
                 </button>
               </form>
             </div>

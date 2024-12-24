@@ -9,7 +9,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import design from './images/design.png'
 import logo from './images/logo.png'
 import signUpImage from './images/signup.png'
-import { handleTogglePassword, handleToggleCPassword, validatePassword} from './utils/signUpUtils.js';
+import { handleTogglePassword, handleToggleCPassword, validatePassword } from './utils/signUpUtils.js';
 import { confirmOTP, resetPassword, sendOTP } from './utils/passwordUtils.js';
 
 function Password() {
@@ -43,34 +43,37 @@ function Password() {
   const handleOtpChange = (e, index) => {
     const { value } = e.target;
 
-    // Only allow single digit input
-    if (value.match(/^\d$/)) {
+    // Allow only digits
+    if (/^\d?$/.test(value)) {
       const newOtp = [...otp];
-      newOtp[index] = value;
+      newOtp[index] = value || ''; // Clear value on backspace
       setOtp(newOtp);
 
-      // Move focus to the next input
-      if (index < length - 1) {
+      // Move focus to the next input if input is valid and not empty
+      if (value && index < otp.length - 1) {
         inputs.current[index + 1].focus();
       }
     }
+  };
 
-    // Move focus to previous input on backspace
-    if (value === '' && index > 0) {
-      inputs.current[index - 1].focus();
-    }
 
-    console.log(otp)
-  }
-  
   const handleKeyDown = (e, index) => {
-    if (e.key === 'Backspace' && otp[index] === '') {
-      // Move focus to previous input on backspace if current input is empty
-      if (index > 0) {
-        inputs.current[index - 1].focus();
+    if (e.key === 'Backspace') {
+      const newOtp = [...otp];
+
+      // Clear current input and move focus to the previous input if empty
+      if (otp[index] === '') {
+        if (index > 0) {
+          inputs.current[index - 1].focus();
+        }
+      } else {
+        // Clear the current input value
+        newOtp[index] = '';
+        setOtp(newOtp);
       }
     }
-  }
+  };
+
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -78,7 +81,7 @@ function Password() {
       ...formData,
       [id]: value,
     });
-    if (id === 'password') {
+    if (id === 'newPassword') {
       validatePassword(value, setPasswordValid);
     }
   };
@@ -89,36 +92,59 @@ function Password() {
       ...form3Data,
       [id]: value,
     });
-    if (id === 'password') {
+    if (id === 'newPassword') {
       validatePassword(value, setPasswordValid);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.id)
-    if (e.target.id=='sendOtp') {
-      sendOTP(formData, setLoading, setPage, navigate, toast)      
+    console.log(e.target.id);
+
+    if (e.target.id === 'sendOtp') {
+      sendOTP(formData, setLoading, setPage, navigate, toast);
     }
-    if (e.target.id=='confirmOtp') {
-      setOtpData(otp.join(''));
-      console.log(otpData)
-      confirmOTP({'otp':otpData}, setLoading, setPage, navigate, toast)      
+
+    if (e.target.id === 'confirmOtp') {
+      const otpValue = otp.join(''); // Join OTP array into a single string
+      if (otpValue.trim() === '') {
+        toast.error('OTP cannot be empty');
+        return;
+      }
+      confirmOTP({ otp: otpValue }, setLoading, setPage, navigate, toast);
     }
-    if (e.target.id=='resetPassword') {
-      resetPassword(form3Data, setLoading, setPage, navigate, toast)      
+
+    if (e.target.id === 'resetPassword') {
+      resetPassword(form3Data, setLoading, setPage, navigate, toast);
     }
   };
 
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pasteData = e.clipboardData.getData('text').trim(); // Get the pasted data
+    if (pasteData.length === otp.length && /^[0-9]+$/.test(pasteData)) {
+      const newOtp = [...otp];
+      pasteData.split('').forEach((digit, index) => {
+        newOtp[index] = digit;
+        inputs.current[index].value = digit;
+      });
+      setOtp(newOtp);
+      inputs.current[otp.length - 1]?.focus(); // Focus the last input
+    } else {
+      toast.error("Invalid OTP format. Ensure it's the correct length and digits only.");
+    }
+  };
+
+
   const handleResend = (e) => {
-    sendOTP(formData, setLoading, setPage, navigate, toast)      
+    sendOTP(formData, setLoading, setPage, navigate, toast)
   };
 
   return (
     <>
       <div className='mt-[100px]'></div>
-      <div className='w-[90%] m-auto grid grid-cols-2 bg-white rounded-xl'>
-        <div className='bg-[#193FAE] relative'>
+      <div className='w-[90%] m-auto grid grid-cols-1 md:grid-cols-2 bg-white rounded-xl'>
+        <div className='bg-[#193FAE] relative hidden md:block '>
           <img src={design} alt="" className="w-[196px] h-[219px] absolute bottom-0 right-0" />
           <img src={design} alt="" className="w-[196px] h-[219px] absolute top-0 left-0 rotate-180" />
           <div className='flex justify-center items-center h-full'>
@@ -129,14 +155,14 @@ function Password() {
             </div>
           </div>
         </div>
-        <div className='p-10 px-20 pt-16 pb-3'>
+        <div className='md:p-10 px-10  md:px-20 pt-16 pb-3'>
           <div className='float-right'>
             <div className='flex justify-start items-center gap-[6px] relative -top-8 -right-9'>
               <img src={logo} className='w-[40.12px] h-[40px]'></img>
               <span className='text-[16px] font-semibold'>Craddule</span>
             </div>
           </div>
-          <div className={page === 1 ?'pt-32':'hidden'}>
+          <div className={page === 1 ? 'pt-32  ' : 'hidden'}>
             <h3 className='font-bold'>Forgot Password?</h3>
             <p className='texet-[16px] text-black200'>Don’t worry! it happens, we’ll send you a reset code to the email linked to your account.</p>
             <form onSubmit={handleSubmit} id='sendOtp'>
@@ -154,26 +180,31 @@ function Password() {
                 </div>
               </div>
 
-              <button className={loading ? 'btn loginBtn cursor-not-allowed':'btn loginBtn'} type="submit" disabled={loading}>
+              <button className={loading ? 'btn loginBtn cursor-not-allowed' : 'btn loginBtn'} type="submit" disabled={loading}>
                 {loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' />}
                 {!loading && <span>Send Code</span>}
               </button>
             </form>
             <p className='mt-8 font-medium text-[16px]'>Remember Password?<a className='ps-2 no-underline text-[#1B45BF]' href='/login'>Login</a></p>
           </div>
-          <div className={page === 2 ?'pt-32':'hidden'}>
-            <h3 className='font-bold'>Password reset</h3>
-            <p className='texet-[16px] text-black200'>Enter the code sent to your email / phone number.</p>
-            <form onSubmit={handleSubmit} id='confirmOtp'>
-              <div className="mt-20">
-                <div className="flex justify-center gap-3">
+          <div className={page === 2 ? 'pt-32' : 'hidden'}>
+            <h3 className="font-bold">Password reset</h3>
+            <p className="text-[16px] text-black200">
+              Enter the code sent to your email / phone number.
+            </p>
+            <form onSubmit={handleSubmit} id="confirmOtp">
+              <div className="mt-10 md:mt-20">
+                <div
+                  className="flex justify-center gap-2 md:gap-3 w-full"
+                  onPaste={(e) => handlePaste(e)}
+                >
                   {otp.map((_, index) => (
                     <input
                       key={index}
                       type="text"
-                      className="otp-input"
-                      maxLength='1'
-                      value={otp.index}
+                      className="otp-input w-10 h-12 md:w-12 md:h-14 text-center text-lg md:text-xl border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      maxLength="1"
+                      value={otp[index]}
                       onChange={(e) => handleOtpChange(e, index)}
                       onKeyDown={(e) => handleKeyDown(e, index)}
                       onFocus={() => setFocusIndex(index)}
@@ -184,20 +215,36 @@ function Password() {
                 </div>
               </div>
 
-              <button className={loading ? 'btn loginBtn cursor-not-allowed':'btn loginBtn'} type="submit" disabled={loading}>
-                {loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' />}
+              <button
+                className={loading ? 'btn loginBtn cursor-not-allowed' : 'btn loginBtn'}
+                type="submit"
+                disabled={loading}
+              >
+                {loading && (
+                  <FontAwesomeIcon icon={faCircleNotch} className="fa-spin" />
+                )}
                 {!loading && <span>Continue</span>}
               </button>
             </form>
-            <p className='mt-8 font-medium text-[16px]'>Didn’t receive the code?<span className='ps-2 no-underline text-[#1B45BF] cursor-pointer' onClick={()=>handleResend()}>Resend code</span></p>
+
+            <p className="mt-8 font-medium text-[16px]">
+              Didn’t receive the code?
+              <span
+                className="ps-2 no-underline text-[#1B45BF] cursor-pointer"
+                onClick={() => handleResend()}
+              >
+                Resend code
+              </span>
+            </p>
           </div>
-          <div className={page === 3 ?'pt-32':'hidden'}>
+
+          <div className={page === 3 ? 'pt-32' : 'hidden'}>
             <h3 className='font-bold'>Set new password</h3>
             <p className='texet-[16px] text-black200'>Must be at least 8 character</p>
             <form onSubmit={handleSubmit} id='resetPassword'>
               <div className="mt-20">
                 <div className="mt-[16px] relative">
-                  <label htmlFor="password" className='text-p18 font-semibold pb-1 block'>Enter new password</label>
+                  <label htmlFor="newPassword" className='text-p18 font-semibold pb-1 block'>Enter new password</label>
                   <input
                     type={showPassword ? 'text' : 'password'}
                     id="newPassword"
@@ -233,12 +280,11 @@ function Password() {
                 </div>
 
                 <div className="mt-[16px] relative">
-                  <label htmlFor="cpassword" className='text-p18 font-semibold pb-1 block'>Confirm new password</label>
+                  <label htmlFor="confirmNewPassword" className='text-p18 font-semibold pb-1 block'>Confirm Password</label>
                   <input
                     type={showCPassword ? 'text' : 'password'}
                     id="confirmNewPassword"
-                    value={form3Data.confirmNewPassword}
-                    placeholder='Input password'
+                    value={formData.confirmNewPassword}
                     onChange={handleChange3}
                     className="w-full border border-black400 px-3 py-[10px] rounded-full"
                   />
@@ -252,20 +298,20 @@ function Password() {
                       <path fill="#B0B0B0" d="M11.5 18c4 0 7.46-2.22 9.24-5.5C18.96 9.22 15.5 7 11.5 7s-7.46 2.22-9.24 5.5C4.04 15.78 7.5 18 11.5 18m0-12c4.56 0 8.5 2.65 10.36 6.5C20 16.35 16.06 19 11.5 19S3 16.35 1.14 12.5C3 8.65 6.94 6 11.5 6m0 2C14 8 16 10 16 12.5S14 17 11.5 17S7 15 7 12.5S9 8 11.5 8m0 1A3.5 3.5 0 0 0 8 12.5a3.5 3.5 0 0 0 3.5 3.5a3.5 3.5 0 0 0 3.5-3.5A3.5 3.5 0 0 0 11.5 9" />
                     </svg>
                   </span>
-                </div> 
+                </div>
               </div>
 
-              <button className={loading ? 'btn loginBtn cursor-not-allowed':'btn loginBtn'} type="submit" disabled={loading}>
+              <button className={loading ? 'btn loginBtn cursor-not-allowed' : 'btn loginBtn'} type="submit" disabled={loading}>
                 {loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' />}
                 {!loading && <span>Reset password</span>}
               </button>
             </form>
           </div>
           <div className='flex justify-center items-center gap-2 mt-40'>
-            <div className={page===1 ? 'w-[100px] h-[4px] bg-[#193FAE]':'w-[100px] h-[4px] bg-[#D9D9D9]'}></div>
-            <div className={page===2 ? 'w-[100px] h-[4px] bg-[#193FAE]':'w-[100px] h-[4px] bg-[#D9D9D9]'}></div>
-            <div className={page===3 ? 'w-[100px] h-[4px] bg-[#193FAE]':'w-[100px] h-[4px] bg-[#D9D9D9]'}></div>
-         </div>
+            <div className={page === 1 ? 'w-[100px] h-[4px] bg-[#193FAE]' : 'w-[100px] h-[4px] bg-[#D9D9D9]'}></div>
+            <div className={page === 2 ? 'w-[100px] h-[4px] bg-[#193FAE]' : 'w-[100px] h-[4px] bg-[#D9D9D9]'}></div>
+            <div className={page === 3 ? 'w-[100px] h-[4px] bg-[#193FAE]' : 'w-[100px] h-[4px] bg-[#D9D9D9]'}></div>
+          </div>
         </div>
       </div>
       {/* <div className='mb-[100px]'></div> */}

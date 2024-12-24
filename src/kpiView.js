@@ -9,11 +9,11 @@ import {API_BASE_URL} from './config/apiConfig';
 import SideMenu2 from './component/sideMenu2';
 import { useNavigate,Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
+import home from './images/HOME.png';
 
 function KpiGraph({projectId, graphType }) {
 
-  
+  const navigate = useNavigate()
     
 
     const [graphData, setGraphData] = useState([]);
@@ -173,14 +173,24 @@ useEffect(() => {
 
         <div>
     <Header />
-    <div className='container'>
-        <div className="main-content">
-        <div className="headGr">
+    <div className=' w-[90%] m-auto '>
+          <div className="flex mt-[40px] justify-between items-center w-[100%]">
+            <div className="w-fit">
+              <button onClick={() => navigate(-1)} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
+                Back
+              </button>
+            </div>
+            <div>
+              <img src={home} alt="Home Icon" />
+            </div>
+          </div>
+        <div className=" w-full ">
+        <div className="">
             <p>{graphName}</p>
         </div>
         
-        <div className="modG">
-          <div className="graph1">
+        <div className="">
+          <div className="">
                 <div className="graphC">
                   <div id="chart">
                   {selectedGraphData && (

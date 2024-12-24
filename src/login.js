@@ -114,15 +114,16 @@ function Login() {
             </div>
           </div>
         </div>
-        <div className='col-md-6'>
-          <div className='bg-[#193FAE] hidden lg:block relative'>
-            <img src={design} alt="" className="w-[196px] h-[219px] absolute bottom-0 right-0" />
-            <img src={design} alt="" className="w-[196px] h-[219px] absolute top-0 left-0 rotate-180" />
-            <div className='w-fit m-auto pt-20'>
-              <img src={loginImage} className='m-auto'></img>
-              <h4 className='font-semibold text-white w-2/3 text-center m-auto'>Turn your ideas into reality</h4>
-              <p className='text-[16px] text-white w-2/3 text-center m-auto'>We know that your ideas are unique, We provide requisite tailored tools.</p>
-            </div>
+        {/* Right Section */}
+        <div className='hidden lg:flex items-center bg-[#193FAE] relative'>
+          <div className='absolute inset-0'>
+            <img src={design} alt="" className="absolute w-[196px] h-[219px] bottom-0 right-0 object-contain" />
+            <img src={design} alt="" className="absolute w-[196px] h-[219px] top-0 left-0 object-contain rotate-180" />
+          </div>
+          <div className='w-full text-center'>
+            <img src={loginImage} alt="Login Illustration" className='m-auto' />
+            <h4 className='font-semibold text-white text-lg w-2/3 mx-auto mt-4'>Turn your ideas into reality</h4>
+            <p className='text-white text-[16px] w-2/3 mx-auto'>We know that your ideas are unique. We provide requisite tailored tools.</p>
           </div>
         </div>
         <ToastContainer />

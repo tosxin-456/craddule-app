@@ -203,20 +203,25 @@ function GetCard() {
 
   return (
     <>
-    <div className={show ? "w-full h-full fixed left-0 top-0 px-20":"hidden"} id='popup'>
-      <div className='w-fit m-auto p-10 bg-white rounded-[30px] drop-shadow-lg translate-y-[50%]'>
-        <h4 className='text-center mt-10'>Subscribe to Craddule</h4>
-        <p className='text-gray800 text-center m-auto mb-5 w-[90%]'>To continue enjoying all the amazing features Craddule has to offer, we’ll need your card details to set up your subscription. The monthly subscription fee is NGN 10,000, granting you uninterrupted access to everything Craddule has to offer.
-        Let’s get you started seamlessly—because greatness awaits!</p>
-        <div className='flex items-center gap-2 justify-center'>
-          <button className='px-4 py-2 bg-blue600 rounded-[30px] text-white text-[16px]' onClick={handleClick}>Subscribe</button>
-          {/* <button className='px-4 py-2 bg-gray-600 rounded-[30px] text-white text-[16px]' onClick={handleCancel}>Not now</button> */}
+      <div className={show ? "w-full h-full fixed left-0 top-0 px-4 sm:px-20 bg-gray-800 bg-opacity-50" : "hidden"} id='popup'>
+        <div className='w-full sm:w-fit m-auto p-6 sm:p-10 bg-white rounded-[30px] drop-shadow-lg translate-y-[50%]'>
+          <h4 className='text-center mt-5 sm:mt-10 text-[18px] sm:text-[24px] font-semibold'>Subscribe to Craddule</h4>
+          <p className='text-gray-800 text-center m-auto mb-5 w-[90%] sm:w-full text-[14px] sm:text-[16px]'>
+            To continue enjoying all the amazing features Craddule has to offer, we’ll need your card details to set up your subscription.
+            The monthly subscription fee is NGN 10,000, granting you uninterrupted access to everything Craddule has to offer. Let’s get you started seamlessly—because greatness awaits!
+          </p>
+          <div className='flex flex-col sm:flex-row items-center gap-4 sm:gap-2 justify-center'>
+            <button className='px-6 py-3 bg-blue-600 rounded-[30px] text-white text-[16px] sm:text-[18px]' onClick={handleClick}>
+              Subscribe
+            </button>
+            {/* <button className='px-6 py-3 bg-gray-600 rounded-[30px] text-white text-[16px] sm:text-[18px]' onClick={handleCancel}>Not now</button> */}
+          </div>
         </div>
       </div>
-    </div>
-    <PaystackButton className='cardBtn hidden' id='cardBtn' {...componentProps} />
+      <PaystackButton className='cardBtn hidden' id='cardBtn' {...componentProps} />
     </>
   );
+
 }
 
 export default GetCard;

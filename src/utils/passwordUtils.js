@@ -63,21 +63,27 @@ export const confirmOTP = async (data, setLoading, setPage, navigate, toast) => 
 };
 
 export const resetPassword = async (data, setLoading, setPage, navigate, toast) => {
+  console.log(data)
   setLoading(true);
   const userId = localStorage.getItem('userId');
   try {
-    if (data.password !== data.cpassword) {
+    if (data.newPassword !== data.confirmNewPassword) {
       setLoading(false);
       toast.error('Passwords do not match');
       return;
     }
+    const formData = {
+      newPassword: data.newPassword,
+      confirmNewPassword: data.confirmNewPassword
+    }
+    console.log(formData)
 
     const response = await fetch(`${API_BASE_URL}/api/user/resetPassword/${userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(formData),
     });
 
     if (response.status === 200) {

@@ -20,7 +20,7 @@ const SideMenu2 = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [subTypes, setSubTypes] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
-  const onClickStatistics = () => navigate(`/design/start`);
+  const onClickStatistics = () => navigate(`/ideation/start`);
 
   useEffect(() => {
     const handleResize = () => {
@@ -229,7 +229,7 @@ useEffect(() => {
         </li>
 
             <li onClick={onClickStatistics}>
-              <CiLineHeight />
+              <CiLineHeight color='black' />
               {!isCollapsed && <span className=' text-black font-bold ' >Statistics</span>}
             </li>
 

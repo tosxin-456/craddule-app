@@ -52,12 +52,13 @@ function LandingPage() {
   };
 
   const handleProjectReviewClick = (reviewId, name, count) => {
+    console.log(name)
     localStorage.setItem('nReview', reviewId);
     localStorage.setItem('nProjectName', name);
     localStorage.setItem('nProjectCount', count);
     navigate(`/sharereview/${reviewId}`);
   };
-
+//  console.log(reviewProjects.projectId)
 
   if (isLoading) {
     // Render the Loading component if data is still being fetched
@@ -112,41 +113,51 @@ function LandingPage() {
       </div>
 
       {/* Additional sections for team members and review projects */}
-      {/* <div style={{ backgroundColor: '#1b45bf', paddingBottom: '40px', paddingTop: '40px' }}>
         <div className='container'>
-          {teamMembers.length > 0 && <p className='proSubTitle' style={{ color: '#fff' }}>Team Member</p>}
-          {teamMembers.map((member) => (
-            <div className='row wow fadeInDown' key={member.projectId}>
-              <div className='col-md-3'>
-                <div onClick={() => handleProjectTeamClick(member.projectId, member.projectDetails.project, member.projectDetails.projectCount)}>
-                  <div className='addPro' style={{ paddingTop: '65px' }}>
-                    <span className='plusP' style={{ fontSize: '20px' }}>Continue</span>
-                    <div className='addProSh' style={{ marginTop: '70px' }}>
-                      <p style={{ marginBottom: 0 }}>{member.projectDetails.project}</p>
-                    </div>
-                  </div>
-                </div>
+        {teamMembers.map((member) => (
+          <div className="lg:col-span-4 flex-row justify-center m-auto mb-5" key={member.projectId}>
+            <div
+              className="block w-[311px] h-[202px] text-white cursor-pointer"
+              onClick={() =>
+                handleProjectTeamClick(
+                  member.projectId,
+                  member.projectDetails.project,
+                  member.projectDetails.projectCount
+                )
+              }
+            >
+              <div className="bg-blue800 h-full flex justify-center items-center">
+                <span>Continue</span>
+              </div>
+              <div className="bg-blue900 h-8 flex justify-center items-center">
+                <span className="text-center"> Team Project {member.projectDetails.project}</span>
               </div>
             </div>
-          ))}
+          </div>
+        ))}
 
-          {reviewProjects.length > 0 && <p className='proSubTitle' style={{ color: '#fff' }}>Review Project</p>}
           {reviewProjects.map((review) => (
-            <div className='row wow fadeInDown' key={review._id}>
-              <div className='col-md-3'>
-                <div onClick={() => handleProjectReviewClick(review._id, review.projectName, review.projectCount)}>
-                  <div className='addPro' style={{ paddingTop: '65px' }}>
-                    <span className='plusP' style={{ fontSize: '20px' }}>Continue</span>
-                    <div className='addProSh' style={{ marginTop: '70px' }}>
-                      <p style={{ marginBottom: 0 }}>{review.projectName}</p>
-                    </div>
-                  </div>
+            <div className="lg:col-span-4 flex-row justify-center m-auto mb-5" key={review._id}>
+              <div
+                className="block w-[311px] h-[202px] text-white cursor-pointer"
+                onClick={() =>
+                  handleProjectReviewClick(
+                    review._id,
+                    review.projectId.projectName,
+                    review.projectId.projectCount
+                  )
+                }
+              >
+                <div className="bg-blue800 h-full flex justify-center items-center">
+                  <span>Continue</span>
+                </div>
+                <div className="bg-blue900 h-8 flex justify-center items-center">
+                  <span className="text-center"> Review Project {review.projectId.projectName}</span>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-      </div> */}
+      </div>
 
       <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />
     </div>

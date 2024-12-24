@@ -185,7 +185,7 @@ const Profile = () => {
         setFormData({ firstName, lastName, email, phoneNumber });
         const imageFile = image.split('/');
         console.log(imageFile)
-        setImage(imageFile[3]);
+        setImage(imageFile[2]);
       } else {
         const data = await response.json();
         console.log(data);
@@ -357,10 +357,15 @@ const handleSubmit = (e) => {
             <p className='text-center font-semibold  sm:text-[18px]'>Profile picture/company logo</p>
             <div className='mt-4'>
               <img
-                src={image ? (API_BASE_URL + '/images/users/' + image) : 'https://www.gravatar.com/avatar/c7763a1c6be16ffb347e8500434b61eb?s=200&r=pg&d=mm'}
-                className='rounded-full w-[150px] sm:w-[300px] h-[150px] sm:h-[300px] m-auto'
-                alt='User avatar'
+                src={
+                  image
+                    ? `${API_BASE_URL}/images/${image}`
+                    : 'https://www.gravatar.com/avatar/c7763a1c6be16ffb347e8500434b61eb?s=200&r=pg&d=mm'
+                }
+                className="rounded-full w-[150px] sm:w-[300px] h-[150px] sm:h-[300px] m-auto"
+                alt="User avatar"
               />
+
               <button className="block px-5 py-3 m-auto mt-4 bg-blue600 rounded-[30px] text-white text-[12px] justify-self-center" onClick={() => setIsOpen(true)}>
                 <span>Change picture</span>
               </button>

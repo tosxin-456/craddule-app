@@ -104,7 +104,7 @@ function IdeationMain() {
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
                                         <button
                                             onClick={() =>
-                                                navigate('pdfEnd/Ideation')
+                                                navigate('/questionBusMain/Ideation/BusinessCaseBuilder/Introduction')
                                             }
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
@@ -140,7 +140,7 @@ function IdeationMain() {
                                         <p className="mt-[-20px] sm:mt-[-30px]">{customFinancialProjectPercentage}%</p>
                                         <p className="text-[12px] sm:text-[14px]">progress</p>
                                         <button
-                                            onClick={() => navigate('pdfEnd/Ideation')}
+                                            onClick={() => navigate('/customFinancial')}
                                             className="m-auto bg-[#1B45BF] px-2 py-1 rounded-lg text-white text-[12px] sm:text-[14px]"
                                         >
                                             Continue

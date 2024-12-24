@@ -92,6 +92,7 @@ function InflationRateGraph({ graphType }) {
         <div>
             <Header />
             <div className='container '>
+                
                 <WhereDidYouHearModal />
                 <div className="flex-row lg:flex justify-between items-center mt-10">
                     <div>

@@ -51,7 +51,7 @@ const ImageUpload = () => {
   return (
     <div className=' w-[100%] '>
       <Header />
-      <div className="const relative">
+      <div className=" w-[95%] m-auto relative">
         <div className="flex mt-[40px] justify-between items-center w-[100%]">
           <div className="w-fit">
             <button onClick={() => navigate('/start')} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
@@ -65,7 +65,7 @@ const ImageUpload = () => {
         <div className="absolute inset-0 mt-[40px] ml-[20px] sm:ml-[60px] z-[-100] bg-no-repeat bg-cover w-[150px] sm:w-[200px] h-[150px] sm:h-[200px]"
           style={{ backgroundImage: `url(${circle})` }}
         ></div>
-        <div className='BoxPhase1'>
+        <div className='w-full bg-white p-2 rounded-2xl mt-5 '>
           <div className='text-center'>
             <p className='centerH'>Share</p>
             <p className='centerHp'>Here you can share your work</p>

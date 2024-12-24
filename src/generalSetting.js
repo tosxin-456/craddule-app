@@ -115,8 +115,8 @@ function GeneralSetting ()  {
           <Header />
           <BreadCrumb page={'Change Password'}/>
 
-          <div className='w-[975px] m-auto mt-5 bg-white rounded-xl'>
-            <div className='p-10 px-44 pt-16 pb-20'>
+          <div className='w-full m-auto mt-5 bg-white rounded-xl'>
+            <div className='p-10 md:px-44 m-auto pt-16 pb-20'>
               <h4 className='font-semibold text-center'>Change Password</h4>
               <h6 className='texet-[16px] text-black200 text-center font-light'>Set a new password</h6>
               <form onSubmit={handleSubmit} className='mt-14'>
@@ -217,8 +217,8 @@ function GeneralSetting ()  {
                       </span>
                     </div>
                 </div>
-                <div className='flex gap-5 justify-between mt-5'>
-                  <button type='submit' className='py-3 px-52 bg-blue600 rounded-full text-white'>
+                <div className='flex gap-5 mt-5 m-auto'>
+                  <button type='submit' className='py-3 px-12 bg-blue600 rounded-full text-white'>
                     {loading ? <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' /> : <span>Change password</span>}
                   </button>
                   <div className='w-6'></div>

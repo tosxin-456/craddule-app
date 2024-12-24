@@ -1,12 +1,12 @@
-import React, { useState,useEffect,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import bci from './images/bc.png';
 import Header from './component/header';
 import Menu from './component/menu';
 import { useNavigate, Link } from 'react-router-dom';
-import {API_BASE_URL} from './config/apiConfig';
+import { API_BASE_URL } from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleNotch,faChevronDown,faBold, faItalic, faUnderline, faStrikethrough, faQuoteRight, faCode, faLink, faImage, faTextHeight, faListOl, faListUl, faSubscript, faSuperscript, faOutdent, faIndent, faAlignRight, faHeading } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch, faChevronDown, faBold, faItalic, faUnderline, faStrikethrough, faQuoteRight, faCode, faLink, faImage, faTextHeight, faListOl, faListUl, faSubscript, faSuperscript, faOutdent, faIndent, faAlignRight, faHeading } from '@fortawesome/free-solid-svg-icons';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { jwtDecode } from "jwt-decode";
@@ -21,68 +21,68 @@ Quill.register("modules/imageResize", ImageResize);
 
 
 
-function SectionIntroShare ({ htmlContent })  {
-    
-    const navigate = useNavigate()
-    const { id,phase } = useParams();
+function SectionIntroShare({ htmlContent }) {
 
-     const onClickHandler = () => navigate(`/video`);
-     const [images, setImages] = useState([]);
-     const [types, setTypes] = useState([]);
+  const navigate = useNavigate()
+  const { id, phase } = useParams();
+
+  const onClickHandler = () => navigate(`/video`);
+  const [images, setImages] = useState([]);
+  const [types, setTypes] = useState([]);
   const [showImagePopup, setShowImagePopup] = useState(false);
-     const [answers, setAnswers] = useState([]);
-     const [answersV, setAnswersV] = useState([]);
-     const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [answers, setAnswers] = useState([]);
+  const [answersV, setAnswersV] = useState([]);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [combinedAnswer, setCombinedAnswer] = useState('');
 
   const access_token = localStorage.getItem('access_token');
-    const decodedToken = jwtDecode(access_token);
-    const userId = decodedToken.userId;
+  const decodedToken = jwtDecode(access_token);
+  const userId = decodedToken.userId;
 
-  const questionType ="BusinessCaseBuilder";
-  const questionSubType ="Introduction";
+  const questionType = "BusinessCaseBuilder";
+  const questionSubType = "Introduction";
   const token = localStorage.getItem('access_token');
   const [value, setValue] = useState('');
   const [formData, setFormData] = useState({
     summary: '',
-    });
-    
-    useEffect(() => {
-       
-      fetchAnswerCut(); // Call the function to fetch the unanswered question
-    }, [questionType, questionSubType, id]);
-  
+  });
+
+  useEffect(() => {
+
+    fetchAnswerCut(); // Call the function to fetch the unanswered question
+  }, [questionType, questionSubType, id]);
+
 
   useEffect(() => {
     const fetchAnswers = async () => {
       try {
         const summaryResponse = await fetch(API_BASE_URL + `/api/summary/${id}/${questionType}/${questionSubType}`, {
-            headers: {
-              'Content-Type': 'application/json', 
-              'Authorization': `Bearer ${token}` // Include the token in the request headers
-            }
-          });
-        
-      if(summaryResponse.ok) {
-        // If summary exists, fetch the summary data
-        const dataS = await summaryResponse.json();
-        console.log(dataS);
-        console.log(dataS.data.summary);
-        setCombinedAnswer(dataS.data.summary);
-     } else {
-        const response = await fetch(API_BASE_URL + `/api/new/question/BusinessCaseBuilder/Introduction/${id}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch answers');
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // Include the token in the request headers
+          }
+        });
+
+        if (summaryResponse.ok) {
+          // If summary exists, fetch the summary data
+          const dataS = await summaryResponse.json();
+          console.log(dataS);
+          console.log(dataS?.data?.summary);
+          setCombinedAnswer(dataS?.data?.summary);
+        } else {
+          const response = await fetch(API_BASE_URL + `/api/new/question/BusinessCaseBuilder/Introduction/${id}`);
+          if (!response.ok) {
+            throw new Error('Failed to fetch answers');
+          }
+          const data = await response.json();
+          console.log(data);
+          setAnswers(data?.data);
+          setLoading(false);
         }
-        const data = await response.json();
-        console.log(data);
-        setAnswers(data.data);
-        setLoading(false);
-    }
       } catch (error) {
-        setError(error.message);
+        setError(error?.message);
         setLoading(false);
       }
     };
@@ -92,7 +92,7 @@ function SectionIntroShare ({ htmlContent })  {
 
   useEffect(() => {
     // Combine all answers into one string
-    const combined = answers.map(answer => answer.answer).join('\n \n');
+    const combined = answers?.map(answer => answer?.answer).join('\n \n');
     setCombinedAnswer(combined);
   }, [answers]);
 
@@ -103,26 +103,26 @@ function SectionIntroShare ({ htmlContent })  {
   //   const event = { target: { id: 'editor', value: content } };
   // // Call the handleChange function with the content
   //   handleChange(event);
-   
+
   // };
 
 
   const handleEditorChange = () => {
     // Get the current selection range
-   
+
     const content = editorRef.current.innerHTML;
     const event = { target: { id: 'editor', value: content } };
-  
+
     // Call the handleChange function to update the state with the new content
     handleChange(event);
-  
-   
+
+
   };
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setCombinedAnswer(value);
-}
+  }
 
 
 
@@ -138,23 +138,23 @@ function SectionIntroShare ({ htmlContent })  {
   const toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],
     ['blockquote', 'code-block'],
-  ['link', 'image'],
-  [{size: []}],
+    ['link', 'image'],
+    [{ size: [] }],
 
-  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-  [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
-  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-  [{ 'direction': 'rtl' }],                         // text direction
+    [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
+    [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+    [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+    [{ 'direction': 'rtl' }],                         // text direction
 
-  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
 
-  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-  [{ 'font': [] }],
-  [{ 'align': [] }],
+    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+    [{ 'font': [] }],
+    [{ 'align': [] }],
 
-  ['clean']         
+    ['clean']
   ];
 
   const modules = {
@@ -166,14 +166,14 @@ function SectionIntroShare ({ htmlContent })  {
       //   }
       // }
     },
-    
+
     imageResize: {
       modules: ['Resize', 'DisplaySize', 'Toolbar'] // Configure the image resize module
     }
   };
-  const module =  {
-  
-      toolbar: toolbarOptions
+  const module = {
+
+    toolbar: toolbarOptions
   };
 
   const reactQuillRef = React.useRef(null);
@@ -182,7 +182,7 @@ function SectionIntroShare ({ htmlContent })  {
     if (reactQuillRef.current) {
       // Get the Quill editor instance
       const quill = reactQuillRef.current.getEditor();
-      
+
       // Access the toolbar
       const toolbar = quill.getModule('toolbar').handlers.image;
       toolbar.addHandler('image', console.log("image toolbar"));
@@ -194,7 +194,7 @@ function SectionIntroShare ({ htmlContent })  {
   };
 
   const fetchAnswerCut = async () => {
-        
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/answer/${id}/${questionType}/${questionSubType}`, {
         headers: {
@@ -202,18 +202,18 @@ function SectionIntroShare ({ htmlContent })  {
           'Authorization': `Bearer ${access_token}` // Include the token in the Authorization header
         }
       });
-  
+
       if (response.status === 200) {
         const data = await response.json();
         console.log(data)
         setAnswersV(data.data); // Adjust based on your API response structure
-       
-      }else{
+
+      } else {
         const result = await response.json();
         console.error('Error:', result['error']);
       }
-  
-      
+
+
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -221,7 +221,7 @@ function SectionIntroShare ({ htmlContent })  {
     }
   };
 
- 
+
   const handleMouseEnter = (index) => {
     setHoveredIndex(index);
   };
@@ -297,31 +297,31 @@ function SectionIntroShare ({ htmlContent })  {
   const [showHeadingDropdown, setShowHeadingDropdown] = useState(false);
 
   const toggleHeadingDropdown = () => setShowHeadingDropdown(!showHeadingDropdown);
-//   createOrUpdateSummary();
-  
-const handleInsertFile = (file) => {
-  const newFile = API_BASE_URL+'/images/'+file;
-  console.log(newFile);
-  setCombinedAnswer((prevContent) => `${prevContent}<div contenteditable="true" style="display:inline-block; width:30%;"><img src="${newFile}" style="width:100%;" /></div>`);
-  // setCombinedAnswer((prevContent) => `${prevContent}<img src="${newFile}" alt="Inserted File" />`);
+  //   createOrUpdateSummary();
 
-};
+  const handleInsertFile = (file) => {
+    const newFile = API_BASE_URL + '/images/' + file;
+    console.log(newFile);
+    setCombinedAnswer((prevContent) => `${prevContent}<div contenteditable="true" style="display:inline-block; width:30%;"><img src="${newFile}" style="width:100%;" /></div>`);
+    // setCombinedAnswer((prevContent) => `${prevContent}<img src="${newFile}" alt="Inserted File" />`);
+
+  };
 
   useEffect(() => {
-      const fetchSubtypeFiles = async () => {
-          try {
-              const response = await axios.get(`${API_BASE_URL}/api/hub/project/${id}`);
-              setTypes(response.data.data);
-              console.log(response.data);
-             
-          } catch (error) {
-              console.error('Error fetching files:', error);
-             
-             
-          }
-      };
-  
-      fetchSubtypeFiles();
+    const fetchSubtypeFiles = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/hub/project/${id}`);
+        setTypes(response.data.data);
+        console.log(response.data);
+
+      } catch (error) {
+        console.error('Error fetching files:', error);
+
+
+      }
+    };
+
+    fetchSubtypeFiles();
   }, []);
 
 
@@ -334,12 +334,12 @@ const handleInsertFile = (file) => {
     if (event.type === 'mousemove' && !isResizing) {
       return; // Ignore mousemove event if not resizing
     }
-  
+
     const imageElement = event.target;
     if (imageElement.nodeName !== 'IMG') {
       return; // Ignore if the target is not an image element
     }
-  
+
     if (event.type === 'mousedown') {
       startImageResize(event);
     } else if (event.type === 'mousemove') {
@@ -372,14 +372,14 @@ const handleInsertFile = (file) => {
 
   function handleMouseMove(event) {
     if (!resizingImage) return;
-  
+
     const { element, initialX, initialY, initialWidth, initialHeight } = resizingImage;
     const deltaX = event.clientX - initialX;
     const deltaY = event.clientY - initialY;
-  
+
     const newWidth = initialWidth + deltaX;
     const newHeight = initialHeight + deltaY;
-  
+
     element.style.width = newWidth + 'px';
     element.style.height = newHeight + 'px';
   }
@@ -392,98 +392,76 @@ const handleInsertFile = (file) => {
     window.removeEventListener('mouseup', handleMouseUp);
   }
 
-    return (
-        <>
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-screen-md p-4 bg-white rounded-lg shadow-md">
+        <div className="w-full">
+          <div className="">
+            <img
+              src={bci}
+              onClick={() => navigate(-1)}
+              className="bcA cursor-pointer mb-4"
+              alt="Back"
+            />
+            <div className="lenght">
+              <div className="text-center mb-6">
+                <p className="centerH text-lg font-semibold" onClick={accessToolbar}>
+                  Introduction
+                </p>
+                <p className="centerHp text-sm text-gray-500">Make sure you answer all questions</p>
+              </div>
+              <div className="w-fit ml-auto mb-6">
+                <a
+                  className="bg-[#193FAE] px-6 py-2 text-white rounded-3xl no-underline"
+                  href={`${API_BASE_WEB_URL}/sharefeedback/${id}/${phase}`}
+                >
+                  Give Feedback
+                </a>
+              </div>
 
-<div className='container-fluid'>
-   
-    <div className='row'>
+              <div className="break border-t border-gray-300 mb-4"></div>
 
-      <div className='col-md-2'>
-      </div>
-        
-        <div className='col-md-9'>
-            <img src={bci} className='bcA'></img>
-        <div className='lenght'>
-                    <div className='text-center'>
-                <p className='centerH' onClick={accessToolbar}>Introduction</p>
-                <p className='centerHp'>Make sure you answer all questions</p>
-                </div>
-                
-            <a className="btn btn-primary buttonE"  href={`${API_BASE_WEB_URL}/sharefeedback/${id}/${phase}`} >
-               
-            Give Feedback
-            </a>
-            {/* <button className="btn btn-primary buttonS">Edit</button> */}
-            {/*<p className= "buttonE">Save</p>
-            <p className= "buttonS">Edit</p>*/}
-            <div class = "break"></div>
-            {answersV.map((answerV, index) => (
-            <Link to={`/question/${answerV.questionId}`}>
-                <div key={answerV._id} className="qul">
-                <Tooltip content={answerV.answer}>
-                
-              
-                    <p
+              {answersV.map((answerV, index) => (
+                <Link to={`/question/${answerV?.questionId}`} key={answerV._id}>
+                  <div className="qul mb-2">
+                    <Tooltip content={answerV?.questionId.question}>
+                      <p
                         className={`qulp ${hoveredIndex === index ? 'full' : ''}`}
                         onMouseEnter={() => handleMouseEnter(index)}
                         onMouseLeave={handleMouseLeave}
-                    >
-                        {hoveredIndex === index ? answerV.question : answerV.question.slice(0, 10) + '...'}
-                    </p>
+                      >
+                        {hoveredIndex === index
+                          ? answerV?.questionId.question
+                          : `${answerV?.questionId?.question.slice(0, 10)}...`}
+                      </p>
                     </Tooltip>
-                    
-                </div>
-                 </Link>
-            ))}
-           
-            <div className='container-textBs'>
+                  </div>
+                </Link>
+              ))}
 
-            {/* <ReactQuill ref={reactQuillRef} theme="snow" value={combinedAnswer} onChange={setCombinedAnswer} modules={modules} formats={formats}/> */}
-            
-                {/* <textarea className='textBs' value={combinedAnswer} onChange={handleChange} id="summary"></textarea> */}
-
-
-
-  <div
-      ref={editorRef}
-      contentEditable={false}
-      className="editor"
-      onInput={handleInput}// Use onInput event instead of onChange for contenteditable elements
-    //  onMouseDown={handleImageResizing}
-    // onMouseMove={handleImageResizing}
-    // onMouseUp={handleImageResizing}
-    ></div>
-
-
-                {showImagePopup && 
-                  <ImagePopup 
-                    
-                    
-                    onClose={() => setShowImagePopup(false)} 
+              <div className="container-textBs mt-6">
+                <div
+                  ref={editorRef}
+                  contentEditable={false}
+                  className="editor border border-gray-300 p-4 rounded-md"
+                  onInput={handleInput}
+                ></div>
+                {showImagePopup && (
+                  <ImagePopup
+                    onClose={() => setShowImagePopup(false)}
                     types={types}
                     onInsertFile={handleInsertFile}
                   />
-                }
-            
+                )}
+              </div>
             </div>
-
-                
-           
-            
-           
-           
-        </div> 
-
-       
-  </div>
-  <div className='col-md-2'>
+          </div>
+        </div>
+        <Toaster position="top-right" />
       </div>
-  </div>
-  <Toaster  position="top-right" />
-  </div>
-  </>
-    );
+    </div>
+  );
+
 }
 
 export default SectionIntroShare
