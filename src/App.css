@@ -6016,25 +6016,11 @@ td {
   visibility: visible;
 }
 
-.toolbar {
-  margin-top: 40px;
-  border-top-left-radius: 29px;
-  border-top-right-radius: 29px;
-  background: #ffffff;
-  padding: 10px;
-  gap: 10px;
-  box-sizing: border-box;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(204, 204, 204);
-  border-image: initial;
-  padding: 8px;
-}
+
 
 .editor {
   padding: 10px;
-  min-height: 300px;
+  min-height: 500px;
   border: 1px solid #ccc;
   outline: none;
   border-top: 0px;
