@@ -663,10 +663,6 @@ function QuestionBusIntro() {
             <p>Here you have the summary of all your answers to our questions</p>
           </div>
           <div className="w-fit mr-[20px] ml-auto mb-[10px] " >
-            <button className="rounded-lg px-3 py-1 bg-[#FFD700] text-[18px]" >
-              Regenerate with Ai
-            </button>
-
           </div>
           <div className='quiInt'>
 
@@ -852,7 +848,12 @@ function QuestionBusIntro() {
                 />
 
 
+                <div className='w-fit m-auto mt-5 ' >
+                  <button className="rounded-lg px-3 py-1 bg-[#FFD700] text-[18px]" >
+                    Generate with Ai
+                  </button>
 
+                </div>
 
               </div>
 
@@ -885,12 +886,7 @@ function QuestionBusIntro() {
           ))}
 
         </div>
-        <div className='w-fit m-auto mb-5 ' >
-          <button className='bg-[#FFD700] px-3 py-1 rounded-full m-auto mb-5  text-[20px] font-medium ' >
-            End Section
-          </button>
 
-        </div>
       </div>
       <ModalVideo open={isOpen} onClose={() => setIsOpen(false)} link={activeLink} id={activeId} time={activeTime}>
 
