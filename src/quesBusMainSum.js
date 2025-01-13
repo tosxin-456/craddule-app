@@ -22,8 +22,8 @@ import nspell from 'nspell';
 import API_BASE_WEB_URL from './config/apiConfigW';
 import HeaderIdeation from './component/headerIdeation';
 import ModalQoute from './component/modalQoute';
-function QuestionBusIntro() {
 
+function QuestionBusIntro() {
     const navigate = useNavigate()
     const { phase,category, subCategory } = useParams();
     const onClickHandler = () => navigate(`/quote`);
@@ -306,6 +306,7 @@ const handleClickSh = (id) => {
        const summary = combinedAnswer;
        const questionType=category;
        const questionSubType=subCategory;
+      //  console.log(userId)
      const response = await fetch(API_BASE_URL +'/api/summary', {
        method: 'POST',
        headers: {
