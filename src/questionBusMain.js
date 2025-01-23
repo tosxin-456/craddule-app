@@ -46,6 +46,7 @@ function QuestionBus() {
   const [activeLink, setActiveLink] = useState("");
   const [activeId, setActiveId] = useState("");
   const [activeTime, setActiveTime] = useState("");
+  const [options, setOptions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
   const projectId = localStorage.getItem('nProject');
@@ -73,34 +74,34 @@ function QuestionBus() {
     setShowScrollableDiv(!showScrollableDiv);
   };
 
-  // useEffect(() => {
-  //   const fetchNextQuestion = async () => {
-  //     try {
-  //       const response = await fetch(`${API_BASE_URL}/api/finished/${projectId}/${category}/${subCategory}`, {
-  //         method: 'GET',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           'Authorization': `Bearer ${access_token}`,
-  //         },
-  //       });
+  useEffect(() => {
+    const fetchNextQuestion = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/finished/${projectId}/${category}/${subCategory}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${access_token}`,
+          },
+        });
 
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         console.log(data);
-  //         // subType.replace(/([A-Z])/g, ' $1').trim();
-  //         setSubCategoryName(data.subCategoryName);
-  //         fetchUnansweredQuestion(data.subCategory);
-  //         getPrevious(data.subCategory);
-  //       } else {
-  //         console.error('Failed to fetch next question');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching next question:', error);
-  //     }
-  //   };
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          // subType.replace(/([A-Z])/g, ' $1').trim();
+          setSubCategoryName(data.subCategoryName);
+          fetchUnansweredQuestion(data.subCategory);
+          getPrevious(data.subCategory);
+        } else {
+          console.error('Failed to fetch next question');
+        }
+      } catch (error) {
+        console.error('Error fetching next question:', error);
+      }
+    };
 
-  //   fetchNextQuestion();
-  // }, [projectId, category]);
+    fetchNextQuestion();
+  }, [projectId, category]);
 
   useEffect(() => {
     setSubCategoryName(subCategory.replace(/([A-Z])/g, ' $1').trim());
@@ -108,17 +109,19 @@ function QuestionBus() {
     getPrevious(subCategory);
   }, []);
 
+
   const fetchUnansweredQuestion = async (subCategoryPassed) => {
     try {
       console.log(subCategoryPassed);
       const response = await fetch(API_BASE_URL + `/api/new/question/${userId}/${projectId}/${category}/${subCategoryPassed}`);
       if (response.status === 200) {
         const data = await response.json();
-        console.log(data);
+        console.log(data.data);
         if (!data.data) {
           createFinish(subCategoryPassed);
 
         } else {
+          console.log(data)
           console.log(data.data.premium);
           console.log(data.data.questionOrder);
           setQuestion(data.data);
@@ -284,6 +287,8 @@ function QuestionBus() {
       console.error('An error occurred:', error);
     }
   };
+
+
 
   useEffect(() => {
     const fetchVideo = async () => {
@@ -458,6 +463,19 @@ function QuestionBus() {
     }
   };
 
+  const handleOptionSelect = (option) => {
+    // Prevent duplicate selections and allow adding to the current answer
+    setFormData((prev) => ({
+      ...prev,
+      answer: prev.answer.includes(option)
+        ? prev.answer
+        : prev.answer
+          ? `${prev.answer}, ${option}` // Append new option
+          : option, // Start with the first option
+    }));
+  };
+
+
 
   //check if there is an active video not finished if the user as been here before
   const checkActiveIfEntered = async () => {
@@ -537,33 +555,67 @@ function QuestionBus() {
 
           </div>
 
-          <div className='centerC'>
-
-
+          <div className="centerC">
             {question ? (
               <form onSubmit={handleSubmit}>
                 <div>
+                  {/* Question */}
+                  <p className="question">{question.question}</p>
 
-                  <p className='question'>{question.question}</p>
-                  <div className='container-textAs'>
-                    <textarea className='textAs' id="answer" value={formData.answer} onChange={handleChange}></textarea>
-                    <p className='textH'> Your answer shouldn't be about money, it shoul be about solving a problem </p>
+                  {/* Options */}
+                  {question.options && question.options.length > 0 && (
+                    <div className="options-container space-y-2 mb-4">
+                      {question.options.map((option, index) => (
+                        <div
+                          key={index}
+                          onClick={() => handleOptionSelect(option)}
+                          className={`cursor-pointer p-3 border rounded-lg transition-colors duration-200 ${formData.answer === option
+                              ? "bg-blue-500 text-white"
+                              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                            }`}
+                        >
+                          {option}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Textarea for Additional Input */}
+                  <div className="container-textAs mb-4">
+                    <textarea
+                      className="textAs w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      id="answer"
+                      value={formData.answer}
+                      onChange={handleChange}
+                      placeholder="You can add more details here..."
+                    />
+                    <p className="textH text-gray-600 mt-2">
+                      Your answer shouldn't be about money; it should be about solving a problem.
+                    </p>
                   </div>
-                  <p className='suggest'>{question.premium}</p>
-                  <button type="submit" className='btn btn-primary curveNext' disabled={loading}>
 
-                    {loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' />}
+                  {/* Premium Suggestion */}
+                  {question.premium && (
+                    <p className="suggest text-sm text-blue-600 font-medium">{question.premium}</p>
+                  )}
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="btn btn-primary curveNext bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition-colors duration-200"
+                    disabled={loading}
+                  >
+                    {loading && <FontAwesomeIcon icon={faCircleNotch} className="fa-spin" />}
                     {!loading && <span>Next</span>}
-
                   </button>
-
                 </div>
-
               </form>
             ) : (
-              <p></p>
+              <p>No question available.</p>
             )}
           </div>
+
+
 
         </div>
 

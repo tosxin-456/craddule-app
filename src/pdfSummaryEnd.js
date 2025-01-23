@@ -38,6 +38,7 @@ function QuestionBusIntro() {
   const [answersV, setAnswersV] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [generateLoading, setGenerateLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState(null);
   const projectId = localStorage.getItem('nProject');
@@ -54,7 +55,8 @@ function QuestionBusIntro() {
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionBoxPosition, setSuggestionBoxPosition] = useState({ top: 0, left: 0 });
   const [selectedWord, setSelectedWord] = useState(null);
-
+  const [viewMode, setViewMode] = useState("AI"); // "AI" or "Original"
+  const [aiUsed, setAiUsed] = useState(false);
   const [showScrollableDiv, setShowScrollableDiv] = useState(false);
   const [showScrollableDiv2, setShowScrollableDiv2] = useState(false);
 
@@ -604,6 +606,57 @@ function QuestionBusIntro() {
     }
   };
 
+  const generateAi = async () => {
+    setGenerateLoading(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/pdf/end/${projectId}/${phase}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+      console.log("Response from generate AI:", data);
+
+      if (data.status === 200 && data.data) {
+        console.log("AI summaries generated successfully");
+
+        // Set individual answers
+        setAnswers(data.data);
+
+        // Generate combined HTML summary
+        const combined = data.data
+          .map((answer) => {
+            const formattedSubType = answer.questionType.replace(/([A-Z])/g, ' $1').trim();
+            return `<h2 style="text-align: center;">${formattedSubType}</h2><br>${answer.summary}`;
+          })
+          .join('<br><br>');
+
+        console.log("Combined AI-generated summary:", combined);
+
+        // Set the combined summary
+        setCombinedAnswer(combined);
+
+        // Check if AI was used
+        const hasAiUsed = data.data.some((answer) => answer.ai_used);
+        setAiUsed(hasAiUsed);
+      } else {
+        console.error("Failed to generate AI summaries:", data.message || "Unknown error");
+      }
+    } catch (error) {
+      console.error("Error during AI generation:", error);
+    } finally {
+      setGenerateLoading(false); // Ensure loading state is updated
+    }
+  };
+
+  const toggleViewMode = () => {
+    setViewMode((prev) => (prev === "AI" ? "Original" : "AI"));
+  };
+
+
   useEffect(() => {
     const fetchVideo = async () => {
       try {
@@ -829,7 +882,7 @@ function QuestionBusIntro() {
                 <div
                   ref={editorRef}
                   contentEditable={true}
-                  className="editor bg-[#EEEEEE] md:w-[80%] rounded-md m-auto "
+                  className="editor bg-[#EEEEEE] md:w-[80%] rounded-md m-auto"
                   onInput={handleEditorChange}
                   onMouseDown={handleMouseDown}
                   onMouseMove={handleMouseMove}
@@ -846,21 +899,42 @@ function QuestionBusIntro() {
                       handleWordClick(word, rect);
                     }
                   }}
-                  style={{ whiteSpace: "pre-wrap", minHeight: "200px", border: "1px solid #ccc", padding: "10px" }}
+                  style={{
+                    whiteSpace: "pre-wrap",
+                    minHeight: "200px",
+                    border: "1px solid #ccc",
+                    padding: "10px",
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: viewMode === "AI" ? combinedAnswer : originalAnswer,
+                  }}
                 />
 
 
-                <div className='w-fit m-auto mt-5 ' >
-                  <button className="rounded-lg px-3 py-1 bg-[#FFD700] text-[18px]" >
-                    Generate with Ai
-                  </button>
 
-                </div>
 
               </div>
 
 
             </form>
+            <div className="w-fit m-auto mt-5">
+              {aiUsed && (
+                <button
+                  onClick={generateAi}
+                  className="rounded-lg px-3 py-1 text-[18px] bg-blue-500 text-white mr-4"
+                >
+                  Regenerate with AI
+                </button>
+              )}
+              <button
+                onClick={toggleViewMode}
+                className={`rounded-lg px-3 py-1 text-[18px] ${generateLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#FFD700]"
+                  }`}
+              >
+                {viewMode === "AI" ? "View Previous Document" : "View Generated AI Document"}
+              </button>
+            </div>
+
           </div>
 
 
