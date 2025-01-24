@@ -19,7 +19,26 @@ export const validatePassword = (password, setPasswordValid) => {
   setPasswordValid({ length, number, capital, special });
 };
 
+function getJavaScriptVersion() {
+  if (typeof Symbol === 'function') return 'ES6+';
+  if (typeof Map === 'function') return 'ES6';
+  if (typeof JSON === 'object') return 'ES5';
+  if (typeof ActiveXObject === 'function') return 'ES3'; // IE 6-8
+  return 'Unknown';
+}
+
+const jsVersion = getJavaScriptVersion();
+
 export const createUser = async (data, referralCode, setLoading, toast, navigate) => {
+  const unsupportedVersionMessage =
+    'Your browser is outdated and does not support modern features required for this application. Please use a modern browser such as Chrome, Firefox, Edge, or Safari.';
+
+  // Check if the JavaScript version is less than ES5
+  if (jsVersion === 'ES3' || jsVersion === 'Unknown') {
+    toast.error(unsupportedVersionMessage);
+    return;
+  }
+
   setLoading(true);
   try {
     if (data.password !== data.cpassword) {
@@ -33,7 +52,7 @@ export const createUser = async (data, referralCode, setLoading, toast, navigate
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, jsVersion }),
     });
 
     if (response.status === 200) {
@@ -51,5 +70,7 @@ export const createUser = async (data, referralCode, setLoading, toast, navigate
   } catch (error) {
     setLoading(false);
     console.error('An error occurred:', error);
+    toast.error('An unexpected error occurred. Please try again later.');
   }
 };
+

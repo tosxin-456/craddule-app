@@ -55,10 +55,12 @@ function QuestionBusIntro() {
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionBoxPosition, setSuggestionBoxPosition] = useState({ top: 0, left: 0 });
   const [selectedWord, setSelectedWord] = useState(null);
-  const [viewMode, setViewMode] = useState("AI"); // "AI" or "Original"
-  const [aiUsed, setAiUsed] = useState(false);
   const [showScrollableDiv, setShowScrollableDiv] = useState(false);
   const [showScrollableDiv2, setShowScrollableDiv2] = useState(false);
+  const [originalAnswer, setOriginalAnswer] = useState("");
+  const [aiUsed, setAiUsed] = useState(false);
+  const [viewMode, setViewMode] = useState("Original");
+  const [summaries, setSummaries] = useState([]);
 
   const handleToggle = () => {
     setShowScrollableDiv(!showScrollableDiv);
@@ -94,47 +96,59 @@ function QuestionBusIntro() {
   }, []);
 
   useEffect(() => {
-    console.log("fetchAnswers");
-    const fetchAnswers = async () => {
+    console.log("Fetching answers...");
 
+    const fetchAnswers = async () => {
       try {
-        const summaryResponse = await fetch(API_BASE_URL + `/api/pdf/end/${projectId}/${phase}`, {
+        const response = await fetch(`${API_BASE_URL}/api/pdf/end/${projectId}/${phase}`, {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}` // Include the token in the request headers
-          }
+            'Authorization': `Bearer ${token}`,
+          },
         });
 
-        if (summaryResponse.ok) {
-          const dataS = await summaryResponse.json();
-          console.log("data for summary:", dataS)
-          // If summary exists, fetch the summary data
-
-          console.log(dataS);
-          console.log(dataS.data.summary);
-          setCombinedAnswer(dataS.data.summary);
-          console.log("we have a summary");
-          setAnswers(dataS.data);
-          const combined = dataS.data.map(answer => {
-            const formattedSubType = answer.questionType.replace(/([A-Z])/g, ' $1').trim();
-            return `<h2 style="text-align: center;">${formattedSubType}</h2><br>${answer.summary}`;
-          }).join('<br><br>');
-          console.log(combined);
-          setCombinedAnswer(combined);
-          setLoading(false);
-
-
-        } else {
-          throw new Error('Failed to fetch summary');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch summary: ${response.statusText}`);
         }
+
+        const dataS = await response.json();
+        console.log("Fetched Data:", dataS);
+
+        const { summary, ai_generated, ai_used, data } = dataS.data;
+
+        setCombinedAnswer(summary);
+        setOriginalAnswer(ai_generated);
+        setAiUsed(ai_used);
+        setAnswers(data);
+
+        // Generate HTML for `original` and `aiGenerated`
+        const { original, aiGenerated } = data.reduce(
+          (acc, answer) => {
+            const formattedSubType = answer.questionType.replace(/([A-Z])/g, ' $1').trim();
+            acc.original.push(`<h2 style="text-align: center;">${formattedSubType}</h2><br>${answer.summary}`);
+            acc.aiGenerated.push(`<h2 style="text-align: center;">${formattedSubType}</h2><br>${answer.ai_generated}`);
+            return acc;
+          },
+          { original: [], aiGenerated: [] }
+        );
+
+        setOriginalAnswer(original.join('<br><br>'));
+        setCombinedAnswer(aiGenerated.join('<br><br>'));
+
+        console.log("Summary and AI-generated content updated successfully.");
       } catch (error) {
-        setError(error.message);
+        console.error("Error fetching answers:", error);
+        setError(error.message || "An unknown error occurred.");
+      } finally {
         setLoading(false);
       }
     };
 
     fetchAnswers();
-  }, []);
+  }, [API_BASE_URL, projectId, phase, token]);
+
+
+
 
 
 
@@ -630,7 +644,7 @@ function QuestionBusIntro() {
         const combined = data.data
           .map((answer) => {
             const formattedSubType = answer.questionType.replace(/([A-Z])/g, ' $1').trim();
-            return `<h2 style="text-align: center;">${formattedSubType}</h2><br>${answer.summary}`;
+            return `<h2 style="text-align: center;">${formattedSubType}</h2><br>${answer.ai_generated}`;
           })
           .join('<br><br>');
 
@@ -721,6 +735,16 @@ function QuestionBusIntro() {
           </div>
           <div className='quiInt'>
 
+            {aiUsed && (
+              <div className='ml-auto w-fit ' >
+                <button
+                  onClick={generateAi}
+                  className="rounded-lg px-3 py-1 ml-auto text-[18px] bg-[#FFD700]"
+                >
+                  Regenerate with AI
+                </button>
+              </div>
+            )}
 
             <form >
 
@@ -881,12 +905,13 @@ function QuestionBusIntro() {
 
                 <div
                   ref={editorRef}
-                  contentEditable={true}
+                  contentEditable={false}
                   className="editor bg-[#EEEEEE] md:w-[80%] rounded-md m-auto"
                   onInput={handleEditorChange}
                   onMouseDown={handleMouseDown}
                   onMouseMove={handleMouseMove}
                   onMouseUp={handleMouseUp}
+
                   onClick={(e) => {
                     const selection = window.getSelection();
                     if (!selection.rangeCount) return;
@@ -911,29 +936,49 @@ function QuestionBusIntro() {
                 />
 
 
-
-
               </div>
 
 
             </form>
             <div className="w-fit m-auto mt-5">
-              {aiUsed && (
+              {/* Show "Generate with AI" button if AI has not been generated */}
+              {!aiUsed && (
                 <button
                   onClick={generateAi}
-                  className="rounded-lg px-3 py-1 text-[18px] bg-blue-500 text-white mr-4"
+                  disabled={generateLoading}
+                  className={`rounded-lg px-3 py-1 text-[18px] ${generateLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#FFD700]"}`}
                 >
-                  Regenerate with AI
+                  {generateLoading ? "Generating..." : "Generate with AI"}
                 </button>
               )}
-              <button
-                onClick={toggleViewMode}
-                className={`rounded-lg px-3 py-1 text-[18px] ${generateLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#FFD700]"
-                  }`}
-              >
-                {viewMode === "AI" ? "View Previous Document" : "View Generated AI Document"}
-              </button>
+
+              {/* Show "View Original/Generated AI Document" toggle if AI has been generated */}
+              {aiUsed && (
+                <>
+                  <button
+                    onClick={() => setViewMode(viewMode === "AI" ? "Original" : "AI")}
+                    className="rounded-lg px-3 py-1 text-[18px] bg-[#FFD700] m-2"
+                  >
+                    {viewMode === "AI" ? "View Original Document" : "View Generated AI Document"}
+                  </button>
+                </>
+              )}
             </div>
+
+            <div className="summary-content">
+              {summaries.map((summaryRecord) => (
+                <div key={summaryRecord.id}>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: viewMode === "AI" && summaryRecord.ai_used
+                        ? summaryRecord.ai_generated
+                        : summaryRecord.summary,
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+
 
           </div>
 

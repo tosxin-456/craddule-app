@@ -101,11 +101,18 @@ function QuestionBusIntro() {
           const dataS = await summaryResponse.json();
           console.log("data for summary:", dataS)
           // If summary exists, fetch the summary data
-          if (dataS.data) {
-            console.log(dataS);
-            console.log(dataS.data.summary);
-            setCombinedAnswer(dataS.data.summary);
-            console.log("we have a summary");
+          if (dataS.data && Array.isArray(dataS.data)) {
+            console.log("Summary data array:", dataS.data);
+
+            const combinedSummary = dataS.data
+              .map((item) => {
+                const formattedSubType = item.questionSubType.replace(/([A-Z])/g, ' $1').trim();
+                return `<h2 style="text-align: center;">${formattedSubType}</h2><br>${item.summary}`;
+              })
+              .join('<br><br>');
+
+            setCombinedAnswer(combinedSummary); // Set the combined summary
+            console.log("Combined summary:", combinedSummary);
           } else {
             const response = await fetch(API_BASE_URL + `/api/pdf/single/${projectId}/${category}`, {
               headers: {
@@ -197,6 +204,7 @@ function QuestionBusIntro() {
 
 
   const createOrUpdateSummary = async (data) => {
+    console.log("on the save pdf.")
     try {
       setLoading(true);
       console.log(combinedAnswer);
@@ -670,7 +678,7 @@ function QuestionBusIntro() {
 
       <div className="main-content">
 
-        <Header />
+        <HeaderIdeation />
         <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
 
           <div className='text-center'>

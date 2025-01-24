@@ -5,19 +5,11 @@ export const handleTogglePassword = (showPassword, setShowPassword) => {
   setShowPassword(!showPassword);
 };
 
-function getJavaScriptVersion() {
-  if (typeof Symbol === 'function') return 'ES6+';
-  if (typeof Map === 'function') return 'ES6';
-  if (typeof JSON === 'object') return 'ES5';
-  if (typeof ActiveXObject === 'function') return 'ES3';
-  return 'Unknown';
-}
 
 
 export const login = async (data, setLoading, navigate, rememberMe, toast) => {
   setLoading(true);
   console.log(API_BASE_URL);
-  const jsVersion = getJavaScriptVersion();
 
   try {
     const response = await fetch(API_BASE_URL + '/api/login', {
@@ -25,7 +17,7 @@ export const login = async (data, setLoading, navigate, rememberMe, toast) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ...data, jsVersion }),
+      body: JSON.stringify(data ),
     });
     if (response.status === 200) {
       const responseData = await response.json(); 
