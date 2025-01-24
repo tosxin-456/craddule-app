@@ -31,11 +31,13 @@ const jsVersion = getJavaScriptVersion();
 
 export const createUser = async (data, referralCode, setLoading, toast, navigate) => {
   const unsupportedVersionMessage =
-    'Your browser is outdated and does not support modern features required for this application. Please use a modern browser such as Chrome, Firefox, Edge, or Safari.';
+    'Your browser is most likely outdated and may not support modern features required for this application. Please consider using a different  browser such as Chrome, Firefox, Edge, or Safari.';
 
   // Check if the JavaScript version is less than ES5
   if (jsVersion === 'ES3' || jsVersion === 'Unknown') {
-    toast.error(unsupportedVersionMessage);
+    toast.error(unsupportedVersionMessage, {
+      autoClose: false, 
+    });
     return;
   }
 
