@@ -568,7 +568,7 @@ function QuestionBus() {
                       </label>
                       <select
                         id="options"
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-200"
                         value={formData.answer}
                         onChange={(e) => handleOptionSelect(e.target.value)}
                       >
@@ -591,7 +591,7 @@ function QuestionBus() {
                     </label>
                     <textarea
                       id="answer"
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-200"
                       value={formData.answer}
                       onChange={handleChange}
                       placeholder="You can add more details here..."
@@ -603,7 +603,7 @@ function QuestionBus() {
 
                   {/* Premium Suggestion */}
                   {question.premium && (
-                    <p className="text-sm text-blue-600 font-medium mb-4">
+                    <p className="text-sm text-yellow-600 font-medium mb-4">
                       {question.premium}
                     </p>
                   )}
@@ -611,7 +611,7 @@ function QuestionBus() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className={`flex justify-center items-center w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 disabled:opacity-50 transition duration-200 ${loading ? "cursor-not-allowed" : ""
+                    className={`flex justify-center items-center w-full bg-yellow-500 text-white py-3 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 disabled:opacity-50 transition duration-200 ${loading ? "cursor-not-allowed" : ""
                       }`}
                     disabled={loading}
                   >
