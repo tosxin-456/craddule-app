@@ -77,7 +77,7 @@ function QuestionBusIntro() {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching types:', error);
-        setError('Failed to fetch types');
+        // setError('Failed to fetch types');
         setLoading(false);
       }
     };
@@ -142,7 +142,7 @@ function QuestionBusIntro() {
           throw new Error('Failed to fetch summary');
         }
       } catch (error) {
-        setError(error.message);
+        // setError(error.message);
         setLoading(false);
       }
     };
@@ -708,75 +708,155 @@ function QuestionBusIntro() {
                 {/* <textarea className='textBs' value={combinedAnswer} onChange={handleChange} id="summary"></textarea> */}
 
 
-                <div class="toolbar">
-                  <button onClick={() => formatText('bold')} type='button'>
-                    <FontAwesomeIcon icon={faBold} />
+                <div className="toolbar mt-4 p-1 mb-5 bg-[#E8ECF9] rounded-lg flex flex-wrap justify-start items-center font-sans gap-1">
+                  <button
+                    onClick={() => formatText('bold')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faBold} />
                   </button>
-                  <button onClick={() => formatText('italic')} type='button'>
-                    <FontAwesomeIcon icon={faItalic} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={() => formatText('italic')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faItalic} />
                   </button>
-                  <button onClick={() => formatText('underline')} type='button'>
-                    <FontAwesomeIcon icon={faUnderline} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={() => formatText('underline')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faUnderline} />
                   </button>
-                  <button onClick={() => formatText('strikeThrough')} type='button'>
-                    <FontAwesomeIcon icon={faStrikethrough} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={() => formatText('strikeThrough')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faStrikethrough} />
                   </button>
-                  <button onClick={() => formatText('formatBlock', 'blockquote')} type='button'>
-                    <FontAwesomeIcon icon={faQuoteRight} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={() => formatText('formatBlock', 'blockquote')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faQuoteRight} />
                   </button>
-                  <button onClick={() => formatText('formatBlock', 'pre')} type='button'>
-                    <FontAwesomeIcon icon={faCode} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={() => formatText('formatBlock', 'pre')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faCode} />
                   </button>
-                  <button onClick={insertLink} type='button'>
-                    <FontAwesomeIcon icon={faLink} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={insertLink}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faLink} />
                   </button>
-                  <button onClick={handleImagePopup} type='button'>
-                    <FontAwesomeIcon icon={faImage} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={handleImagePopup}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faImage} />
                   </button>
-                  <select onChange={(e) => formatText('fontSize', e.target.value)} className="headingDropdown" style={{ marginRight: 10 }}>
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <select
+                    onChange={(e) => formatText('fontSize', e.target.value)}
+                    className="p-1 border rounded bg-transparent text-lg focus:outline-none"
+                  >
                     <option value="">Font Size</option>
                     {[...Array(23)].map((_, i) => (
-                      <option key={i} value={i + 2}>{i + 2}</option>
+                      <option key={i} value={i + 2}>
+                        {i + 2}
+                      </option>
                     ))}
                   </select>
-                  <div className="dropdownM">
-
-
-                    <select onChange={handleHeadingChange} className="headingDropdown">
-                      <option value="">Heading</option>
-                      {[...Array(6)].map((_, i) => (
-                        <option key={i} value={`h${i + 1}`}>H{i + 1}</option>
-                      ))}
-                    </select>
-
-                  </div>
-                  <button onClick={() => formatText('insertOrderedList')} type='button'>
-                    <FontAwesomeIcon icon={faListOl} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <select
+                    onChange={handleHeadingChange}
+                    className="p-1 border rounded bg-transparent text-lg focus:outline-none"
+                  >
+                    <option value="">Heading</option>
+                    {[...Array(6)].map((_, i) => (
+                      <option key={i} value={`h${i + 1}`}>
+                        H{i + 1}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={() => formatText('insertOrderedList')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faListOl} />
                   </button>
-                  <button onClick={() => formatText('insertUnorderedList')} type='button'>
-                    <FontAwesomeIcon icon={faListUl} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={() => formatText('insertUnorderedList')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faListUl} />
                   </button>
-                  <button onClick={() => formatText('subscript')} type='button'>
-                    <FontAwesomeIcon icon={faSubscript} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={() => formatText('subscript')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faSubscript} />
                   </button>
-                  <button onClick={() => formatText('superscript')} type='button'>
-                    <FontAwesomeIcon icon={faSuperscript} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={() => formatText('superscript')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faSuperscript} />
                   </button>
-                  <button onClick={() => formatText('outdent')} type='button'>
-                    <FontAwesomeIcon icon={faOutdent} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={() => formatText('outdent')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faOutdent} />
                   </button>
-                  <button onClick={() => formatText('indent')} type='button'>
-                    <FontAwesomeIcon icon={faIndent} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={() => formatText('indent')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faIndent} />
                   </button>
-                  <button onClick={() => formatText('direction', 'rtl')} type='button'>
-                    <FontAwesomeIcon icon={faAlignRight} />
+                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
+                  <button
+                    onClick={() => formatText('direction', 'rtl')}
+                    type="button"
+                    className="p-1 hover:bg-gray-300 rounded text-lg"
+                  >
+                    <FontAwesomeIcon width={11} icon={faAlignRight} />
                   </button>
-
                 </div>
                 <div
                   ref={editorRef}
                   contentEditable={true}
-                  className="editor"
+                  className="editor bg-[#EEEEEE] md:w-[80%] rounded-md m-auto min-h-full "
                   onInput={handleEditorChange}
                   onMouseDown={handleMouseDown}
                   onMouseMove={handleMouseMove}

@@ -37,12 +37,9 @@ function QuestionBusIntro() {
   const [answers, setAnswers] = useState([]);
   const [answersV, setAnswersV] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [generateLoading, setGenerateLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [error, setError] = useState(null);
   const projectId = localStorage.getItem('nProject');
-  const [combinedAnswer, setCombinedAnswer] = useState('');
   const [answered, setAnswered] = useState([]);
   const [cat, setCat] = useState([]);
   const access_token = localStorage.getItem('access_token');
@@ -57,10 +54,13 @@ function QuestionBusIntro() {
   const [selectedWord, setSelectedWord] = useState(null);
   const [showScrollableDiv, setShowScrollableDiv] = useState(false);
   const [showScrollableDiv2, setShowScrollableDiv2] = useState(false);
-  const [originalAnswer, setOriginalAnswer] = useState("");
-  const [aiUsed, setAiUsed] = useState(false);
-  const [viewMode, setViewMode] = useState("Original");
+  const [viewMode, setViewMode] = useState("AI");
   const [summaries, setSummaries] = useState([]);
+  const [originalAnswer, setOriginalAnswer] = useState("");
+  const [combinedAnswer, setCombinedAnswer] = useState("");
+  const [aiUsed, setAiUsed] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const handleToggle = () => {
     setShowScrollableDiv(!showScrollableDiv);
@@ -87,7 +87,7 @@ function QuestionBusIntro() {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching types:', error);
-        setError('Failed to fetch types');
+        // setError('Failed to fetch types');
         setLoading(false);
       }
     };
@@ -95,62 +95,79 @@ function QuestionBusIntro() {
     fetchTypes();
   }, []);
 
-  useEffect(() => {
-    console.log("Fetching answers...");
+const fetchAnswers = async () => {
+  try {
+    // Start loading state
+    setLoading(true);
+    setError(null);
 
-    const fetchAnswers = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/pdf/end/${projectId}/${phase}`, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch summary: ${response.statusText}`);
-        }
-
-        const dataS = await response.json();
-        console.log("Fetched Data:", dataS);
-
-        const { summary, ai_generated, ai_used, data } = dataS.data;
-
-        setCombinedAnswer(summary);
-        setOriginalAnswer(ai_generated);
-        setAiUsed(ai_used);
-        setAnswers(data);
-
-        // Generate HTML for `original` and `aiGenerated`
-        const { original, aiGenerated } = data.reduce(
-          (acc, answer) => {
-            const formattedSubType = answer.questionType.replace(/([A-Z])/g, ' $1').trim();
-            acc.original.push(`<h2 style="text-align: center;">${formattedSubType}</h2><br>${answer.summary}`);
-            acc.aiGenerated.push(`<h2 style="text-align: center;">${formattedSubType}</h2><br>${answer.ai_generated}`);
-            return acc;
-          },
-          { original: [], aiGenerated: [] }
-        );
-
-        setOriginalAnswer(original.join('<br><br>'));
-        setCombinedAnswer(aiGenerated.join('<br><br>'));
-
-        console.log("Summary and AI-generated content updated successfully.");
-      } catch (error) {
-        console.error("Error fetching answers:", error);
-        setError(error.message || "An unknown error occurred.");
-      } finally {
-        setLoading(false);
+    // Fetch data from the API
+    const response = await fetch(
+      `${API_BASE_URL}/api/pdf/end/${projectId}/${phase}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       }
-    };
+    );
 
+    // Handle non-200 responses
+    if (!response.ok) {
+      throw new Error(`Failed to fetch summary: ${response.statusText}`);
+    }
+
+    // Parse the response JSON
+    const dataS = await response.json();
+    console.log("Fetched Data:", dataS);
+
+    // Destructure the relevant fields from the response
+    const {
+      summary = "",
+      ai_generated = "",
+      ai_used = false,
+      questionType = "",
+      _id = {},
+    } = dataS.data;
+
+    // Extract the _id.$oid field safely
+    const id = _id.$oid || "no-id";
+
+    // Update state variables for the editor and summaries
+    setCombinedAnswer(ai_generated || summary);
+    setOriginalAnswer(summary || "No summary available.");
+    setAiUsed(ai_used);
+
+    // Format the questionType for display purposes
+    const formattedSubType = questionType.replace(/([A-Z])/g, " $1").trim();
+
+    // Update summaries with formatted content
+    setSummaries([
+      {
+        id,
+        ai_used,
+        ai_generated: `<h2 style="text-align: center;">${formattedSubType}</h2><br>${ai_generated}`,
+        summary: `<h2 style="text-align: center;">${formattedSubType}</h2><br>${summary}`,
+        questionType: formattedSubType,
+      },
+    ]);
+
+    console.log("Summary and AI-generated content updated successfully.");
+  } catch (error) {
+    // Handle and log errors
+    console.error("Error fetching answers:", error);
+    setError(error.message || "An unknown error occurred.");
+  } finally {
+    // Ensure loading state is cleared
+    setLoading(false);
+  }
+};
+
+
+
+  useEffect(() => {
     fetchAnswers();
   }, [API_BASE_URL, projectId, phase, token]);
-
-
-
-
-
 
 
 
@@ -632,15 +649,11 @@ function QuestionBusIntro() {
       });
 
       const data = await response.json();
-      console.log("Response from generate AI:", data);
 
       if (data.status === 200 && data.data) {
         console.log("AI summaries generated successfully");
-
-        // Set individual answers
         setAnswers(data.data);
 
-        // Generate combined HTML summary
         const combined = data.data
           .map((answer) => {
             const formattedSubType = answer.questionType.replace(/([A-Z])/g, ' $1').trim();
@@ -648,28 +661,18 @@ function QuestionBusIntro() {
           })
           .join('<br><br>');
 
-        console.log("Combined AI-generated summary:", combined);
-
-        // Set the combined summary
         setCombinedAnswer(combined);
-
-        // Check if AI was used
-        const hasAiUsed = data.data.some((answer) => answer.ai_used);
-        setAiUsed(hasAiUsed);
+        setAiUsed(true);
+        setViewMode("AI"); 
       } else {
         console.error("Failed to generate AI summaries:", data.message || "Unknown error");
       }
     } catch (error) {
       console.error("Error during AI generation:", error);
     } finally {
-      setGenerateLoading(false); // Ensure loading state is updated
+      setGenerateLoading(false);
     }
   };
-
-  const toggleViewMode = () => {
-    setViewMode((prev) => (prev === "AI" ? "Original" : "AI"));
-  };
-
 
   useEffect(() => {
     const fetchVideo = async () => {
@@ -733,256 +736,88 @@ function QuestionBusIntro() {
           </div>
           <div className="w-fit mr-[20px] ml-auto mb-[10px] " >
           </div>
-          <div className='quiInt'>
+          <div className="quiInt">
+            {loading && <p>Loading...</p>}
+            {error && <p className="error-text">{error}</p>}
 
-            {aiUsed && (
-              <div className='ml-auto w-fit ' >
-                <button
-                  onClick={generateAi}
-                  className="rounded-lg px-3 py-1 ml-auto text-[18px] bg-[#FFD700]"
-                >
-                  Regenerate with AI
-                </button>
-              </div>
+            {!loading && !error && (
+              <>
+                {/* Regenerate with AI Button */}
+                {aiUsed && viewMode === "AI" && (
+                  <div className="ml-auto w-fit">
+                    <button
+                      onClick={generateAi}
+                      className={`rounded-lg px-3 py-1 text-[18px] bg-[#FFD700] mb-3`}
+                    >
+                      Regenerate with AI
+                    </button>
+                  </div>
+                )}
+
+                {/* Main Editor */}
+                <form>
+                  <div className="container-textBs">
+                    <div
+                      ref={editorRef}
+                      contentEditable={false}
+                      className="editor bg-[#EEEEEE] md:w-[80%] min-h-72 rounded-md m-auto"
+                      style={{
+                        whiteSpace: "pre-wrap",
+                        minHeight: "200px",
+                        border: "1px solid #ccc",
+                        padding: "10px",
+                      }}
+                      dangerouslySetInnerHTML={{
+                        __html: viewMode === "Original"
+                          ? originalAnswer
+                          : combinedAnswer || "<p>No content available</p>",
+                      }}
+                    />
+                  </div>
+                </form>
+
+                {/* Action Buttons */}
+                <div className="w-fit m-auto mt-5">
+                  {!aiUsed ? (
+                    <button
+                      onClick={() => {
+                        generateAi();
+                        setViewMode("AI");
+                      }}
+                      className={`rounded-lg px-3 py-1 text-[18px] bg-[#FFD700]`}
+                    >
+                      Generate with AI
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() =>
+                        setViewMode(viewMode === "AI" ? "Original" : "AI")
+                      }
+                      className="rounded-lg px-3 py-1 text-[18px] bg-[#FFD700] m-2"
+                    >
+                      {viewMode === "Original"
+                        ? "View Generated AI Document"
+                        : "View Original Document"}
+                    </button>
+                  )}
+                </div>
+
+                {/* Summaries */}
+                {/* <div className="summary-content">
+                  {summaries.map(({ id, ai_used, ai_generated, summary, questionType }) => (
+                    <div key={id}>
+                      <h3>{questionType}</h3>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: viewMode === "AI" && ai_used ? ai_generated : summary,
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div> */}
+              </>
             )}
-
-            <form >
-
-
-
-              <div className='container-textBs'>
-
-                {/* <ReactQuill ref={reactQuillRef} theme="snow" value={combinedAnswer} onChange={setCombinedAnswer} modules={modules} formats={formats}/> */}
-
-                {/* <textarea className='textBs' value={combinedAnswer} onChange={handleChange} id="summary"></textarea> */}
-
-                <div className="toolbar mt-4 p-1 mb-5 bg-[#E8ECF9] rounded-lg flex flex-wrap justify-start items-center font-sans gap-1">
-                  <button
-                    onClick={() => formatText('bold')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faBold} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('italic')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faItalic} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('underline')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faUnderline} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('strikeThrough')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faStrikethrough} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('formatBlock', 'blockquote')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faQuoteRight} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('formatBlock', 'pre')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faCode} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={insertLink}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faLink} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={handleImagePopup}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faImage} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <select
-                    onChange={(e) => formatText('fontSize', e.target.value)}
-                    className="p-1 border rounded bg-transparent text-lg focus:outline-none"
-                  >
-                    <option value="">Font Size</option>
-                    {[...Array(23)].map((_, i) => (
-                      <option key={i} value={i + 2}>
-                        {i + 2}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <select
-                    onChange={handleHeadingChange}
-                    className="p-1 border rounded bg-transparent text-lg focus:outline-none"
-                  >
-                    <option value="">Heading</option>
-                    {[...Array(6)].map((_, i) => (
-                      <option key={i} value={`h${i + 1}`}>
-                        H{i + 1}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('insertOrderedList')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faListOl} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('insertUnorderedList')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faListUl} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('subscript')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faSubscript} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('superscript')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faSuperscript} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('outdent')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faOutdent} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('indent')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faIndent} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('direction', 'rtl')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faAlignRight} />
-                  </button>
-                </div>
-
-
-                <div
-                  ref={editorRef}
-                  contentEditable={false}
-                  className="editor bg-[#EEEEEE] md:w-[80%] rounded-md m-auto"
-                  onInput={handleEditorChange}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-
-                  onClick={(e) => {
-                    const selection = window.getSelection();
-                    if (!selection.rangeCount) return;
-
-                    const range = selection.getRangeAt(0);
-                    const word = range.startContainer.textContent.slice(range.startOffset, range.endOffset);
-                    console.log(word);
-                    if (misspelledWords.includes(word)) {
-                      const rect = e.target.getBoundingClientRect();
-                      handleWordClick(word, rect);
-                    }
-                  }}
-                  style={{
-                    whiteSpace: "pre-wrap",
-                    minHeight: "200px",
-                    border: "1px solid #ccc",
-                    padding: "10px",
-                  }}
-                  dangerouslySetInnerHTML={{
-                    __html: viewMode === "AI" ? combinedAnswer : originalAnswer,
-                  }}
-                />
-
-
-              </div>
-
-
-            </form>
-            <div className="w-fit m-auto mt-5">
-              {/* Show "Generate with AI" button if AI has not been generated */}
-              {!aiUsed && (
-                <button
-                  onClick={generateAi}
-                  disabled={generateLoading}
-                  className={`rounded-lg px-3 py-1 text-[18px] ${generateLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#FFD700]"}`}
-                >
-                  {generateLoading ? "Generating..." : "Generate with AI"}
-                </button>
-              )}
-
-              {/* Show "View Original/Generated AI Document" toggle if AI has been generated */}
-              {aiUsed && (
-                <>
-                  <button
-                    onClick={() => setViewMode(viewMode === "AI" ? "Original" : "AI")}
-                    className="rounded-lg px-3 py-1 text-[18px] bg-[#FFD700] m-2"
-                  >
-                    {viewMode === "AI" ? "View Original Document" : "View Generated AI Document"}
-                  </button>
-                </>
-              )}
-            </div>
-
-            <div className="summary-content">
-              {summaries.map((summaryRecord) => (
-                <div key={summaryRecord.id}>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: viewMode === "AI" && summaryRecord.ai_used
-                        ? summaryRecord.ai_generated
-                        : summaryRecord.summary,
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-
-
           </div>
-
-
         </div>
 
         <div className={`scrollable-div ${showScrollableDiv ? 'show' : ''}`}>
