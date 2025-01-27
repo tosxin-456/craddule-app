@@ -37,7 +37,7 @@ const updateProject = async (completedPhases,projectType,setLoading,navigate) =>
 
       toast.success('Project updated successfully!');
       setLoading(false);
-      navigate('/home');
+      navigate('/welcome-form');
 
     } else {
       const result = await response.json();

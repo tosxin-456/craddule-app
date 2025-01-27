@@ -29,6 +29,7 @@ const ImageUpload = () => {
   const [selectedBox, setSelectedBox] = useState(null);
 
   const onDrop = useCallback((acceptedFiles) => {
+    console.log(acceptedFiles); // Log to ensure files are captured
     const newImages = acceptedFiles.map((file) =>
       Object.assign(file, {
         preview: URL.createObjectURL(file),
@@ -36,6 +37,7 @@ const ImageUpload = () => {
     );
     setImages((prevImages) => [...prevImages, ...newImages]);
   }, []);
+
 
   const moveImage = (dragIndex, hoverIndex) => {
     const dragImage = images[dragIndex];
@@ -61,13 +63,14 @@ const ImageUpload = () => {
     handleUpload();
   };
 
+
   const handleUpload = async () => {
 
     for (let index = 0; index < images.length; index++) {
       setIsLoading(true);
       const selectedFile = images[index];
       const formData = new FormData();
-      // formData.append('userId', userId);
+      formData.append('userId', userId);
       formData.append('image', selectedFile);
       formData.append('type', prototypeType);
       formData.append('projectId', projectId);
@@ -75,7 +78,7 @@ const ImageUpload = () => {
       formData.append('imageName', selectedFile.name); // Use the file name as the image name
       formData.append('timelineId', selectedBox); // Use the file name as the image name
 
-      //console.log(formData);
+      console.log(selectedBox);
 
       try {
         const response = await axios.post(`${API_BASE_URL}/api/prototype/upload`, formData, {
@@ -140,6 +143,7 @@ const ImageUpload = () => {
   const toggleBox = (boxId) => {
     setSelectedBox((prevSelected) => (prevSelected === boxId ? null : boxId));
   };
+  // console.log(boxes)
 
   const isBoxSelected = (boxId) => selectedBox === boxId;
 

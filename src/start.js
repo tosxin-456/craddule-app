@@ -10,6 +10,7 @@ import "./pop-up.css";
 import ReferralModal from "./component/randomPopUp";
 import WhereDidYouHearModal from "./gotToKnowUsModal";
 import GiveFeedbackModal from "./component/giveFeedbackModal";
+import QuestionsForm from "./component/questionsForm";
 
 function InflationRateGraph({ graphType }) {
 
@@ -337,7 +338,7 @@ function InflationRateGraph({ graphType }) {
 
                 <div className="startWrap"></div>
             </div>
-            <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />
+            <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />   
         </div>
     );
 }

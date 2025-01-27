@@ -310,6 +310,7 @@ import CommersialzationOnboarding from './commersializationOnboarding';
 import CommercializationMain from './commersialzationStart';
 import Subfolder from './subfolder';
 import SubFolderUpload from './subfolderupload';
+import QuestionsForm from './component/questionsForm';
 
 function App() {
   const [isTrialExpired, setIsTrialExpired] = useState(false)
@@ -370,6 +371,8 @@ function App() {
           <Route path="/referral" element={<Referral />} />
           <Route path="/login/start/:id/" element={<LoginTeam />} />
           <Route path="/signup/start/:id/" element={<SignUpTeam />} />
+          <Route path="/welcome-form" element={<QuestionsForm />} />
+
 
           <Route path="/home" element={<LandingPage />} />
           <Route path="/start/" element={<Start />} />

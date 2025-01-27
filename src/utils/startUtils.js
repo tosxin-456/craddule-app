@@ -178,7 +178,7 @@ export const CreateTellUs = async (feedbackData, setResponse, setError, setLoadi
     } else {
       const errorData = await response.json();
       console.error('Error:', errorData);
-      setError( 'Something went wrong.');
+      setError('Something went wrong.');
     }
   } catch (error) {
     console.error('Network Error:', error);
@@ -480,5 +480,21 @@ export const FetchGraphDataCommerce = async (userId, projectId, access_token) =>
   }
 };
 
+export const fetchUnansweredQuestions = async (category, subCategoryPassed, projectId) => {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/api/new/questions/${category}/${subCategoryPassed}/${projectId}`
+    );
 
+    if (response.ok) {
+      const data = await response.json();
+      return data?.data?.options ? [data.data] : [];
+    } else {
+      throw new Error("Failed to fetch questions.");
+    }
+  } catch (error) {
+    console.error(error.message);
+    return [];
+  }
+};
 

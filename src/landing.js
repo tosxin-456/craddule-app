@@ -41,7 +41,7 @@ function LandingPage() {
     localStorage.setItem('nProjectName', name);
     localStorage.setItem('nProjectCount', count);
     await CheckOnboarding()
-    navigate(`/start`);
+    navigate(`/welcome-form`);
   };
 
   const handleProjectTeamClick = (projectId, name, count) => {

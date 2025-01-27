@@ -95,73 +95,73 @@ function QuestionBusIntro() {
     fetchTypes();
   }, []);
 
-const fetchAnswers = async () => {
-  try {
-    // Start loading state
-    setLoading(true);
-    setError(null);
+  const fetchAnswers = async () => {
+    try {
+      // Start loading state
+      setLoading(true);
+      setError(null);
 
-    // Fetch data from the API
-    const response = await fetch(
-      `${API_BASE_URL}/api/pdf/end/${projectId}/${phase}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+      // Fetch data from the API
+      const response = await fetch(
+        `${API_BASE_URL}/api/pdf/end/${projectId}/${phase}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Handle non-200 responses
+      if (!response.ok) {
+        throw new Error(`Failed to fetch summary: ${response.statusText}`);
       }
-    );
 
-    // Handle non-200 responses
-    if (!response.ok) {
-      throw new Error(`Failed to fetch summary: ${response.statusText}`);
+      // Parse the response JSON
+      const dataS = await response.json();
+      console.log("Fetched Data:", dataS);
+
+      // Destructure the relevant fields from the response
+      const {
+        summary = "",
+        ai_generated = "",
+        ai_used = false,
+        questionType = "",
+        _id = {},
+      } = dataS.data;
+
+      // Extract the _id.$oid field safely
+      const id = _id.$oid || "no-id";
+
+      // Update state variables for the editor and summaries
+      setCombinedAnswer(ai_generated || summary);
+      setOriginalAnswer(summary || "No summary available.");
+      setAiUsed(ai_used);
+
+      // Format the questionType for display purposes
+      const formattedSubType = questionType.replace(/([A-Z])/g, " $1").trim();
+
+      // Update summaries with formatted content
+      setSummaries([
+        {
+          id,
+          ai_used,
+          ai_generated: `<h2 style="text-align: center;">${formattedSubType}</h2><br>${ai_generated}`,
+          summary: `<h2 style="text-align: center;">${formattedSubType}</h2><br>${summary}`,
+          questionType: formattedSubType,
+        },
+      ]);
+
+      console.log("Summary and AI-generated content updated successfully.");
+    } catch (error) {
+      // Handle and log errors
+      console.error("Error fetching answers:", error);
+      setError(error.message || "An unknown error occurred.");
+    } finally {
+      // Ensure loading state is cleared
+      setLoading(false);
     }
-
-    // Parse the response JSON
-    const dataS = await response.json();
-    console.log("Fetched Data:", dataS);
-
-    // Destructure the relevant fields from the response
-    const {
-      summary = "",
-      ai_generated = "",
-      ai_used = false,
-      questionType = "",
-      _id = {},
-    } = dataS.data;
-
-    // Extract the _id.$oid field safely
-    const id = _id.$oid || "no-id";
-
-    // Update state variables for the editor and summaries
-    setCombinedAnswer(ai_generated || summary);
-    setOriginalAnswer(summary || "No summary available.");
-    setAiUsed(ai_used);
-
-    // Format the questionType for display purposes
-    const formattedSubType = questionType.replace(/([A-Z])/g, " $1").trim();
-
-    // Update summaries with formatted content
-    setSummaries([
-      {
-        id,
-        ai_used,
-        ai_generated: `<h2 style="text-align: center;">${formattedSubType}</h2><br>${ai_generated}`,
-        summary: `<h2 style="text-align: center;">${formattedSubType}</h2><br>${summary}`,
-        questionType: formattedSubType,
-      },
-    ]);
-
-    console.log("Summary and AI-generated content updated successfully.");
-  } catch (error) {
-    // Handle and log errors
-    console.error("Error fetching answers:", error);
-    setError(error.message || "An unknown error occurred.");
-  } finally {
-    // Ensure loading state is cleared
-    setLoading(false);
-  }
-};
+  };
 
 
 
@@ -663,7 +663,7 @@ const fetchAnswers = async () => {
 
         setCombinedAnswer(combined);
         setAiUsed(true);
-        setViewMode("AI"); 
+        setViewMode("AI");
       } else {
         console.error("Failed to generate AI summaries:", data.message || "Unknown error");
       }
@@ -749,7 +749,7 @@ const fetchAnswers = async () => {
                       onClick={generateAi}
                       className={`rounded-lg px-3 py-1 text-[18px] bg-[#FFD700] mb-3`}
                     >
-                      Regenerate with AI
+                      {generateLoading ? "Regenerating" : "Regenerate with AI"}
                     </button>
                   </div>
                 )}
@@ -786,7 +786,7 @@ const fetchAnswers = async () => {
                       }}
                       className={`rounded-lg px-3 py-1 text-[18px] bg-[#FFD700]`}
                     >
-                      Generate with AI
+                      {generateLoading ? "Generating" : "Generate with AI"}
                     </button>
                   ) : (
                     <button

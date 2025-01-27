@@ -31,37 +31,6 @@ export default function ModalStart({ open, onClose }) {
 
   // console.log(userId);
 
-
-  const fetchUnansweredQuestion = async (projectId) => {
-    setErrorMessage('');
-    try {
-      const response = await fetch(API_BASE_URL + `/api/new/question/${userId}/${projectId}/${category}/${subCategoryPassed}`);
-      if (response.status === 200) {
-        const data = await response.json();
-        console.log(data);
-        if (!data.data) {
-          navigate(`/accelerate`);
-        } else {
-          console.log(data.data.questionOrder);
-          setQuestion(data.data);
-          setShowProjectModal(false)
-          setFormQData({
-            answer: '',
-          });
-          setShowQuestionsModal(true)
-        }
-      } else {
-        const errorMessage = `Error fetching question: ${response.statusText}`;
-        console.error(errorMessage);
-        throw new Error(errorMessage);
-      }
-    } catch (error) {
-      console.error('An error occurred:', error.message);
-    } finally {
-      setLoading(false)
-    }
-  };
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -69,21 +38,10 @@ export default function ModalStart({ open, onClose }) {
     });
   };
 
-  const handleQChange = (e) => {
-    setFormQData({
-      ...formQData,
-      [e.target.id]: e.target.value,
-    });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     createProject(formData);
-  };
-
-  const handleQSubmit = (e) => {
-    e.preventDefault();
-    createAnswer(formQData);
   };
 
   const handleProceed = async () => {
@@ -121,7 +79,7 @@ export default function ModalStart({ open, onClose }) {
         // navigate(`/firstQuestion`);
         console.log(responseData); // Parse JSON response
         console.log('Project created successfully');
-        fetchUnansweredQuestion(projectId)
+        navigate(`/accelerate`);
       } else {
 
         const result = await response.json();
@@ -143,45 +101,6 @@ export default function ModalStart({ open, onClose }) {
     }
   };
 
-  const createAnswer = async (data) => {
-    setLoading(true);
-    const projectId = localStorage.getItem('nProject');
-    try {
-      data.userId = userId;
-      data.questionId = question._id;
-      data.projectId = projectId;
-      data.questionType = category;
-      data.questionSubType = subCategoryPassed;
-
-      console.log(data);
-
-      const response = await fetch(API_BASE_URL + '/api/answer', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${access_token}`,
-        },
-        body: JSON.stringify({ data }),
-      });
-
-      if (response.status === 200) {
-        // If submission is successful, fetch another question
-        const responseData = await response.json();
-        console.log(responseData);
-
-        fetchUnansweredQuestion(projectId);
-      } else {
-        const result = await response.json();
-        setLoading(false);
-        setErrorMessage(result['error']);
-        console.error('Error:', result['error']);
-      }
-    } catch (error) {
-      //toast.error(result['error']);  
-      setLoading(false);
-      console.error('An error occurred:', error);
-    }
-  };
 
   if (!open) return null
   return ReactDOM.createPortal(
@@ -253,27 +172,6 @@ export default function ModalStart({ open, onClose }) {
 
           </form>
 
-        </div>}
-      {showQuestionsModal &&
-        <div className="modalSt">
-          {/* <h4 className="text-center text-black400 mb-[30px]">New project name</h4> */}
-          {errorMessage && <p className="createER">Answer is empty</p>}
-
-          <form onSubmit={handleQSubmit}>
-            <div className="">
-              <input
-                type="text"
-                id="answer"
-                className="w-full p18 py-[20px] ps-[40px] rounded-[15px] bg-blue-50"
-                placeholder={question.question}
-                value={formQData.answer} onChange={handleQChange}
-              />
-            </div>
-            <button type="submit" className="w-full bg-blue600 text-white rounded-[30px] mt-[40px] py-[14px]" disabled={loading}>
-              {loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' />}
-              {!loading && <h4 className=''>Continue</h4>}
-            </button>
-          </form>
         </div>}
     </>,
     document.getElementById('portal')
