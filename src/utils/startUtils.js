@@ -56,7 +56,7 @@ export const CheckOnboarding = async () => {
     if (!token) {
       throw new Error("Access token is missing");
     }
-
+    // console.log(userId, token)
     // Decode token to extract user ID
     const decodedToken = jwtDecode(token);
     const userId = decodedToken?.userId;

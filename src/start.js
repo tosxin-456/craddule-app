@@ -11,6 +11,10 @@ import ReferralModal from "./component/randomPopUp";
 import WhereDidYouHearModal from "./gotToKnowUsModal";
 import GiveFeedbackModal from "./component/giveFeedbackModal";
 import QuestionsForm from "./component/questionsForm";
+import { API_BASE_URL } from "./config/apiConfig";
+import GetCard from "./getCard";
+import { FaTimesCircle, FaTools } from "react-icons/fa";
+import PhasePercentage from "./component/graphs";
 
 function InflationRateGraph({ graphType }) {
 
@@ -31,13 +35,19 @@ function InflationRateGraph({ graphType }) {
     const [error, setError] = useState(null);
     const projectId = localStorage.getItem('nProject');
     const [projectDetails, setProjectDetails] = useState([]);
+    const [isVisible, setIsVisible] = useState(false);
     const [userDetails, setUserDetails] = useState({});
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenFeed, setIsOpenFeed] = useState(false);
-
+    const [phaseProgress, setPhaseProgress] = useState({});
+    const subscribed = localStorage.getItem('subscribed') === 'true';
+    const [showPayment, setShowPayment] = useState(false);
     const handleOpenModal = () => setIsOpenFeed(true);
     const handleCloseModal = () => setIsOpenFeed(false);
+    const [isToolboxOpen, setIsToolboxOpen] = useState(false);
     const navigate = useNavigate();
+    // const urls = phaseUrls[phase] || [];
+    const [currentPhase, setCurrentPhase] = useState("Ideation")
 
     const [clickPosition, setClickPosition] = useState({ top: 0, left: 0 });
 
@@ -45,29 +55,98 @@ function InflationRateGraph({ graphType }) {
     const handleClickFeed = (e) => {
         setIsOpenFeed(true);
     };
+    const phases = [
+        "Ideation",
+        "ProductDefinition",
+        "InitialDesign",
+        "ValidatingAndTesting",
+        "Commercialization"
+    ];
+
+
 
     const handleNavigation = async (phase) => {
+        console.log("test 1");
+
+        // Only navigate if the phase is accessible
+        if (!isPhaseAccessible(phase)) {
+            setShowPayment(false);  // Close the modal first
+            setTimeout(() => {
+                setShowPayment(true);  // Then open the modal after a tiny delay
+            }, 50);  // Small delay to force re-render
+            console.log("Phase not accessible, showing payment modal...");
+            return;  // Prevent navigation
+        }
+
+        // Proceed with navigation logic if the phase is accessible
         const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');
 
         const phasePaths = {
             Ideation: '/Ideation',
             ProductDefinition: '/ProductDefinition',
             InitialDesign: '/InitialDesign',
-            ValidatingandTesting: '/ValidatingAndTesting',
+            ValidatingAndTesting: '/ValidatingAndTesting',
             Commercialization: '/Commercialization'
         };
 
-        // Check if the provided phase has been marked as seen
+        // Check if the user has completed onboarding for this phase
         if (onboarding[phase]) {
-            // If seen, navigate to the start page for the phase
+            // If the phase has been seen (onboarding completed), navigate to the phase's start page
             navigate(`/test-ai${phasePaths[phase]}`);
         } else {
-            // If not seen, navigate to the onboarding page for the phase
-            navigate(phasePaths[phase]);
+            // If the phase has not been seen (onboarding not completed), navigate to the onboarding page
+            navigate(`${phasePaths[phase]}`);  // Assuming your onboarding page is a sub-route
         }
     };
 
+
+    useEffect(() => {
+        const fetchProgress = async () => {
+            try {
+                const token = localStorage.getItem("access_token");
+                const res = await fetch(`${API_BASE_URL}/api/test-answer/status/${projectId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    setPhaseProgress(data.data.phaseStatus);
+
+                    // Update unlock status based on phase progress
+                    // If any phase is completed or in progress, consider it unlocked
+                    const hasProgress = Object.values(data.data.phaseStatus).some(
+                        status => status === 'completed' || status === 'inProgress'
+                    );
+                    setUnlock(hasProgress || subscribed);
+                }
+            } catch (err) {
+                console.error("Error fetching phase progress:", err);
+            }
+        };
+
+        if (projectId) {
+            fetchProgress();
+        }
+    }, [projectId, subscribed]);
+
+    const isPhaseAccessible = (phaseName) => {
+        const subscribed = localStorage.getItem('subscribed') === 'true';
+
+        if (subscribed) {
+            // If subscribed, all phases are accessible
+            return true;
+        }
+
+        // If not subscribed, only Ideation is accessible
+        return phaseName === 'Ideation';
+    };
+
+
     // /test-ai/:phase"
+    const getPhaseStatus = (phaseName) => {
+        return phaseProgress[phaseName] || 'notStarted';
+    };
 
 
 
@@ -80,21 +159,52 @@ function InflationRateGraph({ graphType }) {
 
     FetchProjectDetails(projectId, setProjectDetails, setError, setLoading)
 
-    FetchGoStatus(projectId, access_token, setUnlock, setUnlockIn)
+    // FetchGoStatus(projectId, access_token, setUnlock, setUnlockIn)
 
     useEffect(() => {
         updateStreak(setStreak);
     }, []);
 
+    const phaseUrls = {
+        Ideation: ["/go/Ideation"],
+        ProductDefinition: ["/customFinancial", "/branding", "/go/ProductDefinition"],
+        InitialDesign: ["/go/InitialDesign"],
+        ValidatingAndTesting: ["/go/ValidatingAndTesting"],
+        Commercialization: ["/go/Commercialization"],
+    };
+
     //   FetchTimelines(projectId, setTimelines, setLoading, setError)
 
     FetchTimelinesCount(projectId, userId, access_token, setTimelineCount, setLoading, setError)
+
+    const formatLabel = (url) => {
+        if (url === "/customFinancial") return "Custom Financial Projection";
+        if (url === "/branding") return "Branding";
+        if (url.startsWith("/go/")) return "Go No Go";
+        return url.replace("/go/", "").replace("/", "").toUpperCase();
+    };
+
+    // Helper functions
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
+    };
+
+    const toggleToolbox = () => {
+        setIsToolboxOpen(!isToolboxOpen);
+    };
+
+    const subscriptionFunction = () => {
+        setShowPayment(false); // First close
+        setTimeout(() => {
+            setShowPayment(true); // Then open after a very tiny delay
+        }, 50); // 
+    }
 
     return (
         <div>
             <Header />
             <div className='container '>
-                
+
                 <WhereDidYouHearModal />
                 <div className="flex-row lg:flex justify-between items-center mt-10">
                     <div>
@@ -106,69 +216,102 @@ function InflationRateGraph({ graphType }) {
                         <button className='block px-3 py-2 bg-none border border-black500 rounded-[5px]' onClick={() => handleClick('/home')}>Select Project</button>
                     </div>
                 </div>
+
+                <PhasePercentage/>
+
                 <div className="lg:grid grid-cols-2 lg:grid-cols-5 lg:gap-3 mt-14">
                     <div className="col-span-4">
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                             <div className="lg:w-[225px] w-[180px]  h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/ideation.png')] bg-no-repeat bg-cover cursor-pointer relative group">
                                 <div
-                                    className="tilt-box bg-[#E8C400D9]"
-                                    onClick={() =>
-                                        handleNavigation('Ideation')
-                                    }
+                                    className={`tilt-box bg-[#E8C400D9] ${getPhaseStatus('Ideation') === 'completed' ? 'completed' : ''}`}
+                                    onClick={() => handleNavigation('Ideation')}
                                 >
                                     <button className="px-2 py-1 bg-black400 rounded-[10px] mb-[16px] text-white text-[14px]">View</button>
                                     <p className="p18">Ideation</p>
                                     <p className="text-[12px]">Create your Idea from start to finish</p>
                                     <p className="text-[12px]">7 Documents</p>
-                                </div>
 
+                                </div>
                             </div>
 
                             {projectDetails && !projectDetails.includes("Product Definition") && (
-                                <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/product_definition.png')] bg-no-repeat bg-cover cursor-pointer relative">
-                                    <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleNavigation('ProductDefinition') : null}>
+                                <div className="lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/product_definition.png')] bg-no-repeat bg-cover cursor-pointer relative">
+                                    <div
+                                        className={`tilt-box bg-[#333333DE] text-white ${!isPhaseAccessible('ProductDefinition') ? 'lockedIn' : ''} ${getPhaseStatus('ProductDefinition') === 'completed' ? 'completed' : ''}`}
+                                        onClick={() => handleNavigation('ProductDefinition')}
+                                    >
                                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                         <p className="p18">Product Definition</p>
                                         <p className="text-[12px]">Design your business processes and flow</p>
                                         <p className="text-[12px]">4 Documents</p>
+                                        {!isPhaseAccessible('ProductDefinition') && (
+                                            <div className="absolute top-2 right-2">
+                                                <CiLock size={20} color="white" />
+                                            </div>
+                                        )}
                                     </div>
-
                                 </div>
                             )}
+                            {showPayment && <GetCard />}
 
                             {projectDetails && !projectDetails.includes("Initial Design") && (
-                                <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/initial_design.png')] bg-no-repeat bg-cover cursor-pointer relative">
-                                    <div className={`tilt-box bg-[#193FAEDE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleNavigation('InitialDesign') : null}>
+                                <div className="lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/initial_design.png')] bg-no-repeat bg-cover cursor-pointer relative">
+                                    <div
+                                        className={`tilt-box bg-[#193FAEDE] text-white ${!isPhaseAccessible('InitialDesign') ? 'lockedIn' : ''} ${getPhaseStatus('InitialDesign') === 'completed' ? 'completed' : ''}`}
+                                        onClick={() => handleNavigation('InitialDesign')}
+                                    >
                                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                         <p className="p18">Initial Design</p>
                                         <p className="text-[12px]">Plan design and add members to Team</p>
                                         <p className="text-[12px]">2 Documents</p>
-                                    </div>
+                                        {!isPhaseAccessible('InitialDesign') && (
+                                            <div className="absolute top-2 right-2">
+                                                <CiLock size={20} color="white" />
+                                            </div>
+                                        )}
 
+                                    </div>
                                 </div>
                             )}
 
                             {projectDetails && !projectDetails.includes("Validating and Testing") && (
-                                <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/validating.png')] bg-no-repeat bg-cover cursor-pointer relative">
-                                    <div className={`tilt-box bg-[#FFD700DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleNavigation('ValidatingandTesting') : null}>
+                                <div className="lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/validating.png')] bg-no-repeat bg-cover cursor-pointer relative">
+                                    <div
+                                        className={`tilt-box bg-[#FFD700DE] text-white ${!isPhaseAccessible('ValidatingAndTesting') ? 'lockedIn' : ''} ${getPhaseStatus('ValidatingAndTesting') === 'completed' ? 'completed' : ''}`}
+                                        onClick={() => handleNavigation('ValidatingAndTesting')}
+                                    >
                                         <button className="px-2 py-1 bg-black400 rounded-[10px] mb-[16px] text-white text-[14px]">View</button>
                                         <p className="p18">Validating and Testing</p>
                                         <p className="text-[12px]">Test and validate your product</p>
                                         <p className="text-[12px]">3 Documents</p>
+                                        {!isPhaseAccessible('ValidatingAndTesting') && (
+                                            <div className="absolute top-2 right-2">
+                                                <CiLock size={20} color="white" />
+                                            </div>
+                                        )}
                                     </div>
-
                                 </div>
                             )}
 
+
+
                             {projectDetails && !projectDetails.includes("Commercialization") && (
-                                <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/commercialization.png')] bg-no-repeat bg-cover cursor-pointer relative">
-                                    <div className={`tilt-box bg-[#333333DE] text-white ${!unlockIn ? 'lockedIn' : ''}`} onClick={unlock ? () => handleNavigation('Commercialization') : null}>
+                                <div className="lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] group bg-[url('./images/commercialization.png')] bg-no-repeat bg-cover cursor-pointer relative">
+                                    <div
+                                        className={`tilt-box bg-[#333333DE] text-white ${!isPhaseAccessible('Commercialization') ? 'lockedIn' : ''} ${getPhaseStatus('Commercialization') === 'completed' ? 'completed' : ''}`}
+                                        onClick={() => handleNavigation('Commercialization')}
+                                    >
                                         <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                         <p className="p18">Commercialization</p>
                                         <p className="text-[12px]">Get your product ready to launch for production</p>
                                         <p className="text-[12px]">2 Documents</p>
+                                        {!isPhaseAccessible('Commercialization') && (
+                                            <div className="absolute top-2 right-2">
+                                                <CiLock size={20} color="white" />
+                                            </div>
+                                        )}
                                     </div>
-
                                 </div>
                             )}
 
@@ -177,13 +320,10 @@ function InflationRateGraph({ graphType }) {
                                     <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
                                     <p className="p18">KPI</p>
                                     <p className="text-[12px]">Create Custom Graphs that give you more insight</p>
-                                    <p className="text-[12px]">6 Graph Types</p>
-                                </div>
-
-
+                                    <p className="text-[12px]">6 Graph Types</p>                                </div>
                             </div>
 
-
+                            {/* Rest of the component remains the same */}
                             <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/scrab_book.png')] bg-no-repeat bg-cover border-3 border-black cursor-pointer relative group">
                                 <div className="tilt-box bg-[#E6E6E6D9] text-black400" onClick={() => handleClick('/scrapView')}>
                                     <button className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]">View</button>
@@ -191,8 +331,6 @@ function InflationRateGraph({ graphType }) {
                                     <p className="text-[12px]">Create Notes that you can look back at later</p>
                                     <p className="text-[12px]">6 Graph Types</p>
                                 </div>
-
-
                             </div>
 
                             <div className=" lg:w-[225px] w-[180px] h-[305px] rounded-tr-[30px] rounded-bl-[30px] bg-[url('./images/pitch_deck.png')] bg-no-repeat bg-cover cursor-pointer relative group">
@@ -202,10 +340,7 @@ function InflationRateGraph({ graphType }) {
                                     <p className="text-[12px]">Store Pitch Decks and have access to resources</p>
                                     <p className="text-[12px]">5 Documents</p>
                                 </div>
-
-
                             </div>
-
                         </div>
                     </div>
 
@@ -339,7 +474,7 @@ function InflationRateGraph({ graphType }) {
 
                 <div className="startWrap"></div>
             </div>
-            <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />   
+            <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />
         </div>
     );
 }

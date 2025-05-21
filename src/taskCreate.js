@@ -270,6 +270,14 @@ const CreateTask = () => {
       console.log(error.response.data);
     }
   };
+  const phasePaths = [
+    "Ideation",
+    "ProductDefinition",
+    "InitialDesign",
+    "ValidatingAndTesting",
+    "Commercialization"
+  ];
+
 
 
   return (
@@ -288,10 +296,10 @@ const CreateTask = () => {
           >
             Back
           </button>
-            <div className="text-center">
-              <p className="text-xl font-semibold">Create Task</p>
-              <p className="text-gray-600">Here you can create and assign tasks</p>
-            </div>
+          <div className="text-center">
+            <p className="text-xl font-semibold">Create Task</p>
+            <p className="text-gray-600">Here you can create and assign tasks</p>
+          </div>
           <img src={home} alt="Home Icon" />
         </div>
 
@@ -349,52 +357,22 @@ const CreateTask = () => {
 
               </div>
 
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Task */}
-                <div className="flex flex-col">
-                  <label className="text-sm font-medium text-gray-700 mb-2">Task</label>
-                  <select
-                    value={selectStage}
-                    onChange={handleChangeStage}
-                    className="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    <option value="" disabled>Select an option</option>
-                    <option value="BusinessCaseBuilder">Business Case Builder</option>
-                    <option value="BusinessAnalysisPack">Business Analysis Pack</option>
-                    <option value="ValuePropositionPack">Value Proposition Pack</option>
-                    <option value="SuccessMatrix">Success Matrix</option>
-                    <option value="DetailedMarketingStrategies">Detailed Marketing Strategies</option>
-                    <option value="ClaimTheDomain">Claim The Domain</option>
-                    <option value="StakeholdersEngagement">Stakeholders Engagement</option>
-                    <option value="FullProductOrProjectReview">Full Product Or Project Review</option>
-                    <option value="DetailedMarketingRtmTesting">Detailed Marketing Testing</option>
-                    <option value="DevelopmentCostReview">Development Cost Review</option>
-                    <option value="BringTheMVPToFullScale">Bring The MVP To Full Scale</option>
-                    <option value="ExecuteTheMarketingAndRouteToMarketStrategies">Execute Marketing Route</option>
-                  </select>
-                </div>
-
-                {/* Start Date */}
-                <div className="flex flex-col">
-                  <label className="text-sm font-medium text-gray-700 mb-2">Start Date</label>
-                  <DatePicker
-                    selected={selectedDate}
-                    onChange={(date) => setSelectedDate(date)}
-                    className="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                {/* End Date */}
-                <div className="flex flex-col">
-                  <label className="text-sm font-medium text-gray-700 mb-2">End Date</label>
-                  <DatePicker
-                    selected={selectedDate1}
-                    onChange={(date) => setSelectedDate1(date)}
-                    className="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
+              <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-700 mb-2">Task</label>
+                <select
+                  value={selectStage}
+                  onChange={handleChangeStage}
+                  className="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="" disabled>Select an option</option>
+                  {phasePaths.map((phase) => (
+                    <option key={phase} value={phase}>
+                      {phase.replace(/([A-Z])/g, ' $1').trim()}
+                    </option>
+                  ))}
+                </select>
               </div>
+
 
 
               <div className="flex flex-col w-full">

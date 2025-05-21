@@ -57,7 +57,7 @@ function Login() {
     <>
       <div className='mt-[100px]'></div>
       <div className='w-[90%] m-auto lg:grid lg:grid-cols-2 bg-white rounded-xl'>
-        <div className=' lg:p-10 lg:px-20 p-5 px-12 pt-10 lg:pt-16 lg:pb-20'>
+        <div className=' lg:p-10 lg:px-20 p-5 px-1 pt-10 lg:pt-16 lg:pb-20'>
           <div className=' lg:p-10 lg:px-20 p-5 px-12 pt-10 lg:pt-16 lg:pb-20'>
             <div className='flex justify-start items-center lg:gap-[6px] relative -top-8 lg:-left-12 -left-10'>
               <img src={logo} className='w-[40.12px] h-[40px]'></img>
@@ -110,7 +110,7 @@ function Login() {
                   {loading ? <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' /> : <span>Login</span>}
                 </button>
               </form>
-              <p className='mt-8 font-medium text-[16px]'>Not registered yet?<a className='ps-2 no-underline text-[#1B45BF] ' href='/signUp'>Create an Account</a></p>
+              <p className='mt-8 font-medium text-[16px]'>Not registered yet?<a className='ps-2 no-underline text-[#1B45BF] ' href='/signup'>Create an Account</a></p>
             </div>
           </div>
         </div>

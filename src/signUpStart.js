@@ -20,7 +20,7 @@ function SignUp() {
   const match = link.match(/\/start\/(.+)/);
   const uniqueCode = match ? match[1] : '';
 
-  console.log('Unique Code:', uniqueCode);
+  // console.log('Unique Code:', uniqueCode);
   const newLink = '/login/start/' + uniqueCode;
   console.log(newLink);
   const [agreed, setAgreed] = useState(false);
@@ -165,7 +165,7 @@ function SignUp() {
             </div>
           </div>
         </div>
-        <div className=' lg:p-10 lg:px-20 p-5 px-12 pt-10 lg:pt-16 lg:pb-20'>
+        <div className=' lg:p-10 lg:px-20 p-5 px-1 pt-10 lg:pt-16 lg:pb-20'>
           <div className=' lg:p-10 lg:px-20 p-5 px-12 pt-10 lg:pt-16 lg:pb-20'>
             <div className='flex justify-start items-center lg:gap-[6px] relative -top-8 lg:-left-12 -left-10'>
               <img src={logo} className='w-[40.12px] h-[40px]'></img>

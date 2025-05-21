@@ -313,47 +313,23 @@ import SubFolderUpload from './subfolderupload';
 import QuestionsForm from './component/questionsForm';
 import QuestionOptions from './TestAi';
 import PhaseSummary from './PhaseSummary';
+import LoginShare from './sharelogin';
+import EmailConfirmation from './confirmEmail';
 
 function App() {
-  const [isTrialExpired, setIsTrialExpired] = useState(false)
+  const [isTrialExpired, setIsTrialExpired] = useState(false);
   clarity.init('ocijdfgrpz');
-  // const socket = io('http://localhost:3001');
-  const { userId } = getUserIdFromToken();
-  const projectId = localStorage.getItem("nProject");
+
+  const subscribed = localStorage.getItem('subscribed') === 'true';
 
   useEffect(() => {
-    const checkTrial = async () => {
-      console.log("Checking trial status...");
-
-      try {
-        const response = await fetch(
-          `${API_BASE_URL}/api/user/trial/${userId}?projectId=${projectId}`, 
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            },
-          }
-        );
-
-        if (response.status === 200) {
-          const responseData = await response.json(); // Parse JSON response
-          console.log("Trial status:", responseData.trialPopUp);
-
-          setIsTrialExpired(responseData.trialPopUp !== true);
-        } else {
-          setIsTrialExpired(false);
-        }
-      } catch (error) {
-        console.error("An error occurred:", error);
-      }
-    };
-
-    if (userId) {
-      checkTrial();
+    if (subscribed) {
+      setIsTrialExpired(false); // Subscribed users are never expired
+    } else {
+      setIsTrialExpired(true);  // Non-subscribed users' trial is considered expired
     }
-  }, [userId, projectId]); // Added projectId as a dependency
+  }, [subscribed]);
+
 
 
   return (
@@ -367,6 +343,7 @@ function App() {
           <Route path="/signup/:referralCode" element={<SignUp />} />
           <Route path="/pageLogin" element={<PageLogin />} />
           <Route path="/terms&conditions" element={<TermAgreement />} />
+          <Route path="/confirm-email" element={<EmailConfirmation />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/referral" element={<Referral />} />
@@ -604,6 +581,7 @@ function App() {
           <Route path="/AllFiles" element={<AllFiles />} />
           <Route path="/subtypes/:type/:subtype" element={<FilesList />} />
           <Route path="/share/start/:id/" element={<Share />} />
+          <Route path="/share/login/:id/" element={<LoginShare />} />
           <Route path="/question/:id" element={<AllQuestions />} />
           <Route path="/sharereview/:id" element={<ShareReview />} />
           <Route path="/shareview/:id/:phase" element={<ShareView />} />
@@ -673,9 +651,9 @@ function App() {
           <Route path="/createVideoAdmin/" element={<CreateVideosAdmin />} />
         </Routes>
       </Router>
-      {isTrialExpired && window.location.pathname !== '/home' && (
+      {/* {isTrialExpired && window.location.pathname !== '/home' && !== '/login' !== '/home' !== '/register' (
         <GetCard />
-      )}
+      )} */}
     </>
   );
 }

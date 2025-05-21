@@ -25,13 +25,13 @@ function ValidatingOnboarding() {
         const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');
 
         // Check if the Ideation phase is true
-        if (onboarding.ValidatingandTesting === true) {
+        if (onboarding.ValidatingAndTesting === true) {
             navigate(`/test-ai/ValidatingAndTesting`);
             return;
         }
 
         try {
-            await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError, 'ValidatingandTesting');
+            await UpdateOnboardingSeenStatus(projectId, userId, access_token, setError, 'ValidatingAndTesting');
             navigate(`/test-ai/ValidatingAndTesting`);
         } catch (error) {
             console.error('Error updating onboarding status:', error);

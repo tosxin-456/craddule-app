@@ -24,14 +24,14 @@ function SignUp() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showCPassword, setShowCPassword] = useState(false);
+  // const [showCPassword, setShowCPassword] = useState(false);
   const [agreed, setAgreed] = useState(false);
-  const [passwordValid, setPasswordValid] = useState({
-    length: false,
-    number: false,
-    capital: false,
-    special: false,
-  });
+  // const [passwordValid, setPasswordValid] = useState({
+  //   length: false,
+  //   number: false,
+  //   capital: false,
+  //   special: false,
+  // });
   const [loading, setLoading] = useState(false);
   const [referralCode, setReferralCode] = useState('');
   const [formData, setFormData] = useState({
@@ -40,7 +40,7 @@ function SignUp() {
     email: '',
     phoneNumber: '',
     password: '',
-    cpassword: '',
+    // cpassword: '',
   });
 
   const navigate = useNavigate();
@@ -52,9 +52,9 @@ function SignUp() {
       ...formData,
       [id]: value,
     });
-    if (id === 'password') {
-      validatePassword(value, setPasswordValid);
-    }
+    // if (id === 'password') {
+    //   // validatePassword(value, setPasswordValid);
+    // }
   };
 
   const handlePhoneChange = (value) => {
@@ -63,10 +63,10 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!passwordValid.length || !passwordValid.number || !passwordValid.capital || !passwordValid.special) {
-      toast.error('Password does not meet the requirements');
-      return;
-    }
+    // if (!passwordValid.length || !passwordValid.number || !passwordValid.capital || !passwordValid.special) {
+    //   toast.error('Password does not meet the requirements');
+    //   return;
+    // }
     createUser(formData, referralCode, setLoading, toast, navigate);
   };
 
@@ -83,7 +83,7 @@ function SignUp() {
   return (
     <>
       <div className='mt-[100px]'></div>
-      <div className='w-[90%] m-auto lg:grid lg:grid-cols-2 bg-white rounded-xl'>
+      <div className='lg:w-[90%] w-[95%] m-auto lg:grid lg:grid-cols-2 bg-white rounded-xl'>
         <div className='bg-[#193FAE] hidden lg:block relative'>
           <img src={design} alt="" className="w-[196px] h-[219px] absolute bottom-0 right-0" />
           <img src={design} alt="" className="w-[196px] h-[219px] absolute top-0 left-0 rotate-180" />
@@ -96,8 +96,8 @@ function SignUp() {
             </div>
           </div>
         </div>
-        <div className=' lg:p-10 lg:px-20 p-5 px-12 pt-10 lg:pt-16 lg:pb-20'>
-          <div className='flex justify-start items-center lg:gap-[6px] relative -top-8 lg:-left-12 -left-10'>
+        <div className=' lg:p-10 lg:px-20 p-2 px-5 pt-10 lg:pt-16 lg:pb-20'>
+          <div className='flex justify-start items-center lg:gap-[6px] relative -top-0 lg:-left-12 -left-10'>
             <img src={logo} className='w-[40.12px] h-[40px]'></img>
             <span className='text-[16px] font-semibold'>Craddule</span>
           </div>
@@ -173,7 +173,7 @@ function SignUp() {
                       <path fill="#B0B0B0" d="M11.5 18c4 0 7.46-2.22 9.24-5.5C18.96 9.22 15.5 7 11.5 7s-7.46 2.22-9.24 5.5C4.04 15.78 7.5 18 11.5 18m0-12c4.56 0 8.5 2.65 10.36 6.5C20 16.35 16.06 19 11.5 19S3 16.35 1.14 12.5C3 8.65 6.94 6 11.5 6m0 2C14 8 16 10 16 12.5S14 17 11.5 17S7 15 7 12.5S9 8 11.5 8m0 1A3.5 3.5 0 0 0 8 12.5a3.5 3.5 0 0 0 3.5 3.5a3.5 3.5 0 0 0 3.5-3.5A3.5 3.5 0 0 0 11.5 9" />
                     </svg>
                   </span>
-                  <div className="password-validation">
+                  {/* <div className="password-validation">
                     <span className={passwordValid.length ? 'valid' : 'invalid'}>
                       Minimum 8 characters
                     </span>
@@ -186,10 +186,11 @@ function SignUp() {
                     <span className={passwordValid.special ? 'valid' : 'invalid'}>
                       1 special character
                     </span>
-                  </div>
+                  </div> */}
                 </div>
 
-                <div className="mt-[16px] relative">
+
+                {/* <div className="mt-[16px] relative">
                   <label htmlFor="cpassword" className='text-p18 font-semibold pb-1 block'>Confirm Password</label>
                   <input
                     type={showCPassword ? 'text' : 'password'}
@@ -208,7 +209,7 @@ function SignUp() {
                       <path fill="#B0B0B0" d="M11.5 18c4 0 7.46-2.22 9.24-5.5C18.96 9.22 15.5 7 11.5 7s-7.46 2.22-9.24 5.5C4.04 15.78 7.5 18 11.5 18m0-12c4.56 0 8.5 2.65 10.36 6.5C20 16.35 16.06 19 11.5 19S3 16.35 1.14 12.5C3 8.65 6.94 6 11.5 6m0 2C14 8 16 10 16 12.5S14 17 11.5 17S7 15 7 12.5S9 8 11.5 8m0 1A3.5 3.5 0 0 0 8 12.5a3.5 3.5 0 0 0 3.5 3.5a3.5 3.5 0 0 0 3.5-3.5A3.5 3.5 0 0 0 11.5 9" />
                     </svg>
                   </span>
-                </div>
+                </div> */}
                 <div className='flex justify-start items-center gap-1  mt-3'>
                   <input type="checkbox" name="agree" id="agree" className='cursor-pointer' onChange={(e)=>setAgreed(e.target.checked)}/>
                   <label htmlFor="agree" className='font-semibold'>I agree to the <a href='/terms&conditions' rel="noopener" target='_blank' className='no-underline text-[#1B45BF]'>Terms & Conditions</a></label>

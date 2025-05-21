@@ -6714,7 +6714,7 @@ td {
 
 .lockedIn {
   position: relative;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .lockedIn:before {

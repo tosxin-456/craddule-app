@@ -28,7 +28,7 @@ function Login() {
   const match = link.match(/\/start\/(.+)/);
   const uniqueCode = match ? match[1] : '';
   const { id } = useParams();
-  console.log('Unique Code:', uniqueCode);
+  // console.log('Unique Code:', uniqueCode);
   const [rememberMe, setRememberMe] = useState(false)
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);

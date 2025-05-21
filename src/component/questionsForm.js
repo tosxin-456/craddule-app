@@ -120,7 +120,7 @@ function QuestionsForm() {
                     Welcome to Craddule
                 </h2>
                 <p className="text-center" >
-                    Let us get you set your tools, please answer all questions below – please answer robustly but within 500 words
+                    Let us get your tools set, please answer all questions below – please answer robustly but within 500 words
                 </p>
                 {errorMessage && (
                     <p className="text-red-500 text-center mb-4">{errorMessage}</p>

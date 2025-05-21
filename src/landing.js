@@ -15,6 +15,7 @@ import {
 } from './utils/landingPageUtils.js'; // Import utilities
 import GetCard from './getCard.js';
 import { CheckOnboarding, getUserIdFromToken, handleLogoutLanding } from './utils/startUtils.js';
+import { API_BASE_URL } from './config/apiConfig.js';
 
 function LandingPage() {
   const [projects, setProjects] = useState([]);
@@ -23,6 +24,7 @@ function LandingPage() {
   const [isLoading, setIsLoading] = useState(true); // Add loading state
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Utility hooks
   // useValidateToken();
@@ -36,13 +38,85 @@ function LandingPage() {
   useFetchTeamProjects(userId, setTeamMembers);
   useFetchReviewProjects(userId, setReviewProjects);
 
-  const handleProjectClick = async(projectId, name, count) => {
-    localStorage.setItem('nProject', projectId);
-    localStorage.setItem('nProjectName', name);
-    localStorage.setItem('nProjectCount', count);
-    await CheckOnboarding()
+  // const projectId = localStorage.getItem("nProject");
+  const category = "NONE";
+  const access_token = localStorage.getItem('access_token');
+  // console.log(projects)
+
+  // const subCategoryPassed = "NONE";
+
+  const handleProjectClick = async (projectId, name, count, date, recurring) => {
+    localStorage.setItem("nProject", projectId);
+    localStorage.setItem("nProjectName", name);
+    localStorage.setItem("nProjectCount", count);
+
+    console.log("Project selected:", { projectId, name, count, date, recurring });
+
+    let subscribed = false;
+
+    if (recurring === false) {
+      if (date) {
+        console.log("Manual payment detected. Subscribed = true.");
+        subscribed = true;
+      } else {
+        console.log("No manual payment date found. Subscribed = false.");
+        subscribed = false;
+      }
+    } else if (recurring === true) {
+      if (date) {
+        const daysSincePayment = (Date.now() - new Date(date).getTime()) / (1000 * 60 * 60 * 24);
+        console.log(`Recurring payment. Days since last payment: ${daysSincePayment.toFixed(2)} days.`);
+
+        if (daysSincePayment <= 30) {
+          console.log("Subscription still active (within 30 days). Subscribed = true.");
+          subscribed = true;
+        } else {
+          console.log("Subscription expired (over 30 days). Subscribed = false.");
+          subscribed = false;
+        }
+      } else {
+        console.log("Recurring is true but no date found. Subscribed = false.");
+        subscribed = false;
+      }
+    } else {
+      console.log("Unexpected case: recurring neither true nor false.");
+    }
+
+    console.log("Final subscribed value being saved:", subscribed);
+    localStorage.setItem("subscribed", subscribed);
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/test-new/questions/${category}/${projectId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${access_token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        if (!data || !data.data || data.data.length === 0) {
+          await CheckOnboarding();
+          navigate("/start");
+          //  // Navigate to start if no questions
+          return;
+        }
+      } else {
+        throw new Error("Failed to fetch questions.");
+      }
+    } catch (error) {
+      console.error(error.message);
+      setErrorMessage("Failed to fetch questions.");
+    }
+
+    await CheckOnboarding();
     navigate(`/welcome-form`);
   };
+
+
 
   const handleProjectTeamClick = (projectId, name, count) => {
     localStorage.setItem('nProject', projectId);
@@ -58,7 +132,7 @@ function LandingPage() {
     localStorage.setItem('nProjectCount', count);
     navigate(`/sharereview/${reviewId}`);
   };
-//  console.log(reviewProjects.projectId)
+  //  console.log(reviewProjects.projectId)
 
   if (isLoading) {
     // Render the Loading component if data is still being fetched
@@ -98,7 +172,7 @@ function LandingPage() {
             </div>
             {projects.map((project) => (
               <div className='lg:col-span-4 flex-row justify-center m-auto mb-5' key={project._id}>
-                <div className='block w-[311px] h-[202px] text-white cursor-pointer' onClick={() => handleProjectClick(project._id, project.projectName, project.projectCount)}>
+                <div className='block w-[311px] h-[202px] text-white cursor-pointer' onClick={() => handleProjectClick(project._id, project.projectName, project.projectCount, project.lastSubscriptionDate, project.recurring)}>
                   <div className='bg-blue800 h-full flex justify-center items-center'>
                     <span>Continue</span>
                   </div>
@@ -113,7 +187,7 @@ function LandingPage() {
       </div>
 
       {/* Additional sections for team members and review projects */}
-        <div className='container'>
+      <div className='container'>
         {teamMembers.map((member) => (
           <div className="lg:col-span-4 flex-row justify-center m-auto mb-5" key={member.projectId}>
             <div
@@ -136,27 +210,27 @@ function LandingPage() {
           </div>
         ))}
 
-          {reviewProjects.map((review) => (
-            <div className="lg:col-span-4 flex-row justify-center m-auto mb-5" key={review._id}>
-              <div
-                className="block w-[311px] h-[202px] text-white cursor-pointer"
-                onClick={() =>
-                  handleProjectReviewClick(
-                    review._id,
-                    review.projectId.projectName,
-                    review.projectId.projectCount
-                  )
-                }
-              >
-                <div className="bg-blue800 h-full flex justify-center items-center">
-                  <span>Continue</span>
-                </div>
-                <div className="bg-blue900 h-8 flex justify-center items-center">
-                  <span className="text-center"> Review Project {review.projectId.projectName}</span>
-                </div>
+        {reviewProjects.map((review) => (
+          <div className="lg:col-span-4 flex-row justify-center m-auto mb-5" key={review._id}>
+            <div
+              className="block w-[311px] h-[202px] text-white cursor-pointer"
+              onClick={() =>
+                handleProjectReviewClick(
+                  review._id,
+                  review.projectId.projectName,
+                  review.projectId.projectCount
+                )
+              }
+            >
+              <div className="bg-blue800 h-full flex justify-center items-center">
+                <span>Continue</span>
+              </div>
+              <div className="bg-blue900 h-8 flex justify-center items-center">
+                <span className="text-center"> Review Project {review.projectId.projectName}</span>
               </div>
             </div>
-          ))}
+          </div>
+        ))}
       </div>
 
       <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />

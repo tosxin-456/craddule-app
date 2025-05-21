@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { API_BASE_URL } from "./config/apiConfig";
-import { useNavigate, useParams } from "react-router-dom";
-import { FaDownload, FaFilePdf, FaSyncAlt, FaArrowRight } from "react-icons/fa";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { FaDownload, FaFilePdf, FaSyncAlt, FaArrowRight, FaEdit } from "react-icons/fa";
 import { MdOutlineSummarize } from "react-icons/md";
 import ReactMarkdown from "react-markdown";
 import html2pdf from "html2pdf.js";
@@ -28,6 +28,9 @@ import Tooltip from './component/tooltip';
 import ImagePopup from './component/cradduleModal';
 import axios from 'axios';
 import nspell from 'nspell';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import CarStepsProcess from './component/carsComponents';
+import GetCard from './getCard';
 
 
 function PhaseSummary() {
@@ -35,7 +38,7 @@ function PhaseSummary() {
     const [previousSummary, setPreviousSummary] = useState(null);
     const [olderSummary, setOlderSummary] = useState(null);
     const [count, setCount] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [selectedSummary, setSelectedSummary] = useState("recent");
     const navigate = useNavigate();
     const projectId = localStorage.getItem("nProject");
@@ -60,13 +63,24 @@ function PhaseSummary() {
     const [suggestions, setSuggestions] = useState([]);
     const [suggestionBoxPosition, setSuggestionBoxPosition] = useState({ top: 0, left: 0 });
     const [selectedWord, setSelectedWord] = useState(null);
-
+    const [nextPhase, setNextPhase] = useState("")
+    const [subscribed, setSubscribed] = useState(false);
     const [showScrollableDiv, setShowScrollableDiv] = useState(false);
     const [showScrollableDiv2, setShowScrollableDiv2] = useState(false);
+    const [showPayment, setShowPayment] = useState(false);
 
     const handleToggle = () => {
         setShowScrollableDiv(!showScrollableDiv);
     };
+
+    useEffect(() => {
+        requestAnimationFrame(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        });
+    }, []);
 
 
     const handleToggleSh = () => {
@@ -87,11 +101,11 @@ function PhaseSummary() {
             try {
                 const response = await axios.get(`${API_BASE_URL}/api/hub/types`);
                 setImages(response.data);
-                setLoading(false);
+                // setLoading(true);
             } catch (error) {
                 console.error('Error fetching types:', error);
                 // setError('Failed to fetch types');
-                setLoading(false);
+                // setLoading(true);
             }
         };
 
@@ -112,10 +126,10 @@ function PhaseSummary() {
 
                 if (summaryResponse.ok) {
                     const dataS = await summaryResponse.json();
-                    console.log("data for summary:", dataS)
+                    // console.log("data for summary:", dataS)
                     // If summary exists, fetch the summary data
                     if (dataS.data && Array.isArray(dataS.data)) {
-                        console.log("Summary data array:", dataS.data);
+                        // console.log("Summary data array:", dataS.data);
 
                         const combinedSummary = dataS.data
                             .map((item) => {
@@ -125,7 +139,7 @@ function PhaseSummary() {
                             .join('<br><br>');
 
                         setCombinedAnswer(combinedSummary); // Set the combined summary
-                        console.log("Combined summary:", combinedSummary);
+                        // console.log("Combined summary:", combinedSummary);
                     } else {
                         const response = await fetch(API_BASE_URL + `/api/pdf/single/${projectId}/${category}`, {
                             headers: {
@@ -156,16 +170,29 @@ function PhaseSummary() {
                 }
             } catch (error) {
                 // setError(error.message);
-                setLoading(false);
+                // setLoading(false);
             }
         };
 
         fetchAnswers();
     }, []);
 
+    const [isToolbarVisible, setIsToolbarVisible] = useState(false);
 
+    const toggleToolbar = () => {
+        setIsToolbarVisible(!isToolbarVisible);
+    };
 
-
+    const handleSubscriptionClick = () => {
+        if (subscribed) {
+            getNextPhase();
+        } else {
+            setShowPayment(false); // First close
+            setTimeout(() => {
+                setShowPayment(true); // Then open after a very tiny delay
+            }, 50); // small delay to force re-render
+        }
+    };
 
 
 
@@ -456,6 +483,7 @@ function PhaseSummary() {
         return textNodes;
     };
 
+
     const restoreCursorPosition = () => {
         const startMarker = document.getElementById("start-marker");
         if (!startMarker) return;
@@ -686,9 +714,13 @@ function PhaseSummary() {
         "Commercialization"
     ];
 
+
     const fetchSummaries = async () => {
-        setLoading(true);
+        // setLoading(true);
+
         try {
+            const startTime = Date.now(); // Start timing only for the actual fetch work
+
             const response = await fetch(
                 `${API_BASE_URL}/api/test-new/questions/summary/${phase}/${projectId}`,
                 {
@@ -699,19 +731,30 @@ function PhaseSummary() {
                     },
                 }
             );
+
             const data = await response.json();
+
             if (data.status === 200) {
-                console.log(data)
+                console.log(data);
                 setRecentSummary(data.data.summary);
                 setPreviousSummary(data.data.summary_one || null);
                 setOlderSummary(data.data.summary_two || null);
-                setCount(data.data.count)
+                setCount(data.data.count);
+
+                const storedSubscribed = localStorage.getItem('subscribed');
+                console.log("Subscribed status from localStorage:", storedSubscribed);
+                setSubscribed(storedSubscribed === 'true');
             }
+            setLoading(false);
+
         } catch (error) {
             console.error("Error fetching summaries:", error);
+            // On error, stop loading immediately
+            setLoading(false);
         }
-        setLoading(false);
     };
+
+
 
     const regenerateSummary = async () => {
         setLoading(true);
@@ -735,11 +778,44 @@ function PhaseSummary() {
 
     const getNextPhase = () => {
         const currentIndex = phasePaths.indexOf(phase);
-        const nextPhase = currentIndex !== -1 && currentIndex < phasePaths.length - 1
-            ? phasePaths[currentIndex + 1]
-            : null;
-        if (nextPhase) navigate(`/test-ai/${nextPhase}`);
+
+        if (currentIndex === -1 || currentIndex >= phasePaths.length - 1) return;
+
+        const nextPhase = phasePaths[currentIndex + 1];
+        const formattedNextPhase = formatPhase(nextPhase); // For display if needed
+        setNextPhase(formattedNextPhase);
+
+        const onboardingData = JSON.parse(localStorage.getItem('onboarding')) || {};
+
+        // Normalize the keys: make all keys lowercase without spaces
+        const normalize = (str) => str.replace(/\s/g, '').toLowerCase();
+
+        const normalizedOnboarding = {};
+        Object.keys(onboardingData).forEach(key => {
+            normalizedOnboarding[normalize(key)] = onboardingData[key];
+        });
+
+        const normalizedNextPhase = normalize(nextPhase);
+
+        if (normalizedOnboarding[normalizedNextPhase] === false) {
+            navigate(`/${nextPhase}`);
+        } else {
+            navigate(`/test-ai/${nextPhase}`);
+        }
     };
+
+
+
+    useEffect(() => {
+        const currentIndex = phasePaths.indexOf(phase);
+
+        // If current phase not found or it's the last one, do nothing
+        if (currentIndex === -1 || currentIndex >= phasePaths.length - 1) return;
+
+        const nextPickPhase = phasePaths[currentIndex + 1];
+        setNextPhase(formatPhase(nextPickPhase));
+    }, [phase, phasePaths]); // <- add dependencies
+
 
     const formatPhase = (text) => {
         return text
@@ -762,6 +838,11 @@ function PhaseSummary() {
     }
 
     const [editedSummary, setEditedSummary] = useState("");
+    const [twoLine, setTwoLine] = useState("");
+
+    const location = useLocation();
+    const thirdSentence = location.state?.thirdSentence;
+
 
 
     const updateSummary = async () => {
@@ -810,8 +891,20 @@ function PhaseSummary() {
         }
     };
 
+    const formatPhaseName = (slug) => {
+        return slug.replace(/([a-z])([A-Z])/g, '$1 $2');
+    };
+    // console.log(nextPhase)
+
 
     const [selectedField, setSelectedField] = useState("summary");
+
+    // useEffect(() => {
+    //     const storedSubscribed = localStorage.getItem('subscribed');
+    //     console.log("Subscribed status from localStorage:", storedSubscribed);  // log the value directly
+    //     setSubscribed(storedSubscribed);  // Check the value being set
+    // }, []); // Runs only once, when the component mounts
+
 
     return (
         <div
@@ -826,10 +919,10 @@ function PhaseSummary() {
             <div className="flex flex-col items-center gap-6 p-4 md:p-8 bg-gray-100 min-h-screen">
                 <div className="w-full max-w-2xl flex justify-between items-center mt-4 md:mt-10">
                     <button
-                        onClick={() => navigate('/start')}
+                        onClick={() => navigate(`/test-ai/${phase}`)}
                         className="bg-[#193FAE] px-4 md:px-6 py-2 text-white rounded-3xl shadow-md hover:bg-[#162E8D] transition"
                     >
-                        Back to Phases
+                        Back
                     </button>
                     <img src={home} alt="Home Icon" />
                 </div>
@@ -849,12 +942,23 @@ function PhaseSummary() {
                         <FaSyncAlt /> Regenerate
                     </button>
 
-                    <button onClick={getNextPhase} className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                        Next Phase <FaArrowRight />
-                    </button>
+
                     {/* <button onClick={downloadPDF} className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
                         <FaDownload /> Download PDF
                     </button> */}
+                </div>
+
+                {/* Next Phase Button (Bottom) */}
+                <div className="flex justify-center my-6">
+                    <button
+                        onClick={handleSubscriptionClick}
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg transition shadow-sm bg-blue-600 text-white hover:bg-blue-700"
+                    >
+                        <span>
+                            {nextPhase ? `Proceed to ${nextPhase}` : "All done!"}
+                        </span>
+                        <FaArrowRight size={14} />
+                    </button>
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-4 w-full max-w-2xl">
@@ -887,208 +991,235 @@ function PhaseSummary() {
                         )}
                     </div>
 
+                    {/* Payment Modal */}
+                    {showPayment && <GetCard />}
+
 
                     {/* className="min-h-[70vh] bg-white " */}
                     <div id="summary-content" className="  bg-[url('./images/pattern_landscape.png')]  bg-cover bg-no-repeat w-full p-4 md:p-6 bg-white shadow-lg rounded-xl border">
                         <div className='container-textBs'>
-                            <div className='flex justify-between' >
-                                <h4 className="text-[13px] md:text-2xl font-semibold text-gray-800 flex items-center gap-2">
-                                    <MdOutlineSummarize /> SUMMARY
-                                </h4>
-                                <button
-                                    onClick={updateSummary}
-                                    className="bg-blue-500 text-white px-1 py-[5px] rounded-lg shadow hover:bg-blue-600 transition"
-                                >
-                                    Save
-                                </button>
-                            </div>
-
-                            <div className="p-2 space-y-2">
-                                <div className="toolbar bg-gray-100 p-2 rounded-lg flex flex-wrap gap-1 md:justify-center justify-start items-center shadow-md">
-                                    {/** Bold Button **/}
-                                    <button
-                                        onClick={() => formatText("bold")}
-                                        type="button"
-                                    >
-                                        <Bold className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Italic Button **/}
-                                    <button
-                                        onClick={() => formatText("italic")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <Italic className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Underline Button **/}
-                                    <button
-                                        onClick={() => formatText("underline")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <Underline className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Strikethrough Button **/}
-                                    <button
-                                        onClick={() => formatText("strikeThrough")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <Strikethrough className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Blockquote Button **/}
-                                    <button
-                                        onClick={() => formatText("formatBlock", "blockquote")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <Quote className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Code Block Button **/}
-                                    <button
-                                        onClick={() => formatText("formatBlock", "pre")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <Code className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Link Button **/}
-                                    <button
-                                        onClick={insertLink}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <FontAwesomeIcon icon={faLink} className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Image Button **/}
-                                    <button
-                                        onClick={handleImagePopup}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <Image className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Font Size Dropdown **/}
-                                    <select
-                                        onChange={(e) => formatText("fontSize", e.target.value)}
-                                        className="select-dropdown"
-                                    >
-                                        <option value="">Size</option>
-                                        {[...Array(23)].map((_, i) => (
-                                            <option key={i} value={i + 2}>
-                                                {i + 2}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <Divider />
-                                    {/** Heading Dropdown **/}
-                                    <select
-                                        onChange={handleHeadingChange}
-                                        className="select-dropdown"
-                                    >
-                                        <option value="">Heading</option>
-                                        {[...Array(6)].map((_, i) => (
-                                            <option key={i} value={`h${i + 1}`}>
-                                                H{i + 1}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <Divider />
-                                    {/** Ordered List Button **/}
-                                    <button
-                                        onClick={() => formatText("insertOrderedList")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <FontAwesomeIcon icon={faListOl} className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Unordered List Button **/}
-                                    <button
-                                        onClick={() => formatText("insertUnorderedList")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <FontAwesomeIcon icon={faListUl} className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Subscript Button **/}
-                                    <button
-                                        onClick={() => formatText("subscript")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <Subscript className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Superscript Button **/}
-                                    <button
-                                        onClick={() => formatText("superscript")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <Superscript className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Outdent Button **/}
-                                    <button
-                                        onClick={() => formatText("outdent")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <Outdent className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Indent Button **/}
-                                    <button
-                                        onClick={() => formatText("indent")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <Indent className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Align Right Button **/}
-                                    <button
-                                        onClick={() => formatText("direction", "rtl")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <AlignRight className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Align Center Button **/}
-                                    <button
-                                        onClick={() => formatText("direction", "center")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <AlignCenter className="w-4 h-4" />
-                                    </button>
-                                    <Divider />
-                                    {/** Align Left Button **/}
-                                    <button
-                                        onClick={() => formatText("direction", "ltr")}
-                                        type="button"
-                                        className="btn-icon"
-                                    >
-                                        <AlignLeft className="w-4 h-4" />
-                                    </button>
+                            <div className='flex items-center justify-between w-full px-2 py-2'>
+                                {/* Summary Title */}
+                                <div className="flex items-center gap-2">
+                                    <MdOutlineSummarize className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
+                                    <h5 className="text-sm md:text-xl font-semibold text-gray-800">
+                                        SUMMARY
+                                    </h5>
                                 </div>
 
+                                {/* Action Buttons */}
+                                <div className="flex items-center gap-2">
+                                    {/* Edit Button */}
+                                    <button
+                                        onClick={toggleToolbar}
+                                        className="text-gray-700 hover:bg-gray-100 rounded-full p-2 transition"
+                                        aria-label="Edit Summary"
+                                    >
+                                        <FaEdit className="w-4 h-4 md:w-6 md:h-6" />
+                                    </button>
 
+                                    {/* Save Button */}
+                                    <button
+                                        onClick={updateSummary}
+                                        className="bg-blue-500 text-white text-xs md:text-sm px-2 py-1 md:px-3 md:py-2 rounded-lg shadow hover:bg-blue-600 transition"
+                                    >
+                                        Save
+                                    </button>
+                                </div>
                             </div>
 
+                            {/* Toolbar */}
+                            {isToolbarVisible && (
+
+                                <div className="p-2 space-y-2">
+                                    <div className="toolbar bg-gray-100 p-2 rounded-lg flex flex-wrap gap-1 md:justify-center justify-start items-center shadow-md">
+                                        {/** Bold Button **/}
+                                        <button
+                                            onClick={() => formatText("bold")}
+                                            type="button"
+                                        >
+                                            <Bold className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Italic Button **/}
+                                        <button
+                                            onClick={() => formatText("italic")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <Italic className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Underline Button **/}
+                                        <button
+                                            onClick={() => formatText("underline")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <Underline className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Strikethrough Button **/}
+                                        <button
+                                            onClick={() => formatText("strikeThrough")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <Strikethrough className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Blockquote Button **/}
+                                        <button
+                                            onClick={() => formatText("formatBlock", "blockquote")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <Quote className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Code Block Button **/}
+                                        <button
+                                            onClick={() => formatText("formatBlock", "pre")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <Code className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Link Button **/}
+                                        <button
+                                            onClick={insertLink}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <FontAwesomeIcon icon={faLink} className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Image Button **/}
+                                        <button
+                                            onClick={handleImagePopup}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <Image className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Font Size Dropdown **/}
+                                        <select
+                                            onChange={(e) => formatText("fontSize", e.target.value)}
+                                            className="select-dropdown"
+                                        >
+                                            <option value="">Size</option>
+                                            {[...Array(23)].map((_, i) => (
+                                                <option key={i} value={i + 2}>
+                                                    {i + 2}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <Divider />
+                                        {/** Heading Dropdown **/}
+                                        <select
+                                            onChange={handleHeadingChange}
+                                            className="select-dropdown"
+                                        >
+                                            <option value="">Heading</option>
+                                            {[...Array(6)].map((_, i) => (
+                                                <option key={i} value={`h${i + 1}`}>
+                                                    H{i + 1}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <Divider />
+                                        {/** Ordered List Button **/}
+                                        <button
+                                            onClick={() => formatText("insertOrderedList")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <FontAwesomeIcon icon={faListOl} className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Unordered List Button **/}
+                                        <button
+                                            onClick={() => formatText("insertUnorderedList")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <FontAwesomeIcon icon={faListUl} className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Subscript Button **/}
+                                        <button
+                                            onClick={() => formatText("subscript")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <Subscript className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Superscript Button **/}
+                                        <button
+                                            onClick={() => formatText("superscript")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <Superscript className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Outdent Button **/}
+                                        <button
+                                            onClick={() => formatText("outdent")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <Outdent className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Indent Button **/}
+                                        <button
+                                            onClick={() => formatText("indent")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <Indent className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Align Right Button **/}
+                                        <button
+                                            onClick={() => formatText("direction", "rtl")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <AlignRight className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Align Center Button **/}
+                                        <button
+                                            onClick={() => formatText("direction", "center")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <AlignCenter className="w-4 h-4" />
+                                        </button>
+                                        <Divider />
+                                        {/** Align Left Button **/}
+                                        <button
+                                            onClick={() => formatText("direction", "ltr")}
+                                            type="button"
+                                            className="btn-icon"
+                                        >
+                                            <AlignLeft className="w-4 h-4" />
+                                        </button>
+                                    </div>
+
+
+                                </div>
+                            )}
+
                             {loading ? (
-                                <p className="text-gray-500 italic">Loading summary...</p>
+                                <div className="flex items-center justify-center h-screen">
+                                    <AiOutlineLoading3Quarters className="animate-spin text-5xl text-indigo-500" />
+                                </div>
                             ) : (
                                 <div
                                     ref={editorRef}
@@ -1123,7 +1254,42 @@ function PhaseSummary() {
 
                     </div>
                 </div>
+
+
+                <div className="flex items-center p-5 mt-3 bg-gray-50 border-l-4 border-blue-500 rounded-md shadow-sm">
+                    <div className="flex-shrink-0 mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <p className="text-base font-semibold text-gray-700">
+                        {thirdSentence}
+                    </p>
+                </div>
             </div>
+
+            <p className="text-lg text-center font-semibold my-4">
+                These are the next steps.
+            </p>
+
+            {/* Car Steps Process */}
+            <CarStepsProcess />
+
+
+            {/* Next Phase Button (Bottom) */}
+            <div className="flex justify-center my-6">
+                <button
+                    onClick={handleSubscriptionClick}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg transition shadow-sm bg-blue-600 text-white hover:bg-blue-700"
+                >
+                    <span>
+                        {nextPhase ? `Proceed to ${nextPhase}` : "All done!"}
+                    </span>
+                    <FaArrowRight size={14} />
+                </button>
+            </div>
+            <p className='text-center' >Let us get you started with your next steps with  <span onClick={handleSubscriptionClick} className='text-blue-500 hover:cursor-pointer uppercase ' >{nextPhase}</span></p>
+
             <div
                 className="fixed bottom-0 right-0 z-[-100] m-0 p-0 w-[250px] h-[250px] bg-no-repeat"
                 style={{

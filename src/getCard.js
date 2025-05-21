@@ -4,16 +4,15 @@ import './App.css';
 import { API_BASE_URL } from './config/apiConfig';
 import 'react-phone-input-2/lib/style.css';
 import { PaystackButton } from 'react-paystack';
-import { jwtDecode } from "jwt-decode";
 import { getUserIdFromToken } from './utils/startUtils';
-import { CheckCircle, CreditCard, Gift } from 'lucide-react';
+import { CheckCircle, CreditCard, Gift, MapPin } from 'lucide-react';
 
 function GetCard() {
   const { access_token, userId } = getUserIdFromToken();
   console.log(userId);
 
-  // const publicKey = "pk_live_ad719098c01b1d5e280aa45492782cb661b74d46";
-  const publicKey = "pk_test_5b18272091e43f312490878eb3f0002fb4242ac6";
+  const publicKey = "pk_live_ad719098c01b1d5e280aa45492782cb661b74d46";
+  // const publicKey = "pk_test_5b18272091e43f312490878eb3f0002fb4242ac6";
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -23,6 +22,50 @@ function GetCard() {
   const [show, setShow] = useState(true);
   const [subscriptionType, setSubscriptionType] = useState(null);
   const [currency, setCurrency] = useState('NGN');
+  const [isAfrican, setIsAfrican] = useState(true);
+  const [loading, setLoading] = useState(true);
+
+  // Pricing based on location
+  const pricing = {
+    africa: {
+      monthly: 15000,
+      lifetime: 35000,
+      currency: 'NGN'
+    },
+    international: {
+      monthly: 15,
+      lifetime: 35,
+      currency: 'USD'
+    }
+  };
+
+  useEffect(() => {
+    // Detect user's location
+    const detectLocation = async () => {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+
+        // List of African country codes
+        const africanCountries = [
+          'NG'
+        ];
+
+        const isInAfrica = africanCountries.includes(data.country_code);
+        setIsAfrican(isInAfrica);
+        setCurrency(isInAfrica ? 'NGN' : 'USD');
+        setLoading(false);
+      } catch (error) {
+        console.error('Error detecting location:', error);
+        // Default to African pricing if location detection fails
+        setIsAfrican(true);
+        setCurrency('NGN');
+        setLoading(false);
+      }
+    };
+
+    detectLocation();
+  }, []);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -42,7 +85,12 @@ function GetCard() {
           setPhone(phoneNumber);
           setTimeRef(timeSent);
           setAuthCode(authCode);
-          setCurrency(phoneNumber.startsWith('234') ? 'NGN' : 'USD');
+
+          // Override location detection if the phone number starts with 234 (Nigeria)
+          if (phoneNumber && phoneNumber.startsWith('234')) {
+            setIsAfrican(true);
+            setCurrency('NGN');
+          }
         } else {
           const data = await response.json();
           console.log(data);
@@ -55,10 +103,16 @@ function GetCard() {
     fetchUserDetails();
   }, []);
 
+  const getCurrentPricing = () => {
+    return isAfrican ? pricing.africa : pricing.international;
+  };
+
   const handlePaystackSuccessAction = (reference) => {
     console.log('Payment successful, reference:', reference.reference);
-    verifyTransaction(reference.reference)
-    updateUser()
+    localStorage.setItem('subscribed', true);
+    window.location.reload()
+    verifyTransaction(reference.reference);
+    updateUser();
   };
 
   const handlePaystackCloseAction = () => {
@@ -68,22 +122,23 @@ function GetCard() {
 
   const componentProps = {
     email,
-    amount: subscriptionType === 'Recurring' ? 4500 * 100 : 10000 * 100,
+    amount: subscriptionType === 'Recurring'
+      ? getCurrentPricing().monthly * 100
+      : getCurrentPricing().lifetime * 100,
     metadata: {
       name,
       phone,
       subscriptionType
     },
-    currency: currency,
+    currency: getCurrentPricing().currency,
     publicKey,
     text: "Start Free Trial",
     onSuccess: handlePaystackSuccessAction,
     onClose: handlePaystackCloseAction,
-  }
-
+  };
 
   const verifyTransaction = async (data) => {
-    console.log(data, publicKey)
+    console.log(data, publicKey);
     try {
       const res = await fetch(`https://api.paystack.co/transaction/verify/${data}`, {
         method: 'GET',
@@ -98,9 +153,10 @@ function GetCard() {
       }
 
       const response = await res.json();
-      console.log(response)
+      console.log(response);
       localStorage.setItem('auth_code', response.data.authorization.authorization_code);
-
+      localStorage.setItem('subscribed', true);
+      window.location.reload()
       updateUser(response.data.authorization.authorization_code);
     } catch (error) {
       console.log(error.message);
@@ -145,7 +201,6 @@ function GetCard() {
     }
   };
 
-
   const updateUserPop = async (trialPopUp) => {
     try {
       console.log(trialPopUp);
@@ -181,17 +236,28 @@ function GetCard() {
   // Use useEffect to wait for the state update before clicking the button
   useEffect(() => {
     if (subscriptionType) {
-      setShow(false)
+      setShow(false);
       console.log("Subscription Type:", subscriptionType);
       document.getElementsByClassName('cardBtn')[0].click();
     }
   }, [subscriptionType]); // Trigger when subscriptionType changes
 
-
   const handleCancel = () => {
-    setShow(false)
+    setShow(false);
     // updateUserPop('true');
+  };
+
+  if (loading) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
+        <div className="bg-white p-6 rounded-lg shadow-xl">
+          <p className="text-lg font-medium">Loading pricing details...</p>
+        </div>
+      </div>
+    );
   }
+
+  const currentPricing = getCurrentPricing();
 
   return (
     <>
@@ -214,6 +280,14 @@ function GetCard() {
             Subscribe to Craddule
           </h4>
 
+          {/* Location indicator */}
+          <div className="flex items-center justify-center gap-2 mb-4 text-gray-600">
+            <MapPin size={18} />
+            <span className="text-sm">
+              {isAfrican ? "Craddule Nigeria Pricing" : "International Pricing"}
+            </span>
+          </div>
+
           {/* Description */}
           <p className="text-center text-gray-600 mb-6 leading-relaxed">
             Unlock the full potential of Craddule! Choose a plan that suits you:
@@ -224,13 +298,13 @@ function GetCard() {
             <div className="flex items-center gap-3 text-green-600">
               <CheckCircle size={20} />
               <span className="text-sm">
-                <strong>NGN 4,500 per month</strong> – Manage multiple projects seamlessly
+                <strong>{currentPricing.currency} {currentPricing.monthly.toLocaleString()} per month</strong> – Manage multiple projects seamlessly
               </span>
             </div>
             <div className="flex items-center gap-3 text-blue-600">
               <CreditCard size={20} />
               <span className="text-sm">
-                <strong>One-time payment of NGN 10,000</strong> – Lifetime access to a single project
+                <strong>{currentPricing.currency} {currentPricing.lifetime.toLocaleString()}</strong> – Lifetime access to a single project
               </span>
             </div>
           </div>
