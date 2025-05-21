@@ -26,7 +26,7 @@ function LoginShare() {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
-        speciality: '',
+        // speciality: '',
         uniqueCode: id,
         // link: link
     });
@@ -85,11 +85,22 @@ function LoginShare() {
 
             if (response.status === 200) {
                 const responseData = await response.json();
-                const { access_token } = responseData.data;
+                const { token } = responseData;
+                console.log(responseData.user.howDidYouKnowUs)
+                if (responseData.user.status === 'deactivated') {
+                    toast.error("This Account has been Deactivated");
+                } else {
 
-                localStorage.setItem('access_token', access_token);
-                setLoading(false);
-                navigate('/home');
+                    localStorage.removeItem("username");
+                    localStorage.removeItem("password");
+                    localStorage.removeItem("rememberMe");
+
+                    localStorage.setItem('access_token', token);
+                    // localStorage.setItem("onboarding", responseData.onboarding || false);
+                    localStorage.setItem("gottenThrough", responseData.user.howDidYouKnowUs || false);
+
+                    navigate(`/home`);
+                }
             } else {
                 const result = await response.json();
                 setLoading(false);
@@ -160,7 +171,7 @@ function LoginShare() {
                                     </button>
                                 </div>
 
-                                <label htmlFor="speciality" className='lab'>Select Expertise:</label>
+                                {/* <label htmlFor="speciality" className='lab'>Select Expertise:</label>
                                 <select
                                     id="speciality"
                                     value={formData.speciality === customSpeciality ? 'Other' : formData.speciality}
@@ -221,7 +232,7 @@ function LoginShare() {
                                             required={formData.speciality === 'Other'}
                                         />
                                     </div>
-                                )}
+                                )} */}
 
                                 <div className="flex justify-between items-center mt-2 mb-6">
                                     <div className="flex items-center">

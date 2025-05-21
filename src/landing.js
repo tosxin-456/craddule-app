@@ -172,12 +172,12 @@ function LandingPage() {
             </div>
             {projects.map((project) => (
               <div className='lg:col-span-4 flex-row justify-center m-auto mb-5' key={project._id}>
-                <div className='block w-[311px] h-[202px] text-white cursor-pointer' onClick={() => handleProjectClick(project._id, project.projectName, project.projectCount, project.lastSubscriptionDate, project.recurring)}>
+                <div className='block w-[311px] h-[202px] text-white cursor-pointer' onClick={() => handleProjectClick(project?._id, project?.projectName, project?.projectCount, project?.lastSubscriptionDate, project?.recurring)}>
                   <div className='bg-blue800 h-full flex justify-center items-center'>
                     <span>Continue</span>
                   </div>
                   <div className='bg-blue900 h-8 flex justify-center items-center'>
-                    <span className='text-center'>{project.projectName}</span>
+                    <span className='text-center'>{project?.projectName}</span>
                   </div>
                 </div>
               </div>
@@ -188,15 +188,15 @@ function LandingPage() {
 
       {/* Additional sections for team members and review projects */}
       <div className='container'>
-        {teamMembers.map((member) => (
-          <div className="lg:col-span-4 flex-row justify-center m-auto mb-5" key={member.projectId}>
+        {teamMembers?.map((member) => (
+          <div className="lg:col-span-4 flex-row justify-center m-auto mb-5" key={member?.projectId}>
             <div
               className="block w-[311px] h-[202px] text-white cursor-pointer"
               onClick={() =>
                 handleProjectTeamClick(
-                  member.projectId,
-                  member.projectDetails.project,
-                  member.projectDetails.projectCount
+                  member?.projectId,
+                  member?.projectDetails.project,
+                  member?.projectDetails.projectCount
                 )
               }
             >
@@ -204,7 +204,7 @@ function LandingPage() {
                 <span>Continue</span>
               </div>
               <div className="bg-blue900 h-8 flex justify-center items-center">
-                <span className="text-center"> Team Project {member.projectDetails.project}</span>
+                <span className="text-center"> Team Project {member?.projectDetails.project}</span>
               </div>
             </div>
           </div>
@@ -226,7 +226,7 @@ function LandingPage() {
                 <span>Continue</span>
               </div>
               <div className="bg-blue900 h-8 flex justify-center items-center">
-                <span className="text-center"> Review Project {review.projectId.projectName}</span>
+                <span className="text-center"> Review Project {review?.projectId?.projectName}</span>
               </div>
             </div>
           </div>

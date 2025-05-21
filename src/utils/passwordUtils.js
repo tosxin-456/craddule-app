@@ -37,7 +37,7 @@ export const confirmOTP = async (data, setLoading, setPage, navigate, toast) => 
   const userId = localStorage.getItem('userId');
   console.log(data);
   try {
-    const response = await fetch(`${API_BASE_URL}/api/user/confirm/${userId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/user/otp/confirm/${userId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

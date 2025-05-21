@@ -6,7 +6,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { API_BASE_URL } from '../config/apiConfig';
 import { Toaster, toast } from 'sonner';
 
-export default function ShareModal({ open, onClose, selectedPhase }) {
+export default function ShareModal({ open, onClose, selectedPhases }) {
   const [loading, setLoading] = useState(false);
   const [link, setLink] = useState('');
   const navigate = useNavigate();
@@ -33,7 +33,8 @@ export default function ShareModal({ open, onClose, selectedPhase }) {
 
   const createReview = async (data) => {
     setLoading(true);
-    console.log(selectedPhase)
+    console.log("Selected phases:", selectedPhases);
+
     try {
       const timestamp = new Date().getTime();
       const randomString = Math.random().toString(36).substring(2, 8);
@@ -48,7 +49,7 @@ export default function ShareModal({ open, onClose, selectedPhase }) {
         uniqueCode: uniqueCode,
         projectId: projectId,
         email: data.email,
-        phases: selectedPhase, // Send only the selected phase
+        phases: selectedPhases, // Send array of selected phases
       };
 
       const response = await fetch(API_BASE_URL + '/api/share/review', {
@@ -104,7 +105,22 @@ export default function ShareModal({ open, onClose, selectedPhase }) {
           <p type='button' onClick={handleClose} className='closeIcon'>X</p>
           {/* <hr></hr> */}
           <div className=''>
-            <p className='text-center text-[25px] '>Share Phase</p>
+            <p className='text-center text-[25px]'>Share Phases</p>
+
+            {/* Display selected phases */}
+            {selectedPhases && selectedPhases.length > 0 && (
+              <div className="mb-4 px-5">
+                <p className="font-medium mb-2">Selected phases:</p>
+                <div className="flex flex-wrap gap-2">
+                  {selectedPhases.map((phase, index) => (
+                    <span key={index} className="bg-blue-100 text-blue-800 px-2 py-1 rounded-lg text-sm">
+                      {phase}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {link && (
               <div>
                 {successMessage && (
@@ -127,12 +143,12 @@ export default function ShareModal({ open, onClose, selectedPhase }) {
                       className='bg-[#E8ECF9] px-5 py-3 w-full rounded-2xl '
                       placeholder="Enter recipient email"
                       id="email"
-                      value={formData.email} 
+                      value={formData.email}
                       onChange={handleChange}
                     ></input>
                   </div>
                 </div>
-                <button className="bg-blue-900 w-full h-10 text-white rounded-3xl" typeof='submit' style={{ marginLeft: 5 }}>
+                <button className="bg-blue-900 w-full h-10 text-white rounded-3xl" type="submit" style={{ marginLeft: 5 }}>
                   {loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' />}
                   {!loading && <span> Send</span>}
                 </button>

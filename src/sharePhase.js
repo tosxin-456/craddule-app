@@ -16,7 +16,7 @@ import Header from './component/header';
 const ImageUpload = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedPhase, setSelectedPhase] = useState(null);
+  const [selectedPhases, setSelectedPhases] = useState([]);
 
   const phaseDetails = [
     {
@@ -41,17 +41,35 @@ const ImageUpload = () => {
     },
   ];
 
-  const handleShareClick = (phase) => {
-    setSelectedPhase(phase);
+  // Track checked phases for multiple selection
+  const [checkedPhases, setCheckedPhases] = useState({});
+
+  const handlePhaseToggle = (phaseName) => {
+    setCheckedPhases(prev => ({
+      ...prev,
+      [phaseName]: !prev[phaseName]
+    }));
+  };
+
+  const handleShareClick = () => {
+    // Get array of selected phase names
+    const selected = Object.keys(checkedPhases).filter(phase => checkedPhases[phase]);
+
+    if (selected.length === 0) {
+      alert('Please select at least one phase to share');
+      return;
+    }
+
+    setSelectedPhases(selected);
     setIsOpen(true);
   };
 
   const onClickHandler21 = () => navigate('/feedback');
 
   return (
-    <div className=' w-[100%] '>
+    <div className='w-[100%]'>
       <Header />
-      <div className=" w-[95%] m-auto relative">
+      <div className="w-[95%] m-auto relative">
         <div className="flex mt-[40px] justify-between items-center w-[100%]">
           <div className="w-fit">
             <button onClick={() => navigate('/start')} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
@@ -65,13 +83,24 @@ const ImageUpload = () => {
         <div className="absolute inset-0 mt-[40px] ml-[20px] sm:ml-[60px] z-[-100] bg-no-repeat bg-cover w-[150px] sm:w-[200px] h-[150px] sm:h-[200px]"
           style={{ backgroundImage: `url(${circle})` }}
         ></div>
-        <div className='w-full bg-white p-2 rounded-2xl mt-5 '>
+        <div className='w-full bg-white p-2 rounded-2xl mt-5'>
           <div className='text-center'>
             <p className='centerH'>Share</p>
             <p className='centerHp'>Here you can share your work</p>
           </div>
-          <div className=' w-fit ml-auto' >
-            <button className="bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl " onClick={onClickHandler21}>Feedback</button>
+          <div className='flex justify-between items-center'>
+            <button
+              className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl ml-4'
+              onClick={handleShareClick}
+            >
+              Share Selected
+            </button>
+            <button
+              className="bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl"
+              onClick={onClickHandler21}
+            >
+              Feedback
+            </button>
           </div>
           <div className="lg:grid grid-cols-2 lg:grid-cols-3 lg:gap-3 mt-14">
             <div className="col-span-4">
@@ -83,16 +112,21 @@ const ImageUpload = () => {
                     style={{ backgroundImage: `url(${phase.bgImage})` }}
                   >
                     <div className={`tilt-box bg-[${phase.bgColor}] ${phase.textColor}`}>
-                      <button
-                        className="px-2 py-1 bg-white rounded-[10px] mb-[16px] text-black400 text-[14px]"
-                        onClick={() => handleShareClick(phase.name)}
-                      >
-                        Share
-                      </button>
+                      <div className="flex items-center mb-[16px]">
+                        <input
+                          type="checkbox"
+                          id={`phase-${index}`}
+                          checked={checkedPhases[phase.name] || false}
+                          onChange={() => handlePhaseToggle(phase.name)}
+                          className="mr-2 h-5 w-5"
+                        />
+                        <label htmlFor={`phase-${index}`} className="text-[14px]">
+                          Select
+                        </label>
+                      </div>
                       <p className="p18">{phase.name}</p>
                       <p className="p18">{phase.description}</p>
                       <p className="p18">{phase.documents}</p>
-
                     </div>
                   </div>
                 ))}
@@ -102,10 +136,9 @@ const ImageUpload = () => {
           <ShareModal
             open={isOpen}
             onClose={() => setIsOpen(false)}
-            phaseNames={phaseDetails.map((phase) => phase.name)} 
-            selectedPhase={selectedPhase} 
+            phaseNames={phaseDetails.map((phase) => phase.name)}
+            selectedPhases={selectedPhases}
           />
-
         </div>
       </div>
       <div className="fixed bottom-0 right-0 z-[-100] m-0 p-0 w-[150px] h-[150px] bg-no-repeat"

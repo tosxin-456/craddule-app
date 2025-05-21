@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import logo from './images/logo.png';
 import design from './images/design.png';
-import { ToastContainer } from 'react-toastify';
 import signUpImage from './images/signup.png';
 
 function SignUp() {
@@ -57,6 +56,7 @@ function SignUp() {
   };
 
   const createUser = async (data) => {
+    console.log(data)
     setLoading(true);
     try {
       const response = await fetch(`${API_BASE_URL}/api/share/user`, {
@@ -77,6 +77,7 @@ function SignUp() {
       } else {
         const result = await response.json();
         setLoading(false);
+        console.log(result.error)
         toast.error(result.error);
       }
     } catch (error) {
@@ -92,6 +93,7 @@ function SignUp() {
 
   return (
     <>
+      <Toaster position="top-right" richColors />
       <div className='mt-[100px]'></div>
       <div className='w-[90%] m-auto lg:grid lg:grid-cols-2 bg-white rounded-xl'>
         <div className='bg-[#193FAE] hidden lg:block relative'>
@@ -219,7 +221,6 @@ function SignUp() {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 }
