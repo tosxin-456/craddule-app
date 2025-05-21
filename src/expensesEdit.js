@@ -194,7 +194,7 @@ function ExpensesMonthOnMonth() {
     return (
         <div className='container2'>
             <SideMenu2 />
-            <div className="main-content">
+            <div className="w-full">
                 <Header />
                 <div className='main-content2' style={{ paddingLeft: 40, paddingRight: 40 }}>
                     <div className='bacWHI'>

@@ -14,7 +14,9 @@ export default function ModalStart({ open, onClose }) {
   const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({
     projectName: '',
-    projectType:'craddule sprint'
+    projectType: 'craddule sprint',
+    industry: '',
+    customIndustry: ''
   });
   const [formQData, setFormQData] = useState({
     answer: '',
@@ -32,16 +34,37 @@ export default function ModalStart({ open, onClose }) {
   // console.log(userId);
 
   const handleChange = (e) => {
+    if (e.target.id === 'industry' && e.target.value === 'Other') {
+      setFormData({
+        ...formData,
+        [e.target.id]: 'Other'
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.id]: e.target.value,
+      });
+    }
+  };
+
+  const handleCustomIndustryChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.id]: e.target.value,
+      customIndustry: e.target.value
     });
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    createProject(formData);
+
+    // If "Other" is selected, use the custom industry value
+    const dataToSubmit = { ...formData };
+    if (formData.industry === 'Other' && formData.customIndustry) {
+      dataToSubmit.industry = formData.customIndustry;
+    }
+    delete dataToSubmit.customIndustry; // Remove the customIndustry field before submission
+
+    createProject(dataToSubmit);
   };
 
   const handleProceed = async () => {
@@ -124,7 +147,6 @@ export default function ModalStart({ open, onClose }) {
                 placeholder="Project Name"
                 value={formData.projectName}
                 onChange={handleChange}
-
               />
             </div>
             <div className="mt-[20px]">
@@ -162,16 +184,41 @@ export default function ModalStart({ open, onClose }) {
                 <option value="Environmental Services">Environmental Services</option>
                 <option value="Insurance">Insurance</option>
                 <option value="Sports and Recreation">Sports and Recreation</option>
+                <option value="Other">Other</option>
               </select>
             </div>
+
+            {formData.industry === 'Other' && (
+              <div className="mt-[20px]">
+                <input
+                  type="text"
+                  id="customIndustry"
+                  className="w-full p18 py-[20px] ps-[40px] rounded-[15px] bg-blue-50"
+                  placeholder="Specify your industry"
+                  value={formData.customIndustry}
+                  onChange={handleCustomIndustryChange}
+                />
+              </div>
+            )}
+
+            <div className="mt-[20px]">
+              <select
+                id="businessType"
+                className="w-full p18 py-[20px] ps-[40px] rounded-[15px] bg-blue-50"
+                value={formData.businessType}
+                onChange={handleChange}
+              >
+                <option value="">Select a Business Type</option>
+                <option value="Physical">Physical Product</option>
+                <option value="Online">Application / Online Business</option>
+              </select>
+            </div>
+
             <button type="submit" className="w-full bg-blue600 text-white rounded-[30px] mt-[40px] py-[14px]" disabled={loading}>
               {loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' />}
               {!loading && <h4 className=''>Continue</h4>}
-
             </button>
-
           </form>
-
         </div>}
     </>,
     document.getElementById('portal')

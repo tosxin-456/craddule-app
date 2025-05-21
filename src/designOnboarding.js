@@ -28,7 +28,7 @@ function DesignOnboarding() {
     const onboarding = JSON.parse(localStorage.getItem("onboarding") || "{}");
 
     if (onboarding.InitialDesign === true) {
-      navigate("/design/start");
+      navigate(`/test-ai/InitialDesign`);
       return;
     }
 
@@ -40,7 +40,7 @@ function DesignOnboarding() {
         setError,
         "InitialDesign"
       );
-      navigate("/design/start");
+      navigate(`/test-ai/InitialDesign`);
     } catch (error) {
       console.error("Error updating onboarding status:", error);
     }

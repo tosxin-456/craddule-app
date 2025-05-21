@@ -279,7 +279,7 @@ function TimelineView() {
 
     <div className='container2'>
         
-         <div className="main-content">
+         <div className="w-full">
         
         
          <div className='main-content2' style={{paddingLeft:40, paddingRight:40}}>

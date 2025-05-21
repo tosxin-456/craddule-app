@@ -6947,7 +6947,9 @@ td {
   background-position: center; /* Centers the image */
   border-radius: 20px;
   padding: 20px;
-  overflow: hidden; /* Ensures the pseudo-element doesn't extend outside the container */
+  overflow: hidden; 
+  
+  /* Ensures the pseudo-element doesn't extend outside the container */
 }
 
 .bacWHITe::before {

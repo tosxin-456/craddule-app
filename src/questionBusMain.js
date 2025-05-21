@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import bci from './images/bc.png';
 import bro from './images/bro.png';
 import Header from './component/header';
@@ -322,6 +322,43 @@ function QuestionBus() {
     fetchVideo();
   }, [phase]);
 
+  const CustomDropdown = ({ options, selectedValue, onSelect }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleSelect = (value) => {
+      onSelect(value);
+      setIsOpen(false); // Close the dropdown after selection
+    };
+
+    return (
+      <div className="relative w-full">
+        {/* Dropdown Button */}
+        <button
+          type="button"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-200 text-left"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {selectedValue || "Select an option"}
+        </button>
+
+        {/* Dropdown Options */}
+        {isOpen && (
+          <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+            {options.map((option, index) => (
+              <div
+                key={index}
+                className="p-3 hover:bg-gray-100 cursor-pointer whitespace-normal break-words"
+                onClick={() => handleSelect(option)}
+              >
+                {option}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   //Check if user as started Section
   // useEffect(() => {
   //   const checker = async () => {
@@ -515,6 +552,28 @@ function QuestionBus() {
     }
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const selectRef = useRef(null);
+
+  const toggleDropdown = () => setIsModalOpen(!isModalOpen);
+  const handleSelect = (option) => {
+    handleOptionSelect(option);
+    setIsModalOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (selectRef.current && !selectRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
 
 
@@ -527,7 +586,7 @@ function QuestionBus() {
       {phase === 'InitialDesign' && <SideMenu2I />}
       {phase === 'Commercialization' && <SideMenu2C />}
       {phase === 'ValidatingAndTesting' && <SideMenu2V />}
-      <div className="main-content">
+      <div className="w-full">
         <div className='w-[100%]' >
 
           <HeaderIdeation />
@@ -562,26 +621,33 @@ function QuestionBus() {
 
                   {/* Dropdown for Options */}
                   {question.options && question.options.length > 0 && (
-                    <div className="options-container mb-6">
-                      <label htmlFor="options" className="block text-sm font-medium text-gray-700 mb-2">
+                    <div className="relative w-full mb-6" ref={selectRef}>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         Select an option
                       </label>
-                      <select
-                        id="options"
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-200"
-                        value={formData.answer}
-                        onChange={(e) => handleOptionSelect(e.target.value)}
+                      <div
+                        className="w-full p-3 border border-gray-300 rounded-lg bg-white cursor-pointer flex justify-between items-center"
+                        onClick={toggleDropdown}
                       >
-                        <option value="" disabled>
-                          Select an option
-                        </option>
-                        {question.options.map((option, index) => (
-                          <option key={index} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
+                        <span>{formData.answer || "Select an option"}</span>
+                        <span className="ml-2">▼</span> {/* Custom dropdown icon */}
+                      </div>
+
+                      {isModalOpen && (
+                        <div className="absolute mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10 max-h-60 overflow-auto">
+                          {question.options.map((option, index) => (
+                            <div
+                              key={index}
+                              className="p-3 cursor-pointer hover:bg-gray-100 break-words"
+                              onClick={() => handleSelect(option)}
+                            >
+                              {option}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
+
                   )}
 
                   {/* Textarea for Additional Input */}
@@ -591,11 +657,12 @@ function QuestionBus() {
                     </label>
                     <textarea
                       id="answer"
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-200"
+                      className="w-full p-3 h-32 min-h-20 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-200"
                       value={formData.answer}
                       onChange={handleChange}
                       placeholder="You can add more details here..."
                     />
+
                     <p className="text-sm text-gray-500 mt-2">
                       Your answer shouldn't be about money; it should be about solving a problem.
                     </p>

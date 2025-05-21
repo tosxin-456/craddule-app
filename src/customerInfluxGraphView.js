@@ -182,8 +182,8 @@ useEffect(() => {
       return (
 
         <div className='container2'>
-        <SideMenu2 />    
-        <div className="main-content">
+ {/* //<SideMenu2 />     */}
+        <div className="w-full">
        
         <Header />
         <div className="headGr">

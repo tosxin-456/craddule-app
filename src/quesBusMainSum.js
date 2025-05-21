@@ -53,6 +53,7 @@ function QuestionBusIntro() {
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionBoxPosition, setSuggestionBoxPosition] = useState({ top: 0, left: 0 });
   const [selectedWord, setSelectedWord] = useState(null);
+  const [nextSubCategory, setNextSubCategory] = useState(" ");
 
   const [showScrollableDiv, setShowScrollableDiv] = useState(false);
   const [showScrollableDiv2, setShowScrollableDiv2] = useState(false);
@@ -144,6 +145,38 @@ function QuestionBusIntro() {
 
     fetchAnswers();
   }, [category, subCategory, projectId]);
+
+  useEffect(() => {
+    const fetchNextSubCategory = async () => {
+      try {
+        const response = await fetch(
+          `${API_BASE_URL}/api/finished/${projectId}/${category}/${subCategory}`, 
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}` // Include the token in the request headers
+            }
+          });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch next question");
+        }
+
+        const data = await response.json();
+        setNextSubCategory(data.subCategory);
+        console.log(data)
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (category && subCategory && projectId) {
+      fetchNextSubCategory();
+    }
+  }, [category, subCategory, projectId]);
+
 
 
   //insert summary if it has not being created
@@ -333,7 +366,7 @@ function QuestionBusIntro() {
       // Handle error
     }
   };
-  
+
   const createOrUpdateSummary3 = async (data) => {
     const summary = data;
     try {
@@ -917,7 +950,7 @@ function QuestionBusIntro() {
   const separatedSubCategory = separateSubCategory(subCategory);
 
 
-  const onClickNext = () => navigate(`/questionBusMain/${phase}/${category}`);
+  const onClickNext = () => navigate(`/questionBusMain/${phase}/${category}/${nextSubCategory}`);
 
   const handleMouseDown = (event) => {
     if (event.target.tagName === 'IMG') {
@@ -951,22 +984,19 @@ function QuestionBusIntro() {
   return (
 
 
-
-
-
     <div className='container2'>
       {phase === 'Ideation' && <SideMenu2 />}
       {phase === 'ProductDefinition' && <SideMenu2P />}
       {phase === 'InitialDesign' && <SideMenu2I />}
       {phase === 'Commercialization' && <SideMenu2C />}
       {phase === 'ValidatingAndTesting' && <SideMenu2V />}
-      <div className="main-content">
+      <div className="w-full">
 
         <HeaderIdeation />
         <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
 
           <div className='text-center'>
-            <p className='textHp'>{separatedSubCategory}s</p>
+            <p className='textHp'>{separatedSubCategory}</p>
             <p className='textH'>Make sure you answer all questions</p>
           </div>
 
@@ -975,11 +1005,7 @@ function QuestionBusIntro() {
               <p className='prq' onClick={handleToggle}>Previous Questions</p>
             </div>
 
-            {/* <div className='col-md-6'>
-                    <p className='prq' onClick={handleToggleSh} style={{float:"right"}}>Previous Categories</p>
-                  </div> */}
           </div>
-
           <div className='quiInt'>
 
 
@@ -1092,6 +1118,10 @@ function QuestionBusIntro() {
 
 
             </form>
+            <div className='ml-auto w-fit ' >
+              <button onClick={onClickNext} className='bg-yellow-300 px-3 py-1 mt-3 rounded-md ml-auto ' >Next</button>
+            </div>
+
           </div>
 
 

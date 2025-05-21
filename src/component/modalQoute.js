@@ -87,7 +87,7 @@ export default function ModalVideo({ open, onClose, quote,quoteId}){
             <p>{quote}</p>
             
             {/* {showButton && ( */}
-            <p onClick={handleProceed} className="quoteMc" style={{color:'#000'}}>Proceed</p>
+            <p onClick={handleProceed} className="quoteMc cursor-pointer " style={{color:'#000'}}>Proceed</p>
               
             {/* )} */}
                 

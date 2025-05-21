@@ -11,6 +11,13 @@ import { API_BASE_URL } from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch, faChevronDown, faBold, faItalic, faUnderline, faStrikethrough, faQuoteRight, faCode, faLink, faImage, faTextHeight, faListOl, faListUl, faSubscript, faSuperscript, faOutdent, faIndent, faAlignRight, faHeading } from '@fortawesome/free-solid-svg-icons';
+import {
+  DocumentText, Bold, Italic, Underline, Strikethrough, Quote, Code, Image, AlignLeft, AlignCenter, AlignRight, Outdent, Indent, Subscript, Superscript, Edit2, Save, Trash, ListOrdered,
+  ListOrderedIcon,
+  ListMinus,
+} from 'lucide-react';
+
+
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { jwtDecode } from "jwt-decode";
@@ -662,6 +669,12 @@ function QuestionBusIntro() {
     }
   };
 
+  function Divider() {
+    return <div className="h-6 border-[1.2px] border-gray-600 mx-1"></div>;
+  }
+
+  
+
   return (
 
 
@@ -676,7 +689,7 @@ function QuestionBusIntro() {
       {phase === 'Commercialization' && <SideMenu2C />}
       {phase === 'ValidatingAndTesting' && <SideMenu2V />}
 
-      <div className="main-content">
+      <div className="w-full">
 
         <HeaderIdeation />
         <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>
@@ -685,6 +698,7 @@ function QuestionBusIntro() {
             <p className='textHp'>Pdf Summary</p>
 
           </div>
+
 
 
           <div className='quiInt'>
@@ -707,162 +721,197 @@ function QuestionBusIntro() {
 
                 {/* <textarea className='textBs' value={combinedAnswer} onChange={handleChange} id="summary"></textarea> */}
 
+                <div className="p-2 space-y-2">
+                  <div className="toolbar bg-gray-100 p-2 rounded-lg flex flex-wrap gap-1 md:justify-center justify-start items-center shadow-md">
+                    {/** Bold Button **/}
+                    <button
+                      onClick={() => formatText("bold")}
+                      type="button"
+                    >
+                      <Bold className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Italic Button **/}
+                    <button
+                      onClick={() => formatText("italic")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <Italic className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Underline Button **/}
+                    <button
+                      onClick={() => formatText("underline")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <Underline className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Strikethrough Button **/}
+                    <button
+                      onClick={() => formatText("strikeThrough")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <Strikethrough className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Blockquote Button **/}
+                    <button
+                      onClick={() => formatText("formatBlock", "blockquote")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <Quote className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Code Block Button **/}
+                    <button
+                      onClick={() => formatText("formatBlock", "pre")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <Code className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Link Button **/}
+                    <button
+                      onClick={insertLink}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <FontAwesomeIcon icon={faLink} className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Image Button **/}
+                    <button
+                      onClick={handleImagePopup}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <Image className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Font Size Dropdown **/}
+                    <select
+                      onChange={(e) => formatText("fontSize", e.target.value)}
+                      className="select-dropdown"
+                    >
+                      <option value="">Size</option>
+                      {[...Array(23)].map((_, i) => (
+                        <option key={i} value={i + 2}>
+                          {i + 2}
+                        </option>
+                      ))}
+                    </select>
+                    <Divider />
+                    {/** Heading Dropdown **/}
+                    <select
+                      onChange={handleHeadingChange}
+                      className="select-dropdown"
+                    >
+                      <option value="">Heading</option>
+                      {[...Array(6)].map((_, i) => (
+                        <option key={i} value={`h${i + 1}`}>
+                          H{i + 1}
+                        </option>
+                      ))}
+                    </select>
+                    <Divider />
+                    {/** Ordered List Button **/}
+                    <button
+                      onClick={() => formatText("insertOrderedList")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <FontAwesomeIcon icon={faListOl} className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Unordered List Button **/}
+                    <button
+                      onClick={() => formatText("insertUnorderedList")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <FontAwesomeIcon icon={faListUl} className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Subscript Button **/}
+                    <button
+                      onClick={() => formatText("subscript")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <Subscript className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Superscript Button **/}
+                    <button
+                      onClick={() => formatText("superscript")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <Superscript className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Outdent Button **/}
+                    <button
+                      onClick={() => formatText("outdent")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <Outdent className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Indent Button **/}
+                    <button
+                      onClick={() => formatText("indent")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <Indent className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Align Right Button **/}
+                    <button
+                      onClick={() => formatText("direction", "rtl")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <AlignRight className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Align Center Button **/}
+                    <button
+                      onClick={() => formatText("direction", "center")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <AlignCenter className="w-4 h-4" />
+                    </button>
+                    <Divider />
+                    {/** Align Left Button **/}
+                    <button
+                      onClick={() => formatText("direction", "ltr")}
+                      type="button"
+                      className="btn-icon"
+                    >
+                      <AlignLeft className="w-4 h-4" />
+                    </button>
+                  </div>
 
-                <div className="toolbar mt-4 p-1 mb-5 bg-[#E8ECF9] rounded-lg flex flex-wrap justify-start items-center font-sans gap-1">
-                  <button
-                    onClick={() => formatText('bold')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faBold} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('italic')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faItalic} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('underline')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faUnderline} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('strikeThrough')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faStrikethrough} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('formatBlock', 'blockquote')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faQuoteRight} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('formatBlock', 'pre')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faCode} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={insertLink}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faLink} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={handleImagePopup}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faImage} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <select
-                    onChange={(e) => formatText('fontSize', e.target.value)}
-                    className="p-1 border rounded bg-transparent text-lg focus:outline-none"
-                  >
-                    <option value="">Font Size</option>
-                    {[...Array(23)].map((_, i) => (
-                      <option key={i} value={i + 2}>
-                        {i + 2}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <select
-                    onChange={handleHeadingChange}
-                    className="p-1 border rounded bg-transparent text-lg focus:outline-none"
-                  >
-                    <option value="">Heading</option>
-                    {[...Array(6)].map((_, i) => (
-                      <option key={i} value={`h${i + 1}`}>
-                        H{i + 1}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('insertOrderedList')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faListOl} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('insertUnorderedList')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faListUl} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('subscript')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faSubscript} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('superscript')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faSuperscript} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('outdent')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faOutdent} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('indent')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faIndent} />
-                  </button>
-                  <div className="h-5 border-l-2 border-gray-500 mx-1"></div>
-                  <button
-                    onClick={() => formatText('direction', 'rtl')}
-                    type="button"
-                    className="p-1 hover:bg-gray-300 rounded text-lg"
-                  >
-                    <FontAwesomeIcon width={11} icon={faAlignRight} />
-                  </button>
+                  <div
+                    ref={editorRef}
+                    contentEditable={true}
+                    className="editor bg-gray-200 rounded-md shadow-inner min-h-[300px] p-4 focus:outline-none"
+                    onInput={handleEditorChange}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                  />
                 </div>
-                <div
-                  ref={editorRef}
-                  contentEditable={true}
-                  className="editor bg-[#EEEEEE] md:w-[80%] rounded-md m-auto min-h-full "
-                  onInput={handleEditorChange}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-
-                />
 
 
                 {showImagePopup &&

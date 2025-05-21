@@ -116,7 +116,7 @@ function DesignMain() {
     return (
         <div style={{ fontFamily: '"Manrope", sans-serif' }} className="container2">
             <SideMenu2I />
-            <div className="main-content">
+            <div className="w-full">
                 <HeaderIdeation />
                 <div className="container relative">
                     <div className="absolute inset-0 mt-[80px] ml-[20px] sm:ml-[60px] z-[-100] bg-no-repeat bg-cover w-[150px] sm:w-[200px] h-[150px] sm:h-[200px]"

@@ -725,7 +725,7 @@ function QuestionBusIntro() {
       {phase === 'Commercialization' && <SideMenu2C />}
       {phase === 'ValidatingAndTesting' && <SideMenu2V />}
 
-      <div className="main-content">
+      <div className="w-full">
 
         <HeaderIdeation />
         <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>

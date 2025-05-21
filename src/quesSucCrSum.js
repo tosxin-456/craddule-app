@@ -809,7 +809,7 @@ const handleClick = (id) => {
 
     <div className='container2'>
         <SideMenu2P />    
-         <div className="main-content">
+         <div className="w-full">
         
          <HeaderIdeation />
          <div className={`main-content2 ${showScrollableDiv ? 'shrink' : ''}`}>

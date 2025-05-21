@@ -50,23 +50,24 @@ function InflationRateGraph({ graphType }) {
         const onboarding = JSON.parse(localStorage.getItem('onboarding') || '{}');
 
         const phasePaths = {
-            Ideation: '/ideation',
-            ProductDefinition: '/product',
-            InitialDesign: '/design',
-            ValidatingandTesting: '/validate',
-            Commercialization: '/commercialization'
+            Ideation: '/Ideation',
+            ProductDefinition: '/ProductDefinition',
+            InitialDesign: '/InitialDesign',
+            ValidatingandTesting: '/ValidatingAndTesting',
+            Commercialization: '/Commercialization'
         };
 
         // Check if the provided phase has been marked as seen
         if (onboarding[phase]) {
             // If seen, navigate to the start page for the phase
-            navigate(`${phasePaths[phase]}/start`);
+            navigate(`/test-ai${phasePaths[phase]}`);
         } else {
             // If not seen, navigate to the onboarding page for the phase
             navigate(phasePaths[phase]);
         }
     };
 
+    // /test-ai/:phase"
 
 
 

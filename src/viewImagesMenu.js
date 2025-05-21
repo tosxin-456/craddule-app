@@ -70,7 +70,7 @@ function InflationRateGraph({projectId, graphType }) {
 
         <div className="container">
       <SideMenu2 />
-      <div className="main-content">
+      <div className="w-full">
         <h1>Main Content Area</h1>
         <p>This content area expands when the side menu collapses and retracts when it expands.</p>
       </div>

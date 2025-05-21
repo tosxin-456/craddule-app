@@ -107,8 +107,8 @@ useEffect(() => {
       
         <Header />
     <div className='container2'>
-         <SideMenu2 />    
-         <div className="main-content">
+  {/* //<SideMenu2 />     */}
+         <div className="w-full">
          <div className='headermm'>
             <p>AllFiles</p>
           </div> 

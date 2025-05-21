@@ -201,7 +201,7 @@ useEffect(() => {
         {/* <TopMenu /> */}
     <div className='container2'>
          <SideMenu2P />    
-         <div className="main-content">
+         <div className="w-full">
          <div className='headermm'>
             <p>Prototype</p>
           </div> 

@@ -28,7 +28,7 @@ function IdeationOnboarding() {
   const handleNextClick = async () => {
     const onboarding = JSON.parse(localStorage.getItem("onboarding") || "{}");
     if (onboarding.Ideation === true) {
-      navigate("/ideation/start");
+      navigate(`/test-ai/Ideation`);
       return;
     }
     try {
@@ -39,7 +39,7 @@ function IdeationOnboarding() {
         setError,
         "Ideation"
       );
-      navigate("/ideation/start");
+      navigate(`/test-ai/Ideation`);
     } catch (error) {
       console.error("Error updating onboarding status:", error);
     }

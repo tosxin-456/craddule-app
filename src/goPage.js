@@ -19,6 +19,7 @@ import HeaderIdeation from './component/headerIdeation';
 import home from './images/HOME.png';
 import circle from './images/circle.png';
 import feedback from './images/feedback.svg';
+// import home from './images/HOME.png';
 
 function GoPage() {
   useEffect(() => {
@@ -127,26 +128,21 @@ const navigate = useNavigate()
   return (
     <>
 
-      <div className='container2'
+      <div className=''
         style={{
           fontFamily: '"Manrope", sans-serif'
         }}
       >
-        {phase === 'Ideation' && <SideMenu2 />}
-        {phase === 'ProductDefinition' && <SideMenu2P />}
-        {phase === 'InitialDesign' && <SideMenu2I />}
-        {phase === 'Commercialization' && <SideMenu2C />}
-        {phase === 'ValidatingAndTesting' && <SideMenu2V />}
-        <div className="main-content relative ">
+        <div className="w-full relative ">
 
-          <HeaderIdeation />
+          <Header/>
             <div className="absolute inset-0 mt-[80px] ml-[20px] sm:ml-[60px] z-[-100] bg-no-repeat bg-cover w-[150px] sm:w-[200px] h-[150px] sm:h-[200px]"
               style={{ backgroundImage: `url(${circle})` }}
             ></div>
           <div className='main-content2'>
             <div className="flex mt-[40px]  mb-[30px] justify-between items-center w-[100%]">
               <div className="w-fit">
-                <button onClick={() => navigate('/start')} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
+                <button onClick={() => navigate(-1)} className='bg-[#193FAE] px-[30px] py-[5px] text-white rounded-3xl'>
                   Back
                 </button>
               </div>

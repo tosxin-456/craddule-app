@@ -311,49 +311,50 @@ import CommercializationMain from './commersialzationStart';
 import Subfolder from './subfolder';
 import SubFolderUpload from './subfolderupload';
 import QuestionsForm from './component/questionsForm';
+import QuestionOptions from './TestAi';
+import PhaseSummary from './PhaseSummary';
 
 function App() {
   const [isTrialExpired, setIsTrialExpired] = useState(false)
   clarity.init('ocijdfgrpz');
   // const socket = io('http://localhost:3001');
   const { userId } = getUserIdFromToken();
+  const projectId = localStorage.getItem("nProject");
 
   useEffect(() => {
     const checkTrial = async () => {
-      console.log("checking")
+      console.log("Checking trial status...");
+
       try {
-        const response = await fetch(API_BASE_URL + '/api/user/' + userId, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        });
+        const response = await fetch(
+          `${API_BASE_URL}/api/user/trial/${userId}?projectId=${projectId}`, 
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          }
+        );
 
         if (response.status === 200) {
-          console.log(response);
-
           const responseData = await response.json(); // Parse JSON response
-          console.log(responseData.trialPopUp)
-          if (responseData.trialPopUp == 'true') {
-            setIsTrialExpired(false)
-          } else {
-            setIsTrialExpired(true)
-          }
+          console.log("Trial status:", responseData.trialPopUp);
+
+          setIsTrialExpired(responseData.trialPopUp !== true);
         } else {
-          setIsTrialExpired(false)
+          setIsTrialExpired(false);
         }
       } catch (error) {
-        console.error('An error occurred:', error);
+        console.error("An error occurred:", error);
       }
     };
 
-    if (userId == null) {
-      return
-    } else {
-      checkTrial()
+    if (userId) {
+      checkTrial();
     }
-  })
+  }, [userId, projectId]); // Added projectId as a dependency
+
 
   return (
     <>
@@ -377,17 +378,17 @@ function App() {
           <Route path="/home" element={<LandingPage />} />
           <Route path="/start/" element={<Start />} />
           <Route path="/ideation" element={<IdeationPage />} />
-          <Route path="/validate" element={<ValidatingOnboarding />} />
-          <Route path="/commercialization" element={<CommersialzationOnboarding />} />
-          <Route path="/commercialization/start" element={<CommercializationMain />} />
-          <Route path="/validate/start" element={<ValidatingMain />} />
+          <Route path="/ValidatingAndTesting" element={<ValidatingOnboarding />} />
+          <Route path="/Commercialization" element={<CommersialzationOnboarding />} />
+          <Route path="/Commercialization/start" element={<CommercializationMain />} />
+          <Route path="/ValidatingAndTesting/start" element={<ValidatingMain />} />
           <Route path="/ideation/start" element={<IdeationMain />} />
-          <Route path="/product/start" element={<ProductionMain />} />
-          <Route path="/design" element={<DesignOnboarding />} />
-          <Route path="/design/start" element={<DesignMain />} />
+          <Route path="/ProductDefinition/start" element={<ProductionMain />} />
+          <Route path="/InitialDesign" element={<DesignOnboarding />} />
+          <Route path="/InitialDesign/start" element={<DesignMain />} />
           <Route path="/card" element={<GetCard />} />
 
-          <Route path="/product" element={<ProductionOnboarding />} />
+          <Route path="/ProductDefinition" element={<ProductionOnboarding />} />
 
 
           <Route path="/pitchDeckUpload" element={<PitchDeckUpload />} />
@@ -665,12 +666,14 @@ function App() {
           <Route path="/go-no-go" element={<GoNoGoMain />} />
           <Route path="/nda/" element={<Nda />} />
           <Route path="/card/" element={<GetCard />} />
+          <Route path="/test-ai/:phase" element={<QuestionOptions />} />
+          <Route path="/summary-phase/:phase" element={<PhaseSummary />} />
           <Route path="/craddule/:hubType" element={<Subfolder />} />
           <Route path="/craddule/:hubType/upload" element={<SubFolderUpload />} />
           <Route path="/createVideoAdmin/" element={<CreateVideosAdmin />} />
         </Routes>
       </Router>
-      {isTrialExpired && (
+      {isTrialExpired && window.location.pathname !== '/home' && (
         <GetCard />
       )}
     </>

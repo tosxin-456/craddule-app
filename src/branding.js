@@ -16,7 +16,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import HeaderIdeation from './component/headerIdeation';
 import axios from 'axios';
 import ModalVideo from './component/modalVideoAny';
-
+import home from './images/HOME.png';
 
 function PagePositioning() {
   const navigate = useNavigate()
@@ -211,17 +211,25 @@ function PagePositioning() {
 
   return (
     <>
-      <div className='container2'>
-        <SideMenu2P />
-        <div className="main-content">
+      <div className=''>
+        {/* <SideMenu2P /> */}
+        <div className="w-full">
 
-          <HeaderIdeation />
-
+          <Header />
 
 
 
           <div className='centerC'>
 
+            <div className=' flex justify-evenly' >
+              <div className="mr-auto ">
+                <button className="mainBtn" onClick={() => navigate(-1)} >Back</button>
+              </div>
+              <div>
+                <img src={home} />
+
+              </div>
+            </div>
             <div className='text-center'>
               <p className='centerH p-[10px] rounded-sm '>Branding</p>
               <p className='centerHp'>Here you create your brand</p>

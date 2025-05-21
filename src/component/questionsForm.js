@@ -17,17 +17,27 @@ function QuestionsForm() {
     const userId = decodedToken.userId;
     const projectId = localStorage.getItem("nProject");
     const category = "NONE";
-    const subCategoryPassed = "NONE";
+
+    // const subCategoryPassed = "NONE";
 
     const fetchUnansweredQuestions = async () => {
         setErrorMessage("");
         setLoading(true);
         try {
             const response = await fetch(
-                `${API_BASE_URL}/api/new/questions/${category}/${subCategoryPassed}/${projectId}`
+                `${API_BASE_URL}/api/test-new/questions/${category}/${projectId}`,
+                {
+                    method: "GET", // Specify the HTTP method if needed
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${access_token}` // Include the token in the request headers
+                    }
+                }
             );
+
             if (response.ok) {
                 const data = await response.json();
+                console.log(data)
                 if (!data || !data.data || data.data.length === 0) {
                     navigate("/start");
                 } else {
@@ -73,13 +83,12 @@ function QuestionsForm() {
                     projectId,
                     questionId: question._id,
                     answer: answers[question._id],
-                    questionType: category,
-                    questionSubType: subCategoryPassed,
+                    phase: category,
                 };
 
                 console.log("Submitting:", data);
 
-                const response = await fetch(`${API_BASE_URL}/api/answer`, {
+                const response = await fetch(`${API_BASE_URL}/api/test-answer`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -108,8 +117,11 @@ function QuestionsForm() {
         <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
             <div className="bg-white w-full max-w-2xl rounded-lg shadow-lg p-6">
                 <h2 className="text-2xl font-semibold text-center mb-6">
-                    Answer All Questions
+                    Welcome to Craddule
                 </h2>
+                <p className="text-center" >
+                    Let us get you set your tools, please answer all questions below – please answer robustly but within 500 words
+                </p>
                 {errorMessage && (
                     <p className="text-red-500 text-center mb-4">{errorMessage}</p>
                 )}

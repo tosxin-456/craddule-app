@@ -185,7 +185,6 @@ function ScrapCreate({ htmlContent }) {
         body {
             font-family: Arial, sans-serif;
             color: #333;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
         }
@@ -194,9 +193,10 @@ function ScrapCreate({ htmlContent }) {
             max-width: 800px;
             margin: auto;
         }
-        h1 {
+        h5 {
             color: #2E86C1;
-            font-size: 24px;
+            font-size: 23px;
+            text-align: center;
         }
         h2 {
             color: #2874A6;
@@ -213,7 +213,7 @@ function ScrapCreate({ htmlContent }) {
 </head>
 <body>
     <div class="container">
-        <h1>CONFIDENTIALITY AND NON-DISCLOSURE AGREEMENT</h1>
+        <h5>CONFIDENTIALITY AND NON-DISCLOSURE AGREEMENT</h5>
         <p>This Confidentiality and Non-disclosure agreement is made this <strong>${getFormattedDate()}</strong></p>
 
         <h2>PARTIES</h2>
@@ -666,6 +666,9 @@ function ScrapCreate({ htmlContent }) {
             <img src={home} alt="Home Icon" />
           </div>
         </div>
+        <div className='mt-3 text-center text-red-600 ' >
+          <p>We do not offer legal advice, please discuss this template NDA with a legal proffesional before adopting it, thank you</p>
+        </div>
         <div className="upload-container" style={{ textAlign: 'justify', width: "100%" }}>
           <div className='main-content2'>
 
@@ -674,6 +677,7 @@ function ScrapCreate({ htmlContent }) {
                 <p className='centerH' onClick={accessToolbar}>{scrapName}</p>
 
               </div>
+
 
               <form onSubmit={handleSubmit}>
                 <button className="btn btn-primary buttonE" type='submit'>

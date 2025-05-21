@@ -459,7 +459,7 @@ function ScrapView({ htmlContent }) {
                 <div className="mb-4">
                   <h4 className='text-center text-lg sm:text-xl lg:text-2xl font-semibold'>Add Team Member</h4>
                   <p onClick={()=>navigate('/nda')} className='bg-blue-700 text-white w-fit p-1 px-2 rounded-xl cursor-pointer ml-auto ' >
-                    Edit Nda
+                    Edit NDA
                   </p>
                 </div>
               </div>

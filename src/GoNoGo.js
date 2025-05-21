@@ -36,7 +36,7 @@ function GoNoGoMain() {
             }}
             className='container2'>
             <SideMenu2 />
-            <div className="main-content">
+            <div className="w-full">
                 <HeaderIdeation />
 
                 <div className='container relative'>

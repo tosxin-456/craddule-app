@@ -8,7 +8,8 @@ const APP_BASE_URL = 'https://demo.craddule.com';
 const APP_REFER_URL = 'https://craddule.com';
 // const API_BASE_URL = 'https://demo.cradduleapi.com.ng';
 // const API_BASE_URL = 'https://api.cradduleapi.com.ng';
-const API_BASE_URL = 'http://localhost:3010';
+const API_BASE_URL = 'https://test-ai.cradduleapi.com.ng'
+// const API_BASE_URL = 'http://localhost:3010';
 module.exports= {API_BASE_URL, 
     APP_BASE_URL, APP_REFER_URL, API_IMAGE_BASE_URL
 } 

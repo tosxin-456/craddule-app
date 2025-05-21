@@ -29,7 +29,7 @@ function ProductionOnboarding() {
     const onboarding = JSON.parse(localStorage.getItem("onboarding") || "{}");
 
     if (onboarding.ProductDefinition === true) {
-      navigate("/product/start");
+    navigate(`/test-ai/ProductDefinition`);
       return;
     }
 
@@ -41,7 +41,7 @@ function ProductionOnboarding() {
         setError,
         "ProductDefinition"
       );
-      navigate("/product/start");
+    navigate(`/test-ai/ProductDefinition`);
     } catch (error) {
       console.error("Error updating onboarding status:", error);
     }

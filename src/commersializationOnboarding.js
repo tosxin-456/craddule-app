@@ -29,7 +29,7 @@ function CommersialzationOnboarding() {
     const onboarding = JSON.parse(localStorage.getItem("onboarding") || "{}");
 
     if (onboarding.Commercialization === true) {
-      navigate("/commercialization/start");
+          navigate(`/test-ai/Commercialization`);
       return;
     }
 
@@ -41,7 +41,7 @@ function CommersialzationOnboarding() {
         setError,
         "Commercialization"
       );
-      navigate("/commercialization/start");
+          navigate(`/test-ai/Commercialization`);
     } catch (error) {
       console.error("Error updating onboarding status:", error);
     }

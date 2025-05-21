@@ -93,7 +93,7 @@ const ImageUpload = () => {
     <>
     <div className='container2'>
     <SideMenu2P />
-    <div className="main-content">
+    <div className="w-full">
     <DndProvider backend={HTML5Backend}>
       <div className="upload-container">
         <div {...getRootProps({ className: 'dropzone' })}>
