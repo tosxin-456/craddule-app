@@ -11,7 +11,7 @@ function PhasePercentage() {
     const [error, setError] = useState(null);
     const [expandedPhase, setExpandedPhase] = useState(null);
     const [showPayment, setShowPayment] = useState(false);
-    const [showContent, setShowContent] = useState(true); // New state for overall visibility
+    const [showContent, setShowContent] = useState(false); // New state for overall visibility
 
     const navigate = useNavigate();
 

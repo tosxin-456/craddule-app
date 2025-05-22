@@ -14,6 +14,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import ReactGA from "react-ga4";
 import { handleTogglePassword, handleToggleCPassword, validatePassword, createUser } from './utils/signUpUtils.js';
+import SignWithGoogle from './GoogleSignUp.js';
 
 function SignUp() {
   ReactGA.initialize("G-P450CRB987");
@@ -73,7 +74,7 @@ function SignUp() {
   useEffect(()=>{
     const pathname = location.pathname.split('/');
     const lastPath = pathname[pathname.length-1];
-    if (lastPath == 'signUp'){
+    if (lastPath == 'signup'){
       setReferralCode(0);
     }else{
       setReferralCode(lastPath)
@@ -221,6 +222,14 @@ function SignUp() {
                 {!loading && <span>Proceed</span>}
               </button>
             </form>
+
+            <div className="flex items-center my-6">
+              <hr className="flex-grow border-t border-gray-300" />
+              <span className="mx-4 text-gray-500 text-sm font-medium">OR</span>
+              <hr className="flex-grow border-t border-gray-300" />
+            </div>
+
+            <SignWithGoogle/>
 
             <p className='mt-8 font-medium text-[16px]'>Already on Craddule?<a className='ps-2 no-underline text-[#1B45BF]' href='/login'>Login</a></p>
           </div>
