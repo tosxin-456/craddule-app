@@ -152,6 +152,7 @@ import ScrapView from './scrapView';
 
 // AI & Testing
 import QuestionOptions from './TestAi';
+import ConclusionSummaryPage from './ConclusionSummary';
 
 function App() {
   const [isTrialExpired, setIsTrialExpired] = useState(false);
@@ -311,6 +312,8 @@ function App() {
 
           {/* Summary & Reports Routes */}
           <Route path="/summary-phase/:phase" element={<PhaseSummary />} />
+
+          <Route path="/conclusion" element={<ConclusionSummaryPage />} />
 
           {/* Settings Routes */}
           <Route path="/generalSetting" element={<GeneralSetting />} />

@@ -779,15 +779,21 @@ function PhaseSummary() {
     const getNextPhase = () => {
         const currentIndex = phasePaths.indexOf(phase);
 
-        if (currentIndex === -1 || currentIndex >= phasePaths.length - 1) return;
+        if (currentIndex === -1) return;
+
+        // If current phase is the last one, go to conclusion
+        if (currentIndex === phasePaths.length - 1) {
+            navigate("/conclusion");
+            return;
+        }
 
         const nextPhase = phasePaths[currentIndex + 1];
-        const formattedNextPhase = formatPhase(nextPhase); // For display if needed
+        const formattedNextPhase = formatPhase(nextPhase); // Optional: for display
         setNextPhase(formattedNextPhase);
 
         const onboardingData = JSON.parse(localStorage.getItem('onboarding')) || {};
 
-        // Normalize the keys: make all keys lowercase without spaces
+        // Normalize the keys
         const normalize = (str) => str.replace(/\s/g, '').toLowerCase();
 
         const normalizedOnboarding = {};
@@ -803,6 +809,7 @@ function PhaseSummary() {
             navigate(`/test-ai/${nextPhase}`);
         }
     };
+    
 
 
 
