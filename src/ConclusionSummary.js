@@ -190,9 +190,9 @@ const ConclusionSummaryViewer = () => {
                             <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
                                 <div className="flex items-start sm:items-center space-x-2 min-w-0">
                                     <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 flex-shrink-0 mt-0.5 sm:mt-0" />
-                                    <h2 className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 break-words leading-tight">
+                                    <p className=" text-4xl font-semibold text-gray-900 break-words leading-tight">
                                         Investor-Ready Business Summary
-                                    </h2>
+                                    </p>
                                 </div>
                                 {/* Uncomment if download functionality is needed
                                 <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-2 sm:space-y-0">

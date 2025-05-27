@@ -7,6 +7,7 @@ import { API_BASE_URL } from './config/apiConfig';
 import { Toaster, toast } from 'sonner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, Home, User, Calendar, Tag, Upload, HelpCircle, Plus, Palette, Users, Eye } from 'lucide-react';
 import SideMenu2P from './component/sideMenu2P';
 import DatePicker from 'react-datepicker';
 import { SketchPicker } from 'react-color'; // Importing SketchPicker from react-color
@@ -280,164 +281,282 @@ const CreateTask = () => {
 
 
 
-  return (
-    <div>
-      <Header />
-      <div className="container relative">
-        <div
-          className="absolute inset-0 mt-16 ml-[-20px] z-[-100] bg-no-repeat bg-cover w-48 h-48"
-          style={{ backgroundImage: `url(${circle})` }}
-        ></div>
-
-        <div className="flex mt-10 justify-between items-center w-full">
+  const ColorPicker = () => (
+    <div className="absolute top-full left-0 mt-2 z-50 bg-white border border-gray-200 rounded-xl shadow-2xl p-4">
+      <div className="grid grid-cols-6 gap-2 mb-4">
+        {['#3B82F6', '#EF4444', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16'].map((color) => (
           <button
-            onClick={() => navigate(-1)}
-            className="bg-blue-900 px-8 py-2 text-white rounded-3xl"
-          >
-            Back
+            key={color}
+            type="button"
+            className="w-8 h-8 rounded-full border-2 border-gray-200 transition-transform hover:scale-110"
+            style={{ backgroundColor: color }}
+            onClick={() => setSelectedColor(color)}
+          />
+        ))}
+      </div>
+      <input
+        type="color"
+        value={selectedColor}
+        onChange={(e) => setSelectedColor(e.target.value)}
+        className="w-full h-10 rounded-lg border border-gray-200"
+      />
+    </div>
+  );
+
+  return (
+    <div
+      style={{ fontFamily: "Manrope, sans-serif" }}
+      className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100"
+    >
+      <Header />
+
+      <div className="px-4 pb-8 relative">
+        {/* Decorative elements - hidden on mobile for performance */}
+        <div className="hidden sm:block absolute top-8 left-0 w-48 h-48 bg-blue-100 rounded-full opacity-30 blur-3xl -z-10"></div>
+        <div className="hidden sm:block fixed bottom-0 right-0 w-32 h-32 bg-blue-200 rounded-full opacity-20 blur-2xl -z-10"></div>
+
+        {/* Mobile-optimized header */}
+        <div className="flex items-center justify-between py-4">
+          <button
+            onClick={() => navigate('/start')}
+            className="flex items-center gap-2 bg-blue600 hover:bg-blue-700 active:bg-blue-800 px-4 py-2.5 text-white rounded-full transition-colors shadow-md text-sm">
+            <ArrowLeft size={16} />
+            <span className="font-medium">Back</span>
           </button>
-          <div className="text-center">
-            <p className="text-xl font-semibold">Create Task</p>
-            <p className="text-gray-600">Here you can create and assign tasks</p>
+
+
+          <div className=" ">
+            <button
+              onClick={() => navigate('/viewTask')}
+              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base">
+              <Eye className="w-4 h-4" />
+              <span>View Tasks</span>
+            </button>
           </div>
-          <img src={home} alt="Home Icon" />
         </div>
 
-        <div className="mt-2 md:mt-1 mb-3 m-auto md:w-[80%] bg-white rounded-xl p-4  ">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="text-center flex-1 mx-4">
+          <p className="text-xl font-bold text-gray-800">Create Task</p>
+          <p className="text-gray-600 text-xs mt-1">Assign tasks to your team</p>
+        </div>
+        {/* Main Form Card - Mobile optimized */}
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+          <div className="p-4 sm:p-6 space-y-6">
 
-            <div className="space-y-6">
-              <div className="md:flex  gap-6">
-                {/* Task Name Input */}
-                <div className="flex flex-col w-full md:w-1/2">
-                  <label htmlFor="task" className="text-sm font-medium text-gray-700 mb-2">
-                    Task Name
-                  </label>
-                  <input
-                    type="text"
-                    id="task"
-                    value={formData.task}
-                    onChange={handleChange}
-                    className="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
+            {/* Task Name - Full width on mobile */}
+            <div className="space-y-3">
+              <label htmlFor="task" className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                <Tag size={16} className="text-blue-600" />
+                Task Name
+              </label>
+              <input
+                type="text"
+                id="task"
+                value={formData.task}
+                onChange={handleChange}
+                placeholder="Enter task name..."
+                className="w-full border border-gray-200 rounded-xl p-3.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              />
+            </div>
 
-                {/* Color Selection */}
-                <div className="flex flex-col w-full md:w-1/2">
-                  {showPicker && (
-                    <div className="pickerStylesT">
-                      <SketchPicker
-                        color={selectedColor}
-                        onChange={handleColorChange}
-                        presetColors={[]}
-                        disableAlpha
-                      />
-
-
-                    </div>
-                  )}
-                  <p className="text-sm font-medium text-gray-700 mb-2">Color</p>
-                  <div className="flex items-center gap-4">
-                    <input
-                      id="color"
-                      className="border rounded-lg p-2 flex-grow focus:outline-none"
-                      placeholder="Select Color"
-                      readOnly
-                      value={selectedColor} // Display selected color in the input field
-                    />
-                    <button
-                      className="btn btn-primary"
-                      onClick={handleButtonClick}
-                      type="button"
-                    >
-                      {showPicker ? "Add Color" : "Select Color"}
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-700 mb-2">Task</label>
-                <select
-                  value={selectStage}
-                  onChange={handleChangeStage}
-                  className="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            {/* Color Selection - Mobile optimized */}
+            <div className="space-y-3 relative">
+              <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                <Palette size={16} className="text-blue-600" />
+                Task Color
+              </label>
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-12 h-12 rounded-xl border-2 border-gray-200 cursor-pointer transition-transform active:scale-95"
+                  style={{ backgroundColor: selectedColor }}
+                  onClick={handleButtonClick}
+                ></div>
+                <input
+                  className="flex-1 border border-gray-200 rounded-xl p-3.5 bg-gray-50 text-base focus:outline-none"
+                  placeholder="Color code"
+                  readOnly
+                  value={selectedColor}
+                />
+                <button
+                  className="p-3.5 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-100 active:bg-blue-200 transition-colors border border-blue-200"
+                  onClick={handleButtonClick}
+                  type="button"
                 >
-                  <option value="" disabled>Select an option</option>
-                  {phasePaths.map((phase) => (
-                    <option key={phase} value={phase}>
-                      {phase.replace(/([A-Z])/g, ' $1').trim()}
+                  <Palette size={16} />
+                </button>
+              </div>
+              {showPicker && <ColorPicker />}
+            </div>
+
+            {/* Task Stage Selection */}
+            <div className="space-y-3">
+              <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                <Calendar size={16} className="text-blue-600" />
+                Task Stage
+              </label>
+              <select
+                value={selectStage}
+                onChange={handleChangeStage}
+                className="w-full border border-gray-200 rounded-xl p-3.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white appearance-none"
+              >
+                <option value="" disabled>Select project stage</option>
+                {phasePaths.map((phase) => (
+                  <option key={phase} value={phase}>
+                    {phase.replace(/([A-Z])/g, ' $1').trim()}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Team Member Selection - Mobile optimized */}
+            <div className="space-y-3">
+              <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                <Users size={16} className="text-blue-600" />
+                Assign to Team Members
+              </label>
+              <div className="border border-gray-200 rounded-xl p-3 bg-white min-h-[3rem]">
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {selectedUsers.map((user, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-100 text-blue-800 rounded-full text-sm"
+                    >
+                      <User size={12} />
+                      <span className="max-w-20 truncate">{user.label}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleChangeUsers(selectedUsers.filter((_, i) => i !== index))}
+                        className="ml-1 text-blue-600 hover:text-blue-800 text-lg leading-none"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
+                <select
+                  onChange={(e) => {
+                    const user = users.find(u => u.value === e.target.value);
+                    if (user && !selectedUsers.find(u => u.value === user.value)) {
+                      handleChangeUsers([...selectedUsers, user]);
+                    }
+                    e.target.value = '';
+                  }}
+                  className="border-none outline-none bg-transparent text-gray-600 text-base w-full"
+                >
+                  <option value="">+ Add member</option>
+                  {users.map((user) => (
+                    <option key={user.value} value={user.value}>
+                      {user.label}
                     </option>
                   ))}
                 </select>
               </div>
+            </div>
 
-
-
-              <div className="flex flex-col w-full">
-                <label className="text-sm font-medium text-gray-700 mb-2">Select Team Member</label>
-                <Select
-                  isMulti
-                  options={users}
-                  value={selectedUsers}
-                  onChange={handleChangeUsers}
-                  className="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Select Team Member"
-                />
-              </div>
-
-              <div className="flex flex-wrap gap-6">
-                <div className="flex items-center space-x-2">
+            {/* Task Options - Stacked on mobile */}
+            <div className="space-y-4">
+              <h3 className="text-sm font-semibold text-gray-700">Task Options</h3>
+              <div className="space-y-3">
+                <label className="flex items-center gap-3 p-4 border border-gray-200 rounded-xl hover:bg-gray-50 active:bg-gray-100 cursor-pointer transition-colors">
                   <input
                     type="checkbox"
                     checked={isChecked}
                     onChange={handleCheckboxChange}
-                    className="h-5 w-5 text-blue-500 rounded focus:ring-2 focus:ring-blue-500"
+                    className="w-5 h-5 text-blue-500 rounded focus:ring-2 focus:ring-blue-500 flex-shrink-0"
                   />
-                  <span className="text-gray-700">Questions</span>
-                </div>
+                  <HelpCircle size={18} className="text-gray-500 flex-shrink-0" />
+                  <span className="text-gray-700 font-medium">Include Questions</span>
+                </label>
 
-                <div className="flex items-center space-x-2">
+                <label className="flex items-center gap-3 p-4 border border-gray-200 rounded-xl hover:bg-gray-50 active:bg-gray-100 cursor-pointer transition-colors">
                   <input
                     type="checkbox"
                     checked={isCheckedU}
                     onChange={handleCheckboxChangeU}
-                    className="h-5 w-5 text-blue-500 rounded focus:ring-2 focus:ring-blue-500"
+                    className="w-5 h-5 text-blue-500 rounded focus:ring-2 focus:ring-blue-500 flex-shrink-0"
                   />
-                  <span className="text-gray-700">Upload</span>
+                  <Upload size={18} className="text-gray-500 flex-shrink-0" />
+                  <span className="text-gray-700 font-medium">Allow File Upload</span>
+                </label>
+              </div>
+            </div>
+
+            {/* Date Selection - Aligned with design */}
+            <div className="space-y-6">
+              {/* Start Date */}
+              <div className="space-y-3">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <Calendar size={16} className="text-blue-600" />
+                  Start Date
+                </label>
+                <div className="relative">
+                  <input
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => handleDateSelect(e.target.value)}
+                    className="w-full border border-gray-200 rounded-xl p-3.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white"
+                  />
+                  <Calendar className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
+                </div>
+              </div>
+
+              {/* End Date */}
+              <div className="space-y-3">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <Calendar size={16} className="text-blue-600" />
+                  End Date
+                </label>
+                <div className="relative">
+                  <input
+                    type="date"
+                    value={selectedDate1}
+                    onChange={(e) => handleDateSelect1(e.target.value)}
+                    className="w-full border border-gray-200 rounded-xl p-3.5 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white"
+                  />
+                  <Calendar className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
+                </div>
+              </div>
+
+              {/* Selected Range Summary */}
+              <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <h4 className="text-sm font-semibold text-gray-700 mb-2">Selected Date Range</h4>
+                <div className="space-y-1">
+                  <p className="text-sm text-gray-600">
+                    Start: <span className="font-medium text-gray-800">{selectedDate || 'Not selected'}</span>
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    End: <span className="font-medium text-gray-800">{selectedDate1 || 'Not selected'}</span>
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="text-center">
+            <Toaster position="top-right" />
+
+            {/* Submit Button - Mobile optimized */}
+            <div className="pt-4">
               <button
                 type="submit"
-                className="bg-blue-900 px-8 py-2 text-white rounded-3xl disabled:opacity-50"
+                onClick={handleSubmit}
+                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 px-6 py-4 text-white rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-base"
                 disabled={loading}
               >
                 {loading ? (
-                  <FontAwesomeIcon icon={faCircleNotch} className="fa-spin" />
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                    <span>Creating Task...</span>
+                  </>
                 ) : (
-                  <span>Create Task</span>
+                  <>
+                    <Plus size={18} />
+                    <span>Create Task</span>
+                  </>
                 )}
               </button>
             </div>
-          </form>
-
-          <Toaster position="top-right" />
+          </div>
         </div>
       </div>
-      <div className="fixed bottom-0 right-0 z-[-100] m-0 p-0 w-[150px] h-[150px] bg-no-repeat"
-        style={{
-          backgroundImage: `url(${feedback})`,
-          backgroundSize: '100% 100%',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          margin: '0',
-          padding: '0',
-        }}
-      ></div>
     </div>
   );
 

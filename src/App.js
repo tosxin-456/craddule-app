@@ -153,6 +153,7 @@ import ScrapView from './scrapView';
 // AI & Testing
 import QuestionOptions from './TestAi';
 import ConclusionSummaryPage from './ConclusionSummary';
+import TaskProgressViewer from './taskViewer';
 
 function App() {
   const [isTrialExpired, setIsTrialExpired] = useState(false);
@@ -297,6 +298,8 @@ function App() {
           {/* Task Management Routes */}
           <Route path="/createTask/" element={<CreateTask />} />
           <Route path="/uploadTask/" element={<UploadTask />} />
+          <Route path="/viewTask" element={<TaskProgressViewer />} />
+
 
           {/* Sharing Routes */}
           <Route path="/share/start/:id/" element={<Share />} />

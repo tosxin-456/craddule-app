@@ -18,10 +18,10 @@ import SignWithGoogle from './GoogleSignUp.js';
 
 function SignUp() {
   ReactGA.initialize("G-P450CRB987");
-  ReactGA.send({ 
-   hitType: "pageview", 
-   page: window.location.pathname, 
-   title: "Sign Up" 
+  ReactGA.send({
+    hitType: "pageview",
+    page: window.location.pathname,
+    title: "Sign Up"
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -71,12 +71,12 @@ function SignUp() {
     createUser(formData, referralCode, setLoading, toast, navigate);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const pathname = location.pathname.split('/');
-    const lastPath = pathname[pathname.length-1];
-    if (lastPath == 'signup'){
+    const lastPath = pathname[pathname.length - 1];
+    if (lastPath == 'signup') {
       setReferralCode(0);
-    }else{
+    } else {
       setReferralCode(lastPath)
     }
   })
@@ -89,7 +89,7 @@ function SignUp() {
           <img src={design} alt="" className="w-[196px] h-[219px] absolute bottom-0 right-0" />
           <img src={design} alt="" className="w-[196px] h-[219px] absolute top-0 left-0 rotate-180" />
           <div className='flex justify-center items-center h-full'>
-            
+
             <div className='w-fit m-auto'>
               <img src={signUpImage} className='m-auto'></img>
               <h4 className='font-semibold text-white w-3/4 text-center m-auto mt-3'>We help guide your ideas.</h4>
@@ -212,12 +212,12 @@ function SignUp() {
                   </span>
                 </div> */}
                 <div className='flex justify-start items-center gap-1  mt-3'>
-                  <input type="checkbox" name="agree" id="agree" className='cursor-pointer' onChange={(e)=>setAgreed(e.target.checked)}/>
+                  <input type="checkbox" name="agree" id="agree" className='cursor-pointer' onChange={(e) => setAgreed(e.target.checked)} />
                   <label htmlFor="agree" className='font-semibold'>I agree to the <a href='/terms&conditions' rel="noopener" target='_blank' className='no-underline text-[#1B45BF]'>Terms & Conditions</a></label>
                 </div>
               </div>
 
-              <button className={loading | !agreed ? 'btn loginBtn cursor-not-allowed':'btn loginBtn'} type="submit" disabled={loading | !agreed}>
+              <button className={loading | !agreed ? 'btn loginBtn cursor-not-allowed' : 'btn loginBtn'} type="submit" disabled={loading | !agreed}>
                 {loading && <FontAwesomeIcon icon={faCircleNotch} className='fa-spin' />}
                 {!loading && <span>Proceed</span>}
               </button>
@@ -229,8 +229,7 @@ function SignUp() {
               <hr className="flex-grow border-t border-gray-300" />
             </div>
 
-            <SignWithGoogle/>
-
+            <SignWithGoogle />
             <p className='mt-8 font-medium text-[16px]'>Already on Craddule?<a className='ps-2 no-underline text-[#1B45BF]' href='/login'>Login</a></p>
           </div>
         </div>
