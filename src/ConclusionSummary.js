@@ -50,6 +50,7 @@ const ConclusionSummaryViewer = () => {
     }, []);
 
     // Enhanced markdown formatter with better mobile responsiveness - NO H1/H2 headers
+    // Enhanced markdown formatter with better mobile responsiveness - NO H1/H2 headers
     const formatMarkdown = (text) => {
         if (!text) return '';
 
@@ -67,7 +68,7 @@ const ConclusionSummaryViewer = () => {
             // Header - smaller padding on mobile
             tableHtml += '<thead style="background: linear-gradient(to right, #f8fafc, #f1f5f9);"><tr>';
             headerCells.forEach(cell => {
-                tableHtml += `<th style="padding: 8px 12px; text-align: left; font-size: 12px; font-weight: 600; color: #374151; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #e5e7eb; white-space: nowrap; min-width: 100px;">${cell}</th>`;
+                tableHtml += `<th style="padding: 8px 12px; text-align: left; font-size: 12px; font-weight: 600; color: #374151; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #e5e7eb; white-space: nowrap; min-width: 100px; background-color: #f8fafc;">${cell}</th>`;
             });
             tableHtml += '</tr></thead>';
 
@@ -75,12 +76,12 @@ const ConclusionSummaryViewer = () => {
             tableHtml += '<tbody>';
             rowsArray.forEach((row, index) => {
                 const bgColor = index % 2 === 0 ? '#ffffff' : '#f9fafb';
-                tableHtml += `<tr style="background-color: ${bgColor}; transition: background-color 0.15s;">`;
+                tableHtml += `<tr style="background-color: ${bgColor};">`;
                 row.forEach((cell, cellIndex) => {
                     const isNumeric = /^\$?[\d,]+$/.test(cell.trim());
                     const fontWeight = isNumeric ? '500' : '400';
                     const color = isNumeric ? '#111827' : '#374151';
-                    tableHtml += `<td style="padding: 8px 12px; font-size: 12px; color: ${color}; font-weight: ${fontWeight}; border-right: 1px solid #f3f4f6; white-space: nowrap; min-width: 100px;" onmouseover="this.parentNode.style.backgroundColor='#f3f4f6'" onmouseout="this.parentNode.style.backgroundColor='${bgColor}'">${cell}</td>`;
+                    tableHtml += `<td style="padding: 8px 12px; font-size: 12px; color: ${color}; font-weight: ${fontWeight}; border-right: 1px solid #f3f4f6; white-space: nowrap; min-width: 100px; background-color: ${bgColor};">${cell}</td>`;
                 });
                 tableHtml += '</tr>';
             });
