@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import logo from "./images/Craddule logo - PNG 2 4 (1).svg";
 import onboard1 from "./images/productOnboarding1.svg";
-import onboard2 from "./images/productOnboarding2.svg";
 import {
   updateOnboardingStatus,
   UpdateOnboardingSeenStatus,
@@ -19,17 +18,17 @@ function ProductionOnboarding() {
   const userId = decodedToken?.userId || null;
 
   const token = localStorage.getItem("onboarding");
-  const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const projectId = localStorage.getItem("nProject");
   console.log(access_token, userId);
+
   const handleNextClick = async () => {
     const onboarding = JSON.parse(localStorage.getItem("onboarding") || "{}");
 
     if (onboarding.ProductDefinition === true) {
-    navigate(`/test-ai/ProductDefinition`);
+      navigate(`/test-ai/ProductDefinition`);
       return;
     }
 
@@ -41,110 +40,37 @@ function ProductionOnboarding() {
         setError,
         "ProductDefinition"
       );
-    navigate(`/test-ai/ProductDefinition`);
+      navigate(`/test-ai/ProductDefinition`);
     } catch (error) {
       console.error("Error updating onboarding status:", error);
     }
   };
 
-  const handleNext = () => {
-    setPage(2);
-  };
-
   return (
-    <>
-      {page === 1 && (
-        <div className="flex w-full h-screen bg-[black]">
-          <div className="mt-[10px] ml-[10px]">
-            <img src={logo} alt="Logo" className="w-[100px]" />
-          </div>
+    <div className="flex w-full h-screen bg-[black]">
+      <div className="mt-[10px] ml-[10px]">
+        <img src={logo} alt="Logo" className="w-[100px]" />
+      </div>
 
-          {/* Centered Image */}
-          <div className="flex m-auto justify-center items-center h-full">
-            <img
-              src={onboard1}
-              alt="Onboarding 1"
-              className="w-2/3 h-auto object-cover"
-            />
-          </div>
+      {/* Centered Image */}
+      <div className="flex m-auto justify-center items-center h-full">
+        <img
+          src={onboard1}
+          alt="Onboarding 1"
+          className="w-2/3 h-auto object-cover"
+        />
+      </div>
 
-          {/* Next Button at the bottom right */}
-          <div className="absolute bottom-10 right-10">
-            <button
-              onClick={handleNext}
-              className="bg-[#193FAE] text-white py-1 px-5 rounded-2xl"
-            >
-              Next
-            </button>
-          </div>
-
-          {/* Page Indicator */}
-          <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex gap-2">
-            <div
-              className={
-                page === 1
-                  ? "w-[45px] h-[15px] rounded-2xl bg-[#193FAE]"
-                  : "w-[30px] rounded-2xl h-[15px] bg-[#D9D9D9]"
-              }
-            ></div>
-            <div
-              className={
-                page === 2
-                  ? "w-[45px] rounded-2xl h-[15px] bg-[#193FAE]"
-                  : "w-[30px] rounded-2xl h-[15px] bg-[#D9D9D9]"
-              }
-            ></div>
-          </div>
-        </div>
-      )}
-
-      {/* Page 2 */}
-      {page === 2 && (
-        <div className="flex w-full h-screen bg-[black]">
-          {/* Logo at the top right */}
-          <div className=" mt-[10px] ml-[10px] ">
-            <img src={logo} alt="Logo" className="w-[100px]" />
-          </div>
-
-          {/* Centered Image */}
-          <div className="flex m-auto justify-center items-center h-full">
-            <img
-              src={onboard2}
-              alt="Onboarding 2"
-              className="w-2/3 h-auto object-cover"
-            />
-          </div>
-
-          {/* Next Button at the bottom right */}
-          <div className="absolute bottom-10 right-10">
-            <button
-              onClick={handleNextClick}
-              className="bg-[#193FAE] text-white py-1 px-5 rounded-2xl"
-            >
-              Next
-            </button>
-          </div>
-
-          {/* Page Indicator */}
-          <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex gap-2">
-            <div
-              className={
-                page === 1
-                  ? "w-[45px] rounded-2xl h-[15px] bg-[#193FAE]"
-                  : "w-[30px] rounded-2xl h-[15px] bg-[#D9D9D9]"
-              }
-            ></div>
-            <div
-              className={
-                page === 2
-                  ? "w-[45px] rounded-2xl h-[15px] bg-[#193FAE]"
-                  : "w-[30px] rounded-2xl h-[15px] bg-[#D9D9D9]"
-              }
-            ></div>
-          </div>
-        </div>
-      )}
-    </>
+      {/* Next Button at the bottom right */}
+      <div className="absolute bottom-10 right-10">
+        <button
+          onClick={handleNextClick}
+          className="bg-[#193FAE] text-white py-1 px-5 rounded-2xl"
+        >
+          Next
+        </button>
+      </div>
+    </div>
   );
 }
 

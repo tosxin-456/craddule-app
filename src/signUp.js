@@ -105,6 +105,13 @@ function SignUp() {
           <div className='pt-3 '>
             <h3 className='font-bold'>Sign Up</h3>
             <p className='texet-[16px] text-black200'>Begin your success story with Craddule</p>
+            <SignWithGoogle />
+            <div className="flex items-center my-6">
+              <hr className="flex-grow border-t border-gray-300" />
+              <span className="mx-4 text-gray-500 text-sm font-medium">OR</span>
+              <hr className="flex-grow border-t border-gray-300" />
+            </div>
+
             <form onSubmit={handleSubmit}>
               <div className="">
                 <div className="mt-[16px]">
@@ -223,13 +230,6 @@ function SignUp() {
               </button>
             </form>
 
-            <div className="flex items-center my-6">
-              <hr className="flex-grow border-t border-gray-300" />
-              <span className="mx-4 text-gray-500 text-sm font-medium">OR</span>
-              <hr className="flex-grow border-t border-gray-300" />
-            </div>
-
-            <SignWithGoogle />
             <p className='mt-8 font-medium text-[16px]'>Already on Craddule?<a className='ps-2 no-underline text-[#1B45BF]' href='/login'>Login</a></p>
           </div>
         </div>

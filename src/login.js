@@ -131,6 +131,19 @@ function Login() {
               <h3 className='font-bold'>Welcome back!</h3>
               <p className='texet-[16px] text-black200'>Continue your growth with Craddule!</p>
 
+              <Suspense fallback={
+                <div className="w-full py-3 px-4 border border-gray-300 rounded-full text-center bg-gray-50">
+                  <span className="text-gray-500">Loading Google Sign In...</span>
+                </div>
+              }>
+                <SignInWithGoogle />
+              </Suspense>
+              <div className="flex items-center my-6">
+                <hr className="flex-grow border-t border-gray-300" />
+                <span className="mx-4 text-gray-500 text-sm font-medium">OR</span>
+                <hr className="flex-grow border-t border-gray-300" />
+              </div>
+
               <form onSubmit={handleSubmit} className='mt-14'>
                 <div className="mb-8 ">
                   <label htmlFor="email" className='text-p18 font-semibold pb-1'>Email</label>
@@ -191,19 +204,6 @@ function Login() {
                 </button>
               </form>
 
-              <div className="flex items-center my-6">
-                <hr className="flex-grow border-t border-gray-300" />
-                <span className="mx-4 text-gray-500 text-sm font-medium">OR</span>
-                <hr className="flex-grow border-t border-gray-300" />
-              </div>
-
-              <Suspense fallback={
-                <div className="w-full py-3 px-4 border border-gray-300 rounded-full text-center bg-gray-50">
-                  <span className="text-gray-500">Loading Google Sign In...</span>
-                </div>
-              }>
-                <SignInWithGoogle />
-              </Suspense>
 
               <p className='mt-8 font-medium text-[16px]'>
                 Not registered yet?

@@ -27,6 +27,7 @@ export default function SignInWithGoogle() {
             }
 
             localStorage.setItem('access_token', data.token || data.data.access_token);
+            localStorage.setItem("gottenThrough", data.user.howDidYouKnowUs || false);
             setError('');
             navigate('/home');
         } catch (error) {

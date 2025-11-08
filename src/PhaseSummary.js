@@ -14,11 +14,14 @@ import {
     DocumentText, Bold, Italic, Underline, Strikethrough, Quote, Code, Image, AlignLeft, AlignCenter, AlignRight, Outdent, Indent, Subscript, Superscript, Edit2, Save, Trash, ListOrdered,
     ListOrderedIcon,
     ListMinus,
+    Loader2,
 } from 'lucide-react';
 import circle from './images/circle.png';
 import bg from './images/pattern_landscape.png';
 import feedback from './images/feedback.svg';
-
+import softCorrections from "./softCorrections.json";
+import sentences from "./sentences.json";
+import wordlist from "./wordlist.json";
 
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -37,6 +40,7 @@ function PhaseSummary() {
     const [recentSummary, setRecentSummary] = useState("");
     const [previousSummary, setPreviousSummary] = useState(null);
     const [olderSummary, setOlderSummary] = useState(null);
+    const [loadingSummary, setLoadingSummary] = useState(true);
     const [count, setCount] = useState(null);
     const [loading, setLoading] = useState(true);
     const [selectedSummary, setSelectedSummary] = useState("recent");
@@ -64,10 +68,187 @@ function PhaseSummary() {
     const [suggestionBoxPosition, setSuggestionBoxPosition] = useState({ top: 0, left: 0 });
     const [selectedWord, setSelectedWord] = useState(null);
     const [nextPhase, setNextPhase] = useState("")
-    const [subscribed, setSubscribed] = useState(false);
+    const [subscribed, setSubscribed] = useState(true);
     const [showScrollableDiv, setShowScrollableDiv] = useState(false);
     const [showScrollableDiv2, setShowScrollableDiv2] = useState(false);
     const [showPayment, setShowPayment] = useState(false);
+    const [suggestion, setSuggestion] = useState("");
+    const textareaRef = useRef();
+    const suggestionRef = useRef();
+
+    const softMap = new Map(Object.entries(softCorrections));
+    const dictionarySet = new Set(wordlist.map((w) => w.toLowerCase()));
+
+    // Levenshtein Distance function
+    function levenshtein(a, b) {
+        const dp = Array(a.length + 1)
+            .fill(null)
+            .map(() => Array(b.length + 1).fill(0));
+        for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+        for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+        for (let i = 1; i <= a.length; i++) {
+            for (let j = 1; j <= b.length; j++) {
+                if (a[i - 1] === b[j - 1]) dp[i][j] = dp[i - 1][j - 1];
+                else dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+            }
+        }
+        return dp[a.length][b.length];
+    }
+
+    // Build bigram prediction model from sentences
+    function buildNextWordMapFromSentences(sentences) {
+        const map = new Map();
+        for (const sentence of sentences) {
+            const words = sentence.trim().toLowerCase().split(/\s+/);
+            for (let i = 0; i < words.length - 1; i++) {
+                const word = words[i];
+                const next = words[i + 1];
+                if (!map.has(word)) map.set(word, []);
+                if (!map.get(word).includes(next)) map.get(word).push(next);
+            }
+        }
+        return map;
+    }
+
+    const nextWordMap = buildNextWordMapFromSentences(sentences);
+
+    // Correction helper
+    function getClosestWordFromCorpus(word) {
+        let best = null;
+        let min = Infinity;
+        const allWords = Array.from(dictionarySet);
+        for (let i = 0; i < allWords.length; i++) {
+            const dist = levenshtein(word, allWords[i]);
+            if (dist < min && dist <= 2) {
+                best = allWords[i];
+                min = dist;
+            }
+            if (min === 1) break;
+        }
+        return best;
+    }
+
+    const handleAnswerChange = (e) => {
+        const val = e.target.value;
+        const endsWithSpace = val.endsWith(" ");
+        const words = val.trim().split(/\s+/);
+        const lastWord = words[words.length - 1]?.toLowerCase();
+
+        if (endsWithSpace && lastWord) {
+            // Step 1: Soft corrections
+            if (softMap.has(lastWord)) {
+                words[words.length - 1] = softMap.get(lastWord);
+                setSelectedAnswer(words.join(" ") + " ");
+                setSuggestion("");
+                return;
+            }
+
+            // Step 2: Fuzzy correction ONLY if it's not a valid dictionary word
+            if (!dictionarySet.has(lastWord)) {
+                const corrected = getClosestWordFromCorpus(lastWord);
+                if (corrected) {
+                    words[words.length - 1] = corrected;
+                    setSelectedAnswer(words.join(" ") + " ");
+                    setSuggestion("");
+                    return;
+                }
+            }
+
+            // Step 3: Prediction (only for single word)
+            if (words.length === 1) {
+                const next = nextWordMap.get(lastWord);
+                setSuggestion(next ? next[0] : "");
+            } else {
+                setSuggestion("");
+            }
+        } else {
+            setSuggestion("");
+        }
+
+        setSelectedAnswer(val);
+    };
+
+    // 5. Add this keydown handler function
+    const handleAnswerKeyDown = (e) => {
+        if (suggestion && (e.key === "Tab" || e.key === "ArrowRight")) {
+            e.preventDefault();
+            setSelectedAnswer((prev) => prev + suggestion + " ");
+            setSuggestion("");
+        }
+    };
+
+    const [isSelecting, setIsSelecting] = useState(false);
+    const [selectedText, setSelectedText] = useState("");
+    const [selectionStart, setSelectionStart] = useState(null);
+    const [selectionEnd, setSelectionEnd] = useState(null);
+    const [selectedAnswer, setSelectedAnswer] = useState("");
+
+    // Enhanced mouse event handlers
+    const handleMouseDown = (e) => {
+        setIsSelecting(true);
+        setSelectionStart({ x: e.clientX, y: e.clientY });
+        // Clear previous selection
+        setSelectedText("");
+        setSelectionEnd(null);
+    };
+
+    const handleMouseMove = (e) => {
+        if (isSelecting) {
+            setSelectionEnd({ x: e.clientX, y: e.clientY });
+        }
+    };
+
+    const handleMouseUp = (e) => {
+        if (isSelecting) {
+            setIsSelecting(false);
+
+            // Get the selected text from the browser's selection API
+            const selection = window.getSelection();
+            const text = selection.toString().trim();
+
+            if (text) {
+                setSelectedText(text);
+                console.log("Selected text:", text);
+
+                // Optional: You can store the range for later use
+                if (selection.rangeCount > 0) {
+                    const range = selection.getRangeAt(0);
+                    // Store range if needed for operations like replace, highlight, etc.
+                }
+            }
+
+            setSelectionStart(null);
+            setSelectionEnd(null);
+        }
+    };
+
+    const syncScroll = () => {
+        if (textareaRef.current && suggestionRef.current) {
+            suggestionRef.current.scrollTop = textareaRef.current.scrollTop;
+            suggestionRef.current.scrollLeft = textareaRef.current.scrollLeft;
+        }
+    };
+
+
+    // Optional: Handle text selection changes
+    const handleSelectionChange = () => {
+        const selection = window.getSelection();
+        const text = selection.toString().trim();
+
+        if (text && text !== selectedText) {
+            setSelectedText(text);
+        } else if (!text) {
+            setSelectedText("");
+        }
+    };
+
+    // Add this useEffect to listen for selection changes
+    useEffect(() => {
+        document.addEventListener('selectionchange', handleSelectionChange);
+        return () => {
+            document.removeEventListener('selectionchange', handleSelectionChange);
+        };
+    }, [selectedText]);
 
     const handleToggle = () => {
         setShowScrollableDiv(!showScrollableDiv);
@@ -112,71 +293,6 @@ function PhaseSummary() {
         fetchTypes();
     }, []);
 
-    useEffect(() => {
-        console.log("fetchAnswers");
-        const fetchAnswers = async () => {
-            console.log(API_BASE_URL + `/api/pdf/${projectId}/${category}`)
-            try {
-                const summaryResponse = await fetch(API_BASE_URL + `/api/pdf/${projectId}/${category}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` // Include the token in the request headers
-                    }
-                });
-
-                if (summaryResponse.ok) {
-                    const dataS = await summaryResponse.json();
-                    // console.log("data for summary:", dataS)
-                    // If summary exists, fetch the summary data
-                    if (dataS.data && Array.isArray(dataS.data)) {
-                        // console.log("Summary data array:", dataS.data);
-
-                        const combinedSummary = dataS.data
-                            .map((item) => {
-                                const formattedSubType = item.questionSubType.replace(/([A-Z])/g, ' $1').trim();
-                                return `<h2 style="text-align: center;">${formattedSubType}</h2><br>${item.summary}`;
-                            })
-                            .join('<br><br>');
-
-                        setCombinedAnswer(combinedSummary); // Set the combined summary
-                        // console.log("Combined summary:", combinedSummary);
-                    } else {
-                        const response = await fetch(API_BASE_URL + `/api/pdf/single/${projectId}/${category}`, {
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${token}` // Include the token in the request headers
-                            }
-                        });
-
-                        if (!response.ok) {
-                            throw new Error('Failed to fetch answers');
-                        }
-                        const data = await response.json();
-                        console.log(data);
-                        console.log(data.data);
-                        console.log(data.data[0].summary);
-                        console.log('answers getting because no summary');
-                        setAnswers(data.data);
-                        const combined = data.data.map(answer => {
-                            const formattedSubType = answer.questionSubType.replace(/([A-Z])/g, ' $1').trim();
-                            return `<h4 style="text-align: center;">${formattedSubType}</h4><br>${answer.summary}`;
-                        }).join('<br><br>');
-                        console.log(combined);
-                        setCombinedAnswer(combined);
-                        setLoading(false);
-                    }
-                } else {
-                    throw new Error('Failed to fetch summary');
-                }
-            } catch (error) {
-                // setError(error.message);
-                // setLoading(false);
-            }
-        };
-
-        fetchAnswers();
-    }, []);
-
     const [isToolbarVisible, setIsToolbarVisible] = useState(false);
 
     const toggleToolbar = () => {
@@ -184,14 +300,16 @@ function PhaseSummary() {
     };
 
     const handleSubscriptionClick = () => {
-        if (subscribed) {
-            getNextPhase();
-        } else {
-            setShowPayment(false); // First close
-            setTimeout(() => {
-                setShowPayment(true); // Then open after a very tiny delay
-            }, 50); // small delay to force re-render
-        }
+        getNextPhase();
+
+        // if (subscribed) {
+        //     getNextPhase();
+        // } else {
+        //     setShowPayment(false); // First close
+        //     setTimeout(() => {
+        //         setShowPayment(true); // Then open after a very tiny delay
+        //     }, 50); // small delay to force re-render
+        // }
     };
 
 
@@ -673,35 +791,6 @@ function PhaseSummary() {
 
     const onClickNext = () => navigate(`/questionBusMain/${phase}/${category}`);
 
-    const handleMouseDown = (event) => {
-        if (event.target.tagName === 'IMG') {
-            setResizingImage(event.target);
-            setInitialX(event.clientX);
-            setInitialY(event.clientY);
-            setIsResizing(true);
-        }
-    };
-
-    const handleMouseMove = (event) => {
-        if (isResizing && resizingImage) {
-            const deltaX = event.clientX - initialX;
-            const deltaY = event.clientY - initialY;
-            const newWidth = resizingImage.clientWidth + deltaX;
-            const newHeight = resizingImage.clientHeight + deltaY;
-            resizingImage.style.width = `${newWidth}px`;
-            resizingImage.style.height = `${newHeight}px`;
-            setInitialX(event.clientX);
-            setInitialY(event.clientY);
-        }
-    };
-
-    const handleMouseUp = () => {
-        if (isResizing) {
-            setIsResizing(false);
-            setResizingImage(null);
-        }
-    };
-
     useEffect(() => {
         fetchSummaries();
     }, []);
@@ -716,11 +805,8 @@ function PhaseSummary() {
 
 
     const fetchSummaries = async () => {
-        // setLoading(true);
-
+        setLoadingSummary(true);
         try {
-            const startTime = Date.now(); // Start timing only for the actual fetch work
-
             const response = await fetch(
                 `${API_BASE_URL}/api/test-new/questions/summary/${phase}/${projectId}`,
                 {
@@ -734,8 +820,9 @@ function PhaseSummary() {
 
             const data = await response.json();
 
-            if (data.status === 200) {
-                console.log(data);
+            if (response.ok) {
+                // HTTP status is 200–299
+                console.log("Summary data:", data);
                 setRecentSummary(data.data.summary);
                 setPreviousSummary(data.data.summary_one || null);
                 setOlderSummary(data.data.summary_two || null);
@@ -744,20 +831,26 @@ function PhaseSummary() {
                 const storedSubscribed = localStorage.getItem('subscribed');
                 console.log("Subscribed status from localStorage:", storedSubscribed);
                 setSubscribed(storedSubscribed === 'true');
-            }
-            setLoading(false);
+            } else {
+                console.warn("Non-200 HTTP status:", response.status, data);
 
+                // Provide fallback UI state or error message
+                setRecentSummary(null);
+                setPreviousSummary(null);
+                setOlderSummary(null);
+                setCount(0);
+            }
         } catch (error) {
             console.error("Error fetching summaries:", error);
-            // On error, stop loading immediately
-            setLoading(false);
+        } finally {
+            setLoadingSummary(false);
         }
     };
 
 
 
     const regenerateSummary = async () => {
-        setLoading(true);
+        setLoadingSummary(true);
         try {
             await fetch(
                 `${API_BASE_URL}/api/test-new/questions/summary/${phase}/${projectId}`,
@@ -773,7 +866,7 @@ function PhaseSummary() {
         } catch (error) {
             console.error("Error regenerating summary:", error);
         }
-        setLoading(false);
+        setLoadingSummary(false);
     };
 
     const getNextPhase = () => {
@@ -804,12 +897,14 @@ function PhaseSummary() {
         const normalizedNextPhase = normalize(nextPhase);
 
         if (normalizedOnboarding[normalizedNextPhase] === false) {
-            navigate(`/${nextPhase}`);
+            // navigate(`/${nextPhase}`);
+            navigate(`/test-ai/${nextPhase}`);
+
         } else {
             navigate(`/test-ai/${nextPhase}`);
         }
     };
-    
+
 
 
 
@@ -870,7 +965,7 @@ function PhaseSummary() {
         const selectedField = fieldMap[selectedSummary]; // Get the correct field
 
         try {
-            setLoading(true);
+            setLoadingSummary(true);
             const response = await fetch(`${API_BASE_URL}/api/test-new/questions/summary-update/${phase}/${projectId}`, {
                 method: "POST",
                 headers: {
@@ -894,7 +989,7 @@ function PhaseSummary() {
             console.error("Error updating summary:", error);
             alert("Error updating summary.");
         } finally {
-            setLoading(false);
+            setLoadingSummary(false);
         }
     };
 
@@ -906,12 +1001,80 @@ function PhaseSummary() {
 
     const [selectedField, setSelectedField] = useState("summary");
 
-    // useEffect(() => {
-    //     const storedSubscribed = localStorage.getItem('subscribed');
-    //     console.log("Subscribed status from localStorage:", storedSubscribed);  // log the value directly
-    //     setSubscribed(storedSubscribed);  // Check the value being set
-    // }, []); // Runs only once, when the component mounts
 
+    if (loadingSummary) {
+        return (
+            <div
+                style={{
+                    fontFamily: '"Manrope", sans-serif'
+                }}
+                className="text-center py-16 px-6"
+            >
+                <div className="max-w-md mx-auto">
+                    <div className="flex flex-col items-center justify-center space-y-6">
+
+                        {/* Enhanced loading spinner with multiple layers */}
+                        <div className="relative">
+                            {/* Outer glow effect */}
+                            <div className="absolute inset-0 w-16 h-16 bg-blue-500 rounded-full opacity-20 animate-ping"></div>
+
+                            {/* Rotating outer ring */}
+                            <div className="absolute inset-0 w-16 h-16 border-4 border-blue-200 rounded-full animate-pulse"></div>
+
+                            {/* Main spinner */}
+                            <div className="relative z-10 flex items-center justify-center w-16 h-16">
+                                <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
+                            </div>
+
+                            {/* Secondary ring */}
+                            <div className="absolute inset-2 w-12 h-12 border-2 border-blue-300 rounded-full animate-spin" style={{ animationDuration: '3s', animationDirection: 'reverse' }}></div>
+                        </div>
+
+                        {/* Enhanced text content */}
+                        <div className="space-y-3">
+                            <h2 className="text-3xl font-bold text-gray-800 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                                Generating Your Summary
+                            </h2>
+                            <p className="text-lg text-gray-600 font-medium">
+                                Analyzing project data for <span className="text-blue-600 font-semibold">{formatPhase("Analysis")}</span> phase...
+                            </p>
+                        </div>
+
+                        {/* Enhanced progress indicator */}
+                        <div className="flex space-x-2 mt-6">
+                            <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full animate-bounce shadow-lg"></div>
+                            <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full animate-bounce shadow-lg" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full animate-bounce shadow-lg" style={{ animationDelay: '0.2s' }}></div>
+                        </div>
+
+                        {/* Progress bar */}
+                        <div className="w-full max-w-xs mx-auto mt-6">
+                            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full animate-pulse"></div>
+                            </div>
+                        </div>
+
+                        {/* Enhanced status message */}
+                        <div className="space-y-2 mt-6">
+                            <div className="text-sm text-gray-500 font-medium">
+                                This may take a few moments...
+                            </div>
+                            <div className="text-xs text-gray-400 flex items-center justify-center space-x-2">
+                                <div className="w-1 h-1 bg-green-500 rounded-full animate-pulse"></div>
+                                <span>Processing your data securely</span>
+                            </div>
+                        </div>
+
+                        {/* Subtle background decoration */}
+                        <div className="absolute inset-0 pointer-events-none">
+                            <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-100 rounded-full opacity-20 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                            <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-indigo-100 rounded-full opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div
@@ -921,9 +1084,10 @@ function PhaseSummary() {
             }}>
             <Header />
 
+
             <div className="absolute inset-0 mt-[50px] ml-[60px]  z-[-100] bg-no-repeat bg-cover w-[200px] h-[200px] " style={{ backgroundImage: `url(${circle})` }}></div>
 
-            <div className="flex flex-col items-center gap-6 p-4 md:p-8 bg-gray-100 min-h-screen">
+            <div className="flex flex-col items-center gap-6 p-1 md:p-8 bg-gray-100 min-h-screen">
                 <div className="w-full max-w-2xl flex justify-between items-center mt-4 md:mt-10">
                     <button
                         onClick={() => navigate(`/test-ai/${phase}`)}
@@ -967,8 +1131,9 @@ function PhaseSummary() {
                         <FaArrowRight size={14} />
                     </button>
                 </div>
+                <img src={home} alt="Home Icon" className="flex-shrink-0" />
 
-                <div className="flex flex-col md:flex-row gap-4 w-full max-w-2xl">
+                <div className="flex flex-col md:flex-row gap-4 w-full ">
                     <div className="flex flex-col gap-2">
                         {recentSummary && (
                             <button
@@ -1002,10 +1167,13 @@ function PhaseSummary() {
                     {showPayment && <GetCard />}
 
 
+
+
+
                     {/* className="min-h-[70vh] bg-white " */}
-                    <div id="summary-content" className="  bg-[url('./images/pattern_landscape.png')]  bg-cover bg-no-repeat w-full p-4 md:p-6 bg-white shadow-lg rounded-xl border">
-                        <div className='container-textBs'>
-                            <div className='flex items-center justify-between w-full px-2 py-2'>
+                    <div id="summary-content" className="  bg-[url('./images/pattern_landscape.png')]  bg-cover bg-no-repeat w-full p-2 md:p-6 bg-white shadow-lg rounded-xl border">
+                        <div className=''>
+                            <div className='flex items-center justify-between w-full px-1 py-1'>
                                 {/* Summary Title */}
                                 <div className="flex items-center gap-2">
                                     <MdOutlineSummarize className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
@@ -1223,27 +1391,104 @@ function PhaseSummary() {
                                 </div>
                             )}
 
-                            {loading ? (
+                            {loadingSummary ? (
+                                // Show spinner if summary is not loaded
                                 <div className="flex items-center justify-center h-screen">
                                     <AiOutlineLoading3Quarters className="animate-spin text-5xl text-indigo-500" />
                                 </div>
                             ) : (
-                                <div
-                                    ref={editorRef}
-                                    contentEditable={true}
-                                    className="editor rounded-md shadow-inner min-h-[300px] p-4 break-words focus:outline-none"
-                                    // onInput={handleEditorChange}
-                                    onMouseDown={handleMouseDown}
-                                    onMouseMove={handleMouseMove}
-                                    onMouseUp={handleMouseUp}
-                                    onInput={(e) => setEditedSummary(e.currentTarget.innerHTML)}
-                                // dangerouslySetInnerHTML={isEditing ? { __html: editedSummary } : undefined}
-                                >
-                                    <ReactMarkdown>
-                                        {selectedSummary === "recent" ? recentSummary : selectedSummary === "previous" ? previousSummary : olderSummary}
-                                    </ReactMarkdown>
-                                </div>
+                                <div className="relative">
+                                    <div
+                                        ref={suggestionRef}
+                                        className="absolute inset-0 w-full p-4 min-h-[12rem] border rounded-lg pointer-events-none z-0 whitespace-pre-wrap overflow-hidden font-mono text-transparent bg-transparent"
+                                        style={{
+                                            fontFamily: 'inherit',
+                                            fontSize: 'inherit',
+                                            lineHeight: 'inherit',
+                                            letterSpacing: 'inherit',
+                                            wordSpacing: 'inherit'
+                                        }}
+                                        onScroll={syncScroll}
+                                    >
+                                        <span style={{ color: 'transparent' }}>
+                                            {selectedAnswer}
+                                        </span>
+                                        {suggestion && (
+                                            <span style={{
+                                                color: '#9CA3AF',
+                                                backgroundColor: '#F3F4F6',
+                                                padding: '1px 3px',
+                                                borderRadius: '2px'
+                                            }}>
+                                                {suggestion.startsWith(selectedAnswer.split(' ').pop())
+                                                    ? suggestion.slice(selectedAnswer.split(' ').pop().length)
+                                                    : (selectedAnswer.endsWith(' ') ? suggestion : ' ' + suggestion)
+                                                }
+                                            </span>
+                                        )}
+                                    </div>
+                                    <div
+                                        ref={editorRef}
+                                        contentEditable={true}
+                                        className="editor rounded-md shadow-inner min-h-[300px] p-4 break-words focus:outline-none"
+                                        onMouseDown={handleMouseDown}
+                                        onMouseMove={handleMouseMove}
+                                        onMouseUp={handleMouseUp}
+                                        onInput={(e) => setEditedSummary(e.currentTarget.innerHTML)}
+                                        style={{
+                                            userSelect: 'text',
+                                            WebkitUserSelect: 'text',
+                                            MozUserSelect: 'text',
+                                            msUserSelect: 'text'
+                                        }}
+                                    >
+                                        <ReactMarkdown>
+                                            {selectedSummary === "recent" ? recentSummary :
+                                                selectedSummary === "previous" ? previousSummary : olderSummary}
+                                        </ReactMarkdown>
+                                    </div>
 
+                                    {/* Optional: Display selected text */}
+                                    {selectedText && (
+                                        <div className="mt-2 p-2 bg-blue-100 rounded border">
+                                            <strong>Selected:</strong> {selectedText}
+                                        </div>
+                                    )}
+
+                                    {/* Optional: Selection actions */}
+                                    {selectedText && (
+                                        <div className="mt-2 flex gap-2">
+                                            <button
+                                                className="px-3 py-1 bg-blue-500 text-white rounded text-sm"
+                                                onClick={() => {
+                                                    // Copy selected text to clipboard
+                                                    navigator.clipboard.writeText(selectedText);
+                                                }}
+                                            >
+                                                Copy
+                                            </button>
+                                            <button
+                                                className="px-3 py-1 bg-green-500 text-white rounded text-sm"
+                                                onClick={() => {
+                                                    // Apply correction to selected text
+                                                    console.log("Apply correction to:", selectedText);
+                                                }}
+                                            >
+                                                Correct
+                                            </button>
+                                            <button
+                                                className="px-3 py-1 bg-red-500 text-white rounded text-sm"
+                                                onClick={() => {
+                                                    // Clear selection
+                                                    window.getSelection().removeAllRanges();
+                                                    setSelectedText("");
+                                                }}
+                                            >
+                                                Clear
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
                             )}
 
 

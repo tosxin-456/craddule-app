@@ -154,13 +154,17 @@ import ScrapView from './scrapView';
 import QuestionOptions from './TestAi';
 import ConclusionSummaryPage from './ConclusionSummary';
 import TaskProgressViewer from './taskViewer';
+import CradduleWelcome from './welcome-part';
+import PresentationEditor from './powerPoint';
+import PowerPointPresentation from './powerPoint2';
+import PitchDeckSystem from './powerPoint3';
 
 function App() {
   const [isTrialExpired, setIsTrialExpired] = useState(false);
   clarity.init('ocijdfgrpz');
 
-  const subscribed = localStorage.getItem('subscribed') === 'true';
-
+  // const subscribed = localStorage.getItem('subscribed') === 'true';
+  const subscribed = true
   useEffect(() => {
     if (subscribed) {
       setIsTrialExpired(false);
@@ -193,40 +197,45 @@ function App() {
           {/* Getting Started Routes */}
           <Route path="/home" element={<LandingPage />} />
           <Route path="/start/" element={<Start />} />
-          <Route path="/homeStarter" element={<HomeStarter />} />
+          {/* <Route path="/homeStarter" element={<HomeStarter />} /> */}
           <Route path="/welcome-form" element={<QuestionsForm />} />
-          <Route path="/createProject" element={<CreateProject />} />
-          <Route path="/createQuestion" element={<CreateQuestion />} />
+          {/* <Route path="/createProject" element={<CreateProject />} /> */}
+          {/* <Route path="/createQuestion" element={<CreateQuestion />} /> */}
+          <Route path="/welcome" element={<CradduleWelcome />} />
+          {/* <Route path="/presentation" element={<PresentationEditor />} /> */}
+          {/* <Route path="/power-presentation" element={<PowerPointPresentation />} /> */}
+          <Route path="/ppt" element={<PitchDeckSystem />} />
+
 
           {/* Phase Onboarding Routes */}
-          <Route path="/ideation" element={<IdeationPage />} />
-          <Route path="/ValidatingAndTesting" element={<ValidatingOnboarding />} />
-          <Route path="/Commercialization" element={<CommersialzationOnboarding />} />
-          <Route path="/InitialDesign" element={<DesignOnboarding />} />
-          <Route path="/ProductDefinition" element={<ProductionOnboarding />} />
+          {/* <Route path="/ideation" element={<IdeationPage />} /> */}
+          {/* <Route path="/ValidatingAndTesting" element={<ValidatingOnboarding />} /> */}
+          {/* <Route path="/Commercialization" element={<CommersialzationOnboarding />} /> */}
+          {/* <Route path="/InitialDesign" element={<DesignOnboarding />} /> */}
+          {/* <Route path="/ProductDefinition" element={<ProductionOnboarding />} /> */}
 
           {/* Core Business Routes */}
-          <Route path="/pageIntro" element={<PageIntro />} />
-          <Route path="/pageBusiness" element={<PageBusiness />} />
-          <Route path="/pageCustomer" element={<PageCustomer />} />
-          <Route path="/customerSegment" element={<CustomerSegment />} />
-          <Route path="/marketing" element={<PageMarketing />} />
-          <Route path="/pagePositioning" element={<PagePositioning />} />
-          <Route path="/pageProject" element={<PageProject />} />
-          <Route path="/pageSuccess" element={<PageSuccess />} />
+          {/* <Route path="/pageIntro" element={<PageIntro />} /> */}
+          {/* <Route path="/pageBusiness" element={<PageBusiness />} /> */}
+          {/* <Route path="/pageCustomer" element={<PageCustomer />} /> */}
+          {/* <Route path="/customerSegment" element={<CustomerSegment />} /> */}
+          {/* <Route path="/marketing" element={<PageMarketing />} /> */}
+          {/* <Route path="/pagePositioning" element={<PagePositioning />} /> */}
+          {/* <Route path="/pageProject" element={<PageProject />} /> */}
+          {/* <Route path="/pageSuccess" element={<PageSuccess />} /> */}
           <Route path="/go/:phase" element={<GoPage />} />
 
           {/* Financial Analysis Routes */}
           <Route path="/customFinancial/" element={<CustomFinancial />} />
 
           {/* KPI & Metrics Routes */}
-          <Route path="/kpiPage" element={<KPIPage />} />
-          <Route path="/pageAddKpi" element={<PageAddKpi />} />
+          {/* <Route path="/kpiPage" element={<KPIPage />} /> */}
+          {/* <Route path="/pageAddKpi" element={<PageAddKpi />} /> */}
           <Route path="/createKpi/" element={<CreateKpi />} />
-          <Route path="/kpiEdit/:id" element={<EditKpi />} />
+          {/* <Route path="/kpiEdit/:id" element={<EditKpi />} /> */}
           <Route path="/kpi/" element={<Kpi />} />
           <Route path="/kpiview/:id" element={<KpiView />} />
-          <Route path="/searchKpi" element={<SearchKpi />} />
+          {/* <Route path="/searchKpi" element={<SearchKpi />} /> */}
 
           {/* Financial Charts & Analysis Routes */}
           <Route path="/expenses" element={<Expenses />} />
@@ -246,32 +255,34 @@ function App() {
           <Route path="/viewInflation/" element={<ViewInflation />} />
 
           {/* Financial Creation Routes */}
-          <Route path="/inflationCreate/" element={<CreateInflation />} />
-          <Route path="/operatingIncomeCreate/" element={<CreateOperatingIncome />} />
-          <Route path="/expensesCreate/" element={<CreateExpenses />} />
-          <Route path="/netProfitCreate/" element={<CreateNetProfit />} />
-          <Route path="/customerGrowthCreate/" element={<CreateCustomerGrowth />} />
-          <Route path="/customerInfluxCreate/" element={<CreateCustomerInflux />} />
+          {/* <Route path="/inflationCreate/" element={<CreateInflation />} /> */}
+          {/* <Route path="/operatingIncomeCreate/" element={<CreateOperatingIncome />} /> */}
+          {/* <Route path="/expensesCreate/" element={<CreateExpenses />} /> */}
+          {/* <Route path="/netProfitCreate/" element={<CreateNetProfit />} /> */}
+          {/* <Route path="/customerGrowthCreate/" element={<CreateCustomerGrowth />} /> */}
+          {/* <Route path="/customerInfluxCreate/" element={<CreateCustomerInflux />} /> */}
 
           {/* Financial Editing Routes */}
-          <Route path="/inflationEdit/:id" element={<EditInflation />} />
-          <Route path="/operatingIncomeEdit/:id" element={<EditOperatingIncome />} />
-          <Route path="/expensesEdit/:id" element={<EditExpenses />} />
-          <Route path="/netProfitEdit/:id" element={<EditNetProfit />} />
-          <Route path="/customerGrowthEdit/:id" element={<EditCustomerGrowth />} />
-          <Route path="/customerInfluxEdit/:id" element={<EditCustomerInflux />} />
+          {/* <Route path="/inflationEdit/:id" element={<EditInflation />} /> */}
+          {/* <Route path="/operatingIncomeEdit/:id" element={<EditOperatingIncome />} /> */}
+          {/* <Route path="/expensesEdit/:id" element={<EditExpenses />} /> */}
+          {/* <Route path="/netProfitEdit/:id" element={<EditNetProfit />} /> */}
+          {/* <Route path="/customerGrowthEdit/:id" element={<EditCustomerGrowth />} /> */}
+          {/* <Route path="/customerInfluxEdit/:id" element={<EditCustomerInflux />} /> */}
 
           {/* Prototyping & Design Routes */}
-          <Route path="/wireFrame" element={<WireFrame />} />
+          {/* <Route path="/wireFrame" element={<WireFrame />} /> */}
 
           {/* Pitch Deck Routes */}
-          <Route path="/pitchDeck" element={<PitchDeck />} />
-          <Route path="/pitchDeckStart/" element={<PitchDeckStart />} />
-          <Route path="/pitchDeckUpload" element={<PitchDeckUpload />} />
-          <Route path="/pitchDeckView" element={<PitchDeckView />} />
-          <Route path="/pitchDeckResources" element={<PitchDeckResources />} />
-          <Route path="/pitchDeckLectures" element={<PitchDeckLectures />} />
-          <Route path="/presentation" element={<Presentation />} />
+          <Route path="/pitchDeck" element={<PitchDeckSystem />} />
+          <Route path="/pitchDeckStart/" element={<PitchDeckSystem />} />
+
+          {/* <Route path="/pitchDeckStart/" element={<PitchDeckStart />} /> */}
+          {/* <Route path="/pitchDeckUpload" element={<PitchDeckUpload />} /> */}
+          {/* <Route path="/pitchDeckView" element={<PitchDeckView />} /> */}
+          {/* <Route path="/pitchDeckResources" element={<PitchDeckResources />} /> */}
+          {/* <Route path="/pitchDeckLectures" element={<PitchDeckLectures />} /> */}
+          {/* <Route path="/presentation" element={<Presentation />} /> */}
 
           {/* Branding Routes */}
           <Route path="/branding" element={<Branding />} />
@@ -282,18 +293,18 @@ function App() {
           <Route path="/teamAdd/" element={<TeamAdd />} />
 
           {/* File Management Routes */}
-          <Route path="/upload/" element={<Upload />} />
-          <Route path="/AllFiles" element={<AllFiles />} />
-          <Route path="/subtypes/:type/:subtype" element={<FilesList />} />
+          {/* <Route path="/upload/" element={<Upload />} /> */}
+          {/* <Route path="/AllFiles" element={<AllFiles />} /> */}
+          {/* <Route path="/subtypes/:type/:subtype" element={<FilesList />} /> */}
           <Route path="/craddule/" element={<Craddule />} />
-          <Route path="/types/:id" element={<CradduleType />} />
+          {/* <Route path="/types/:id" element={<CradduleType />} /> */}
           <Route path="/craddule/:hubType" element={<Subfolder />} />
           <Route path="/craddule/:hubType/upload" element={<SubFolderUpload />} />
 
           {/* Media Management Routes */}
-          <Route path="/createVideo/" element={<CreateVideo />} />
-          <Route path="/createVideosAdmin/" element={<CreateVideosAdmin />} />
-          <Route path="/inspVideo" element={<InspVideo />} />
+          {/* <Route path="/createVideo/" element={<CreateVideo />} /> */}
+          {/* <Route path="/createVideosAdmin/" element={<CreateVideosAdmin />} /> */}
+          {/* <Route path="/inspVideo" element={<InspVideo />} /> */}
 
           {/* Task Management Routes */}
           <Route path="/createTask/" element={<CreateTask />} />
@@ -310,8 +321,8 @@ function App() {
 
           {/* Feedback & Communication Routes */}
           <Route path="/feedback" element={<PageFeedback />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/createQuote/" element={<CreateQuote />} />
+          {/* <Route path="/chat" element={<Chat />} /> */}
+          {/* <Route path="/createQuote/" element={<CreateQuote />} /> */}
 
           {/* Summary & Reports Routes */}
           <Route path="/summary-phase/:phase" element={<PhaseSummary />} />

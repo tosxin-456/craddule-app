@@ -42,6 +42,7 @@ export default function SignWithGoogle() {
 
             const data = await res.json();
             localStorage.setItem('access_token', data.data.access_token);
+            
             setError('');
             navigate('/home');
 

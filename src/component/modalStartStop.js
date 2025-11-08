@@ -99,10 +99,12 @@ export default function ModalStart({ open, onClose }) {
         // setLoading(false);
         const projectId = responseData.data._id;
         localStorage.setItem("nProject", projectId);
+        localStorage.setItem("nProjectName", formData.projectName);
+
         // navigate(`/firstQuestion`);
         console.log(responseData); // Parse JSON response
         console.log('Project created successfully');
-        navigate(`/accelerate`);
+        navigate(`/welcome`);
       } else {
 
         const result = await response.json();

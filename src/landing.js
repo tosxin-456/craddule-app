@@ -22,6 +22,7 @@ function LandingPage() {
   const [teamMembers, setTeamMembers] = useState([]);
   const [reviewProjects, setReviewProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Add loading state
+  const [backgroundLoaded, setBackgroundLoaded] = useState(false); // Add background loading state
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
@@ -29,6 +30,42 @@ function LandingPage() {
   // Utility hooks
   // useValidateToken();
   const { userId } = getUserIdFromToken();
+
+  // Preload background image
+  useEffect(() => {
+    const preloadBackgroundImage = () => {
+      // Get the background image URL from CSS
+      const tempDiv = document.createElement('div');
+      tempDiv.className = 'landP';
+      document.body.appendChild(tempDiv);
+      
+      const computedStyle = window.getComputedStyle(tempDiv);
+      const backgroundImage = computedStyle.backgroundImage;
+      
+      // Remove the temporary div
+      document.body.removeChild(tempDiv);
+      
+      if (backgroundImage && backgroundImage !== 'none') {
+        // Extract URL from background-image CSS property
+        const imageUrl = backgroundImage.slice(4, -1).replace(/"/g, '');
+        
+        const img = new Image();
+        img.onload = () => {
+          setBackgroundLoaded(true);
+        };
+        img.onerror = () => {
+          // If image fails to load, still show the page
+          setBackgroundLoaded(true);
+        };
+        img.src = imageUrl;
+      } else {
+        // If no background image found, proceed anyway
+        setBackgroundLoaded(true);
+      }
+    };
+
+    preloadBackgroundImage();
+  }, []);
 
   // Fetch data and update loading state
   useFetchUserProjects(userId, (data) => {
@@ -83,7 +120,7 @@ function LandingPage() {
     }
 
     console.log("Final subscribed value being saved:", subscribed);
-    localStorage.setItem("subscribed", subscribed);
+    localStorage.setItem("subscribed", true);
     try {
       const response = await fetch(
         `${API_BASE_URL}/api/test-new/questions/${category}/${projectId}`,
@@ -116,8 +153,6 @@ function LandingPage() {
     navigate(`/welcome-form`);
   };
 
-
-
   const handleProjectTeamClick = (projectId, name, count) => {
     localStorage.setItem('nProject', projectId);
     localStorage.setItem('nProjectName', name);
@@ -134,8 +169,8 @@ function LandingPage() {
   };
   //  console.log(reviewProjects.projectId)
 
-  if (isLoading) {
-    // Render the Loading component if data is still being fetched
+  // Show loading screen if data is still being fetched OR background image hasn't loaded
+  if (isLoading || !backgroundLoaded) {
     return <Loading label="Loading your projects..." />;
   }
 
@@ -156,11 +191,10 @@ function LandingPage() {
         <div className='proSeg2'>
           <div className='text-center'>
             <p className='text-[18px] lg:text-[80px]  font-bold text-white'>{`${projects.length == 0 ? `BEGIN YOUR LAUNCH` : 'CONTINUE YOUR'}`}</p>
-            <p className='text-[18px] lg:text-[80px] font-bold text-white'>{`${projects.length == 0 ? `TO SUCCESS` : 'JOURNEY'}`}</p>
           </div>
 
-          <div className='lg:grid   lg:grid-cols-12 lg:gap-0 gap-5 justify-center '>
-            <div className={`${projects.length == 0 ? 'col-span-12' : 'col-span-4'} m-auto mb-5`}>
+          <div className='flex flex-col items-center lg:grid lg:grid-cols-12 lg:gap-0 gap-5 justify-center'>
+            <div className={`${projects.length == 0 ? 'lg:col-span-12' : 'lg:col-span-4'} mb-5`}>
               <div className='w-[311px] h-[202px] text-white cursor-pointer' onClick={() => setIsOpen(true)}>
                 <div className='bg-blue800 h-full flex justify-center items-center'>
                   <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 20 20"><path fill="#FFFFFF" d="M10 0c.423 0 .766.343.766.766v8.467h8.468a.766.766 0 1 1 0 1.533h-8.468v8.468a.766.766 0 1 1-1.532 0l-.001-8.468H.766a.766.766 0 0 1 0-1.532l8.467-.001V.766A.77.77 0 0 1 10 0" /></svg>
@@ -171,7 +205,7 @@ function LandingPage() {
               </div>
             </div>
             {projects.map((project) => (
-              <div className='lg:col-span-4 flex-row justify-center m-auto mb-5' key={project._id}>
+              <div className='lg:col-span-4 mb-5' key={project._id}>
                 <div className='block w-[311px] h-[202px] text-white cursor-pointer' onClick={() => handleProjectClick(project?._id, project?.projectName, project?.projectCount, project?.lastSubscriptionDate, project?.recurring)}>
                   <div className='bg-blue800 h-full flex justify-center items-center'>
                     <span>Continue</span>
@@ -188,49 +222,51 @@ function LandingPage() {
 
       {/* Additional sections for team members and review projects */}
       <div className='container'>
-        {teamMembers?.map((member) => (
-          <div className="lg:col-span-4 flex-row justify-center m-auto mb-5" key={member?.projectId}>
-            <div
-              className="block w-[311px] h-[202px] text-white cursor-pointer"
-              onClick={() =>
-                handleProjectTeamClick(
-                  member?.projectId,
-                  member?.projectDetails.project,
-                  member?.projectDetails.projectCount
-                )
-              }
-            >
-              <div className="bg-blue800 h-full flex justify-center items-center">
-                <span>Continue</span>
-              </div>
-              <div className="bg-blue900 h-8 flex justify-center items-center">
-                <span className="text-center"> Team Project {member?.projectDetails.project}</span>
+        <div className='flex flex-col items-center lg:grid lg:grid-cols-12 lg:gap-0 gap-5'>
+          {teamMembers?.map((member) => (
+            <div className="lg:col-span-4 mb-5" key={member?.projectId}>
+              <div
+                className="block w-[311px] h-[202px] text-white cursor-pointer"
+                onClick={() =>
+                  handleProjectTeamClick(
+                    member?.projectId,
+                    member?.projectDetails.project,
+                    member?.projectDetails.projectCount
+                  )
+                }
+              >
+                <div className="bg-blue800 h-full flex justify-center items-center">
+                  <span>Continue</span>
+                </div>
+                <div className="bg-blue900 h-8 flex justify-center items-center">
+                  <span className="text-center"> Team Project {member?.projectDetails.project}</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        {reviewProjects.map((review) => (
-          <div className="lg:col-span-4 flex-row justify-center m-auto mb-5" key={review._id}>
-            <div
-              className="block w-[311px] h-[202px] text-white cursor-pointer"
-              onClick={() =>
-                handleProjectReviewClick(
-                  review._id,
-                  review.projectId.projectName,
-                  review.projectId.projectCount
-                )
-              }
-            >
-              <div className="bg-blue800 h-full flex justify-center items-center">
-                <span>Continue</span>
-              </div>
-              <div className="bg-blue900 h-8 flex justify-center items-center">
-                <span className="text-center"> Review Project {review?.projectId?.projectName}</span>
+          {reviewProjects.map((review) => (
+            <div className="lg:col-span-4 mb-5" key={review._id}>
+              <div
+                className="block w-[311px] h-[202px] text-white cursor-pointer"
+                onClick={() =>
+                  handleProjectReviewClick(
+                    review._id,
+                    review.projectId.projectName,
+                    review.projectId.projectCount
+                  )
+                }
+              >
+                <div className="bg-blue800 h-full flex justify-center items-center">
+                  <span>Continue</span>
+                </div>
+                <div className="bg-blue900 h-8 flex justify-center items-center">
+                  <span className="text-center"> Review Project {review?.projectId?.projectName}</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <ModalStart open={isOpen} onClose={() => setIsOpen(false)} />

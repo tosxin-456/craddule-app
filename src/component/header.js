@@ -10,6 +10,7 @@ import { jwtDecode } from "jwt-decode";
 import ModalStart from './modalTellUs';
 import { handleLogout } from '../utils/startUtils';
 import NotificationModal from './notificationModal';
+import PhasePercentage from './graphs';
 
 const Header = () => {
   const projectId = localStorage.getItem('nProject');
@@ -276,6 +277,8 @@ const Header = () => {
                     </g>
                   </svg>
                   Profiles
+                  <PhasePercentage />
+
                   {location.pathname !== '/start' && ( // Check if not on '/start' page
                     <button
                       onClick={handleLogout}
@@ -292,6 +295,7 @@ const Header = () => {
             {/* Desktop Menu */}
             <div className='hidden lg:flex items-center gap-5'>
               <div className='flex items-center gap-3'>
+                <PhasePercentage />
                 <svg xmlns="http://www.w3.org/2000/svg" className='cursor-pointer' width="25" height="25" viewBox="0 0 24 24" onClick={handleToggle}>
                   <rect width="24" height="24" fill="none" />
                   <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
